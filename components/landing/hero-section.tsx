@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { AuthButton } from "@/components/auth/auth-button"
+import { SignUpButton, useUser } from "@clerk/nextjs"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -22,6 +22,8 @@ const staggerContainer = {
 }
 
 export function HeroSection() {
+  const { isSignedIn, isLoaded } = useUser()
+
   return (
     <section className="relative overflow-hidden bg-background py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,9 +53,19 @@ export function HeroSection() {
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <AuthButton size="lg" className="gap-2 px-8" showArrow>
-              Get Started Free
-            </AuthButton>
+            {isLoaded && isSignedIn ? (
+              <Link href="/restore">
+                <Button size="lg" className="gap-2 px-8">
+                  Go to Restore
+                </Button>
+              </Link>
+            ) : (
+              <SignUpButton mode="modal">
+                <Button size="lg" className="gap-2 px-8">
+                  Get Started Free
+                </Button>
+              </SignUpButton>
+            )}
             <Link href="/pricing">
               <Button variant="outline" size="lg" className="px-8 bg-transparent">
                 View Pricing

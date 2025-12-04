@@ -1,6 +1,7 @@
-"use client"
-import { motion } from "framer-motion"
-import { AuthButton } from "@/components/auth/auth-button"
+"use client";
+import { motion } from "framer-motion";
+import { SignUpButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export function CTASection() {
   return (
@@ -37,12 +38,14 @@ export function CTASection() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            <AuthButton variant="secondary" size="lg" className="mt-8 gap-2 px-8" showArrow>
-              Get Started Free
-            </AuthButton>
+            <SignUpButton mode="modal">
+              <Button variant="secondary" size="lg" className="mt-8 gap-2 px-8">
+                Get Started Free
+              </Button>
+            </SignUpButton>
           </motion.div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
