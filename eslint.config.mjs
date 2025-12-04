@@ -32,8 +32,10 @@ export default [
         },
       },
       globals: {
+        // React
         React: 'readonly',
         JSX: 'readonly',
+        // Node.js
         NodeJS: 'readonly',
         console: 'readonly',
         process: 'readonly',
@@ -42,14 +44,32 @@ export default [
         require: 'readonly',
         module: 'readonly',
         exports: 'readonly',
+        Buffer: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+        // Browser
         window: 'readonly',
         document: 'readonly',
         navigator: 'readonly',
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        // Web APIs
         fetch: 'readonly',
         FormData: 'readonly',
         Headers: 'readonly',
         Request: 'readonly',
         Response: 'readonly',
+        URL: 'readonly',
+        URLSearchParams: 'readonly',
+        File: 'readonly',
+        Blob: 'readonly',
+        Image: 'readonly',
+        HTMLDivElement: 'readonly',
+        HTMLImageElement: 'readonly',
+        MouseEvent: 'readonly',
+        TouchEvent: 'readonly',
       },
     },
     plugins: {

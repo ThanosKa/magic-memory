@@ -7,8 +7,14 @@ import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import { HowItWorksSection } from "@/components/landing/how-it-works-section"
 import { FAQSection } from "@/components/landing/faq-section"
 import { CTASection } from "@/components/landing/cta-section"
+import { Metadata } from "next"
 
-export default function HomePage() {
+export const metadata: Metadata = {
+  title: "RestorePhotos - AI Photo Restoration",
+  description: "Restore your old photos with AI. 100% free and open source.",
+}
+
+export default function Page() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />

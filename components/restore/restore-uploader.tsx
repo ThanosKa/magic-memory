@@ -242,7 +242,7 @@ export function RestoreUploader() {
       link.click()
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
-    } catch (err) {
+    } catch (_err) {
       const link = document.createElement("a")
       link.href = restoredImage
       link.download = `${originalFilename}-restored.png`
@@ -287,9 +287,8 @@ export function RestoreUploader() {
           <CardContent className="p-0">
             <div
               {...getRootProps()}
-              className={`flex flex-col items-center justify-center py-16 px-8 cursor-pointer transition-colors ${
-                isDragActive ? "bg-accent" : "hover:bg-accent/50"
-              } ${stage === "checking_nsfw" ? "opacity-50 cursor-wait" : ""}`}
+              className={`flex flex-col items-center justify-center py-16 px-8 cursor-pointer transition-colors ${isDragActive ? "bg-accent" : "hover:bg-accent/50"
+                } ${stage === "checking_nsfw" ? "opacity-50 cursor-wait" : ""}`}
             >
               <input {...getInputProps()} />
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">

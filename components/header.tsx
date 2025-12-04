@@ -42,9 +42,8 @@ function HeaderWithClerk() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.href ? "text-foreground" : "text-muted-foreground"
-              }`}
+              className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
+                }`}
             >
               {link.label}
             </Link>
@@ -97,9 +96,8 @@ function HeaderWithClerk() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`text-lg font-medium transition-colors hover:text-primary ${
-                        pathname === link.href ? "text-foreground" : "text-muted-foreground"
-                      }`}
+                      className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
+                        }`}
                     >
                       {link.label}
                     </Link>
@@ -152,9 +150,8 @@ function HeaderWithoutClerk() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.href ? "text-foreground" : "text-muted-foreground"
-              }`}
+              className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
+                }`}
             >
               {link.label}
             </Link>
@@ -188,9 +185,8 @@ function HeaderWithoutClerk() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`text-lg font-medium transition-colors hover:text-primary ${
-                        pathname === link.href ? "text-foreground" : "text-muted-foreground"
-                      }`}
+                      className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
+                        }`}
                     >
                       {link.label}
                     </Link>
@@ -214,12 +210,11 @@ function HeaderWithoutClerk() {
 }
 
 export function Header() {
-  const [hasClerk, setHasClerk] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 
   useEffect(() => {
     setMounted(true)
-    setHasClerk(!!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY)
   }, [])
 
   // Show minimal header during SSR/hydration

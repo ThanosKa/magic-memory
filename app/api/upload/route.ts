@@ -5,7 +5,7 @@ import logger from "@/lib/logger"
 import { v4 as uuidv4 } from "uuid"
 import { z } from "zod"
 
-const uploadResponseSchema = z.object({
+const _uploadResponseSchema = z.object({
   url: z.string().url(),
   path: z.string(),
   signedUrl: z.string().url().optional(),

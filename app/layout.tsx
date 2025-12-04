@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ConditionalClerkProvider } from "@/components/providers/clerk-provider"
 import { WebVitalsTracker } from "@/components/web-vitals-tracker"
+import { CookieConsent } from "@/components/cookie-consent"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     canonical: "https://restorephotos.app",
   },
   category: "Technology",
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export const viewport: Viewport = {
@@ -127,6 +128,7 @@ export default function RootLayout({
         <body className={`${inter.className} antialiased`}>
           <WebVitalsTracker />
           {children}
+          <CookieConsent />
           <Analytics />
         </body>
       </html>

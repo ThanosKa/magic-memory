@@ -11,7 +11,7 @@ Instructions below are for AI assistants. Keep responses concise and aligned wit
 ## Repo Map
 
 - Primary framework: **Next.js 15 App Router** + TypeScript + React 19
-- Auth in `middleware.ts` (Clerk); API routes in `app/api/`
+- Auth in `proxy.ts` (Clerk route protection); API routes in `app/api/`
 - Photo restoration logic in `app/api/restore/`, `app/api/upload/`
 - Credit system in `app/api/credits/`, `lib/redis.ts` (free), `lib/supabase/` (paid)
 - Payment handling in `app/api/stripe/`
