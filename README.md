@@ -125,12 +125,26 @@ magic-memory/
 
 ## 📜 Scripts
 
-- `pnpm dev`: Start the development server
-- `pnpm build`: Build the application for production
-- `pnpm start`: Start the production server
-- `pnpm lint`: Run ESLint
-- `pnpm type-check`: Run TypeScript compiler check
-- `pnpm run seo:audit`: Run the internal SEO audit script
+| Command | Purpose | When to Use |
+|---------|---------|-------------|
+| `pnpm dev` | Start development server with hot reload  | During development |
+| `pnpm build` | Build optimized production bundle (includes type-checking) | Before deployment |
+| `pnpm start` | Start production server | After `pnpm build` |
+| `pnpm lint` | Run ESLint to check code quality and best practices | Before commits |
+| `pnpm type-check` | Run TypeScript compiler to verify types without emitting files | Before commits / CI |
+| `pnpm run seo:audit` | Run comprehensive SEO audit on all pages | SEO optimization |
+
+**Pre-commit Checklist:** Run `pnpm lint` and `pnpm type-check` before committing to catch issues early.
+
+## 🔍 SEO & Performance
+
+- **Comprehensive SEO**: All pages have proper metadata (title, description, canonical URLs, OpenGraph, Twitter Cards)
+- **Structured Data**: JSON-LD schemas for better search engine understanding
+- **Core Web Vitals**: Real-time tracking of LCP, CLS, and INP metrics
+- **Optimized Images**: Next.js Image component with WebP support
+- **Custom 404 Page**: Helpful, branded error page
+- **robots.txt**: Configured for optimal crawling
+- **SEO Audit Script**: Automated checks for SEO best practices
 
 ## 💳 Credit System
 

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ConditionalClerkProvider } from "@/components/providers/clerk-provider"
+import { WebVitalsTracker } from "@/components/web-vitals-tracker"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     description: "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image-magic-memory.png",
         width: 1200,
         height: 630,
         alt: "RestorePhotos - AI Photo Restoration",
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RestorePhotos - Restore Your Old Photos with AI",
     description: "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image-magic-memory.png"],
     creator: "@restorephotos",
   },
   alternates: {
@@ -124,6 +125,7 @@ export default function RootLayout({
           />
         </head>
         <body className={`${inter.className} antialiased`}>
+          <WebVitalsTracker />
           {children}
           <Analytics />
         </body>

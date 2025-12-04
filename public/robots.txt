@@ -1,0 +1,21 @@
+# robots.txt for magic-memory (RestorePhotos)
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow authenticated/user-specific pages
+Disallow: /api/
+Disallow: /restore/
+Disallow: /_next/
+Disallow: /.well-known/
+
+# Sitemap reference
+Sitemap: https://restorephotos.app/sitemap.xml
+
+# Crawl-delay for specific bots (if needed)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /

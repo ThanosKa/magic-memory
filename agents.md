@@ -23,11 +23,13 @@ Instructions below are for AI assistants. Keep responses concise and aligned wit
 
 - Install: `pnpm install`
 - Dev: `pnpm dev`
-- Build: `pnpm build`
+- Build: `pnpm build` (includes type-checking)
 - Start: `pnpm start`
-- Lint: `pnpm lint`
-- Type check: `pnpm type-check`
-- SEO audit: `pnpm run seo:audit`
+- Lint: `pnpm lint` (ESLint - code quality & best practices)
+- Type check: `pnpm type-check` (TypeScript compiler without emit)
+- SEO audit: `pnpm run seo:audit` (comprehensive SEO validation)
+
+**Pre-commit checklist:** Always run `pnpm lint` and `pnpm type-check` before committing code to catch issues early.
 
 ## Behavior Rules
 

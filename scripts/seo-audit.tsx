@@ -28,7 +28,7 @@ const seoChecks: SEOCheck[] = [
     name: "Has metadata export",
     description: "Page should export metadata for title and description",
     check: (content) =>
-      content.includes("export const metadata") !== content.includes("export async function generateMetadata"),
+      content.includes("export const metadata") || content.includes("export async function generateMetadata"),
     severity: "error",
   },
   {
@@ -50,6 +50,33 @@ const seoChecks: SEOCheck[] = [
     severity: "error",
   },
   {
+    name: "Has OpenGraph metadata",
+    description: "Metadata should include OpenGraph tags for social sharing",
+    check: (content) => {
+      if (!content.includes("metadata")) return true
+      return content.includes("openGraph") || content.includes("og:")
+    },
+    severity: "warning",
+  },
+  {
+    name: "Has Twitter Card metadata",
+    description: "Metadata should include Twitter card tags",
+    check: (content) => {
+      if (!content.includes("metadata")) return true
+      return content.includes("twitter")
+    },
+    severity: "warning",
+  },
+  {
+    name: "Has canonical URL",
+    description: "Metadata should include canonical URL",
+    check: (content) => {
+      if (!content.includes("metadata")) return true
+      return content.includes("canonical") || content.includes("alternates")
+    },
+    severity: "warning",
+  },
+  {
     name: "Has semantic HTML",
     description: "Page should use semantic HTML elements (main, section, article, etc.)",
     check: (content) => content.includes("<main") || content.includes("<section") || content.includes("<article"),
@@ -60,6 +87,7 @@ const seoChecks: SEOCheck[] = [
     description: "All images should have alt attributes",
     check: (content) => {
       const imgMatches = content.match(/<Image[^>]*>/g) || []
+      if (imgMatches.length === 0) return true
       return imgMatches.every((img) => img.includes("alt="))
     },
     severity: "error",
@@ -76,7 +104,7 @@ const seoChecks: SEOCheck[] = [
   },
   {
     name: "Heading hierarchy",
-    description: "Page should have proper heading hierarchy (h1 before h2, etc.)",
+    description: "Page should have proper heading hierarchy (h1 present)",
     check: (content) => {
       const hasH1 = content.includes("<h1") || content.includes("text-4xl") || content.includes("text-5xl")
       return hasH1
@@ -89,6 +117,36 @@ const seoChecks: SEOCheck[] = [
     check: (content) => {
       if (!content.includes("<img")) return true // No images
       return content.includes('from "next/image"') || content.includes("from 'next/image'")
+    },
+    severity: "warning",
+  },
+  {
+    name: "No button-only navigation",
+    description: "Navigation should use <Link> or <a> tags, not onClick-only buttons",
+    check: (content) => {
+      // Check for buttons with onClick but no proper link
+      const buttonMatches = content.match(/<button[^>]*onClick[^>]*>/gi) || []
+      const hasNavigationButtons = buttonMatches.some(btn => 
+        btn.includes("router.push") || btn.includes("navigate") || btn.includes("window.location")
+      )
+      return !hasNavigationButtons
+    },
+    severity: "error",
+  },
+  {
+    name: "Has JSON-LD structured data",
+    description: "Page should include JSON-LD structured data for rich results",
+    check: (content) => {
+      return content.includes("application/ld+json") || content.includes("@context")
+    },
+    severity: "warning",
+  },
+  {
+    name: "Robots meta tag configured",
+    description: "Page should explicitly set robots meta tag (index/noindex)",
+    check: (content) => {
+      if (!content.includes("metadata")) return true
+      return content.includes("robots:")
     },
     severity: "warning",
   },
