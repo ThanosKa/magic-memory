@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 
 const isProtectedRoute = (pathname: string) => pathname.startsWith("/restore")
 
-export default async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   // If Clerk is not configured, allow all requests
   if (!process.env.CLERK_SECRET_KEY || !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
     return NextResponse.next()
