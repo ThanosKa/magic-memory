@@ -36,6 +36,10 @@ export const metadata: Metadata = {
     description: "Affordable photo restoration with AI. Free daily credit or choose from our credit packages.",
     images: [getOgImageUrl()],
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default async function PricingPage() {

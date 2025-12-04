@@ -1,14 +1,53 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
+import { Metadata } from "next"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Terms of Service | RestorePhotos",
   description: "Terms of Service for RestorePhotos AI photo restoration service.",
+  alternates: {
+    canonical: getCanonicalUrl("/terms"),
+  },
+  openGraph: {
+    title: "Terms of Service | RestorePhotos",
+    description: "Terms of Service for RestorePhotos AI photo restoration service.",
+    url: getCanonicalUrl("/terms"),
+    images: [
+      {
+        url: getOgImageUrl(),
+        width: 1200,
+        height: 630,
+        alt: "RestorePhotos Terms of Service",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service | RestorePhotos",
+    description: "Terms of Service for RestorePhotos AI photo restoration service.",
+    images: [getOgImageUrl()],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
+import { breadcrumbJsonLd } from "@/lib/seo/metadata-helpers"
+
 export default function TermsPage() {
+  const jsonLd = breadcrumbJsonLd([
+    { name: "Home", url: "/" },
+    { name: "Terms of Service", url: "/terms" },
+  ])
+
   return (
     <div className="flex min-h-screen flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">

@@ -1,14 +1,53 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
+import { Metadata } from "next"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Privacy Policy | RestorePhotos",
   description: "Privacy Policy for RestorePhotos AI photo restoration service.",
+  alternates: {
+    canonical: getCanonicalUrl("/privacy"),
+  },
+  openGraph: {
+    title: "Privacy Policy | RestorePhotos",
+    description: "Privacy Policy for RestorePhotos AI photo restoration service.",
+    url: getCanonicalUrl("/privacy"),
+    images: [
+      {
+        url: getOgImageUrl(),
+        width: 1200,
+        height: 630,
+        alt: "RestorePhotos Privacy Policy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | RestorePhotos",
+    description: "Privacy Policy for RestorePhotos AI photo restoration service.",
+    images: [getOgImageUrl()],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
+import { breadcrumbJsonLd } from "@/lib/seo/metadata-helpers"
+
 export default function PrivacyPage() {
+  const jsonLd = breadcrumbJsonLd([
+    { name: "Home", url: "/" },
+    { name: "Privacy Policy", url: "/privacy" },
+  ])
+
   return (
     <div className="flex min-h-screen flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
