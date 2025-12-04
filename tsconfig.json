@@ -15,17 +15,29 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "react": ["./node_modules/@types/react"],
+      "react-dom": ["./node_modules/@types/react-dom"],
+      "csstype": ["./node_modules/csstype"]
     }
   },
   "include": [
