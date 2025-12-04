@@ -1,8 +1,8 @@
 <div align="center">
 
-# RestorePhotos
+# magic-memory
 
-![RestorePhotos Banner](/public/og-image.png)
+![magic-memory Banner](/public/og-image.png)
 
 **AI-powered photo restoration that brings your memories back to life**
 
@@ -14,7 +14,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![GitHub Stars](https://img.shields.io/github/stars/yourusername/restore-photos?style=social)](https://github.com/yourusername/restore-photos)
 
-[Demo](https://restorephotos.app) · [Report Bug](https://github.com/yourusername/restore-photos/issues) · [Request Feature](https://github.com/yourusername/restore-photos/issues)
+[Demo](https://magic-memory.app) · [Report Bug](https://github.com/yourusername/magic-memory/issues) · [Request Feature](https://github.com/yourusername/magic-memory/issues)
 
 </div>
 
@@ -59,58 +59,39 @@
 
 ### Installation
 
-\`\`\`bash
+```bash
 # Clone the repository
-git clone https://github.com/yourusername/restore-photos.git
-cd restore-photos
+git clone https://github.com/yourusername/magic-memory.git
+cd magic-memory
 
 # Install dependencies
 pnpm install
 
-# Copy environment variables
+# Set up environment variables
 cp .env.example .env.local
+# Edit .env.local with your actual API keys
 
 # Run database migrations (in Supabase SQL Editor)
 # Execute scripts/001_create_users_table.sql through scripts/005_create_atomic_credit_functions.sql
 
 # Start development server
 pnpm dev
-\`\`\`
+```
 
 ### Environment Variables
 
-Create a `.env.local` file with the following variables:
+Copy `.env.example` to `.env.local` and fill in your API keys:
 
-\`\`\`env
-# Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
+```bash
+cp .env.example .env.local
+```
 
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
-SUPABASE_SERVICE_ROLE_KEY=eyJ...
-
-# Stripe
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-
-# Replicate (AI Model)
-REPLICATE_API_TOKEN=r8_...
-
-# Upstash Redis
-UPSTASH_REDIS_REST_URL=https://...
-UPSTASH_REDIS_REST_TOKEN=...
-
-# App URL
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-\`\`\`
+See [`.env.example`](.env.example) for the full list of required variables and where to obtain them.
 
 ## Project Structure
 
 \`\`\`
-restore-photos/
+magic-memory/
 ├── app/                    # Next.js App Router pages
 │   ├── api/               # API routes
 │   │   ├── credits/       # Credit management
@@ -130,7 +111,6 @@ restore-photos/
 │   ├── supabase/         # Supabase clients
 │   ├── validations/      # Zod schemas
 │   ├── constants.ts      # App constants
-│   ├── env.ts            # Environment validation
 │   ├── logger.ts         # Pino logger
 │   └── redis.ts          # Upstash Redis client
 ├── scripts/              # Database migrations
@@ -239,8 +219,8 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 <div align="center">
 
-**[⬆ Back to Top](#restorephotos)**
+**[⬆ Back to Top](#magic-memory)**
 
-Made with ❤️ by the RestorePhotos Team
+Made with ❤️ by the magic-memory Team
 
 </div>

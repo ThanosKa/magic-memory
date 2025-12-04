@@ -1,6 +1,6 @@
-# RestorePhotos Project Overview for Cursor
+# magic-memory Project Overview for Cursor
 
-## What is RestorePhotos?
+## What is magic-memory?
 
 An AI-powered SaaS that restores old, blurry, or damaged photos using the GFPGAN model via Replicate API.
 
