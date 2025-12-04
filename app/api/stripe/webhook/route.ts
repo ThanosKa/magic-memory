@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
-import logger, { logError, createRequestContext } from "@/lib/logger"
+import logger from "@/lib/logger"
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -8,8 +8,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 export async function POST(request: NextRequest) {
-  const ctx = createRequestContext(null, "stripe_webhook")
-
   const body = await request.text()
   const signature = request.headers.get("stripe-signature")!
 
@@ -17,9 +15,10 @@ export async function POST(request: NextRequest) {
 
   try {
     event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)
-    logger.info({ ...ctx, eventType: event.type, eventId: event.id }, "Webhook received")
+    logger.info({ eventType: event.type, eventId: event.id }, "Webhook received")
   } catch (err) {
-    logError(logger, err, { ...ctx, action: "signature_verification" })
+    const errorMessage = err instanceof Error ? err.message : "Unknown error"
+    logger.error({ error: errorMessage }, "Webhook signature verification failed")
     return NextResponse.json({ error: "Webhook signature verification failed" }, { status: 400 })
   }
 
@@ -29,15 +28,14 @@ export async function POST(request: NextRequest) {
     const { userId, packageType, credits } = session.metadata || {}
 
     if (!userId || !packageType || !credits) {
-      logger.error({ ...ctx, sessionId: session.id }, "Missing metadata in checkout session")
+      logger.error({ sessionId: session.id }, "Missing metadata in checkout session")
       return NextResponse.json({ received: true })
     }
 
     const creditsToAdd = Number.parseInt(credits, 10)
-    ctx.userId = userId
 
     logger.info(
-      { ...ctx, packageType, credits: creditsToAdd, paymentIntent: session.payment_intent },
+      { userId, packageType, credits: creditsToAdd, paymentIntent: session.payment_intent },
       "Processing successful payment",
     )
 
@@ -50,7 +48,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (fetchError) {
-      logError(logger, fetchError, { ...ctx, action: "fetch_user" })
+      logger.error({ userId, error: fetchError.message }, "Failed to fetch user")
       return NextResponse.json({ received: true })
     }
 
@@ -60,7 +58,7 @@ export async function POST(request: NextRequest) {
     const { error: updateError } = await supabase.from("users").update({ paid_credits: newCredits }).eq("id", userId)
 
     if (updateError) {
-      logError(logger, updateError, { ...ctx, action: "update_credits" })
+      logger.error({ userId, error: updateError.message }, "Failed to update credits")
       return NextResponse.json({ received: true })
     }
 
@@ -73,11 +71,11 @@ export async function POST(request: NextRequest) {
     })
 
     if (purchaseError) {
-      logError(logger, purchaseError, { ...ctx, action: "record_purchase" })
+      logger.error({ userId, error: purchaseError.message }, "Failed to record purchase")
     }
 
     logger.info(
-      { ...ctx, previousCredits, newCredits, creditsAdded: creditsToAdd, packageType },
+      { userId, previousCredits, newCredits, creditsAdded: creditsToAdd, packageType },
       "Credits added successfully",
     )
   }

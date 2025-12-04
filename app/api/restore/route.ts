@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@clerk/nextjs/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
-import logger, { logError, createRequestContext } from "@/lib/logger"
+import logger from "@/lib/logger"
 import { parseRequestBody } from "@/lib/validations/utils"
 import { restorePhotoRequestSchema } from "@/lib/validations/api"
 import { checkUserCredits, deductCreditAndRecordRestoration, rollbackRestoration } from "@/lib/supabase/transactions"
@@ -95,32 +95,29 @@ export async function POST(request: NextRequest) {
   let usedFreeCredit = false
   let userId: string | null = null
 
-  const ctx = createRequestContext(null, "restore_photo")
-
   try {
     const authResult = await auth()
     userId = authResult.userId
-    ctx.userId = userId || "anonymous"
 
     if (!userId) {
-      logger.warn(ctx, "Unauthorized restoration attempt")
+      logger.warn({ userId: "anonymous" }, "Unauthorized restoration attempt")
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
     const parseResult = await parseRequestBody(request, restorePhotoRequestSchema)
     if (!parseResult.success) {
-      logger.warn({ ...ctx, error: "Invalid request body" }, "Validation failed")
+      logger.warn({ userId, error: "Invalid request body" }, "Validation failed")
       return parseResult.error
     }
 
     const { imageUrl, originalFilename = "photo" } = parseResult.data
 
-    logger.info({ ...ctx, imageUrl }, "Restoration request received")
+    logger.info({ userId, imageUrl }, "Restoration request received")
 
     const creditCheck = await checkUserCredits(userId)
 
     if (!creditCheck || !creditCheck.has_credits) {
-      logger.warn({ ...ctx, creditCheck }, "No credits available")
+      logger.warn({ userId, creditCheck }, "No credits available")
       return NextResponse.json(
         { success: false, error: "No credits available. Purchase more credits to continue." },
         { status: 403 },
@@ -129,11 +126,11 @@ export async function POST(request: NextRequest) {
 
     usedFreeCredit = creditCheck.should_use_free
 
-    logger.info({ ...ctx, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
+    logger.info({ userId, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
 
     const replicateOutput = await runReplicateWithPolling(imageUrl)
 
-    logger.info({ ...ctx }, "AI restoration complete, uploading to storage")
+    logger.info({ userId }, "AI restoration complete, uploading to storage")
 
     const { url: restoredImageUrl, path: restoredImagePath } = await uploadRestoredImage(
       replicateOutput,
@@ -144,7 +141,7 @@ export async function POST(request: NextRequest) {
     const deductResult = await deductCreditAndRecordRestoration(userId, imageUrl, restoredImageUrl, usedFreeCredit)
 
     if (!deductResult.success) {
-      logError(logger, deductResult.error_message, { ...ctx, action: "deduct_credit" })
+      logger.error({ userId, error: deductResult.error_message }, "Failed to deduct credit")
       return NextResponse.json({ success: false, error: "Failed to record restoration" }, { status: 500 })
     }
 
@@ -152,11 +149,11 @@ export async function POST(request: NextRequest) {
 
     if (usedFreeCredit && getRedisClient()) {
       await markFreeCreditUsed(userId)
-      logger.info({ ...ctx }, "Free credit marked as used in Redis")
+      logger.info({ userId }, "Free credit marked as used in Redis")
     }
 
     logger.info(
-      { ...ctx, restorationId, restoredImageUrl, usedFreeCredit },
+      { userId, restorationId, restoredImageUrl, usedFreeCredit },
       "Restoration completed successfully",
     )
 
@@ -171,14 +168,14 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (error) {
-    logError(logger, error, { ...ctx, action: "restoration_error" })
+    const errorMessage = error instanceof Error ? error.message : "Failed to restore image"
+    logger.error({ userId, error: errorMessage }, "Restoration error")
 
     if (restorationId) {
       await rollbackRestoration(restorationId)
-      logger.info({ ...ctx, restorationId }, "Rolled back failed restoration")
+      logger.info({ userId, restorationId }, "Rolled back failed restoration")
     }
 
-    const errorMessage = error instanceof Error ? error.message : "Failed to restore image"
     return NextResponse.json({ success: false, error: errorMessage }, { status: 500 })
   }
 }

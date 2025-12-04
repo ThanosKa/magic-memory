@@ -1,78 +1,25 @@
-import { randomUUID } from "crypto";
-import pino, { type Logger } from "pino";
+import pino from "pino";
 
-const logger = pino({
-  level: process.env.NODE_ENV === "production" ? "info" : "debug",
-  transport:
-    process.env.NODE_ENV === "development"
-      ? {
-          target: "pino-pretty",
-          options: {
-            colorize: true,
-            ignore: "pid,hostname",
-            translateTime: "SYS:standard",
-          },
-        }
-      : undefined,
-  base: {
-    env: process.env.NODE_ENV,
-  },
+const isDev = process.env.NODE_ENV !== "production";
+
+export const logger = pino({
+  level: process.env.LOG_LEVEL || (isDev ? "debug" : "info"),
+  ...(isDev && {
+    transport: {
+      target: "pino-pretty",
+      options: {
+        colorize: true,
+        translateTime: "SYS:standard",
+        ignore: "pid,hostname",
+      },
+    },
+  }),
+  // Keep redaction - protects against accidental secret logging
   redact: {
-    paths: [
-      "password",
-      "token",
-      "apiKey",
-      "secret",
-      "authorization",
-      "cookie",
-      "stripe_secret_key",
-      "*.password",
-      "*.token",
-      "*.apiKey",
-      "*.secret",
-    ],
+    paths: ["password", "token", "apiKey", "secret", "authorization", "cookie"],
     censor: "[REDACTED]",
   },
 });
 
-export type RequestContext = {
-  requestId: string;
-  userId?: string;
-  action?: string;
-  [key: string]: unknown;
-};
-
-export function createRequestContext(
-  requestId: string | null,
-  action?: string
-): RequestContext {
-  return {
-    requestId: requestId ?? randomUUID(),
-    action,
-  };
-}
-
-export function logError(
-  baseLogger: Logger,
-  error: unknown,
-  context: Record<string, unknown> = {}
-): void {
-  if (error instanceof Error) {
-    baseLogger.error(
-      {
-        ...context,
-        error: {
-          name: error.name,
-          message: error.message,
-          stack: error.stack,
-        },
-      },
-      error.message
-    );
-    return;
-  }
-
-  baseLogger.error({ ...context, error }, "Unhandled error");
-}
-
 export default logger;
+

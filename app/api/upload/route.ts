@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@clerk/nextjs/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
-import logger, { logError, createRequestContext } from "@/lib/logger"
+import logger from "@/lib/logger"
 import { v4 as uuidv4 } from "uuid"
 import { z } from "zod"
 
@@ -12,14 +12,11 @@ const uploadResponseSchema = z.object({
 })
 
 export async function POST(request: NextRequest) {
-  const ctx = createRequestContext(null, "upload_photo")
-
   try {
     const { userId } = await auth()
-    ctx.userId = userId || "anonymous"
 
     if (!userId) {
-      logger.warn(ctx, "Unauthorized upload attempt")
+      logger.warn({ userId: "anonymous" }, "Unauthorized upload attempt")
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
@@ -28,15 +25,15 @@ export async function POST(request: NextRequest) {
     const originalFilename = formData.get("originalFilename") as string | null
 
     if (!file) {
-      logger.warn({ ...ctx }, "No file provided")
+      logger.warn({ userId }, "No file provided")
       return NextResponse.json({ success: false, error: "No file provided" }, { status: 400 })
     }
 
-    logger.info({ ...ctx, fileSize: file.size, fileType: file.type }, "Upload request received")
+    logger.info({ userId, fileSize: file.size, fileType: file.type }, "Upload request received")
 
     const validTypes = ["image/jpeg", "image/png", "image/webp"]
     if (!validTypes.includes(file.type)) {
-      logger.warn({ ...ctx, fileType: file.type }, "Invalid file type rejected")
+      logger.warn({ userId, fileType: file.type }, "Invalid file type rejected")
       return NextResponse.json(
         { success: false, error: "Invalid file type. Supported: JPG, PNG, WebP" },
         { status: 400 },
@@ -44,7 +41,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      logger.warn({ ...ctx, fileSize: file.size }, "File too large rejected")
+      logger.warn({ userId, fileSize: file.size }, "File too large rejected")
       return NextResponse.json({ success: false, error: "File too large. Maximum size: 10MB" }, { status: 400 })
     }
 
@@ -70,7 +67,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (error) {
-      logError(logger, error, { ...ctx, action: "storage_upload" })
+      logger.error({ userId, error: error.message }, "Failed to upload file to storage")
       return NextResponse.json({ success: false, error: "Failed to upload file" }, { status: 500 })
     }
 
@@ -79,14 +76,14 @@ export async function POST(request: NextRequest) {
       .createSignedUrl(data.path, 3600)
 
     if (signedUrlError) {
-      logger.warn({ ...ctx, error: signedUrlError }, "Failed to create signed URL")
+      logger.warn({ userId, error: signedUrlError.message }, "Failed to create signed URL")
     }
 
     const {
       data: { publicUrl },
     } = supabase.storage.from("photos").getPublicUrl(data.path)
 
-    logger.info({ ...ctx, path: data.path, fileSize: file.size }, "File uploaded successfully")
+    logger.info({ userId, path: data.path, fileSize: file.size }, "File uploaded successfully")
 
     const responseData = {
       url: publicUrl,
@@ -100,7 +97,8 @@ export async function POST(request: NextRequest) {
       data: responseData,
     })
   } catch (error) {
-    logError(logger, error, { ...ctx })
+    const errorMessage = error instanceof Error ? error.message : "Unknown error"
+    logger.error({ error: errorMessage }, "Internal server error in POST /api/upload")
     return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }
