@@ -1,11 +1,11 @@
 import { Redis } from "@upstash/redis"
-import { redisLogger } from "@/lib/logger"
+import logger from "@/lib/logger"
 
 let redisClient: Redis | null = null
 
 export function getRedisClient(): Redis | null {
   if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
-    redisLogger.warn("Redis credentials not configured, free credit tracking will use DB fallback")
+    logger.warn("Redis credentials not configured, free credit tracking will use DB fallback")
     return null
   }
 
@@ -45,7 +45,7 @@ export async function hasUsedFreeCredit(userId: string): Promise<boolean> {
     const used = await redis.get<string>(key)
     return used === "1"
   } catch (error) {
-    redisLogger.error({ error, userId }, "Error checking free credit in Redis")
+    logger.error({ error, userId }, "Error checking free credit in Redis")
     return false
   }
 }
@@ -59,10 +59,10 @@ export async function markFreeCreditUsed(userId: string): Promise<boolean> {
     const key = getFreeCreditKey(userId)
     const ttl = getSecondsUntilMidnightUTC()
     await redis.set(key, "1", { ex: ttl })
-    redisLogger.info({ userId, ttl }, "Marked free credit as used")
+    logger.info({ userId, ttl }, "Marked free credit as used")
     return true
   } catch (error) {
-    redisLogger.error({ error, userId }, "Error marking free credit in Redis")
+    logger.error({ error, userId }, "Error marking free credit in Redis")
     return false
   }
 }

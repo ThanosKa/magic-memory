@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
-import { webhookLogger, paymentLogger, logError, createRequestContext } from "@/lib/logger"
+import logger, { logError, createRequestContext } from "@/lib/logger"
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
 
   try {
     event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)
-    webhookLogger.info({ ...ctx, eventType: event.type, eventId: event.id }, "Webhook received")
+    logger.info({ ...ctx, eventType: event.type, eventId: event.id }, "Webhook received")
   } catch (err) {
-    logError(webhookLogger, err, { ...ctx, action: "signature_verification" })
+    logError(logger, err, { ...ctx, action: "signature_verification" })
     return NextResponse.json({ error: "Webhook signature verification failed" }, { status: 400 })
   }
 
@@ -29,14 +29,14 @@ export async function POST(request: NextRequest) {
     const { userId, packageType, credits } = session.metadata || {}
 
     if (!userId || !packageType || !credits) {
-      webhookLogger.error({ ...ctx, sessionId: session.id }, "Missing metadata in checkout session")
+      logger.error({ ...ctx, sessionId: session.id }, "Missing metadata in checkout session")
       return NextResponse.json({ received: true })
     }
 
     const creditsToAdd = Number.parseInt(credits, 10)
     ctx.userId = userId
 
-    paymentLogger.info(
+    logger.info(
       { ...ctx, packageType, credits: creditsToAdd, paymentIntent: session.payment_intent },
       "Processing successful payment",
     )
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (fetchError) {
-      logError(paymentLogger, fetchError, { ...ctx, action: "fetch_user" })
+      logError(logger, fetchError, { ...ctx, action: "fetch_user" })
       return NextResponse.json({ received: true })
     }
 
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     const { error: updateError } = await supabase.from("users").update({ paid_credits: newCredits }).eq("id", userId)
 
     if (updateError) {
-      logError(paymentLogger, updateError, { ...ctx, action: "update_credits" })
+      logError(logger, updateError, { ...ctx, action: "update_credits" })
       return NextResponse.json({ received: true })
     }
 
@@ -73,10 +73,10 @@ export async function POST(request: NextRequest) {
     })
 
     if (purchaseError) {
-      logError(paymentLogger, purchaseError, { ...ctx, action: "record_purchase" })
+      logError(logger, purchaseError, { ...ctx, action: "record_purchase" })
     }
 
-    paymentLogger.info(
+    logger.info(
       { ...ctx, previousCredits, newCredits, creditsAdded: creditsToAdd, packageType },
       "Credits added successfully",
     )

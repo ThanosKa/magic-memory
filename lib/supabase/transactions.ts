@@ -1,5 +1,5 @@
 import { getSupabaseAdminClient } from "./server"
-import { dbLogger } from "@/lib/logger"
+import logger from "@/lib/logger"
 
 export interface CreditCheckResult {
   has_credits: boolean
@@ -28,7 +28,7 @@ export async function checkUserCredits(userId: string): Promise<CreditCheckResul
       .single()
 
     if (userError || !user) {
-      dbLogger.error({ error: userError, userId }, "User not found for credit check")
+      logger.error({ error: userError, userId }, "User not found for credit check")
       return null
     }
 
@@ -37,7 +37,7 @@ export async function checkUserCredits(userId: string): Promise<CreditCheckResul
     })
 
     if (error) {
-      dbLogger.error({ error, userId }, "Error checking user credits")
+      logger.error({ error, userId }, "Error checking user credits")
       return null
     }
 
@@ -45,7 +45,7 @@ export async function checkUserCredits(userId: string): Promise<CreditCheckResul
     const result = Array.isArray(data) ? data[0] : data
     return result as CreditCheckResult
   } catch (error) {
-    dbLogger.error({ error, userId }, "Exception checking user credits")
+    logger.error({ error, userId }, "Exception checking user credits")
     return null
   }
 }
@@ -84,7 +84,7 @@ export async function deductCreditAndRecordRestoration(
     })
 
     if (error) {
-      dbLogger.error({ error, userId }, "Error deducting credit")
+      logger.error({ error, userId }, "Error deducting credit")
       return {
         success: false,
         restoration_id: null,
@@ -96,7 +96,7 @@ export async function deductCreditAndRecordRestoration(
     const result = Array.isArray(data) ? data[0] : data
     return result as DeductCreditResult
   } catch (error) {
-    dbLogger.error({ error, userId }, "Exception deducting credit")
+    logger.error({ error, userId }, "Exception deducting credit")
     return {
       success: false,
       restoration_id: null,
@@ -116,14 +116,14 @@ export async function rollbackRestoration(restorationId: string): Promise<boolea
     })
 
     if (error) {
-      dbLogger.error({ error, restorationId }, "Error rolling back restoration")
+      logger.error({ error, restorationId }, "Error rolling back restoration")
       return false
     }
 
-    dbLogger.info({ restorationId }, "Restoration rolled back successfully")
+    logger.info({ restorationId }, "Restoration rolled back successfully")
     return data as boolean
   } catch (error) {
-    dbLogger.error({ error, restorationId }, "Exception rolling back restoration")
+    logger.error({ error, restorationId }, "Exception rolling back restoration")
     return false
   }
 }

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { auth, currentUser } from "@clerk/nextjs/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
-import { apiLogger, authLogger, logError, createRequestContext } from "@/lib/logger"
+import logger, { logError, createRequestContext } from "@/lib/logger"
 import { hasUsedFreeCredit, getRedisClient } from "@/lib/redis"
 import { z } from "zod"
 
@@ -20,11 +20,11 @@ export async function GET() {
     ctx.userId = userId || "anonymous"
 
     if (!userId) {
-      authLogger.warn(ctx, "Unauthorized credits request")
+      logger.warn(ctx, "Unauthorized credits request")
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
-    apiLogger.debug({ ...ctx }, "Fetching user credits")
+    logger.debug({ ...ctx }, "Fetching user credits")
 
     const supabase = getSupabaseAdminClient()
 
@@ -33,7 +33,7 @@ export async function GET() {
     if (error && error.code === "PGRST116") {
       const clerkUser = await currentUser()
 
-      authLogger.info({ ...ctx, email: clerkUser?.emailAddresses[0]?.emailAddress }, "Creating new user")
+      logger.info({ ...ctx, email: clerkUser?.emailAddresses[0]?.emailAddress }, "Creating new user")
 
       const { data: newUser, error: insertError } = await supabase
         .from("users")
@@ -48,12 +48,12 @@ export async function GET() {
         .single()
 
       if (insertError) {
-        logError(apiLogger, insertError, { ...ctx, action: "create_user" })
+        logError(logger, insertError, { ...ctx, action: "create_user" })
         return NextResponse.json({ success: false, error: "Failed to create user" }, { status: 500 })
       }
 
       user = newUser
-      authLogger.info({ ...ctx, dbUserId: newUser.id }, "New user created")
+      logger.info({ ...ctx, dbUserId: newUser.id }, "New user created")
     }
 
     let hasFreeDaily = true
@@ -61,7 +61,7 @@ export async function GET() {
 
     if (redis) {
       hasFreeDaily = !(await hasUsedFreeCredit(userId))
-      apiLogger.debug({ ...ctx, hasFreeDaily, source: "redis" }, "Free credit check from Redis")
+      logger.debug({ ...ctx, hasFreeDaily, source: "redis" }, "Free credit check from Redis")
     } else {
       const today = new Date()
       today.setUTCHours(0, 0, 0, 0)
@@ -74,7 +74,7 @@ export async function GET() {
         .gte("created_at", today.toISOString())
 
       hasFreeDaily = (count ?? 0) === 0
-      apiLogger.debug({ ...ctx, hasFreeDaily, source: "database" }, "Free credit check from database")
+      logger.debug({ ...ctx, hasFreeDaily, source: "database" }, "Free credit check from database")
     }
 
     const paidCredits = user?.paid_credits ?? 0
@@ -94,18 +94,18 @@ export async function GET() {
 
     const validatedResponse = creditResponseSchema.safeParse(responseData)
     if (!validatedResponse.success) {
-      logError(apiLogger, validatedResponse.error, { ...ctx, action: "validate_response" })
+      logError(logger, validatedResponse.error, { ...ctx, action: "validate_response" })
       return NextResponse.json({ success: false, error: "Internal data validation error" }, { status: 500 })
     }
 
-    apiLogger.info({ ...ctx, totalCredits, paidCredits, hasFreeDaily }, "Credits fetched successfully")
+    logger.info({ ...ctx, totalCredits, paidCredits, hasFreeDaily }, "Credits fetched successfully")
 
     return NextResponse.json({
       success: true,
       data: validatedResponse.data,
     })
   } catch (error) {
-    logError(apiLogger, error, { ...ctx })
+    logError(logger, error, { ...ctx })
     return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }

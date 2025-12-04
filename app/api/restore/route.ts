@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@clerk/nextjs/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
-import { restoreLogger, storageLogger, logError, createRequestContext } from "@/lib/logger"
+import logger, { logError, createRequestContext } from "@/lib/logger"
 import { parseRequestBody } from "@/lib/validations/utils"
 import { restorePhotoRequestSchema } from "@/lib/validations/api"
 import { checkUserCredits, deductCreditAndRecordRestoration, rollbackRestoration } from "@/lib/supabase/transactions"
@@ -23,7 +23,7 @@ async function runReplicateWithPolling(imageUrl: string): Promise<string> {
     },
   })
 
-  restoreLogger.info({ predictionId: prediction.id }, "Replicate prediction created")
+  logger.info({ predictionId: prediction.id }, "Replicate prediction created")
 
   const maxAttempts = 60
   let attempts = 0
@@ -32,12 +32,12 @@ async function runReplicateWithPolling(imageUrl: string): Promise<string> {
     const status = await replicate.predictions.get(prediction.id)
 
     if (status.status === "succeeded") {
-      restoreLogger.info({ predictionId: prediction.id }, "Replicate prediction succeeded")
+      logger.info({ predictionId: prediction.id }, "Replicate prediction succeeded")
       return status.output as string
     }
 
     if (status.status === "failed" || status.status === "canceled") {
-      restoreLogger.error(
+      logger.error(
         { predictionId: prediction.id, status: status.status, error: status.error },
         "Replicate prediction failed",
       )
@@ -77,7 +77,7 @@ async function uploadRestoredImage(
   })
 
   if (error) {
-    storageLogger.error({ error, userId }, "Failed to upload restored image")
+    logger.error({ error, userId }, "Failed to upload restored image")
     throw new Error("Failed to save restored image")
   }
 
@@ -85,7 +85,7 @@ async function uploadRestoredImage(
     data: { publicUrl },
   } = supabase.storage.from("photos").getPublicUrl(data.path)
 
-  storageLogger.info({ userId, path: data.path }, "Restored image uploaded to Storage")
+  logger.info({ userId, path: data.path }, "Restored image uploaded to Storage")
 
   return { url: publicUrl, path: data.path }
 }
@@ -103,24 +103,24 @@ export async function POST(request: NextRequest) {
     ctx.userId = userId || "anonymous"
 
     if (!userId) {
-      restoreLogger.warn(ctx, "Unauthorized restoration attempt")
+      logger.warn(ctx, "Unauthorized restoration attempt")
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
     const parseResult = await parseRequestBody(request, restorePhotoRequestSchema)
     if (!parseResult.success) {
-      restoreLogger.warn({ ...ctx, error: "Invalid request body" }, "Validation failed")
+      logger.warn({ ...ctx, error: "Invalid request body" }, "Validation failed")
       return parseResult.error
     }
 
     const { imageUrl, originalFilename = "photo" } = parseResult.data
 
-    restoreLogger.info({ ...ctx, imageUrl }, "Restoration request received")
+    logger.info({ ...ctx, imageUrl }, "Restoration request received")
 
     const creditCheck = await checkUserCredits(userId)
 
     if (!creditCheck || !creditCheck.has_credits) {
-      restoreLogger.warn({ ...ctx, creditCheck }, "No credits available")
+      logger.warn({ ...ctx, creditCheck }, "No credits available")
       return NextResponse.json(
         { success: false, error: "No credits available. Purchase more credits to continue." },
         { status: 403 },
@@ -129,11 +129,11 @@ export async function POST(request: NextRequest) {
 
     usedFreeCredit = creditCheck.should_use_free
 
-    restoreLogger.info({ ...ctx, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
+    logger.info({ ...ctx, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
 
     const replicateOutput = await runReplicateWithPolling(imageUrl)
 
-    restoreLogger.info({ ...ctx }, "AI restoration complete, uploading to storage")
+    logger.info({ ...ctx }, "AI restoration complete, uploading to storage")
 
     const { url: restoredImageUrl, path: restoredImagePath } = await uploadRestoredImage(
       replicateOutput,
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
     const deductResult = await deductCreditAndRecordRestoration(userId, imageUrl, restoredImageUrl, usedFreeCredit)
 
     if (!deductResult.success) {
-      logError(restoreLogger, deductResult.error_message, { ...ctx, action: "deduct_credit" })
+      logError(logger, deductResult.error_message, { ...ctx, action: "deduct_credit" })
       return NextResponse.json({ success: false, error: "Failed to record restoration" }, { status: 500 })
     }
 
@@ -152,10 +152,10 @@ export async function POST(request: NextRequest) {
 
     if (usedFreeCredit && getRedisClient()) {
       await markFreeCreditUsed(userId)
-      restoreLogger.info({ ...ctx }, "Free credit marked as used in Redis")
+      logger.info({ ...ctx }, "Free credit marked as used in Redis")
     }
 
-    restoreLogger.info(
+    logger.info(
       { ...ctx, restorationId, restoredImageUrl, usedFreeCredit },
       "Restoration completed successfully",
     )
@@ -171,11 +171,11 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (error) {
-    logError(restoreLogger, error, { ...ctx, action: "restoration_error" })
+    logError(logger, error, { ...ctx, action: "restoration_error" })
 
     if (restorationId) {
       await rollbackRestoration(restorationId)
-      restoreLogger.info({ ...ctx, restorationId }, "Rolled back failed restoration")
+      logger.info({ ...ctx, restorationId }, "Rolled back failed restoration")
     }
 
     const errorMessage = error instanceof Error ? error.message : "Failed to restore image"

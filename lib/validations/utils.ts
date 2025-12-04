@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import type { z, ZodError } from "zod"
-import { apiLogger } from "@/lib/logger"
+import logger from "@/lib/logger"
 
 // Helper to safely parse request body with Zod
 export async function parseRequestBody<T extends z.ZodType>(
@@ -12,7 +12,7 @@ export async function parseRequestBody<T extends z.ZodType>(
     const parsed = schema.safeParse(body)
 
     if (!parsed.success) {
-      apiLogger.warn({ errors: parsed.error.flatten() }, "Request validation failed")
+      logger.warn({ errors: parsed.error.flatten() }, "Request validation failed")
       return {
         success: false,
         error: NextResponse.json(
@@ -28,7 +28,7 @@ export async function parseRequestBody<T extends z.ZodType>(
 
     return { success: true, data: parsed.data }
   } catch (error) {
-    apiLogger.error({ error }, "Failed to parse request body")
+    logger.error({ error }, "Failed to parse request body")
     return {
       success: false,
       error: NextResponse.json({ success: false, error: "Invalid JSON body" }, { status: 400 }),
