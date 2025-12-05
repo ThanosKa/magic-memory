@@ -436,23 +436,12 @@ export function RestoreUploader() {
 
           {!restoredImage && (
             <div className={comparisonContainerClass}>
-              <div
-                className={`grid gap-6 ${
-                  restoredImage
-                    ? "md:grid-cols-2"
-                    : "md:grid-cols-1 max-w-md mx-auto"
-                }`}
-              >
-                <div className="relative w-full">
-                  {restoredImage && (
-                    <div className="absolute top-2 left-2 z-10 rounded-md bg-black/50 px-2 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                      Original
-                    </div>
-                  )}
+              <div className="flex justify-center">
+                <div className="relative max-w-md w-full">
                   <img
                     src={preview || "/placeholder.svg"}
                     alt="Original photo"
-                    className="h-auto w-auto max-w-sm rounded-lg"
+                    className="h-auto w- rounded-lg"
                   />
 
                   {isProcessing && (
