@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { auth } from "@clerk/nextjs/server"
+import { auth, clerkClient } from "@clerk/nextjs/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
 import logger from "@/lib/logger"
 import { hasUsedFreeCredit, getRedisClient } from "@/lib/redis"
@@ -14,7 +14,8 @@ const creditResponseSchema = z.object({
 
 export async function GET() {
   try {
-    const { userId } = await auth()
+    const authResult = await auth()
+    const userId = authResult?.userId
 
     if (!userId) {
       logger.warn({ userId: "anonymous" }, "Unauthorized credits request")
@@ -25,9 +26,57 @@ export async function GET() {
 
     const supabase = getSupabaseAdminClient()
 
-    const { data: user, error } = await supabase.from("users").select("*").eq("clerk_user_id", userId).single()
+    let { data: user, error } = await supabase.from("users").select("*").eq("clerk_user_id", userId).single()
 
-    if (error || !user) {
+    // Development fallback: Create user if not found (simulates webhook behavior)
+    if ((error || !user) && process.env.NODE_ENV === "development") {
+      logger.warn({ userId }, "User not found in dev mode, attempting to create")
+
+      // Fetch user details from Clerk API to get email
+      try {
+        const client = await clerkClient()
+        const clerkUser = await client.users.getUser(userId)
+        const email = clerkUser.emailAddresses[0]?.emailAddress
+
+        if (!email) {
+          logger.error({ userId }, "User not found in database and no email from Clerk")
+          return NextResponse.json(
+            { success: false, error: "User not found. Please contact support." },
+            { status: 404 }
+          )
+        }
+
+        // Create or update user (upsert on email to handle duplicate Clerk accounts with same email)
+        const { data: newUser, error: createError } = await supabase
+          .from("users")
+          .upsert({
+            clerk_user_id: userId,
+            email,
+            paid_credits: 0,
+          }, { onConflict: "email" })
+          .select()
+          .single()
+
+        if (createError || !newUser) {
+          logger.error({ userId, error: createError?.message }, "Failed to create user in dev mode")
+          return NextResponse.json(
+            { success: false, error: "Failed to create user. Please contact support." },
+            { status: 500 }
+          )
+        }
+
+        user = newUser
+        logger.info({ userId, email }, "User created in dev mode")
+      } catch (clerkError) {
+        const errorMessage = clerkError instanceof Error ? clerkError.message : "Unknown error"
+        logger.error({ userId, error: errorMessage }, "Failed to fetch user from Clerk")
+        return NextResponse.json(
+          { success: false, error: "Failed to fetch user details. Please contact support." },
+          { status: 500 }
+        )
+      }
+    } else if (error || !user) {
+      // Production: User should exist via webhook
       logger.error({ userId, error: error?.message }, "User not found in database")
       return NextResponse.json(
         { success: false, error: "User not found. Please contact support." },
