@@ -71,7 +71,25 @@ BEGIN
     RETURN;
   END IF;
   
-  -- Verify credits available
+  -- If caller wants to use free credit, verify it's still available (race-safe check)
+  IF p_use_free_credit THEN
+    DECLARE
+      v_free_used_count INTEGER;
+    BEGIN
+      SELECT COUNT(*) INTO v_free_used_count
+      FROM restorations
+      WHERE user_id = p_user_id
+        AND used_free_credit = TRUE
+        AND created_at >= DATE_TRUNC('day', NOW() AT TIME ZONE 'UTC');
+      
+      IF v_free_used_count > 0 THEN
+        RETURN QUERY SELECT FALSE, NULL::UUID, v_user_record.paid_credits, 'Free credit already used today'::TEXT;
+        RETURN;
+      END IF;
+    END;
+  END IF;
+  
+  -- Verify paid credits available if not using free
   IF NOT p_use_free_credit AND v_user_record.paid_credits <= 0 THEN
     RETURN QUERY SELECT FALSE, NULL::UUID, 0, 'No paid credits available'::TEXT;
     RETURN;
@@ -127,6 +145,13 @@ BEGIN
   RETURN TRUE;
 END;
 $$;
+
+-- Create partial unique index to enforce one free credit per user per day
+-- This is a database-level constraint that makes it impossible to insert two free credits on the same day
+-- The index only applies to rows where used_free_credit = TRUE and created_at is today (UTC)
+CREATE UNIQUE INDEX IF NOT EXISTS idx_one_free_credit_per_user_per_day
+ON restorations (user_id, (DATE_TRUNC('day', created_at AT TIME ZONE 'UTC')))
+WHERE used_free_credit = TRUE;
 
 -- Grant execute permissions
 GRANT EXECUTE ON FUNCTION check_user_credits(UUID) TO authenticated;
