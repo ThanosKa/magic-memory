@@ -1,17 +1,18 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef, useCallback, useEffect } from "react"
-import Image from "next/image"
-import { cn } from "@/lib/utils"
+import { useState, useRef, useCallback, useEffect } from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface ImageComparisonSliderProps {
-  originalImage: string
-  restoredImage: string
-  originalAlt?: string
-  restoredAlt?: string
-  className?: string
+  originalImage: string;
+  restoredImage: string;
+  originalAlt?: string;
+  restoredAlt?: string;
+  className?: string;
+  aspectRatio?: number;
 }
 
 export function ImageComparisonSlider({
@@ -20,76 +21,82 @@ export function ImageComparisonSlider({
   originalAlt = "Original photo",
   restoredAlt = "Restored photo",
   className,
+  aspectRatio,
 }: ImageComparisonSliderProps) {
-  const [sliderPosition, setSliderPosition] = useState(50)
-  const [isDragging, setIsDragging] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const baseContainerClass = "w-full max-w-7xl mx-auto min-h-[600px]";
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const computedAspectRatio =
+    aspectRatio && Number.isFinite(aspectRatio) ? aspectRatio : 1;
 
   const handleMove = useCallback((clientX: number) => {
-    if (!containerRef.current) return
+    if (!containerRef.current) return;
 
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = clientX - rect.left
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-    setSliderPosition(percentage)
-  }, [])
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
+  }, []);
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      e.preventDefault()
-      setIsDragging(true)
-      handleMove(e.clientX)
+      e.preventDefault();
+      setIsDragging(true);
+      handleMove(e.clientX);
     },
-    [handleMove],
-  )
+    [handleMove]
+  );
 
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
-      setIsDragging(true)
-      handleMove(e.touches[0].clientX)
+      setIsDragging(true);
+      handleMove(e.touches[0].clientX);
     },
-    [handleMove],
-  )
+    [handleMove]
+  );
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (isDragging) {
-        handleMove(e.clientX)
+        handleMove(e.clientX);
       }
-    }
+    };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (isDragging) {
-        handleMove(e.touches[0].clientX)
+        handleMove(e.touches[0].clientX);
       }
-    }
+    };
 
     const handleEnd = () => {
-      setIsDragging(false)
-    }
+      setIsDragging(false);
+    };
 
     if (isDragging) {
-      window.addEventListener("mousemove", handleMouseMove)
-      window.addEventListener("mouseup", handleEnd)
-      window.addEventListener("touchmove", handleTouchMove)
-      window.addEventListener("touchend", handleEnd)
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleEnd);
+      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchend", handleEnd);
     }
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      window.removeEventListener("mouseup", handleEnd)
-      window.removeEventListener("touchmove", handleTouchMove)
-      window.removeEventListener("touchend", handleEnd)
-    }
-  }, [isDragging, handleMove])
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleEnd);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleEnd);
+    };
+  }, [isDragging, handleMove]);
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "relative aspect-square w-full cursor-ew-resize select-none overflow-hidden",
-        className,
+        "relative cursor-ew-resize select-none overflow-hidden rounded-lg",
+        baseContainerClass,
+        className
       )}
+      style={{ aspectRatio: computedAspectRatio }}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
     >
@@ -109,7 +116,10 @@ export function ImageComparisonSlider({
       </div>
 
       {/* Original Image (Foreground - Clipped) */}
-      <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}>
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+      >
         <Image
           src={originalImage || "/placeholder.svg"}
           alt={originalAlt}
@@ -137,7 +147,11 @@ export function ImageComparisonSlider({
             stroke="currentColor"
             strokeWidth={3}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+            />
           </svg>
         </div>
       </div>
@@ -147,12 +161,12 @@ export function ImageComparisonSlider({
         <div
           className={cn(
             "rounded-lg bg-black/60 px-4 py-2 text-sm text-white transition-opacity duration-500",
-            isDragging ? "opacity-0" : "opacity-100",
+            isDragging ? "opacity-0" : "opacity-100"
           )}
         >
           Drag to compare
         </div>
       </div>
     </div>
-  )
+  );
 }

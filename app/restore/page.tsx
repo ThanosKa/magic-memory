@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers";
 import { LoadingSpinner } from "@/components/ui/loading-states";
-
+import { FooterMinimal } from "@/components/footer-minimal";
 const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
   {
@@ -88,13 +88,12 @@ export default async function RestorePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Header />
-      <main className="flex-1 py-4 sm:py-8">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-
+      <main className="flex flex-1 items-center justify-center py-12 sm:py-16">
+        <div className="mx-auto flex w-full max-w-4xl justify-center px-4 sm:px-6 lg:px-8">
           <RestoreUploader />
         </div>
       </main>
-      <Footer />
+      <FooterMinimal />
     </div>
   );
 }
