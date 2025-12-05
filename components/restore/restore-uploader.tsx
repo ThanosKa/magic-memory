@@ -8,14 +8,35 @@ import { Upload, X, Download, ImageIcon, Coins, SlidersHorizontal, LayoutGrid, R
 import Image from "next/image"
 import useSWR, { mutate } from "swr"
 import { ImageComparisonSlider } from "./image-comparison-slider"
-import { checkFileNSFW, loadNSFWModel } from "@/lib/nsfw-detection"
 import { ErrorAlert, type ErrorType } from "@/components/ui/error-alert"
-import { LoadingSpinner, ProgressLoading, CreditsSkeleton } from "@/components/ui/loading-states"
+import { ProgressLoading, CreditsSkeleton } from "@/components/ui/loading-states"
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 type ViewMode = "slider" | "side-by-side"
-type RestorationStage = "idle" | "checking_nsfw" | "uploading" | "restoring" | "complete"
+type RestorationStage = "idle" | "restoring" | "complete"
+
+// Max image dimensions (GFPGAN limit)
+const MAX_IMAGE_DIMENSION = 4000
+
+async function validateImageDimensions(file: File): Promise<{ valid: boolean; width: number; height: number }> {
+  return new Promise((resolve) => {
+    const img = new window.Image()
+    img.onload = () => {
+      URL.revokeObjectURL(img.src)
+      resolve({
+        valid: img.width <= MAX_IMAGE_DIMENSION && img.height <= MAX_IMAGE_DIMENSION,
+        width: img.width,
+        height: img.height,
+      })
+    }
+    img.onerror = () => {
+      URL.revokeObjectURL(img.src)
+      resolve({ valid: true, width: 0, height: 0 }) // Allow on error
+    }
+    img.src = URL.createObjectURL(file)
+  })
+}
 
 export function RestoreUploader() {
   const [file, setFile] = useState<File | null>(null)
@@ -33,10 +54,6 @@ export function RestoreUploader() {
   const hasCredits = totalCredits > 0
 
   useEffect(() => {
-    loadNSFWModel().catch(console.error)
-  }, [])
-
-  useEffect(() => {
     if (stage === "restoring") {
       setProgress(0)
       const interval = setInterval(() => {
@@ -45,7 +62,7 @@ export function RestoreUploader() {
             clearInterval(interval)
             return 90
           }
-          return prev + Math.random() * 5
+          return prev + Math.random() * 3
         })
       }, 1000)
       return () => clearInterval(interval)
@@ -54,9 +71,9 @@ export function RestoreUploader() {
     }
   }, [stage])
 
-  const onDrop = useCallback(async (acceptedFiles: File[], rejectedFiles: any[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[], rejectedFiles: unknown[]) => {
     if (rejectedFiles.length > 0) {
-      const rejection = rejectedFiles[0]
+      const rejection = rejectedFiles[0] as { errors: { code: string }[] }
       if (rejection.errors[0]?.code === "file-too-large") {
         setError({ type: "file_too_large" })
       } else if (rejection.errors[0]?.code === "file-invalid-type") {
@@ -69,36 +86,22 @@ export function RestoreUploader() {
     if (!selectedFile) return
 
     setError(null)
-    setStage("checking_nsfw")
 
-    try {
-      const nsfwResult = await checkFileNSFW(selectedFile)
-
-      if (nsfwResult.isNSFW) {
-        setError({
-          type: "nsfw_content",
-          message: `This image may contain inappropriate content (confidence: ${(nsfwResult.confidence * 100).toFixed(1)}%). Please upload a different photo.`,
-        })
-        setStage("idle")
-        return
-      }
-
-      setFile(selectedFile)
-      setPreview(URL.createObjectURL(selectedFile))
-      setRestoredImage(null)
-      const nameWithoutExt = selectedFile.name.replace(/\.[^/.]+$/, "")
-      setOriginalFilename(nameWithoutExt)
-      setStage("idle")
-    } catch (err) {
-      console.error("NSFW check error:", err)
-      // On error, allow the file (fail open)
-      setFile(selectedFile)
-      setPreview(URL.createObjectURL(selectedFile))
-      setRestoredImage(null)
-      const nameWithoutExt = selectedFile.name.replace(/\.[^/.]+$/, "")
-      setOriginalFilename(nameWithoutExt)
-      setStage("idle")
+    // Validate image dimensions
+    const { valid, width, height } = await validateImageDimensions(selectedFile)
+    if (!valid) {
+      setError({
+        type: "generic",
+        message: `Image too large (${width}x${height}). Maximum dimensions: ${MAX_IMAGE_DIMENSION}x${MAX_IMAGE_DIMENSION} pixels.`,
+      })
+      return
     }
+
+    setFile(selectedFile)
+    setPreview(URL.createObjectURL(selectedFile))
+    setRestoredImage(null)
+    const nameWithoutExt = selectedFile.name.replace(/\.[^/.]+$/, "")
+    setOriginalFilename(nameWithoutExt)
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -121,7 +124,7 @@ export function RestoreUploader() {
       return
     }
 
-    setStage("uploading")
+    setStage("restoring")
     setError(null)
 
     try {
@@ -129,43 +132,9 @@ export function RestoreUploader() {
       formData.append("file", file)
       formData.append("originalFilename", originalFilename)
 
-      const uploadResponse = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      })
-
-      if (!uploadResponse.ok) {
-        if (uploadResponse.status === 401) {
-          setError({ type: "auth_error" })
-          setStage("idle")
-          return
-        }
-        throw new Error("Upload failed")
-      }
-
-      const uploadData = await uploadResponse.json()
-
-      if (!uploadData.success) {
-        if (uploadData.error?.includes("too large")) {
-          setError({ type: "file_too_large", message: uploadData.error })
-        } else if (uploadData.error?.includes("Invalid file")) {
-          setError({ type: "invalid_file_type", message: uploadData.error })
-        } else {
-          setError({ type: "generic", message: uploadData.error })
-        }
-        setStage("idle")
-        return
-      }
-
-      setStage("restoring")
-
       const restoreResponse = await fetch("/api/restore", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          imageUrl: uploadData.data.url,
-          originalFilename: originalFilename,
-        }),
+        body: formData,
       })
 
       const restoreData = await restoreResponse.json()
@@ -177,6 +146,8 @@ export function RestoreUploader() {
           setError({ type: "timeout", message: restoreData.error })
         } else if (restoreResponse.status === 401) {
           setError({ type: "auth_error" })
+        } else if (restoreData.error?.includes("dimensions")) {
+          setError({ type: "generic", message: restoreData.error })
         } else {
           setError({ type: "restoration_failed", message: restoreData.error })
         }
@@ -208,7 +179,6 @@ export function RestoreUploader() {
     setStage("idle")
     setProgress(0)
     setOriginalFilename("photo")
-    // Refresh credits to get updated count
     mutate("/api/credits")
   }
 
@@ -250,7 +220,7 @@ export function RestoreUploader() {
     }
   }
 
-  const isProcessing = stage === "checking_nsfw" || stage === "uploading" || stage === "restoring"
+  const isProcessing = stage === "restoring"
 
   return (
     <div className="mt-12 space-y-8">
@@ -287,22 +257,17 @@ export function RestoreUploader() {
           <CardContent className="p-0">
             <div
               {...getRootProps()}
-              className={`flex flex-col items-center justify-center py-16 px-8 cursor-pointer transition-colors ${isDragActive ? "bg-accent" : "hover:bg-accent/50"
-                } ${stage === "checking_nsfw" ? "opacity-50 cursor-wait" : ""}`}
+              className={`flex flex-col items-center justify-center py-16 px-8 cursor-pointer transition-colors ${isDragActive ? "bg-accent" : "hover:bg-accent/50"}`}
             >
               <input {...getInputProps()} />
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                {stage === "checking_nsfw" ? <LoadingSpinner size="lg" /> : <Upload className="h-8 w-8 text-primary" />}
+                <Upload className="h-8 w-8 text-primary" />
               </div>
               <p className="mt-4 text-lg font-medium">
-                {stage === "checking_nsfw"
-                  ? "Checking image..."
-                  : isDragActive
-                    ? "Drop your photo here"
-                    : "Drag & drop your photo here"}
+                {isDragActive ? "Drop your photo here" : "Drag & drop your photo here"}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">or click to select a file</p>
-              <p className="mt-4 text-xs text-muted-foreground">Supports JPG, PNG, WebP up to 10MB</p>
+              <p className="mt-4 text-xs text-muted-foreground">Supports JPG, PNG, WebP up to 10MB (max 4000x4000px)</p>
             </div>
           </CardContent>
         </Card>
@@ -314,15 +279,9 @@ export function RestoreUploader() {
           {isProcessing && (
             <Card className="overflow-hidden">
               <ProgressLoading
-                progress={stage === "restoring" ? progress : undefined}
-                message={
-                  stage === "checking_nsfw"
-                    ? "Checking image content..."
-                    : stage === "uploading"
-                      ? "Uploading your photo..."
-                      : "AI is restoring your photo..."
-                }
-                submessage={stage === "restoring" ? "This may take up to 60 seconds" : undefined}
+                progress={progress}
+                message="AI is restoring your photo..."
+                submessage="This may take up to 60 seconds"
               />
             </Card>
           )}

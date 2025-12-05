@@ -50,6 +50,8 @@ export const APP_CONFIG = {
   description: "Restore your old photos with AI",
   freeRestorationPerDay: 1,
   maxFileSize: 10 * 1024 * 1024, // 10MB
+  maxImageDimension: 4000, // 4000x4000 max for GFPGAN
   supportedFormats: ["image/jpeg", "image/png", "image/webp"],
-  processingTimeSeconds: { min: 5, max: 15 },
+  processingTimeSeconds: { min: 5, max: 60 },
 } as const
+

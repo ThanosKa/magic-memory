@@ -1,15 +1,45 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@clerk/nextjs/server"
-import { getSupabaseAdminClient } from "@/lib/supabase/server"
 import logger from "@/lib/logger"
-import { parseRequestBody } from "@/lib/validations/utils"
-import { restorePhotoRequestSchema } from "@/lib/validations/api"
 import { checkUserCredits, deductCreditAndRecordRestoration, rollbackRestoration } from "@/lib/supabase/transactions"
 import { markFreeCreditUsed, getRedisClient } from "@/lib/redis"
+import { Ratelimit } from "@upstash/ratelimit"
 import Replicate from "replicate"
-import { v4 as uuidv4 } from "uuid"
 
-async function runReplicateWithPolling(imageUrl: string): Promise<string> {
+// Rate limiting: 10 requests per minute per user
+function getRateLimiter() {
+  const redis = getRedisClient()
+  if (!redis) return null
+
+  return new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(10, "1 m"),
+    analytics: true,
+    prefix: "ratelimit:restore",
+  })
+}
+
+// Max image dimensions (GFPGAN works best under 4000px)
+const MAX_IMAGE_DIMENSION = 4000
+const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
+
+async function validateImageDimensions(buffer: Buffer): Promise<{ valid: boolean; error?: string }> {
+  // Check PNG dimensions from header
+  if (buffer[0] === 0x89 && buffer[1] === 0x50) {
+    const width = buffer.readUInt32BE(16)
+    const height = buffer.readUInt32BE(20)
+    if (width > MAX_IMAGE_DIMENSION || height > MAX_IMAGE_DIMENSION) {
+      return { valid: false, error: `Image dimensions ${width}x${height} exceed maximum ${MAX_IMAGE_DIMENSION}x${MAX_IMAGE_DIMENSION}` }
+    }
+    return { valid: true }
+  }
+
+  // Check JPEG dimensions - more complex, skip for now and trust client
+  // WebP also skipped - trust client validation
+  return { valid: true }
+}
+
+async function runReplicateWithPolling(imageBase64: string): Promise<string> {
   const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
   })
@@ -17,7 +47,7 @@ async function runReplicateWithPolling(imageUrl: string): Promise<string> {
   const prediction = await replicate.predictions.create({
     version: "0fbacf7afc6c144e5be9767cff80f25aff23e52b0708f17e20f9879b2f21516c",
     input: {
-      img: imageUrl,
+      img: imageBase64,
       version: "v1.4",
       scale: 2,
     },
@@ -51,45 +81,6 @@ async function runReplicateWithPolling(imageUrl: string): Promise<string> {
   throw new Error("Restoration timed out after 60 seconds")
 }
 
-async function uploadRestoredImage(
-  imageUrl: string,
-  userId: string,
-  originalFilename: string,
-): Promise<{ url: string; path: string }> {
-  const supabase = getSupabaseAdminClient()
-
-  const response = await fetch(imageUrl)
-  if (!response.ok) {
-    throw new Error("Failed to fetch restored image from Replicate")
-  }
-
-  const arrayBuffer = await response.arrayBuffer()
-  const buffer = Buffer.from(arrayBuffer)
-
-  const contentType = response.headers.get("content-type") || "image/png"
-  const extension = contentType.includes("jpeg") ? "jpg" : "png"
-
-  const fileName = `user_${userId}/${originalFilename}-restored-${uuidv4().slice(0, 8)}.${extension}`
-
-  const { data, error } = await supabase.storage.from("photos").upload(fileName, buffer, {
-    contentType,
-    upsert: false,
-  })
-
-  if (error) {
-    logger.error({ error, userId }, "Failed to upload restored image")
-    throw new Error("Failed to save restored image")
-  }
-
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from("photos").getPublicUrl(data.path)
-
-  logger.info({ userId, path: data.path }, "Restored image uploaded to Storage")
-
-  return { url: publicUrl, path: data.path }
-}
-
 export async function POST(request: NextRequest) {
   let restorationId: string | null = null
   let usedFreeCredit = false
@@ -104,16 +95,61 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
-    const parseResult = await parseRequestBody(request, restorePhotoRequestSchema)
-    if (!parseResult.success) {
-      logger.warn({ userId, error: "Invalid request body" }, "Validation failed")
-      return parseResult.error
+    // Rate limiting
+    const rateLimiter = getRateLimiter()
+    if (rateLimiter) {
+      const { success, remaining } = await rateLimiter.limit(userId)
+      if (!success) {
+        logger.warn({ userId, remaining }, "Rate limit exceeded")
+        return NextResponse.json(
+          { success: false, error: "Too many requests. Please wait a minute before trying again." },
+          { status: 429 }
+        )
+      }
     }
 
-    const { imageUrl, originalFilename = "photo" } = parseResult.data
+    // Parse FormData
+    const formData = await request.formData()
+    const file = formData.get("file") as File | null
+    const originalFilename = (formData.get("originalFilename") as string) || "photo"
 
-    logger.info({ userId, imageUrl }, "Restoration request received")
+    if (!file) {
+      logger.warn({ userId }, "No file provided")
+      return NextResponse.json({ success: false, error: "No file provided" }, { status: 400 })
+    }
 
+    // Validate file type
+    const validTypes = ["image/jpeg", "image/png", "image/webp"]
+    if (!validTypes.includes(file.type)) {
+      logger.warn({ userId, fileType: file.type }, "Invalid file type")
+      return NextResponse.json(
+        { success: false, error: "Invalid file type. Supported: JPG, PNG, WebP" },
+        { status: 400 }
+      )
+    }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      logger.warn({ userId, fileSize: file.size }, "File too large")
+      return NextResponse.json(
+        { success: false, error: "File too large. Maximum size: 10MB" },
+        { status: 400 }
+      )
+    }
+
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+
+    // Server-side dimension check for PNG
+    const dimensionCheck = await validateImageDimensions(buffer)
+    if (!dimensionCheck.valid) {
+      logger.warn({ userId, error: dimensionCheck.error }, "Image dimensions exceeded")
+      return NextResponse.json({ success: false, error: dimensionCheck.error }, { status: 400 })
+    }
+
+    logger.info({ userId, fileSize: file.size, fileType: file.type }, "Restoration request received")
+
+    // Check credits
     const creditCheck = await checkUserCredits(userId)
 
     if (!creditCheck || !creditCheck.has_credits) {
@@ -128,17 +164,24 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
 
-    const replicateOutput = await runReplicateWithPolling(imageUrl)
+    // Convert to base64 data URL for Replicate
+    const base64 = buffer.toString("base64")
+    const mimeType = file.type
+    const dataUrl = `data:${mimeType};base64,${base64}`
 
-    logger.info({ userId }, "AI restoration complete, uploading to storage")
+    // Run GFPGAN restoration
+    const restoredImageUrl = await runReplicateWithPolling(dataUrl)
 
-    const { url: restoredImageUrl, path: restoredImagePath } = await uploadRestoredImage(
-      replicateOutput,
+    logger.info({ userId }, "AI restoration complete")
+
+    // Deduct credit and record restoration
+    // Note: We store the Replicate URL (ephemeral) - user must download before it expires (~1 hour)
+    const deductResult = await deductCreditAndRecordRestoration(
       userId,
-      originalFilename,
+      `ephemeral:${originalFilename}`, // We don't store original, just record the filename
+      restoredImageUrl,
+      usedFreeCredit
     )
-
-    const deductResult = await deductCreditAndRecordRestoration(userId, imageUrl, restoredImageUrl, usedFreeCredit)
 
     if (!deductResult.success) {
       logger.error({ userId, error: deductResult.error_message }, "Failed to deduct credit")
@@ -153,7 +196,7 @@ export async function POST(request: NextRequest) {
     }
 
     logger.info(
-      { userId, restorationId, restoredImageUrl, usedFreeCredit },
+      { userId, restorationId, usedFreeCredit },
       "Restoration completed successfully",
     )
 
@@ -161,7 +204,6 @@ export async function POST(request: NextRequest) {
       success: true,
       data: {
         restoredImageUrl,
-        restoredImagePath,
         usedFreeCredit,
         remainingPaidCredits: deductResult.remaining_paid_credits,
         restorationId,
