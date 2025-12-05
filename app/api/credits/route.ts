@@ -84,28 +84,26 @@ export async function GET() {
       )
     }
 
-    let hasFreeDaily = true
-    const redis = getRedisClient()
 
-    if (redis) {
-      hasFreeDaily = !(await hasUsedFreeCredit(userId))
-      logger.debug({ userId, hasFreeDaily, source: "redis" }, "Free credit check from Redis")
-    } else {
-      const today = new Date()
-      today.setUTCHours(0, 0, 0, 0)
+    let hasFreeDaily = false
+    let paidCredits = 0
 
-      const { count } = await supabase
-        .from("restorations")
-        .select("*", { count: "exact", head: true })
-        .eq("user_id", user.id)
-        .eq("used_free_credit", true)
-        .gte("created_at", today.toISOString())
+    // Use database as source of truth (same function as restore endpoint)
+    const { data: creditData, error: creditError } = await supabase.rpc("check_user_credits", {
+      p_user_id: user.id,
+    })
 
-      hasFreeDaily = (count ?? 0) === 0
-      logger.debug({ userId, hasFreeDaily, source: "database" }, "Free credit check from database")
+    if (creditError) {
+      logger.error({ userId, error: creditError.message }, "Failed to check credits")
+      return NextResponse.json({ success: false, error: "Failed to fetch credits" }, { status: 500 })
     }
 
-    const paidCredits = user?.paid_credits ?? 0
+    const creditResult = Array.isArray(creditData) ? creditData[0] : creditData
+    hasFreeDaily = creditResult?.has_free_daily ?? false
+    paidCredits = creditResult?.paid_credits ?? 0
+
+    logger.debug({ userId, hasFreeDaily, paidCredits, source: "database" }, "Credits fetched from database")
+
     const totalCredits = paidCredits + (hasFreeDaily ? 1 : 0)
 
     const now = new Date()
