@@ -1,44 +1,49 @@
-import type React from "react"
-import type { Metadata, Viewport } from "next"
-import dynamic from "next/dynamic"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { LoadingSpinner } from "@/components/ui/loading-states"
+import type React from "react";
+import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { LoadingSpinner } from "@/components/ui/loading-states";
+import { AnalyticsProvider } from "@/app/analytics-provider";
 
 const ConditionalClerkProvider = dynamic(
-  () => import("@/components/providers/clerk-provider").then((m) => m.ConditionalClerkProvider),
+  () =>
+    import("@/components/providers/clerk-provider").then(
+      (m) => m.ConditionalClerkProvider
+    ),
   {
     ssr: true,
     loading: () => <LoadingSpinner className="mx-auto my-6" />,
   }
-)
+);
 
 const WebVitalsTracker = dynamic(
-  () => import("@/components/web-vitals-tracker").then((m) => m.WebVitalsTracker),
+  () =>
+    import("@/components/web-vitals-tracker").then((m) => m.WebVitalsTracker),
   {
     ssr: true,
     loading: () => <LoadingSpinner className="mx-auto my-4" />,
   }
-)
+);
 
-const CookieConsent = dynamic(() => import("@/components/cookie-consent").then((m) => m.CookieConsent), {
-  ssr: true,
-  loading: () => <LoadingSpinner className="mx-auto my-4" />,
-})
-
-const Analytics = dynamic(() => import("@vercel/analytics/next").then((m) => m.Analytics), {
-  ssr: false,
-  loading: () => null,
-})
+const CookieConsent = dynamic(
+  () => import("@/components/cookie-consent").then((m) => m.CookieConsent),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-4" />,
+  }
+);
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap", // Added font-display: swap for performance
   variable: "--font-inter",
-})
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://restorephotos.app"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || "https://restorephotos.app"
+  ),
   title: {
     default: "RestorePhotos - Restore Your Old Photos with AI",
     template: "%s | RestorePhotos",
@@ -77,7 +82,8 @@ export const metadata: Metadata = {
     url: "https://restorephotos.app",
     siteName: "RestorePhotos",
     title: "RestorePhotos - Restore Your Old Photos with AI",
-    description: "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
+    description:
+      "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
     images: [
       {
         url: "/og-image-magic-memory.png",
@@ -90,7 +96,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "RestorePhotos - Restore Your Old Photos with AI",
-    description: "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
+    description:
+      "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
     images: ["/og-image-magic-memory.png"],
     creator: "@restorephotos",
   },
@@ -98,8 +105,8 @@ export const metadata: Metadata = {
     canonical: "https://restorephotos.app",
   },
   category: "Technology",
-  generator: 'v0.app'
-}
+  generator: "v0.app",
+};
 
 export const viewport: Viewport = {
   themeColor: [
@@ -110,12 +117,12 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <ConditionalClerkProvider>
@@ -128,7 +135,8 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
                 name: "RestorePhotos",
-                description: "AI-powered photo restoration service that brings your old memories back to life.",
+                description:
+                  "AI-powered photo restoration service that brings your old memories back to life.",
                 url: "https://restorephotos.app",
                 applicationCategory: "PhotographyApplication",
                 operatingSystem: "Web",
@@ -153,9 +161,9 @@ export default function RootLayout({
           <WebVitalsTracker />
           {children}
           <CookieConsent />
-          <Analytics />
+          <AnalyticsProvider />
         </body>
       </html>
     </ConditionalClerkProvider>
-  )
+  );
 }
