@@ -87,7 +87,7 @@ export function ImageComparisonSlider({
     <div
       ref={containerRef}
       className={cn(
-        "relative aspect-square w-full cursor-ew-resize select-none overflow-hidden rounded-lg border bg-muted",
+        "relative aspect-square w-full cursor-ew-resize select-none overflow-hidden",
         className,
       )}
       onMouseDown={handleMouseDown}
@@ -99,7 +99,7 @@ export function ImageComparisonSlider({
           src={restoredImage || "/placeholder.svg"}
           alt={restoredAlt}
           fill
-          className="object-contain"
+          className="object-cover"
           crossOrigin="anonymous"
         />
         {/* Label */}
@@ -114,30 +114,30 @@ export function ImageComparisonSlider({
           src={originalImage || "/placeholder.svg"}
           alt={originalAlt}
           fill
-          className="object-contain"
+          className="object-cover"
           crossOrigin="anonymous"
         />
         {/* Label */}
-        <div className="absolute bottom-4 left-4 rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground shadow-lg">
+        <div className="absolute bottom-4 left-4 rounded-full bg-black/50 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm shadow-lg">
           Original
         </div>
       </div>
 
       {/* Slider Handle */}
       <div
-        className="absolute top-0 bottom-0 z-10 w-1 bg-white shadow-lg"
+        className="absolute top-0 bottom-0 z-10 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)]"
         style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
       >
         {/* Handle Circle */}
-        <div className="absolute top-1/2 left-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-primary shadow-lg">
+        <div className="absolute top-1/2 left-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-primary shadow-lg">
           <svg
-            className="h-5 w-5 text-primary-foreground"
+            className="h-4 w-4 text-primary-foreground"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
+            strokeWidth={3}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
           </svg>
         </div>
       </div>

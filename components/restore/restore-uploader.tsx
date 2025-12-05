@@ -4,12 +4,14 @@ import { useState, useCallback, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Upload, X, Download, ImageIcon, Coins, SlidersHorizontal, LayoutGrid, RefreshCw } from "lucide-react"
+import { Upload, X, Download, ImageIcon, Coins, SlidersHorizontal, LayoutGrid, RefreshCw, FileText, FileIcon, TriangleAlert, CloudUpload } from "lucide-react"
 import Image from "next/image"
 import useSWR, { mutate } from "swr"
 import { ImageComparisonSlider } from "./image-comparison-slider"
 import { ErrorAlert, type ErrorType } from "@/components/ui/error-alert"
 import { ProgressLoading, CreditsSkeleton } from "@/components/ui/loading-states"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Progress } from "@/components/ui/progress"
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -45,7 +47,7 @@ export function RestoreUploader() {
   const [stage, setStage] = useState<RestorationStage>("idle")
   const [progress, setProgress] = useState(0)
   const [error, setError] = useState<{ type: ErrorType; message?: string } | null>(null)
-  const [viewMode, setViewMode] = useState<ViewMode>("slider")
+  const [viewMode, setViewMode] = useState<ViewMode>("side-by-side")
   const [originalFilename, setOriginalFilename] = useState<string>("photo")
 
   const { data: creditsData, isLoading: isLoadingCredits } = useSWR("/api/credits", fetcher)
@@ -223,17 +225,17 @@ export function RestoreUploader() {
   const isProcessing = stage === "restoring"
 
   return (
-    <div className="mt-12 space-y-8">
-      <div className="flex justify-center">
-        {isLoadingCredits ? (
-          <CreditsSkeleton />
-        ) : (
-          <div className="flex items-center gap-2 rounded-full bg-accent px-4 py-2">
-            <Coins className="h-5 w-5 text-primary" />
-            <span className="font-medium">{totalCredits} credits available</span>
-          </div>
-        )}
-      </div>
+    <div className="mt-4 space-y-8">
+      {!restoredImage && !isProcessing && (
+        <div className="text-center">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Restore Your Photo
+          </h1>
+          <p className="mt-4 text-muted-foreground">
+            Upload an old, blurry, or damaged photo and let AI work its magic.
+          </p>
+        </div>
+      )}
 
       {error && (
         <div className="mx-auto max-w-lg">
@@ -253,24 +255,34 @@ export function RestoreUploader() {
 
       {/* Upload Area */}
       {!preview && (
-        <Card className="border-dashed border-2">
-          <CardContent className="p-0">
+        <div className="relative group w-full max-w-2xl mx-auto">
+          {/* Gradient glow effect */}
+          <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-50 blur transition duration-500 group-hover:opacity-100" />
+
+          {/* Main upload container */}
+          <div className="relative rounded-xl bg-background p-2 ring-1 ring-border">
             <div
               {...getRootProps()}
-              className={`flex flex-col items-center justify-center py-16 px-8 cursor-pointer transition-colors ${isDragActive ? "bg-accent" : "hover:bg-accent/50"}`}
+              className={`flex justify-center rounded-md border mt-2 border-dashed border-input px-6 py-12 transition-colors ${isDragActive ? "bg-accent/50" : "hover:bg-muted/50 cursor-pointer"
+                }`}
             >
               <input {...getInputProps()} />
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <Upload className="h-8 w-8 text-primary" />
+              <div className="text-center relative w-full">
+                <CloudUpload className="mx-auto h-12 w-12 text-muted-foreground" />
+                <div className="mt-4 flex text-sm leading-6 text-muted-foreground justify-center">
+                  <p>Drag and drop or</p>
+                  <span className="relative cursor-pointer rounded-sm pl-1 font-medium text-primary hover:underline hover:underline-offset-4">
+                    choose file
+                  </span>
+                  <p className="pl-1">to upload</p>
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  JPG, PNG, WebP up to 10MB
+                </p>
               </div>
-              <p className="mt-4 text-lg font-medium">
-                {isDragActive ? "Drop your photo here" : "Drag & drop your photo here"}
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">or click to select a file</p>
-              <p className="mt-4 text-xs text-muted-foreground">Supports JPG, PNG, WebP up to 10MB (max 4000x4000px)</p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* Preview & Results */}
@@ -288,90 +300,85 @@ export function RestoreUploader() {
 
           {!isProcessing && (
             <>
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold">{restoredImage ? "Comparison" : "Preview"}</h2>
-                <div className="flex items-center gap-2">
-                  {restoredImage && (
-                    <div className="flex items-center gap-1 rounded-lg border p-1">
-                      <Button
-                        variant={viewMode === "slider" ? "secondary" : "ghost"}
-                        size="sm"
-                        onClick={() => setViewMode("slider")}
-                        className="h-8 px-2"
-                      >
-                        <SlidersHorizontal className="h-4 w-4 mr-1" />
-                        Slider
-                      </Button>
-                      <Button
-                        variant={viewMode === "side-by-side" ? "secondary" : "ghost"}
-                        size="sm"
-                        onClick={() => setViewMode("side-by-side")}
-                        className="h-8 px-2"
-                      >
-                        <LayoutGrid className="h-4 w-4 mr-1" />
+              {restoredImage && (
+                <div className="flex justify-center">
+                  <Tabs defaultValue="side-by-side" className="w-full max-w-2xl" onValueChange={(val) => setViewMode(val as ViewMode)}>
+                    <TabsList className="grid w-full grid-cols-2">
+                      <TabsTrigger value="side-by-side" className="flex items-center gap-2">
+                        <LayoutGrid className="h-4 w-4" />
                         Side by Side
-                      </Button>
-                    </div>
-                  )}
-                  {!restoredImage && (
-                    <Button variant="ghost" size="sm" onClick={handleClear}>
-                      <X className="mr-2 h-4 w-4" />
-                      Clear
-                    </Button>
-                  )}
-                </div>
-              </div>
+                      </TabsTrigger>
+                      <TabsTrigger value="slider" className="flex items-center gap-2">
+                        <SlidersHorizontal className="h-4 w-4" />
+                        Slider
+                      </TabsTrigger>
+                    </TabsList>
 
-              {restoredImage && viewMode === "slider" ? (
-                <ImageComparisonSlider
-                  originalImage={preview}
-                  restoredImage={restoredImage}
-                  className="max-w-2xl mx-auto"
-                />
-              ) : (
-                <div className={`grid gap-6 ${restoredImage ? "md:grid-cols-2" : "md:grid-cols-1 max-w-md mx-auto"}`}>
-                  <Card className="overflow-hidden">
-                    <div className="bg-muted px-4 py-2 text-sm font-medium">Original</div>
-                    <div className="relative aspect-square">
-                      <Image src={preview || "/placeholder.svg"} alt="Original photo" fill className="object-contain" />
-                    </div>
-                  </Card>
-
-                  {restoredImage && (
-                    <Card className="overflow-hidden">
-                      <div className="bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">Restored</div>
-                      <div className="relative aspect-square">
-                        <Image
-                          src={restoredImage || "/placeholder.svg"}
-                          alt="Restored photo"
-                          fill
-                          className="object-contain"
-                          crossOrigin="anonymous"
+                    <div className="mt-6">
+                      <TabsContent value="slider">
+                        <ImageComparisonSlider
+                          originalImage={preview}
+                          restoredImage={restoredImage}
+                          className="max-w-2xl mx-auto"
                         />
-                      </div>
-                    </Card>
-                  )}
+                      </TabsContent>
+
+                      <TabsContent value="side-by-side">
+                        <div className={`grid gap-6 ${restoredImage ? "md:grid-cols-2" : "md:grid-cols-1 max-w-md mx-auto"}`}>
+                          <div className="relative w-full">
+                            {restoredImage && <div className="absolute top-2 left-2 z-10 rounded-md bg-black/50 px-2 py-1 text-xs font-medium text-white backdrop-blur-sm">Original</div>}
+                            <img src={preview || "/placeholder.svg"} alt="Original photo" className="h-auto w-full rounded-lg" />
+                          </div>
+
+                          {restoredImage && (
+                            <div className="relative w-full">
+                              <div className="absolute top-2 left-2 z-10 rounded-md bg-primary px-2 py-1 text-xs font-medium text-primary-foreground shadow-lg">Restored</div>
+                              <img
+                                src={restoredImage || "/placeholder.svg"}
+                                alt="Restored photo"
+                                className="h-auto w-full rounded-lg"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </div>
+              )}
+
+              {!restoredImage && (
+                <div className={`grid gap-6 ${restoredImage ? "md:grid-cols-2" : "md:grid-cols-1 max-w-md mx-auto"}`}>
+                  <div className="relative w-full">
+                    {restoredImage && <div className="absolute top-2 left-2 z-10 rounded-md bg-black/50 px-2 py-1 text-xs font-medium text-white backdrop-blur-sm">Original</div>}
+                    <img src={preview || "/placeholder.svg"} alt="Original photo" className="h-auto w-full rounded-lg" />
+                  </div>
                 </div>
               )}
 
               {/* Actions */}
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                 {!restoredImage ? (
-                  <Button size="lg" onClick={handleRestore} disabled={!hasCredits} className="gap-2">
-                    {!hasCredits ? (
-                      "No credits available"
-                    ) : (
-                      <>
-                        <ImageIcon className="h-4 w-4" />
-                        Restore Photo
-                      </>
-                    )}
-                  </Button>
+                  <div className="flex gap-4">
+                    <Button size="lg" onClick={handleRestore} disabled={!hasCredits} className="gap-2">
+                      {!hasCredits ? (
+                        "No credits available"
+                      ) : (
+                        <>
+                          <ImageIcon className="h-4 w-4" />
+                          Restore Photo
+                        </>
+                      )}
+                    </Button>
+                    <Button variant="secondary" size="lg" onClick={handleClear}>
+                      Remove
+                    </Button>
+                  </div>
                 ) : (
                   <>
                     <Button size="lg" onClick={handleDownload} className="gap-2">
                       <Download className="h-4 w-4" />
-                      Download {originalFilename}-restored
+                      Download
                     </Button>
                     <Button size="lg" variant="outline" onClick={handleRestoreAnother} className="gap-2 bg-transparent">
                       <RefreshCw className="h-4 w-4" />
