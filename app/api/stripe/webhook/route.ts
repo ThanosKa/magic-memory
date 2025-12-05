@@ -26,20 +26,32 @@ export async function POST(request: NextRequest) {
     const session = event.data.object as Stripe.Checkout.Session
 
     const { userId, packageType, credits } = session.metadata || {}
+    const paymentIntent = session.payment_intent as string
 
-    if (!userId || !packageType || !credits) {
+    if (!userId || !packageType || !credits || !paymentIntent) {
       logger.error({ sessionId: session.id }, "Missing metadata in checkout session")
       return NextResponse.json({ received: true })
     }
 
     const creditsToAdd = Number.parseInt(credits, 10)
+    const supabase = getSupabaseAdminClient()
+
+    // IDEMPOTENCY CHECK: Check if we already processed this payment
+    const { data: existingPurchase } = await supabase
+      .from("purchases")
+      .select("id")
+      .eq("stripe_payment_id", paymentIntent)
+      .single()
+
+    if (existingPurchase) {
+      logger.info({ paymentIntent, userId }, "Payment already processed, skipping (idempotency)")
+      return NextResponse.json({ received: true })
+    }
 
     logger.info(
-      { userId, packageType, credits: creditsToAdd, paymentIntent: session.payment_intent },
+      { userId, packageType, credits: creditsToAdd, paymentIntent },
       "Processing successful payment",
     )
-
-    const supabase = getSupabaseAdminClient()
 
     const { data: user, error: fetchError } = await supabase
       .from("users")
@@ -64,7 +76,7 @@ export async function POST(request: NextRequest) {
 
     const { error: purchaseError } = await supabase.from("purchases").insert({
       user_id: userId,
-      stripe_payment_id: session.payment_intent as string,
+      stripe_payment_id: paymentIntent,
       credits_purchased: creditsToAdd,
       amount_paid: session.amount_total!,
       package_type: packageType,
@@ -82,3 +94,4 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ received: true })
 }
+

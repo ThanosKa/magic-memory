@@ -37,16 +37,8 @@ export const metadata: Metadata = {
 }
 
 async function checkAuth() {
-  if (!process.env.CLERK_SECRET_KEY) {
-    return { userId: "demo-user" } // Allow access in demo mode
-  }
-
-  try {
-    const { auth } = await import("@clerk/nextjs/server")
-    return await auth()
-  } catch {
-    return { userId: null }
-  }
+  const { auth } = await import("@clerk/nextjs/server")
+  return await auth()
 }
 
 import { breadcrumbJsonLd } from "@/lib/seo/metadata-helpers"
