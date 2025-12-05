@@ -71,6 +71,7 @@
     "replicate": "latest",
     "sonner": "^1.7.4",
     "stripe": "latest",
+    "svix": "^1.82.0",
     "swr": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",

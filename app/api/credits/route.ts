@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { auth, currentUser } from "@clerk/nextjs/server"
+import { auth } from "@clerk/nextjs/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
 import logger from "@/lib/logger"
 import { hasUsedFreeCredit, getRedisClient } from "@/lib/redis"
@@ -25,32 +25,14 @@ export async function GET() {
 
     const supabase = getSupabaseAdminClient()
 
-    let { data: user, error } = await supabase.from("users").select("*").eq("clerk_user_id", userId).single()
+    const { data: user, error } = await supabase.from("users").select("*").eq("clerk_user_id", userId).single()
 
-    if (error && error.code === "PGRST116") {
-      const clerkUser = await currentUser()
-
-      logger.info({ userId, email: clerkUser?.emailAddresses[0]?.emailAddress }, "Creating new user")
-
-      const { data: newUser, error: insertError } = await supabase
-        .from("users")
-        .insert({
-          clerk_user_id: userId,
-          email: clerkUser?.emailAddresses[0]?.emailAddress || "",
-          name: clerkUser?.fullName || null,
-          profile_image: clerkUser?.imageUrl || null,
-          paid_credits: 0,
-        })
-        .select()
-        .single()
-
-      if (insertError) {
-        logger.error({ userId, error: insertError.message }, "Failed to create user")
-        return NextResponse.json({ success: false, error: "Failed to create user" }, { status: 500 })
-      }
-
-      user = newUser
-      logger.info({ userId, dbUserId: newUser.id }, "New user created")
+    if (error || !user) {
+      logger.error({ userId, error: error?.message }, "User not found in database")
+      return NextResponse.json(
+        { success: false, error: "User not found. Please contact support." },
+        { status: 404 }
+      )
     }
 
     let hasFreeDaily = true
