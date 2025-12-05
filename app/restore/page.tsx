@@ -1,9 +1,35 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { RestoreUploader } from "@/components/restore/restore-uploader"
-import { redirect } from "next/navigation"
-import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
-import { Metadata } from "next"
+import dynamic from "next/dynamic";
+import { redirect } from "next/navigation";
+import { Metadata } from "next";
+import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers";
+import { LoadingSpinner } from "@/components/ui/loading-states";
+
+const Header = dynamic(
+  () => import("@/components/header").then((m) => m.Header),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-6" />,
+  }
+);
+
+const Footer = dynamic(
+  () => import("@/components/footer").then((m) => m.Footer),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-12" />,
+  }
+);
+
+const RestoreUploader = dynamic(
+  () =>
+    import("@/components/restore/restore-uploader").then(
+      (m) => m.RestoreUploader
+    ),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
 
 export const metadata: Metadata = {
   title: "Restore Photos - RestorePhotos",
@@ -34,26 +60,26 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-}
+};
 
 async function checkAuth() {
-  const { auth } = await import("@clerk/nextjs/server")
-  return await auth()
+  const { auth } = await import("@clerk/nextjs/server");
+  return await auth();
 }
 
-import { breadcrumbJsonLd } from "@/lib/seo/metadata-helpers"
+import { breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 
 export default async function RestorePage() {
-  const { userId } = await checkAuth()
+  const { userId } = await checkAuth();
 
   if (!userId) {
-    redirect("/")
+    redirect("/");
   }
 
   const jsonLd = breadcrumbJsonLd([
     { name: "Home", url: "/" },
     { name: "Restore Photos", url: "/restore" },
-  ])
+  ]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -65,7 +91,9 @@ export default async function RestorePage() {
       <main className="flex-1 py-12 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Restore Your Photo</h1>
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Restore Your Photo
+            </h1>
             <p className="mt-4 text-muted-foreground">
               Upload an old, blurry, or damaged photo and let AI work its magic.
             </p>
@@ -75,5 +103,5 @@ export default async function RestorePage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }

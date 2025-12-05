@@ -1,11 +1,35 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
+import dynamic from "next/dynamic"
 import { Inter } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import { ConditionalClerkProvider } from "@/components/providers/clerk-provider"
-import { WebVitalsTracker } from "@/components/web-vitals-tracker"
-import { CookieConsent } from "@/components/cookie-consent"
+import { LoadingSpinner } from "@/components/ui/loading-states"
+
+const ConditionalClerkProvider = dynamic(
+  () => import("@/components/providers/clerk-provider").then((m) => m.ConditionalClerkProvider),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-6" />,
+  }
+)
+
+const WebVitalsTracker = dynamic(
+  () => import("@/components/web-vitals-tracker").then((m) => m.WebVitalsTracker),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-4" />,
+  }
+)
+
+const CookieConsent = dynamic(() => import("@/components/cookie-consent").then((m) => m.CookieConsent), {
+  ssr: true,
+  loading: () => <LoadingSpinner className="mx-auto my-4" />,
+})
+
+const Analytics = dynamic(() => import("@vercel/analytics/next").then((m) => m.Analytics), {
+  ssr: false,
+  loading: () => null,
+})
 
 const inter = Inter({
   subsets: ["latin"],

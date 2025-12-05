@@ -1,6 +1,12 @@
-import { UserProfile } from "@clerk/nextjs"
+import dynamic from "next/dynamic"
 import { Metadata } from "next"
 import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
+import { LoadingSpinner } from "@/components/ui/loading-states"
+
+const UserProfile = dynamic(() => import("@clerk/nextjs").then((m) => m.UserProfile), {
+  ssr: true,
+  loading: () => <LoadingSpinner className="mx-auto my-6" />,
+})
 
 export const metadata: Metadata = {
     title: "Your Profile | RestorePhotos",

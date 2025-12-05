@@ -1,14 +1,88 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { HeroSection } from "@/components/landing/hero-section"
-import { SocialProof } from "@/components/landing/social-proof"
-import { FeaturesSection } from "@/components/landing/features-section"
-import { TestimonialsSection } from "@/components/landing/testimonials-section"
-import { HowItWorksSection } from "@/components/landing/how-it-works-section"
-import { FAQSection } from "@/components/landing/faq-section"
-import { CTASection } from "@/components/landing/cta-section"
-import { Metadata } from "next"
-import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
+import dynamic from "next/dynamic";
+import { Metadata } from "next";
+import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers";
+import { LoadingSpinner } from "@/components/ui/loading-states";
+
+const Header = dynamic(
+  () => import("@/components/header").then((m) => m.Header),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-6" />,
+  }
+);
+
+const Footer = dynamic(
+  () => import("@/components/footer").then((m) => m.Footer),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-12" />,
+  }
+);
+
+const HeroSection = dynamic(
+  () => import("@/components/landing/hero-section").then((m) => m.HeroSection),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
+
+const SocialProof = dynamic(
+  () => import("@/components/landing/social-proof").then((m) => m.SocialProof),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
+
+const FeaturesSection = dynamic(
+  () =>
+    import("@/components/landing/features-section").then(
+      (m) => m.FeaturesSection
+    ),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
+
+const TestimonialsSection = dynamic(
+  () =>
+    import("@/components/landing/testimonials-section").then(
+      (m) => m.TestimonialsSection
+    ),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
+
+const HowItWorksSection = dynamic(
+  () =>
+    import("@/components/landing/how-it-works-section").then(
+      (m) => m.HowItWorksSection
+    ),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
+
+const FAQSection = dynamic(
+  () => import("@/components/landing/faq-section").then((m) => m.FAQSection),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
+
+const CTASection = dynamic(
+  () => import("@/components/landing/cta-section").then((m) => m.CTASection),
+  {
+    ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-10" />,
+  }
+);
 
 export const metadata: Metadata = {
   title: "RestorePhotos - AI Photo Restoration",
@@ -39,13 +113,16 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-}
+};
 
-import { organizationJsonLd, webApplicationJsonLd } from "@/lib/seo/metadata-helpers"
+import {
+  organizationJsonLd,
+  webApplicationJsonLd,
+} from "@/lib/seo/metadata-helpers";
 
 export default function Page() {
-  const orgJsonLd = organizationJsonLd()
-  const appJsonLd = webApplicationJsonLd()
+  const orgJsonLd = organizationJsonLd();
+  const appJsonLd = webApplicationJsonLd();
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -70,5 +147,5 @@ export default function Page() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
