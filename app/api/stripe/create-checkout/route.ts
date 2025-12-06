@@ -79,6 +79,7 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: "payment",
+      allow_promotion_codes: true,
       success_url: `${
         process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
       }/restore?success=true`,
