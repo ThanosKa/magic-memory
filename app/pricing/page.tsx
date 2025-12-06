@@ -76,7 +76,7 @@ export const metadata: Metadata = {
         url: getOgImageUrl(),
         width: 1200,
         height: 630,
-        alt: "RestorePhotos Pricing",
+        alt: "Magic Memory Pricing",
       },
     ],
   },

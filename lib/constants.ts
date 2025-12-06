@@ -52,8 +52,8 @@ export const CREDIT_PACKAGES = {
 export type PackageType = keyof typeof CREDIT_PACKAGES;
 
 export const APP_CONFIG = {
-  name: "RestorePhotos",
-  description: "Restore your old photos with AI",
+  name: "Magic Memory",
+  description: "Magic Memory restores your old photos with AI",
   freeRestorationPerDay: 1,
   maxFileSize: 10 * 1024 * 1024, // 10MB
   maxImageDimension: 4000, // 4000x4000 max for GFPGAN

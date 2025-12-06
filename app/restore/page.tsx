@@ -30,13 +30,13 @@ const RestoreUploader = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Restore Photos - RestorePhotos",
+  title: "Restore Photos - Magic Memory",
   description: "Upload and restore your old photos with AI.",
   alternates: {
     canonical: getCanonicalUrl("/restore"),
   },
   openGraph: {
-    title: "Restore Photos - RestorePhotos",
+    title: "Restore Photos - Magic Memory",
     description: "Upload and restore your old photos with AI.",
     url: getCanonicalUrl("/restore"),
     images: [
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
         url: getOgImageUrl(),
         width: 1200,
         height: 630,
-        alt: "RestorePhotos - Restore Tool",
+        alt: "Magic Memory - Restore Tool",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Restore Photos - RestorePhotos",
+    title: "Restore Photos - Magic Memory",
     description: "Upload and restore your old photos with AI.",
     images: [getOgImageUrl()],
   },

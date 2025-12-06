@@ -1,40 +1,56 @@
 # API Route Patterns
 
 ## Response Shape
+
 Always return: `{ success: true, data: {...} }` or `{ success: false, error: "message" }`
 
 ## Route Template
-```typescript
-import { NextResponse } from "next/server"
-import { auth } from "@clerk/nextjs/server"
-import { z } from "zod"
-import { logger } from "@/lib/logger"
-import { createSupabaseServerClient } from "@/lib/supabase/server"
 
-const Schema = z.object({ /* fields */ })
+```typescript
+import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
+import { z } from "zod";
+import { logger } from "@/lib/logger";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+
+const Schema = z.object({
+  /* fields */
+});
 
 export async function POST(request: Request) {
-  const log = logger.child({ route: "POST /api/endpoint" })
+  const log = logger.child({ route: "POST /api/endpoint" });
   try {
-    const { userId } = await auth()
-    if (!userId) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
-    
-    const body = await request.json()
-    const parsed = Schema.safeParse(body)
-    if (!parsed.success) return NextResponse.json({ success: false, error: "Invalid data" }, { status: 400 })
-    
-    const supabase = createSupabaseServerClient()
+    const { userId } = await auth();
+    if (!userId)
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+
+    const body = await request.json();
+    const parsed = Schema.safeParse(body);
+    if (!parsed.success)
+      return NextResponse.json(
+        { success: false, error: "Invalid data" },
+        { status: 400 }
+      );
+
+    const supabase = createSupabaseServerClient();
     // Business logic here
-    
-    return NextResponse.json({ success: true, data: result })
+
+    return NextResponse.json({ success: true, data: result });
   } catch (error) {
-    log.error({ error }, "Failed")
-    return NextResponse.json({ success: false, error: "Internal error" }, { status: 500 })
+    log.error({ error }, "Failed");
+    return NextResponse.json(
+      { success: false, error: "Internal error" },
+      { status: 500 }
+    );
   }
 }
 ```
 
 ## Rules
+
 - Always wrap in try/catch
 - Always validate input with Zod
 - Log errors with context

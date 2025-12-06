@@ -55,7 +55,7 @@ describe("GET /api/credits", () => {
             id: "user-uuid",
             clerk_user_id: "clerk_user_123",
             paid_credits: 50,
-            email: "test@example.com",
+            email: "kazakis.th@gmail.com",
         }
 
         const mockCreditResult = {
@@ -88,7 +88,7 @@ describe("GET /api/credits", () => {
     it("includes freeResetTime as ISO string", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        const mockUser = { id: "user-uuid", clerk_user_id: "clerk_user_123", paid_credits: 0, email: "test@example.com" }
+        const mockUser = { id: "user-uuid", clerk_user_id: "clerk_user_123", paid_credits: 0, email: "kazakis.th@gmail.com" }
         const mockCreditResult = { has_free_daily: false, paid_credits: 0 }
 
         const mockSupabase = {
@@ -113,7 +113,7 @@ describe("GET /api/credits", () => {
     it("returns 500 when credit check RPC fails", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        const mockUser = { id: "user-uuid", clerk_user_id: "clerk_user_123", email: "test@example.com" }
+        const mockUser = { id: "user-uuid", clerk_user_id: "clerk_user_123", email: "kazakis.th@gmail.com" }
 
         const mockSupabase = {
             from: vi.fn().mockReturnValue({
@@ -137,7 +137,7 @@ describe("GET /api/credits", () => {
     it("calculates totalCredits as paid + free (1)", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        const mockUser = { id: "user-uuid", clerk_user_id: "clerk_user_123", email: "test@example.com" }
+        const mockUser = { id: "user-uuid", clerk_user_id: "clerk_user_123", email: "kazakis.th@gmail.com" }
         const mockCreditResult = { has_free_daily: true, paid_credits: 100 }
 
         const mockSupabase = {

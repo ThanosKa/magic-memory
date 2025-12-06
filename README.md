@@ -13,7 +13,7 @@ AI-powered photo restoration that brings your memories back to life.
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-[Demo](https://magic-memory.app) · [Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md)
+Demo (TODO: add production URL) · [Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md)
 
 </div>
 
@@ -34,28 +34,30 @@ magic-memory is a SaaS app that restores old, blurry, or damaged photos using th
 
 ## Tech stack
 
-| Category | Technology |
-|----------|------------|
-| Framework | Next.js 15/16 (App Router) |
-| Language | TypeScript (strict) |
-| Styling | Tailwind CSS 4 + shadcn/ui |
-| Auth | Clerk |
+| Category         | Technology                      |
+| ---------------- | ------------------------------- |
+| Framework        | Next.js 15/16 (App Router)      |
+| Language         | TypeScript (strict)             |
+| Styling          | Tailwind CSS 4 + shadcn/ui      |
+| Auth             | Clerk                           |
 | Database/Storage | Supabase (PostgreSQL + Storage) |
-| AI | GFPGAN on Replicate |
-| Rate limiting | Upstash Redis |
-| Payments | Stripe |
-| Logging | Pino |
-| Data fetching | SWR |
-| Validation | Zod |
+| AI               | GFPGAN on Replicate             |
+| Rate limiting    | Upstash Redis                   |
+| Payments         | Stripe                          |
+| Logging          | Pino                            |
+| Data fetching    | SWR                             |
+| Validation       | Zod                             |
 
 ## Quick start
 
 ### Prerequisites
+
 - Node.js 20+
 - pnpm
 - Accounts: Clerk, Supabase, Stripe, Replicate, Upstash
 
 ### Setup
+
 ```bash
 git clone https://github.com/thaka/magic-memory.git
 cd magic-memory
@@ -65,13 +67,16 @@ cp .env.example .env.local
 ```
 
 ### Database
+
 Run the SQL scripts in `scripts/` (in order):
+
 - `scripts/001_create_users_table.sql`
 - `scripts/002_create_restorations_table.sql`
 - `scripts/003_create_purchases_table.sql`
 - `scripts/004_create_atomic_credit_functions.sql`
 
 ### Run
+
 ```bash
 pnpm dev
 # visit http://localhost:3000
@@ -91,15 +96,15 @@ magic-memory/
 
 ## Commands
 
-| Command | Purpose |
-|---------|---------|
-| `pnpm dev` | Start dev server with hot reload |
-| `pnpm lint` | ESLint quality gate |
-| `pnpm type-check` | TypeScript check without emit |
-| `pnpm test:run` | Run Vitest in CI mode |
-| `pnpm build` | Production build (includes type-check) |
-| `pnpm start` | Start production server after build |
-| `pnpm run seo:audit` | SEO audit script |
+| Command              | Purpose                                |
+| -------------------- | -------------------------------------- |
+| `pnpm dev`           | Start dev server with hot reload       |
+| `pnpm lint`          | ESLint quality gate                    |
+| `pnpm type-check`    | TypeScript check without emit          |
+| `pnpm test:run`      | Run Vitest in CI mode                  |
+| `pnpm build`         | Production build (includes type-check) |
+| `pnpm start`         | Start production server after build    |
+| `pnpm run seo:audit` | SEO audit script                       |
 
 Pre-commit: run `pnpm lint` and `pnpm type-check`.
 

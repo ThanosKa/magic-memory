@@ -57,7 +57,7 @@ async function validateImageDimensions(
     };
     img.onerror = () => {
       URL.revokeObjectURL(img.src);
-      resolve({ valid: true, width: 0, height: 0 }); // Allow on error
+      resolve({ valid: true, width: 0, height: 0 });
     };
     img.src = URL.createObjectURL(file);
   });

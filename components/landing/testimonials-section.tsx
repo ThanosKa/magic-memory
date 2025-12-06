@@ -37,7 +37,7 @@ const testimonials = [
     twitter: "https://twitter.com",
   },
   {
-    quote: "I've tried other tools but RestorePhotos is by far the best. The face enhancement is incredible.",
+    quote: "I've tried other tools but Magic Memory is by far the best. The face enhancement is incredible.",
     author: "James W.",
     role: "Content Creator",
     twitter: "https://twitter.com",
@@ -69,7 +69,7 @@ export function TestimonialsSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Loved by thousands of users</h2>
-          <p className="mt-4 text-lg text-muted-foreground">See what our community is saying about RestorePhotos.</p>
+          <p className="mt-4 text-lg text-muted-foreground">See what our community is saying about Magic Memory.</p>
         </motion.div>
         <motion.div
           className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"

@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
-import { Menu, Sparkles, Coins } from "lucide-react";
+import { Menu, Coins } from "lucide-react";
 import useSWR from "swr";
 import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Button } from "@/components/ui/button";
@@ -35,10 +36,14 @@ function HeaderWithClerk() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Sparkles className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold">RestorePhotos</span>
+            <Image
+              src="/icon.png"
+              alt="Magic Memory Logo"
+              width={32}
+              height={32}
+              className="rounded-lg"
+            />
+            <span className="text-xl font-bold">Magic Memory</span>
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
@@ -46,11 +51,10 @@ function HeaderWithClerk() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  pathname === link.href
-                    ? "text-foreground"
-                    : "text-muted-foreground"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -108,11 +112,10 @@ function HeaderWithClerk() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`text-lg font-medium transition-colors hover:text-primary ${
-                          pathname === link.href
-                            ? "text-foreground"
-                            : "text-muted-foreground"
-                        }`}
+                        className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href
+                          ? "text-foreground"
+                          : "text-muted-foreground"
+                          }`}
                       >
                         {link.label}
                       </Link>
@@ -158,10 +161,14 @@ function HeaderWithoutClerk() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Sparkles className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold">RestorePhotos</span>
+            <Image
+              src="/icon.png"
+              alt="Magic Memory Logo"
+              width={32}
+              height={32}
+              className="rounded-lg"
+            />
+            <span className="text-xl font-bold">Magic Memory</span>
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
@@ -169,11 +176,10 @@ function HeaderWithoutClerk() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  pathname === link.href
-                    ? "text-foreground"
-                    : "text-muted-foreground"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -214,11 +220,10 @@ function HeaderWithoutClerk() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`text-lg font-medium transition-colors hover:text-primary ${
-                          pathname === link.href
-                            ? "text-foreground"
-                            : "text-muted-foreground"
-                        }`}
+                        className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href
+                          ? "text-foreground"
+                          : "text-muted-foreground"
+                          }`}
                       >
                         {link.label}
                       </Link>
@@ -261,10 +266,14 @@ export function Header() {
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Sparkles className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold">RestorePhotos</span>
+              <Image
+                src="/icon.png"
+                alt="Magic Memory Logo"
+                width={32}
+                height={32}
+                className="rounded-lg"
+              />
+              <span className="text-xl font-bold">Magic Memory</span>
             </Link>
           </div>
         </header>

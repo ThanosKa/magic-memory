@@ -67,7 +67,7 @@ describe("constants", () => {
         })
 
         it("has app name and description", () => {
-            expect(APP_CONFIG.name).toBe("RestorePhotos")
+            expect(APP_CONFIG.name).toBe("Magic Memory")
             expect(APP_CONFIG.description).toBeDefined()
         })
     })

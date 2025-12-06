@@ -9,13 +9,13 @@ const UserProfile = dynamic(() => import("@clerk/nextjs").then((m) => m.UserProf
 })
 
 export const metadata: Metadata = {
-    title: "Your Profile | RestorePhotos",
+    title: "Your Profile | Magic Memory",
     description: "Manage your account settings and preferences.",
     alternates: {
         canonical: getCanonicalUrl("/profile"),
     },
     openGraph: {
-        title: "Your Profile | RestorePhotos",
+        title: "Your Profile | Magic Memory",
         description: "Manage your account settings and preferences.",
         url: getCanonicalUrl("/profile"),
         images: [
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
                 url: getOgImageUrl(),
                 width: 1200,
                 height: 630,
-                alt: "RestorePhotos Profile",
+                alt: "Magic Memory Profile",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Your Profile | RestorePhotos",
+        title: "Your Profile | Magic Memory",
         description: "Manage your account settings and preferences.",
         images: [getOgImageUrl()],
     },

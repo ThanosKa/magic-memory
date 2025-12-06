@@ -4,28 +4,28 @@ import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | RestorePhotos",
-  description: "Privacy Policy for RestorePhotos AI photo restoration service.",
+  title: "Privacy Policy | Magic Memory",
+  description: "Privacy Policy for the Magic Memory AI photo restoration service.",
   alternates: {
     canonical: getCanonicalUrl("/privacy"),
   },
   openGraph: {
-    title: "Privacy Policy | RestorePhotos",
-    description: "Privacy Policy for RestorePhotos AI photo restoration service.",
+    title: "Privacy Policy | Magic Memory",
+    description: "Privacy Policy for the Magic Memory AI photo restoration service.",
     url: getCanonicalUrl("/privacy"),
     images: [
       {
         url: getOgImageUrl(),
         width: 1200,
         height: 630,
-        alt: "RestorePhotos Privacy Policy",
+        alt: "Magic Memory Privacy Policy",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy | RestorePhotos",
-    description: "Privacy Policy for RestorePhotos AI photo restoration service.",
+    title: "Privacy Policy | Magic Memory",
+    description: "Privacy Policy for the Magic Memory AI photo restoration service.",
     images: [getOgImageUrl()],
   },
   robots: {
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">8. Contact</h2>
-              <p className="mt-2">For privacy-related questions, please contact us at support@restorephotos.app.</p>
+              <p className="mt-2">For privacy-related questions, please contact us at kazakis.th@gmail.com.</p>
             </section>
           </div>
         </div>

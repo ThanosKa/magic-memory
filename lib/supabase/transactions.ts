@@ -1,63 +1,64 @@
-import { getSupabaseAdminClient } from "./server"
-import logger from "@/lib/logger"
+import { getSupabaseAdminClient } from "./server";
+import logger from "@/lib/logger";
 
 export interface CreditCheckResult {
-  has_credits: boolean
-  has_free_daily: boolean
-  paid_credits: number
-  should_use_free: boolean
+  has_credits: boolean;
+  has_free_daily: boolean;
+  paid_credits: number;
+  should_use_free: boolean;
 }
 
 export interface DeductCreditResult {
-  success: boolean
-  restoration_id: string | null
-  remaining_paid_credits: number
-  error_message: string | null
+  success: boolean;
+  restoration_id: string | null;
+  remaining_paid_credits: number;
+  error_message: string | null;
 }
 
-// Atomically check if user has credits available
-export async function checkUserCredits(userId: string): Promise<CreditCheckResult | null> {
-  const supabase = getSupabaseAdminClient()
+export async function checkUserCredits(
+  userId: string
+): Promise<CreditCheckResult | null> {
+  const supabase = getSupabaseAdminClient();
 
   try {
-    // First get the internal user ID from clerk_user_id
     const { data: user, error: userError } = await supabase
       .from("users")
       .select("id")
       .eq("clerk_user_id", userId)
-      .single()
+      .single();
 
     if (userError || !user) {
-      logger.error({ error: userError, userId }, "User not found for credit check")
-      return null
+      logger.error(
+        { error: userError, userId },
+        "User not found for credit check"
+      );
+      return null;
     }
 
     const { data, error } = await supabase.rpc("check_user_credits", {
       p_user_id: user.id,
-    })
+    });
 
     if (error) {
-      logger.error({ error, userId }, "Error checking user credits")
-      return null
+      logger.error({ error, userId }, "Error checking user credits");
+      return null;
     }
 
-    // RPC returns an array, get first result
-    const result = Array.isArray(data) ? data[0] : data
-    return result as CreditCheckResult
+    const result = Array.isArray(data) ? data[0] : data;
+    return result as CreditCheckResult;
   } catch (error) {
-    logger.error({ error, userId }, "Exception checking user credits")
-    return null
+    logger.error({ error, userId }, "Exception checking user credits");
+    return null;
   }
 }
 
-// Atomically deduct credit and record restoration
 export async function deductCreditAndRecordRestoration(
   userId: string,
   originalUrl: string,
   restoredUrl: string,
-  useFreeCredit: boolean,
+  useFreeCredit: boolean
 ): Promise<DeductCreditResult> {
-  const supabase = getSupabaseAdminClient()
+  const supabase = getSupabaseAdminClient();
 
   try {
     // First get the internal user ID
@@ -65,7 +66,7 @@ export async function deductCreditAndRecordRestoration(
       .from("users")
       .select("id")
       .eq("clerk_user_id", userId)
-      .single()
+      .single();
 
     if (userError || !user) {
       return {
@@ -73,57 +74,64 @@ export async function deductCreditAndRecordRestoration(
         restoration_id: null,
         remaining_paid_credits: 0,
         error_message: "User not found",
-      }
+      };
     }
 
-    const { data, error } = await supabase.rpc("deduct_credit_and_record_restoration", {
-      p_user_id: user.id,
-      p_original_url: originalUrl,
-      p_restored_url: restoredUrl,
-      p_use_free_credit: useFreeCredit,
-    })
+    const { data, error } = await supabase.rpc(
+      "deduct_credit_and_record_restoration",
+      {
+        p_user_id: user.id,
+        p_original_url: originalUrl,
+        p_restored_url: restoredUrl,
+        p_use_free_credit: useFreeCredit,
+      }
+    );
 
     if (error) {
-      logger.error({ error, userId }, "Error deducting credit")
+      logger.error({ error, userId }, "Error deducting credit");
       return {
         success: false,
         restoration_id: null,
         remaining_paid_credits: 0,
         error_message: error.message,
-      }
+      };
     }
 
-    const result = Array.isArray(data) ? data[0] : data
-    return result as DeductCreditResult
+    const result = Array.isArray(data) ? data[0] : data;
+    return result as DeductCreditResult;
   } catch (error) {
-    logger.error({ error, userId }, "Exception deducting credit")
+    logger.error({ error, userId }, "Exception deducting credit");
     return {
       success: false,
       restoration_id: null,
       remaining_paid_credits: 0,
       error_message: "Internal error",
-    }
+    };
   }
 }
 
-// Rollback a restoration if something fails after credit deduction
-export async function rollbackRestoration(restorationId: string): Promise<boolean> {
-  const supabase = getSupabaseAdminClient()
+export async function rollbackRestoration(
+  restorationId: string
+): Promise<boolean> {
+  const supabase = getSupabaseAdminClient();
 
   try {
     const { data, error } = await supabase.rpc("rollback_restoration", {
       p_restoration_id: restorationId,
-    })
+    });
 
     if (error) {
-      logger.error({ error, restorationId }, "Error rolling back restoration")
-      return false
+      logger.error({ error, restorationId }, "Error rolling back restoration");
+      return false;
     }
 
-    logger.info({ restorationId }, "Restoration rolled back successfully")
-    return data as boolean
+    logger.info({ restorationId }, "Restoration rolled back successfully");
+    return data as boolean;
   } catch (error) {
-    logger.error({ error, restorationId }, "Exception rolling back restoration")
-    return false
+    logger.error(
+      { error, restorationId },
+      "Exception rolling back restoration"
+    );
+    return false;
   }
 }

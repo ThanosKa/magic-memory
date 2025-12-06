@@ -99,7 +99,7 @@ describe("POST /api/stripe/create-checkout", () => {
 
         const mockUser = {
             id: "user-uuid",
-            email: "test@example.com",
+            email: "kazakis.th@gmail.com",
         }
 
         const mockSupabase = {
@@ -130,7 +130,8 @@ describe("POST /api/stripe/create-checkout", () => {
     it("includes correct metadata in checkout session", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        const mockUser = { id: "user-uuid", email: "test@example.com" }
+        const mockUser = { id: "user-uuid", email: "kazakis.th@gmail.com" }
+        const mockUser = { id: "user-uuid", email: "kazakis.th@gmail.com" }
 
         const mockSupabase = {
             from: vi.fn().mockReturnValue({

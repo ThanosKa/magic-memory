@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-- Email: `security@magic-memory.app`
+- Email: `kazakis.th@gmail.com`
 - Include a short description, reproduction steps, and potential impact.
 - Please do not open public issues for security reports.
 

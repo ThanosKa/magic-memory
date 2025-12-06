@@ -38,11 +38,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://restorephotos.app"
-  ),
+    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+  ), // TODO: set production URL
   title: {
-    default: "RestorePhotos - Restore Your Old Photos with AI",
-    template: "%s | RestorePhotos",
+    default: "Magic Memory - Restore Your Old Photos with AI",
+    template: "%s | Magic Memory",
   },
   description:
     "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily or buy credits for unlimited restorations. Powered by GFPGAN.",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     "restore old photos",
     "AI image restoration",
   ],
-  authors: [{ name: "RestorePhotos Team" }],
-  creator: "RestorePhotos",
-  publisher: "RestorePhotos",
+  authors: [{ name: "Magic Memory Team" }],
+  creator: "Magic Memory",
+  publisher: "Magic Memory",
   robots: {
     index: true,
     follow: true,
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://restorephotos.app",
-    siteName: "RestorePhotos",
-    title: "RestorePhotos - Restore Your Old Photos with AI",
+    url: "http://localhost:3000", // TODO: set production URL
+    siteName: "Magic Memory",
+    title: "Magic Memory - Restore Your Old Photos with AI",
     description:
       "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
     images: [
@@ -85,20 +85,20 @@ export const metadata: Metadata = {
         url: "/og-image-restore.png",
         width: 1200,
         height: 630,
-        alt: "RestorePhotos - AI Photo Restoration",
+        alt: "Magic Memory - AI Photo Restoration",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RestorePhotos - Restore Your Old Photos with AI",
+    title: "Magic Memory - Restore Your Old Photos with AI",
     description:
       "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
     images: ["/og-image-restore.png"],
-    creator: "@restorephotos",
+    creator: "@TODO_set_twitter_handle", // TODO: set Twitter/X handle
   },
   alternates: {
-    canonical: "https://restorephotos.app",
+    canonical: "http://localhost:3000", // TODO: set production canonical URL
   },
   category: "Technology",
   generator: "v0.app",
@@ -130,10 +130,10 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
-                name: "RestorePhotos",
+                name: "Magic Memory",
                 description:
                   "AI-powered photo restoration service that brings your old memories back to life.",
-                url: "https://restorephotos.app",
+                url: "http://localhost:3000", // TODO: set production URL
                 applicationCategory: "PhotographyApplication",
                 operatingSystem: "Web",
                 offers: {

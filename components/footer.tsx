@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
+
 
 export function Footer() {
   return (
@@ -8,9 +9,13 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Sparkles className="h-5 w-5 text-primary-foreground" />
-              </div>
+              <Image
+                src="/icon.png"
+                alt="Magic Memory Logo"
+                width={32}
+                height={32}
+                className="rounded-lg"
+              />
               <span className="text-xl font-bold">Magic Memory</span>
             </div>
             <p className="text-sm text-muted-foreground">

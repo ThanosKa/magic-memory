@@ -1,4 +1,4 @@
-# robots.txt for magic-memory (RestorePhotos)
+# robots.txt for Magic Memory
 
 # Allow all crawlers
 User-agent: *
@@ -11,7 +11,8 @@ Disallow: /_next/
 Disallow: /.well-known/
 
 # Sitemap reference
-Sitemap: https://restorephotos.app/sitemap.xml
+# TODO: set production sitemap URL
+Sitemap: http://localhost:3000/sitemap.xml
 
 # Crawl-delay for specific bots (if needed)
 User-agent: GPTBot

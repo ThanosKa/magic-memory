@@ -55,15 +55,15 @@ export function initWebVitals(): void {
 
 export const WEB_VITALS_THRESHOLDS = {
   LCP: {
-    good: 2500, // 2.5s
-    poor: 4000, // 4s
+    good: 2500,
+    poor: 4000,
   },
   CLS: {
     good: 0.1,
     poor: 0.25,
   },
   INP: {
-    good: 200, // 200ms
-    poor: 500, // 500ms
+    good: 200,
+    poor: 500,
   },
 } as const;

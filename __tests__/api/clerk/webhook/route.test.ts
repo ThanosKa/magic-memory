@@ -82,7 +82,7 @@ describe("POST /api/clerk/webhook", () => {
             type: "user.created",
             data: {
                 id: "clerk_user_123",
-                email_addresses: [{ email_address: "test@example.com" }],
+                email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: "John",
                 last_name: "Doe",
                 image_url: "https://example.com/photo.jpg",
@@ -97,7 +97,7 @@ describe("POST /api/clerk/webhook", () => {
         expect(data.received).toBe(true)
         expect(mockInsert).toHaveBeenCalledWith({
             clerk_user_id: "clerk_user_123",
-            email: "test@example.com",
+            email: "kazakis.th@gmail.com",
             name: "John Doe",
             profile_image: "https://example.com/photo.jpg",
             paid_credits: 0,
@@ -120,7 +120,7 @@ describe("POST /api/clerk/webhook", () => {
             type: "user.updated",
             data: {
                 id: "clerk_user_123",
-                email_addresses: [{ email_address: "updated@example.com" }],
+                email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: "Jane",
                 last_name: "Smith",
                 image_url: "https://example.com/new-photo.jpg",
@@ -134,7 +134,7 @@ describe("POST /api/clerk/webhook", () => {
         expect(response.status).toBe(200)
         expect(data.received).toBe(true)
         expect(mockUpdate).toHaveBeenCalledWith({
-            email: "updated@example.com",
+            email: "kazakis.th@gmail.com",
             name: "Jane Smith",
             profile_image: "https://example.com/new-photo.jpg",
         })
@@ -182,7 +182,7 @@ describe("POST /api/clerk/webhook", () => {
             type: "user.created",
             data: {
                 id: "clerk_user_123",
-                email_addresses: [{ email_address: "test@example.com" }],
+                email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: null,
                 last_name: null,
                 image_url: null,
@@ -194,7 +194,7 @@ describe("POST /api/clerk/webhook", () => {
 
         expect(mockInsert).toHaveBeenCalledWith({
             clerk_user_id: "clerk_user_123",
-            email: "test@example.com",
+            email: "kazakis.th@gmail.com",
             name: null,
             profile_image: null,
             paid_credits: 0,
@@ -213,7 +213,7 @@ describe("POST /api/clerk/webhook", () => {
             type: "user.created",
             data: {
                 id: "clerk_user_123",
-                email_addresses: [{ email_address: "test@example.com" }],
+                email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: "John",
                 last_name: "Doe",
                 image_url: null,

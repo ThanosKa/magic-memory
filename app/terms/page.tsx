@@ -4,28 +4,28 @@ import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Terms of Service | RestorePhotos",
-  description: "Terms of Service for RestorePhotos AI photo restoration service.",
+  title: "Terms of Service | Magic Memory",
+  description: "Terms of Service for the Magic Memory AI photo restoration service.",
   alternates: {
     canonical: getCanonicalUrl("/terms"),
   },
   openGraph: {
-    title: "Terms of Service | RestorePhotos",
-    description: "Terms of Service for RestorePhotos AI photo restoration service.",
+    title: "Terms of Service | Magic Memory",
+    description: "Terms of Service for the Magic Memory AI photo restoration service.",
     url: getCanonicalUrl("/terms"),
     images: [
       {
         url: getOgImageUrl(),
         width: 1200,
         height: 630,
-        alt: "RestorePhotos Terms of Service",
+        alt: "Magic Memory Terms of Service",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms of Service | RestorePhotos",
-    description: "Terms of Service for RestorePhotos AI photo restoration service.",
+    title: "Terms of Service | Magic Memory",
+    description: "Terms of Service for the Magic Memory AI photo restoration service.",
     images: [getOgImageUrl()],
   },
   robots: {
@@ -58,7 +58,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-foreground">1. Acceptance of Terms</h2>
               <p className="mt-2">
-                By accessing and using RestorePhotos, you accept and agree to be bound by these Terms of Service. If you
+                By accessing and using Magic Memory, you accept and agree to be bound by these Terms of Service. If you
                 do not agree to these terms, please do not use our service.
               </p>
             </section>
@@ -66,7 +66,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-foreground">2. Service Description</h2>
               <p className="mt-2">
-                RestorePhotos provides AI-powered photo restoration services using machine learning technology. We offer
+                Magic Memory provides AI-powered photo restoration services using machine learning technology. We offer
                 both free daily credits and paid credit packages for photo restorations.
               </p>
             </section>
@@ -107,14 +107,14 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-foreground">7. Limitation of Liability</h2>
               <p className="mt-2">
-                RestorePhotos is provided "as is" without warranties of any kind. We are not liable for any damages
+                Magic Memory is provided "as is" without warranties of any kind. We are not liable for any damages
                 arising from the use of our service.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">8. Contact</h2>
-              <p className="mt-2">For questions about these Terms, please contact us at support@restorephotos.app.</p>
+              <p className="mt-2">For questions about these Terms, please contact us at kazakis.th@gmail.com.</p>
             </section>
           </div>
         </div>

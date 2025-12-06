@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { Button } from '@/components/ui/button';
-import { Home, Search, ArrowLeft } from 'lucide-react';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Home, Search, ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: '404 - Page Not Found',
-  description: 'The page you are looking for could not be found.',
+  title: "404 - Page Not Found",
+  description: "The page you are looking for could not be found.",
   robots: {
     index: false,
     follow: false,
@@ -29,7 +29,8 @@ export default function NotFound() {
               Page Not Found
             </h2>
             <p className="text-lg text-muted-foreground max-w-md mx-auto">
-              Sorry, we couldn't find the page you're looking for. It might have been moved or doesn't exist.
+              Sorry, we couldn't find the page you're looking for. It might have
+              been moved or doesn't exist.
             </p>
           </div>
 
@@ -53,24 +54,18 @@ export default function NotFound() {
               Looking for something specific?
             </p>
             <div className="flex flex-wrap gap-4 justify-center text-sm">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="text-primary hover:underline inline-flex items-center"
               >
                 <ArrowLeft className="mr-1 h-3 w-3" />
                 Home
               </Link>
-              <Link 
-                href="/pricing" 
-                className="text-primary hover:underline"
-              >
+              <Link href="/pricing" className="text-primary hover:underline">
                 Pricing
               </Link>
-              <Link 
-                href="/restore" 
-                className="text-primary hover:underline"
-              >
-                Restore Photos
+              <Link href="/restore" className="text-primary hover:underline">
+                Restore
               </Link>
             </div>
           </div>
