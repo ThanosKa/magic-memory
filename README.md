@@ -2,64 +2,132 @@
 
 <h1>✨ Magic Memory ✨</h1>
 
-[![Next.js 15](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
-[![React 19](https://img.shields.io/badge/React-19-61dafb?logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
-[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-radix-8a3ffc)](https://ui.shadcn.com/)
-[![Replicate](https://img.shields.io/badge/Replicate-GFPGAN-0f9d58)](https://replicate.com)
-[![pnpm](https://img.shields.io/badge/pnpm-%F0%9F%8F%AF-orange?logo=pnpm)](https://pnpm.io/)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/thaka/magic-memory?style=social)](https://github.com/thaka/magic-memory/stargazers)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Next.js 16](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript 5](https://img.shields.io/badge/TypeScript_5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind v4](https://img.shields.io/badge/Tailwind_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-Radix-8A3FFC?style=for-the-badge)](https://ui.shadcn.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
+[![Replicate](https://img.shields.io/badge/Replicate-GFPGAN-0F9D58?style=for-the-badge)](https://replicate.com/)
+[![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
+[![Upstash Redis](https://img.shields.io/badge/Upstash_Redis-00E9A3?style=for-the-badge&logo=redis&logoColor=white)](https://upstash.com/)
+[![pnpm](https://img.shields.io/badge/pnpm-FFCF00?style=for-the-badge&logo=pnpm&logoColor=black)](https://pnpm.io/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/thaka/magic-memory?style=for-the-badge&logo=github)](https://github.com/thaka/magic-memory/stargazers)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fthaka%2Fmagic-memory)
 
-<p>AI-powered photo restoration SaaS that revives old, blurry, or damaged photos in seconds.</p>
+<p>AI-powered photo restoration SaaS that revives old, blurry, or damaged photos with GFPGAN, safe-by-default uploads, no persistent image storage, and a transparent credit system.</p>
 
-[Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md)
+[Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md) · [Discussions](https://github.com/thaka/magic-memory/discussions)
 
 </div>
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshot
 
 <div align="center">
   <img src="./public/og-image-restore.png" alt="Magic Memory restored photo preview" width="90%" />
 </div>
 
-## What It Does
+---
 
-- Restores old, blurry, or damaged photos with GFPGAN on Replicate.
-- Client-side NSFW detection blocks unsafe uploads before they hit the server.
-- Credit system with daily free credit plus paid packs that never expire.
-- Real-time job status, interactive before/after slider, and downloadable results.
-- No persistent image storage: uploads are processed in memory, sent to Replicate, and only restoration metadata (output URL, filename label, credit usage, timestamps) is stored for your account history.
-- Authentication with Clerk; payments via Stripe; Supabase database (no image storage).
+## Table of Contents
 
-## Why It’s Useful
+- [About](#about)
+- [Features](#features)
+  - [SEO and Performance](#seo-and-performance)
+  - [Enhanced UX](#enhanced-ux)
+- [Demo](#demo)
+- [How It Works](#how-it-works)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Setup](#environment-setup)
+  - [Database Setup](#database-setup)
+  - [Run Locally](#run-locally)
+  - [Testing](#testing)
+  - [SEO Check](#seo-check)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Architecture](#architecture)
+- [Deployment](#deployment)
+- [CI](#ci)
+- [Contributing](#contributing)
+- [Security](#security)
+- [Acknowledgments](#acknowledgments)
+- [Star History](#star-history)
+- [Contact](#contact)
+- [Support](#support)
+- [License](#license)
+- [Back to Top](#back-to-top)
 
-- Reliable quality: GFPGAN restores facial detail and clarity automatically.
-- Fast path to production: App Router, server-first patterns, and SWR for data.
-- Safe by default: NSFW prefiltering and rate limiting via Upstash Redis.
-- Clear pricing: free daily credit to try, paid credits that stay in your account.
+---
 
-## Tech stack
+## About
 
-| Category         | Technology                      |
-| ---------------- | ------------------------------- |
-| Framework        | Next.js 15 (App Router)         |
-| Language         | TypeScript (strict)             |
-| Styling          | Tailwind CSS 4 + shadcn/ui      |
-| Auth             | Clerk                           |
-| Database         | Supabase (PostgreSQL; no image storage) |
-| AI               | GFPGAN on Replicate             |
-| Rate limiting    | Upstash Redis                   |
-| Payments         | Stripe                          |
-| Logging          | Pino                            |
-| Data fetching    | SWR                             |
-| Validation       | Zod                             |
+Magic Memory lets anyone restore old, blurry, or damaged photos in seconds. Upload a photo, pass an on-device NSFW check, pay with credits, and download a sharper, cleaner result processed with GFPGAN on Replicate. Auth is handled by Clerk, payments by Stripe, data by Supabase, and safety by Upstash Redis rate limits.
+
+## Features
+
+- One-click restoration with GFPGAN on Replicate.
+- Client-side NSFW detection before the upload leaves the browser.
+- Credit system with a daily free credit plus paid packs that never expire.
+- Real-time restoration status, before/after slider, and direct download of results.
+- Supabase-backed history (metadata only, no binary image storage) so users can revisit prior restorations.
+- Authentication with Clerk; payments via Stripe Checkout.
+- Rate limiting via Upstash Redis; structured logging with Pino; validation via Zod.
+
+### SEO and Performance
+
+- Next.js Metadata API for dynamic Open Graph and Twitter cards.
+- Core Web Vitals tracking during development.
+- SEO audit script (`pnpm seo:audit`) against the running app.
+- Optimized assets and Tailwind v4 for lean output.
+
+### Enhanced UX
+
+- Smooth navigation with responsive layouts and shadcn/ui components.
+- Animated interactions for CTA buttons and upload states.
+- Clear progress states while Replicate jobs run.
+- Accessible forms, keyboard support, and consistent focus handling.
+
+## Demo
+
+- Run locally with `pnpm dev` at `http://localhost:3000`.
+- Deploy to Vercel with the one-click button above and plug in your env vars.
+
+Quick preview of the flow: upload → NSFW check → Replicate GFPGAN → credit deduction → download and view history (no persistent binary storage).
+
+## How It Works
+
+1. User uploads an image; client-side NSFW scanning blocks unsafe files.
+2. Clerk session guards the request; credit balance is checked before processing.
+3. The image stays in memory, is encoded, and sent to Replicate for restoration (no Supabase Storage writes).
+4. Replicate runs GFPGAN and returns an enhanced image URL.
+5. Restoration metadata, credit usage, and timestamps are recorded in Supabase.
+6. The user can preview with a before/after slider and download the result.
+
+## Built With
+
+| Category      | Technology                                              |
+| ------------- | ------------------------------------------------------- |
+| Framework     | Next.js 16 (App Router)                                 |
+| Language      | TypeScript (strict)                                     |
+| Styling       | Tailwind CSS v4 + shadcn/ui                             |
+| Auth          | Clerk                                                   |
+| Database      | Supabase (PostgreSQL; metadata only, no binary storage) |
+| AI            | GFPGAN on Replicate                                     |
+| Rate limiting | Upstash Redis                                           |
+| Payments      | Stripe                                                  |
+| Data fetching | SWR                                                     |
+| Validation    | Zod                                                     |
+| Logging       | Pino                                                    |
 
 ## Getting Started
 
@@ -67,105 +135,119 @@
 
 - Node.js 20+
 - pnpm
-- Accounts: Clerk, Supabase, Stripe, Replicate, Upstash
+- Accounts: Clerk, Supabase, Stripe, Replicate, Upstash Redis
 
-### Setup
+### Installation
 
 ```bash
 git clone https://github.com/thaka/magic-memory.git
 cd magic-memory
 pnpm install
-cp .env.example .env.local
-# add Clerk, Supabase, Stripe, Replicate, Upstash keys
 ```
 
-### Database
+### Environment Setup
 
-Run the SQL scripts in `scripts/` (in order):
+```bash
+cp .env.example .env.local
+# Fill in Clerk, Supabase (URL, anon, service role), Stripe (secret, webhook, publishable, price IDs), Replicate token, Upstash Redis URL/token, and NEXT_PUBLIC_APP_URL.
+```
 
-- `scripts/001_create_users_table.sql`
-- `scripts/002_create_restorations_table.sql`
-- `scripts/003_create_purchases_table.sql`
-- `scripts/004_create_atomic_credit_functions.sql`
+### Database Setup
 
-### Run locally
+Run the SQL migrations in order:
+
+```bash
+psql "$SUPABASE_DB_URL" -f scripts/001_create_users_table.sql \
+  -f scripts/002_create_restorations_table.sql \
+  -f scripts/003_create_purchases_table.sql \
+  -f scripts/004_create_atomic_credit_functions.sql
+```
+
+### Run Locally
 
 ```bash
 pnpm dev
-# visit http://localhost:3000
+# http://localhost:3000
 ```
 
-## Useful scripts
+### Testing
 
-| Command              | Purpose                                |
-| -------------------- | -------------------------------------- |
-| `pnpm dev`           | Start dev server with hot reload       |
-| `pnpm lint`          | ESLint quality gate                    |
-| `pnpm type-check`    | TypeScript check without emit          |
-| `pnpm test:run`      | Run Vitest in CI mode                  |
-| `pnpm build`         | Production build (includes type-check) |
-| `pnpm start`         | Start production server after build    |
-| `pnpm run seo:audit` | SEO audit script                       |
+- `pnpm lint` — ESLint quality gate.
+- `pnpm type-check` — TypeScript without emit.
+- `pnpm test:run` — Vitest suite used in CI.
+- `pnpm test:coverage` — Vitest with coverage.
 
-Pre-commit: run `pnpm lint` and `pnpm type-check`.
+### SEO Check
 
-## Testing
+```bash
+# Terminal 1
+pnpm dev
 
-- `pnpm type-check` — TypeScript validation without emit.
-- `pnpm test:run` — Run the Vitest suite used in CI.
+# Terminal 2
+pnpm seo:audit
+```
 
-## Deploy Your Own (Vercel)
+Optionally target a deployed URL:
 
-- Click the Vercel button above for one-click deploy (uses `next build` output).
-- Add all required environment variables (Clerk, Supabase, Stripe, Replicate, Upstash) in the Vercel dashboard before first run.
+```bash
+NEXT_PUBLIC_APP_URL=https://your-domain.com pnpm seo:audit
+```
 
-## Manual Deployment
+## Usage
 
-- Build with `pnpm build` and run with `pnpm start` on Node 20+.
-- Provide the same environment variables and Supabase/Redis endpoints as in `.env.example`.
+1. Sign in with Clerk.
+2. Upload a photo; NSFW filtering runs client-side.
+3. Confirm credit use (daily free credit or paid pack).
+4. Wait for the Replicate job; watch progress in real time.
+5. Compare before/after and download the restored image.
+6. View history and receipts in your account.
 
-## Project structure
+## Project Structure
 
 ```
 magic-memory/
-├── app/                # Next.js App Router pages and APIs
-├── components/         # UI and feature components
-├── lib/                # Supabase clients, Redis, logger, validations
-├── scripts/            # Database migrations and SEO audit
-├── __tests__/          # Vitest coverage for APIs and libs
-└── .github/            # CI, issue/PR templates, funding
+├── app/                 # App Router routes and API endpoints
+├── components/          # UI, upload flow, restore experience
+├── lib/                 # Supabase clients, Redis, logger, validations
+├── scripts/             # SQL migrations and SEO audit script
+├── __tests__/           # Vitest coverage for APIs and libs
+└── .github/             # CI workflow and templates
 ```
 
-## Architecture at a glance
+## Architecture
 
-- **App Router** pages under `app/`; API routes live in `app/api/`.
-- **Auth** via Clerk middleware in `proxy.ts`; protected routes include `/restore` and `/profile`.
-- **Credits** tracked in Supabase with RPC functions; free daily credit resets and paid credits never expire.
-- **Storage** none for images; restorations are processed via Replicate and only metadata/URLs live in Supabase DB; rate limiting via Upstash Redis.
-- **AI restore** calls Replicate GFPGAN; results are returned and recorded as metadata (no binary storage).
-- **Logging** with Pino; validations via Zod.
+- App Router pages in `app/`; API handlers in `app/api/`.
+- Auth via Clerk middleware in `proxy.ts`.
+- Credits tracked in Supabase with atomic SQL functions; daily free credit plus non-expiring paid credits.
+- No binary storage; only restoration metadata/URLs in Supabase; rate limiting via Upstash Redis.
+- AI restoration through Replicate GFPGAN; metadata persisted for history.
+- Logging with Pino and validation with Zod; SWR for client data fetching.
+
+## Deployment
+
+- Vercel: click the button above, set all environment variables, and deploy.
+- Manual: `pnpm build` then `pnpm start` on Node 20+ with the same env vars as `.env.local`.
+
+Production checklist:
+
+- Update all environment variables for production.
+- Enable Supabase connection pooling.
+- Configure Clerk production instance and webhooks.
+- Set Stripe live keys and webhook secrets.
+- Add Upstash Redis production tokens.
+- Configure custom domain and error tracking if desired.
 
 ## CI
 
-GitHub Actions (`.github/workflows/ci.yml`) runs pnpm lint, type-check, tests, and build on Node 20 and 22. Secrets are stubbed with safe placeholders.
+`.github/workflows/ci.yml` runs lint, type-check, Vitest, and build on Node 20 and 22.
 
 ## Contributing
 
-We welcome contributions. Read the [Contributing Guide](CONTRIBUTING.md) and follow the [Code of Conduct](CODE_OF_CONDUCT.md). Use the issue templates for bugs and feature requests, and the PR template when submitting changes.
+Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md). Use the issue templates for bugs and features, and the PR template when submitting changes.
 
 ## Security
 
-Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Do not open public issues for security reports.
-
-## Contact & Support
-
-- Twitter: [@KazakisThanos](https://x.com/KazakisThanos)
-- Email: kazakis.th@gmail.com
-- Buy Me a Coffee: [https://buymeacoffee.com/thaka](https://buymeacoffee.com/thaka)
-
-## License
-
-Apache License 2.0. See [LICENSE](LICENSE).
+Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Avoid filing public issues for security concerns.
 
 ## Acknowledgments
 
@@ -173,3 +255,34 @@ Apache License 2.0. See [LICENSE](LICENSE).
 - [Replicate](https://replicate.com)
 - [shadcn/ui](https://ui.shadcn.com)
 - [Vercel](https://vercel.com)
+
+## Star History
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=thaka/magic-memory&type=Date)](https://star-history.com/#thaka/magic-memory&Date)
+
+</div>
+
+## Contact
+
+- GitHub Issues: [Open an issue](https://github.com/thaka/magic-memory/issues)
+- Discussions: [Join the conversation](https://github.com/thaka/magic-memory/discussions)
+- X: [@KazakisThanos](https://x.com/KazakisThanos)
+- Email: kazakis.th@gmail.com
+
+## Support
+
+[Buy Me a Coffee](https://buymeacoffee.com/thaka)
+
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE).
+
+---
+
+<div id="back-to-top" align="center">
+
+[Back to Top](#readme)
+
+</div>

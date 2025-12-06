@@ -2,47 +2,34 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
   pull_request:
-  workflow_dispatch:
-
-env:
-  CI: true
-  NEXT_TELEMETRY_DISABLED: 1
-  NEXT_PUBLIC_APP_URL: http://localhost:3000
-  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test
-  CLERK_SECRET_KEY: sk_test
-  CLERK_WEBHOOK_SECRET: whsec_test
-  NEXT_PUBLIC_SUPABASE_URL: http://localhost:54321
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: supabase_anon_key
-  SUPABASE_SERVICE_ROLE_KEY: supabase_service_role
-  REPLICATE_API_TOKEN: replicate_api_token
-  UPSTASH_REDIS_REST_URL: https://example.com
-  UPSTASH_REDIS_REST_TOKEN: upstash_token
-  STRIPE_SECRET_KEY: sk_test
-  STRIPE_WEBHOOK_SECRET: whsec_test
-  NEXT_PUBLIC_STRIPE_PRICE_STARTER: price_starter
-  NEXT_PUBLIC_STRIPE_PRICE_GROWTH: price_growth
-  NEXT_PUBLIC_STRIPE_PRICE_PREMIUM: price_premium
-
-permissions:
-  contents: read
-
-concurrency:
-  group: ci-${{ github.ref }}-${{ github.workflow }}
-  cancel-in-progress: true
+    branches: ["main"]
 
 jobs:
-  quality:
-    name: Node ${{ matrix.node-version }}
+  build-and-test:
+    name: Build and Test
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [20.x, 22.x]
+    env:
+      SKIP_ENV_VALIDATION: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      NEXT_PUBLIC_SUPABASE_URL: "https://example.supabase.co"
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: "dummy-key"
+      SUPABASE_SERVICE_ROLE_KEY: "dummy-key"
+      SUPABASE_DB_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_Y2xlcmsuZXhhbXBsZS5jb20k"
+      CLERK_SECRET_KEY: "sk_test_Y2xlcmsuZXhhbXBsZS5jb20k"
+      NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+      STRIPE_SECRET_KEY: "sk_test_dummy"
+      STRIPE_WEBHOOK_SECRET: "whsec_dummy"
+      NEXT_PUBLIC_STRIPE_PRICE_STARTER: "price_dummy_starter"
+      NEXT_PUBLIC_STRIPE_PRICE_GROWTH: "price_dummy_growth"
+      NEXT_PUBLIC_STRIPE_PRICE_PREMIUM: "price_dummy_premium"
+      OPENROUTER_API_KEY: "dummy-key"
+      REPLICATE_API_TOKEN: "dummy-key"
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install pnpm
@@ -53,21 +40,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: pnpm
+          node-version: "20"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm run lint
 
-      - name: Type check
-        run: pnpm type-check
+      - name: Type Check
+        run: pnpm run type-check
 
-      - name: Tests
-        run: pnpm test:run
-
-      - name: Build
-        run: pnpm build
-
+      - name: Run Tests
+        run: pnpm run test

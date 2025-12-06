@@ -128,7 +128,7 @@ export const getCanonicalUrl = (path: string): string => {
 };
 
 export const getOgImageUrl = (
-  imagePath: string = "/og-image-magic-memory.png"
+  imagePath: string = "/og-image-restore.png"
 ): string => {
   if (imagePath.startsWith("http")) return imagePath;
   return `${SITE_URL}${imagePath}`;

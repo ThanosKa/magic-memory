@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { LoadingSpinner } from "@/components/ui/loading-states";
 import { AnalyticsProvider } from "@/app/analytics-provider";
 
 const ConditionalClerkProvider = dynamic(
@@ -12,6 +13,7 @@ const ConditionalClerkProvider = dynamic(
     ),
   {
     ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-6" />,
   }
 );
 
@@ -20,6 +22,7 @@ const WebVitalsTracker = dynamic(
     import("@/components/web-vitals-tracker").then((m) => m.WebVitalsTracker),
   {
     ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-4" />,
   }
 );
 
@@ -27,40 +30,57 @@ const CookieConsent = dynamic(
   () => import("@/components/cookie-consent").then((m) => m.CookieConsent),
   {
     ssr: true,
+    loading: () => <LoadingSpinner className="mx-auto my-4" />,
   }
 );
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
+  display: "swap", // Added font-display: swap for performance
   variable: "--font-inter",
 });
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const BRAND = "Magic Memory";
+const OG_IMAGE = "/og-image-restore.png";
+const TITLE_DEFAULT = `${BRAND} — AI Photo Restoration`;
+const DESCRIPTION =
+  "Magic Memory uses GFPGAN to restore and enhance your photos with safe-by-default uploads, no persistent image storage, and transparent credits.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-  ), // TODO: set production URL
+  metadataBase: new URL(APP_URL),
   title: {
-    default: "Magic Memory - Restore Your Old Photos with AI",
-    template: "%s | Magic Memory",
+    default: TITLE_DEFAULT,
+    template: `%s | ${BRAND}`,
   },
-  description:
-    "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily or buy credits for unlimited restorations. Powered by GFPGAN.",
+  description: DESCRIPTION,
   keywords: [
-    "photo restoration",
-    "AI photo repair",
-    "old photo restore",
+    "Magic Memory",
+    "AI photo restoration",
+    "AI photo enhancer",
     "GFPGAN",
-    "image enhancement",
-    "face restoration",
+    "restore old photos",
+    "old photo restore",
+    "old photo enhancer",
     "vintage photo repair",
     "photo enhancement",
-    "restore old photos",
-    "AI image restoration",
+    "image enhancement",
+    "deblur photos",
+    "face restoration",
+    "portrait enhancer",
+    "family photo restoration",
+    "image upscaling",
+    "HD upscaling",
+    "before after photo",
+    "before after slider",
+    "secure photo restoration",
+    "no photo storage",
+    "NSFW safe upload",
+    "credit based photo restore",
   ],
-  authors: [{ name: "Magic Memory Team" }],
-  creator: "Magic Memory",
-  publisher: "Magic Memory",
+  authors: [{ name: `${BRAND} Team` }],
+  creator: BRAND,
+  publisher: BRAND,
   robots: {
     index: true,
     follow: true,
@@ -75,30 +95,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "http://localhost:3000", // TODO: set production URL
-    siteName: "Magic Memory",
-    title: "Magic Memory - Restore Your Old Photos with AI",
-    description:
-      "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
+    url: APP_URL,
+    siteName: BRAND,
+    title: TITLE_DEFAULT,
+    description: DESCRIPTION,
     images: [
       {
-        url: "/og-image-restore.png",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Magic Memory - AI Photo Restoration",
+        alt: TITLE_DEFAULT,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Magic Memory - Restore Your Old Photos with AI",
-    description:
-      "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
-    images: ["/og-image-restore.png"],
-    creator: "@TODO_set_twitter_handle", // TODO: set Twitter/X handle
+    title: TITLE_DEFAULT,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+    creator: "@TODO_set_twitter_handle",
   },
   alternates: {
-    canonical: "http://localhost:3000", // TODO: set production canonical URL
+    canonical: APP_URL,
   },
   category: "Technology",
   generator: "v0.app",
@@ -130,10 +148,9 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
-                name: "Magic Memory",
-                description:
-                  "AI-powered photo restoration service that brings your old memories back to life.",
-                url: "http://localhost:3000", // TODO: set production URL
+                name: BRAND,
+                description: DESCRIPTION,
+                url: APP_URL,
                 applicationCategory: "PhotographyApplication",
                 operatingSystem: "Web",
                 offers: {

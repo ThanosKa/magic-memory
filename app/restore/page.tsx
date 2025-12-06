@@ -23,14 +23,14 @@ const RestoreUploader = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Restore Photos - Magic Memory",
-  description: "Upload and restore your old photos with AI.",
+  title: "Magic Memory — AI Photo Restoration",
+  description: "Upload and enhance your photos with Magic Memory AI.",
   alternates: {
     canonical: getCanonicalUrl("/restore"),
   },
   openGraph: {
-    title: "Restore Photos - Magic Memory",
-    description: "Upload and restore your old photos with AI.",
+    title: "Magic Memory — AI Photo Restoration",
+    description: "Upload and enhance your photos with Magic Memory AI.",
     url: getCanonicalUrl("/restore"),
     images: [
       {
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Restore Photos - Magic Memory",
-    description: "Upload and restore your old photos with AI.",
+    title: "Magic Memory — AI Photo Restoration",
+    description: "Upload and enhance your photos with Magic Memory AI.",
     images: [getOgImageUrl()],
   },
   robots: {
@@ -81,6 +81,7 @@ export default async function RestorePage() {
       <Suspense fallback={<RestorePageFallback />}>
         <Header />
         <main className="flex flex-1 items-center justify-center py-12 sm:py-16">
+          <h1 className="sr-only">Magic Memory</h1>
           <div className="mx-auto flex w-full max-w-4xl justify-center px-4 sm:px-6 lg:px-8">
             <RestoreUploader />
           </div>
