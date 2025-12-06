@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     "before after slider",
     "secure photo restoration",
     "no photo storage",
-    "NSFW safe upload",
+    "privacy-first upload",
     "credit based photo restore",
   ],
   authors: [{ name: `${BRAND} Team` }],

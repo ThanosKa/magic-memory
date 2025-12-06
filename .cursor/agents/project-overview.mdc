@@ -29,19 +29,17 @@ An AI-powered SaaS that restores old, blurry, or damaged photos using the GFPGAN
 
 1. User signs in with Google (Clerk)
 2. User uploads old photo
-3. Client-side NSFW check (nsfwjs)
-4. Process in memory and send to Replicate GFPGAN (no image storage on our side)
-5. Receive restored output URL from Replicate
-6. Record restoration metadata and deduct credit via atomic transaction
-7. User downloads restored photo
+3. Process in memory and send to Replicate GFPGAN (no image storage on our side)
+4. Receive restored output URL from Replicate
+5. Record restoration metadata and deduct credit via atomic transaction
+6. User downloads restored photo
 
 ## Key Technical Decisions
 
 1. **No ORM** - Direct Supabase client queries
 2. **Atomic transactions** - RPC functions for credit operations
-3. **Client-side NSFW** - Faster UX, less server load
-4. **Redis for free credits** - TTL handles daily reset automatically
-5. **No persistent image storage** - Restorations live only as Replicate output URLs plus metadata
+3. **Redis for free credits** - TTL handles daily reset automatically
+4. **No persistent image storage** - Restorations live only as Replicate output URLs plus metadata
 
 ## Environment Variables Required
 

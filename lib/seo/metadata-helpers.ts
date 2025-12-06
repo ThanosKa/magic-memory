@@ -38,7 +38,7 @@ export const webApplicationJsonLd = (): Thing => ({
     "Free daily restoration credit",
     "Instant results in 5-15 seconds",
     "Interactive before/after comparison",
-    "Client-side NSFW detection",
+    "No persistent image storage",
     "Secure authentication with Google",
   ],
 });

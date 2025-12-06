@@ -18,8 +18,6 @@
 [![Stars](https://img.shields.io/github/stars/thaka/magic-memory?style=for-the-badge&logo=github)](https://github.com/thaka/magic-memory/stargazers)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fthaka%2Fmagic-memory)
-
 <p>AI-powered photo restoration SaaS that revives old, blurry, or damaged photos with GFPGAN, safe-by-default uploads, no persistent image storage, and a transparent credit system.</p>
 
 [Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md) · [Discussions](https://github.com/thaka/magic-memory/discussions)
@@ -57,6 +55,9 @@
 - [Project Structure](#project-structure)
 - [Architecture](#architecture)
 - [Deployment](#deployment)
+  - [Deploy to Vercel](#deploy-to-vercel)
+  - [Manual Deploy](#manual-deploy)
+  - [Production Checklist](#production-checklist)
 - [CI](#ci)
 - [Contributing](#contributing)
 - [Security](#security)
@@ -71,12 +72,11 @@
 
 ## About
 
-Magic Memory lets anyone restore old, blurry, or damaged photos in seconds. Upload a photo, pass an on-device NSFW check, pay with credits, and download a sharper, cleaner result processed with GFPGAN on Replicate. Auth is handled by Clerk, payments by Stripe, data by Supabase, and safety by Upstash Redis rate limits.
+Magic Memory lets anyone restore old, blurry, or damaged photos in seconds. Upload a photo, pay with credits, and download a sharper, cleaner result processed with GFPGAN on Replicate. Auth is handled by Clerk, payments by Stripe, data by Supabase, and safety by Upstash Redis rate limits.
 
 ## Features
 
 - One-click restoration with GFPGAN on Replicate.
-- Client-side NSFW detection before the upload leaves the browser.
 - Credit system with a daily free credit plus paid packs that never expire.
 - Real-time restoration status, before/after slider, and direct download of results.
 - Supabase-backed history (metadata only, no binary image storage) so users can revisit prior restorations.
@@ -102,11 +102,11 @@ Magic Memory lets anyone restore old, blurry, or damaged photos in seconds. Uplo
 - Run locally with `pnpm dev` at `http://localhost:3000`.
 - Deploy to Vercel with the one-click button above and plug in your env vars.
 
-Quick preview of the flow: upload → NSFW check → Replicate GFPGAN → credit deduction → download and view history (no persistent binary storage).
+Quick preview of the flow: upload → Replicate GFPGAN → credit deduction → download and view history (no persistent binary storage).
 
 ## How It Works
 
-1. User uploads an image; client-side NSFW scanning blocks unsafe files.
+1. User uploads an image; the request is prepared and validated before processing.
 2. Clerk session guards the request; credit balance is checked before processing.
 3. The image stays in memory, is encoded, and sent to Replicate for restoration (no Supabase Storage writes).
 4. Replicate runs GFPGAN and returns an enhanced image URL.
@@ -196,7 +196,7 @@ NEXT_PUBLIC_APP_URL=https://your-domain.com pnpm seo:audit
 ## Usage
 
 1. Sign in with Clerk.
-2. Upload a photo; NSFW filtering runs client-side.
+2. Upload a photo.
 3. Confirm credit use (daily free credit or paid pack).
 4. Wait for the Replicate job; watch progress in real time.
 5. Compare before/after and download the restored image.
@@ -225,10 +225,28 @@ magic-memory/
 
 ## Deployment
 
-- Vercel: click the button above, set all environment variables, and deploy.
-- Manual: `pnpm build` then `pnpm start` on Node 20+ with the same env vars as `.env.local`.
+### Deploy to Vercel
 
-Production checklist:
+The easiest way to deploy magic-memory.dev is with Vercel:
+
+1. Push your code to GitHub.
+2. Import the project in Vercel.
+3. Add all environment variables from `.env.local`.
+4. Update `NEXT_PUBLIC_APP_URL` to your production domain.
+5. Deploy.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fthaka%2Fmagic-memory)
+
+### Manual Deploy
+
+Build locally and run on Node 20+ with the same environment as `.env.local`:
+
+```bash
+pnpm build
+pnpm start
+```
+
+### Production Checklist
 
 - Update all environment variables for production.
 - Enable Supabase connection pooling.
@@ -239,7 +257,7 @@ Production checklist:
 
 ## CI
 
-`.github/workflows/ci.yml` runs lint, type-check, Vitest, and build on Node 20 and 22.
+`.github/workflows/ci.yml` runs lint, type-check, and Vitest on Node 20 with pnpm cache.
 
 ## Contributing
 
