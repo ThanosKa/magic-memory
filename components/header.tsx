@@ -51,10 +51,11 @@ function HeaderWithClerk() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-                  }`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  pathname === link.href
+                    ? "text-foreground"
+                    : "text-muted-foreground"
+                }`}
               >
                 {link.label}
               </Link>
@@ -112,10 +113,11 @@ function HeaderWithClerk() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href
-                          ? "text-foreground"
-                          : "text-muted-foreground"
-                          }`}
+                        className={`text-lg font-medium transition-colors hover:text-primary ${
+                          pathname === link.href
+                            ? "text-foreground"
+                            : "text-muted-foreground"
+                        }`}
                       >
                         {link.label}
                       </Link>
@@ -176,10 +178,11 @@ function HeaderWithoutClerk() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-                  }`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  pathname === link.href
+                    ? "text-foreground"
+                    : "text-muted-foreground"
+                }`}
               >
                 {link.label}
               </Link>
@@ -220,10 +223,11 @@ function HeaderWithoutClerk() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href
-                          ? "text-foreground"
-                          : "text-muted-foreground"
-                          }`}
+                        className={`text-lg font-medium transition-colors hover:text-primary ${
+                          pathname === link.href
+                            ? "text-foreground"
+                            : "text-muted-foreground"
+                        }`}
                       >
                         {link.label}
                       </Link>
