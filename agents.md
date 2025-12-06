@@ -4,7 +4,7 @@ Instructions below are for AI assistants. Keep responses concise and aligned wit
 
 ## Project Overview
 
-**magic-memory** - AI-powered photo restoration SaaS using GFPGAN model
+**Magic Memory** - AI-powered photo restoration SaaS using GFPGAN model
 
 **Core Flow:** User uploads old photo → NSFW check → Supabase Storage → Replicate GFPGAN → Restored image → Credit deduction → Download
 
@@ -76,6 +76,6 @@ Instructions below are for AI assistants. Keep responses concise and aligned wit
 
 ## References
 
-- Canonical files: `.cursor/rules/*.mdc` (coding patterns) and `.cursor/agents/*.mdc` (project context)
+- Canonical files: `.cursor/rules/general.mdc`, `.cursor/rules/code-style.mdc`, `.cursor/rules/api-patterns.mdc`, `.cursor/rules/component-patterns.mdc`, `.cursor/agents/project-overview.mdc`, and this `agents.md`
 - For planning requests, refer to this AGENTS.md guide
 - Environment setup: see `.env.example` in project root

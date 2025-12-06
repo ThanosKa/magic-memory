@@ -1,18 +1,32 @@
+---
+alwaysApply: false
+---
+
 # magic-memory Project Overview for Cursor
 
 ## What is magic-memory?
 
 An AI-powered SaaS that restores old, blurry, or damaged photos using the GFPGAN model via Replicate API.
 
+## Canonical references
+
+- Agent guide: `agents.md`
+- Behavior rules: `.cursor/rules/general.mdc`
+- Code style: `.cursor/rules/code-style.mdc`
+- API patterns: `.cursor/rules/api-patterns.mdc`
+- Component patterns: `.cursor/rules/component-patterns.mdc`
+
 ## Business Logic
 
 ### Credit System
+
 - **Free**: 1 restoration/day, resets at midnight UTC (stored in Redis with TTL)
 - **Paid**: 100/$9, 350/$19, 1000/$29 (stored in Supabase, never expire)
 - **Priority**: Use free first, then paid
 - **No credits = No service**
 
 ### User Flow
+
 1. User signs in with Google (Clerk)
 2. User uploads old photo
 3. Client-side NSFW check (nsfwjs)
@@ -33,6 +47,7 @@ An AI-powered SaaS that restores old, blurry, or damaged photos using the GFPGAN
 ## Environment Variables Required
 
 See `.env.example` for full list. Key ones:
+
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` / `CLERK_SECRET_KEY`
 - `NEXT_PUBLIC_SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY`
 - `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET`
@@ -42,17 +57,21 @@ See `.env.example` for full list. Key ones:
 ## Common Development Tasks
 
 ### Add a new API endpoint
-See `.cursor/rules/api-patterns.md`
+
+See `.cursor/rules/api-patterns.mdc`
 
 ### Add a new component
-See `.cursor/rules/component-patterns.md`
+
+See `.cursor/rules/component-patterns.mdc`
 
 ### Modify database
+
 1. Create new migration in `scripts/`
 2. Run in Supabase SQL Editor
 3. Update Zod schemas in `lib/validations/`
 
 ### Add environment variable
+
 1. Add to `.env.example`
 2. Add to `lib/env.ts` Zod schema
 3. Use via `import { env } from "@/lib/env"`
