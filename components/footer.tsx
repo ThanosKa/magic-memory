@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Sparkles } from "lucide-react"
+import Link from "next/link";
+import { Sparkles } from "lucide-react";
 
 export function Footer() {
   return (
@@ -12,7 +12,7 @@ export function Footer() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
                 <Sparkles className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold">RestorePhotos</span>
+              <span className="text-xl font-bold">Magic Memory</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Bring your old photos back to life with AI-powered restoration.
@@ -23,14 +23,23 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold">Product</h3>
             <nav className="flex flex-col gap-2">
-              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+              <Link
+                href="/"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
                 Home
               </Link>
-              <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">
+              <Link
+                href="/pricing"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
                 Pricing
               </Link>
-              <Link href="/restore" className="text-sm text-muted-foreground hover:text-foreground">
-                Restore Photos
+              <Link
+                href="/restore"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Magic Memory
               </Link>
             </nav>
           </div>
@@ -39,10 +48,16 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold">Legal</h3>
             <nav className="flex flex-col gap-2">
-              <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">
+              <Link
+                href="/terms"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
                 Terms of Service
               </Link>
-              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">
+              <Link
+                href="/privacy"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
                 Privacy Policy
               </Link>
             </nav>
@@ -69,7 +84,7 @@ export function Footer() {
                 Twitter / X
               </a>
               <a
-                href="mailto:support@restorephotos.app"
+                href="mailto:kazakis.th@gmail.com"
                 className="text-sm text-muted-foreground hover:text-foreground"
               >
                 Support
@@ -79,25 +94,11 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-border pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} RestorePhotos. All rights reserved.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Powered by{" "}
-              <a
-                href="https://replicate.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-foreground"
-              >
-                Replicate API
-              </a>{" "}
-              (GFPGAN)
-            </p>
-          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            © 2025 Thaka — All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

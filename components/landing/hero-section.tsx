@@ -39,7 +39,7 @@ export function HeroSection() {
             variants={fadeInUp}
             transition={{ duration: 0.5 }}
           >
-            Restore Your Old Photos with AI
+            Restore Your Old Photos with Magic Memory
           </motion.h1>
           <motion.p
             className="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground sm:text-xl"
@@ -78,27 +78,28 @@ export function HeroSection() {
             </Link>
           </motion.div>
 
-          {/* Before/After Comparison */}
           <motion.div
-            className="mt-16 w-full max-w-4xl"
+            className="mt-16 w-full max-w-5xl"
             variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
-              <div className="grid grid-cols-2">
-                <div className="relative aspect-[4/3] border-r border-border">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+                <div className="relative aspect-[4/3]">
                   <Image
                     src="/old-damaged-faded-vintage-family-photo-with-scratc.jpg"
                     alt="Before: Old damaged photo"
                     fill
                     className="object-cover"
                     priority
-                    sizes="(max-width: 768px) 50vw, 400px"
+                    sizes="(max-width: 768px) 100vw, 520px"
                   />
                   <div className="absolute bottom-4 left-4 rounded-full bg-background/90 px-3 py-1 text-sm font-medium backdrop-blur">
                     Before
                   </div>
                 </div>
+              </div>
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
                 <div className="relative aspect-[4/3]">
                   <Image
                     src="/restored-clear-sharp-vibrant-family-photo-professi.jpg"
@@ -106,7 +107,7 @@ export function HeroSection() {
                     fill
                     className="object-cover"
                     priority
-                    sizes="(max-width: 768px) 50vw, 400px"
+                    sizes="(max-width: 768px) 100vw, 520px"
                   />
                   <div className="absolute bottom-4 right-4 rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground">
                     After

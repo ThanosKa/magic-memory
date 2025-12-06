@@ -1,9 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
-import { SignUpButton } from "@clerk/nextjs";
+import Link from "next/link";
+import { SignUpButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 
 export function CTASection() {
+  const { isSignedIn, isLoaded } = useUser();
+
   return (
     <section className="bg-primary py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -38,11 +41,19 @@ export function CTASection() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            <SignUpButton mode="modal">
-              <Button variant="secondary" size="lg" className="mt-8 gap-2 px-8">
-                Get Started Free
-              </Button>
-            </SignUpButton>
+            {isLoaded && isSignedIn ? (
+              <Link href="/restore">
+                <Button variant="secondary" size="lg" className="mt-8 gap-2 px-8">
+                  Go to Magic Memory
+                </Button>
+              </Link>
+            ) : (
+              <SignUpButton mode="modal">
+                <Button variant="secondary" size="lg" className="mt-8 gap-2 px-8">
+                  Get Started Free
+                </Button>
+              </SignUpButton>
+            )}
           </motion.div>
         </motion.div>
       </div>
