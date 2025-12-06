@@ -6,7 +6,6 @@ import { markFreeCreditUsed, getRedisClient } from "@/lib/redis"
 import { Ratelimit } from "@upstash/ratelimit"
 import Replicate from "replicate"
 
-// Rate limiting: 10 requests per minute per user
 function getRateLimiter() {
   const redis = getRedisClient()
   if (!redis) return null
@@ -19,12 +18,10 @@ function getRateLimiter() {
   })
 }
 
-// Max image dimensions (GFPGAN works best under 4000px)
 const MAX_IMAGE_DIMENSION = 4000
-const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024
 
 async function validateImageDimensions(buffer: Buffer): Promise<{ valid: boolean; error?: string }> {
-  // Check PNG dimensions from header
   if (buffer[0] === 0x89 && buffer[1] === 0x50) {
     const width = buffer.readUInt32BE(16)
     const height = buffer.readUInt32BE(20)
@@ -34,8 +31,6 @@ async function validateImageDimensions(buffer: Buffer): Promise<{ valid: boolean
     return { valid: true }
   }
 
-  // Check JPEG dimensions - more complex, skip for now and trust client
-  // WebP also skipped - trust client validation
   return { valid: true }
 }
 
@@ -95,7 +90,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
-    // Rate limiting
     const rateLimiter = getRateLimiter()
     if (rateLimiter) {
       const { success, remaining } = await rateLimiter.limit(userId)
@@ -108,7 +102,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Parse FormData
     const formData = await request.formData()
     const file = formData.get("file") as File | null
     const originalFilename = (formData.get("originalFilename") as string) || "photo"
@@ -118,7 +111,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "No file provided" }, { status: 400 })
     }
 
-    // Validate file type
     const validTypes = ["image/jpeg", "image/png", "image/webp"]
     if (!validTypes.includes(file.type)) {
       logger.warn({ userId, fileType: file.type }, "Invalid file type")
@@ -128,7 +120,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate file size
     if (file.size > MAX_FILE_SIZE) {
       logger.warn({ userId, fileSize: file.size }, "File too large")
       return NextResponse.json(
@@ -140,7 +131,6 @@ export async function POST(request: NextRequest) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    // Server-side dimension check for PNG
     const dimensionCheck = await validateImageDimensions(buffer)
     if (!dimensionCheck.valid) {
       logger.warn({ userId, error: dimensionCheck.error }, "Image dimensions exceeded")
@@ -149,7 +139,6 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId, fileSize: file.size, fileType: file.type }, "Restoration request received")
 
-    // Check credits
     const creditCheck = await checkUserCredits(userId)
 
     if (!creditCheck || !creditCheck.has_credits) {
@@ -164,21 +153,17 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
 
-    // Convert to base64 data URL for Replicate
     const base64 = buffer.toString("base64")
     const mimeType = file.type
     const dataUrl = `data:${mimeType};base64,${base64}`
 
-    // Run GFPGAN restoration
     const restoredImageUrl = await runReplicateWithPolling(dataUrl)
 
     logger.info({ userId }, "AI restoration complete")
 
-    // Deduct credit and record restoration
-    // Note: We store the Replicate URL (ephemeral) - user must download before it expires (~1 hour)
     const deductResult = await deductCreditAndRecordRestoration(
       userId,
-      `ephemeral:${originalFilename}`, // We don't store original, just record the filename
+      `ephemeral:${originalFilename}`,
       restoredImageUrl,
       usedFreeCredit
     )

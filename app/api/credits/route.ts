@@ -28,11 +28,9 @@ export async function GET() {
 
     let { data: user, error } = await supabase.from("users").select("*").eq("clerk_user_id", userId).single()
 
-    // Development fallback: Create user if not found (simulates webhook behavior)
     if ((error || !user) && process.env.NODE_ENV === "development") {
       logger.warn({ userId }, "User not found in dev mode, attempting to create")
 
-      // Fetch user details from Clerk API to get email
       try {
         const client = await clerkClient()
         const clerkUser = await client.users.getUser(userId)
@@ -46,7 +44,6 @@ export async function GET() {
           )
         }
 
-        // Create or update user (upsert on email to handle duplicate Clerk accounts with same email)
         const { data: newUser, error: createError } = await supabase
           .from("users")
           .upsert({
@@ -76,7 +73,6 @@ export async function GET() {
         )
       }
     } else if (error || !user) {
-      // Production: User should exist via webhook
       logger.error({ userId, error: error?.message }, "User not found in database")
       return NextResponse.json(
         { success: false, error: "User not found. Please contact support." },
@@ -86,9 +82,8 @@ export async function GET() {
 
 
     let hasFreeDaily = false
-    let paidCredits = 0
+    let     paidCredits = 0
 
-    // Use database as source of truth (same function as restore endpoint)
     const { data: creditData, error: creditError } = await supabase.rpc("check_user_credits", {
       p_user_id: user.id,
     })

@@ -67,7 +67,6 @@ export function CookieConsent() {
                                 </div>
                             </div>
 
-                            {/* Actions */}
                             <div className="flex shrink-0 gap-2 sm:ml-4">
                                 <Button
                                     variant="outline"

@@ -1,12 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server"
 
 export async function proxy(req: NextRequest) {
-  // If Clerk is not configured, allow all requests
   if (!process.env.CLERK_SECRET_KEY || !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
     return NextResponse.next()
   }
 
-  // Dynamically import Clerk middleware only if configured
   try {
     const { clerkMiddleware, createRouteMatcher } = await import("@clerk/nextjs/server")
     const isProtected = createRouteMatcher(["/restore(.*)", "/profile(.*)"])

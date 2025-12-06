@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CI: true
+  NEXT_TELEMETRY_DISABLED: 1
+  NEXT_PUBLIC_APP_URL: http://localhost:3000
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test
+  CLERK_SECRET_KEY: sk_test
+  CLERK_WEBHOOK_SECRET: whsec_test
+  NEXT_PUBLIC_SUPABASE_URL: http://localhost:54321
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: supabase_anon_key
+  SUPABASE_SERVICE_ROLE_KEY: supabase_service_role
+  REPLICATE_API_TOKEN: replicate_api_token
+  UPSTASH_REDIS_REST_URL: https://example.com
+  UPSTASH_REDIS_REST_TOKEN: upstash_token
+  STRIPE_SECRET_KEY: sk_test
+  STRIPE_WEBHOOK_SECRET: whsec_test
+  NEXT_PUBLIC_STRIPE_PRICE_STARTER: price_starter
+  NEXT_PUBLIC_STRIPE_PRICE_GROWTH: price_growth
+  NEXT_PUBLIC_STRIPE_PRICE_PREMIUM: price_premium
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm type-check
+
+      - name: Tests
+        run: pnpm test:run
+
+      - name: Build
+        run: pnpm build
+

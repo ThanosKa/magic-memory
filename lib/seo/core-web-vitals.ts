@@ -1,10 +1,5 @@
 'use client';
 
-/**
- * Core Web Vitals Tracking
- * Monitors LCP, CLS, and INP metrics and sends them to analytics
- */
-
 import { onLCP, onCLS, onINP, type Metric } from 'web-vitals';
 
 type VitalsPayload = {
@@ -16,9 +11,6 @@ type VitalsPayload = {
   navigationType: string;
 };
 
-/**
- * Send vitals data to analytics endpoint
- */
 const sendToAnalytics = (metric: Metric): void => {
   const payload: VitalsPayload = {
     name: metric.name,
@@ -29,12 +21,10 @@ const sendToAnalytics = (metric: Metric): void => {
     navigationType: metric.navigationType,
   };
 
-  // Use sendBeacon if available (doesn't block page unload)
   if (navigator.sendBeacon) {
     const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
     navigator.sendBeacon('/api/vitals', blob);
   } else {
-    // Fallback to fetch
     fetch('/api/vitals', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -43,7 +33,6 @@ const sendToAnalytics = (metric: Metric): void => {
     }).catch(console.error);
   }
 
-  // Also log to console in development
   if (process.env.NODE_ENV === 'development') {
     console.log('[Web Vitals]', metric.name, {
       value: Math.round(metric.value),
@@ -52,10 +41,6 @@ const sendToAnalytics = (metric: Metric): void => {
   }
 };
 
-/**
- * Initialize Core Web Vitals tracking
- * Call this once in your root client component or layout
- */
 export function initWebVitals(): void {
   if (typeof window === 'undefined') return;
 
@@ -68,9 +53,6 @@ export function initWebVitals(): void {
   }
 }
 
-/**
- * Get thresholds for each metric
- */
 export const WEB_VITALS_THRESHOLDS = {
   LCP: {
     good: 2500, // 2.5s

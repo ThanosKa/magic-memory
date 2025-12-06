@@ -32,7 +32,7 @@ const CookieConsent = dynamic(
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap", // Added font-display: swap for performance
+  display: "swap",
   variable: "--font-inter",
 });
 
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
       "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
     images: [
       {
-        url: "/og-image-magic-memory.png",
+        url: "/og-image-restore.png",
         width: 1200,
         height: 630,
         alt: "RestorePhotos - AI Photo Restoration",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     title: "RestorePhotos - Restore Your Old Photos with AI",
     description:
       "Bring your memories back to life with AI-powered photo restoration. Get 1 free restoration daily.",
-    images: ["/og-image-magic-memory.png"],
+    images: ["/og-image-restore.png"],
     creator: "@restorephotos",
   },
   alternates: {

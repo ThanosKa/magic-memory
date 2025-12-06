@@ -1,11 +1,3 @@
-/**
- * SEO Audit Script for RestorePhotos
- *
- * Run with: npx ts-node scripts/seo-audit.ts
- *
- * This script checks all pages for SEO best practices.
- */
-
 import fs from "fs"
 import path from "path"
 

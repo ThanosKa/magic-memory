@@ -20,12 +20,10 @@ export default function NotFound() {
       <Header />
       <main className="flex flex-1 items-center justify-center px-4 py-16">
         <div className="text-center">
-          {/* Large 404 Text */}
           <h1 className="text-9xl font-bold tracking-tighter text-primary/20 select-none">
             404
           </h1>
-          
-          {/* Error Message */}
+
           <div className="mt-4 space-y-2">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               Page Not Found
@@ -35,7 +33,6 @@ export default function NotFound() {
             </p>
           </div>
 
-          {/* Action Buttons */}
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg">
               <Link href="/">
@@ -51,7 +48,6 @@ export default function NotFound() {
             </Button>
           </div>
 
-          {/* Helpful Links */}
           <div className="mt-12">
             <p className="text-sm text-muted-foreground mb-4">
               Looking for something specific?

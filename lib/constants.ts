@@ -1,4 +1,3 @@
-// Credit packages configuration
 export const CREDIT_PACKAGES = {
   starter: {
     name: "Starter",
@@ -52,7 +51,6 @@ export const CREDIT_PACKAGES = {
 
 export type PackageType = keyof typeof CREDIT_PACKAGES;
 
-// App configuration
 export const APP_CONFIG = {
   name: "RestorePhotos",
   description: "Restore your old photos with AI",

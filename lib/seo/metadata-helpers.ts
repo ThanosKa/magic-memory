@@ -1,17 +1,9 @@
-/**
- * SEO Metadata and JSON-LD Schema Helpers
- * Based on Schema.org standards for structured data
- */
-
 type Thing = Record<string, unknown>;
 
 const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://restorephotos.app';
 const SITE_NAME = 'magic-memory';
 const SITE_TITLE = 'RestorePhotos - AI-Powered Photo Restoration';
 
-/**
- * Organization Schema
- */
 export const organizationJsonLd = (
   name: string = SITE_NAME,
   url: string = SITE_URL,
@@ -22,14 +14,9 @@ export const organizationJsonLd = (
   name,
   url,
   logo,
-  sameAs: [
-    // Add social media profiles here when available
-  ],
+  sameAs: [],
 });
 
-/**
- * WebApplication Schema
- */
 export const webApplicationJsonLd = (): Thing => ({
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
@@ -54,9 +41,6 @@ export const webApplicationJsonLd = (): Thing => ({
   ],
 });
 
-/**
- * Breadcrumb List Schema
- */
 export const breadcrumbJsonLd = (items: Array<{ name: string; url: string }>): Thing => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -68,9 +52,6 @@ export const breadcrumbJsonLd = (items: Array<{ name: string; url: string }>): T
   })),
 });
 
-/**
- * Product Schema (for pricing tiers)
- */
 export const productJsonLd = (product: {
   name: string;
   description: string;
@@ -79,7 +60,7 @@ export const productJsonLd = (product: {
   offers: {
     price: number;
     priceCurrency: string;
-    availability: string; // e.g., 'https://schema.org/InStock'
+    availability: string;
   };
 }): Thing => ({
   '@context': 'https://schema.org',
@@ -94,9 +75,6 @@ export const productJsonLd = (product: {
   },
 });
 
-/**
- * Offer Catalog for Pricing Page
- */
 export const offerCatalogJsonLd = (
   offers: Array<{
     name: string;
@@ -125,9 +103,6 @@ export const offerCatalogJsonLd = (
   })),
 });
 
-/**
- * FAQ Page Schema
- */
 export const faqPageJsonLd = (
   faqs: Array<{ question: string; answer: string }>
 ): Thing => ({
@@ -143,25 +118,16 @@ export const faqPageJsonLd = (
   })),
 });
 
-/**
- * Generate canonical URL
- */
 export const getCanonicalUrl = (path: string): string => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${SITE_URL}${cleanPath}`;
 };
 
-/**
- * Generate absolute OG image URL
- */
 export const getOgImageUrl = (imagePath: string = '/og-image-magic-memory.png'): string => {
   if (imagePath.startsWith('http')) return imagePath;
   return `${SITE_URL}${imagePath}`;
 };
 
-/**
- * Default metadata configuration
- */
 export const defaultMetadata = {
   siteName: SITE_NAME,
   siteUrl: SITE_URL,

@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 })
     }
 
-    // Get webhook headers for verification
     const svixId = request.headers.get("svix-id")
     const svixTimestamp = request.headers.get("svix-timestamp")
     const svixSignature = request.headers.get("svix-signature")
@@ -51,7 +50,6 @@ export async function POST(request: NextRequest) {
 
     const body = await request.text()
 
-    // Verify webhook signature
     const webhook = new Webhook(webhookSecret)
     let event: ClerkWebhookEvent
 
@@ -71,7 +69,6 @@ export async function POST(request: NextRequest) {
 
     const supabase = getSupabaseAdminClient()
 
-    // Handle different event types
     switch (event.type) {
         case "user.created": {
             const { id, email_addresses, first_name, last_name, image_url } = event.data

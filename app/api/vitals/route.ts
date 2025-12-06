@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import logger from '@/lib/logger';
 
-/**
- * API endpoint to receive Core Web Vitals metrics
- * Logs vitals data for monitoring and analytics
- */
-
 type VitalsPayload = {
   name: string;
   value: number;
@@ -19,7 +14,6 @@ export async function POST(request: NextRequest) {
   try {
     const payload: VitalsPayload = await request.json();
 
-    // Validate payload
     if (!payload.name || typeof payload.value !== 'number') {
       return NextResponse.json(
         { error: 'Invalid payload' },
@@ -27,7 +21,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log to server (can be extended to send to analytics service)
     logger.info({
       type: 'web-vitals',
       metric: payload.name,
@@ -37,12 +30,6 @@ export async function POST(request: NextRequest) {
       id: payload.id,
       navigationType: payload.navigationType,
     });
-
-    // In production, you might want to:
-    // - Send to Google Analytics
-    // - Send to DataDog, New Relic, etc.
-    // - Store in database for analysis
-    // - Aggregate metrics for dashboards
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
@@ -54,7 +41,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Optional: Handle OPTIONS for CORS
 export async function OPTIONS() {
   return NextResponse.json({}, { status: 200 });
 }

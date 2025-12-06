@@ -62,7 +62,6 @@ export async function POST(request: NextRequest) {
     const creditsToAdd = Number.parseInt(credits, 10)
     const supabase = getSupabaseAdminClient()
 
-    // IDEMPOTENCY CHECK: Check if we already processed this payment
     const { data: existingPurchase } = await supabase
       .from("purchases")
       .select("id")

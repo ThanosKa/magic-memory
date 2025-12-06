@@ -4,186 +4,137 @@
 
 ![magic-memory Banner](/public/og-image.png)
 
-**AI-powered photo restoration that brings your memories back to life**
+AI-powered photo restoration that brings your memories back to life.
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://vercel.com)
+[![CI](https://github.com/thaka/magic-memory/actions/workflows/ci.yml/badge.svg)](https://github.com/thaka/magic-memory/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/thaka/magic-memory?style=social)](https://github.com/thaka/magic-memory/stargazers)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-[Demo](https://magic-memory.app) · [Report Bug](https://github.com/yourusername/magic-memory/issues) · [Request Feature](https://github.com/yourusername/magic-memory/issues)
+[Demo](https://magic-memory.app) · [Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md)
 
 </div>
 
 ---
 
-## 🚀 Overview
+## Overview
 
-**magic-memory** is a modern SaaS application that uses advanced AI to restore old, blurry, or damaged photos. Built with the latest web technologies, it offers a seamless user experience with instant results, secure payments, and a robust credit system.
+magic-memory is a SaaS app that restores old, blurry, or damaged photos using the GFPGAN model on Replicate. It provides instant results, payments, a credit system, and a streamlined UX for uploads, safety checks, and downloads.
 
-## ✨ Features
+## Features
 
-- **AI-Powered Restoration**: Utilizes the GFPGAN model via Replicate API for state-of-the-art face restoration and image enhancement.
-- **Smart Credit System**:
-  - **Free Daily Credits**: Users get 1 free restoration every day (resets at midnight UTC).
-  - **Paid Packages**: Purchase credits that never expire (Starter, Growth, Premium).
-- **Instant Processing**: Get restored photos in 5-15 seconds with real-time status updates.
-- **Interactive Comparison**: Compare original and restored images with a slick slider view.
-- **Safety First**: Client-side NSFW detection ensures platform safety before upload.
-- **Secure Authentication**: Seamless sign-in with Google via Clerk.
-- **Payments**: Integrated Stripe checkout for secure credit purchases.
+- AI restoration via GFPGAN on Replicate.
+- Credit system with daily free credit plus paid packs that never expire.
+- Real-time status updates and fast processing.
+- Interactive before/after comparison slider.
+- Client-side NSFW detection before upload.
+- Authentication with Clerk; payments via Stripe; storage in Supabase.
 
-## 🛠️ Tech Stack
+## Tech stack
 
 | Category | Technology |
 |----------|------------|
-| **Framework** | Next.js 15 (App Router) |
-| **Language** | TypeScript (Strict Mode) |
-| **Styling** | Tailwind CSS 4 + shadcn/ui |
-| **Authentication** | Clerk |
-| **Database** | Supabase (PostgreSQL) |
-| **Storage** | Supabase Storage |
-| **AI Model** | GFPGAN via Replicate API |
-| **Rate Limiting** | Upstash Redis |
-| **Payments** | Stripe |
-| **Logging** | Pino + Pino Pretty |
-| **Data Fetching** | SWR |
-| **Validation** | Zod |
-| **Animations** | Framer Motion |
-| **Deployment** | Vercel |
+| Framework | Next.js 15/16 (App Router) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS 4 + shadcn/ui |
+| Auth | Clerk |
+| Database/Storage | Supabase (PostgreSQL + Storage) |
+| AI | GFPGAN on Replicate |
+| Rate limiting | Upstash Redis |
+| Payments | Stripe |
+| Logging | Pino |
+| Data fetching | SWR |
+| Validation | Zod |
 
-## 🏁 Quick Start
+## Quick start
 
 ### Prerequisites
+- Node.js 20+
+- pnpm
+- Accounts: Clerk, Supabase, Stripe, Replicate, Upstash
 
-- **Node.js** 18+
-- **pnpm** (recommended) or npm
-- Accounts for:
-  - [Clerk](https://clerk.com) (Authentication)
-  - [Supabase](https://supabase.com) (Database & Storage)
-  - [Stripe](https://stripe.com) (Payments)
-  - [Replicate](https://replicate.com) (AI Model)
-  - [Upstash](https://upstash.com) (Redis)
+### Setup
+```bash
+git clone https://github.com/thaka/magic-memory.git
+cd magic-memory
+pnpm install
+cp .env.example .env.local
+# add Clerk, Supabase, Stripe, Replicate, Upstash keys
+```
 
-### Installation
+### Database
+Run the SQL scripts in `scripts/` (in order):
+- `scripts/001_create_users_table.sql`
+- `scripts/002_create_restorations_table.sql`
+- `scripts/003_create_purchases_table.sql`
+- `scripts/004_create_atomic_credit_functions.sql`
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/yourusername/magic-memory.git
-    cd magic-memory
-    ```
+### Run
+```bash
+pnpm dev
+# visit http://localhost:3000
+```
 
-2.  **Install dependencies**
-    ```bash
-    pnpm install
-    ```
-
-3.  **Set up environment variables**
-    ```bash
-    cp .env.example .env.local
-    ```
-    Open `.env.local` and fill in your API keys for Clerk, Supabase, Stripe, Replicate, and Upstash.
-
-4.  **Database Setup**
-    Run the SQL migration scripts located in the `scripts/` folder in your Supabase SQL Editor. Execute them in order:
-    - `scripts/001_create_users_table.sql`
-    - ... through `scripts/005_create_atomic_credit_functions.sql`
-
-5.  **Start development server**
-    ```bash
-    pnpm dev
-    ```
-    Open [http://localhost:3000](http://localhost:3000) to view the app.
-
-## 📂 Project Structure
+## Project structure
 
 ```
 magic-memory/
-├── app/                    # Next.js App Router pages
-│   ├── api/               # API routes (credits, restore, stripe, upload)
-│   ├── pricing/           # Pricing page
-│   ├── restore/           # Restore page (protected)
-│   └── page.tsx           # Landing page
-├── components/            # React components
-│   ├── landing/          # Landing page sections
-│   ├── pricing/          # Pricing components
-│   ├── restore/          # Restore tool components
-│   ├── providers/        # Context providers
-│   └── ui/               # shadcn/ui components
-├── lib/                   # Utilities and configurations
-│   ├── supabase/         # Supabase clients & transactions
-│   ├── validations/      # Zod schemas
-│   ├── constants.ts      # App constants
-│   ├── logger.ts         # Pino logger configuration
-│   └── redis.ts          # Upstash Redis client
-├── scripts/              # Database migrations & SEO audit
-├── .cursor/              # Cursor IDE rules
-└── agents.md             # AI agent guidelines
+├── app/                # Next.js App Router pages and APIs
+├── components/         # UI and feature components
+├── lib/                # Supabase clients, Redis, logger, validations
+├── scripts/            # Database migrations and SEO audit
+├── __tests__/          # Vitest coverage for APIs and libs
+└── .github/            # CI, issue/PR templates, funding
 ```
 
-## 📜 Scripts
+## Commands
 
-| Command | Purpose | When to Use |
-|---------|---------|-------------|
-| `pnpm dev` | Start development server with hot reload  | During development |
-| `pnpm build` | Build optimized production bundle (includes type-checking) | Before deployment |
-| `pnpm start` | Start production server | After `pnpm build` |
-| `pnpm lint` | Run ESLint to check code quality and best practices | Before commits |
-| `pnpm type-check` | Run TypeScript compiler to verify types without emitting files | Before commits / CI |
-| `pnpm run seo:audit` | Run comprehensive SEO audit on all pages | SEO optimization |
+| Command | Purpose |
+|---------|---------|
+| `pnpm dev` | Start dev server with hot reload |
+| `pnpm lint` | ESLint quality gate |
+| `pnpm type-check` | TypeScript check without emit |
+| `pnpm test:run` | Run Vitest in CI mode |
+| `pnpm build` | Production build (includes type-check) |
+| `pnpm start` | Start production server after build |
+| `pnpm run seo:audit` | SEO audit script |
 
-**Pre-commit Checklist:** Run `pnpm lint` and `pnpm type-check` before committing to catch issues early.
+Pre-commit: run `pnpm lint` and `pnpm type-check`.
 
-## 🔍 SEO & Performance
+## Architecture at a glance
 
-- **Comprehensive SEO**: All pages have proper metadata (title, description, canonical URLs, OpenGraph, Twitter Cards)
-- **Structured Data**: JSON-LD schemas for better search engine understanding
-- **Core Web Vitals**: Real-time tracking of LCP, CLS, and INP metrics
-- **Optimized Images**: Next.js Image component with WebP support
-- **Custom 404 Page**: Helpful, branded error page
-- **robots.txt**: Configured for optimal crawling
-- **SEO Audit Script**: Automated checks for SEO best practices
+- **App Router** pages under `app/`; API routes live in `app/api/`.
+- **Auth** via Clerk middleware in `proxy.ts`; protected routes include `/restore` and `/profile`.
+- **Credits** tracked in Supabase with RPC functions; free daily credit resets and paid credits never expire.
+- **Storage** uses Supabase Storage; rate limiting via Upstash Redis.
+- **AI restore** calls Replicate GFPGAN; results stored and returned to the user.
+- **Logging** with Pino; validations via Zod.
 
-## 💳 Credit System
+## CI
 
-| Type | Credits | Price | Expiry |
-|------|---------|-------|--------|
-| **Free** | 1/day | $0 | Resets at midnight UTC |
-| **Starter** | 100 | $9 | Never |
-| **Growth** | 350 | $19 | Never |
-| **Premium** | 1000 | $29 | Never |
+GitHub Actions (`.github/workflows/ci.yml`) runs pnpm lint, type-check, tests, and build on Node 20 and 22. Secrets are stubbed with safe placeholders.
 
-**Logic**: The system automatically prioritizes free credits. If a user has a free credit available, it will be used before their paid balance.
+## Contributing
 
-## 🤝 Contributing
+We welcome contributions. Read the [Contributing Guide](CONTRIBUTING.md) and follow the [Code of Conduct](CODE_OF_CONDUCT.md). Use the issue templates for bugs and feature requests, and the PR template when submitting changes.
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+## Security
 
-1.  Fork the repository
-2.  Create a feature branch (`git checkout -b feature/amazing-feature`)
-3.  Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4.  Push to the branch (`git push origin feature/amazing-feature`)
-5.  Open a Pull Request
+Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Do not open public issues for security reports.
 
-## 📄 License
+## Funding
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+Support the project: [Buy Me a Coffee](https://buymeacoffee.com/thaka).
 
-## 🙏 Acknowledgments
+## License
 
-- [GFPGAN](https://github.com/TencentARC/GFPGAN) for the amazing face restoration model
-- [Replicate](https://replicate.com) for hosting the AI model
-- [shadcn/ui](https://ui.shadcn.com) for beautiful UI components
-- [Vercel](https://vercel.com) for hosting and infrastructure
+Apache License 2.0. See [LICENSE](LICENSE).
 
----
+## Acknowledgments
 
-<div align="center">
-
-**[⬆ Back to Top](#magic-memory)**
-
-Made with ❤️ by the magic-memory Team
-
-</div>
+- [GFPGAN](https://github.com/TencentARC/GFPGAN)
+- [Replicate](https://replicate.com)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Vercel](https://vercel.com)
