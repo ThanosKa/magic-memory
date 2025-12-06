@@ -1,5 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest"
-import { NextResponse } from "next/server"
+import { describe, it, expect, vi } from "vitest"
 import { z } from "zod"
 import {
     parseRequestBody,

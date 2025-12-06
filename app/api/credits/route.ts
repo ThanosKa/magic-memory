@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import logger from "@/lib/logger";
-import { hasUsedFreeCredit, getRedisClient } from "@/lib/redis";
 import { z } from "zod";
 
 const creditResponseSchema = z.object({
@@ -29,11 +28,12 @@ export async function GET() {
 
     const supabase = getSupabaseAdminClient();
 
-    let { data: user, error } = await supabase
+    const { data: userData, error } = await supabase
       .from("users")
       .select("*")
       .eq("clerk_user_id", userId)
       .single();
+    let user = userData;
 
     if ((error || !user) && process.env.NODE_ENV === "development") {
       logger.warn(

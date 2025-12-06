@@ -4,18 +4,40 @@ import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants"
 import logger from "@/lib/logger"
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-11-17.clover",
-})
+function getStripeClient() {
+  const secretKey = process.env.STRIPE_SECRET_KEY
+
+  if (!secretKey) {
+    throw new Error("STRIPE_SECRET_KEY is not configured")
+  }
+
+  return new Stripe(secretKey, {
+    apiVersion: "2025-11-17.clover",
+  })
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.text()
-  const signature = request.headers.get("stripe-signature")!
+  const signature = request.headers.get("stripe-signature")
+
+  if (!signature) {
+    logger.error("Missing Stripe signature header")
+    return NextResponse.json({ error: "Missing stripe signature" }, { status: 400 })
+  }
+
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
+
+  if (!webhookSecret) {
+    logger.error("STRIPE_WEBHOOK_SECRET is not configured")
+    return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 })
+  }
+
+  const stripe = getStripeClient()
 
   let event: Stripe.Event
 
   try {
-    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)
+    event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
     logger.info({ eventType: event.type, eventId: event.id }, "Webhook received")
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error"
@@ -103,7 +125,7 @@ export async function POST(request: NextRequest) {
       user_id: userId,
       stripe_payment_id: paymentIntent,
       credits_purchased: creditsToAdd,
-      amount_paid: session.amount_total!,
+      amount_paid: session.amount_total ?? 0,
       package_type: packageType,
     })
 

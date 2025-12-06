@@ -206,8 +206,8 @@ function findPages(dir: string, pages: string[] = []): string[] {
 }
 
 function runAudit() {
-  console.log("\n🔍 Magic Memory SEO Audit\n");
-  console.log("=".repeat(50));
+  console.warn("\n🔍 Magic Memory SEO Audit\n");
+  console.warn("=".repeat(50));
 
   const appDir = path.join(process.cwd(), "app");
   const pages = findPages(appDir);
@@ -221,39 +221,39 @@ function runAudit() {
     if (!result) continue;
 
     const relativePath = path.relative(process.cwd(), result.file);
-    console.log(`\n📄 ${relativePath}`);
+    console.warn(`\n📄 ${relativePath}`);
 
     if (result.failed.length === 0 && result.warnings.length === 0) {
-      console.log("   ✅ All checks passed!");
+      console.warn("   ✅ All checks passed!");
     }
 
     for (const fail of result.failed) {
-      console.log(`   ❌ ${fail}`);
+      console.warn(`   ❌ ${fail}`);
       totalFailed++;
     }
 
     for (const warn of result.warnings) {
-      console.log(`   ⚠️  ${warn}`);
+      console.warn(`   ⚠️  ${warn}`);
       totalWarnings++;
     }
 
     totalPassed += result.passed.length;
   }
 
-  console.log("\n" + "=".repeat(50));
-  console.log("\n📊 Summary:");
-  console.log(`   ✅ Passed: ${totalPassed}`);
-  console.log(`   ❌ Failed: ${totalFailed}`);
-  console.log(`   ⚠️  Warnings: ${totalWarnings}`);
+  console.warn("\n" + "=".repeat(50));
+  console.warn("\n📊 Summary:");
+  console.warn(`   ✅ Passed: ${totalPassed}`);
+  console.warn(`   ❌ Failed: ${totalFailed}`);
+  console.warn(`   ⚠️  Warnings: ${totalWarnings}`);
 
   if (totalFailed > 0) {
-    console.log("\n❌ SEO audit failed. Please fix the errors above.");
+    console.error("\n❌ SEO audit failed. Please fix the errors above.");
     process.exit(1);
   } else if (totalWarnings > 0) {
-    console.log("\n⚠️  SEO audit passed with warnings.");
+    console.warn("\n⚠️  SEO audit passed with warnings.");
     process.exit(0);
   } else {
-    console.log("\n✅ SEO audit passed!");
+    console.warn("\n✅ SEO audit passed!");
     process.exit(0);
   }
 }

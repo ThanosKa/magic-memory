@@ -12,13 +12,6 @@ const Header = dynamic(
   }
 );
 
-const Footer = dynamic(
-  () => import("@/components/footer").then((m) => m.Footer),
-  {
-    ssr: true,
-  }
-);
-
 const RestoreUploader = dynamic(
   () =>
     import("@/components/restore/restore-uploader").then(

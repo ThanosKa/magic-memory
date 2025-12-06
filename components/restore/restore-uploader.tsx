@@ -1,38 +1,25 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
-  Upload,
-  X,
   Download,
   ImageIcon,
-  Coins,
   SlidersHorizontal,
   LayoutGrid,
   RefreshCw,
-  FileText,
-  FileIcon,
-  TriangleAlert,
   CloudUpload,
 } from "lucide-react";
 import Image from "next/image";
 import useSWR, { mutate } from "swr";
 import { ImageComparisonSlider } from "./image-comparison-slider";
 import { ErrorAlert, type ErrorType } from "@/components/ui/error-alert";
-import {
-  ProgressLoading,
-  CreditsSkeleton,
-} from "@/components/ui/loading-states";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-type ViewMode = "slider" | "side-by-side";
 type RestorationStage = "idle" | "restoring" | "complete";
 type ImageDimensions = { width: number; height: number };
 
@@ -73,40 +60,49 @@ export function RestoreUploader() {
     type: ErrorType;
     message?: string;
   } | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>("side-by-side");
   const [originalFilename, setOriginalFilename] = useState<string>("photo");
   const [imageDimensions, setImageDimensions] =
     useState<ImageDimensions | null>(null);
 
-  const { data: creditsData, isLoading: isLoadingCredits } = useSWR(
-    "/api/credits",
-    fetcher
-  );
+  const { data: creditsData } = useSWR("/api/credits", fetcher);
   const totalCredits = creditsData?.data?.totalCredits ?? 0;
   const freeResetTime = creditsData?.data?.freeResetTime;
   const hasCredits = totalCredits > 0;
 
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval> | null = null;
+  const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(
+    null
+  );
 
-    if (stage === "restoring") {
-      setProgress((prev) => (prev < 5 ? 5 : prev));
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          const target = 95;
-          if (prev >= target) return prev;
-          const delta = Math.max(0.5, (target - prev) * 0.08);
-          return Math.min(prev + delta, target);
-        });
-      }, 200);
-    } else if (stage === "complete") {
-      setProgress(100);
+  const clearProgressInterval = useCallback(() => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+      progressIntervalRef.current = null;
     }
+  }, []);
 
+  const startRestoringProgress = useCallback(() => {
+    clearProgressInterval();
+    setProgress((prev) => (prev < 5 ? 5 : prev));
+    progressIntervalRef.current = setInterval(() => {
+      setProgress((prev) => {
+        const target = 95;
+        if (prev >= target) return prev;
+        const delta = Math.max(0.5, (target - prev) * 0.08);
+        return Math.min(prev + delta, target);
+      });
+    }, 200);
+  }, [clearProgressInterval]);
+
+  const completeProgress = useCallback(() => {
+    clearProgressInterval();
+    setProgress(100);
+  }, [clearProgressInterval]);
+
+  useEffect(() => {
     return () => {
-      if (interval) clearInterval(interval);
+      clearProgressInterval();
     };
-  }, [stage]);
+  }, [clearProgressInterval]);
 
   const onDrop = useCallback(
     async (acceptedFiles: File[], rejectedFiles: unknown[]) => {
@@ -174,7 +170,7 @@ export function RestoreUploader() {
 
     setStage("restoring");
     setError(null);
-    setProgress(5);
+    startRestoringProgress();
 
     try {
       const formData = new FormData();
@@ -198,13 +194,14 @@ export function RestoreUploader() {
         } else {
           setError({ type: "generic", message: FRIENDLY_RESTORE_ERROR });
         }
-        setProgress(100);
+        completeProgress();
         setStage("idle");
         return;
       }
 
       setRestoredImage(restoreData.data.restoredImageUrl);
       setStage("complete");
+      completeProgress();
       mutate("/api/credits");
     } catch (err) {
       console.error("Restore error", err);
@@ -212,12 +209,13 @@ export function RestoreUploader() {
         type: "generic",
         message: FRIENDLY_RESTORE_ERROR,
       });
-      setProgress(100);
+      completeProgress();
       setStage("idle");
     }
   };
 
   const handleRestoreAnother = () => {
+    clearProgressInterval();
     if (preview) {
       URL.revokeObjectURL(preview);
     }
@@ -233,6 +231,7 @@ export function RestoreUploader() {
   };
 
   const handleClear = () => {
+    clearProgressInterval();
     if (preview) {
       URL.revokeObjectURL(preview);
     }
@@ -266,7 +265,7 @@ export function RestoreUploader() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-    } catch (_err) {
+    } catch {
       const link = document.createElement("a");
       link.href = restoredImage;
       link.download = `${originalFilename}-restored.png`;
@@ -279,6 +278,8 @@ export function RestoreUploader() {
     imageDimensions && imageDimensions.height
       ? imageDimensions.width / imageDimensions.height
       : 1;
+  const displayWidth = imageDimensions?.width ?? 1200;
+  const displayHeight = imageDimensions?.height ?? 800;
   const comparisonContainerClass = "w-full max-w-7xl mx-auto";
 
   return (
@@ -355,11 +356,7 @@ export function RestoreUploader() {
 
           {restoredImage && (
             <div className="flex justify-center">
-              <Tabs
-                defaultValue="side-by-side"
-                className="w-full max-w-4xl"
-                onValueChange={(val) => setViewMode(val as ViewMode)}
-              >
+                <Tabs defaultValue="side-by-side" className="w-full max-w-4xl">
                 <div className="flex justify-center">
                   <TabsList className="grid w-full max-w-[400px] grid-cols-2">
                     <TabsTrigger
@@ -405,10 +402,13 @@ export function RestoreUploader() {
                               Before
                             </div>
                           )}
-                          <img
+                          <Image
                             src={preview || "/placeholder.svg"}
                             alt="Original photo"
+                            width={displayWidth}
+                            height={displayHeight}
                             className="h-auto w-full rounded-lg"
+                            unoptimized
                           />
                         </div>
 
@@ -417,10 +417,13 @@ export function RestoreUploader() {
                             <div className="absolute right-4 top-4 z-10 rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground shadow-lg">
                               After
                             </div>
-                            <img
+                            <Image
                               src={restoredImage || "/placeholder.svg"}
                               alt="Restored photo"
+                              width={displayWidth}
+                              height={displayHeight}
                               className="h-auto w-full rounded-lg"
+                              unoptimized
                             />
                           </div>
                         )}
@@ -436,10 +439,13 @@ export function RestoreUploader() {
             <div className={comparisonContainerClass}>
               <div className="flex justify-center">
                 <div className="relative max-w-md w-full">
-                  <img
+                  <Image
                     src={preview || "/placeholder.svg"}
                     alt="Original photo"
-                    className="h-auto w- rounded-lg"
+                    width={displayWidth}
+                    height={displayHeight}
+                    className="h-auto w-full rounded-lg"
+                    unoptimized
                   />
 
                   {isProcessing && (

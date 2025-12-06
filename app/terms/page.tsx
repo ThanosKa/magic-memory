@@ -107,7 +107,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-foreground">7. Limitation of Liability</h2>
               <p className="mt-2">
-                Magic Memory is provided "as is" without warranties of any kind. We are not liable for any damages
+                Magic Memory is provided &quot;as is&quot; without warranties of any kind. We are not liable for any damages
                 arising from the use of our service.
               </p>
             </section>

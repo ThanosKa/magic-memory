@@ -7,9 +7,17 @@ import { createCheckoutRequestSchema } from "@/lib/validations/api";
 import { CREDIT_PACKAGES } from "@/lib/constants";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-11-17.clover",
-});
+function getStripeClient() {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+
+  if (!secretKey) {
+    throw new Error("STRIPE_SECRET_KEY is not configured");
+  }
+
+  return new Stripe(secretKey, {
+    apiVersion: "2025-11-17.clover",
+  });
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -70,6 +78,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const stripe = getStripeClient();
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
