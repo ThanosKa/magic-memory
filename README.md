@@ -31,7 +31,7 @@
 ## 📸 Screenshot
 
 <div align="center">
-  <img src="./public/hero.png" alt="Magic Memory restored photo preview" width="90%" />
+  <img src="./public/hero.png" alt="Magic Memory hero section" width="90%" />
 </div>
 
 ---
