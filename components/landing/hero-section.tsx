@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Highlighter } from "@/components/ui/highlighter";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -39,7 +40,10 @@ export function HeroSection() {
             variants={fadeInUp}
             transition={{ duration: 0.5 }}
           >
-            Restore Your Old Photos with Magic Memory
+            Restore Your Old Photos{" "}
+            <Highlighter action="highlight" color="#87CEFA">
+              Using AI
+            </Highlighter>
           </motion.h1>
           <motion.p
             className="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground sm:text-xl"
@@ -94,7 +98,7 @@ export function HeroSection() {
                     priority
                     sizes="(max-width: 768px) 100vw, 520px"
                   />
-                  <div className="absolute bottom-4 left-4 rounded-full bg-background/90 px-3 py-1 text-sm font-medium backdrop-blur">
+                  <div className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-sm font-medium backdrop-blur">
                     Before
                   </div>
                 </div>
@@ -109,7 +113,7 @@ export function HeroSection() {
                     priority
                     sizes="(max-width: 768px) 100vw, 520px"
                   />
-                  <div className="absolute bottom-4 right-4 rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground">
+                  <div className="absolute right-4 top-4 rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground">
                     After
                   </div>
                 </div>
