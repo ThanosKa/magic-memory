@@ -9,7 +9,6 @@
 [![shadcn/ui](https://img.shields.io/badge/shadcn/ui-radix-8a3ffc)](https://ui.shadcn.com/)
 [![Replicate](https://img.shields.io/badge/Replicate-GFPGAN-0f9d58)](https://replicate.com)
 [![pnpm](https://img.shields.io/badge/pnpm-%F0%9F%8F%AF-orange?logo=pnpm)](https://pnpm.io/)
-[![CI](https://github.com/thaka/magic-memory/actions/workflows/ci.yml/badge.svg)](https://github.com/thaka/magic-memory/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/thaka/magic-memory?style=social)](https://github.com/thaka/magic-memory/stargazers)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
@@ -23,6 +22,12 @@
 </div>
 
 ---
+
+## 📸 Screenshots
+
+<div align="center">
+  <img src="./public/og-image-restore.png" alt="Magic Memory restored photo preview" width="90%" />
+</div>
 
 ## What It Does
 
@@ -38,12 +43,6 @@
 - Fast path to production: App Router, server-first patterns, and SWR for data.
 - Safe by default: NSFW prefiltering and rate limiting via Upstash Redis.
 - Clear pricing: free daily credit to try, paid credits that stay in your account.
-
-## 📸 Screenshots
-
-<div align="center">
-  <img src="./public/og-image-restore.png" alt="Magic Memory restored photo preview" width="90%" />
-</div>
 
 ## Tech stack
 
@@ -114,10 +113,15 @@ Pre-commit: run `pnpm lint` and `pnpm type-check`.
 - `pnpm type-check` — TypeScript validation without emit.
 - `pnpm test:run` — Run the Vitest suite used in CI.
 
-## Deployment
+## Deploy Your Own (Vercel)
 
-- One-click: use the Vercel button above (defaults to `next build` output). Add all required environment variables (Clerk, Supabase, Stripe, Replicate, Upstash) in the Vercel dashboard.
-- Manual: `pnpm build` then `pnpm start` on Node 20+. Ensure your host provides the same environment variables and Supabase/Redis endpoints.
+- Click the Vercel button above for one-click deploy (uses `next build` output).
+- Add all required environment variables (Clerk, Supabase, Stripe, Replicate, Upstash) in the Vercel dashboard before first run.
+
+## Manual Deployment
+
+- Build with `pnpm build` and run with `pnpm start` on Node 20+.
+- Provide the same environment variables and Supabase/Redis endpoints as in `.env.example`.
 
 ## Project structure
 
@@ -152,9 +156,11 @@ We welcome contributions. Read the [Contributing Guide](CONTRIBUTING.md) and fol
 
 Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Do not open public issues for security reports.
 
-## Funding
+## Contact & Support
 
-Support the project: [Buy Me a Coffee](https://buymeacoffee.com/thaka).
+- Twitter: [@KazakisThanos](https://x.com/KazakisThanos)
+- Email: kazakis.th@gmail.com
+- Buy Me a Coffee: [https://buymeacoffee.com/thaka](https://buymeacoffee.com/thaka)
 
 ## License
 
