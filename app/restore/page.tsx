@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
@@ -8,7 +9,6 @@ const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-6" />,
   }
 );
 
@@ -16,7 +16,6 @@ const Footer = dynamic(
   () => import("@/components/footer").then((m) => m.Footer),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-12" />,
   }
 );
 
@@ -27,7 +26,6 @@ const RestoreUploader = dynamic(
     ),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -87,13 +85,30 @@ export default async function RestorePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
-      <main className="flex flex-1 items-center justify-center py-12 sm:py-16">
-        <div className="mx-auto flex w-full max-w-4xl justify-center px-4 sm:px-6 lg:px-8">
-          <RestoreUploader />
+      <Suspense fallback={<RestorePageFallback />}>
+        <Header />
+        <main className="flex flex-1 items-center justify-center py-12 sm:py-16">
+          <div className="mx-auto flex w-full max-w-4xl justify-center px-4 sm:px-6 lg:px-8">
+            <RestoreUploader />
+          </div>
+        </main>
+        <FooterMinimal />
+      </Suspense>
+    </div>
+  );
+}
+
+function RestorePageFallback() {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <main className="flex flex-1 items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <LoadingSpinner size="lg" />
+          <p className="text-sm text-muted-foreground">
+            Loading restore tools...
+          </p>
         </div>
       </main>
-      <FooterMinimal />
     </div>
   );
 }

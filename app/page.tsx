@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
 import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers";
@@ -7,7 +8,6 @@ const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-6" />,
   }
 );
 
@@ -15,7 +15,6 @@ const Footer = dynamic(
   () => import("@/components/footer").then((m) => m.Footer),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-12" />,
   }
 );
 
@@ -23,7 +22,6 @@ const HeroSection = dynamic(
   () => import("@/components/landing/hero-section").then((m) => m.HeroSection),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -31,7 +29,6 @@ const SocialProof = dynamic(
   () => import("@/components/landing/social-proof").then((m) => m.SocialProof),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -42,7 +39,6 @@ const FeaturesSection = dynamic(
     ),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -53,7 +49,6 @@ const TestimonialsSection = dynamic(
     ),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -64,7 +59,6 @@ const HowItWorksSection = dynamic(
     ),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -72,7 +66,6 @@ const FAQSection = dynamic(
   () => import("@/components/landing/faq-section").then((m) => m.FAQSection),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -80,7 +73,6 @@ const CTASection = dynamic(
   () => import("@/components/landing/cta-section").then((m) => m.CTASection),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -134,18 +126,28 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
       />
-      <Header />
-      <main className="flex-1">
-        <h1 className="sr-only">RestorePhotos - AI Photo Restoration</h1>
-        <HeroSection />
-        <SocialProof />
-        <FeaturesSection />
-        <TestimonialsSection />
-        <HowItWorksSection />
-        <FAQSection />
-        <CTASection />
-      </main>
-      <Footer />
+      <Suspense fallback={<LandingFallback />}>
+        <Header />
+        <main className="flex-1">
+          <h1 className="sr-only">RestorePhotos - AI Photo Restoration</h1>
+          <HeroSection />
+          <SocialProof />
+          <FeaturesSection />
+          <TestimonialsSection />
+          <HowItWorksSection />
+          <FAQSection />
+          <CTASection />
+        </main>
+        <Footer />
+      </Suspense>
+    </div>
+  );
+}
+
+function LandingFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <LoadingSpinner size="lg" />
     </div>
   );
 }

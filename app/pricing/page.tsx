@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { auth } from "@clerk/nextjs/server";
@@ -12,7 +13,6 @@ const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-6" />,
   }
 );
 
@@ -20,7 +20,6 @@ const Footer = dynamic(
   () => import("@/components/footer").then((m) => m.Footer),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-12" />,
   }
 );
 
@@ -29,7 +28,6 @@ const PricingCards = dynamic(
     import("@/components/pricing/pricing-cards").then((m) => m.PricingCards),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-10" />,
   }
 );
 
@@ -106,21 +104,31 @@ export default async function PricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
-      <main className="flex-1 py-20 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Simple, transparent pricing
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Choose the plan that works best for you. Credits never expire.
-            </p>
+      <Suspense fallback={<PricingPageFallback />}>
+        <Header />
+        <main className="flex-1 py-20 sm:py-32">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                Simple, transparent pricing
+              </h1>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Choose the plan that works best for you. Credits never expire.
+              </p>
+            </div>
+            <PricingCards isSignedIn={!!userId} />
           </div>
-          <PricingCards isSignedIn={!!userId} />
-        </div>
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </Suspense>
+    </div>
+  );
+}
+
+function PricingPageFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <LoadingSpinner size="lg" />
     </div>
   );
 }

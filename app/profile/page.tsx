@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import dynamic from "next/dynamic"
 import { Metadata } from "next"
 import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
@@ -5,7 +6,6 @@ import { LoadingSpinner } from "@/components/ui/loading-states"
 
 const UserProfile = dynamic(() => import("@clerk/nextjs").then((m) => m.UserProfile), {
   ssr: true,
-  loading: () => <LoadingSpinner className="mx-auto my-6" />,
 })
 
 export const metadata: Metadata = {
@@ -58,16 +58,24 @@ export default function ProfilePage() {
                     Your Profile
                 </h1>
                 <div className="rounded-xl border border-border bg-card p-2 shadow-sm">
-                    <UserProfile
-                        appearance={{
-                            elements: {
-                                rootBox: "w-full",
-                                card: "shadow-none border-none bg-transparent",
-                                navbar: "hidden",
-                                pageScrollBox: "p-0",
-                            },
-                        }}
-                    />
+                    <Suspense
+                        fallback={
+                            <div className="flex items-center justify-center py-12">
+                                <LoadingSpinner size="lg" />
+                            </div>
+                        }
+                    >
+                        <UserProfile
+                            appearance={{
+                                elements: {
+                                    rootBox: "w-full",
+                                    card: "shadow-none border-none bg-transparent",
+                                    navbar: "hidden",
+                                    pageScrollBox: "p-0",
+                                },
+                            }}
+                        />
+                    </Suspense>
                 </div>
             </div>
         </main>

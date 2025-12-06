@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { LoadingSpinner } from "@/components/ui/loading-states";
 import { AnalyticsProvider } from "@/app/analytics-provider";
 
 const ConditionalClerkProvider = dynamic(
@@ -13,7 +12,6 @@ const ConditionalClerkProvider = dynamic(
     ),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-6" />,
   }
 );
 
@@ -22,7 +20,6 @@ const WebVitalsTracker = dynamic(
     import("@/components/web-vitals-tracker").then((m) => m.WebVitalsTracker),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-4" />,
   }
 );
 
@@ -30,7 +27,6 @@ const CookieConsent = dynamic(
   () => import("@/components/cookie-consent").then((m) => m.CookieConsent),
   {
     ssr: true,
-    loading: () => <LoadingSpinner className="mx-auto my-4" />,
   }
 );
 

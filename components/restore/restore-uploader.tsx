@@ -36,6 +36,9 @@ type ViewMode = "slider" | "side-by-side";
 type RestorationStage = "idle" | "restoring" | "complete";
 type ImageDimensions = { width: number; height: number };
 
+const FRIENDLY_RESTORE_ERROR =
+  "We couldn't restore your photo this time. Please try again shortly.";
+
 // Max image dimensions (GFPGAN limit)
 const MAX_IMAGE_DIMENSION = 4000;
 
@@ -85,21 +88,25 @@ export function RestoreUploader() {
   const hasCredits = totalCredits > 0;
 
   useEffect(() => {
+    let interval: ReturnType<typeof setInterval> | null = null;
+
     if (stage === "restoring") {
-      setProgress(0);
-      const interval = setInterval(() => {
+      setProgress((prev) => (prev < 5 ? 5 : prev));
+      interval = setInterval(() => {
         setProgress((prev) => {
-          if (prev >= 90) {
-            clearInterval(interval);
-            return 90;
-          }
-          return prev + Math.random() * 6 + 2; // 2-8% per second, reaches ~90% in ~15 seconds
+          const target = 95;
+          if (prev >= target) return prev;
+          const delta = Math.max(0.5, (target - prev) * 0.08);
+          return Math.min(prev + delta, target);
         });
-      }, 800); // Faster updates every 800ms
-      return () => clearInterval(interval);
+      }, 200);
     } else if (stage === "complete") {
       setProgress(100);
     }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [stage]);
 
   const onDrop = useCallback(
@@ -169,6 +176,7 @@ export function RestoreUploader() {
 
     setStage("restoring");
     setError(null);
+    setProgress(5);
 
     try {
       const formData = new FormData();
@@ -183,13 +191,16 @@ export function RestoreUploader() {
       const restoreData = await restoreResponse.json();
 
       if (!restoreData.success) {
+        console.error("Restore failed", restoreData.error);
+
         if (restoreData.error?.includes("No credits")) {
           setError({ type: "out_of_credits", message: restoreData.error });
         } else if (restoreResponse.status === 401) {
           setError({ type: "auth_error" });
         } else {
-          setError({ type: "generic", message: restoreData.error });
+          setError({ type: "generic", message: FRIENDLY_RESTORE_ERROR });
         }
+        setProgress(100);
         setStage("idle");
         return;
       }
@@ -198,10 +209,12 @@ export function RestoreUploader() {
       setStage("complete");
       mutate("/api/credits");
     } catch (err) {
+      console.error("Restore error", err);
       setError({
         type: "generic",
-        message: err instanceof Error ? err.message : "Something went wrong",
+        message: FRIENDLY_RESTORE_ERROR,
       });
+      setProgress(100);
       setStage("idle");
     }
   };
