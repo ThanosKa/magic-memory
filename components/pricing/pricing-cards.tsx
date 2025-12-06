@@ -72,14 +72,14 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
     >
       {/* Free Tier */}
       <motion.div variants={cardVariants}>
-        <Card className="relative border-border h-full">
+        <Card className="relative border-border h-full flex flex-col">
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
               <h3 className="text-xl font-semibold">Free</h3>
             </div>
             <div className="mt-4">
-              <span className="text-4xl font-bold">$0</span>
+              <span className="text-4xl font-bold">€0</span>
               <span className="text-muted-foreground">/day</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -106,7 +106,7 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
               </li>
             </ul>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="mt-auto">
             {isSignedIn ? (
               <Button
                 variant="outline"
@@ -137,13 +137,9 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
           (typeof CREDIT_PACKAGES)[PackageType]
         ][]
       ).map(([key, pkg]) => (
-        <motion.div
-          key={key}
-          variants={cardVariants}
-          whileHover={{ y: -4, transition: { duration: 0.2 } }}
-        >
+        <motion.div key={key} variants={cardVariants}>
           <Card
-            className={`relative h-full ${
+            className={`relative h-full flex flex-col ${
               pkg.popular
                 ? "border-primary shadow-lg ring-1 ring-primary"
                 : "border-border"
@@ -178,7 +174,7 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
                 ))}
               </ul>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="mt-auto">
               {isSignedIn ? (
                 <Button
                   className="w-full"

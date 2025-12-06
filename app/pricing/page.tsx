@@ -43,19 +43,19 @@ const PRICING_OFFERS = [
   {
     name: "Starter Plan",
     description: "100 restoration credits that never expire",
-    price: 9,
+    price: 9.99,
     credits: 100,
   },
   {
     name: "Growth Plan",
     description: "350 restoration credits that never expire",
-    price: 19,
+    price: 19.99,
     credits: 350,
   },
   {
     name: "Premium Plan",
     description: "1000 restoration credits that never expire",
-    price: 29,
+    price: 29.99,
     credits: 1000,
   },
 ];
@@ -63,14 +63,14 @@ const PRICING_OFFERS = [
 export const metadata: Metadata = {
   title: "Pricing - Get Credits for Photo Restoration",
   description:
-    "Choose the perfect plan for your photo restoration needs. Get 1 free restoration daily or purchase credits that never expire. Starter from $9, Premium package available.",
+    "Choose the perfect plan for your photo restoration needs. Get 1 free restoration daily or purchase credits that never expire. Starter from €9.99, Premium package available.",
   alternates: {
     canonical: getCanonicalUrl("/pricing"),
   },
   openGraph: {
     title: "Pricing - Photo Restoration Credits",
     description:
-      "Affordable photo restoration with AI. Free daily credit or choose from our credit packages.",
+      "Affordable photo restoration with AI. Free daily credit or choose from our euro-priced credit packages.",
     url: getCanonicalUrl("/pricing"),
     type: "website",
     images: [
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pricing - Photo Restoration Credits",
     description:
-      "Affordable photo restoration with AI. Free daily credit or choose from our credit packages.",
+      "Affordable photo restoration with AI. Free daily credit or choose from our euro-priced credit packages.",
     images: [getOgImageUrl()],
   },
   robots: {

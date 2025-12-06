@@ -3,17 +3,22 @@ export const CREDIT_PACKAGES = {
   starter: {
     name: "Starter",
     credits: 100,
-    price: 900, // in cents ($9)
-    priceDisplay: "$9",
+    price: 999, // in cents (€9.99)
+    priceDisplay: "€9.99",
     description: "Best for occasional use",
     popular: false,
-    features: ["100 photo restorations", "Credits never expire", "High-quality results", "Fast processing"],
+    features: [
+      "100 photo restorations",
+      "Credits never expire",
+      "High-quality results",
+      "Fast processing",
+    ],
   },
   growth: {
     name: "Growth",
     credits: 350,
-    price: 1900, // in cents ($19)
-    priceDisplay: "$19",
+    price: 1999, // in cents (€19.99)
+    priceDisplay: "€19.99",
     description: "Best for regular users",
     popular: true,
     features: [
@@ -27,8 +32,8 @@ export const CREDIT_PACKAGES = {
   premium: {
     name: "Premium",
     credits: 1000,
-    price: 2900, // in cents ($29)
-    priceDisplay: "$29",
+    price: 2999, // in cents (€29.99)
+    priceDisplay: "€29.99",
     description: "Best for professionals",
     popular: false,
     features: [
@@ -40,9 +45,9 @@ export const CREDIT_PACKAGES = {
       "Bulk processing",
     ],
   },
-} as const
+} as const;
 
-export type PackageType = keyof typeof CREDIT_PACKAGES
+export type PackageType = keyof typeof CREDIT_PACKAGES;
 
 // App configuration
 export const APP_CONFIG = {
@@ -53,5 +58,4 @@ export const APP_CONFIG = {
   maxImageDimension: 4000, // 4000x4000 max for GFPGAN
   supportedFormats: ["image/jpeg", "image/png", "image/webp"],
   processingTimeSeconds: { min: 5, max: 60 },
-} as const
-
+} as const;
