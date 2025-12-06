@@ -478,18 +478,31 @@ export function RestoreUploader() {
               {!restoredImage ? (
                 hasCredits ? (
                   <div className="flex gap-4">
-                    <Button size="lg" onClick={handleRestore} className="gap-2">
+                    <Button
+                      size="lg"
+                      onClick={handleRestore}
+                      className="gap-2 px-8"
+                    >
                       <ImageIcon className="h-4 w-4" />
                       Restore Photo
                     </Button>
-                    <Button variant="secondary" size="lg" onClick={handleClear}>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={handleClear}
+                      className="px-8 bg-transparent"
+                    >
                       Remove
                     </Button>
                   </div>
                 ) : null
               ) : (
                 <>
-                  <Button size="lg" onClick={handleDownload} className="gap-2">
+                  <Button
+                    size="lg"
+                    onClick={handleDownload}
+                    className="gap-2 px-8"
+                  >
                     <Download className="h-4 w-4" />
                     Download
                   </Button>
@@ -497,7 +510,7 @@ export function RestoreUploader() {
                     size="lg"
                     variant="outline"
                     onClick={handleRestoreAnother}
-                    className="gap-2 bg-transparent"
+                    className="gap-2 px-8 bg-transparent"
                   >
                     <RefreshCw className="h-4 w-4" />
                     Restore Another Photo

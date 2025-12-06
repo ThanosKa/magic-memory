@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { SignUpButton, useUser } from "@clerk/nextjs"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { SignUpButton, useUser } from "@clerk/nextjs";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
-}
+};
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -19,10 +19,10 @@ const staggerContainer = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 export function HeroSection() {
-  const { isSignedIn, isLoaded } = useUser()
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <section className="relative overflow-hidden bg-background py-20 sm:py-32">
@@ -46,7 +46,8 @@ export function HeroSection() {
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Bring your memories back to life. Get 1 free restoration daily, or buy credits for unlimited restorations.
+            Bring your memories back to life. Get 1 free restoration daily, or
+            buy credits for unlimited restorations.
           </motion.p>
           <motion.div
             className="mt-10 flex flex-col gap-4 sm:flex-row"
@@ -56,7 +57,7 @@ export function HeroSection() {
             {isLoaded && isSignedIn ? (
               <Link href="/restore">
                 <Button size="lg" className="gap-2 px-8">
-                  Go to Restore
+                  Restore
                 </Button>
               </Link>
             ) : (
@@ -67,14 +68,22 @@ export function HeroSection() {
               </SignUpButton>
             )}
             <Link href="/pricing">
-              <Button variant="outline" size="lg" className="px-8 bg-transparent">
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-8 bg-transparent"
+              >
                 View Pricing
               </Button>
             </Link>
           </motion.div>
 
           {/* Before/After Comparison */}
-          <motion.div className="mt-16 w-full max-w-4xl" variants={fadeInUp} transition={{ duration: 0.6, delay: 0.3 }}>
+          <motion.div
+            className="mt-16 w-full max-w-4xl"
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
               <div className="grid grid-cols-2">
                 <div className="relative aspect-[4/3] border-r border-border">
@@ -109,5 +118,5 @@ export function HeroSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
