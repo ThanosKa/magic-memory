@@ -309,4 +309,92 @@ describe("POST /api/stripe/webhook", () => {
       configurable: true,
     });
   });
+
+  it("processes 100% discount checkout with no payment intent", async () => {
+    const mockSession = {
+      id: "cs_test_full_discount",
+      metadata: {
+        userId: "user-uuid",
+        packageType: "starter",
+        credits: "100",
+        priceId: "price_starter",
+      },
+      payment_intent: null,
+      amount_total: 0,
+      amount_subtotal: 999,
+      total_details: { amount_discount: 999 },
+      currency: "eur",
+      payment_status: "no_payment_required",
+    };
+
+    mockStripeConstructEvent.mockReturnValue({
+      type: "checkout.session.completed",
+      id: "evt_full_discount",
+      data: { object: mockSession },
+    });
+
+    const mockUpdate = vi.fn().mockReturnValue({
+      eq: vi.fn().mockResolvedValue({ error: null }),
+    });
+    const mockInsert = vi.fn().mockResolvedValue({ error: null });
+
+    const mockSupabase = {
+      from: vi.fn((table: string) => {
+        if (table === "purchases") {
+          return {
+            select: vi.fn().mockReturnValue({
+              eq: vi.fn().mockReturnValue({
+                single: vi.fn().mockResolvedValue({
+                  data: null,
+                  error: { code: "PGRST116" },
+                }),
+              }),
+            }),
+            insert: mockInsert,
+          };
+        }
+        return {
+          select: vi.fn().mockReturnValue({
+            eq: vi.fn().mockReturnValue({
+              single: vi
+                .fn()
+                .mockResolvedValue({ data: { paid_credits: 0 }, error: null }),
+            }),
+          }),
+          update: mockUpdate,
+        };
+      }),
+    };
+    vi.mocked(getSupabaseAdminClient).mockReturnValue(
+      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
+    );
+
+    const originalPriceId = CREDIT_PACKAGES.starter.priceId;
+    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
+      value: "price_starter",
+      writable: true,
+      configurable: true,
+    });
+
+    const request = createMockRequest("{}");
+    const response = await POST(request);
+    const data = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(data.data?.received).toBe(true);
+    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 100 });
+    expect(mockInsert).toHaveBeenCalledWith({
+      user_id: "user-uuid",
+      stripe_payment_id: "cs_test_full_discount",
+      credits_purchased: 100,
+      amount_paid: 0,
+      package_type: "starter",
+    });
+
+    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
+      value: originalPriceId,
+      writable: true,
+      configurable: true,
+    });
+  });
 });

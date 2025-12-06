@@ -74,8 +74,21 @@ export async function POST(request: NextRequest) {
 
       const { userId, packageType, credits, priceId } = parseResult.data;
       const paymentIntent = session.payment_intent as string | null;
+      const amountTotal = session.amount_total ?? 0;
+      const amountDiscount =
+        session.total_details?.amount_discount && session.amount_subtotal
+          ? session.total_details.amount_discount
+          : 0;
 
-      if (!paymentIntent) {
+      const isFullyDiscounted =
+        (session.payment_status === "paid" ||
+          session.payment_status === "no_payment_required") &&
+        amountTotal === 0;
+
+      const paymentId =
+        paymentIntent ?? (isFullyDiscounted ? session.id : null);
+
+      if (!paymentId) {
         logger.error(
           { sessionId: session.id },
           "Missing payment intent in checkout session"
@@ -102,11 +115,6 @@ export async function POST(request: NextRequest) {
       }
 
       const amountSubtotal = session.amount_subtotal ?? session.amount_total;
-      const amountTotal = session.amount_total ?? 0;
-      const amountDiscount =
-        session.total_details?.amount_discount && amountSubtotal
-          ? session.total_details.amount_discount
-          : 0;
 
       const subtotalMatchesPackage = amountSubtotal === pkg.price;
       const totalWithDiscountMatchesPackage =
@@ -142,12 +150,12 @@ export async function POST(request: NextRequest) {
       const { data: existingPurchase } = await supabase
         .from("purchases")
         .select("id")
-        .eq("stripe_payment_id", paymentIntent)
+        .eq("stripe_payment_id", paymentId)
         .single();
 
       if (existingPurchase) {
         logger.info(
-          { paymentIntent, userId },
+          { paymentId, userId },
           "Payment already processed, skipping (idempotency)"
         );
         return NextResponse.json({ success: true, data: { received: true } });
@@ -190,7 +198,7 @@ export async function POST(request: NextRequest) {
 
       const { error: purchaseError } = await supabase.from("purchases").insert({
         user_id: userId,
-        stripe_payment_id: paymentIntent,
+        stripe_payment_id: paymentId,
         credits_purchased: creditsToAdd,
         amount_paid: session.amount_total ?? 0,
         package_type: packageType,
