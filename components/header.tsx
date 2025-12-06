@@ -34,7 +34,6 @@ function HeaderWithClerk() {
       <AnnouncementBanner />
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <Sparkles className="h-5 w-5 text-primary-foreground" />
@@ -42,7 +41,6 @@ function HeaderWithClerk() {
             <span className="text-xl font-bold">RestorePhotos</span>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
               <Link
@@ -59,7 +57,6 @@ function HeaderWithClerk() {
             ))}
           </nav>
 
-          {/* Right Side */}
           <div className="flex items-center gap-4">
             {isLoaded && isSignedIn && (
               <Link
@@ -86,7 +83,6 @@ function HeaderWithClerk() {
 
             {isLoaded && isSignedIn && <UserButton afterSignOutUrl="/" />}
 
-            {/* Mobile Menu */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild className="md:hidden">
                 <Button variant="ghost" size="icon">
@@ -161,7 +157,6 @@ function HeaderWithoutClerk() {
       <AnnouncementBanner />
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <Sparkles className="h-5 w-5 text-primary-foreground" />
@@ -169,7 +164,6 @@ function HeaderWithoutClerk() {
             <span className="text-xl font-bold">RestorePhotos</span>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
               <Link
@@ -186,7 +180,6 @@ function HeaderWithoutClerk() {
             ))}
           </nav>
 
-          {/* Right Side - Disabled buttons when no auth */}
           <div className="flex items-center gap-4">
             <div className="hidden items-center gap-2 md:flex">
               <Button
@@ -206,7 +199,6 @@ function HeaderWithoutClerk() {
               </Button>
             </div>
 
-            {/* Mobile Menu */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild className="md:hidden">
                 <Button variant="ghost" size="icon">
@@ -262,7 +254,6 @@ export function Header() {
     setMounted(true);
   }, []);
 
-  // Show minimal header during SSR/hydration
   if (!mounted) {
     return (
       <>
@@ -281,6 +272,5 @@ export function Header() {
     );
   }
 
-  // Render appropriate header based on Clerk availability
   return hasClerk ? <HeaderWithClerk /> : <HeaderWithoutClerk />;
 }

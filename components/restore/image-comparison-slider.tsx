@@ -100,7 +100,6 @@ export function ImageComparisonSlider({
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
     >
-      {/* Restored Image (Background - Full) */}
       <div className="absolute inset-0">
         <Image
           src={restoredImage || "/placeholder.svg"}
@@ -110,12 +109,11 @@ export function ImageComparisonSlider({
           crossOrigin="anonymous"
         />
         {/* Label */}
-        <div className="absolute bottom-4 right-4 rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground shadow-lg">
-          Restored
+        <div className="absolute right-4 top-4 rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground shadow-lg">
+          After
         </div>
       </div>
 
-      {/* Original Image (Foreground - Clipped) */}
       <div
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
@@ -128,12 +126,11 @@ export function ImageComparisonSlider({
           crossOrigin="anonymous"
         />
         {/* Label */}
-        <div className="absolute bottom-4 left-4 rounded-full bg-black/50 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm shadow-lg">
-          Original
+        <div className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-sm font-medium backdrop-blur shadow-lg">
+          Before
         </div>
       </div>
 
-      {/* Slider Handle */}
       <div
         className="absolute top-0 bottom-0 z-10 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)]"
         style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
@@ -156,7 +153,6 @@ export function ImageComparisonSlider({
         </div>
       </div>
 
-      {/* Instructions overlay (shown briefly) */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div
           className={cn(

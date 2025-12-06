@@ -6,7 +6,6 @@ export function Footer() {
     <footer className="border-t border-border bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-4">
-          {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -19,7 +18,6 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Product Links */}
           <div className="space-y-4">
             <h3 className="font-semibold">Product</h3>
             <nav className="flex flex-col gap-2">
@@ -44,7 +42,6 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Legal Links */}
           <div className="space-y-4">
             <h3 className="font-semibold">Legal</h3>
             <nav className="flex flex-col gap-2">
@@ -63,7 +60,6 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Social Links */}
           <div className="space-y-4">
             <h3 className="font-semibold">Connect</h3>
             <nav className="flex flex-col gap-2">

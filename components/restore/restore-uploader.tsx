@@ -39,7 +39,6 @@ type ImageDimensions = { width: number; height: number };
 const FRIENDLY_RESTORE_ERROR =
   "We couldn't restore your photo this time. Please try again shortly.";
 
-// Max image dimensions (GFPGAN limit)
 const MAX_IMAGE_DIMENSION = 4000;
 
 async function validateImageDimensions(
@@ -132,7 +131,6 @@ export function RestoreUploader() {
         URL.revokeObjectURL(preview);
       }
 
-      // Validate image dimensions
       const { valid, width, height } = await validateImageDimensions(
         selectedFile
       );
@@ -308,7 +306,6 @@ export function RestoreUploader() {
         </div>
       )}
 
-      {/* Upload Area */}
       {!preview && (
         <div className="relative group w-full max-w-2xl mx-auto">
           {/* Gradient glow effect */}
@@ -343,7 +340,6 @@ export function RestoreUploader() {
         </div>
       )}
 
-      {/* Preview & Results */}
       {preview && (
         <div className="space-y-6">
           {!hasCredits && (
@@ -405,8 +401,8 @@ export function RestoreUploader() {
                       >
                         <div className="relative w-full">
                           {restoredImage && (
-                            <div className="absolute top-2 left-2 z-10 rounded-md bg-black/50 px-2 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                              Original
+                            <div className="absolute left-4 top-4 z-10 rounded-full bg-background/90 px-3 py-1 text-sm font-medium backdrop-blur shadow-lg">
+                              Before
                             </div>
                           )}
                           <img
@@ -418,8 +414,8 @@ export function RestoreUploader() {
 
                         {restoredImage && (
                           <div className="relative w-full">
-                            <div className="absolute top-2 left-2 z-10 rounded-md bg-primary px-2 py-1 text-xs font-medium text-primary-foreground shadow-lg">
-                              Restored
+                            <div className="absolute right-4 top-4 z-10 rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground shadow-lg">
+                              After
                             </div>
                             <img
                               src={restoredImage || "/placeholder.svg"}
@@ -474,7 +470,6 @@ export function RestoreUploader() {
             </div>
           )}
 
-          {/* Actions */}
           {!isProcessing && (
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               {!restoredImage ? (
