@@ -36,16 +36,12 @@ export function getSupabaseAdminClient() {
     throw new Error("Supabase admin environment variables are missing");
   }
 
-  return createServerClient(
-    supabaseUrl,
-    serviceRoleKey,
-    {
-      cookies: {
-        getAll() {
-          return [];
-        },
-        setAll() {},
+  return createServerClient(supabaseUrl, serviceRoleKey, {
+    cookies: {
+      getAll() {
+        return [];
       },
-    }
-  );
+      setAll() {},
+    },
+  });
 }

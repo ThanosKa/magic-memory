@@ -101,9 +101,28 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: true, data: { received: true } });
       }
 
-      if (session.amount_total !== pkg.price) {
+      const amountSubtotal = session.amount_subtotal ?? session.amount_total;
+      const amountTotal = session.amount_total ?? 0;
+      const amountDiscount =
+        session.total_details?.amount_discount && amountSubtotal
+          ? session.total_details.amount_discount
+          : 0;
+
+      const subtotalMatchesPackage = amountSubtotal === pkg.price;
+      const totalWithDiscountMatchesPackage =
+        amountSubtotal && amountDiscount
+          ? amountTotal + amountDiscount === pkg.price
+          : false;
+
+      if (!subtotalMatchesPackage && !totalWithDiscountMatchesPackage) {
         logger.error(
-          { packageType, expected: pkg.price, actual: session.amount_total },
+          {
+            packageType,
+            expected: pkg.price,
+            subtotal: amountSubtotal,
+            total: amountTotal,
+            discount: amountDiscount,
+          },
           "Amount mismatch for checkout session"
         );
         return NextResponse.json({ success: true, data: { received: true } });

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterAll } from "vitest";
 import { NextRequest } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
@@ -34,6 +34,8 @@ function createMockRequest(body: Record<string, unknown>): NextRequest {
 }
 
 describe("POST /api/stripe/create-checkout", () => {
+  const originalStripeSecret = process.env.STRIPE_SECRET_KEY;
+
   beforeEach(() => {
     vi.clearAllMocks();
     mockStripeCheckoutCreate.mockReset();
@@ -41,6 +43,11 @@ describe("POST /api/stripe/create-checkout", () => {
       id: "cs_test_123",
       url: "https://checkout.stripe.com/test",
     });
+    process.env.STRIPE_SECRET_KEY = "sk_test_dummy";
+  });
+
+  afterAll(() => {
+    process.env.STRIPE_SECRET_KEY = originalStripeSecret;
   });
 
   it("returns 401 when not authenticated", async () => {
@@ -79,12 +86,10 @@ describe("POST /api/stripe/create-checkout", () => {
       from: vi.fn().mockReturnValue({
         select: vi.fn().mockReturnValue({
           eq: vi.fn().mockReturnValue({
-            single: vi
-              .fn()
-              .mockResolvedValue({
-                data: null,
-                error: { message: "Not found" },
-              }),
+            single: vi.fn().mockResolvedValue({
+              data: null,
+              error: { message: "Not found" },
+            }),
           }),
         }),
       }),

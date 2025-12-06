@@ -66,8 +66,12 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-foreground">2. Service Description</h2>
               <p className="mt-2">
-                Magic Memory provides AI-powered photo restoration services using machine learning technology. We offer
-                both free daily credits and paid credit packages for photo restorations.
+                Magic Memory provides AI-powered photo restoration using Replicate&apos;s GFPGAN model. We process your
+                uploaded photo in memory, send it to Replicate for restoration, and return the restored result. We do
+                not store your original or restored images on our infrastructure. We may store restoration metadata
+                (Replicate output link, filename label, credit usage, timestamps, and your user ID) in our database for
+                your account history and billing audit. We offer both free daily credits and paid credit packages for
+                photo restorations.
               </p>
             </section>
 
@@ -97,7 +101,16 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-foreground">6. Intellectual Property</h2>
+              <h2 className="text-xl font-semibold text-foreground">6. Data Handling & Storage</h2>
+              <p className="mt-2">
+                Restorations are processed via Replicate, which temporarily hosts outputs at unique URLs subject to
+                their retention policies. We do not store images on our own storage systems. Deleting your restoration
+                history with us removes our references to those URLs but does not control Replicate&apos;s retention.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold text-foreground">7. Intellectual Property</h2>
               <p className="mt-2">
                 You retain all rights to your original photos. Restored photos are also your property. We do not claim
                 ownership of any content you upload or restore using our service.
@@ -105,7 +118,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-foreground">7. Limitation of Liability</h2>
+              <h2 className="text-xl font-semibold text-foreground">8. Limitation of Liability</h2>
               <p className="mt-2">
                 Magic Memory is provided &quot;as is&quot; without warranties of any kind. We are not liable for any damages
                 arising from the use of our service.
@@ -113,7 +126,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-foreground">8. Contact</h2>
+              <h2 className="text-xl font-semibold text-foreground">9. Contact</h2>
               <p className="mt-2">For questions about these Terms, please contact us at kazakis.th@gmail.com.</p>
             </section>
           </div>

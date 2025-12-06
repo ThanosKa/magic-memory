@@ -35,7 +35,8 @@
 - Client-side NSFW detection blocks unsafe uploads before they hit the server.
 - Credit system with daily free credit plus paid packs that never expire.
 - Real-time job status, interactive before/after slider, and downloadable results.
-- Authentication with Clerk; payments via Stripe; storage on Supabase.
+- No persistent image storage: uploads are processed in memory, sent to Replicate, and only restoration metadata (output URL, filename label, credit usage, timestamps) is stored for your account history.
+- Authentication with Clerk; payments via Stripe; Supabase database (no image storage).
 
 ## Why It’s Useful
 
@@ -52,7 +53,7 @@
 | Language         | TypeScript (strict)             |
 | Styling          | Tailwind CSS 4 + shadcn/ui      |
 | Auth             | Clerk                           |
-| Database/Storage | Supabase (PostgreSQL + Storage) |
+| Database         | Supabase (PostgreSQL; no image storage) |
 | AI               | GFPGAN on Replicate             |
 | Rate limiting    | Upstash Redis                   |
 | Payments         | Stripe                          |
@@ -140,8 +141,8 @@ magic-memory/
 - **App Router** pages under `app/`; API routes live in `app/api/`.
 - **Auth** via Clerk middleware in `proxy.ts`; protected routes include `/restore` and `/profile`.
 - **Credits** tracked in Supabase with RPC functions; free daily credit resets and paid credits never expire.
-- **Storage** uses Supabase Storage; rate limiting via Upstash Redis.
-- **AI restore** calls Replicate GFPGAN; results stored and returned to the user.
+- **Storage** none for images; restorations are processed via Replicate and only metadata/URLs live in Supabase DB; rate limiting via Upstash Redis.
+- **AI restore** calls Replicate GFPGAN; results are returned and recorded as metadata (no binary storage).
 - **Logging** with Pino; validations via Zod.
 
 ## CI

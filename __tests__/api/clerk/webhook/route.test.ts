@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest"
+import { describe, it, expect, vi, beforeEach, afterAll } from "vitest"
 import { NextRequest } from "next/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
 import { POST } from "@/app/api/clerk/webhook/route"
@@ -36,10 +36,16 @@ function createMockRequest(
 }
 
 describe("POST /api/clerk/webhook", () => {
+    const originalWebhookSecret = process.env.CLERK_WEBHOOK_SECRET
+
     beforeEach(() => {
         vi.clearAllMocks()
         mockWebhookVerify.mockReset()
         process.env.CLERK_WEBHOOK_SECRET = "whsec_test123"
+    })
+
+    afterAll(() => {
+        process.env.CLERK_WEBHOOK_SECRET = originalWebhookSecret
     })
 
     it("returns 400 for missing svix headers", async () => {
@@ -65,7 +71,7 @@ describe("POST /api/clerk/webhook", () => {
         const data = await response.json()
 
         expect(response.status).toBe(400)
-        expect(data.error).toBe("Invalid signature")
+        expect(data.error).toBe("Webhook processing failed")
     })
 
     it("inserts new user on user.created event", async () => {
@@ -94,7 +100,7 @@ describe("POST /api/clerk/webhook", () => {
         const data = await response.json()
 
         expect(response.status).toBe(200)
-        expect(data.received).toBe(true)
+        expect(data.data?.received).toBe(true)
         expect(mockInsert).toHaveBeenCalledWith({
             clerk_user_id: "clerk_user_123",
             email: "kazakis.th@gmail.com",
@@ -132,7 +138,7 @@ describe("POST /api/clerk/webhook", () => {
         const data = await response.json()
 
         expect(response.status).toBe(200)
-        expect(data.received).toBe(true)
+        expect(data.data?.received).toBe(true)
         expect(mockUpdate).toHaveBeenCalledWith({
             email: "kazakis.th@gmail.com",
             name: "Jane Smith",
@@ -164,7 +170,7 @@ describe("POST /api/clerk/webhook", () => {
         const data = await response.json()
 
         expect(response.status).toBe(200)
-        expect(data.received).toBe(true)
+        expect(data.data?.received).toBe(true)
         expect(mockDelete).toHaveBeenCalled()
     })
 
