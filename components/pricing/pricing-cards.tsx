@@ -8,7 +8,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Sparkles } from "lucide-react";
+import { Check } from "lucide-react";
 import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -74,10 +74,7 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
       <motion.div variants={cardVariants}>
         <Card className="relative border-border h-full flex flex-col">
           <CardHeader className="pb-4">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" />
-              <h3 className="text-xl font-semibold">Free</h3>
-            </div>
+            <h3 className="text-xl font-semibold">Free</h3>
             <div className="mt-4">
               <span className="text-4xl font-bold">€0</span>
               <span className="text-muted-foreground">/day</span>
