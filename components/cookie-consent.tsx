@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Cookie, X } from "lucide-react"
+import { Cookie } from "lucide-react"
 
 const COOKIE_CONSENT_KEY = "cookie-consent"
 
@@ -40,16 +40,8 @@ export function CookieConsent() {
                     className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6"
                 >
                         <div className="mx-auto max-w-4xl">
-                            <div className="relative flex flex-col gap-4 rounded-2xl border border-border bg-background/95 p-6 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
-                            <button
-                                onClick={handleDecline}
-                                className="absolute right-3 top-3 rounded-full p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                                aria-label="Close"
-                            >
-                                <X className="h-4 w-4" />
-                            </button>
-
-                            <div className="flex items-start gap-4 pr-8 sm:pr-0">
+                            <div className="flex flex-col gap-4 rounded-2xl border border-border bg-background/95 p-6 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+                            <div className="flex items-start gap-4">
                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                                     <Cookie className="h-5 w-5 text-primary" />
                                 </div>

@@ -10,6 +10,7 @@ import useSWR from "swr";
 import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CreditsSkeleton } from "@/components/ui/loading-states";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -18,7 +19,7 @@ function HeaderWithClerk() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isSignedIn, isLoaded } = useUser();
 
-  const { data: creditsData } = useSWR(
+  const { data: creditsData, isLoading: isCreditsLoading } = useSWR(
     isSignedIn ? "/api/credits" : null,
     fetcher
   );
@@ -26,8 +27,8 @@ function HeaderWithClerk() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/restore", label: "Restore" },
     { href: "/pricing", label: "Pricing" },
-    ...(isSignedIn ? [{ href: "/restore", label: "Restore" }] : []),
   ];
 
   return (
@@ -63,15 +64,21 @@ function HeaderWithClerk() {
           </nav>
 
           <div className="flex items-center gap-4">
-            {isLoaded && isSignedIn && (
-              <Link
-                href="/pricing"
-                className="hidden items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent/80 hover:text-primary sm:flex"
-              >
-                <Coins className="h-4 w-4 text-primary" />
-                <span>{totalCredits} credits</span>
-              </Link>
-            )}
+            {isLoaded &&
+              isSignedIn &&
+              (isCreditsLoading ? (
+                <div className="hidden sm:flex">
+                  <CreditsSkeleton />
+                </div>
+              ) : (
+                <Link
+                  href="/pricing"
+                  className="hidden items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent/80 hover:text-primary sm:flex"
+                >
+                  <Coins className="h-4 w-4 text-primary" />
+                  <span>{totalCredits} credits</span>
+                </Link>
+              ))}
 
             {isLoaded && !isSignedIn && (
               <div className="hidden items-center gap-2 md:flex">
@@ -97,16 +104,19 @@ function HeaderWithClerk() {
               </SheetTrigger>
               <SheetContent side="right" className="w-72">
                 <div className="flex flex-col gap-6 pt-6">
-                  {isSignedIn && (
-                    <Link
-                      href="/pricing"
-                      onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium w-fit transition-colors hover:bg-accent/80 hover:text-primary"
-                    >
-                      <Coins className="h-4 w-4 text-primary" />
-                      <span>{totalCredits} credits</span>
-                    </Link>
-                  )}
+                  {isSignedIn &&
+                    (isCreditsLoading ? (
+                      <CreditsSkeleton />
+                    ) : (
+                      <Link
+                        href="/pricing"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium w-fit transition-colors hover:bg-accent/80 hover:text-primary"
+                      >
+                        <Coins className="h-4 w-4 text-primary" />
+                        <span>{totalCredits} credits</span>
+                      </Link>
+                    ))}
                   <nav className="flex flex-col gap-4">
                     {navLinks.map((link) => (
                       <Link
@@ -154,6 +164,7 @@ function HeaderWithoutClerk() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/restore", label: "Restore" },
     { href: "/pricing", label: "Pricing" },
   ];
 
