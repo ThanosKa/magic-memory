@@ -93,9 +93,9 @@ export function RestoreUploader() {
             clearInterval(interval);
             return 90;
           }
-          return prev + Math.random() * 3;
+          return prev + Math.random() * 6 + 2; // 2-8% per second, reaches ~90% in ~15 seconds
         });
-      }, 1000);
+      }, 800); // Faster updates every 800ms
       return () => clearInterval(interval);
     } else if (stage === "complete") {
       setProgress(100);
@@ -445,18 +445,18 @@ export function RestoreUploader() {
                   />
 
                   {isProcessing && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg bg-black/40 backdrop-blur-md transition-all duration-300">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg bg-black/10 backdrop-blur-sm transition-all duration-300">
                       <div className="w-48 space-y-4 text-center">
                         <div className="relative h-16 w-16 mx-auto">
-                          <div className="absolute inset-0 rounded-full border-4 border-primary/30" />
-                          <div className="absolute inset-0 rounded-full border-4 border-primary border-t-transparent animate-spin" />
+                          <div className="absolute inset-0 rounded-full border-4 border-primary/10" />
+                          <div className="absolute inset-0 rounded-full border-4 border-primary/70 border-t-transparent animate-spin" />
                           <ImageIcon className="absolute inset-0 m-auto h-6 w-6 text-primary" />
                         </div>
                         <div className="space-y-1">
-                          <p className="text-sm font-medium text-white shadow-sm">
+                          <p className="text-sm font-medium text-white">
                             Restoring your photo...
                           </p>
-                          <p className="text-lg font-bold text-white shadow-sm">
+                          <p className="text-lg font-bold text-white">
                             {Math.round(progress)}%
                           </p>
                         </div>

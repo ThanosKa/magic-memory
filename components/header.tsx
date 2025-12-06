@@ -1,29 +1,32 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Sparkles, Coins } from "lucide-react"
-import { useState, useEffect } from "react"
-import useSWR from "swr"
-import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu, Sparkles, Coins } from "lucide-react";
+import { useState, useEffect } from "react";
+import useSWR from "swr";
+import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 function HeaderWithClerk() {
-  const pathname = usePathname()
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const { isSignedIn, isLoaded } = useUser()
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { isSignedIn, isLoaded } = useUser();
 
-  const { data: creditsData } = useSWR(isSignedIn ? "/api/credits" : null, fetcher)
-  const totalCredits = creditsData?.data?.totalCredits ?? 0
+  const { data: creditsData } = useSWR(
+    isSignedIn ? "/api/credits" : null,
+    fetcher
+  );
+  const totalCredits = creditsData?.data?.totalCredits ?? 0;
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/pricing", label: "Pricing" },
     ...(isSignedIn ? [{ href: "/restore", label: "Restore" }] : []),
-  ]
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -42,8 +45,11 @@ function HeaderWithClerk() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
-                }`}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                pathname === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+              }`}
             >
               {link.label}
             </Link>
@@ -53,10 +59,13 @@ function HeaderWithClerk() {
         {/* Right Side */}
         <div className="flex items-center gap-4">
           {isLoaded && isSignedIn && (
-            <div className="hidden items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium sm:flex">
+            <Link
+              href="/pricing"
+              className="hidden items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent/80 hover:text-primary sm:flex"
+            >
               <Coins className="h-4 w-4 text-primary" />
               <span>{totalCredits} credits</span>
-            </div>
+            </Link>
           )}
 
           {isLoaded && !isSignedIn && (
@@ -85,10 +94,14 @@ function HeaderWithClerk() {
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 pt-6">
                 {isSignedIn && (
-                  <div className="flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium w-fit">
+                  <Link
+                    href="/pricing"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium w-fit transition-colors hover:bg-accent/80 hover:text-primary"
+                  >
                     <Coins className="h-4 w-4 text-primary" />
                     <span>{totalCredits} credits</span>
-                  </div>
+                  </Link>
                 )}
                 <nav className="flex flex-col gap-4">
                   {navLinks.map((link) => (
@@ -96,8 +109,11 @@ function HeaderWithClerk() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
-                        }`}
+                      className={`text-lg font-medium transition-colors hover:text-primary ${
+                        pathname === link.href
+                          ? "text-foreground"
+                          : "text-muted-foreground"
+                      }`}
                     >
                       {link.label}
                     </Link>
@@ -106,7 +122,10 @@ function HeaderWithClerk() {
                 {!isSignedIn && (
                   <div className="flex flex-col gap-2 pt-4">
                     <SignInButton mode="modal">
-                      <Button variant="outline" className="w-full bg-transparent">
+                      <Button
+                        variant="outline"
+                        className="w-full bg-transparent"
+                      >
                         Sign In
                       </Button>
                     </SignInButton>
@@ -121,17 +140,17 @@ function HeaderWithClerk() {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
 function HeaderWithoutClerk() {
-  const pathname = usePathname()
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/pricing", label: "Pricing" },
-  ]
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -150,8 +169,11 @@ function HeaderWithoutClerk() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
-                }`}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                pathname === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+              }`}
             >
               {link.label}
             </Link>
@@ -161,10 +183,19 @@ function HeaderWithoutClerk() {
         {/* Right Side - Disabled buttons when no auth */}
         <div className="flex items-center gap-4">
           <div className="hidden items-center gap-2 md:flex">
-            <Button variant="ghost" size="sm" disabled title="Configure Clerk to enable sign in">
+            <Button
+              variant="ghost"
+              size="sm"
+              disabled
+              title="Configure Clerk to enable sign in"
+            >
               Sign In
             </Button>
-            <Button size="sm" disabled title="Configure Clerk to enable sign up">
+            <Button
+              size="sm"
+              disabled
+              title="Configure Clerk to enable sign up"
+            >
               Get Started
             </Button>
           </div>
@@ -185,15 +216,22 @@ function HeaderWithoutClerk() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`text-lg font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-muted-foreground"
-                        }`}
+                      className={`text-lg font-medium transition-colors hover:text-primary ${
+                        pathname === link.href
+                          ? "text-foreground"
+                          : "text-muted-foreground"
+                      }`}
                     >
                       {link.label}
                     </Link>
                   ))}
                 </nav>
                 <div className="flex flex-col gap-2 pt-4">
-                  <Button variant="outline" className="w-full bg-transparent" disabled>
+                  <Button
+                    variant="outline"
+                    className="w-full bg-transparent"
+                    disabled
+                  >
                     Sign In
                   </Button>
                   <Button className="w-full" disabled>
@@ -206,16 +244,16 @@ function HeaderWithoutClerk() {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
 export function Header() {
-  const [mounted, setMounted] = useState(false)
-  const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+  const [mounted, setMounted] = useState(false);
+  const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   // Show minimal header during SSR/hydration
   if (!mounted) {
@@ -230,9 +268,9 @@ export function Header() {
           </Link>
         </div>
       </header>
-    )
+    );
   }
 
   // Render appropriate header based on Clerk availability
-  return hasClerk ? <HeaderWithClerk /> : <HeaderWithoutClerk />
+  return hasClerk ? <HeaderWithClerk /> : <HeaderWithoutClerk />;
 }
