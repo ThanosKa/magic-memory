@@ -1,19 +1,19 @@
 import { getSupabaseAdminClient } from "./server";
 import logger from "@/lib/logger";
 
-export interface CreditCheckResult {
+export type CreditCheckResult = {
   has_credits: boolean;
   has_free_daily: boolean;
   paid_credits: number;
   should_use_free: boolean;
-}
+};
 
-export interface DeductCreditResult {
+export type DeductCreditResult = {
   success: boolean;
   restoration_id: string | null;
   remaining_paid_credits: number;
   error_message: string | null;
-}
+};
 
 export async function checkUserCredits(
   userId: string

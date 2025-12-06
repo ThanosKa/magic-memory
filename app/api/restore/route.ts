@@ -1,10 +1,15 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { auth } from "@clerk/nextjs/server"
-import logger from "@/lib/logger"
-import { checkUserCredits, deductCreditAndRecordRestoration, rollbackRestoration } from "@/lib/supabase/transactions"
-import { markFreeCreditUsed, getRedisClient } from "@/lib/redis"
-import { Ratelimit } from "@upstash/ratelimit"
-import Replicate from "replicate"
+import { type NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
+import { z } from "zod";
+import { Ratelimit } from "@upstash/ratelimit";
+import Replicate from "replicate";
+import { markFreeCreditUsed, getRedisClient } from "@/lib/redis";
+import logger from "@/lib/logger";
+import {
+  checkUserCredits,
+  deductCreditAndRecordRestoration,
+  rollbackRestoration,
+} from "@/lib/supabase/transactions";
 
 function getRateLimiter() {
   const redis = getRedisClient()
@@ -18,8 +23,12 @@ function getRateLimiter() {
   })
 }
 
-const MAX_IMAGE_DIMENSION = 4000
-const MAX_FILE_SIZE = 10 * 1024 * 1024
+const MAX_IMAGE_DIMENSION = 4000;
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+const restoreFormDataSchema = z.object({
+  originalFilename: z.string().trim().min(1).max(200).default("photo"),
+});
 
 async function validateImageDimensions(buffer: Buffer): Promise<{ valid: boolean; error?: string }> {
   if (buffer[0] === 0x89 && buffer[1] === 0x50) {
@@ -102,16 +111,34 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const formData = await request.formData()
-    const file = formData.get("file") as File | null
-    const originalFilename = (formData.get("originalFilename") as string) || "photo"
+    const formData = await request.formData();
+    const file = formData.get("file");
 
-    if (!file) {
+    const originalFilenameRaw = formData.get("originalFilename");
+    const parsedForm = restoreFormDataSchema.safeParse({
+      originalFilename:
+        typeof originalFilenameRaw === "string" ? originalFilenameRaw : undefined,
+    });
+
+    if (!parsedForm.success) {
+      logger.warn(
+        { userId, errors: parsedForm.error.flatten() },
+        "Invalid restore form data"
+      );
+      return NextResponse.json(
+        { success: false, error: "Invalid form data" },
+        { status: 400 }
+      );
+    }
+
+    const { originalFilename } = parsedForm.data;
+
+    if (!(file instanceof File)) {
       logger.warn({ userId }, "No file provided")
       return NextResponse.json({ success: false, error: "No file provided" }, { status: 400 })
     }
 
-    const validTypes = ["image/jpeg", "image/png", "image/webp"]
+    const validTypes = ["image/jpeg", "image/png", "image/webp"];
     if (!validTypes.includes(file.type)) {
       logger.warn({ userId, fileType: file.type }, "Invalid file type")
       return NextResponse.json(

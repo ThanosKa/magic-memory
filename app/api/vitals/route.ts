@@ -1,28 +1,36 @@
-import { NextRequest, NextResponse } from 'next/server';
-import logger from '@/lib/logger';
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+import logger from "@/lib/logger";
 
-type VitalsPayload = {
-  name: string;
-  value: number;
-  id: string;
-  path: string;
-  rating: 'good' | 'needs-improvement' | 'poor';
-  navigationType: string;
-};
+const vitalsPayloadSchema = z.object({
+  name: z.string().min(1),
+  value: z.number(),
+  id: z.string().min(1),
+  path: z.string().min(1),
+  rating: z.enum(["good", "needs-improvement", "poor"]),
+  navigationType: z.string().min(1),
+});
 
 export async function POST(request: NextRequest) {
   try {
-    const payload: VitalsPayload = await request.json();
+    const json = await request.json();
+    const parsed = vitalsPayloadSchema.safeParse(json);
 
-    if (!payload.name || typeof payload.value !== 'number') {
+    if (!parsed.success) {
+      logger.warn(
+        { errors: parsed.error.flatten() },
+        "Invalid web vitals payload"
+      );
       return NextResponse.json(
-        { error: 'Invalid payload' },
+        { success: false, error: "Invalid payload" },
         { status: 400 }
       );
     }
 
+    const payload = parsed.data;
+
     logger.info({
-      type: 'web-vitals',
+      type: "web-vitals",
       metric: payload.name,
       value: Math.round(payload.value),
       rating: payload.rating,
@@ -33,14 +41,14 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    logger.error({ error, message: 'Failed to process web vitals' });
+    logger.error({ error, message: "Failed to process web vitals" });
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { success: false, error: "Internal server error" },
       { status: 500 }
     );
   }
 }
 
 export async function OPTIONS() {
-  return NextResponse.json({}, { status: 200 });
+  return NextResponse.json({ success: true }, { status: 200 });
 }

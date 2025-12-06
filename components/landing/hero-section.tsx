@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Highlighter } from "@/components/ui/highlighter";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { SignUpButton, useUser } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { Highlighter } from "@/components/ui/highlighter";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },

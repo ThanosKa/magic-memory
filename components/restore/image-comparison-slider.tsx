@@ -6,14 +6,14 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-interface ImageComparisonSliderProps {
+type ImageComparisonSliderProps = {
   originalImage: string;
   restoredImage: string;
   originalAlt?: string;
   restoredAlt?: string;
   className?: string;
   aspectRatio?: number;
-}
+};
 
 export function ImageComparisonSlider({
   originalImage,

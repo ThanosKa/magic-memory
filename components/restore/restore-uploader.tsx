@@ -1,23 +1,23 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
-import { useDropzone } from "react-dropzone";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { useDropzone } from "react-dropzone";
+import useSWR, { mutate } from "swr";
 import {
+  CloudUpload,
   Download,
   ImageIcon,
-  SlidersHorizontal,
   LayoutGrid,
   RefreshCw,
-  CloudUpload,
+  SlidersHorizontal,
 } from "lucide-react";
-import Image from "next/image";
-import useSWR, { mutate } from "swr";
 import { ImageComparisonSlider } from "./image-comparison-slider";
+import { Button } from "@/components/ui/button";
 import { ErrorAlert, type ErrorType } from "@/components/ui/error-alert";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 type RestorationStage = "idle" | "restoring" | "complete";
@@ -356,7 +356,7 @@ export function RestoreUploader() {
 
           {restoredImage && (
             <div className="flex justify-center">
-                <Tabs defaultValue="side-by-side" className="w-full max-w-4xl">
+              <Tabs defaultValue="side-by-side" className="w-full max-w-4xl">
                 <div className="flex justify-center">
                   <TabsList className="grid w-full max-w-[400px] grid-cols-2">
                     <TabsTrigger
