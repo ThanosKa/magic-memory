@@ -109,7 +109,10 @@ export function RestoreUploader() {
         if (rejection.errors[0]?.code === "file-too-large") {
           setError({ type: "file_too_large" });
         } else if (rejection.errors[0]?.code === "file-invalid-type") {
-          setError({ type: "invalid_file_type" });
+          setError({
+            type: "generic",
+            message: "Please upload a valid image file (JPG, PNG, or WebP).",
+          });
         }
         return;
       }
@@ -182,14 +185,10 @@ export function RestoreUploader() {
       if (!restoreData.success) {
         if (restoreData.error?.includes("No credits")) {
           setError({ type: "out_of_credits", message: restoreData.error });
-        } else if (restoreData.error?.includes("timed out")) {
-          setError({ type: "timeout", message: restoreData.error });
         } else if (restoreResponse.status === 401) {
           setError({ type: "auth_error" });
-        } else if (restoreData.error?.includes("dimensions")) {
-          setError({ type: "generic", message: restoreData.error });
         } else {
-          setError({ type: "restoration_failed", message: restoreData.error });
+          setError({ type: "generic", message: restoreData.error });
         }
         setStage("idle");
         return;
@@ -199,14 +198,10 @@ export function RestoreUploader() {
       setStage("complete");
       mutate("/api/credits");
     } catch (err) {
-      if (err instanceof TypeError && err.message.includes("fetch")) {
-        setError({ type: "network_error" });
-      } else {
-        setError({
-          type: "generic",
-          message: err instanceof Error ? err.message : "Something went wrong",
-        });
-      }
+      setError({
+        type: "generic",
+        message: err instanceof Error ? err.message : "Something went wrong",
+      });
       setStage("idle");
     }
   };
@@ -295,13 +290,7 @@ export function RestoreUploader() {
             message={error.message}
             freeResetTime={freeResetTime}
             onDismiss={() => setError(null)}
-            onRetry={
-              error.type === "restoration_failed" ||
-              error.type === "network_error" ||
-              error.type === "timeout"
-                ? handleRestore
-                : undefined
-            }
+            onRetry={error.type === "generic" ? handleRestore : undefined}
           />
         </div>
       )}

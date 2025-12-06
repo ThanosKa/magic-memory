@@ -5,6 +5,7 @@ export const CREDIT_PACKAGES = {
     credits: 100,
     price: 999, // in cents (€9.99)
     priceDisplay: "€9.99",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER ?? "",
     description: "Best for occasional use",
     popular: false,
     features: [
@@ -19,6 +20,7 @@ export const CREDIT_PACKAGES = {
     credits: 350,
     price: 1999, // in cents (€19.99)
     priceDisplay: "€19.99",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_GROWTH ?? "",
     description: "Best for regular users",
     popular: true,
     features: [
@@ -34,6 +36,7 @@ export const CREDIT_PACKAGES = {
     credits: 1000,
     price: 2999, // in cents (€29.99)
     priceDisplay: "€29.99",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PREMIUM ?? "",
     description: "Best for professionals",
     popular: false,
     features: [

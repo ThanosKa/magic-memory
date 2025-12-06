@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
+import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants"
 import logger from "@/lib/logger"
 import Stripe from "stripe"
 
@@ -25,11 +26,36 @@ export async function POST(request: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session
 
-    const { userId, packageType, credits } = session.metadata || {}
+    const { userId, packageType, credits, priceId } = session.metadata || {}
     const paymentIntent = session.payment_intent as string
 
-    if (!userId || !packageType || !credits || !paymentIntent) {
+    if (!userId || !packageType || !credits || !paymentIntent || !priceId) {
       logger.error({ sessionId: session.id }, "Missing metadata in checkout session")
+      return NextResponse.json({ received: true })
+    }
+
+    const pkg = CREDIT_PACKAGES[packageType as PackageType]
+
+    if (!pkg) {
+      logger.error({ packageType }, "Unknown package type in checkout session")
+      return NextResponse.json({ received: true })
+    }
+
+    if (!pkg.priceId || pkg.priceId !== priceId) {
+      logger.error({ packageType, priceId }, "Price id mismatch for checkout session")
+      return NextResponse.json({ received: true })
+    }
+
+    if (session.amount_total !== pkg.price) {
+      logger.error(
+        { packageType, expected: pkg.price, actual: session.amount_total },
+        "Amount mismatch for checkout session",
+      )
+      return NextResponse.json({ received: true })
+    }
+
+    if (session.currency?.toLowerCase() !== "eur") {
+      logger.error({ currency: session.currency, packageType }, "Unexpected currency for checkout session")
       return NextResponse.json({ received: true })
     }
 
