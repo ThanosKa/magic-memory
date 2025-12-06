@@ -91,8 +91,8 @@ export function HeroSection() {
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
                 <div className="relative aspect-[4/3]">
                   <Image
-                    src="/old-damaged-faded-vintage-family-photo-with-scratc.jpg"
-                    alt="Before: Old damaged photo"
+                    src="/couple-before.jpg"
+                    alt="Before: Blurry couple photo"
                     fill
                     className="object-cover"
                     priority
@@ -106,8 +106,8 @@ export function HeroSection() {
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
                 <div className="relative aspect-[4/3]">
                   <Image
-                    src="/restored-clear-sharp-vibrant-family-photo-professi.jpg"
-                    alt="After: Restored photo"
+                    src="/couple-after.png"
+                    alt="After: Restored couple photo"
                     fill
                     className="object-cover"
                     priority

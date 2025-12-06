@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MegaphoneIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const SCROLL_THRESHOLD = 24;
@@ -25,24 +24,24 @@ export function AnnouncementBanner() {
       className={cn(
         "relative z-40 w-full overflow-hidden border-b border-primary/20 bg-primary text-primary-foreground transition-all duration-300",
         isVisible
-          ? "max-h-16 opacity-100"
+          ? "max-h-24 opacity-100"
           : "pointer-events-none -translate-y-full max-h-0 opacity-0"
       )}
       aria-live="polite"
     >
-      <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-2 text-sm sm:px-6 lg:px-8">
-        <MegaphoneIcon className="h-4 w-4 shrink-0" aria-hidden />
-        <div className="flex flex-1 flex-col gap-1 text-center sm:flex-row sm:items-center sm:justify-center sm:gap-2">
-          <span className="font-semibold tracking-tight">
-            Use code RESTORE40 for 40% off all pricing.
+      <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-3 sm:px-6 lg:px-8">
+        <div className="flex flex-1 flex-col items-center gap-2 text-center sm:flex-row sm:flex-initial sm:items-center sm:gap-3">
+          <span className="text-base font-semibold tracking-tight sm:text-lg">
+            Use code{" "}
+            <span className="rounded-full bg-primary-foreground px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-primary shadow-sm sm:text-sm">
+              RESTORE40
+            </span>{" "}
+            for 40% off all pricing.
           </span>
-          <span className="text-sm text-primary-foreground/80">
+          <span className="text-sm text-primary-foreground/85 sm:text-base">
             Limited time launch offer—redeem at checkout.
           </span>
         </div>
-        <span className="hidden rounded-full bg-primary-foreground/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] sm:inline">
-          RESTORE40
-        </span>
       </div>
     </div>
   );
