@@ -1,42 +1,55 @@
+---
+description: React component patterns for this codebase
+globs: *.tsx
+alwaysApply: false
+---
+
 # Component Patterns
 
 ## Client Components
+
 - Use `"use client"` for hooks, browser APIs, events
 - Server Components by default
 
 ```tsx
-"use client"
-import { useState } from "react"
-import { motion } from "framer-motion"
+"use client";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface Props {
-  title: string
-  onAction: () => void
+  title: string;
+  onAction: () => void;
 }
 
 export function MyComponent({ title, onAction }: Props) {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <h2>{title}</h2>
-      <button onClick={onAction} disabled={loading}>Submit</button>
+      <button onClick={onAction} disabled={loading}>
+        Submit
+      </button>
     </motion.div>
-  )
+  );
 }
 ```
 
 ## Server Components
+
 - Fetch data directly
 - Pass to client components as props
 - Use `auth()` and Supabase server client
 
 ## Animations
+
 Use Framer Motion:
+
 - Fade in: `initial={{ opacity: 0 }} animate={{ opacity: 1 }}`
 - Scroll reveal: `initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}`
 - Stagger: Define `variants` with `staggerChildren`
 
 ## Data Fetching
+
 - Client: Use SWR, never `useEffect`
 - Server: Direct async fetch in component
 - Loading states: Return `<Skeleton />` or loading UI

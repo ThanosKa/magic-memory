@@ -1,42 +1,55 @@
 <div align="center">
 
-# magic-memory
+<h1>✨ Magic Memory ✨</h1>
 
-![magic-memory Banner](/public/og-image.png)
-
-AI-powered photo restoration that brings your memories back to life.
-
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19-61dafb?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-radix-8a3ffc)](https://ui.shadcn.com/)
+[![Replicate](https://img.shields.io/badge/Replicate-GFPGAN-0f9d58)](https://replicate.com)
+[![pnpm](https://img.shields.io/badge/pnpm-%F0%9F%8F%AF-orange?logo=pnpm)](https://pnpm.io/)
 [![CI](https://github.com/thaka/magic-memory/actions/workflows/ci.yml/badge.svg)](https://github.com/thaka/magic-memory/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/thaka/magic-memory?style=social)](https://github.com/thaka/magic-memory/stargazers)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-Demo (TODO: add production URL) · [Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fthaka%2Fmagic-memory)
+
+<p>AI-powered photo restoration SaaS that revives old, blurry, or damaged photos in seconds.</p>
+
+[Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md)
 
 </div>
 
 ---
 
-## Overview
+## What It Does
 
-magic-memory is a SaaS app that restores old, blurry, or damaged photos using the GFPGAN model on Replicate. It provides instant results, payments, a credit system, and a streamlined UX for uploads, safety checks, and downloads.
-
-## Features
-
-- AI restoration via GFPGAN on Replicate.
+- Restores old, blurry, or damaged photos with GFPGAN on Replicate.
+- Client-side NSFW detection blocks unsafe uploads before they hit the server.
 - Credit system with daily free credit plus paid packs that never expire.
-- Real-time status updates and fast processing.
-- Interactive before/after comparison slider.
-- Client-side NSFW detection before upload.
-- Authentication with Clerk; payments via Stripe; storage in Supabase.
+- Real-time job status, interactive before/after slider, and downloadable results.
+- Authentication with Clerk; payments via Stripe; storage on Supabase.
+
+## Why It’s Useful
+
+- Reliable quality: GFPGAN restores facial detail and clarity automatically.
+- Fast path to production: App Router, server-first patterns, and SWR for data.
+- Safe by default: NSFW prefiltering and rate limiting via Upstash Redis.
+- Clear pricing: free daily credit to try, paid credits that stay in your account.
+
+## 📸 Screenshots
+
+<div align="center">
+  <img src="./public/og-image-restore.png" alt="Magic Memory restored photo preview" width="90%" />
+</div>
 
 ## Tech stack
 
 | Category         | Technology                      |
 | ---------------- | ------------------------------- |
-| Framework        | Next.js 15/16 (App Router)      |
+| Framework        | Next.js 15 (App Router)         |
 | Language         | TypeScript (strict)             |
 | Styling          | Tailwind CSS 4 + shadcn/ui      |
 | Auth             | Clerk                           |
@@ -48,7 +61,7 @@ magic-memory is a SaaS app that restores old, blurry, or damaged photos using th
 | Data fetching    | SWR                             |
 | Validation       | Zod                             |
 
-## Quick start
+## Getting Started
 
 ### Prerequisites
 
@@ -75,26 +88,14 @@ Run the SQL scripts in `scripts/` (in order):
 - `scripts/003_create_purchases_table.sql`
 - `scripts/004_create_atomic_credit_functions.sql`
 
-### Run
+### Run locally
 
 ```bash
 pnpm dev
 # visit http://localhost:3000
 ```
 
-## Project structure
-
-```
-magic-memory/
-├── app/                # Next.js App Router pages and APIs
-├── components/         # UI and feature components
-├── lib/                # Supabase clients, Redis, logger, validations
-├── scripts/            # Database migrations and SEO audit
-├── __tests__/          # Vitest coverage for APIs and libs
-└── .github/            # CI, issue/PR templates, funding
-```
-
-## Commands
+## Useful scripts
 
 | Command              | Purpose                                |
 | -------------------- | -------------------------------------- |
@@ -107,6 +108,28 @@ magic-memory/
 | `pnpm run seo:audit` | SEO audit script                       |
 
 Pre-commit: run `pnpm lint` and `pnpm type-check`.
+
+## Testing
+
+- `pnpm type-check` — TypeScript validation without emit.
+- `pnpm test:run` — Run the Vitest suite used in CI.
+
+## Deployment
+
+- One-click: use the Vercel button above (defaults to `next build` output). Add all required environment variables (Clerk, Supabase, Stripe, Replicate, Upstash) in the Vercel dashboard.
+- Manual: `pnpm build` then `pnpm start` on Node 20+. Ensure your host provides the same environment variables and Supabase/Redis endpoints.
+
+## Project structure
+
+```
+magic-memory/
+├── app/                # Next.js App Router pages and APIs
+├── components/         # UI and feature components
+├── lib/                # Supabase clients, Redis, logger, validations
+├── scripts/            # Database migrations and SEO audit
+├── __tests__/          # Vitest coverage for APIs and libs
+└── .github/            # CI, issue/PR templates, funding
+```
 
 ## Architecture at a glance
 

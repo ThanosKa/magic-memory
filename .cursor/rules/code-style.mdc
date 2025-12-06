@@ -1,6 +1,13 @@
+---
+description:  code style for TypeScript/React in this repo
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+
 # Code Style Rules
 
 ## TypeScript
+
 - Strict mode enabled (`"strict": true`)
 - Prefer `type` over `interface`
 - Use Zod for runtime validation, infer types: `type User = z.infer<typeof UserSchema>`
@@ -8,6 +15,7 @@
 - Use optional chaining (`?.`) and nullish coalescing (`??`)
 
 ## React
+
 - Server Components by default
 - Add `"use client"` only for hooks, browser APIs, or event handlers
 - Prefer named exports: `export function Component()`
@@ -15,17 +23,19 @@
 - Destructure props in function signature
 
 ## Imports
+
 Order: React/Next → third-party → components → utils → types
 
 ```typescript
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { logger } from "@/lib/logger"
-import type { User } from "@/lib/validations"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { logger } from "@/lib/logger";
+import type { User } from "@/lib/validations";
 ```
 
 ## Naming
+
 - Components: `PascalCase` (e.g., `RestoreUploader`)
 - Files: `kebab-case` (e.g., `restore-uploader.tsx`)
 - Functions: `camelCase` (e.g., `handleSubmit`)
@@ -33,6 +43,7 @@ import type { User } from "@/lib/validations"
 - Types: `PascalCase` (e.g., `UserProfile`)
 
 ## Comments
+
 - JSDoc for exported functions only
 - Inline comments for complex logic only
 - No emojis
