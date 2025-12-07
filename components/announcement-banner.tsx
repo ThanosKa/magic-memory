@@ -39,11 +39,10 @@ export function AnnouncementBanner() {
             for 40% off all pricing.
           </span>
           <span className="text-sm text-primary-foreground/85 sm:text-base">
-            Limited time launch offer—redeem at checkout.
+            Limited time launch offer.
           </span>
         </div>
       </div>
     </div>
   );
 }
-
