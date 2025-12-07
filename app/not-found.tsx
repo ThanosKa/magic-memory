@@ -48,27 +48,6 @@ export default function NotFound() {
               </Link>
             </Button>
           </div>
-
-          <div className="mt-12">
-            <p className="text-sm text-muted-foreground mb-4">
-              Looking for something specific?
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center text-sm">
-              <Link
-                href="/"
-                className="text-primary hover:underline inline-flex items-center"
-              >
-                <ArrowLeft className="mr-1 h-3 w-3" />
-                Home
-              </Link>
-              <Link href="/pricing" className="text-primary hover:underline">
-                Pricing
-              </Link>
-              <Link href="/restore" className="text-primary hover:underline">
-                Restore
-              </Link>
-            </div>
-          </div>
         </div>
       </main>
       <Footer />
