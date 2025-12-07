@@ -14,6 +14,11 @@ import { CreditsSkeleton } from "@/components/ui/loading-states";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
+type NavLink = {
+  href: string;
+  label: string;
+};
+
 function HeaderWithClerk() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,11 +30,50 @@ function HeaderWithClerk() {
   );
   const totalCredits = creditsData?.data?.totalCredits ?? 0;
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { href: "/", label: "Home" },
     { href: "/restore", label: "Restore" },
     { href: "/pricing", label: "Pricing" },
   ];
+
+  const renderNavLink = (link: NavLink, variant: "desktop" | "mobile") => {
+    const isActive = pathname === link.href;
+    const classes =
+      variant === "desktop"
+        ? `text-sm font-medium transition-colors hover:text-primary ${
+            isActive ? "text-foreground" : "text-muted-foreground"
+          }`
+        : `rounded-md px-2 py-1.5 text-lg font-medium transition-colors hover:bg-muted hover:text-primary ${
+            isActive ? "bg-muted text-foreground" : "text-muted-foreground"
+          }`;
+    const handleClick =
+      variant === "mobile" ? () => setMobileOpen(false) : undefined;
+
+    if (link.href === "/restore" && isLoaded && !isSignedIn) {
+      return (
+        <SignInButton mode="modal" forceRedirectUrl="/restore" key={link.href}>
+          <button
+            type="button"
+            className={`${classes} w-full text-left`}
+            onClick={handleClick}
+          >
+            {link.label}
+          </button>
+        </SignInButton>
+      );
+    }
+
+    return (
+      <Link
+        key={link.href}
+        href={link.href}
+        onClick={handleClick}
+        className={classes}
+      >
+        {link.label}
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -48,19 +92,7 @@ function HeaderWithClerk() {
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  pathname === link.href
-                    ? "text-foreground"
-                    : "text-muted-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => renderNavLink(link, "desktop"))}
           </nav>
 
           <div className="flex items-center gap-4">
@@ -118,20 +150,7 @@ function HeaderWithClerk() {
                       </Link>
                     ))}
                   <nav className="flex flex-col gap-3">
-                    {navLinks.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        className={`rounded-md px-2 py-1.5 text-lg font-medium transition-colors hover:bg-muted hover:text-primary ${
-                          pathname === link.href
-                            ? "bg-muted text-foreground"
-                            : "text-muted-foreground"
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
+                    {navLinks.map((link) => renderNavLink(link, "mobile"))}
                   </nav>
                   {!isSignedIn && (
                     <div className="flex flex-col gap-3 pt-2">
