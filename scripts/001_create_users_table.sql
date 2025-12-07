@@ -36,7 +36,7 @@ CREATE POLICY "Service role can insert users" ON users
 -- Create trigger to auto-update updated_at
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER 
-SET search_path = ''
+SET search_path = public
 AS $$
 BEGIN
   NEW.updated_at = NOW();
