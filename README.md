@@ -15,12 +15,12 @@
 [![Upstash Redis](https://img.shields.io/badge/Upstash_Redis-00E9A3?style=for-the-badge&logo=redis&logoColor=white)](https://upstash.com/)
 [![pnpm](https://img.shields.io/badge/pnpm-FFCF00?style=for-the-badge&logo=pnpm&logoColor=black)](https://pnpm.io/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/thaka/magic-memory?style=for-the-badge&logo=github)](https://github.com/thaka/magic-memory/stargazers)
+[![Stars](https://img.shields.io/github/stars/ThanosKa/magic-memory?style=for-the-badge&logo=github)](https://github.com/ThanosKa/magic-memory/stargazers)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
 
 <p>AI-powered photo restoration SaaS that revives old, blurry, or damaged photos with GFPGAN, safe-by-default uploads, no persistent image storage, and a transparent credit system.</p>
 
-[Report Bug](https://github.com/thaka/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/thaka/magic-memory/issues/new?template=feature_request.md) · [Discussions](https://github.com/thaka/magic-memory/discussions)
+[Report Bug](https://github.com/ThanosKa/magic-memory/issues/new?template=bug_report.md) · [Request Feature](https://github.com/ThanosKa/magic-memory/issues/new?template=feature_request.md) · [Discussions](https://github.com/ThanosKa/magic-memory/discussions)
 
 </div>
 
@@ -140,7 +140,7 @@ Quick preview of the flow: upload → Replicate GFPGAN → credit deduction → 
 ### Installation
 
 ```bash
-git clone https://github.com/thaka/magic-memory.git
+git clone https://github.com/ThanosKa/magic-memory.git
 cd magic-memory
 pnpm install
 ```
@@ -235,7 +235,7 @@ The easiest way to deploy magic-memory.dev is with Vercel:
 4. Update `NEXT_PUBLIC_APP_URL` to your production domain.
 5. Deploy.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fthaka%2Fmagic-memory)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FThanosKa%2Fmagic-memory)
 
 ### Manual Deploy
 
@@ -278,20 +278,20 @@ Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Avo
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=thaka/magic-memory&type=Date)](https://star-history.com/#thaka/magic-memory&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=ThanosKa/magic-memory&type=Date)](https://star-history.com/#ThanosKa/magic-memory&Date)
 
 </div>
 
 ## Contact
 
-- GitHub Issues: [Open an issue](https://github.com/thaka/magic-memory/issues)
-- Discussions: [Join the conversation](https://github.com/thaka/magic-memory/discussions)
+- GitHub Issues: [Open an issue](https://github.com/ThanosKa/magic-memory/issues)
+- Discussions: [Join the conversation](https://github.com/ThanosKa/magic-memory/discussions)
 - X: [@KazakisThanos](https://x.com/KazakisThanos)
 - Email: kazakis.th@gmail.com
 
 ## Support
 
-[Buy Me a Coffee](https://buymeacoffee.com/thaka)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/thaka)
 
 ## License
 

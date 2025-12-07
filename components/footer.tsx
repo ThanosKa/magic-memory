@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-
 export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/30">
@@ -69,7 +68,7 @@ export function Footer() {
             <h3 className="font-semibold">Connect</h3>
             <nav className="flex flex-col gap-2 items-center md:items-start">
               <a
-                href="https://github.com"
+                href="https://github.com/ThanosKa/magic-memory"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-foreground"

@@ -12,7 +12,7 @@ Thank you for helping build magic-memory. This guide explains how to set up your
 
 1. Fork the repository and clone your fork:
    ```bash
-   git clone https://github.com/thaka/magic-memory.git
+   git clone https://github.com/ThanosKa/magic-memory.git
    cd magic-memory
    ```
 2. Install dependencies:
