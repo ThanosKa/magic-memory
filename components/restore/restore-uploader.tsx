@@ -280,7 +280,7 @@ export function RestoreUploader() {
       : 1;
   const displayWidth = imageDimensions?.width ?? 1200;
   const displayHeight = imageDimensions?.height ?? 800;
-  const comparisonContainerClass = "w-full max-w-7xl mx-auto";
+  const comparisonContainerClass = "w-full max-w-5xl mx-auto px-0 sm:px-4";
 
   return (
     <div className="mt-4 space-y-8">

@@ -57,13 +57,15 @@ export function FeaturesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Everything you need to restore your photos</h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-balance">
+            Everything you need to restore your photos
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground text-pretty">
             Powerful AI technology made simple and accessible for everyone.
           </p>
         </motion.div>
         <motion.div
-          className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}

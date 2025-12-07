@@ -102,7 +102,7 @@ function HeaderWithClerk() {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-72">
+              <SheetContent side="right" className="w-80 max-w-[90vw] px-4">
                 <div className="flex flex-col gap-6 pt-6">
                   {isSignedIn &&
                     (isCreditsLoading ? (
@@ -111,21 +111,21 @@ function HeaderWithClerk() {
                       <Link
                         href="/pricing"
                         onClick={() => setMobileOpen(false)}
-                        className="flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium w-fit transition-colors hover:bg-accent/80 hover:text-primary"
+                        className="flex items-center gap-2 rounded-full bg-accent px-3.5 py-1.5 text-sm font-medium w-fit transition-colors hover:bg-accent/80 hover:text-primary"
                       >
                         <Coins className="h-4 w-4 text-primary" />
                         <span>{totalCredits} credits</span>
                       </Link>
                     ))}
-                  <nav className="flex flex-col gap-4">
+                  <nav className="flex flex-col gap-3">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`text-lg font-medium transition-colors hover:text-primary ${
+                        className={`rounded-md px-2 py-1.5 text-lg font-medium transition-colors hover:bg-muted hover:text-primary ${
                           pathname === link.href
-                            ? "text-foreground"
+                            ? "bg-muted text-foreground"
                             : "text-muted-foreground"
                         }`}
                       >
@@ -134,7 +134,7 @@ function HeaderWithClerk() {
                     ))}
                   </nav>
                   {!isSignedIn && (
-                    <div className="flex flex-col gap-2 pt-4">
+                    <div className="flex flex-col gap-3 pt-2">
                       <SignInButton mode="modal">
                         <Button
                           variant="outline"
@@ -226,17 +226,17 @@ function HeaderWithoutClerk() {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-72">
+              <SheetContent side="right" className="w-80 max-w-[90vw] px-4">
                 <div className="flex flex-col gap-6 pt-6">
-                  <nav className="flex flex-col gap-4">
+                  <nav className="flex flex-col gap-3">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`text-lg font-medium transition-colors hover:text-primary ${
+                        className={`rounded-md px-2 py-1.5 text-lg font-medium transition-colors hover:bg-muted hover:text-primary ${
                           pathname === link.href
-                            ? "text-foreground"
+                            ? "bg-muted text-foreground"
                             : "text-muted-foreground"
                         }`}
                       >
@@ -244,7 +244,7 @@ function HeaderWithoutClerk() {
                       </Link>
                     ))}
                   </nav>
-                  <div className="flex flex-col gap-2 pt-4">
+                  <div className="flex flex-col gap-3 pt-2">
                     <Button
                       variant="outline"
                       className="w-full bg-transparent"

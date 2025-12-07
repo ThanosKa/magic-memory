@@ -23,7 +23,8 @@ export function ImageComparisonSlider({
   className,
   aspectRatio,
 }: ImageComparisonSliderProps) {
-  const baseContainerClass = "w-full max-w-7xl mx-auto min-h-[600px]";
+  const baseContainerClass =
+    "w-full max-w-full md:max-w-5xl lg:max-w-6xl mx-auto min-h-[260px] sm:min-h-[340px] md:min-h-[460px]";
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);

@@ -6,8 +6,8 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div className="space-y-4">
+        <div className="grid gap-10 md:grid-cols-4">
+          <div className="space-y-4 text-center md:text-left">
             <div className="flex items-center gap-2">
               <Image
                 src="/icon.png"
@@ -23,9 +23,9 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold">Product</h3>
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2 items-center md:items-start">
               <Link
                 href="/"
                 className="text-sm text-muted-foreground hover:text-foreground"
@@ -47,9 +47,9 @@ export function Footer() {
             </nav>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold">Legal</h3>
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2 items-center md:items-start">
               <Link
                 href="/terms"
                 className="text-sm text-muted-foreground hover:text-foreground"
@@ -65,9 +65,9 @@ export function Footer() {
             </nav>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold">Connect</h3>
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2 items-center md:items-start">
               <a
                 href="https://github.com"
                 target="_blank"
