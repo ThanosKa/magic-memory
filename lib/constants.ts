@@ -44,7 +44,6 @@ export const CREDIT_PACKAGES = {
       "High-quality results",
       "Fast processing",
       "Priority support",
-      "Bulk processing",
     ],
   },
 } as const;
