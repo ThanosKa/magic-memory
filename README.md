@@ -285,7 +285,6 @@ Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Avo
 ## Contact
 
 - GitHub Issues: [Open an issue](https://github.com/ThanosKa/magic-memory/issues)
-- Discussions: [Join the conversation](https://github.com/ThanosKa/magic-memory/discussions)
 - X: [@KazakisThanos](https://x.com/KazakisThanos)
 - Email: kazakis.th@gmail.com
 
