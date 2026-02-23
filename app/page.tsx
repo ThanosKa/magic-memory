@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
-import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers";
+import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd } from "@/lib/seo/metadata-helpers";
+import { homepageFaqs } from "@/lib/seo/faq-data";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 
 const Header = dynamic(
@@ -25,6 +26,43 @@ const HeroSection = dynamic(
   }
 );
 
+const SocialProof = dynamic(
+  () => import("@/components/landing/social-proof").then((m) => m.SocialProof),
+  {
+    ssr: true,
+  }
+);
+
+const HowItWorksSection = dynamic(
+  () =>
+    import("@/components/landing/how-it-works-section").then(
+      (m) => m.HowItWorksSection
+    ),
+  {
+    ssr: true,
+  }
+);
+
+const FeaturesSection = dynamic(
+  () =>
+    import("@/components/landing/features-section").then(
+      (m) => m.FeaturesSection
+    ),
+  {
+    ssr: true,
+  }
+);
+
+const TestimonialsSection = dynamic(
+  () =>
+    import("@/components/landing/testimonials-section").then(
+      (m) => m.TestimonialsSection
+    ),
+  {
+    ssr: true,
+  }
+);
+
 const FAQSection = dynamic(
   () => import("@/components/landing/faq-section").then((m) => m.FAQSection),
   {
@@ -41,7 +79,8 @@ const CTASection = dynamic(
 
 export const metadata: Metadata = {
   title: "Magic Memory - AI Photo Restoration",
-  description: "Restore your old photos with AI. Start free, no card required.",
+  description:
+    "Restore your old photos with AI. Start free, no card required.",
   alternates: {
     canonical: getCanonicalUrl("/"),
   },
@@ -77,9 +116,33 @@ import {
   webApplicationJsonLd,
 } from "@/lib/seo/metadata-helpers";
 
+const howToJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How to Restore Old Photos with AI",
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "Upload Your Photo",
+      text: "Upload a JPEG, PNG, or WebP photo up to 10MB.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "AI Restores It",
+      text: "GFPGAN AI restores faces and enhances photo quality in 5-15 seconds.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Download Your Result",
+      text: "Download your restored photo in full resolution.",
+    },
+  ],
+};
+
 export default function Page() {
   const orgJsonLd = organizationJsonLd();
   const appJsonLd = webApplicationJsonLd();
+  const faqJsonLd = faqPageJsonLd(homepageFaqs);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -91,11 +154,23 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+      />
       <Suspense fallback={<LandingFallback />}>
         <Header />
         <main className="flex-1">
           <h1 className="sr-only">Magic Memory - AI Photo Restoration</h1>
           <HeroSection />
+          <SocialProof />
+          <HowItWorksSection />
+          <FeaturesSection />
+          <TestimonialsSection />
           <FAQSection />
           <CTASection />
         </main>

@@ -34,6 +34,7 @@ function HeaderWithClerk() {
     { href: "/", label: "Home" },
     { href: "/restore", label: "Restore" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/blog", label: "Blog" },
   ];
 
   const renderNavLink = (link: NavLink, variant: "desktop" | "mobile") => {
@@ -185,6 +186,7 @@ function HeaderWithoutClerk() {
     { href: "/", label: "Home" },
     { href: "/restore", label: "Restore" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/blog", label: "Blog" },
   ];
 
   return (

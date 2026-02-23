@@ -113,13 +113,13 @@ export const metadata: Metadata = {
     title: TITLE_DEFAULT,
     description: DESCRIPTION,
     images: [OG_IMAGE],
-    creator: "@TODO_set_twitter_handle",
+    creator: "@KazakisThanos",
   },
   alternates: {
     canonical: APP_URL,
   },
   category: "Technology",
-  generator: "v0.app",
+  generator: "Next.js",
 };
 
 export const viewport: Viewport = {
@@ -147,24 +147,48 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
-                "@type": "WebApplication",
-                name: BRAND,
-                description: DESCRIPTION,
-                url: APP_URL,
-                applicationCategory: "PhotographyApplication",
-                operatingSystem: "Web",
-                offers: {
-                  "@type": "Offer",
-                  price: "0",
-                  priceCurrency: "USD",
-                  description: "1 free restoration per day",
-                },
-                featureList: [
-                  "AI-powered face restoration",
-                  "GFPGAN model",
-                  "Free daily restoration",
-                  "Credit packages available",
-                  "Instant results",
+                "@graph": [
+                  {
+                    "@type": "WebApplication",
+                    name: BRAND,
+                    description: DESCRIPTION,
+                    url: APP_URL,
+                    applicationCategory: "PhotographyApplication",
+                    operatingSystem: "Web",
+                    offers: {
+                      "@type": "Offer",
+                      price: "0",
+                      priceCurrency: "EUR",
+                      description: "1 free restoration per day",
+                    },
+                    featureList: [
+                      "AI-powered face restoration",
+                      "GFPGAN model",
+                      "Free daily restoration",
+                      "Credit packages available",
+                      "Instant results",
+                    ],
+                  },
+                  {
+                    "@type": "Organization",
+                    name: BRAND,
+                    url: APP_URL,
+                    logo: `${APP_URL}/icon.svg`,
+                    sameAs: [
+                      "https://twitter.com/KazakisThanos",
+                      "https://github.com/ThanosKa/magic-memory",
+                    ],
+                  },
+                  {
+                    "@type": "WebSite",
+                    name: BRAND,
+                    url: APP_URL,
+                    potentialAction: {
+                      "@type": "SearchAction",
+                      target: `${APP_URL}/blog?q={search_term_string}`,
+                      "query-input": "required name=search_term_string",
+                    },
+                  },
                 ],
               }),
             }}

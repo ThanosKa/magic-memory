@@ -2,7 +2,6 @@
 
 import { Users } from "lucide-react"
 import { motion } from "framer-motion"
-import Image from "next/image"
 
 export function SocialProof() {
   return (
@@ -19,21 +18,12 @@ export function SocialProof() {
             {[1, 2, 3, 4, 5].map((i) => (
               <motion.div
                 key={i}
-                className="h-8 w-8 rounded-full border-2 border-background bg-accent overflow-hidden"
+                className="h-8 w-8 rounded-full border-2 border-background bg-accent"
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-              >
-                <Image
-                  src={`/happy-user-avatar-.jpg?height=32&width=32&query=happy user avatar ${i}`}
-                  alt={`User ${i}`}
-                  width={32}
-                  height={32}
-                  className="object-cover"
-                  loading="lazy"
-                />
-              </motion.div>
+              />
             ))}
           </div>
           <div className="flex items-center gap-2">

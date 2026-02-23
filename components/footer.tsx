@@ -5,8 +5,8 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div className="space-y-4 text-center md:text-left">
+        <div className="grid gap-10 md:grid-cols-5">
+          <div className="space-y-4 text-center md:col-span-1 md:text-left">
             <div className="flex items-center gap-2">
               <Image
                 src="/icon.png"
@@ -43,6 +43,66 @@ export function Footer() {
               >
                 Magic Memory
               </Link>
+              <Link
+                href="/blog"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Blog
+              </Link>
+              <Link
+                href="/restore-old-photos"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Restore Old Photos
+              </Link>
+              <Link
+                href="/fix-blurry-photos"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Fix Blurry Photos
+              </Link>
+              <Link
+                href="/alternatives"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Photo Restoration Alternatives
+              </Link>
+            </nav>
+          </div>
+
+          <div className="space-y-4 text-center md:text-left">
+            <h3 className="font-semibold">Resources</h3>
+            <nav className="flex flex-col gap-2 items-center md:items-start">
+              <Link
+                href="/restore-family-photos"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Restore Family Photos
+              </Link>
+              <Link
+                href="/restore-wedding-photos"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Restore Wedding Photos
+              </Link>
+              <Link
+                href="/restore-damaged-photos"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Fix Damaged Photos
+              </Link>
+              <Link
+                href="/blog/how-to-restore-old-photos"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                How to Restore Old Photos
+              </Link>
+              <Link
+                href="/blog/gfpgan-explained"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                What is GFPGAN?
+              </Link>
             </nav>
           </div>
 
@@ -76,7 +136,7 @@ export function Footer() {
                 GitHub
               </a>
               <a
-                href="https://twitter.com"
+                href="https://twitter.com/KazakisThanos"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-foreground"
@@ -95,7 +155,7 @@ export function Footer() {
 
         <div className="mt-8 border-t border-border pt-8">
           <p className="text-center text-sm text-muted-foreground">
-            © 2025 Thaka — All rights reserved.
+            &copy; 2026 Thaka — All rights reserved.
           </p>
         </div>
       </div>

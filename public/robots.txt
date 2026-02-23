@@ -1,22 +1,13 @@
-# robots.txt for Magic Memory
+# robots.txt — Magic Memory
 
-# Allow all crawlers
 User-agent: *
 Allow: /
-
-# Disallow authenticated/user-specific pages
 Disallow: /api/
-Disallow: /restore/
 Disallow: /_next/
 Disallow: /.well-known/
 
-# Sitemap reference
-# TODO: set production sitemap URL
-Sitemap: http://localhost:3000/sitemap.xml
+# Authenticated tool — no SEO value
+Disallow: /restore
 
-# Crawl-delay for specific bots (if needed)
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
+# Sitemap
+Sitemap: https://magic-memory.com/sitemap.xml

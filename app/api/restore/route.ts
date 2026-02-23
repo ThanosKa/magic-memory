@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { unstable_noStore as noStore } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -86,6 +87,9 @@ async function runReplicateWithPolling(imageBase64: string): Promise<string> {
 }
 
 export async function POST(request: NextRequest) {
+  // Prevent Next.js from caching any fetch calls (predictions polling GET requests)
+  noStore()
+
   let restorationId: string | null = null
   let usedFreeCredit = false
   let userId: string | null = null
@@ -101,13 +105,18 @@ export async function POST(request: NextRequest) {
 
     const rateLimiter = getRateLimiter()
     if (rateLimiter) {
-      const { success, remaining } = await rateLimiter.limit(userId)
-      if (!success) {
-        logger.warn({ userId, remaining }, "Rate limit exceeded")
-        return NextResponse.json(
-          { success: false, error: "Too many requests. Please wait a minute before trying again." },
-          { status: 429 }
-        )
+      try {
+        const { success, remaining } = await rateLimiter.limit(userId)
+        if (!success) {
+          logger.warn({ userId, remaining }, "Rate limit exceeded")
+          return NextResponse.json(
+            { success: false, error: "Too many requests. Please wait a minute before trying again." },
+            { status: 429 }
+          )
+        }
+      } catch (redisErr) {
+        // Redis unavailable — log and continue rather than blocking restoration
+        logger.warn({ userId, error: redisErr instanceof Error ? redisErr.message : String(redisErr) }, "Rate limiter unavailable, skipping")
       }
     }
 
@@ -223,7 +232,8 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Failed to restore image"
-    logger.error({ userId, error: errorMessage }, "Restoration error")
+    const errorCause = error instanceof Error && error.cause ? String(error.cause) : undefined
+    logger.error({ userId, error: errorMessage, cause: errorCause }, "Restoration error")
 
     if (restorationId) {
       await rollbackRestoration(restorationId)

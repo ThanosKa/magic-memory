@@ -14,7 +14,10 @@ export const organizationJsonLd = (
   name,
   url,
   logo,
-  sameAs: [],
+  sameAs: [
+    "https://twitter.com/KazakisThanos",
+    "https://github.com/ThanosKa/magic-memory",
+  ],
 });
 
 export const webApplicationJsonLd = (): Thing => ({
@@ -29,7 +32,7 @@ export const webApplicationJsonLd = (): Thing => ({
   offers: {
     "@type": "Offer",
     price: "0",
-    priceCurrency: "USD",
+    priceCurrency: "EUR",
     description:
       "1 free restoration per day, with paid credit packages available",
   },
@@ -97,7 +100,7 @@ export const offerCatalogJsonLd = (
     name: offer.name,
     description: offer.description,
     price: offer.price,
-    priceCurrency: "USD",
+    priceCurrency: "EUR",
     availability: "https://schema.org/InStock",
     itemOffered: {
       "@type": "Service",
@@ -137,7 +140,7 @@ export const getOgImageUrl = (
 export const defaultMetadata = {
   siteName: SITE_NAME,
   siteUrl: SITE_URL,
-  twitterHandle: "@TODO_set_twitter_handle", // TODO: set Twitter/X handle
+  twitterHandle: "@KazakisThanos",
   ogType: "website" as const,
   locale: "en_US",
 };

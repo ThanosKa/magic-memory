@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     images: [getOgImageUrl()],
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 };
 

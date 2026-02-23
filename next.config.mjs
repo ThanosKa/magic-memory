@@ -8,7 +8,15 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "**.replicate.delivery" },
+      { protocol: "https", hostname: "replicate.delivery" },
+      { protocol: "https", hostname: "pbxt.replicate.delivery" },
+    ],
+    localPatterns: [
+      { pathname: "/**", search: "" },
+      { pathname: "/**" },
+    ],
   },
   turbopack: {
     root: path.join(__dirname, "."),
@@ -18,6 +26,7 @@ const nextConfig = {
     "pino-pretty",
     "thread-stream",
     "sonic-boom",
+    "replicate",
   ],
 };
 

@@ -3,7 +3,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Twitter } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const testimonials = [
   {
@@ -12,6 +11,7 @@ const testimonials = [
     author: "Sarah M.",
     role: "Family Historian",
     twitter: "https://twitter.com",
+    initials: "SM",
   },
   {
     quote:
@@ -19,6 +19,7 @@ const testimonials = [
     author: "Michael K.",
     role: "Photographer",
     twitter: "https://twitter.com",
+    initials: "MK",
   },
   {
     quote:
@@ -26,6 +27,7 @@ const testimonials = [
     author: "Jennifer L.",
     role: "Mother of 3",
     twitter: "https://twitter.com",
+    initials: "JL",
   },
   {
     quote:
@@ -33,6 +35,7 @@ const testimonials = [
     author: "David R.",
     role: "Hobbyist",
     twitter: "https://twitter.com",
+    initials: "DR",
   },
   {
     quote:
@@ -40,6 +43,7 @@ const testimonials = [
     author: "Emily C.",
     role: "Graphic Designer",
     twitter: "https://twitter.com",
+    initials: "EC",
   },
   {
     quote:
@@ -47,6 +51,7 @@ const testimonials = [
     author: "James W.",
     role: "Content Creator",
     twitter: "https://twitter.com",
+    initials: "JW",
   },
 ];
 
@@ -97,15 +102,8 @@ export function TestimonialsSection() {
                   </p>
                   <div className="mt-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-accent overflow-hidden">
-                        <Image
-                          src={`/.jpg?height=40&width=40&query=${testimonial.author} avatar`}
-                          alt={testimonial.author}
-                          width={40}
-                          height={40}
-                          className="object-cover"
-                          loading="lazy"
-                        />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-xs font-semibold text-accent-foreground">
+                        {testimonial.initials}
                       </div>
                       <div>
                         <p className="text-sm font-medium">

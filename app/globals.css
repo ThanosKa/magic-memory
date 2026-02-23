@@ -123,3 +123,68 @@
     @apply bg-background text-foreground overflow-x-hidden;
   }
 }
+
+/* Article body typography for blog posts */
+.article-body h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.article-body h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.article-body p {
+  color: var(--muted-foreground);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.article-body ul,
+.article-body ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.article-body ul {
+  list-style-type: disc;
+}
+
+.article-body ol {
+  list-style-type: decimal;
+}
+
+.article-body li {
+  color: var(--muted-foreground);
+  line-height: 1.75;
+  margin-bottom: 0.5rem;
+}
+
+.article-body strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.article-body code {
+  font-size: 0.875em;
+  background: var(--muted);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+.article-body .not-prose {
+  all: revert;
+}
+
+.not-prose {
+  font-size: 1rem;
+  line-height: 1.5;
+}
