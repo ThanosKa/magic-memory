@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog/posts";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.com";
+  process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

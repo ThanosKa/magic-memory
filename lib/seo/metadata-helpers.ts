@@ -1,6 +1,6 @@
 type Thing = Record<string, unknown>;
 
-const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"; // TODO: set production URL
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 const SITE_NAME = "Magic Memory";
 const SITE_TITLE = "Magic Memory - AI-Powered Photo Restoration";
 

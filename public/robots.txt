@@ -10,4 +10,4 @@ Disallow: /.well-known/
 Disallow: /restore
 
 # Sitemap
-Sitemap: https://magic-memory.com/sitemap.xml
+Sitemap: https://magic-memory.dev/sitemap.xml
