@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-5">
+        <div className="grid gap-10 md:grid-cols-6">
           <div className="space-y-4 text-center md:col-span-1 md:text-left">
             <div className="flex items-center gap-2">
               <Image
@@ -61,11 +61,41 @@ export function Footer() {
               >
                 Fix Blurry Photos
               </Link>
+            </nav>
+          </div>
+
+          <div className="space-y-4 text-center md:text-left">
+            <h3 className="font-semibold">Compare</h3>
+            <nav className="flex flex-col gap-2 items-center md:items-start">
+              <Link
+                href="/vs/remini"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                vs Remini
+              </Link>
+              <Link
+                href="/vs/myheritage"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                vs MyHeritage
+              </Link>
+              <Link
+                href="/vs/vanceai"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                vs VanceAI
+              </Link>
+              <Link
+                href="/alternatives/remini"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                Remini Alternative
+              </Link>
               <Link
                 href="/alternatives"
                 className="text-sm text-muted-foreground hover:text-foreground"
               >
-                Photo Restoration Alternatives
+                All Alternatives
               </Link>
             </nav>
           </div>

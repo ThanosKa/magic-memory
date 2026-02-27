@@ -111,15 +111,12 @@ export const metadata: Metadata = {
   },
 };
 
-import {
-  organizationJsonLd,
-  webApplicationJsonLd,
-} from "@/lib/seo/metadata-helpers";
-
 const howToJsonLd = {
   "@context": "https://schema.org",
   "@type": "HowTo",
   name: "How to Restore Old Photos with AI",
+  description: "Restore old, blurry, or damaged photos using Magic Memory's GFPGAN AI in three simple steps.",
+  totalTime: "PT1M",
   step: [
     {
       "@type": "HowToStep",
@@ -140,20 +137,10 @@ const howToJsonLd = {
 };
 
 export default function Page() {
-  const orgJsonLd = organizationJsonLd();
-  const appJsonLd = webApplicationJsonLd();
   const faqJsonLd = faqPageJsonLd(homepageFaqs);
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
