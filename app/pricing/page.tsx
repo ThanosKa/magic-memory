@@ -66,9 +66,9 @@ export const metadata: Metadata = {
     canonical: getCanonicalUrl("/pricing"),
   },
   openGraph: {
-    title: "Pricing - Photo Restoration Credits",
+    title: "Pricing — AI Photo Restoration Credits | Magic Memory",
     description:
-      "Affordable photo restoration with AI. Free daily credit or choose from our euro-priced credit packages.",
+      "Get 1 free AI photo restoration daily or purchase credits that never expire. Starter from \u20ac9.99. Powered by GFPGAN — instant results in under 15 seconds.",
     url: getCanonicalUrl("/pricing"),
     type: "website",
     images: [
@@ -82,9 +82,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing - Photo Restoration Credits",
+    title: "Pricing — AI Photo Restoration Credits | Magic Memory",
     description:
-      "Affordable photo restoration with AI. Free daily credit or choose from our euro-priced credit packages.",
+      "Get 1 free AI photo restoration daily or purchase credits that never expire. Starter from \u20ac9.99. Powered by GFPGAN — instant results in under 15 seconds.",
     images: [getOgImageUrl()],
   },
   robots: {
@@ -110,7 +110,7 @@ export default async function PricingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Simple, transparent pricing
+                AI Photo Restoration Pricing
               </h1>
               <p className="mt-4 text-lg text-muted-foreground">
                 Choose the plan that works best for you. Credits never expire.

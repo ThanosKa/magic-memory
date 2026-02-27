@@ -78,16 +78,16 @@ const CTASection = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Magic Memory - AI Photo Restoration",
+  title: "AI Photo Restoration — Restore Old Photos Free",
   description:
-    "Restore your old photos with AI. Start free, no card required.",
+    "Magic Memory uses GFPGAN AI to restore old, blurry, and damaged photos in under 15 seconds. Get 1 free restoration daily — no card required. Upload a photo and see instant before-and-after results. No images stored on our servers.",
   alternates: {
     canonical: getCanonicalUrl("/"),
   },
   openGraph: {
-    title: "Magic Memory - AI Photo Restoration",
+    title: "AI Photo Restoration — Restore Old Photos Free | Magic Memory",
     description:
-      "Restore your old photos with AI. Start free, no card required.",
+      "Magic Memory uses GFPGAN AI to restore old, blurry, and damaged photos in under 15 seconds. Get 1 free restoration daily — no card required. Upload a photo and see instant before-and-after results.",
     url: getCanonicalUrl("/"),
     images: [
       {
@@ -100,9 +100,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Magic Memory - AI Photo Restoration",
+    title: "AI Photo Restoration — Restore Old Photos Free | Magic Memory",
     description:
-      "Restore your old photos with AI. Start free, no card required.",
+      "Magic Memory uses GFPGAN AI to restore old, blurry, and damaged photos in under 15 seconds. Get 1 free restoration daily — no card required.",
     images: [getOgImageUrl()],
   },
   robots: {
@@ -165,7 +165,6 @@ export default function Page() {
       <Suspense fallback={<LandingFallback />}>
         <Header />
         <main className="flex-1">
-          <h1 className="sr-only">Magic Memory - AI Photo Restoration</h1>
           <HeroSection />
           <SocialProof />
           <HowItWorksSection />

@@ -20,14 +20,14 @@ export default function NotFound() {
       <Header />
       <main className="flex flex-1 items-center justify-center px-4 py-16 sm:py-20">
         <div className="text-center space-y-4 max-w-2xl">
-          <h1 className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-primary/20 select-none">
+          <p className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-primary/20 select-none" aria-hidden="true">
             404
-          </h1>
+          </p>
 
           <div className="mt-4 space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight sm:text-4xl">
               Page Not Found
-            </h2>
+            </h1>
             <p className="text-lg text-muted-foreground max-w-md mx-auto">
               Sorry, we couldn&apos;t find the page you&apos;re looking for. It
               might have been moved or doesn&apos;t exist.

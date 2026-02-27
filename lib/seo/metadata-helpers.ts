@@ -94,9 +94,8 @@ export const offerCatalogJsonLd = (
   "@type": "OfferCatalog",
   name: `${SITE_NAME} Pricing Plans`,
   description: "Photo restoration credit packages that never expire",
-  itemListElement: offers.map((offer, index) => ({
+  itemListElement: offers.map((offer) => ({
     "@type": "Offer",
-    position: index + 1,
     name: offer.name,
     description: offer.description,
     price: offer.price,

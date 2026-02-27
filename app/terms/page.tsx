@@ -4,14 +4,14 @@ import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Magic Memory",
-  description: "Terms of Service for the Magic Memory AI photo restoration service.",
+  title: "Terms of Service",
+  description: "Terms of Service for Magic Memory AI photo restoration. Covers credits, payments, data handling, acceptable use, and intellectual property. Purchased credits never expire.",
   alternates: {
     canonical: getCanonicalUrl("/terms"),
   },
   openGraph: {
     title: "Terms of Service | Magic Memory",
-    description: "Terms of Service for the Magic Memory AI photo restoration service.",
+    description: "Terms of Service for Magic Memory AI photo restoration. Covers credits, payments, data handling, and intellectual property.",
     url: getCanonicalUrl("/terms"),
     images: [
       {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Terms of Service | Magic Memory",
-    description: "Terms of Service for the Magic Memory AI photo restoration service.",
+    description: "Terms of Service for Magic Memory AI photo restoration. Covers credits, payments, data handling, and intellectual property.",
     images: [getOgImageUrl()],
   },
   robots: {

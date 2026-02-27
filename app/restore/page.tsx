@@ -81,7 +81,6 @@ export default async function RestorePage() {
       <Suspense fallback={<RestorePageFallback />}>
         <Header />
         <main className="flex flex-1 items-center justify-center py-12 sm:py-16">
-          <h1 className="sr-only">Magic Memory</h1>
           <div className="mx-auto flex w-full max-w-4xl justify-center px-4 sm:px-6 lg:px-8">
             <RestoreUploader />
           </div>
