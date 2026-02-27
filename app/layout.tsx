@@ -40,7 +40,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 const BRAND = "Magic Memory";
 const OG_IMAGE = "/og-image-restore.png";
 const TITLE_DEFAULT = `${BRAND} — AI Photo Restoration`;
