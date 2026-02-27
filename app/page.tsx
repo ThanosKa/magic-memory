@@ -26,13 +26,6 @@ const HeroSection = dynamic(
   }
 );
 
-const SocialProof = dynamic(
-  () => import("@/components/landing/social-proof").then((m) => m.SocialProof),
-  {
-    ssr: true,
-  }
-);
-
 const HowItWorksSection = dynamic(
   () =>
     import("@/components/landing/how-it-works-section").then(
@@ -143,7 +136,6 @@ export default function Page() {
         <Header />
         <main className="flex-1">
           <HeroSection />
-          <SocialProof />
           <HowItWorksSection />
           <FeaturesSection />
           <FAQSection />
