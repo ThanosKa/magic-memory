@@ -53,16 +53,6 @@ const FeaturesSection = dynamic(
   }
 );
 
-const TestimonialsSection = dynamic(
-  () =>
-    import("@/components/landing/testimonials-section").then(
-      (m) => m.TestimonialsSection
-    ),
-  {
-    ssr: true,
-  }
-);
-
 const FAQSection = dynamic(
   () => import("@/components/landing/faq-section").then((m) => m.FAQSection),
   {
@@ -156,7 +146,6 @@ export default function Page() {
           <SocialProof />
           <HowItWorksSection />
           <FeaturesSection />
-          <TestimonialsSection />
           <FAQSection />
           <CTASection />
         </main>
