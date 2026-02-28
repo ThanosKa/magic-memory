@@ -201,7 +201,7 @@ describe("POST /api/stripe/create-checkout", () => {
           userId: "user-uuid",
           clerkUserId: "clerk_user_123",
           packageType: "growth",
-          credits: "350",
+          credits: "120",
         }),
       })
     );

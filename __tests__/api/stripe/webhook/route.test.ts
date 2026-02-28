@@ -84,7 +84,7 @@ describe("POST /api/stripe/webhook", () => {
       metadata: {
         userId: "user-uuid",
         packageType: "starter",
-        credits: "100",
+        credits: "30",
         priceId: "price_starter",
       },
       payment_intent: "pi_existing",
@@ -158,7 +158,7 @@ describe("POST /api/stripe/webhook", () => {
       metadata: {
         userId: "user-uuid",
         packageType: "starter",
-        credits: "100",
+        credits: "30",
         priceId: "price_starter",
       },
       payment_intent: "pi_new_123",
@@ -221,7 +221,7 @@ describe("POST /api/stripe/webhook", () => {
 
     expect(response.status).toBe(200);
     expect(data.data?.received).toBe(true);
-    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 150 });
+    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 80 });
 
     Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
       value: originalPriceId,
@@ -236,7 +236,7 @@ describe("POST /api/stripe/webhook", () => {
       metadata: {
         userId: "user-uuid",
         packageType: "starter",
-        credits: "100",
+        credits: "30",
         priceId: "price_starter",
       },
       payment_intent: "pi_discount_123",
@@ -301,7 +301,7 @@ describe("POST /api/stripe/webhook", () => {
 
     expect(response.status).toBe(200);
     expect(data.data?.received).toBe(true);
-    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 150 });
+    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 80 });
 
     Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
       value: originalPriceId,
@@ -316,7 +316,7 @@ describe("POST /api/stripe/webhook", () => {
       metadata: {
         userId: "user-uuid",
         packageType: "starter",
-        credits: "100",
+        credits: "30",
         priceId: "price_starter",
       },
       payment_intent: null,
@@ -382,11 +382,11 @@ describe("POST /api/stripe/webhook", () => {
 
     expect(response.status).toBe(200);
     expect(data.data?.received).toBe(true);
-    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 100 });
+    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 30 });
     expect(mockInsert).toHaveBeenCalledWith({
       user_id: "user-uuid",
       stripe_payment_id: "cs_test_full_discount",
-      credits_purchased: 100,
+      credits_purchased: 30,
       amount_paid: 0,
       package_type: "starter",
     });

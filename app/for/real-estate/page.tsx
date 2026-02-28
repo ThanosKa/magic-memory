@@ -41,7 +41,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is this suitable for a real estate team?",
     answer:
-      "Yes. A credit pack of 100 restorations (\u20ac9.99) is enough to enhance headshots for an entire real estate office. Credits never expire, so you can process new team member photos as they join. Each photo is processed in under 15 seconds with no technical skill required.",
+      "Yes. A credit pack of 30 restorations (\u20ac9.99) is enough to enhance headshots for an entire real estate office. Credits never expire, so you can process new team member photos as they join. Each photo is processed in under 15 seconds with no technical skill required.",
   },
 ];
 
@@ -116,7 +116,7 @@ export default function ForRealEstatePage() {
                     </div>
                     <div>
                       <p className="font-semibold mb-1">Small team (5-20 agents)</p>
-                      <p className="text-sm text-muted-foreground">{"\u20ac"}9.99 for 100 credits. Process every team member&apos;s headshot plus marketing materials.</p>
+                      <p className="text-sm text-muted-foreground">{"\u20ac"}9.99 for 30 credits. Process every team member&apos;s headshot plus marketing materials.</p>
                     </div>
                     <div>
                       <p className="font-semibold mb-1">Large brokerage</p>

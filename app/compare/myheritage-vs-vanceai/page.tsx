@@ -31,7 +31,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which is cheaper: MyHeritage or VanceAI?",
     answer:
-      "Both offer tiered pricing. MyHeritage costs around $13/month for a genealogy subscription that includes photo enhancement. VanceAI starts at $4.95/month with limited credits. VanceAI is cheaper if you only need image tools, but MyHeritage may be better value if you also use genealogy features. Magic Memory offers one-time credits from \u20ac9.99 for 100 restorations with no subscription.",
+      "Both offer tiered pricing. MyHeritage costs around $13/month for a genealogy subscription that includes photo enhancement. VanceAI starts at $4.95/month with limited credits. VanceAI is cheaper if you only need image tools, but MyHeritage may be better value if you also use genealogy features. Magic Memory offers one-time credits from \u20ac9.99 for 30 restorations with no subscription.",
   },
   {
     question: "Does MyHeritage have batch processing?",

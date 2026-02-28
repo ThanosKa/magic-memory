@@ -41,7 +41,7 @@ const faqs: FAQItem[] = [
   {
     question: "Can I restore multiple ancestor photos at once?",
     answer:
-      "Magic Memory processes one photo at a time through the web interface. You get 1 free restoration per day. For larger genealogy projects, credit packs start at \u20ac9.99 for 100 restorations — enough for an entire family photo collection. Credits never expire.",
+      "Magic Memory processes one photo at a time through the web interface. You get 1 free restoration per day. For larger genealogy projects, credit packs start at \u20ac9.99 for 30 restorations — enough for an entire family photo collection. Credits never expire.",
   },
 ];
 
@@ -105,7 +105,7 @@ export default function ForGenealogistsPage() {
                   </div>
                   <div className="rounded-2xl border border-border bg-card p-6">
                     <h3 className="font-semibold mb-2">No subscription required</h3>
-                    <p className="text-sm text-muted-foreground">Unlike MyHeritage (which requires a genealogy subscription) or Remini (which charges $9.99/week), Magic Memory offers 1 free restoration per day and credit packs from {"\u20ac"}9.99 for 100 restorations that never expire.</p>
+                    <p className="text-sm text-muted-foreground">Unlike MyHeritage (which requires a genealogy subscription) or Remini (which charges $9.99/week), Magic Memory offers 1 free restoration per day and credit packs from {"\u20ac"}9.99 for 30 restorations that never expire.</p>
                   </div>
                 </div>
               </div>
@@ -132,7 +132,7 @@ export default function ForGenealogistsPage() {
                       </tr>
                     </thead>
                     <tbody className="text-muted-foreground">
-                      <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Price</td><td className="py-2">{"\u20ac"}9.99 one-time (100 photos)</td><td className="py-2">~$13/month subscription</td></tr>
+                      <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Price</td><td className="py-2">{"\u20ac"}9.99 one-time (30 photos)</td><td className="py-2">~$13/month subscription</td></tr>
                       <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Free tier</td><td className="py-2">1/day, no card</td><td className="py-2">Very limited</td></tr>
                       <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Photo storage</td><td className="py-2">None (privacy-first)</td><td className="py-2">Stored in account</td></tr>
                       <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Genealogy tools</td><td className="py-2">Photo restoration only</td><td className="py-2">Family trees, DNA, records</td></tr>
@@ -149,7 +149,7 @@ export default function ForGenealogistsPage() {
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 mb-12">
               <h2 className="text-xl font-semibold mb-3">Restore Your Ancestor Photos</h2>
               <p className="text-muted-foreground mb-4">
-                Upload an old family photo and see the restoration in under 15 seconds. 1 free restoration per day, no credit card required. Credit packs from {"\u20ac"}9.99 for 100 restorations — enough for an entire family photo collection.
+                Upload an old family photo and see the restoration in under 15 seconds. 1 free restoration per day, no credit card required. Credit packs from {"\u20ac"}9.99 for 30 restorations — enough for an entire family photo collection.
               </p>
               <Link
                 href="/restore"

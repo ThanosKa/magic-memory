@@ -27,7 +27,7 @@ export const homepageFaqs: FAQItem[] = [
   {
     question: "What's the difference between free and paid credits?",
     answer:
-      "Free credits give you 1 restoration per day and reset at midnight UTC. Paid credits are purchased in packages (100, 350, or 1000 credits) and never expire. When you restore a photo, we use your free credit first, then your paid credits.",
+      "Free credits give you 1 restoration per day and reset at midnight UTC. Paid credits are purchased in packages (30, 120, or 350 credits) and never expire. When you restore a photo, we use your free credit first, then your paid credits.",
   },
   {
     question: "Can I get a refund for purchased credits?",

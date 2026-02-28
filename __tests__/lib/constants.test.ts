@@ -4,9 +4,9 @@ import { CREDIT_PACKAGES, APP_CONFIG, type PackageType } from "@/lib/constants"
 describe("constants", () => {
     describe("CREDIT_PACKAGES", () => {
         it("has correct credit values for each package", () => {
-            expect(CREDIT_PACKAGES.starter.credits).toBe(100)
-            expect(CREDIT_PACKAGES.growth.credits).toBe(350)
-            expect(CREDIT_PACKAGES.premium.credits).toBe(1000)
+            expect(CREDIT_PACKAGES.starter.credits).toBe(30)
+            expect(CREDIT_PACKAGES.growth.credits).toBe(120)
+            expect(CREDIT_PACKAGES.premium.credits).toBe(350)
         })
 
         it("has correct prices in cents", () => {

@@ -31,7 +31,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which is cheaper: Remini or VanceAI?",
     answer:
-      "VanceAI starts at $4.95/month with limited credits. Remini costs $9.99/week (roughly $40/month). VanceAI is significantly cheaper for light to moderate use. Magic Memory offers one-time credits from \u20ac9.99 for 100 restorations with no subscription and no expiry.",
+      "VanceAI starts at $4.95/month with limited credits. Remini costs $9.99/week (roughly $40/month). VanceAI is significantly cheaper for light to moderate use. Magic Memory offers one-time credits from \u20ac9.99 for 30 restorations with no subscription and no expiry.",
   },
   {
     question: "Does Remini have batch processing?",

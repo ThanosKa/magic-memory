@@ -1,14 +1,14 @@
 export const CREDIT_PACKAGES = {
   starter: {
     name: "Starter",
-    credits: 100,
+    credits: 30,
     price: 999, // in cents (€9.99)
     priceDisplay: "€9.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER ?? "",
     description: "Best for occasional use",
     popular: false,
     features: [
-      "100 photo restorations",
+      "30 photo restorations",
       "Credits never expire",
       "High-quality results",
       "Fast processing",
@@ -16,14 +16,14 @@ export const CREDIT_PACKAGES = {
   },
   growth: {
     name: "Growth",
-    credits: 350,
+    credits: 120,
     price: 1999, // in cents (€19.99)
     priceDisplay: "€19.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_GROWTH ?? "",
     description: "Best for regular users",
     popular: true,
     features: [
-      "350 photo restorations",
+      "120 photo restorations",
       "Credits never expire",
       "High-quality results",
       "Fast processing",
@@ -32,14 +32,14 @@ export const CREDIT_PACKAGES = {
   },
   premium: {
     name: "Premium",
-    credits: 1000,
+    credits: 350,
     price: 2999, // in cents (€29.99)
     priceDisplay: "€29.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PREMIUM ?? "",
     description: "Best for professionals",
     popular: false,
     features: [
-      "1000 photo restorations",
+      "350 photo restorations",
       "Credits never expire",
       "High-quality results",
       "Fast processing",

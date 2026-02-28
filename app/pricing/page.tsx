@@ -40,21 +40,21 @@ const PRICING_OFFERS = [
   },
   {
     name: "Starter Plan",
-    description: "100 restoration credits that never expire",
+    description: "30 restoration credits that never expire",
     price: 9.99,
-    credits: 100,
+    credits: 30,
   },
   {
     name: "Growth Plan",
-    description: "350 restoration credits that never expire",
+    description: "120 restoration credits that never expire",
     price: 19.99,
-    credits: 350,
+    credits: 120,
   },
   {
     name: "Premium Plan",
-    description: "1000 restoration credits that never expire",
+    description: "350 restoration credits that never expire",
     price: 29.99,
-    credits: 1000,
+    credits: 350,
   },
 ];
 

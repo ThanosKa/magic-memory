@@ -41,7 +41,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is there a free alternative to both?",
     answer:
-      "Magic Memory offers 1 free photo restoration per day with no credit card required. It works on any device via the web browser and uses GFPGAN AI for face restoration. Paid credits start at \u20ac9.99 for 100 restorations and never expire.",
+      "Magic Memory offers 1 free photo restoration per day with no credit card required. It works on any device via the web browser and uses GFPGAN AI for face restoration. Paid credits start at \u20ac9.99 for 30 restorations and never expire.",
   },
 ];
 
@@ -129,7 +129,7 @@ export default function CompareReminiVsMyHeritagePage() {
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 mb-12">
               <h2 className="text-xl font-semibold mb-3">Consider Magic Memory</h2>
               <p className="text-muted-foreground mb-4">
-                If you just need photo restoration without a weekly subscription or a genealogy bundle, Magic Memory may be a better fit. It is a web-based tool that works on any device, offers 1 free restoration per day, and uses GFPGAN AI for face restoration. Credits start at {"\u20ac"}9.99 for 100 restorations and never expire.
+                If you just need photo restoration without a weekly subscription or a genealogy bundle, Magic Memory may be a better fit. It is a web-based tool that works on any device, offers 1 free restoration per day, and uses GFPGAN AI for face restoration. Credits start at {"\u20ac"}9.99 for 30 restorations and never expire.
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">

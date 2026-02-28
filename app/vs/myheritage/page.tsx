@@ -35,7 +35,7 @@ const faqs: FAQItem[] = [
   {
     question: "How much does MyHeritage photo restoration cost vs Magic Memory?",
     answer:
-      "Magic Memory offers one-time credit packages starting at €9.99 for 100 restorations, plus 1 free restoration per day. MyHeritage requires a genealogy subscription that starts at around $13/month. If you only want photo restoration, Magic Memory is substantially cheaper.",
+      "Magic Memory offers one-time credit packages starting at €9.99 for 30 restorations, plus 1 free restoration per day. MyHeritage requires a genealogy subscription that starts at around $13/month. If you only want photo restoration, Magic Memory is substantially cheaper.",
   },
   {
     question: "Does MyHeritage store my photos?",

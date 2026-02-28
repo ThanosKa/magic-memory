@@ -35,7 +35,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which is cheaper: Magic Memory or Remini?",
     answer:
-      "For most users, Magic Memory is cheaper. Remini charges $9.99/week. Magic Memory's smallest credit package is €9.99 for 100 credits (one-time, never expires), plus 1 free restoration per day. A user who restores 10 photos per month would pay $43/month on Remini versus roughly €10 every few months on Magic Memory.",
+      "For most users, Magic Memory is cheaper. Remini charges $9.99/week. Magic Memory's smallest credit package is €9.99 for 30 credits (one-time, never expires), plus 1 free restoration per day. A user who restores 10 photos per month would pay $43/month on Remini versus roughly €10 every few months on Magic Memory.",
   },
   {
     question: "Can you use Magic Memory on iPhone?",
