@@ -101,6 +101,67 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/compare/remini-vs-myheritage`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/compare/remini-vs-vanceai`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/compare/myheritage-vs-vanceai`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+  ];
+
+  const glossaryPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/glossary/photo-restoration`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/glossary/gfpgan`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/glossary/face-restoration`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/glossary/image-upscaling`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/glossary/ai-photo-enhancement`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+  ];
+
+  const personaPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/for/genealogists`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/for/photographers`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/for/real-estate`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
   ];
 
   const blogPages: MetadataRoute.Sitemap = [
@@ -117,6 +178,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...useCasePages,
     ...competitorPages,
+    ...glossaryPages,
+    ...personaPages,
     ...blogPages,
   ];
 }

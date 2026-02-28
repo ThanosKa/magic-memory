@@ -122,16 +122,28 @@ export function Footer() {
                 Fix Damaged Photos
               </Link>
               <Link
-                href="/blog/how-to-restore-old-photos"
+                href="/glossary/photo-restoration"
                 className="text-sm text-muted-foreground hover:text-foreground"
               >
-                How to Restore Old Photos
+                What Is Photo Restoration?
               </Link>
               <Link
-                href="/blog/gfpgan-explained"
+                href="/glossary/gfpgan"
                 className="text-sm text-muted-foreground hover:text-foreground"
               >
-                What is GFPGAN?
+                What Is GFPGAN?
+              </Link>
+              <Link
+                href="/for/genealogists"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                For Genealogists
+              </Link>
+              <Link
+                href="/for/photographers"
+                className="text-sm text-muted-foreground hover:text-foreground"
+              >
+                For Photographers
               </Link>
             </nav>
           </div>
