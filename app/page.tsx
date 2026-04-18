@@ -46,6 +46,16 @@ const FeaturesSection = dynamic(
   }
 );
 
+const ExploreSection = dynamic(
+  () =>
+    import("@/components/landing/explore-section").then(
+      (m) => m.ExploreSection
+    ),
+  {
+    ssr: true,
+  }
+);
+
 const FAQSection = dynamic(
   () => import("@/components/landing/faq-section").then((m) => m.FAQSection),
   {
@@ -138,6 +148,7 @@ export default function Page() {
           <HeroSection />
           <HowItWorksSection />
           <FeaturesSection />
+          <ExploreSection />
           <FAQSection />
           <CTASection />
         </main>

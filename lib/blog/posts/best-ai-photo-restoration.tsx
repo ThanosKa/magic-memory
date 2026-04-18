@@ -27,7 +27,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>1. Magic Memory — Best for Web-Based Portrait Restoration</h3>
       <p>
-        Magic Memory uses GFPGAN (Generative Facial Prior GAN), a model published at CVPR 2021 by researchers at Tencent ARC. It is one of the strongest publicly-available models for face-specific restoration.
+        Magic Memory uses <Link href="/glossary/gfpgan" className="text-primary hover:underline">GFPGAN</Link> (Generative Facial Prior GAN), a model published at CVPR 2021 by researchers at Tencent ARC. It is one of the strongest publicly-available models for <Link href="/glossary/face-restoration" className="text-primary hover:underline">face-specific restoration</Link>.
       </p>
       <ul>
         <li><strong>Best for:</strong> Portrait and family photo restoration, occasional users, privacy-conscious users</li>
@@ -40,7 +40,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>2. Remini — Best for Mobile Users</h3>
       <p>
-        Remini is the most popular mobile AI photo enhancer with a large user base and additional editing features beyond restoration. It uses a proprietary model that delivers strong face enhancement.
+        Remini is the most popular mobile AI photo enhancer with a large user base and additional editing features beyond restoration. It uses a proprietary model that delivers strong face enhancement. For a full side-by-side, see our <Link href="/vs/remini" className="text-primary hover:underline">Magic Memory vs Remini comparison</Link>.
       </p>
       <ul>
         <li><strong>Best for:</strong> Mobile-first users, daily users who want an app experience</li>
@@ -52,7 +52,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>3. MyHeritage Photo Enhancer — Best for Genealogy Users</h3>
       <p>
-        MyHeritage integrates photo enhancement with a comprehensive genealogy platform. If you are actively building a family tree and doing ancestry research, the photo tools add genuine value within the platform.
+        MyHeritage integrates photo enhancement with a comprehensive genealogy platform. If you are actively building a family tree and doing ancestry research, the photo tools add genuine value within the platform. See our detailed <Link href="/vs/myheritage" className="text-primary hover:underline">Magic Memory vs MyHeritage comparison</Link> for pricing and free-tier limits.
       </p>
       <ul>
         <li><strong>Best for:</strong> Active genealogy researchers who also want photo restoration</li>
@@ -63,7 +63,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>4. VanceAI — Best for Professionals</h3>
       <p>
-        VanceAI is a professional AI image tool suite with multiple capabilities: restoration, upscaling, background removal, colorization, and more. The interface is more complex but provides more control.
+        VanceAI is a professional AI image tool suite with multiple capabilities: restoration, <Link href="/glossary/image-upscaling" className="text-primary hover:underline">upscaling</Link>, background removal, colorization, and more. The interface is more complex but provides more control. Compare features head-to-head in our <Link href="/vs/vanceai" className="text-primary hover:underline">Magic Memory vs VanceAI breakdown</Link>.
       </p>
       <ul>
         <li><strong>Best for:</strong> Professionals needing multiple AI image tools, batch processing</li>
@@ -74,7 +74,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>5. Fotor — Best for General Photo Editing</h3>
       <p>
-        Fotor is a general photo editor that includes AI enhancement features. If you need a full photo editor with AI assistance — not just restoration — Fotor covers a broader range of editing needs.
+        Fotor is a general photo editor that includes <Link href="/glossary/ai-photo-enhancement" className="text-primary hover:underline">AI enhancement features</Link>. If you need a full photo editor with AI assistance — not just restoration — Fotor covers a broader range of editing needs. See the <Link href="/alternatives" className="text-primary hover:underline">full alternatives comparison</Link> for Fotor&apos;s tradeoffs.
       </p>
       <ul>
         <li><strong>Best for:</strong> Users who want a full photo editor with some AI enhancement</li>
@@ -156,10 +156,46 @@ export function BestAIPhotoRestorationContent() {
         Yes. The restored photo you download is a permanent image file. It does not degrade or change after you download it. Save multiple copies in different locations for long-term preservation.
       </p>
 
-      <div className="not-prose mt-8">
-        <p className="text-sm text-muted-foreground">
-          See also: <Link href="/alternatives" className="text-primary hover:underline">Full Alternatives Comparison</Link> · <Link href="/alternatives/remini" className="text-primary hover:underline">Remini Alternative</Link> · <Link href="/blog/gfpgan-explained" className="text-primary hover:underline">What is GFPGAN?</Link>
-        </p>
+      <div className="not-prose mt-10 rounded-2xl border border-border bg-muted/30 p-6">
+        <h3 className="text-lg font-semibold mb-4">Related deep-dives</h3>
+        <div className="grid gap-6 sm:grid-cols-2 text-sm">
+          <div>
+            <p className="font-semibold text-foreground mb-2">Head-to-head comparisons</p>
+            <ul className="space-y-1 text-muted-foreground">
+              <li><Link href="/vs/remini" className="text-primary hover:underline">Magic Memory vs Remini</Link></li>
+              <li><Link href="/vs/myheritage" className="text-primary hover:underline">Magic Memory vs MyHeritage</Link></li>
+              <li><Link href="/vs/vanceai" className="text-primary hover:underline">Magic Memory vs VanceAI</Link></li>
+              <li><Link href="/alternatives" className="text-primary hover:underline">Full alternatives comparison</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold text-foreground mb-2">By photo type</p>
+            <ul className="space-y-1 text-muted-foreground">
+              <li><Link href="/restore-old-photos" className="text-primary hover:underline">Restore old photos</Link></li>
+              <li><Link href="/restore-family-photos" className="text-primary hover:underline">Restore family photos</Link></li>
+              <li><Link href="/fix-blurry-photos" className="text-primary hover:underline">Fix blurry photos</Link></li>
+              <li><Link href="/restore-black-and-white-photos" className="text-primary hover:underline">Restore black and white photos</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold text-foreground mb-2">How the tech works</p>
+            <ul className="space-y-1 text-muted-foreground">
+              <li><Link href="/glossary/gfpgan" className="text-primary hover:underline">What is GFPGAN?</Link></li>
+              <li><Link href="/glossary/face-restoration" className="text-primary hover:underline">What is face restoration?</Link></li>
+              <li><Link href="/glossary/image-upscaling" className="text-primary hover:underline">What is image upscaling?</Link></li>
+              <li><Link href="/blog/gfpgan-explained" className="text-primary hover:underline">GFPGAN explained (blog)</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold text-foreground mb-2">Ready to restore?</p>
+            <ul className="space-y-1 text-muted-foreground">
+              <li><Link href="/pricing" className="text-primary hover:underline">See pricing (free tier, no card)</Link></li>
+              <li><Link href="/for/photographers" className="text-primary hover:underline">For photographers</Link></li>
+              <li><Link href="/for/genealogists" className="text-primary hover:underline">For genealogists</Link></li>
+              <li><Link href="/restore" className="text-primary hover:underline">Try Magic Memory free</Link></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </>
   );

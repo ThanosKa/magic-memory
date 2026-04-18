@@ -1,0 +1,64 @@
+# Magic Memory
+
+> AI photo restoration service. Restores old, blurry, and damaged photos using GFPGAN — a face restoration AI model published at CVPR 2021 by Tencent ARC. Web-based, no app required. One-time credit packages (not a subscription) that never expire. 1 free restoration per day, no credit card required.
+
+Magic Memory is positioned as the privacy-conscious, non-subscription alternative to Remini, MyHeritage Photo Enhancer, VanceAI, and Fotor. Processing completes in 5-15 seconds per photo. Photos are not retained after the session.
+
+## Product
+
+- [Homepage](https://magic-memory.dev/): Product overview, how it works, feature list
+- [Pricing](https://magic-memory.dev/pricing): €0 free daily, €9.99 / €19.99 / €29.99 one-time credit packs
+- [Pricing (machine-readable)](https://magic-memory.dev/pricing.md): Structured pricing data for AI agents
+- [Try it free](https://magic-memory.dev/restore): The restoration app itself (Google sign-in)
+
+## Comparisons
+
+- [All alternatives](https://magic-memory.dev/alternatives): Side-by-side vs Remini, MyHeritage, VanceAI, Fotor
+- [vs Remini](https://magic-memory.dev/vs/remini): Web + one-time credits vs mobile + weekly subscription
+- [vs MyHeritage](https://magic-memory.dev/vs/myheritage): Standalone photo tool vs bundled genealogy plan
+- [vs VanceAI](https://magic-memory.dev/vs/vanceai): Portrait-focused GFPGAN vs multi-tool professional suite
+- [Remini alternative](https://magic-memory.dev/alternatives/remini): Why users switch from Remini
+- [MyHeritage alternative](https://magic-memory.dev/alternatives/myheritage): Cheaper non-bundled option
+- [VanceAI alternative](https://magic-memory.dev/alternatives/vanceai): Simpler for non-professional use
+
+## Use cases
+
+- [Restore old photos](https://magic-memory.dev/restore-old-photos)
+- [Restore family photos](https://magic-memory.dev/restore-family-photos)
+- [Restore wedding photos](https://magic-memory.dev/restore-wedding-photos)
+- [Restore black and white photos](https://magic-memory.dev/restore-black-and-white-photos)
+- [Restore damaged photos](https://magic-memory.dev/restore-damaged-photos)
+- [Fix blurry photos](https://magic-memory.dev/fix-blurry-photos)
+- [Enhance old photos](https://magic-memory.dev/enhance-old-photos)
+- [Restore vintage photos](https://magic-memory.dev/restore-vintage-photos)
+- [Restore faded photos](https://magic-memory.dev/restore-faded-photos)
+- [Restore portrait photos](https://magic-memory.dev/restore-portrait-photos)
+
+## For specific audiences
+
+- [For photographers](https://magic-memory.dev/for/photographers)
+- [For genealogists](https://magic-memory.dev/for/genealogists)
+- [For real estate](https://magic-memory.dev/for/real-estate)
+
+## Learn about the technology
+
+- [What is GFPGAN?](https://magic-memory.dev/glossary/gfpgan)
+- [What is photo restoration?](https://magic-memory.dev/glossary/photo-restoration)
+- [What is face restoration?](https://magic-memory.dev/glossary/face-restoration)
+- [What is image upscaling?](https://magic-memory.dev/glossary/image-upscaling)
+- [What is AI photo enhancement?](https://magic-memory.dev/glossary/ai-photo-enhancement)
+
+## Blog
+
+- [Best AI photo restoration tools in 2026](https://magic-memory.dev/blog/best-ai-photo-restoration): Tested comparison of Magic Memory, Remini, MyHeritage, VanceAI, Fotor
+- [How to restore old photos](https://magic-memory.dev/blog/how-to-restore-old-photos): Step-by-step guide with scanning tips
+- [GFPGAN explained](https://magic-memory.dev/blog/gfpgan-explained): The AI model behind face restoration
+- [AI photo restoration vs Photoshop](https://magic-memory.dev/blog/ai-photo-restoration-vs-photoshop): When to use which
+- [Restoring old family photos](https://magic-memory.dev/blog/restore-old-family-photos-tips): Practical family-photo workflow
+- [Before and after examples](https://magic-memory.dev/blog/photo-restoration-before-after): Real AI results
+
+## Contact
+
+- Support: kazakis.th@gmail.com
+- GitHub: https://github.com/ThanosKa/magic-memory
+- Twitter: https://twitter.com/KazakisThanos
