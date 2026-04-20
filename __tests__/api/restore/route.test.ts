@@ -132,30 +132,14 @@ describe("POST /api/restore", () => {
         expect(data.error).toContain("No credits available")
     })
 
-    it("uses free credit when available", async () => {
+    it("returns 403 even when SQL function reports free daily credit available", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
         vi.mocked(checkUserCredits).mockResolvedValue({
             has_credits: true,
             has_free_daily: true,
-            paid_credits: 50,
+            paid_credits: 0,
             should_use_free: true,
-        })
-
-        vi.mocked(deductCreditAndRecordRestoration).mockResolvedValue({
-            success: true,
-            restoration_id: "restoration-uuid",
-            remaining_paid_credits: 50,
-            error_message: null,
-        })
-
-        vi.mocked(markFreeCreditUsed).mockResolvedValue(true)
-
-        mockPredictionsCreate.mockResolvedValue({ id: "pred-123", status: "starting" })
-        mockPredictionsGet.mockResolvedValue({
-            id: "pred-123",
-            status: "succeeded",
-            output: "https://replicate.delivery/restored.png",
         })
 
         const validFile = createMockFile("test.jpg", "image/jpeg")
@@ -163,10 +147,11 @@ describe("POST /api/restore", () => {
         const response = await POST(request)
         const data = await response.json()
 
-        expect(response.status).toBe(200)
-        expect(data.success).toBe(true)
-        expect(data.data.usedFreeCredit).toBe(true)
-        expect(data.data.restoredImageUrl).toBeDefined()
+        expect(response.status).toBe(403)
+        expect(data.success).toBe(false)
+        expect(data.error).toContain("No credits available")
+        expect(vi.mocked(deductCreditAndRecordRestoration)).not.toHaveBeenCalled()
+        expect(vi.mocked(markFreeCreditUsed)).not.toHaveBeenCalled()
     })
 
     it("uses paid credit when no free available", async () => {
@@ -209,15 +194,15 @@ describe("POST /api/restore", () => {
 
         vi.mocked(checkUserCredits).mockResolvedValue({
             has_credits: true,
-            has_free_daily: true,
-            paid_credits: 0,
-            should_use_free: true,
+            has_free_daily: false,
+            paid_credits: 5,
+            should_use_free: false,
         })
 
         vi.mocked(deductCreditAndRecordRestoration).mockResolvedValue({
             success: true,
             restoration_id: "restoration-uuid",
-            remaining_paid_credits: 0,
+            remaining_paid_credits: 4,
             error_message: null,
         })
 

@@ -96,7 +96,9 @@ export default function TermsPage() {
               <h2 className="text-xl font-semibold text-foreground">5. Credits and Payments</h2>
               <p className="mt-2">
                 Purchased credits never expire. Free daily credits reset at midnight UTC. All payments are processed
-                securely through Stripe. Refunds are available within 7 days of purchase if credits have not been used.
+                securely through Stripe. All sales are final: we do not issue refunds under any circumstances,
+                including unused credits, partial usage, or dissatisfaction with restoration results. If a
+                restoration fails due to a processing error on our end, the credit is not deducted from your balance.
               </p>
             </section>
 

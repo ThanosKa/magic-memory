@@ -40,8 +40,8 @@ Payment processor: Stripe (PCI DSS Level 1).
 
 ## Policies
 
-- Refunds: Full or prorated refunds on unused credits within 30 days of purchase
-- Failed restorations: Credits are not deducted if a restoration fails
+- Refunds: All sales are final. We do not issue refunds under any circumstances, whether credits are used or unused
+- Failed restorations: Credits are not deducted if a restoration fails on our end
 - Data: Photos are processed on secure servers and not stored after your session ends
 - AI model: GFPGAN (Generative Facial Prior GAN), published at CVPR 2021 by Tencent ARC
 

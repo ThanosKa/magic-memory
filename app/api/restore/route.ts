@@ -177,15 +177,15 @@ export async function POST(request: NextRequest) {
 
     const creditCheck = await checkUserCredits(userId)
 
-    if (!creditCheck || !creditCheck.has_credits) {
-      logger.warn({ userId, creditCheck }, "No credits available")
+    if (!creditCheck || creditCheck.paid_credits <= 0) {
+      logger.warn({ userId, creditCheck }, "No paid credits available")
       return NextResponse.json(
         { success: false, error: "No credits available. Purchase more credits to continue." },
         { status: 403 },
       )
     }
 
-    usedFreeCredit = creditCheck.should_use_free
+    usedFreeCredit = false
 
     logger.info({ userId, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
 

@@ -90,7 +90,7 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Can I get a refund on unused credits?",
     answer:
-      "Yes. We offer refunds on unused credits within 30 days of purchase. If you've used part of a pack, we refund the prorated value of what's left. Contact our support team and include your order reference.",
+      "No. All sales are final and we do not issue refunds under any circumstances, whether credits are used or unused. Purchased credits never expire, so you can use them whenever you're ready. If a restoration fails on our end, the credit is not deducted from your balance.",
   },
   {
     question: "What if a restoration doesn't look good?",

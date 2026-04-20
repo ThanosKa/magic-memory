@@ -32,7 +32,7 @@ export const homepageFaqs: FAQItem[] = [
   {
     question: "Can I get a refund for purchased credits?",
     answer:
-      "We offer refunds for unused credits within 30 days of purchase. If you've used some credits from a package, we'll refund the prorated amount for unused credits. Contact our support team for assistance.",
+      "No. All sales are final and we do not issue refunds under any circumstances, whether credits are used or unused. Purchased credits never expire, so you can use them whenever you're ready. If a restoration fails on our end, the credit is not deducted from your balance.",
   },
   {
     question: "Is my photo data secure?",
