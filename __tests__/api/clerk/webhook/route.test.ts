@@ -106,7 +106,7 @@ describe("POST /api/clerk/webhook", () => {
             email: "kazakis.th@gmail.com",
             name: "John Doe",
             profile_image: "https://example.com/photo.jpg",
-            paid_credits: 0,
+            paid_credits: 1,
         })
     })
 
@@ -203,7 +203,7 @@ describe("POST /api/clerk/webhook", () => {
             email: "kazakis.th@gmail.com",
             name: null,
             profile_image: null,
-            paid_credits: 0,
+            paid_credits: 1,
         })
     })
 

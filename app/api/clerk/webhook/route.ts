@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
                     email,
                     name,
                     profile_image: image_url,
-                    paid_credits: 0,
+                    paid_credits: 1,
                 });
 
                 if (error) {
