@@ -115,48 +115,19 @@ export async function GET() {
       );
     }
 
-    let hasFreeDaily = false;
-    let paidCredits = 0;
-
-    const { data: creditData, error: creditError } = await supabase.rpc(
-      "check_user_credits",
-      {
-        p_user_id: user.id,
-      }
-    );
-
-    if (creditError) {
-      logger.error(
-        { userId, error: creditError.message },
-        "Failed to check credits"
-      );
-      return NextResponse.json(
-        { success: false, error: "Failed to fetch credits" },
-        { status: 500 }
-      );
-    }
-
-    const creditResult = Array.isArray(creditData) ? creditData[0] : creditData;
-    hasFreeDaily = creditResult?.has_free_daily ?? false;
-    paidCredits = creditResult?.paid_credits ?? 0;
+    const paidCredits = user.paid_credits ?? 0;
+    const hasFreeDaily = false;
+    const totalCredits = paidCredits;
 
     logger.debug(
-      { userId, hasFreeDaily, paidCredits, source: "database" },
+      { userId, paidCredits, source: "database" },
       "Credits fetched from database"
     );
-
-    const totalCredits = paidCredits + (hasFreeDaily ? 1 : 0);
-
-    const now = new Date();
-    const midnight = new Date(now);
-    midnight.setUTCHours(24, 0, 0, 0);
-    const freeResetTime = midnight.toISOString();
 
     const responseData = {
       paidCredits,
       hasFreeDaily,
       totalCredits,
-      freeResetTime,
     };
 
     const validatedResponse = creditResponseSchema.safeParse(responseData);

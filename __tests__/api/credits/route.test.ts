@@ -8,6 +8,22 @@ vi.mock("@/lib/supabase/server");
 vi.mock("@/lib/redis");
 vi.mock("@/lib/logger");
 
+function mockSupabaseWithUser(user: { paid_credits: number } | null) {
+  return {
+    from: vi.fn().mockReturnValue({
+      select: vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          single: vi.fn().mockResolvedValue(
+            user
+              ? { data: user, error: null }
+              : { data: null, error: { message: "Not found" } }
+          ),
+        }),
+      }),
+    }),
+  };
+}
+
 describe("GET /api/credits", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -31,23 +47,8 @@ describe("GET /api/credits", () => {
       ReturnType<typeof auth>
     >);
 
-    const mockSupabase = {
-      from: vi.fn().mockReturnValue({
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            single: vi
-              .fn()
-              .mockResolvedValue({
-                data: null,
-                error: { message: "Not found" },
-              }),
-          }),
-        }),
-      }),
-      rpc: vi.fn(),
-    };
     vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
+      mockSupabaseWithUser(null) as unknown as ReturnType<typeof getSupabaseAdminClient>
     );
 
     const response = await GET();
@@ -58,35 +59,13 @@ describe("GET /api/credits", () => {
     expect(data.error).toContain("User not found");
   });
 
-  it("returns correct credit balance with free and paid credits", async () => {
+  it("returns paid credits only — hasFreeDaily is always false", async () => {
     vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
-    const mockUser = {
-      id: "user-uuid",
-      clerk_user_id: "clerk_user_123",
-      paid_credits: 50,
-      email: "kazakis.th@gmail.com",
-    };
-
-    const mockCreditResult = {
-      has_free_daily: true,
-      paid_credits: 50,
-    };
-
-    const mockSupabase = {
-      from: vi.fn().mockReturnValue({
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            single: vi.fn().mockResolvedValue({ data: mockUser, error: null }),
-          }),
-        }),
-      }),
-      rpc: vi.fn().mockResolvedValue({ data: [mockCreditResult], error: null }),
-    };
     vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
+      mockSupabaseWithUser({ paid_credits: 50 }) as unknown as ReturnType<typeof getSupabaseAdminClient>
     );
 
     const response = await GET();
@@ -95,111 +74,43 @@ describe("GET /api/credits", () => {
     expect(response.status).toBe(200);
     expect(data.success).toBe(true);
     expect(data.data.paidCredits).toBe(50);
-    expect(data.data.hasFreeDaily).toBe(true);
-    expect(data.data.totalCredits).toBe(51);
+    expect(data.data.hasFreeDaily).toBe(false);
+    expect(data.data.totalCredits).toBe(50);
   });
 
-  it("includes freeResetTime as ISO string", async () => {
+  it("returns 0 credits for a user with paid_credits = 0", async () => {
     vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
-    const mockUser = {
-      id: "user-uuid",
-      clerk_user_id: "clerk_user_123",
-      paid_credits: 0,
-      email: "kazakis.th@gmail.com",
-    };
-    const mockCreditResult = { has_free_daily: false, paid_credits: 0 };
-
-    const mockSupabase = {
-      from: vi.fn().mockReturnValue({
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            single: vi.fn().mockResolvedValue({ data: mockUser, error: null }),
-          }),
-        }),
-      }),
-      rpc: vi.fn().mockResolvedValue({ data: [mockCreditResult], error: null }),
-    };
     vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
+      mockSupabaseWithUser({ paid_credits: 0 }) as unknown as ReturnType<typeof getSupabaseAdminClient>
     );
 
     const response = await GET();
     const data = await response.json();
 
-    expect(data.data.freeResetTime).toBeDefined();
-    expect(new Date(data.data.freeResetTime).toISOString()).toBe(
-      data.data.freeResetTime
-    );
+    expect(response.status).toBe(200);
+    expect(data.data.paidCredits).toBe(0);
+    expect(data.data.hasFreeDaily).toBe(false);
+    expect(data.data.totalCredits).toBe(0);
   });
 
-  it("returns 500 when credit check RPC fails", async () => {
+  it("grants exactly 1 credit to a fresh signup (paid_credits = 1 from webhook)", async () => {
     vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
-    const mockUser = {
-      id: "user-uuid",
-      clerk_user_id: "clerk_user_123",
-      email: "kazakis.th@gmail.com",
-    };
-
-    const mockSupabase = {
-      from: vi.fn().mockReturnValue({
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            single: vi.fn().mockResolvedValue({ data: mockUser, error: null }),
-          }),
-        }),
-      }),
-      rpc: vi
-        .fn()
-        .mockResolvedValue({ data: null, error: { message: "RPC error" } }),
-    };
     vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
+      mockSupabaseWithUser({ paid_credits: 1 }) as unknown as ReturnType<typeof getSupabaseAdminClient>
     );
 
     const response = await GET();
     const data = await response.json();
 
-    expect(response.status).toBe(500);
-    expect(data.success).toBe(false);
-  });
-
-  it("calculates totalCredits as paid + free (1)", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
-      ReturnType<typeof auth>
-    >);
-
-    const mockUser = {
-      id: "user-uuid",
-      clerk_user_id: "clerk_user_123",
-      email: "kazakis.th@gmail.com",
-    };
-    const mockCreditResult = { has_free_daily: true, paid_credits: 100 };
-
-    const mockSupabase = {
-      from: vi.fn().mockReturnValue({
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            single: vi.fn().mockResolvedValue({ data: mockUser, error: null }),
-          }),
-        }),
-      }),
-      rpc: vi.fn().mockResolvedValue({ data: [mockCreditResult], error: null }),
-    };
-    vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
-    );
-
-    const response = await GET();
-    const data = await response.json();
-
-    expect(data.data.totalCredits).toBe(101);
-    expect(data.data.paidCredits).toBe(100);
-    expect(data.data.hasFreeDaily).toBe(true);
+    expect(response.status).toBe(200);
+    expect(data.data.paidCredits).toBe(1);
+    expect(data.data.totalCredits).toBe(1);
+    expect(data.data.hasFreeDaily).toBe(false);
   });
 });
