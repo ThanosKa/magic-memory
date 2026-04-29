@@ -26,7 +26,6 @@ type ImageDimensions = { width: number; height: number };
 const FRIENDLY_RESTORE_ERROR =
   "We couldn't restore your photo this time. Please try again shortly.";
 
-const MAX_IMAGE_DIMENSION = 4000;
 const MAX_UPLOAD_SIZE = 3.5 * 1024 * 1024;
 const RESIZE_MAX_DIMENSION = 1536;
 

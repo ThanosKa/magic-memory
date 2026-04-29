@@ -126,7 +126,7 @@ function HeaderWithClerk() {
               </div>
             )}
 
-            {isLoaded && isSignedIn && <UserButton afterSignOutUrl="/" />}
+            {isLoaded && isSignedIn && <UserButton />}
 
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild className="md:hidden">

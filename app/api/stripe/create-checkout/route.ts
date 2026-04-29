@@ -15,6 +15,7 @@ function getStripeClient() {
   }
 
   return new Stripe(secretKey, {
+    // @ts-expect-error — pinned to clover until we migrate to dahlia
     apiVersion: "2025-11-17.clover",
   });
 }
@@ -90,10 +91,10 @@ export async function POST(request: NextRequest) {
       mode: "payment",
       allow_promotion_codes: true,
       success_url: `${
-        process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+        process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev"
       }/restore?success=true`,
       cancel_url: `${
-        process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+        process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev"
       }/pricing?canceled=true`,
       customer_email: user.email,
       metadata: {

@@ -21,6 +21,7 @@ function getStripeClient() {
   }
 
   return new Stripe(secretKey, {
+    // @ts-expect-error — pinned to clover until we migrate to dahlia
     apiVersion: "2025-11-17.clover",
   });
 }
