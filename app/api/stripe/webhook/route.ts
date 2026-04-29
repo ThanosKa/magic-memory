@@ -3,6 +3,7 @@ import { z } from "zod";
 import Stripe from "stripe";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
+import { sendPurchaseEmail } from "@/lib/email";
 import logger from "@/lib/logger";
 
 const stripeMetadataSchema = z.object({
@@ -221,6 +222,18 @@ export async function POST(request: NextRequest) {
         },
         "Credits added successfully"
       );
+
+      const customerEmail = session.customer_details?.email;
+      if (customerEmail) {
+        const customerName = session.customer_details?.name || null;
+        sendPurchaseEmail(
+          customerEmail,
+          customerName,
+          pkg.name,
+          creditsToAdd,
+          pkg.priceDisplay,
+        ).catch(() => {});
+      }
     }
 
     return NextResponse.json({ success: true, data: { received: true } });

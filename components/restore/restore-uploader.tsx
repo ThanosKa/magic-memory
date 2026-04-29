@@ -27,27 +27,77 @@ const FRIENDLY_RESTORE_ERROR =
   "We couldn't restore your photo this time. Please try again shortly.";
 
 const MAX_IMAGE_DIMENSION = 4000;
+const MAX_UPLOAD_SIZE = 3.5 * 1024 * 1024;
+const RESIZE_MAX_DIMENSION = 1536;
 
-async function validateImageDimensions(
-  file: File
-): Promise<{ valid: boolean; width: number; height: number }> {
-  return new Promise((resolve) => {
+async function loadImage(file: File): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
     const img = new window.Image();
-    img.onload = () => {
-      URL.revokeObjectURL(img.src);
-      resolve({
-        valid:
-          img.width <= MAX_IMAGE_DIMENSION && img.height <= MAX_IMAGE_DIMENSION,
-        width: img.width,
-        height: img.height,
-      });
-    };
-    img.onerror = () => {
-      URL.revokeObjectURL(img.src);
-      resolve({ valid: true, width: 0, height: 0 });
-    };
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("Failed to load image"));
     img.src = URL.createObjectURL(file);
   });
+}
+
+async function compressImage(
+  file: File
+): Promise<{ file: File; width: number; height: number }> {
+  const img = await loadImage(file);
+  const origWidth = img.width;
+  const origHeight = img.height;
+
+  const needsResize =
+    origWidth > RESIZE_MAX_DIMENSION ||
+    origHeight > RESIZE_MAX_DIMENSION ||
+    file.size > MAX_UPLOAD_SIZE;
+
+  if (!needsResize) {
+    URL.revokeObjectURL(img.src);
+    return { file, width: origWidth, height: origHeight };
+  }
+
+  let targetWidth = origWidth;
+  let targetHeight = origHeight;
+  const maxDim = RESIZE_MAX_DIMENSION;
+
+  if (targetWidth > maxDim || targetHeight > maxDim) {
+    if (targetWidth >= targetHeight) {
+      targetHeight = Math.round((targetHeight / targetWidth) * maxDim);
+      targetWidth = maxDim;
+    } else {
+      targetWidth = Math.round((targetWidth / targetHeight) * maxDim);
+      targetHeight = maxDim;
+    }
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = targetWidth;
+  canvas.height = targetHeight;
+  const ctx = canvas.getContext("2d")!;
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0, 0, targetWidth, targetHeight);
+  ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+  URL.revokeObjectURL(img.src);
+
+  const blob = await new Promise<Blob>((resolve, reject) =>
+    canvas.toBlob(
+      (b) => {
+        if (b) resolve(b);
+        else reject(new Error("Image compression failed"));
+      },
+      "image/jpeg",
+      0.9,
+    )
+  );
+
+  canvas.width = 0;
+  canvas.height = 0;
+
+  const compressed = new File([blob], file.name.replace(/\.[^/.]+$/, ".jpg"), {
+    type: "image/jpeg",
+  });
+
+  return { file: compressed, width: targetWidth, height: targetHeight };
 }
 
 export function RestoreUploader() {
@@ -127,23 +177,21 @@ export function RestoreUploader() {
         URL.revokeObjectURL(preview);
       }
 
-      const { valid, width, height } = await validateImageDimensions(
-        selectedFile
-      );
-      if (!valid) {
+      try {
+        const { file: processedFile, width, height } =
+          await compressImage(selectedFile);
+        setFile(processedFile);
+        setPreview(URL.createObjectURL(processedFile));
+        setRestoredImage(null);
+        setImageDimensions({ width, height });
+        const nameWithoutExt = selectedFile.name.replace(/\.[^/.]+$/, "");
+        setOriginalFilename(nameWithoutExt);
+      } catch {
         setError({
           type: "generic",
-          message: `Image too large (${width}x${height}). Maximum dimensions: ${MAX_IMAGE_DIMENSION}x${MAX_IMAGE_DIMENSION} pixels.`,
+          message: "Could not process this image. Please try a different photo.",
         });
-        return;
       }
-
-      setFile(selectedFile);
-      setPreview(URL.createObjectURL(selectedFile));
-      setRestoredImage(null);
-      setImageDimensions({ width, height });
-      const nameWithoutExt = selectedFile.name.replace(/\.[^/.]+$/, "");
-      setOriginalFilename(nameWithoutExt);
     },
     [preview]
   );
@@ -156,7 +204,7 @@ export function RestoreUploader() {
       "image/webp": [".webp"],
     },
     maxFiles: 1,
-    maxSize: 10 * 1024 * 1024,
+    maxSize: 20 * 1024 * 1024,
     disabled: stage !== "idle",
   });
 
@@ -333,7 +381,7 @@ export function RestoreUploader() {
                   <p className="pl-1">to upload</p>
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  JPG, PNG, WebP up to 10MB
+                  JPG, PNG, WebP up to 20MB
                 </p>
               </div>
             </div>

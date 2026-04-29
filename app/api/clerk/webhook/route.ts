@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { Webhook } from "svix";
 import { z } from "zod";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
+import { sendWelcomeEmail } from "@/lib/email";
 import logger from "@/lib/logger";
 
 const clerkWebhookSchema = z.discriminatedUnion("type", [
@@ -119,6 +120,7 @@ export async function POST(request: NextRequest) {
                 }
 
                 logger.info({ userId: id, email }, "User created in database");
+                sendWelcomeEmail(email, name).catch(() => {});
                 break;
             }
 
