@@ -35,10 +35,10 @@ export async function GET() {
       .single();
     let user = userData;
 
-    if ((error || !user) && process.env.NODE_ENV === "development") {
+    if (error || !user) {
       logger.warn(
         { userId },
-        "User not found in dev mode, attempting to create"
+        "User not found in database, attempting to create"
       );
 
       try {
@@ -60,15 +60,21 @@ export async function GET() {
           );
         }
 
+        const name =
+          [clerkUser.firstName, clerkUser.lastName]
+            .filter(Boolean)
+            .join(" ") || null;
+
         const { data: newUser, error: createError } = await supabase
           .from("users")
           .upsert(
             {
               clerk_user_id: userId,
               email,
-              paid_credits: 0,
+              name,
+              paid_credits: 1,
             },
-            { onConflict: "email" }
+            { onConflict: "clerk_user_id" }
           )
           .select()
           .single();
@@ -76,7 +82,7 @@ export async function GET() {
         if (createError || !newUser) {
           logger.error(
             { userId, error: createError?.message },
-            "Failed to create user in dev mode"
+            "Failed to create user"
           );
           return NextResponse.json(
             {
@@ -88,7 +94,7 @@ export async function GET() {
         }
 
         user = newUser;
-        logger.info({ userId, email }, "User created in dev mode");
+        logger.info({ userId, email }, "User auto-created from Clerk");
       } catch (clerkError) {
         const errorMessage =
           clerkError instanceof Error ? clerkError.message : "Unknown error";
@@ -104,15 +110,6 @@ export async function GET() {
           { status: 500 }
         );
       }
-    } else if (error || !user) {
-      logger.error(
-        { userId, error: error?.message },
-        "User not found in database"
-      );
-      return NextResponse.json(
-        { success: false, error: "User not found. Please contact support." },
-        { status: 404 }
-      );
     }
 
     const paidCredits = user.paid_credits ?? 0;

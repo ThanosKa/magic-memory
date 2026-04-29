@@ -232,7 +232,6 @@ export async function POST(request: NextRequest) {
           customerName,
           pkg.name,
           creditsToAdd,
-          pkg.priceDisplay,
         ).catch(() => {});
       }
     }

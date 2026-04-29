@@ -37,14 +37,13 @@ export async function sendPurchaseEmail(
   name: string | null,
   packageName: string,
   credits: number,
-  amountDisplay: string,
 ) {
   try {
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
       to,
       subject: `Your ${packageName} plan is ready — ${credits} credits added`,
-      html: buildPurchaseHtml(name, packageName, credits, amountDisplay),
+      html: buildPurchaseHtml(name, packageName, credits),
     });
 
     if (error) {
@@ -168,7 +167,6 @@ function buildPurchaseHtml(
   name: string | null,
   packageName: string,
   credits: number,
-  amountDisplay: string,
 ): string {
   const greeting = name ? `Hi ${name.split(" ")[0]},` : "Hi there,";
 
@@ -189,13 +187,6 @@ function buildPurchaseHtml(
             <tr>
               <td style="padding:4px 0;font-size:14px;color:${MUTED_COLOR};">Credits added</td>
               <td style="padding:4px 0;font-size:14px;font-weight:600;color:${TEXT_COLOR};text-align:right;">${credits} restorations</td>
-            </tr>
-            <tr>
-              <td colspan="2" style="padding:8px 0;"><hr style="border:none;border-top:1px solid ${BORDER_COLOR};margin:0;" /></td>
-            </tr>
-            <tr>
-              <td style="padding:4px 0;font-size:14px;color:${MUTED_COLOR};">Amount paid</td>
-              <td style="padding:4px 0;font-size:16px;font-weight:700;color:${TEXT_COLOR};text-align:right;">${amountDisplay}</td>
             </tr>
           </table>
         </td>
