@@ -25,172 +25,65 @@ export function Footer() {
           <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold">Product</h3>
             <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link
-                href="/"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Home
-              </Link>
-              <Link
-                href="/pricing"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Pricing
-              </Link>
-              <Link
-                href="/restore"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Magic Memory
-              </Link>
-              <Link
-                href="/blog"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/restore-old-photos"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Restore Old Photos
-              </Link>
-              <Link
-                href="/fix-blurry-photos"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Fix Blurry Photos
-              </Link>
+              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">Home</Link>
+              <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">Pricing</Link>
+              <Link href="/restore" className="text-sm text-muted-foreground hover:text-foreground">Restore a photo</Link>
+              <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">Blog</Link>
+              <Link href="/blog/best-ai-photo-restoration" className="text-sm text-muted-foreground hover:text-foreground">Best AI photo restoration 2026</Link>
+              <Link href="/blog/ai-photo-restoration-vs-photoshop" className="text-sm text-muted-foreground hover:text-foreground">AI vs Photoshop</Link>
+            </nav>
+          </div>
+
+          <div className="space-y-4 text-center md:text-left">
+            <h3 className="font-semibold">By photo type</h3>
+            <nav className="flex flex-col gap-2 items-center md:items-start">
+              <Link href="/restore-old-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore old photos</Link>
+              <Link href="/restore-family-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore family photos</Link>
+              <Link href="/restore-wedding-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore wedding photos</Link>
+              <Link href="/restore-vintage-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore vintage photos</Link>
+              <Link href="/restore-portrait-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore portrait photos</Link>
+              <Link href="/restore-faded-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore faded photos</Link>
+              <Link href="/restore-black-and-white-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore B&amp;W photos</Link>
+              <Link href="/restore-damaged-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore damaged photos</Link>
+              <Link href="/fix-blurry-photos" className="text-sm text-muted-foreground hover:text-foreground">Fix blurry photos</Link>
             </nav>
           </div>
 
           <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold">Compare</h3>
             <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link
-                href="/vs/remini"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                vs Remini
-              </Link>
-              <Link
-                href="/vs/myheritage"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                vs MyHeritage
-              </Link>
-              <Link
-                href="/vs/vanceai"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                vs VanceAI
-              </Link>
-              <Link
-                href="/alternatives/remini"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Remini Alternative
-              </Link>
-              <Link
-                href="/alternatives"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                All Alternatives
-              </Link>
+              <Link href="/alternatives" className="text-sm text-muted-foreground hover:text-foreground">All alternatives</Link>
+              <Link href="/vs/remini" className="text-sm text-muted-foreground hover:text-foreground">vs Remini</Link>
+              <Link href="/vs/myheritage" className="text-sm text-muted-foreground hover:text-foreground">vs MyHeritage</Link>
+              <Link href="/vs/vanceai" className="text-sm text-muted-foreground hover:text-foreground">vs VanceAI</Link>
+              <Link href="/alternatives/remini" className="text-sm text-muted-foreground hover:text-foreground">Remini alternative</Link>
+              <Link href="/alternatives/myheritage" className="text-sm text-muted-foreground hover:text-foreground">MyHeritage alternative</Link>
+              <Link href="/alternatives/vanceai" className="text-sm text-muted-foreground hover:text-foreground">VanceAI alternative</Link>
             </nav>
           </div>
 
           <div className="space-y-4 text-center md:text-left">
-            <h3 className="font-semibold">Resources</h3>
+            <h3 className="font-semibold">Learn</h3>
             <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link
-                href="/restore-family-photos"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Restore Family Photos
-              </Link>
-              <Link
-                href="/restore-wedding-photos"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Restore Wedding Photos
-              </Link>
-              <Link
-                href="/restore-damaged-photos"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Fix Damaged Photos
-              </Link>
-              <Link
-                href="/glossary/photo-restoration"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                What Is Photo Restoration?
-              </Link>
-              <Link
-                href="/glossary/gfpgan"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                What Is GFPGAN?
-              </Link>
-              <Link
-                href="/for/genealogists"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                For Genealogists
-              </Link>
-              <Link
-                href="/for/photographers"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                For Photographers
-              </Link>
-            </nav>
-          </div>
-
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="font-semibold">Legal</h3>
-            <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link
-                href="/terms"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Terms of Service
-              </Link>
-              <Link
-                href="/privacy"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Privacy Policy
-              </Link>
+              <Link href="/glossary/photo-restoration" className="text-sm text-muted-foreground hover:text-foreground">What is photo restoration?</Link>
+              <Link href="/glossary/gfpgan" className="text-sm text-muted-foreground hover:text-foreground">What is GFPGAN?</Link>
+              <Link href="/glossary/face-restoration" className="text-sm text-muted-foreground hover:text-foreground">What is face restoration?</Link>
+              <Link href="/glossary/image-upscaling" className="text-sm text-muted-foreground hover:text-foreground">What is image upscaling?</Link>
+              <Link href="/glossary/ai-photo-enhancement" className="text-sm text-muted-foreground hover:text-foreground">What is AI photo enhancement?</Link>
+              <Link href="/for/photographers" className="text-sm text-muted-foreground hover:text-foreground">For photographers</Link>
+              <Link href="/for/genealogists" className="text-sm text-muted-foreground hover:text-foreground">For genealogists</Link>
+              <Link href="/for/real-estate" className="text-sm text-muted-foreground hover:text-foreground">For real estate</Link>
             </nav>
           </div>
 
           <div className="space-y-4 text-center md:text-left">
             <h3 className="font-semibold">Connect</h3>
             <nav className="flex flex-col gap-2 items-center md:items-start">
-              <a
-                href="https://github.com/ThanosKa/magic-memory"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://twitter.com/KazakisThanos"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Twitter / X
-              </a>
-              <a
-                href="mailto:kazakis.th@gmail.com"
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                Support
-              </a>
+              <a href="https://github.com/ThanosKa/magic-memory" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">GitHub</a>
+              <a href="https://twitter.com/KazakisThanos" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">Twitter / X</a>
+              <a href="mailto:kazakis.th@gmail.com" className="text-sm text-muted-foreground hover:text-foreground">Support</a>
+              <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">Terms</Link>
+              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy</Link>
             </nav>
           </div>
         </div>
