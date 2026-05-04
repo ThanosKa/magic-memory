@@ -105,3 +105,16 @@ vi.mock("svix", () => ({
     verify: vi.fn(),
   })),
 }));
+
+vi.mock("resend", () => ({
+  Resend: vi.fn().mockImplementation(() => ({
+    emails: {
+      send: vi.fn(() => Promise.resolve({ data: { id: "test_email_id" }, error: null })),
+    },
+  })),
+}));
+
+vi.mock("@/lib/email", () => ({
+  sendWelcomeEmail: vi.fn(() => Promise.resolve()),
+  sendPurchaseEmail: vi.fn(() => Promise.resolve()),
+}));

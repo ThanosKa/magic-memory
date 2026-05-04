@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { GET } from "@/app/api/credits/route";
 
@@ -7,6 +7,18 @@ vi.mock("@clerk/nextjs/server");
 vi.mock("@/lib/supabase/server");
 vi.mock("@/lib/redis");
 vi.mock("@/lib/logger");
+
+function mockClerkUserWithoutEmail() {
+  return vi.mocked(clerkClient).mockResolvedValue({
+    users: {
+      getUser: vi.fn().mockResolvedValue({
+        emailAddresses: [],
+        firstName: null,
+        lastName: null,
+      }),
+    },
+  } as unknown as Awaited<ReturnType<typeof clerkClient>>);
+}
 
 function mockSupabaseWithUser(user: { paid_credits: number } | null) {
   return {
@@ -42,7 +54,7 @@ describe("GET /api/credits", () => {
     expect(data.error).toBe("Unauthorized");
   });
 
-  it("returns 404 when user not found in database", async () => {
+  it("returns 404 when user not found in database and Clerk has no email", async () => {
     vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
@@ -50,6 +62,8 @@ describe("GET /api/credits", () => {
     vi.mocked(getSupabaseAdminClient).mockReturnValue(
       mockSupabaseWithUser(null) as unknown as ReturnType<typeof getSupabaseAdminClient>
     );
+
+    mockClerkUserWithoutEmail();
 
     const response = await GET();
     const data = await response.json();
