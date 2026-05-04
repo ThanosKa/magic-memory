@@ -7,7 +7,12 @@ export async function proxy(req: NextRequest) {
 
   try {
     const { clerkMiddleware, createRouteMatcher } = await import("@clerk/nextjs/server")
-    const isProtected = createRouteMatcher(["/restore(.*)", "/profile(.*)"])
+    const isProtected = createRouteMatcher([
+      "/restore",
+      "/restore/(.*)",
+      "/profile",
+      "/profile/(.*)",
+    ])
 
     return clerkMiddleware(async (auth, request) => {
       if (isProtected(request)) {

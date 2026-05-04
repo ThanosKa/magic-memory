@@ -28,6 +28,30 @@ const nextConfig = {
     "sonic-boom",
     "replicate",
   ],
+  async redirects() {
+    return [
+      {
+        source: "/compare/remini-vs-myheritage",
+        destination: "/alternatives",
+        permanent: true,
+      },
+      {
+        source: "/compare/remini-vs-vanceai",
+        destination: "/alternatives",
+        permanent: true,
+      },
+      {
+        source: "/compare/myheritage-vs-vanceai",
+        destination: "/alternatives",
+        permanent: true,
+      },
+      {
+        source: "/&",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

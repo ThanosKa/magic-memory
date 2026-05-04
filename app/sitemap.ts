@@ -101,21 +101,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
-    {
-      url: `${BASE_URL}/compare/remini-vs-myheritage`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${BASE_URL}/compare/remini-vs-vanceai`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${BASE_URL}/compare/myheritage-vs-vanceai`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
   ];
 
   const glossaryPages: MetadataRoute.Sitemap = [

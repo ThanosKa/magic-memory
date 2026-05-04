@@ -141,7 +141,7 @@ export default function ForGenealogistsPage() {
                   </table>
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">
-                  <Link href="/compare/remini-vs-myheritage" className="underline hover:text-foreground">See full Remini vs MyHeritage comparison</Link>
+                  <Link href="/alternatives/myheritage" className="underline hover:text-foreground">See full MyHeritage alternative comparison</Link>
                 </p>
               </div>
             </div>
