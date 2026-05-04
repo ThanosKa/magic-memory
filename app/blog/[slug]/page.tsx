@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import { getCanonicalUrl, getOgImageUrl, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import { blogPosts, getBlogPost } from "@/lib/blog/posts";
+import { listicleItemListJsonLd } from "@/lib/seo/listicle-schema";
 import { BlogPostLayout } from "@/components/blog/blog-post-layout";
+
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 
 // Content components
 import { HowToRestoreOldPhotosContent } from "@/lib/blog/posts/how-to-restore-old-photos";
@@ -75,23 +78,28 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
+  const canonicalUrl = getCanonicalUrl(`/blog/${slug}`);
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
     description: post.description,
+    image: [getOgImageUrl()],
     datePublished: post.datePublished,
     dateModified: post.dateModified,
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
     author: {
       "@type": "Organization",
       name: "Magic Memory",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
       name: "Magic Memory",
+      url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.com"}/icon.svg`,
+        url: `${SITE_URL}/icon.svg`,
       },
     },
   };
@@ -101,6 +109,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     { name: "Blog", url: "/blog" },
     { name: post.title, url: `/blog/${slug}` },
   ]);
+
+  const itemList = listicleItemListJsonLd(slug);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -112,6 +122,12 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      {itemList && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
+        />
+      )}
       <Header />
       <main className="flex-1">
         <BlogPostLayout post={post}>

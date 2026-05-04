@@ -11,7 +11,7 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "VanceAI Alternative for Photo Restoration — Magic Memory",
+  title: "VanceAI Alternative for Photo Restoration (One-Click)",
   description:
     "Looking for a simpler VanceAI alternative? Magic Memory offers one-click AI photo restoration without the complex interface. Compare features, pricing, and ease of use.",
   alternates: { canonical: getCanonicalUrl("/alternatives/vanceai") },

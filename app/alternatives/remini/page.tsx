@@ -11,7 +11,7 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "Remini Alternative — Magic Memory vs Remini for Photo Restoration",
+  title: "Remini Alternative for Photo Restoration (No Subscription)",
   description:
     "Looking for a Remini alternative? Compare Magic Memory vs Remini: pricing, platform, privacy, and restoration quality. Magic Memory is web-based with one-time credits.",
   alternates: { canonical: getCanonicalUrl("/alternatives/remini") },

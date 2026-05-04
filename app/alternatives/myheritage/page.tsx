@@ -11,12 +11,12 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "MyHeritage Photo Enhancer Alternative — Magic Memory",
+  title: "MyHeritage Photo Enhancer Alternative & Pricing Compared (2026)",
   description:
-    "Looking for a MyHeritage photo enhancer alternative? Magic Memory offers standalone photo restoration without a genealogy subscription. Compare features and pricing.",
+    "MyHeritage Photo Enhancer costs $119–$259/yr (bundled with genealogy). Magic Memory does standalone AI photo restoration from €9.99 one-time, or 1 free per day. Full pricing & feature comparison.",
   alternates: { canonical: getCanonicalUrl("/alternatives/myheritage") },
   openGraph: {
-    title: "MyHeritage Photo Enhancer Alternative — Magic Memory",
+    title: "MyHeritage Photo Enhancer Alternative & Pricing Compared",
     description: "Standalone photo restoration without a genealogy subscription. Compare Magic Memory vs MyHeritage.",
     url: getCanonicalUrl("/alternatives/myheritage"),
     images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "MyHeritage Alternative" }],
@@ -79,12 +79,35 @@ export default function MyHeritageAlternativePage() {
             </nav>
 
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
-              MyHeritage Photo Enhancer Alternative — Magic Memory
+              MyHeritage Photo Enhancer Alternative — Pricing Compared
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-12">
-              MyHeritage bundles photo enhancement with genealogy subscriptions. If you only want photo restoration without the DNA kits, family trees, and genealogy database, you are paying for features you do not need.
+            <p className="text-lg text-muted-foreground mb-10">
+              MyHeritage bundles photo enhancement with genealogy subscriptions ($119–$259/year). If you only want photo restoration — not DNA kits, family trees, and genealogy databases — you are paying for features you do not need. Magic Memory offers standalone restoration from €9.99 one-time, or free daily.
             </p>
+
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 mb-10">
+              <h2 className="text-xl font-semibold mb-4">Pricing at a glance</h2>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="py-2 text-left font-semibold"></th>
+                      <th className="py-2 text-left font-semibold">MyHeritage Photo Enhancer</th>
+                      <th className="py-2 text-left font-semibold text-primary">Magic Memory</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-muted-foreground">
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Pricing model</td><td className="py-2">Annual genealogy subscription</td><td className="py-2">One-time credits, never expire</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Lowest paid tier</td><td className="py-2">~$119/year</td><td className="py-2">€9.99 (30 credits)</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Highest paid tier</td><td className="py-2">~$259/year</td><td className="py-2">€29.99 (350 credits)</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Free tier</td><td className="py-2">Very limited preview</td><td className="py-2">1 restoration/day, no card</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Photo-only purchase?</td><td className="py-2">No — bundled with genealogy</td><td className="py-2">Yes — standalone</td></tr>
+                    <tr><td className="py-2 font-medium text-foreground">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.09</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
               <h2 className="text-xl font-semibold mb-2">TL;DR</h2>

@@ -5,9 +5,63 @@ export function BestAIPhotoRestorationContent() {
     <>
       <div className="not-prose rounded-xl border border-border bg-muted/30 p-6 mb-8">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary mb-2">Quick Answer</p>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground mb-4">
           The best AI photo restoration tool for most users is <strong>Magic Memory</strong> (web-based, free daily, one-time credits) for portrait restoration. Remini is best for mobile users who want an app. VanceAI is best for professionals needing multiple tools.
         </p>
+        <Link
+          href="/"
+          className="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+        >
+          Try Magic Memory free →
+        </Link>
+        <p className="text-xs text-muted-foreground mt-3">
+          1 restoration per day, no credit card. Last verified 2026-05-04.
+        </p>
+      </div>
+
+      <div className="not-prose overflow-auto mb-10">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="border-b border-border bg-muted/50">
+              <th className="px-4 py-3 text-left font-semibold">Tool</th>
+              <th className="px-4 py-3 text-left font-semibold">Pricing</th>
+              <th className="px-4 py-3 text-left font-semibold">Free tier</th>
+              <th className="px-4 py-3 text-left font-semibold">Best for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-border">
+              <td className="px-4 py-3 font-medium text-primary">Magic Memory</td>
+              <td className="px-4 py-3 text-muted-foreground">€9.99–€29.99 one-time</td>
+              <td className="px-4 py-3 text-muted-foreground">1/day, no card</td>
+              <td className="px-4 py-3 text-muted-foreground">Web, occasional users</td>
+            </tr>
+            <tr className="border-b border-border bg-muted/20">
+              <td className="px-4 py-3 font-medium">Remini</td>
+              <td className="px-4 py-3 text-muted-foreground">$9.99/week</td>
+              <td className="px-4 py-3 text-muted-foreground">Limited</td>
+              <td className="px-4 py-3 text-muted-foreground">Mobile, daily users</td>
+            </tr>
+            <tr className="border-b border-border">
+              <td className="px-4 py-3 font-medium">MyHeritage</td>
+              <td className="px-4 py-3 text-muted-foreground">$119–$259/yr bundle</td>
+              <td className="px-4 py-3 text-muted-foreground">Very limited</td>
+              <td className="px-4 py-3 text-muted-foreground">Genealogy researchers</td>
+            </tr>
+            <tr className="border-b border-border bg-muted/20">
+              <td className="px-4 py-3 font-medium">VanceAI</td>
+              <td className="px-4 py-3 text-muted-foreground">From $4.95/mo</td>
+              <td className="px-4 py-3 text-muted-foreground">3 free/month</td>
+              <td className="px-4 py-3 text-muted-foreground">Pros, batch processing</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-3 font-medium">Fotor</td>
+              <td className="px-4 py-3 text-muted-foreground">From $3.33/mo</td>
+              <td className="px-4 py-3 text-muted-foreground">Free tier</td>
+              <td className="px-4 py-3 text-muted-foreground">General photo editing</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <h2>What Makes a Good AI Photo Restoration Tool</h2>
@@ -52,7 +106,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>3. MyHeritage Photo Enhancer — Best for Genealogy Users</h3>
       <p>
-        MyHeritage integrates photo enhancement with a comprehensive genealogy platform. If you are actively building a family tree and doing ancestry research, the photo tools add genuine value within the platform. See our detailed <Link href="/vs/myheritage" className="text-primary hover:underline">Magic Memory vs MyHeritage comparison</Link> for pricing and free-tier limits.
+        MyHeritage integrates photo enhancement with a comprehensive genealogy platform. If you are actively building a family tree and doing ancestry research, the photo tools add genuine value within the platform. If you only want photo restoration without paying $119–$259/yr for genealogy, see the <Link href="/alternatives/myheritage" className="text-primary hover:underline">MyHeritage Photo Enhancer alternative breakdown</Link>, or our <Link href="/vs/myheritage" className="text-primary hover:underline">Magic Memory vs MyHeritage comparison</Link>.
       </p>
       <ul>
         <li><strong>Best for:</strong> Active genealogy researchers who also want photo restoration</li>

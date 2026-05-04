@@ -115,16 +115,16 @@ const pricingFaqs: FAQItem[] = [
 ];
 
 export const metadata: Metadata = {
-  title: "Pricing - Get Credits for Photo Restoration",
+  title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
   description:
-    "Choose the perfect plan for your photo restoration needs. Get 1 free restoration daily or purchase credits that never expire. Starter from €9.99, Premium package available.",
+    "Pay once, restore forever. Credits never expire — €9.99 for 30 restorations, down to €0.09/photo. Or 1 free per day, no card required. No subscription.",
   alternates: {
     canonical: getCanonicalUrl("/pricing"),
   },
   openGraph: {
-    title: "Pricing — AI Photo Restoration Credits | Magic Memory",
+    title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
     description:
-      "Get 1 free AI photo restoration daily or purchase credits that never expire. Starter from \u20ac9.99. Powered by GFPGAN — instant results in under 15 seconds.",
+      "Pay once, restore forever. Credits never expire \u2014 \u20ac9.99 for 30 restorations. Or 1 free per day, no card required. No subscription, no monthly fees.",
     url: getCanonicalUrl("/pricing"),
     type: "website",
     images: [
@@ -138,9 +138,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing — AI Photo Restoration Credits | Magic Memory",
+    title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
     description:
-      "Get 1 free AI photo restoration daily or purchase credits that never expire. Starter from \u20ac9.99. Powered by GFPGAN — instant results in under 15 seconds.",
+      "Pay once, restore forever. Credits never expire \u2014 \u20ac9.99 for 30 restorations. Or 1 free per day, no card required. No subscription, no monthly fees.",
     images: [getOgImageUrl()],
   },
   robots: {

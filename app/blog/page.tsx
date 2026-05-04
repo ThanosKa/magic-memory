@@ -9,7 +9,7 @@ const Header = dynamic(() => import("@/components/header").then((m) => m.Header)
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "Blog — AI Photo Restoration Tips and Guides | Magic Memory",
+  title: "Blog — AI Photo Restoration Tips and Guides",
   description:
     "Learn how to restore old photos, understand AI photo restoration technology, and compare tools. Guides, tips, and tutorials from the Magic Memory team.",
   alternates: { canonical: getCanonicalUrl("/blog") },

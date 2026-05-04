@@ -9,7 +9,7 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "Best AI Photo Restoration Tools — Compared | Magic Memory",
+  title: "Best AI Photo Restoration Tools — Compared",
   description:
     "Compare the best AI photo restoration tools: Magic Memory, Remini, MyHeritage, VanceAI, and Fotor. Honest comparison with pricing, features, and who each is best for.",
   alternates: { canonical: getCanonicalUrl("/alternatives") },
