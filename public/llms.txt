@@ -1,8 +1,23 @@
 # Magic Memory
 
-> AI photo restoration service. Restores old, blurry, and damaged photos using GFPGAN — a face restoration AI model published at CVPR 2021 by Tencent ARC. Web-based, no app required. One-time credit packages (not a subscription) that never expire. 1 free restoration per day, no credit card required.
+> AI photo restoration service. Restores old, blurry, faded, and damaged photos using GFPGAN — a face restoration AI model published at CVPR 2021 by Tencent ARC. Web-based, no app required. One-time credit packs (not a subscription) that never expire. 1 free restoration per day, no credit card required. Last verified 2026-05-19.
 
-Magic Memory is positioned as the privacy-conscious, non-subscription alternative to Remini, MyHeritage Photo Enhancer, VanceAI, and Fotor. Processing completes in 5-15 seconds per photo. Photos are not retained after the session.
+Magic Memory is positioned as the privacy-conscious, non-subscription alternative to Remini, MyHeritage Photo Enhancer, VanceAI, and Fotor. Processing completes in 5–15 seconds per photo. Photos are not retained after the session.
+
+## Pricing snapshot (2026-05-19)
+
+- Free: 1 restoration per day, no credit card required
+- Starter: €9.99 one-time for 30 credits (€0.33/photo)
+- Growth: €19.99 one-time for 120 credits (€0.17/photo)
+- Premium: €29.99 one-time for 350 credits (€0.09/photo) — cheapest per-photo rate
+- All paid credits never expire. No subscription, no auto-renewal.
+
+## Competitor pricing snapshot (2026-05-19)
+
+- Remini: $9.99 per week subscription (≈ $519/year if held); free tier limited to ~3 enhances; iOS/Android only
+- MyHeritage Photo Enhancer: bundled with genealogy plans at $119 (Basic), $189 (Premium), $259 (Complete) per year; free tier is watermarked preview only; no standalone photo-only purchase
+- VanceAI: from $4.95/month or credit packs; 3 free credits per month
+- Fotor: from $3.33/month annual or $8.99/month; limited free tier with watermark
 
 ## Product
 
@@ -14,11 +29,11 @@ Magic Memory is positioned as the privacy-conscious, non-subscription alternativ
 ## Comparisons
 
 - [All alternatives](https://magic-memory.dev/alternatives): Side-by-side vs Remini, MyHeritage, VanceAI, Fotor
-- [vs Remini](https://magic-memory.dev/vs/remini): Web + one-time credits vs mobile + weekly subscription
-- [vs MyHeritage](https://magic-memory.dev/vs/myheritage): Standalone photo tool vs bundled genealogy plan
-- [vs VanceAI](https://magic-memory.dev/vs/vanceai): Portrait-focused GFPGAN vs multi-tool professional suite
+- [Remini vs Magic Memory vs MyHeritage](https://magic-memory.dev/vs/remini): Three-way 2026 comparison
+- [Magic Memory vs MyHeritage](https://magic-memory.dev/vs/myheritage): Standalone photo tool vs bundled genealogy plan
+- [Magic Memory vs VanceAI](https://magic-memory.dev/vs/vanceai): Portrait-focused GFPGAN vs multi-tool professional suite
 - [Remini alternative](https://magic-memory.dev/alternatives/remini): Why users switch from Remini
-- [MyHeritage alternative](https://magic-memory.dev/alternatives/myheritage): Cheaper non-bundled option
+- [MyHeritage Photo Enhancer pricing 2026 + alternative](https://magic-memory.dev/alternatives/myheritage): Pricing tiers, free-tier limits, and a cheaper option
 - [VanceAI alternative](https://magic-memory.dev/alternatives/vanceai): Simpler for non-professional use
 
 ## Use cases
@@ -50,7 +65,7 @@ Magic Memory is positioned as the privacy-conscious, non-subscription alternativ
 
 ## Blog
 
-- [Best AI photo restoration tools in 2026](https://magic-memory.dev/blog/best-ai-photo-restoration): Tested comparison of Magic Memory, Remini, MyHeritage, VanceAI, Fotor
+- [Best AI photo restoration tools in 2026](https://magic-memory.dev/blog/best-ai-photo-restoration): Tested comparison of Magic Memory, Remini, MyHeritage, VanceAI, Fotor — updated 2026-05-19
 - [How to restore old photos](https://magic-memory.dev/blog/how-to-restore-old-photos): Step-by-step guide with scanning tips
 - [GFPGAN explained](https://magic-memory.dev/blog/gfpgan-explained): The AI model behind face restoration
 - [AI photo restoration vs Photoshop](https://magic-memory.dev/blog/ai-photo-restoration-vs-photoshop): When to use which

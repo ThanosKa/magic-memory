@@ -71,16 +71,16 @@ const CTASection = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "AI Photo Restoration — Restore Old Photos Free",
+  title: "Free AI Photo Restoration — Restore Old Photos in 15 Seconds",
   description:
-    "Magic Memory uses GFPGAN AI to restore old, blurry, and damaged photos in under 15 seconds. Get 1 free restoration daily — no card required. Upload a photo and see instant before-and-after results. No images stored on our servers.",
+    "Restore old, blurry, and damaged photos free with GFPGAN AI. 1 free restoration daily, no credit card. No subscription, no app — just upload and download in under 15 seconds. Cheaper than Remini ($9.99/wk) and MyHeritage ($119/yr). Photos never stored.",
   alternates: {
     canonical: getCanonicalUrl("/"),
   },
   openGraph: {
-    title: "AI Photo Restoration — Restore Old Photos Free | Magic Memory",
+    title: "Free AI Photo Restoration — Restore Old Photos in 15 Seconds | Magic Memory",
     description:
-      "Magic Memory uses GFPGAN AI to restore old, blurry, and damaged photos in under 15 seconds. Get 1 free restoration daily — no card required. Upload a photo and see instant before-and-after results.",
+      "Restore old, blurry, and damaged photos free with GFPGAN AI. 1 free restoration daily, no credit card. No subscription, no app — just upload and download. Photos never stored.",
     url: getCanonicalUrl("/"),
     images: [
       {
@@ -93,9 +93,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Photo Restoration — Restore Old Photos Free | Magic Memory",
+    title: "Free AI Photo Restoration — Restore Old Photos in 15 Seconds | Magic Memory",
     description:
-      "Magic Memory uses GFPGAN AI to restore old, blurry, and damaged photos in under 15 seconds. Get 1 free restoration daily — no card required.",
+      "1 free restoration daily, no credit card. Cheaper than Remini and MyHeritage. Photos never stored.",
     images: [getOgImageUrl()],
   },
   robots: {

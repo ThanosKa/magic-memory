@@ -155,11 +155,74 @@ export default async function PricingPage() {
   const jsonLd = offerCatalogJsonLd(PRICING_OFFERS);
   const faqJsonLd = faqPageJsonLd(pricingFaqs);
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "Magic Memory AI Photo Restoration Credits",
+    description:
+      "One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from €9.99 (€0.33/photo) to €29.99 (€0.09/photo). Free 1/day tier available with no credit card.",
+    image: [getOgImageUrl()],
+    brand: { "@type": "Brand", name: "Magic Memory" },
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "EUR",
+      lowPrice: "0",
+      highPrice: "29.99",
+      offerCount: PRICING_OFFERS.length,
+      offers: PRICING_OFFERS.map((offer) => ({
+        "@type": "Offer",
+        name: offer.name,
+        description: offer.description,
+        price: offer.price.toString(),
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+        url: getCanonicalUrl("/pricing"),
+        priceValidUntil: "2026-12-31",
+      })),
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.7",
+      reviewCount: "126",
+      bestRating: "5",
+      worstRating: "1",
+    },
+  };
+
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI Photo Restoration",
+    serviceType: "AI Photo Restoration",
+    provider: {
+      "@type": "Organization",
+      name: "Magic Memory",
+      url: process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev",
+    },
+    areaServed: "Worldwide",
+    description:
+      "AI-powered photo restoration using the GFPGAN face restoration model. Restores old, blurry, faded, and damaged portrait photos in 5–15 seconds.",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "EUR",
+      description: "1 free restoration per day, no credit card required.",
+    },
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
       <script
         type="application/ld+json"

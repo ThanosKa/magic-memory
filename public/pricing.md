@@ -2,7 +2,7 @@
 
 AI-powered photo restoration using GFPGAN. No subscription — one-time credit packages that never expire.
 
-Last updated: 2026-04-18
+Last updated: 2026-05-19
 Currency: EUR (Euro). Your bank converts to local currency at purchase.
 Payment processor: Stripe (PCI DSS Level 1).
 

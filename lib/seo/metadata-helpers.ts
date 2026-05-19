@@ -143,3 +143,54 @@ export const defaultMetadata = {
   ogType: "website" as const,
   locale: "en_US",
 };
+
+export const useCaseSoftwareJsonLd = (params: {
+  name: string;
+  description: string;
+  url: string;
+  category?: string;
+}): Thing => ({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: params.name,
+  description: params.description,
+  url: params.url.startsWith("http") ? params.url : `${SITE_URL}${params.url}`,
+  applicationCategory: params.category || "PhotographyApplication",
+  applicationSubCategory: "PhotoRestoration",
+  operatingSystem: "Web",
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "EUR",
+    lowPrice: "0",
+    highPrice: "29.99",
+    offerCount: 4,
+    description:
+      "1 free restoration per day plus one-time credit packs from €9.99 to €29.99",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.7",
+    reviewCount: "126",
+    bestRating: "5",
+    worstRating: "1",
+  },
+});
+
+export const howToJsonLd = (params: {
+  name: string;
+  description?: string;
+  steps: Array<{ name: string; text: string }>;
+  totalTime?: string;
+}): Thing => ({
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: params.name,
+  description: params.description,
+  totalTime: params.totalTime || "PT15S",
+  step: params.steps.map((step, index) => ({
+    "@type": "HowToStep",
+    position: index + 1,
+    name: step.name,
+    text: step.text,
+  })),
+});

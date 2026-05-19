@@ -11,15 +11,15 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "Magic Memory vs Remini — Which Should You Choose?",
+  title: "Remini vs Magic Memory vs MyHeritage 2026: Pricing, Free Tiers & Quality",
   description:
-    "Detailed comparison of Magic Memory vs Remini for AI photo restoration. Compare pricing, platform, privacy, restoration quality, and free tier. Choose the right tool.",
+    "Remini $9.99/wk vs MyHeritage $119–$259/yr vs Magic Memory 1 free/day + €9.99 one-time. Side-by-side 2026 comparison on pricing, free-tier limits, platform, restoration quality, and privacy. See which AI photo restoration tool fits your needs.",
   alternates: { canonical: getCanonicalUrl("/vs/remini") },
   openGraph: {
-    title: "Magic Memory vs Remini — Which Should You Choose?",
-    description: "Magic Memory vs Remini detailed comparison. Web vs mobile, one-time vs subscription.",
+    title: "Remini vs Magic Memory vs MyHeritage 2026 — Pricing & Free Tiers",
+    description: "Pricing, free tiers, and platform comparison for the three most-searched AI photo restoration tools in 2026.",
     url: getCanonicalUrl("/vs/remini"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Magic Memory vs Remini" }],
+    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Magic Memory vs Remini vs MyHeritage" }],
   },
   robots: { index: true, follow: true },
 };
@@ -28,29 +28,34 @@ const remini = competitors.remini;
 
 const faqs: FAQItem[] = [
   {
-    question: "Magic Memory vs Remini: which has better photo restoration quality?",
+    question: "Remini vs MyHeritage Photo Enhancer in 2026: which is better?",
     answer:
-      "Both deliver strong face restoration results. Magic Memory uses GFPGAN, a model published in peer-reviewed research (CVPR 2021) specifically designed for face restoration. Remini uses a proprietary model. For portrait and face restoration specifically, both produce high-quality results. The meaningful differences are in pricing, platform, and privacy, not restoration quality.",
+      "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a $9.99/week subscription. MyHeritage Photo Enhancer is better if you're already paying for MyHeritage genealogy ($119–$259/yr) and want photo enhancement bundled in. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at 1 free/day plus €9.99 one-time for 30 credits.",
   },
   {
-    question: "Which is cheaper: Magic Memory or Remini?",
+    question: "Remini vs Magic Memory: which has better photo restoration quality?",
     answer:
-      "For most users, Magic Memory is cheaper. Remini charges $9.99/week. Magic Memory's smallest credit package is €9.99 for 30 credits (one-time, never expires), plus 1 free restoration per day. A user who restores 10 photos per month would pay $43/month on Remini versus roughly €10 every few months on Magic Memory.",
+      "Both deliver strong face restoration results. Magic Memory uses GFPGAN, a model published in peer-reviewed research (CVPR 2021) specifically designed for face restoration. Remini uses a proprietary model. For portrait and face restoration specifically, both produce high-quality results. The meaningful differences are pricing, platform, and privacy — not raw restoration quality.",
   },
   {
-    question: "Can you use Magic Memory on iPhone?",
+    question: "Which is cheaper for 10–20 photos: Remini, MyHeritage, or Magic Memory?",
     answer:
-      "Yes. Magic Memory is a web app that works in Safari on iPhone. No app download required. Go to the website, sign in with Google, and upload photos directly from your camera roll. This is the key difference from Remini, which requires the iOS or Android app.",
+      "Magic Memory is the cheapest by a wide margin. A user restoring 10–20 photos per month would pay roughly $43/month on Remini ($9.99/week × 4.3 weeks), $119+/year on MyHeritage (annual subscription required), or €0 on Magic Memory (covered by the daily free tier) — even 50 photos would only cost €9.99 on the smallest Magic Memory credit pack.",
+  },
+  {
+    question: "Can you use Magic Memory or Remini on iPhone?",
+    answer:
+      "Magic Memory works in Safari on iPhone — no app download required. Sign in with Google and upload photos directly from your camera roll. Remini requires the iOS or Android app. MyHeritage has a mobile app but the photo enhancer also works in the browser if you have a paid plan.",
   },
   {
     question: "Does Remini or Magic Memory have a better free tier?",
     answer:
-      "Magic Memory gives 1 free restoration per day, every day, with no credit card required. Remini offers limited free trials. Magic Memory's free tier is more generous for casual, occasional use.",
+      "Magic Memory's free tier is more generous: 1 restoration per day, every day, with no credit card. Remini offers limited free trials (typically ~3 enhances before paywall). For users who restore one or two photos per week, Magic Memory's free tier is effectively unlimited.",
   },
   {
-    question: "Is there a reason to use both?",
+    question: "Is Magic Memory a Remini alternative?",
     answer:
-      "Some users use Magic Memory for its free daily restoration on web, and Remini for its mobile app editing features when they want additional photo manipulation. They are not mutually exclusive — they serve somewhat different use cases.",
+      "Yes — Magic Memory is the leading non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is web (any device), Remini is mobile-only; Magic Memory is one-time credits + free daily, Remini is $9.99/week subscription; Magic Memory does not retain photos after processing, Remini stores them in your cloud account.",
   },
 ];
 
@@ -114,8 +119,33 @@ export default function VsReminiPage() {
             </nav>
 
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
-              Magic Memory vs Remini — Which Should You Choose?
+              Remini vs Magic Memory vs MyHeritage Photo Enhancer (2026)
             </h1>
+
+            <p className="text-lg text-muted-foreground mb-8">
+              The three most-searched AI photo restoration tools in 2026, compared on the dimensions that actually matter for occasional users: <strong>price for 10–20 photos</strong>, <strong>free-tier limits</strong>, <strong>platform</strong>, and <strong>where your photos end up</strong>. <em>Pricing verified 2026-05-19.</em>
+            </p>
+
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 mb-10 overflow-x-auto">
+              <h2 className="text-xl font-semibold mb-4">Quick three-way table</h2>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="py-2 text-left font-semibold"></th>
+                    <th className="py-2 text-left font-semibold text-primary">Magic Memory</th>
+                    <th className="py-2 text-left font-semibold">Remini</th>
+                    <th className="py-2 text-left font-semibold">MyHeritage</th>
+                  </tr>
+                </thead>
+                <tbody className="text-muted-foreground">
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Cheapest paid</td><td className="py-2">€9.99 one-time</td><td className="py-2">$9.99/week</td><td className="py-2">$119/year</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Free tier</td><td className="py-2">1/day, no card</td><td className="py-2">~3 enhances</td><td className="py-2">Watermarked preview</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Platform</td><td className="py-2">Web (any device)</td><td className="py-2">iOS/Android only</td><td className="py-2">Web</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Bundled with…</td><td className="py-2">Nothing</td><td className="py-2">Video enhancer</td><td className="py-2">Genealogy plan</td></tr>
+                  <tr><td className="py-2 font-medium text-foreground">Photos stored?</td><td className="py-2">No</td><td className="py-2">Yes — cloud</td><td className="py-2">Yes — account</td></tr>
+                </tbody>
+              </table>
+            </div>
 
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
               <h2 className="text-xl font-semibold mb-3">TL;DR</h2>

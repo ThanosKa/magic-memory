@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd, useCaseSoftwareJsonLd } from "@/lib/seo/metadata-helpers";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
@@ -65,11 +65,18 @@ export default function RestoreVintagePhotosPage() {
     { name: "Home", url: "/" },
     { name: "Restore Vintage Photos", url: "/restore-vintage-photos" },
   ]);
+  const softwareJsonLd = useCaseSoftwareJsonLd({
+    name: "Magic Memory — Restore Vintage Photos with AI",
+    description:
+      "Restore vintage photos from the 1920s through 1970s with GFPGAN AI. Handles film grain, sepia tones, and period portrait conventions. 1 free per day.",
+    url: "/restore-vintage-photos",
+  });
 
   return (
     <div className="flex min-h-screen flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }} />
       <Header />
       <main className="flex-1">
         <UseCaseHero

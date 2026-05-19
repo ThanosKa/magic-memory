@@ -40,9 +40,9 @@ export function HeroSection() {
             variants={fadeInUp}
             transition={{ duration: 0.5 }}
           >
-            Restore Your Old Photos{" "}
+            Restore Old Photos in 15 Seconds —{" "}
             <Highlighter action="highlight" color="#87CEFA">
-              Using AI
+              Free Daily, No App
             </Highlighter>
           </motion.h1>
           <motion.p
@@ -50,8 +50,14 @@ export function HeroSection() {
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Bring your memories back to life. Get 1 free restoration daily, or
-            buy credits for unlimited restorations.
+            GFPGAN AI restores blurry faces, faded color, and damaged scans in under 15 seconds. 1 free restoration every day — no credit card, no subscription. Photos are never stored.
+          </motion.p>
+          <motion.p
+            className="mt-4 text-sm text-muted-foreground"
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            Cheaper than Remini ($9.99/wk) and MyHeritage ($119/yr). Web-based — works on any device.
           </motion.p>
           <motion.div
             className="mt-10 flex flex-col gap-4 sm:flex-row"
