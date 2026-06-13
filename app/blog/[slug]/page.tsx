@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import { getCanonicalUrl, getOgImageUrl, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import { blogPosts, getBlogPost } from "@/lib/blog/posts";
-import { listicleItemListJsonLd } from "@/lib/seo/listicle-schema";
+import { listicleItemListJsonLd, listicleFaqJsonLd } from "@/lib/seo/listicle-schema";
 import { BlogPostLayout } from "@/components/blog/blog-post-layout";
 
 const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
@@ -111,6 +111,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   ]);
 
   const itemList = listicleItemListJsonLd(slug);
+  const faqList = listicleFaqJsonLd(slug);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -126,6 +127,12 @@ export default async function BlogPostPage({ params }: PageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
+        />
+      )}
+      {faqList && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqList) }}
         />
       )}
       <Header />

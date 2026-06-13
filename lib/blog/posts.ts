@@ -23,10 +23,10 @@ export const blogPosts: BlogPost[] = [
     slug: "best-ai-photo-restoration",
     title: "Best AI Photo Restoration Tools 2026: 5 Tested — Pricing, Speed, Free Limits",
     description:
-      "We tested 5 AI photo restoration tools on the same old photo. Remini ($9.99/wk), MyHeritage ($119–$259/yr), VanceAI ($4.95/mo), Fotor, and Magic Memory (1 free/day, €0.09/photo). See speed, quality, and the cheapest option for occasional users.",
-    date: "May 19, 2026",
+      "The best AI photo restoration tools of 2026, tested on the same old photo: Remini ($9.99/wk), MyHeritage ($119–$259/yr), VanceAI ($4.95/mo), Fotor, and Magic Memory (1 free/day, €0.09/photo). See speed, quality, and the cheapest AI photo restorer for occasional users.",
+    date: "June 13, 2026",
     datePublished: "2026-02-23",
-    dateModified: "2026-05-19",
+    dateModified: "2026-06-13",
     readingTime: 12,
   },
   {

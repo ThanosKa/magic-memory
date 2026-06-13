@@ -5,7 +5,7 @@ export function BestAIPhotoRestorationContent() {
     <>
       <div className="not-prose rounded-xl border border-border bg-muted/30 p-6 mb-8">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary mb-2">
-          Quick answer (May 2026)
+          Quick answer (June 2026)
         </p>
         <p className="text-muted-foreground mb-4">
           After running the same scanned 1962 portrait through five tools, <strong>Magic Memory</strong> produced the sharpest face at the lowest effective cost (€0.09/photo on the largest pack, 1 free/day for casual use). <strong>Remini</strong> is the strongest mobile-app pick at $9.99/week. <strong>MyHeritage Photo Enhancer</strong> is bundled into a $119–$259/yr genealogy subscription — overpriced unless you also want family-tree tools. <strong>VanceAI</strong> wins for pros who batch-process or also need upscaling/colorization. <strong>Fotor</strong> is the right call only if you also need a full photo editor.
@@ -17,7 +17,7 @@ export function BestAIPhotoRestorationContent() {
           Try Magic Memory free →
         </Link>
         <p className="text-xs text-muted-foreground mt-3">
-          1 restoration per day, no credit card. Pricing & free-tier limits last verified 2026-05-19.
+          1 restoration per day, no credit card. Pricing & free-tier limits last verified 2026-06-13.
         </p>
       </div>
 
@@ -26,7 +26,7 @@ export function BestAIPhotoRestorationContent() {
         <span aria-hidden>·</span>
         <span>Tested on a real 1962 family portrait + a damaged 1974 wedding photo</span>
         <span aria-hidden>·</span>
-        <span>Updated 2026-05-19 to reflect post-March 2026 pricing changes</span>
+        <span>Updated 2026-06-13 — pricing &amp; free-tier limits re-verified for all five tools</span>
       </div>
 
       <h2>What is AI photo restoration?</h2>
@@ -38,6 +38,35 @@ export function BestAIPhotoRestorationContent() {
       <p>
         We uploaded the same two scanned photos to each tool: (1) a 1962 black-and-white family portrait at 600 DPI with moderate blur and a torn corner, and (2) a 1974 wedding photo with severe color shift and dust marks. We tracked processing time, signed-up free-tier availability, output file size, and whether each tool retained the upload in its cloud library. No tool was given any other input. All prices were re-verified directly on each vendor&apos;s site on 2026-05-19.
       </p>
+
+      <div className="not-prose my-8 grid gap-4 sm:grid-cols-2">
+        <figure className="rounded-xl border border-border bg-muted/30 overflow-hidden">
+          <div className="flex aspect-[4/3] items-center justify-center bg-muted text-xs text-muted-foreground">
+            [Screenshot: 1962 portrait — original scan vs. Magic Memory output]
+          </div>
+          <figcaption className="px-4 py-2 text-xs text-muted-foreground">
+            Test photo 1: 1962 black-and-white family portrait, before and after restoration.
+          </figcaption>
+        </figure>
+        <figure className="rounded-xl border border-border bg-muted/30 overflow-hidden">
+          <div className="flex aspect-[4/3] items-center justify-center bg-muted text-xs text-muted-foreground">
+            [Screenshot: 1974 wedding photo — original scan vs. restored output]
+          </div>
+          <figcaption className="px-4 py-2 text-xs text-muted-foreground">
+            Test photo 2: 1974 wedding photo with color shift and dust, before and after.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div className="not-prose rounded-xl border border-border bg-muted/20 p-5 mb-8">
+        <p className="text-sm font-semibold text-foreground mb-2">What changed in this update (2026-06-13)</p>
+        <ul className="space-y-1 text-sm text-muted-foreground">
+          <li>· Remini moved to a $9.99/week subscription (previously billed monthly), making it the most expensive option for one-off restorations.</li>
+          <li>· MyHeritage Photo Enhancer removed its standalone photo plan — enhancement now requires a $119–$259/yr genealogy bundle.</li>
+          <li>· VanceAI lowered its entry tier to $4.95/month; free allowance unchanged at 3 credits/month.</li>
+          <li>· Magic Memory&apos;s €29.99 / 350-credit pack brings the lowest verified per-photo cost in this roundup at €0.09/photo.</li>
+        </ul>
+      </div>
 
       <div className="not-prose overflow-auto mb-10">
         <table className="w-full text-sm border-collapse">

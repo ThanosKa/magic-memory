@@ -86,6 +86,49 @@ const listicles: Record<string, ListicleEntry[]> = {
   "best-ai-photo-restoration": bestAiPhotoRestoration,
 };
 
+type ListicleFaq = { question: string; answer: string };
+
+// Mirrors the visible "Frequently asked questions" section in each listicle post.
+const listicleFaqs: Record<string, ListicleFaq[]> = {
+  "best-ai-photo-restoration": [
+    {
+      question: "What are the most popular AI photo restoration tools in 2026?",
+      answer:
+        "The five most-used AI photo restoration tools in 2026 are Remini (mobile-first, largest user base), MyHeritage Photo Enhancer (bundled in genealogy plans), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, free daily), and Fotor (general photo editor with AI enhancement). Together they cover roughly every realistic use case — from one-off family photos to batch professional jobs.",
+    },
+    {
+      question: "What is the best free AI photo restoration tool in 2026?",
+      answer:
+        "Magic Memory offers the most generous free tier: 1 restoration per day with no credit card required. For occasional users, that is effectively unlimited. Most other tools restrict free usage to a one-time trial, a watermarked preview, or 3 credits per month.",
+    },
+    {
+      question: "What is the cheapest AI photo restoration for 20+ photos?",
+      answer:
+        "Magic Memory's €29.99 / 350-credit pack works out to roughly €0.09 per photo and credits never expire. Remini at $9.99/week works out to ~$0.50/photo only if you restore 20 photos in a single week — otherwise the cost per photo balloons. MyHeritage bundles photo enhancement with a $119–$259/yr genealogy plan, so 20 photos cost $6–$13 each if you do not also use the genealogy tools.",
+    },
+    {
+      question: "Which tool works without downloading an app?",
+      answer:
+        "Magic Memory, MyHeritage, VanceAI, and Fotor all work directly in a web browser on any device — desktop, laptop, tablet, or phone — without downloading an app. Remini is the only major restoration tool that requires installing an iOS or Android app.",
+    },
+    {
+      question: "What are the features of popular AI photo restoration tools?",
+      answer:
+        "Across the top tools, the common features are face-specific restoration (sharper eyes, recovered skin texture, repaired teeth/hair detail), upscaling (output at 2x or 4x the input resolution), and damage repair (scratches, tears, fading). Higher-tier tools additionally offer colorization of black-and-white photos, batch processing, and integration with family-tree or social-media workflows. The single most important differentiator is whether the model is face-specialized (GFPGAN-based) or general-purpose.",
+    },
+    {
+      question: "Are AI photo restoration results permanent?",
+      answer:
+        "Yes. The restored photo you download is a permanent image file. It does not degrade or change after you download it. Save multiple copies in different locations for long-term preservation.",
+    },
+    {
+      question: "How do popular AI image restoration tools compare on accuracy and speed?",
+      answer:
+        "In our 2026-05-19 test, processing time ranged from 5–30 seconds across all five tools, with Magic Memory and VanceAI on the fast end. Face accuracy was strongest on Magic Memory and Remini (both produce identifiable, sharp faces from severely degraded inputs); MyHeritage and VanceAI produced more conservative output. Fotor's general-purpose AI was the least face-specialized.",
+    },
+  ],
+};
+
 export function listicleItemListJsonLd(slug: string): Thing | null {
   const items = listicles[slug];
   if (!items) return null;
@@ -131,6 +174,21 @@ export function listicleItemListJsonLd(slug: string): Thing | null {
           },
         },
       },
+    })),
+  };
+}
+
+export function listicleFaqJsonLd(slug: string): Thing | null {
+  const faqs = listicleFaqs[slug];
+  if (!faqs) return null;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
     })),
   };
 }

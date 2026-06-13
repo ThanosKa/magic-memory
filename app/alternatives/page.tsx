@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { listicleItemListJsonLd } from "@/lib/seo/listicle-schema";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
@@ -9,15 +10,16 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "Best AI Photo Restoration Tools — Compared",
+  title: "5 Best AI Photo Restoration Tools 2026 (Tested & Compared)",
   description:
-    "Compare the best AI photo restoration tools: Magic Memory, Remini, MyHeritage, VanceAI, and Fotor. Honest comparison with pricing, features, and who each is best for.",
+    "We tested the 5 best AI photo restoration tools in 2026 — Magic Memory, Remini, MyHeritage, VanceAI, and Fotor. Compare pricing, free tiers, and the best AI photo restorer for your use case.",
   alternates: { canonical: getCanonicalUrl("/alternatives") },
   openGraph: {
-    title: "Best AI Photo Restoration Tools — Compared",
-    description: "Honest comparison of the best AI photo restoration tools in 2026.",
+    title: "5 Best AI Photo Restoration Tools 2026 (Tested & Compared)",
+    description:
+      "We tested the 5 best AI photo restoration tools in 2026 — pricing, free tiers, and which AI photo restorer is right for you.",
     url: getCanonicalUrl("/alternatives"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Best AI Photo Restoration Tools" }],
+    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Best AI Photo Restoration Tools 2026" }],
   },
   robots: { index: true, follow: true },
 };
@@ -104,11 +106,15 @@ export default function AlternativesPage() {
     { name: "Home", url: "/" },
     { name: "AI Photo Restoration Alternatives", url: "/alternatives" },
   ]);
+  const itemList = listicleItemListJsonLd("best-ai-photo-restoration");
 
   return (
     <div className="flex min-h-screen flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      {itemList && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
+      )}
       <Header />
       <main className="flex-1">
         <section className="py-20 sm:py-32">
@@ -120,11 +126,11 @@ export default function AlternativesPage() {
             </nav>
 
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
-              Best AI Photo Restoration Tools — Compared
+              5 Best AI Photo Restoration Tools 2026 (Tested &amp; Compared)
             </h1>
 
             <p className="text-lg text-muted-foreground mb-16 max-w-3xl">
-              Five AI photo restoration tools tested and compared honestly — including their weaknesses. Find the right tool for your use case, budget, and platform.
+              We tested the 5 best AI photo restoration tools of 2026 on the same old photo and compared them honestly — including their weaknesses. Find the right AI photo restorer for your use case, budget, and platform. Last verified 2026-05-19.
             </p>
 
             <div className="space-y-6 mb-16">
