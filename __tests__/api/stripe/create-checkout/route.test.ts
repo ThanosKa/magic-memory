@@ -111,7 +111,7 @@ describe("POST /api/stripe/create-checkout", () => {
 
     expect(response.status).toBe(404);
     expect(data.success).toBe(false);
-    expect(data.error).toBe("User not found");
+    expect(data.error).toContain("couldn't find your account");
 
     Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
       value: originalPriceId,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import Image from "next/image";
 import Link from "next/link";
 import { useDropzone } from "react-dropzone";
@@ -117,6 +118,14 @@ export function RestoreUploader() {
   const totalCredits = creditsData?.data?.totalCredits ?? 0;
   const freeResetTime = creditsData?.data?.freeResetTime;
   const hasCredits = totalCredits > 0;
+  const creditsError =
+    creditsData?.success === false && typeof creditsData.error === "string"
+      ? creditsData.error
+      : null;
+
+  useEffect(() => {
+    if (creditsError) toast.error(creditsError, { id: "credits-error" });
+  }, [creditsError]);
 
   const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(
     null
@@ -240,6 +249,7 @@ export function RestoreUploader() {
           setError({ type: "auth_error" });
         } else {
           setError({ type: "generic", message: FRIENDLY_RESTORE_ERROR });
+          toast.error(FRIENDLY_RESTORE_ERROR);
         }
         completeProgress();
         setStage("idle");

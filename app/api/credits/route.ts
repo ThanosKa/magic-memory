@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
+import { ensureUser } from "@/lib/supabase/ensure-user";
 import logger from "@/lib/logger";
 import { z } from "zod";
 
@@ -65,23 +66,16 @@ export async function GET() {
             .filter(Boolean)
             .join(" ") || null;
 
-        const { data: newUser, error: createError } = await supabase
-          .from("users")
-          .upsert(
-            {
-              clerk_user_id: userId,
-              email,
-              name,
-              paid_credits: 1,
-            },
-            { onConflict: "clerk_user_id" }
-          )
-          .select()
-          .single();
+        const ensured = await ensureUser({
+          supabase,
+          clerkUserId: userId,
+          email,
+          name,
+        });
 
-        if (createError || !newUser) {
+        if (!ensured.ok) {
           logger.error(
-            { userId, error: createError?.message },
+            { userId, error: ensured.message },
             "Failed to create user"
           );
           return NextResponse.json(
@@ -93,7 +87,13 @@ export async function GET() {
           );
         }
 
-        user = newUser;
+        if (ensured.relinked) {
+          logger.warn(
+            { userId, email },
+            "Existing user row re-linked to new Clerk id"
+          );
+        }
+        user = ensured.user;
         logger.info({ userId, email }, "User auto-created from Clerk");
       } catch (clerkError) {
         const errorMessage =

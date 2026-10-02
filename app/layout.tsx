@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { AnalyticsProvider } from "@/app/analytics-provider";
 
@@ -210,6 +211,7 @@ export default function RootLayout({
           {children}
           <CookieConsent />
           <AnalyticsProvider />
+          <Toaster richColors position="top-center" />
         </body>
       </html>
     </ConditionalClerkProvider>

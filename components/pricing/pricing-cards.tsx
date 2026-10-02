@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
 import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
 import { useState } from "react";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { SignUpButton, useUser } from "@clerk/nextjs";
@@ -54,9 +55,15 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
         window.location.href = data.url;
       } else {
         console.error("Failed to create checkout session");
+        toast.error(
+          typeof data.error === "string"
+            ? data.error
+            : "Could not start checkout. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error creating checkout:", error);
+      toast.error("Could not start checkout. Please try again.");
     } finally {
       setLoading(null);
     }

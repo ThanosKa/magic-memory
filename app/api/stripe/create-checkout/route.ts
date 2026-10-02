@@ -74,7 +74,11 @@ export async function POST(request: NextRequest) {
         "User not found for checkout"
       );
       return NextResponse.json(
-        { success: false, error: "User not found" },
+        {
+          success: false,
+          error:
+            "We couldn't find your account. Please refresh the page and try again, or contact support.",
+        },
         { status: 404 }
       );
     }
