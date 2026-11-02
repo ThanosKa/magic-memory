@@ -7,28 +7,66 @@ import { cn } from "@/lib/utils";
 
 type LensMode = "original" | "lens" | "restored";
 
+export type RestorationLensImage = {
+  src: string;
+  alt: string;
+};
+
+export type RestorationLensCaptions = {
+  /** Corner tag over the photo in Original and Lens modes. */
+  original: string;
+  /** Corner tag over the photo in Restored mode. */
+  restored: string;
+  /** Small tag under the lens ring. */
+  ring: string;
+  /** Optional note after the interaction hint, e.g. "Sample restoration". */
+  note?: string;
+};
+
+export type RestorationLensProps = {
+  /** The original photo, shown underneath. */
+  before: RestorationLensImage;
+  /** The restored photo, revealed through the lens. */
+  after: RestorationLensImage;
+  captions: RestorationLensCaptions;
+  /** Frame width / height. Match the photo's ratio so both images line up. Defaults to 3/2. */
+  aspectRatio?: number;
+  /** Passed to next/image. */
+  sizes?: string;
+  /** Load both images eagerly and preload the original (above-the-fold use). */
+  preload?: boolean;
+  /** Skip next/image optimisation, e.g. for remote hosts not in next.config. */
+  unoptimized?: boolean;
+  className?: string;
+};
+
 const MODES: { value: LensMode; label: string }[] = [
   { value: "original", label: "Original" },
   { value: "lens", label: "Lens" },
   { value: "restored", label: "Restored" },
 ];
 
-const CAPTIONS: Record<LensMode, string> = {
-  original: "Original scan",
-  lens: "Original scan",
-  restored: "Restored by Magic Memory",
-};
-
 const LERP = 0.18;
+const DEFAULT_ASPECT_RATIO = 3 / 2;
+const DEFAULT_SIZES = "(max-width: 1024px) 100vw, 58vw";
 
 /**
- * The hero's signature: a blurry original with the restored version
+ * Before/after comparison: the original photo with the restored version
  * underneath. A soft "lens" follows the pointer (or drifts on its own
- * until touched) and reveals the restored face through a CSS mask.
+ * until touched) and reveals the restored photo through a CSS mask.
  * Position is written straight to CSS custom properties, so moving the
  * lens never re-renders React.
  */
-export function RestorationLens() {
+export function RestorationLens({
+  before,
+  after,
+  captions,
+  aspectRatio = DEFAULT_ASPECT_RATIO,
+  sizes = DEFAULT_SIZES,
+  preload = false,
+  unoptimized = false,
+  className,
+}: RestorationLensProps) {
   const [mode, setMode] = useState<LensMode>("lens");
   const [idle, setIdle] = useState(true);
   const frameRef = useRef<HTMLDivElement>(null);
@@ -72,43 +110,46 @@ export function RestorationLens() {
   };
 
   return (
-    <figure className="relative w-full">
+    <figure className={cn("relative w-full", className)}>
       <div className="rounded-[4px] bg-paper-deep p-2 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.85),0_2px_6px_rgba(0,0,0,0.3)] sm:p-3">
         <div
           ref={frameRef}
-          className="mm-lens relative aspect-[3/2] w-full cursor-crosshair select-none overflow-hidden bg-ink"
+          className="mm-lens relative w-full cursor-crosshair select-none overflow-hidden bg-ink"
+          style={{ aspectRatio }}
           data-mode={mode}
           data-idle={idle}
           onPointerMove={handlePointer}
           onPointerDown={handlePointer}
         >
           <Image
-            src="/couple-before.jpg"
-            alt="Original photo: a blurry snapshot of a couple at a night fair"
+            src={before.src}
+            alt={before.alt}
             fill
-            preload
+            preload={preload}
+            unoptimized={unoptimized}
             draggable={false}
-            sizes="(max-width: 1024px) 100vw, 58vw"
+            sizes={sizes}
             className="object-cover"
           />
           <div className="mm-lens__reveal absolute inset-0">
             <Image
-              src="/couple-after.png"
-              alt="The same photo restored: faces are sharp, with clear eyes and skin detail"
+              src={after.src}
+              alt={after.alt}
               fill
-              loading="eager"
+              loading={preload ? "eager" : undefined}
+              unoptimized={unoptimized}
               draggable={false}
-              sizes="(max-width: 1024px) 100vw, 58vw"
+              sizes={sizes}
               className="object-cover"
             />
           </div>
           <div className="mm-lens__ring" aria-hidden="true">
             <span className="font-mono absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink/70 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-paper/90 backdrop-blur-sm">
-              Restored
+              {captions.ring}
             </span>
           </div>
           <span className="font-mono pointer-events-none absolute left-3 top-3 rounded-full bg-ink/65 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-paper/85 backdrop-blur-sm sm:left-4 sm:top-4">
-            {CAPTIONS[mode]}
+            {mode === "restored" ? captions.restored : captions.original}
           </span>
         </div>
       </div>
@@ -139,8 +180,12 @@ export function RestorationLens() {
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/45">
           <span className="mm-hint-hover">Move over the photo</span>
           <span className="mm-hint-touch">Drag across the photo</span>
-          <span aria-hidden="true"> · </span>
-          Sample restoration
+          {captions.note ? (
+            <>
+              <span aria-hidden="true"> · </span>
+              {captions.note}
+            </>
+          ) : null}
         </p>
       </figcaption>
     </figure>

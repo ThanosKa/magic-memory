@@ -89,7 +89,23 @@ export function HomeHero() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
         >
-          <RestorationLens />
+          <RestorationLens
+            before={{
+              src: "/couple-before.jpg",
+              alt: "Original photo: a blurry snapshot of a couple at a night fair",
+            }}
+            after={{
+              src: "/couple-after.png",
+              alt: "The same photo restored: faces are sharp, with clear eyes and skin detail",
+            }}
+            captions={{
+              original: "Original scan",
+              restored: "Restored by Magic Memory",
+              ring: "Restored",
+              note: "Sample restoration",
+            }}
+            preload
+          />
         </motion.div>
       </div>
     </section>
