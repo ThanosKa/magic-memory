@@ -2,8 +2,9 @@
 @import "tw-animate-css";
 
 /* ------------------------------------------------------------------ */
-/* "Darkroom" theme — the single theme for the whole app.              */
-/* Raw palette first, then the shadcn semantic tokens built from it.   */
+/* "Darkroom" theme. Dark is the default; light is a palette swap set  */
+/* by next-themes as <html data-theme="light">. Raw palette first,     */
+/* then the shadcn semantic tokens built from it.                      */
 /* ------------------------------------------------------------------ */
 
 @property --mm-x {
@@ -24,8 +25,10 @@
   initial-value: 0px;
 }
 
-:root {
-  /* Palette */
+:root, :root[data-theme="dark"] {
+  /* Palette (dark, the default). `ink` is the page, `paper` is the text and
+     the contrast sections; light swaps them, so components never need a
+     theme variant. */
   --ink: #0d0b09;
   --surface: #14110e;
   --surface-2: #16130f;
@@ -34,7 +37,37 @@
   --paper-deep: #ebe2d2;
   --ember: #ff5a36;
 
-  /* Semantic tokens (used by components/ui) */
+  /* Semantic colours that are not plain palette references */
+  --muted-foreground: #a69d90;
+  --destructive: #f2555a;
+  --success: #7fc99a;
+}
+
+/* Light darkroom: paper page, ink text, darker ember (AA on paper).
+   The cream contrast sections (bg-paper text-ink) become ink sections. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ink: #f7f3eb;
+  --surface: #fdfbf7;
+  --surface-2: #f0eadf;
+  --surface-3: #e9e2d5;
+  --paper: #050403;
+  --paper-deep: #26211c;
+  --ember: #ad3418;
+
+  --muted-foreground: #5c544a;
+  --destructive: #b3262d;
+  --success: #2b6e44;
+}
+
+:root {
+  /* Pinned: the same in both themes, for things that sit on a photo or are
+     a physical print, which do not change with the page. */
+  --print: #ebe2d2; /* print frame around a photo */
+  --scrim: #0d0b09; /* dark veil and chips over a photo */
+  --scrim-foreground: #f1eadf; /* text on a scrim */
+
+  /* Semantic tokens (used by components/ui), built from the palette */
   --background: var(--ink);
   --foreground: var(--paper);
   --card: var(--surface);
@@ -46,14 +79,11 @@
   --secondary: var(--surface-3);
   --secondary-foreground: var(--paper);
   --muted: var(--surface-2);
-  --muted-foreground: #a69d90;
   --accent: var(--surface-3);
   --accent-foreground: var(--paper);
-  --destructive: #f2555a;
   --destructive-foreground: var(--ink);
-  --success: #7fc99a;
-  --border: rgb(241 234 223 / 0.12);
-  --input: rgb(241 234 223 / 0.16);
+  --border: color-mix(in srgb, var(--paper) 12%, transparent);
+  --input: color-mix(in srgb, var(--paper) 16%, transparent);
   --ring: var(--ember);
   --radius: 0.75rem;
 
@@ -75,6 +105,9 @@
   --color-paper: var(--paper);
   --color-paper-deep: var(--paper-deep);
   --color-ember: var(--ember);
+  --color-print: var(--print);
+  --color-scrim: var(--scrim);
+  --color-scrim-foreground: var(--scrim-foreground);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -116,8 +149,8 @@
     -moz-osx-font-smoothing: grayscale;
   }
   ::selection {
-    background: rgb(255 90 54 / 0.35);
-    color: #fff;
+    background: color-mix(in srgb, var(--ember) 35%, transparent);
+    color: var(--paper);
   }
 }
 

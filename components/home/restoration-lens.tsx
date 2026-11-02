@@ -126,10 +126,10 @@ export function RestorationLens({
 
   return (
     <figure className={cn("relative w-full", className)}>
-      <div className="rounded-[4px] bg-paper-deep p-2 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.85),0_2px_6px_rgba(0,0,0,0.3)] sm:p-3">
+      <div className="rounded-[4px] bg-print p-2 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.85),0_2px_6px_rgba(0,0,0,0.3)] sm:p-3">
         <div
           ref={frameRef}
-          className="mm-lens relative w-full cursor-crosshair select-none overflow-hidden bg-ink"
+          className="mm-lens relative w-full cursor-crosshair select-none overflow-hidden bg-scrim"
           style={{ aspectRatio }}
           data-mode={mode}
           data-idle={idle}
@@ -160,12 +160,12 @@ export function RestorationLens({
           </div>
           <div className="mm-lens__track" aria-hidden="true">
             <div className="mm-lens__ring">
-              <span className="font-mono absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink/80 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-paper/90">
+              <span className="font-mono absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-scrim/80 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-scrim-foreground/90">
                 {captions.ring}
               </span>
             </div>
           </div>
-          <span className="font-mono pointer-events-none absolute left-3 top-3 rounded-full bg-ink/75 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-paper/85 sm:left-4 sm:top-4">
+          <span className="font-mono pointer-events-none absolute left-3 top-3 rounded-full bg-scrim/75 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-scrim-foreground/85 sm:left-4 sm:top-4">
             {mode === "restored" ? captions.restored : captions.original}
           </span>
         </div>

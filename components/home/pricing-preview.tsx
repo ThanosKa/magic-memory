@@ -85,7 +85,7 @@ export function PricingPreview() {
               </div>
               <p className="font-serif mt-5 text-[56px] leading-none tracking-[-0.02em]">{plan.price}</p>
               <p className="mt-5 text-[16px] font-medium">{plan.amount}</p>
-              <p className={cn("text-[14px]", plan.popular ? "text-paper/55" : "text-ink/55")}>
+              <p className={cn("text-[14px]", plan.popular ? "text-paper/65" : "text-ink/65")}>
                 {plan.detail}
               </p>
             </li>

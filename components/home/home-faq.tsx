@@ -12,7 +12,7 @@ export function HomeFaq() {
           Good questions,{" "}
           <span className="italic text-paper/55">straight answers.</span>
         </h2>
-        <p className="mt-6 text-[15px] leading-[1.6] text-paper/55">
+        <p className="mt-6 text-[15px] leading-[1.6] text-paper/60">
           Something else on your mind?{" "}
           <a
             href="mailto:kazakis.th@gmail.com"

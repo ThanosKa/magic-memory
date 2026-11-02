@@ -2,10 +2,11 @@ import type React from "react";
 import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import "./globals.css";
-import { Toaster } from "sonner";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { AnalyticsProvider } from "@/app/analytics-provider";
 import { fontVariables } from "@/lib/fonts";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemedToaster } from "@/components/theme/themed-toaster";
 
 const ConditionalClerkProvider = dynamic(
   () =>
@@ -133,7 +134,7 @@ export default function RootLayout({
 }>) {
   return (
     <ConditionalClerkProvider>
-      <html lang="en" className={fontVariables}>
+      <html lang="en" className={fontVariables} suppressHydrationWarning>
         <head>
           <script
             type="application/ld+json"
@@ -199,25 +200,13 @@ export default function RootLayout({
           />
         </head>
         <body className="font-sans antialiased">
-          <WebVitalsTracker />
-          {children}
-          <CookieConsent />
-          <AnalyticsProvider />
-          <Toaster
-            theme="dark"
-            position="top-center"
-            toastOptions={{
-              classNames: {
-                toast:
-                  "!bg-surface !text-paper !border-border !rounded-lg !font-sans",
-                description: "!text-muted-foreground",
-                success: "!text-success",
-                error: "!text-destructive",
-                actionButton: "!bg-paper !text-ink",
-                cancelButton: "!bg-surface-3 !text-paper",
-              },
-            }}
-          />
+          <ThemeProvider>
+            <WebVitalsTracker />
+            {children}
+            <CookieConsent />
+            <AnalyticsProvider />
+            <ThemedToaster />
+          </ThemeProvider>
         </body>
       </html>
     </ConditionalClerkProvider>

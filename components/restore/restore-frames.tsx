@@ -97,8 +97,8 @@ export function PhotoFrame({ src, alt, aspectRatio, progress }: PhotoFrameProps)
 
   return (
     <figure className="mx-auto w-full" style={photoWidthStyle(aspectRatio)}>
-      <div className={cn("rounded-[4px] bg-paper-deep p-2 sm:p-3", PRINT_SHADOW)}>
-        <div className="relative w-full overflow-hidden bg-ink" style={{ aspectRatio }}>
+      <div className={cn("rounded-[4px] bg-print p-2 sm:p-3", PRINT_SHADOW)}>
+        <div className="relative w-full overflow-hidden bg-scrim" style={{ aspectRatio }}>
           <Image
             src={src}
             alt={alt}
@@ -114,16 +114,16 @@ export function PhotoFrame({ src, alt, aspectRatio, progress }: PhotoFrameProps)
             <div
               role="status"
               aria-live="polite"
-              className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-ink/65 px-6 text-center"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-scrim/65 px-6 text-center"
             >
-              <p className="font-mono flex items-center gap-2.5 text-[11px] uppercase tracking-[0.22em] text-paper/80">
+              <p className="font-mono flex items-center gap-2.5 text-[11px] uppercase tracking-[0.22em] text-scrim-foreground/80">
                 <span className="size-1.5 animate-pulse rounded-full bg-ember" aria-hidden="true" />
                 Restoring your photo...
               </p>
-              <p className="font-serif text-[clamp(3rem,8vw,5rem)] leading-none tracking-[-0.02em] text-paper tabular-nums">
+              <p className="font-serif text-[clamp(3rem,8vw,5rem)] leading-none tracking-[-0.02em] text-scrim-foreground tabular-nums">
                 {Math.round(progress)}%
               </p>
-              <Progress value={progress} className="h-1 w-48 max-w-full bg-paper/15" />
+              <Progress value={progress} className="h-1 w-48 max-w-full bg-scrim-foreground/15" />
             </div>
           )}
         </div>

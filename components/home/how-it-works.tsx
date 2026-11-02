@@ -41,7 +41,7 @@ function RestoreVisual() {
         </div>
       </div>
       <div className="absolute inset-y-0 left-1/2 w-px bg-ember" aria-hidden="true" />
-      <span className="font-mono absolute bottom-2.5 left-2.5 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] uppercase tracking-[0.16em] text-paper/90">
+      <span className="font-mono absolute bottom-2.5 left-2.5 rounded-full bg-scrim/70 px-2 py-0.5 text-[10px] uppercase tracking-[0.16em] text-scrim-foreground/90">
         Rebuilding faces
       </span>
     </div>
@@ -58,8 +58,8 @@ function DownloadVisual() {
         sizes="(max-width: 768px) 90vw, 30vw"
         className="origin-[46%_48%] scale-[1.7] object-cover"
       />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/80 to-transparent" />
-      <span className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1.5 text-[12px] font-medium text-ink">
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-scrim/80 to-transparent" />
+      <span className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1.5 rounded-full bg-scrim-foreground px-3 py-1.5 text-[12px] font-medium text-scrim">
         <Download className="size-3.5" aria-hidden="true" />
         Download
       </span>

@@ -12,6 +12,7 @@ import { PageContainer } from "@/components/layout/page-container";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CreditsSkeleton } from "@/components/ui/loading-states";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 
 const headerClass =
@@ -111,6 +112,7 @@ function HeaderWithClerk() {
           </nav>
 
           <div className="flex items-center gap-3 sm:gap-4">
+            <ThemeToggle className="hidden md:inline-flex" />
             {isLoaded &&
               isSignedIn &&
               (isCreditsLoading ? (
@@ -167,6 +169,7 @@ function HeaderWithClerk() {
                   <nav className="flex flex-col">
                     {navLinks.map((link) => renderNavLink(link, "mobile"))}
                   </nav>
+                  <ThemeToggle variant="row" />
                   {!isSignedIn && (
                     <div className="flex flex-col gap-3 pt-2">
                       <SignInButton mode="modal">
@@ -219,6 +222,7 @@ function HeaderWithoutClerk() {
           </nav>
 
           <div className="flex items-center gap-3 sm:gap-4">
+            <ThemeToggle className="hidden md:inline-flex" />
             <div className="hidden items-center gap-2 md:flex">
               <Button
                 variant="ghost"
@@ -258,6 +262,7 @@ function HeaderWithoutClerk() {
                       </Link>
                     ))}
                   </nav>
+                  <ThemeToggle variant="row" />
                   <div className="flex flex-col gap-3 pt-2">
                     <Button variant="outline" className="w-full" disabled>
                       Sign In

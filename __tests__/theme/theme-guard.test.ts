@@ -3,7 +3,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs"
 import path from "node:path"
 
 /**
- * Theme guard: keeps the single "darkroom" theme from drifting.
+ * Theme guard: keeps the "darkroom" theme (dark default + light variant) from drifting.
  *
  * Colours live in one place (THEME_FILE). Components and pages must use token
  * classes (bg-ink, text-paper/60, border-border, ring-ember, ...), never raw hex
@@ -33,7 +33,7 @@ const RULES: Rule[] = [
       /\b(?:bg|text|border|from|via|to|ring|fill|stroke|outline|divide|decoration|placeholder|caret|accent|shadow)-(?:white|black)\b/g,
   },
   {
-    name: "dark: variant (there is only one theme)",
+    name: "dark: variant (theming happens in tokens only)",
     pattern: /(?<![\w-])dark:/g,
   },
 ]
@@ -54,6 +54,26 @@ const EXCEPTIONS: { file: string; snippet: string; reason: string }[] = [
     reason: "canvas background when flattening an upload; image data, not UI",
   },
 ]
+
+const DARK_SELECTOR = ':root, :root[data-theme="dark"]'
+const LIGHT_SELECTOR = ':root[data-theme="light"]'
+/** The raw palette; components use these as utility classes (bg-ink, text-paper/70, ...). */
+const PALETTE = ["--ink", "--surface", "--surface-2", "--surface-3", "--paper", "--paper-deep", "--ember"]
+
+/** Declarations of the CSS rule whose selector is exactly `selector`. */
+function declarations(css: string, selector: string): Record<string, string> {
+  const start = css.indexOf(`\n${selector} {`)
+  if (start === -1) return {}
+  const body = css.slice(css.indexOf("{", start) + 1, css.indexOf("}", start))
+  return Object.fromEntries(
+    body
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .split(";")
+      .map((decl) => decl.split(":").map((part) => part.trim()))
+      .filter(([name, value]) => name && value)
+      .map(([name, ...rest]) => [name, rest.join(":")])
+  )
+}
 
 function toPosix(p: string): string {
   return p.split(path.sep).join("/")
@@ -97,11 +117,25 @@ describe("theme guard", () => {
     expect(unused, "Remove these entries from EXCEPTIONS").toEqual([])
   })
 
-  it("declares one dark theme with no light variant", () => {
+  it("defaults to dark and themes only through tokens (no dark/light variants)", () => {
     const theme = readFileSync(path.join(ROOT, THEME_FILE), "utf8")
 
-    expect(theme).toMatch(/color-scheme:\s*dark/)
-    expect(theme).not.toMatch(/@custom-variant\s+dark/)
-    expect(theme).not.toMatch(/^\s*\.dark\s*\{/m)
+    expect(theme).toMatch(/html\s*\{[^}]*color-scheme:\s*dark/)
+    expect(declarations(theme, LIGHT_SELECTOR)).toHaveProperty("color-scheme", "light")
+    expect(theme).not.toMatch(/@custom-variant\s+(?:dark|light)/)
+    expect(theme).not.toMatch(/^\s*\.(?:dark|light)\s*\{/m)
+  })
+
+  it("defines every palette token in both themes", () => {
+    const theme = readFileSync(path.join(ROOT, THEME_FILE), "utf8")
+    const dark = declarations(theme, DARK_SELECTOR)
+    const light = declarations(theme, LIGHT_SELECTOR)
+
+    for (const token of PALETTE) {
+      expect(dark, `dark theme is missing ${token}`).toHaveProperty(token)
+      expect(light, `light theme is missing ${token}`).toHaveProperty(token)
+    }
+    const missing = Object.keys(dark).filter((name) => name.startsWith("--") && !(name in light))
+    expect(missing, `Redefine these in ${LIGHT_SELECTOR}`).toEqual([])
   })
 })
