@@ -4,5 +4,4 @@
 # no longer needs to be here.
 components/landing/hero-section.tsx
 components/restore/image-comparison-slider.tsx
-components/restore/restore-uploader.tsx
 components/ui/highlighter.tsx

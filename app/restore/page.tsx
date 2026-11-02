@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { getCanonicalUrl, getOgImageUrl } from "@/lib/seo/metadata-helpers";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { FooterMinimal } from "@/components/footer-minimal";
+import { PageContainer } from "@/components/layout/page-container";
 const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
   {
@@ -80,10 +81,10 @@ export default async function RestorePage() {
       />
       <Suspense fallback={<RestorePageFallback />}>
         <Header />
-        <main className="flex flex-1 items-center justify-center py-12 sm:py-16">
-          <div className="mx-auto flex w-full max-w-4xl justify-center px-4 sm:px-6 lg:px-8">
+        <main className="flex-1">
+          <PageContainer className="pb-20 pt-10 sm:pt-14 lg:pb-28 lg:pt-16">
             <RestoreUploader />
-          </div>
+          </PageContainer>
         </main>
         <FooterMinimal />
       </Suspense>
@@ -97,7 +98,7 @@ function RestorePageFallback() {
       <main className="flex flex-1 items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <LoadingSpinner size="lg" />
-          <p className="text-sm text-muted-foreground">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/60">
             Loading restore tools...
           </p>
         </div>
