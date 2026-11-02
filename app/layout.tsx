@@ -203,7 +203,21 @@ export default function RootLayout({
           {children}
           <CookieConsent />
           <AnalyticsProvider />
-          <Toaster theme="dark" richColors position="top-center" />
+          <Toaster
+            theme="dark"
+            position="top-center"
+            toastOptions={{
+              classNames: {
+                toast:
+                  "!bg-surface !text-paper !border-border !rounded-lg !font-sans",
+                description: "!text-muted-foreground",
+                success: "!text-success",
+                error: "!text-destructive",
+                actionButton: "!bg-paper !text-ink",
+                cancelButton: "!bg-surface-3 !text-paper",
+              },
+            }}
+          />
         </body>
       </html>
     </ConditionalClerkProvider>
