@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl } from "@/lib/seo/metadata-helpers";
 import { blogPosts } from "@/lib/blog/posts";
+import { PageContainer } from "@/components/layout/page-container";
 import { BlogCard } from "@/components/blog/blog-card";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
@@ -26,19 +27,19 @@ export default function BlogPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <section className="py-20 sm:py-32">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">Home</Link>
+        <section className="py-16 sm:py-24">
+          <PageContainer>
+            <nav className="mb-8 flex items-center gap-2 text-sm text-paper/60">
+              <Link href="/" className="focus-ring hover:text-paper">Home</Link>
               <span>/</span>
-              <span className="text-foreground">Blog</span>
+              <span className="text-paper">Blog</span>
             </nav>
 
             <div className="mb-12">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
+              <h1 className="font-serif text-5xl leading-[1.02] tracking-[-0.03em] sm:text-7xl mb-5">
                 AI Photo Restoration Blog
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl">
+              <p className="text-lg text-paper/70 max-w-2xl">
                 Guides, tutorials, and tips for restoring old photos with AI — from scanning advice to tool comparisons.
               </p>
             </div>
@@ -48,7 +49,7 @@ export default function BlogPage() {
                 <BlogCard key={post.slug} post={post} />
               ))}
             </div>
-          </div>
+          </PageContainer>
         </section>
       </main>
       <Footer />
