@@ -1,15 +1,28 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd, useCaseSoftwareJsonLd } from "@/lib/seo/metadata-helpers";
+import {
+  getCanonicalUrl,
+  getOgImageUrl,
+  faqPageJsonLd,
+  breadcrumbJsonLd,
+  useCaseSoftwareJsonLd,
+} from "@/lib/seo/metadata-helpers";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
+import { UseCaseArticle } from "@/components/use-case/use-case-article";
+import { UseCaseRelated } from "@/components/use-case/use-case-related";
+import { FinalCta } from "@/components/layout/final-cta";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
-const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
-const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
-const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
+const Header = dynamic(
+  () => import("@/components/header").then((m) => m.Header),
+  { ssr: true },
+);
+const Footer = dynamic(
+  () => import("@/components/footer").then((m) => m.Footer),
+  { ssr: true },
+);
 
 export const metadata: Metadata = {
   title: "Restore Old Wedding Photos With AI — Magic Memory",
@@ -18,9 +31,17 @@ export const metadata: Metadata = {
   alternates: { canonical: getCanonicalUrl("/restore-wedding-photos") },
   openGraph: {
     title: "Restore Old Wedding Photos With AI — Magic Memory",
-    description: "Restore wedding photos from any era. Perfect anniversary gift. Free daily restoration.",
+    description:
+      "Restore wedding photos from any era. Perfect anniversary gift. Free daily restoration.",
     url: getCanonicalUrl("/restore-wedding-photos"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Restore Wedding Photos" }],
+    images: [
+      {
+        url: getOgImageUrl(),
+        width: 1200,
+        height: 630,
+        alt: "Restore Wedding Photos",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -38,7 +59,8 @@ const faqs: FAQItem[] = [
       "Yes. Formal wedding portraits — where the couple faces the camera — are ideal for GFPGAN restoration. The model excels at close-up and mid-range portraits where faces are clearly visible. Full-body shots still benefit, though the face restoration is most dramatic in closer crops.",
   },
   {
-    question: "My parents' wedding photo is yellowed and creased. Can that be fixed?",
+    question:
+      "My parents' wedding photo is yellowed and creased. Can that be fixed?",
     answer:
       "GFPGAN significantly improves yellowed and faded wedding photos by restoring clarity and sharpness to faces. Physical creases that obscure faces can be partially corrected. For severe physical damage like tears through the center of a face, results vary — the AI fills in detail based on surrounding facial structure.",
   },
@@ -74,9 +96,18 @@ export default function RestoreWeddingPhotosPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+      />
       <Header />
       <main className="flex-1">
         <UseCaseHero
@@ -85,51 +116,57 @@ export default function RestoreWeddingPhotosPage() {
           keyword="restore wedding photos"
         />
 
-        <section className="py-20 sm:py-32 bg-muted/30">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold tracking-tight mb-6">Why Wedding Photos Degrade Faster</h2>
-            <p className="text-muted-foreground mb-4">
-              Wedding photos from before the 1990s face a specific challenge: they were stored in albums. Album adhesives contain acids that migrate into photo paper over time. Magnetic albums from the 1970s and 1980s are particularly damaging — the adhesive becomes highly acidic and causes yellowing, staining, and emulsion damage.
-            </p>
-            <p className="text-muted-foreground mb-4">
-              The good news is that GFPGAN focuses on facial restoration — the most emotionally important part of any wedding photo. Even heavily degraded wedding portraits often yield excellent restoration results because the AI reconstructs facial structure from learned priors, not just the damaged source pixels.
-            </p>
+        <UseCaseArticle>
+          <h2>Why Wedding Photos Degrade Faster</h2>
+          <p>
+            Wedding photos from before the 1990s face a specific challenge: they
+            were stored in albums. Album adhesives contain acids that migrate
+            into photo paper over time. Magnetic albums from the 1970s and 1980s
+            are particularly damaging — the adhesive becomes highly acidic and
+            causes yellowing, staining, and emulsion damage.
+          </p>
+          <p>
+            The good news is that GFPGAN focuses on facial restoration — the
+            most emotionally important part of any wedding photo. Even heavily
+            degraded wedding portraits often yield excellent restoration results
+            because the AI reconstructs facial structure from learned priors,
+            not just the damaged source pixels.
+          </p>
 
-            <h2 className="text-3xl font-bold tracking-tight mt-12 mb-6">Perfect For Anniversary Gifts</h2>
-            <p className="text-muted-foreground mb-4">
-              A restored wedding photo is one of the most meaningful anniversary gifts possible. For milestone anniversaries (25th, 50th, 60th), restoring and reprinting your parents&apos; wedding photo — or your own — creates a tangible piece of family history.
-            </p>
-            <p className="text-muted-foreground">
-              Magic Memory processes your photo in under 15 seconds. Download, print at your local photo shop, and frame. Total time investment: under an hour, including the scan.
-            </p>
-          </div>
-        </section>
+          <h2>Perfect For Anniversary Gifts</h2>
+          <p>
+            A restored wedding photo is one of the most meaningful anniversary
+            gifts possible. For milestone anniversaries (25th, 50th, 60th),
+            restoring and reprinting your parents&apos; wedding photo — or your
+            own — creates a tangible piece of family history.
+          </p>
+          <p>
+            Magic Memory processes your photo in under 15 seconds. Download,
+            print at your local photo shop, and frame. Total time investment:
+            under an hour, including the scan.
+          </p>
+        </UseCaseArticle>
 
         <UseCaseHowItWorks />
         <UseCaseFAQ faqs={faqs} />
 
-        <section className="py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold tracking-tight mb-6">Related Restorations</h2>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {[
-                { href: "/restore-old-photos", label: "Restore Old Photos" },
-                { href: "/restore-family-photos", label: "Restore Family Photos" },
-                { href: "/restore-faded-photos", label: "Fix Faded Photos" },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-2xl border border-border bg-card p-6 text-sm font-medium hover:border-primary/50 hover:shadow-md transition-all"
-                >
-                  {link.label} →
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        <UseCaseRelated
+          links={[
+            { href: "/restore-old-photos", label: "Restore Old Photos" },
+            { href: "/restore-family-photos", label: "Restore Family Photos" },
+            { href: "/restore-faded-photos", label: "Fix Faded Photos" },
+          ]}
+        />
 
-        <CTASection />
+        <FinalCta
+          title={
+            <>
+              Ready to restore{" "}
+              <span className="italic text-paper/55">your memories?</span>
+            </>
+          }
+          note="Start with your free daily restoration. No credit card required."
+        />
       </main>
       <Footer />
     </div>
