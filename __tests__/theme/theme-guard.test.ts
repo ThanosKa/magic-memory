@@ -8,15 +8,10 @@ import path from "node:path"
  * Colours live in one place (THEME_FILE). Components and pages must use token
  * classes (bg-ink, text-paper/60, border-border, ring-ember, ...), never raw hex
  * colours or the retired palette.
- *
- * Files that have not been migrated yet are listed in ALLOWLIST_FILE, one path
- * per line. When you migrate a file, delete its line. When the list is empty
- * the guard covers the whole app.
  */
 
 const ROOT = path.resolve(__dirname, "../..")
 const THEME_FILE = "app/globals.css"
-const ALLOWLIST_FILE = "__tests__/theme/theme-guard-allowlist.txt"
 const SCANNED_DIRS = ["app", "components"]
 const SCANNED_EXTENSIONS = [".ts", ".tsx", ".css"]
 
@@ -73,13 +68,6 @@ function listScannedFiles(): string[] {
   ).sort()
 }
 
-function readAllowlist(): string[] {
-  return readFileSync(path.join(ROOT, ALLOWLIST_FILE), "utf8")
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line !== "" && !line.startsWith("#"))
-}
-
 function findViolations(file: string): string[] {
   let source = readFileSync(path.join(ROOT, file), "utf8")
   for (const exception of EXCEPTIONS) {
@@ -95,20 +83,9 @@ function findViolations(file: string): string[] {
 
 describe("theme guard", () => {
   it("finds no raw hex colours or retired palette outside the theme file", () => {
-    const allowlist = new Set(readAllowlist())
-    const violations = listScannedFiles()
-      .filter((file) => !allowlist.has(file))
-      .flatMap(findViolations)
+    const violations = listScannedFiles().flatMap(findViolations)
 
     expect(violations, `Use theme tokens from ${THEME_FILE} instead`).toEqual([])
-  })
-
-  it("keeps the allowlist honest: every entry exists and still needs migrating", () => {
-    const stale = readAllowlist().filter(
-      (file) => !existsSync(path.join(ROOT, file)) || findViolations(file).length === 0
-    )
-
-    expect(stale, `Remove these lines from ${ALLOWLIST_FILE}`).toEqual([])
   })
 
   it("keeps every documented exception in use", () => {

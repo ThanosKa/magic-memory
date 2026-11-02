@@ -1,7 +1,0 @@
-# Theme guard allowlist: files not yet migrated to the darkroom theme.
-# One path per line, relative to the repo root. Lines starting with # are comments.
-# When you migrate a file, delete its line. The guard fails if a listed file
-# no longer needs to be here.
-components/landing/hero-section.tsx
-components/restore/image-comparison-slider.tsx
-components/ui/highlighter.tsx
