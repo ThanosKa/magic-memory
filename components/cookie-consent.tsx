@@ -40,18 +40,18 @@ export function CookieConsent() {
                     className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6"
                 >
                         <div className="mx-auto max-w-4xl">
-                            <div className="flex flex-col gap-4 rounded-2xl border border-border bg-background/95 p-6 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+                            <div className="flex flex-col gap-4 rounded-2xl border border-paper/15 bg-ink/95 p-6 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex items-start gap-4">
-                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                                    <Cookie className="h-5 w-5 text-primary" />
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-paper/15">
+                                    <Cookie className="size-5 text-ember" aria-hidden="true" />
                                 </div>
                                 <div className="space-y-1">
-                                    <h3 className="font-semibold text-foreground">Cookie Notice</h3>
-                                    <p className="text-sm text-muted-foreground">
+                                    <h3 className="font-serif text-xl leading-none text-paper">Cookie Notice</h3>
+                                    <p className="text-sm leading-relaxed text-paper/70">
                                         We use essential cookies for authentication and session management.{" "}
                                         <Link
                                             href="/privacy"
-                                            className="font-medium text-primary underline-offset-4 hover:underline"
+                                            className="focus-ring mm-underline font-medium text-paper"
                                         >
                                             Learn more
                                         </Link>
