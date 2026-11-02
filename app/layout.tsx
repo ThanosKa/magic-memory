@@ -1,11 +1,11 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { AnalyticsProvider } from "@/app/analytics-provider";
+import { fontVariables } from "@/lib/fonts";
 
 const ConditionalClerkProvider = dynamic(
   () =>
@@ -34,12 +34,6 @@ const CookieConsent = dynamic(
     loading: () => <LoadingSpinner className="mx-auto my-4" />,
   }
 );
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap", // Added font-display: swap for performance
-  variable: "--font-inter",
-});
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 const BRAND = "Magic Memory";
@@ -124,10 +118,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-  ],
+  themeColor: "#0d0b09",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -141,7 +133,7 @@ export default function RootLayout({
 }>) {
   return (
     <ConditionalClerkProvider>
-      <html lang="en" className={inter.variable}>
+      <html lang="en" className={fontVariables}>
         <head>
           <script
             type="application/ld+json"
@@ -206,12 +198,12 @@ export default function RootLayout({
             }}
           />
         </head>
-        <body className={`${inter.className} antialiased`}>
+        <body className="font-sans antialiased">
           <WebVitalsTracker />
           {children}
           <CookieConsent />
           <AnalyticsProvider />
-          <Toaster richColors position="top-center" />
+          <Toaster theme="dark" richColors position="top-center" />
         </body>
       </html>
     </ConditionalClerkProvider>

@@ -35,7 +35,7 @@ const PROMISES = [
 
 export function PricingPreview() {
   return (
-    <section className="relative z-30 -mt-10 rounded-t-[40px] bg-[#f1eadf] text-[#0d0b09] md:rounded-t-[56px]">
+    <section className="relative z-30 -mt-10 rounded-t-[40px] bg-paper text-ink md:rounded-t-[56px]">
       <div className="mx-auto max-w-[1360px] px-5 pb-28 pt-20 sm:px-8 md:pb-36 md:pt-28 lg:px-14">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
           <Reveal>
@@ -44,11 +44,11 @@ export function PricingPreview() {
             </SectionLabel>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mm-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
+            <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
               Pay once.{" "}
-              <span className="italic text-[#0d0b09]/55">Credits never expire.</span>
+              <span className="italic text-ink/55">Credits never expire.</span>
             </h2>
-            <p className="mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-[#0d0b09]/65">
+            <p className="mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-ink/65">
               Everyone gets one free restoration a day. Need more? Buy a pack
               once. No subscription, no auto-renewal.
             </p>
@@ -56,37 +56,37 @@ export function PricingPreview() {
         </div>
 
         <Reveal delay={0.1} className="mt-16 md:mt-20">
-          <ul className="grid overflow-hidden rounded-[20px] border border-[#0d0b09]/12 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
             {PLANS.map((plan, i) => (
               <li
                 key={plan.name}
                 className={cn(
-                  "relative flex flex-col gap-1 border-[#0d0b09]/12 p-7 sm:p-8",
+                  "relative flex flex-col gap-1 border-ink/12 p-7 sm:p-8",
                   i > 0 && "border-t sm:border-t-0",
                   i % 2 === 1 && "sm:border-l",
                   i >= 2 && "sm:border-t lg:border-t-0",
                   i === 2 && "lg:border-l",
-                  plan.popular && "bg-[#0d0b09] text-[#f1eadf]"
+                  plan.popular && "bg-ink text-paper"
                 )}
               >
                 <div className="flex h-6 items-center justify-between gap-3">
                   <p
                     className={cn(
-                      "mm-mono text-[11px] uppercase tracking-[0.2em]",
-                      plan.popular ? "text-[#f1eadf]/60" : "text-[#0d0b09]/55"
+                      "font-mono text-[11px] uppercase tracking-[0.2em]",
+                      plan.popular ? "text-paper/60" : "text-ink/55"
                     )}
                   >
                     {plan.name}
                   </p>
                   {plan.popular && (
-                    <span className="mm-mono rounded-full bg-[#ff5a36] px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-[#0d0b09]">
+                    <span className="font-mono rounded-full bg-ember px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-ink">
                       Most popular
                     </span>
                   )}
                 </div>
-                <p className="mm-serif mt-5 text-[56px] leading-none tracking-[-0.02em]">{plan.price}</p>
+                <p className="font-serif mt-5 text-[56px] leading-none tracking-[-0.02em]">{plan.price}</p>
                 <p className="mt-5 text-[16px] font-medium">{plan.amount}</p>
-                <p className={cn("text-[14px]", plan.popular ? "text-[#f1eadf]/55" : "text-[#0d0b09]/55")}>
+                <p className={cn("text-[14px]", plan.popular ? "text-paper/55" : "text-ink/55")}>
                   {plan.detail}
                 </p>
               </li>
@@ -95,14 +95,14 @@ export function PricingPreview() {
         </Reveal>
 
         <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-[44rem] text-[13px] leading-[1.6] text-[#0d0b09]/50">
+          <p className="max-w-[44rem] text-[13px] leading-[1.6] text-ink/50">
             For comparison: Remini costs $9.99 a week and MyHeritage&rsquo;s
             enhancer comes with genealogy plans from $119 a year (prices checked
             May 2026).
           </p>
           <Link
             href="/pricing"
-            className="group inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-full border border-[#0d0b09]/20 px-5 text-[14px] font-medium transition-colors hover:bg-[#0d0b09] hover:text-[#f1eadf] sm:self-auto"
+            className="group inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-full border border-ink/20 px-5 text-[14px] font-medium transition-colors hover:bg-ink hover:text-paper sm:self-auto"
           >
             Compare plans
             <ArrowUpRight
@@ -112,11 +112,11 @@ export function PricingPreview() {
           </Link>
         </div>
 
-        <ul className="mt-20 grid gap-x-8 gap-y-6 border-t border-[#0d0b09]/12 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-20 grid gap-x-8 gap-y-6 border-t border-ink/12 pt-10 sm:grid-cols-2 lg:grid-cols-4">
           {PROMISES.map(({ Icon, text }, i) => (
             <Reveal as="li" key={text} delay={i * 0.08} className="flex items-start gap-3">
-              <Icon className="mt-0.5 size-5 shrink-0 text-[#0d0b09]/70" strokeWidth={1.6} aria-hidden="true" />
-              <span className="text-[15px] leading-[1.5] text-[#0d0b09]/80">{text}</span>
+              <Icon className="mt-0.5 size-5 shrink-0 text-ink/70" strokeWidth={1.6} aria-hidden="true" />
+              <span className="text-[15px] leading-[1.5] text-ink/80">{text}</span>
             </Reveal>
           ))}
         </ul>

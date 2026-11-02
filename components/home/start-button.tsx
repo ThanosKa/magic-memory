@@ -12,18 +12,16 @@ type StartButtonProps = {
 };
 
 const pillClass =
-  "group inline-flex h-12 items-center gap-3 rounded-full bg-[#f1eadf] pl-6 pr-2 text-[15px] font-medium text-[#0d0b09] transition-[background-color,transform] duration-200 hover:bg-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5a36] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d0b09]";
+  "group inline-flex h-12 items-center gap-2.5 rounded-full bg-paper px-6 text-[15px] font-medium text-ink transition-[filter,transform] duration-200 hover:brightness-105 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-ink";
 
 function PillContent({ label }: { label: string }) {
   return (
     <>
       <span>{label}</span>
-      <span className="flex size-8 items-center justify-center rounded-full bg-[#0d0b09] text-[#f1eadf]">
-        <ArrowRight
-          className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
-          aria-hidden="true"
-        />
-      </span>
+      <ArrowRight
+        className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+        aria-hidden="true"
+      />
     </>
   );
 }

@@ -1,82 +1,76 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* ------------------------------------------------------------------ */
+/* "Darkroom" theme — the single theme for the whole app.              */
+/* Raw palette first, then the shadcn semantic tokens built from it.   */
+/* ------------------------------------------------------------------ */
 
-:root {
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.13 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.13 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.13 0 0);
-  --primary: oklch(0.45 0.2 280);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.13 0 0);
-  --muted: oklch(0.96 0.01 280);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.92 0.03 280);
-  --accent-foreground: oklch(0.13 0 0);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.91 0 0);
-  --input: oklch(0.91 0 0);
-  --ring: oklch(0.45 0.2 280);
-  --chart-1: oklch(0.45 0.2 280);
-  --chart-2: oklch(0.6 0.15 200);
-  --chart-3: oklch(0.5 0.1 150);
-  --chart-4: oklch(0.7 0.15 60);
-  --chart-5: oklch(0.65 0.2 30);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.99 0 0);
-  --sidebar-foreground: oklch(0.13 0 0);
-  --sidebar-primary: oklch(0.45 0.2 280);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.96 0.01 280);
-  --sidebar-accent-foreground: oklch(0.13 0 0);
-  --sidebar-border: oklch(0.91 0 0);
-  --sidebar-ring: oklch(0.45 0.2 280);
+@property --mm-x {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 46%;
 }
 
-.dark {
-  --background: oklch(0.13 0 0);
-  --foreground: oklch(0.99 0 0);
-  --card: oklch(0.17 0 0);
-  --card-foreground: oklch(0.99 0 0);
-  --popover: oklch(0.17 0 0);
-  --popover-foreground: oklch(0.99 0 0);
-  --primary: oklch(0.65 0.2 280);
-  --primary-foreground: oklch(0.13 0 0);
-  --secondary: oklch(0.23 0 0);
-  --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.23 0.01 280);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.28 0.03 280);
-  --accent-foreground: oklch(0.99 0 0);
-  --destructive: oklch(0.45 0.2 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.27 0 0);
-  --input: oklch(0.27 0 0);
-  --ring: oklch(0.65 0.2 280);
-  --chart-1: oklch(0.65 0.2 280);
-  --chart-2: oklch(0.55 0.15 200);
-  --chart-3: oklch(0.6 0.1 150);
-  --chart-4: oklch(0.65 0.15 60);
-  --chart-5: oklch(0.6 0.2 30);
-  --sidebar: oklch(0.17 0 0);
-  --sidebar-foreground: oklch(0.99 0 0);
-  --sidebar-primary: oklch(0.65 0.2 280);
-  --sidebar-primary-foreground: oklch(0.13 0 0);
-  --sidebar-accent: oklch(0.23 0.01 280);
-  --sidebar-accent-foreground: oklch(0.99 0 0);
-  --sidebar-border: oklch(0.27 0 0);
-  --sidebar-ring: oklch(0.65 0.2 280);
+@property --mm-y {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+@property --mm-r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+:root {
+  /* Palette */
+  --ink: #0d0b09;
+  --surface: #14110e;
+  --surface-2: #16130f;
+  --surface-3: #1d1915;
+  --paper: #f1eadf;
+  --paper-deep: #ebe2d2;
+  --ember: #ff5a36;
+
+  /* Semantic tokens (used by components/ui) */
+  --background: var(--ink);
+  --foreground: var(--paper);
+  --card: var(--surface);
+  --card-foreground: var(--paper);
+  --popover: var(--surface);
+  --popover-foreground: var(--paper);
+  --primary: var(--paper);
+  --primary-foreground: var(--ink);
+  --secondary: var(--surface-3);
+  --secondary-foreground: var(--paper);
+  --muted: var(--surface-2);
+  --muted-foreground: #a69d90;
+  --accent: var(--surface-3);
+  --accent-foreground: var(--paper);
+  --destructive: #f2555a;
+  --destructive-foreground: var(--ink);
+  --success: #7fc99a;
+  --border: rgb(241 234 223 / 0.12);
+  --input: rgb(241 234 223 / 0.16);
+  --ring: var(--ember);
+  --radius: 0.75rem;
 }
 
 @theme inline {
-  --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Times New Roman", Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ember: var(--ember);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -93,42 +87,41 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-xl: calc(var(--radius) + 8px);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    color-scheme: dark;
+    background: var(--background);
+  }
   body {
     @apply bg-background text-foreground overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection {
+    background: rgb(255 90 54 / 0.35);
+    color: #fff;
   }
 }
 
 /* Article body typography for blog posts */
 .article-body h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.3;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.15;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
@@ -136,7 +129,7 @@
 
 .article-body h3 {
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.4;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
@@ -173,6 +166,13 @@
   font-weight: 600;
 }
 
+.article-body a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--ember);
+  text-underline-offset: 3px;
+}
+
 .article-body code {
   font-size: 0.875em;
   background: var(--muted);
@@ -190,71 +190,8 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Home (marketing landing page) — "darkroom" theme, scoped to .mm-home */
+/* Signature details shared across pages                                */
 /* ------------------------------------------------------------------ */
-
-@property --mm-x {
-  syntax: "<length-percentage>";
-  inherits: true;
-  initial-value: 46%;
-}
-
-@property --mm-y {
-  syntax: "<length-percentage>";
-  inherits: true;
-  initial-value: 50%;
-}
-
-@property --mm-r {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-
-/* Re-map the shadcn tokens so the shared header/footer adopt the theme. */
-.mm-home {
-  --background: #0d0b09;
-  --foreground: #f1eadf;
-  --card: #14110e;
-  --card-foreground: #f1eadf;
-  --popover: #14110e;
-  --popover-foreground: #f1eadf;
-  --primary: #f1eadf;
-  --primary-foreground: #0d0b09;
-  --secondary: #1d1915;
-  --secondary-foreground: #f1eadf;
-  --muted: #16130f;
-  --muted-foreground: #a69d90;
-  --accent: #1d1915;
-  --accent-foreground: #f1eadf;
-  --border: rgb(241 234 223 / 0.12);
-  --input: rgb(241 234 223 / 0.12);
-  --ring: #ff5a36;
-  background: var(--background);
-  color: var(--foreground);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html:has(.mm-home),
-body:has(.mm-home) {
-  background: #0d0b09;
-  color-scheme: dark;
-}
-
-.mm-home ::selection {
-  background: rgb(255 90 54 / 0.35);
-  color: #fff;
-}
-
-.mm-serif {
-  font-family: var(--font-mm-serif), "Times New Roman", Georgia, serif;
-  font-weight: 400;
-}
-
-.mm-mono {
-  font-family: var(--font-mm-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-}
 
 /* Link underline that grows from the left on hover. */
 .mm-underline {
@@ -275,7 +212,7 @@ body:has(.mm-home) {
   background-image: repeating-linear-gradient(
     90deg,
     transparent 0 8px,
-    #f1eadf 8px 18px,
+    var(--paper) 8px 18px,
     transparent 18px 26px
   );
   background-size: 26px 7px;

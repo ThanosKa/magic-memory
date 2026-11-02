@@ -8,7 +8,6 @@ import { AudienceSection } from "@/components/home/audience-section";
 import { PricingPreview } from "@/components/home/pricing-preview";
 import { HomeFaq } from "@/components/home/home-faq";
 import { FinalCta } from "@/components/home/final-cta";
-import { homeMono, homeSerif } from "@/components/home/fonts";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd } from "@/lib/seo/metadata-helpers";
 import { homepageFaqs } from "@/lib/seo/faq-data";
 
@@ -75,7 +74,7 @@ export default function Page() {
   const faqJsonLd = faqPageJsonLd(homepageFaqs);
 
   return (
-    <div className={`mm-home flex min-h-screen flex-col ${homeSerif.variable} ${homeMono.variable}`}>
+    <div className="flex min-h-screen flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
