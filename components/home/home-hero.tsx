@@ -1,12 +1,7 @@
-"use client";
-
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { RestorationLens } from "@/components/home/restoration-lens";
 import { PageContainer } from "@/components/layout/page-container";
 import { StartButton } from "@/components/layout/start-button";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 const HEADLINE: { text: string; italic?: boolean; br?: boolean }[] = [
   { text: "Old" },
@@ -16,18 +11,16 @@ const HEADLINE: { text: string; italic?: boolean; br?: boolean }[] = [
   { text: "focus.", italic: true },
 ];
 
+/**
+ * Home hero. The entrance is a CSS animation (`mm-rise`, see globals.css) so
+ * it plays on first paint instead of waiting for hydration, and it is off
+ * when the visitor prefers reduced motion.
+ */
 export function HomeHero() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="relative overflow-hidden">
       <PageContainer className="grid min-h-[calc(100svh-4rem)] items-center gap-12 pb-16 pt-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:pb-20 lg:pt-12">
-        <motion.div
-          className="max-w-xl"
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE }}
-        >
+        <div className="mm-rise max-w-xl">
           <p className="font-mono flex items-center gap-2.5 text-[11px] uppercase tracking-[0.22em] text-paper/60">
             <span className="size-1.5 rounded-full bg-ember" aria-hidden="true" />
             AI photo restoration
@@ -65,13 +58,9 @@ export function HomeHero() {
             <li>No credit card</li>
             <li>Nothing to install</li>
           </ul>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 28, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
-        >
+        <div className="mm-rise mm-rise--frame">
           <RestorationLens
             before={{
               src: "/couple-before.jpg",
@@ -89,7 +78,7 @@ export function HomeHero() {
             }}
             preload
           />
-        </motion.div>
+        </div>
       </PageContainer>
     </section>
   );

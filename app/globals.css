@@ -56,6 +56,11 @@
   --input: rgb(241 234 223 / 0.16);
   --ring: var(--ember);
   --radius: 0.75rem;
+
+  /* Motion. Strong curves: built-in CSS easings are too weak for UI. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entering, exiting, UI response */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* moving on screen */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* sheets sliding in from an edge */
 }
 
 @theme inline {
@@ -224,11 +229,34 @@
   background-position: 0 100%;
   background-repeat: no-repeat;
   padding-bottom: 2px;
-  transition: background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: background-size 0.25s var(--ease-out);
 }
 .mm-underline:hover,
 .group:hover .mm-underline {
   background-size: 100% 1px;
+}
+
+/* Home hero entrance. CSS, not JS, so it runs on first paint. The copy
+   rises first; the photo frame follows a beat later. */
+.mm-rise {
+  animation: mm-rise 0.7s var(--ease-out) both;
+}
+.mm-rise--frame {
+  animation-name: mm-rise-frame;
+  animation-duration: 0.9s;
+  animation-delay: 0.1s;
+}
+@keyframes mm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+@keyframes mm-rise-frame {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
 }
 
 /* Film-strip sprocket holes. */
@@ -250,7 +278,7 @@
 .mm-lens {
   --mm-r: 0px;
   touch-action: pan-y;
-  transition: --mm-r 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: --mm-r 0.6s var(--ease-out);
 }
 .mm-lens[data-mode="lens"] {
   --mm-r: clamp(80px, 11vw, 150px);
@@ -293,7 +321,7 @@
   box-shadow: 0 0 0 1px rgb(13 11 9 / 0.25);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s var(--ease-out);
 }
 .mm-lens[data-mode="lens"] .mm-lens__ring {
   opacity: 1;
@@ -327,6 +355,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .mm-rise,
+  .mm-rise--frame {
+    animation: none;
+  }
   .mm-lens {
     transition: none;
   }

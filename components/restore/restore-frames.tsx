@@ -106,7 +106,7 @@ export function PhotoFrame({ src, alt, aspectRatio, progress }: PhotoFrameProps)
             unoptimized
             sizes="(max-width: 1024px) 100vw, 58vw"
             className={cn(
-              "object-cover transition-[filter] duration-500",
+              "object-cover transition-[filter] duration-300 ease-(--ease-out)",
               isRestoring && "blur-[2px] grayscale-[40%]"
             )}
           />

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Cookie } from "lucide-react"
 
@@ -10,6 +10,8 @@ const COOKIE_CONSENT_KEY = "cookie-consent"
 
 export function CookieConsent() {
     const [showBanner, setShowBanner] = useState(false)
+    // Reduced motion: fade only, no slide.
+    const offset = useReducedMotion() ? 0 : 100
 
     useEffect(() => {
         const consent = localStorage.getItem(COOKIE_CONSENT_KEY)
@@ -33,9 +35,9 @@ export function CookieConsent() {
         <AnimatePresence>
             {showBanner && (
                 <motion.div
-                    initial={{ y: 100, opacity: 0 }}
+                    initial={{ y: offset, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 100, opacity: 0 }}
+                    exit={{ y: offset, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6"
                 >
