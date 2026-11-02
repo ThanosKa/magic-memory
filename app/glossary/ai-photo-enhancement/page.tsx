@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -80,7 +81,7 @@ export default function GlossaryAIPhotoEnhancementPage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Types of AI Photo Enhancement</h2>
+                <ArticleHeading>Types of AI Photo Enhancement</ArticleHeading>
                 <div className="space-y-4">
                   <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                     <h3 className="font-semibold text-paper mb-2">Face restoration</h3>
@@ -102,7 +103,7 @@ export default function GlossaryAIPhotoEnhancementPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">AI Enhancement vs Manual Editing</h2>
+                <ArticleHeading>AI Enhancement vs Manual Editing</ArticleHeading>
                 <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
@@ -130,7 +131,7 @@ export default function GlossaryAIPhotoEnhancementPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Key Models and Tools</h2>
+                <ArticleHeading>Key Models and Tools</ArticleHeading>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
@@ -152,7 +153,7 @@ export default function GlossaryAIPhotoEnhancementPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Who Uses AI Photo Enhancement</h2>
+                <ArticleHeading>Who Uses AI Photo Enhancement</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Families</strong> — Restoring old photos of parents, grandparents, and ancestors for preservation or display</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Genealogists</strong> — Enhancing faces in historical photos to identify and document family members</li>

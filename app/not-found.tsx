@@ -28,7 +28,7 @@ export default function NotFound() {
 
           <div className="mt-6 space-y-4">
             <h1 className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] leading-[1] tracking-[-0.02em] text-paper">
-              Page not <span className="italic text-paper/70">found.</span>
+              Page Not <span className="italic text-paper/70">Found</span>
             </h1>
             <p className="mx-auto max-w-md text-[17px] leading-[1.6] text-paper/70">
               Sorry, we couldn&apos;t find the page you&apos;re looking for. It

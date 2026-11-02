@@ -3,6 +3,7 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { PRINT_FRAME_CLASS } from "@/components/layout/film";
 import { cn } from "@/lib/utils";
 
 type LensMode = "original" | "lens" | "restored";
@@ -24,18 +25,12 @@ export type RestorationLensCaptions = {
 };
 
 export type RestorationLensProps = {
-  /** The original photo, shown underneath. */
   before: RestorationLensImage;
-  /** The restored photo, revealed through the lens. */
   after: RestorationLensImage;
   captions: RestorationLensCaptions;
-  /** Frame width / height. Match the photo's ratio so both images line up. Defaults to 3/2. */
   aspectRatio?: number;
-  /** Passed to next/image. */
   sizes?: string;
-  /** Load both images eagerly and preload the original (above-the-fold use). */
   preload?: boolean;
-  /** Skip next/image optimisation, e.g. for remote hosts not in next.config. */
   unoptimized?: boolean;
   className?: string;
 };
@@ -56,6 +51,12 @@ const DEFAULT_SIZES = "(max-width: 1024px) 100vw, 58vw";
  * until touched) and reveals the restored photo through a CSS mask.
  * Position is written straight to CSS custom properties, so moving the
  * lens never re-renders React.
+ *
+ * - `before` is the original photo, `after` the restored one under the lens.
+ * - `aspectRatio` is the frame's width / height (default 3/2); match the
+ *   photo's ratio so both images line up. `sizes` is passed to next/image.
+ * - `preload` loads both images eagerly and preloads the original (above the fold).
+ * - `unoptimized` skips next/image optimisation, e.g. for remote hosts not in next.config.
  */
 export function RestorationLens({
   before,
@@ -126,7 +127,7 @@ export function RestorationLens({
 
   return (
     <figure className={cn("relative w-full", className)}>
-      <div className="rounded-[4px] bg-print p-2 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.85),0_2px_6px_rgba(0,0,0,0.3)] sm:p-3">
+      <div className={PRINT_FRAME_CLASS}>
         <div
           ref={frameRef}
           className="mm-lens relative w-full cursor-crosshair touch-pan-y select-none overflow-hidden bg-scrim"

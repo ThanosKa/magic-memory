@@ -3,14 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import type { DropzoneInputProps, DropzoneRootProps } from "react-dropzone";
 import { ImageUp } from "lucide-react";
+import { PRINT_FRAME_CLASS, Sprockets } from "@/components/layout/film";
 import { Button, ButtonArrow } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-
-/** Print-frame shadow shared with the restoration lens. */
-const PRINT_SHADOW =
-  "shadow-[0_40px_90px_-30px_rgba(0,0,0,0.85),0_2px_6px_rgba(0,0,0,0.3)]";
 
 /**
  * Caps a photo's width so a tall portrait still fits the viewport.
@@ -19,10 +16,6 @@ const PRINT_SHADOW =
  */
 export function photoWidthStyle(aspectRatio: number): React.CSSProperties {
   return { maxWidth: `min(100%, calc(72svh * ${aspectRatio}))` };
-}
-
-function Sprockets() {
-  return <div className="mm-sprockets h-[14px] w-full" aria-hidden="true" />;
 }
 
 type UploadFrameProps = {
@@ -97,7 +90,7 @@ export function PhotoFrame({ src, alt, aspectRatio, progress }: PhotoFrameProps)
 
   return (
     <figure className="mx-auto w-full" style={photoWidthStyle(aspectRatio)}>
-      <div className={cn("rounded-[4px] bg-print p-2 sm:p-3", PRINT_SHADOW)}>
+      <div className={PRINT_FRAME_CLASS}>
         <div className="relative w-full overflow-hidden bg-scrim" style={{ aspectRatio }}>
           <Image
             src={src}

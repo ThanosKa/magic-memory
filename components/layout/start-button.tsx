@@ -11,8 +11,12 @@ type StartButtonProps = {
   className?: string;
 };
 
-/** The primary pill: opens sign-up for visitors, links to /restore when signed in. */
-const pillClass = buttonVariants({ size: "lg" });
+type StartButtonWithClerkProps = Required<Omit<StartButtonProps, "className">> &
+  Pick<StartButtonProps, "className">;
+
+const PILL_CLASS = buttonVariants({ size: "lg" });
+const DEFAULT_LABEL = "Restore a photo free";
+const DEFAULT_SIGNED_IN_LABEL = "Restore a photo";
 
 function PillContent({ label }: { label: string }) {
   return (
@@ -24,15 +28,15 @@ function PillContent({ label }: { label: string }) {
 }
 
 function StartButtonWithClerk({
-  label = "Restore a photo free",
-  signedInLabel = "Restore a photo",
+  label,
+  signedInLabel,
   className,
-}: StartButtonProps) {
+}: StartButtonWithClerkProps) {
   const { isSignedIn, isLoaded } = useUser();
 
   if (isLoaded && isSignedIn) {
     return (
-      <Link href="/restore" className={cn(pillClass, className)}>
+      <Link href="/restore" className={cn(PILL_CLASS, className)}>
         <PillContent label={signedInLabel} />
       </Link>
     );
@@ -40,23 +44,28 @@ function StartButtonWithClerk({
 
   return (
     <SignUpButton mode="modal" forceRedirectUrl="/restore">
-      <button type="button" className={cn(pillClass, className)}>
+      <button type="button" className={cn(PILL_CLASS, className)}>
         <PillContent label={label} />
       </button>
     </SignUpButton>
   );
 }
 
-export function StartButton(props: StartButtonProps) {
+/** The primary pill: opens sign-up for visitors, links to /restore when signed in. */
+export function StartButton({
+  label = DEFAULT_LABEL,
+  signedInLabel = DEFAULT_SIGNED_IN_LABEL,
+  className,
+}: StartButtonProps) {
   const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
   if (!hasClerk) {
     return (
-      <Link href="/restore" className={cn(pillClass, props.className)}>
-        <PillContent label={props.label ?? "Restore a photo free"} />
+      <Link href="/restore" className={cn(PILL_CLASS, className)}>
+        <PillContent label={label} />
       </Link>
     );
   }
 
-  return <StartButtonWithClerk {...props} />;
+  return <StartButtonWithClerk label={label} signedInLabel={signedInLabel} className={className} />;
 }

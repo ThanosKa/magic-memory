@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -79,7 +80,7 @@ export default function ForRealEstatePage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Use Cases for Real Estate</h2>
+                <ArticleHeading>Use Cases for Real Estate</ArticleHeading>
                 <div className="space-y-4">
                   <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                     <h3 className="font-semibold text-paper mb-2">Agent headshots</h3>
@@ -101,7 +102,7 @@ export default function ForRealEstatePage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">How It Works</h2>
+                <ArticleHeading>How It Works</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">1.</span> <strong className="text-paper">Upload your headshot or team photo</strong> — JPEG, PNG, or WebP up to 10MB. Works from any device.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">AI enhances the face</strong> — GFPGAN sharpens facial features, reduces noise, and improves detail in 5-15 seconds.</li>
@@ -110,7 +111,7 @@ export default function ForRealEstatePage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Pricing for Real Estate Teams</h2>
+                <ArticleHeading>Pricing for Real Estate Teams</ArticleHeading>
                 <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                   <div className="grid gap-4 sm:grid-cols-3">
                     <div>
@@ -130,7 +131,7 @@ export default function ForRealEstatePage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Important Note</h2>
+                <ArticleHeading>Important Note</ArticleHeading>
                 <p className="text-paper/70">
                   Magic Memory uses GFPGAN, which specifically restores and enhances faces. It is ideal for headshots, team photos, and any image where faces are the primary subject. For property interior and exterior photos, a general image enhancement tool would be more appropriate. We focus on doing one thing well — face restoration.
                 </p>

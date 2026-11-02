@@ -13,9 +13,10 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PageContainer } from "@/components/layout/page-container";
+import { SectionColumns } from "@/components/layout/section-columns";
 import { StackedSection } from "@/components/layout/stacked-section";
 import { SectionLabel } from "@/components/layout/section-label";
-import { CREDIT_PACKAGES } from "@/lib/constants";
+import { CREDIT_PACKAGES, perPhotoPrice } from "@/lib/constants";
 
 const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
@@ -40,10 +41,6 @@ const PricingCards = dynamic(
 );
 
 const { starter, growth, premium } = CREDIT_PACKAGES;
-
-function perPhoto(pkg: { price: number; credits: number }) {
-  return `€${(pkg.price / pkg.credits / 100).toFixed(2)}`;
-}
 
 const PRICING_OFFERS = [
   {
@@ -74,12 +71,12 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Which plan is right for me?",
     answer:
-      `If you only need to restore a few photos, start with the free daily tier — 1 restoration per day, no card required. If you have a batch of 10-${starter.credits} family photos to get through, Starter (${starter.credits} credits for ${starter.priceDisplay}) is the cheapest per-photo option for small projects. Growth (${growth.credits} credits for ${growth.priceDisplay}, ${perPhoto(growth)} per restoration) covers a full album. Premium (${premium.credits} credits for ${premium.priceDisplay}, ${perPhoto(premium)} per restoration) is best for photographers, genealogists, or anyone digitizing decades of prints.`,
+      `If you only need to restore a few photos, start with the free daily tier — 1 restoration per day, no card required. If you have a batch of 10-${starter.credits} family photos to get through, Starter (${starter.credits} credits for ${starter.priceDisplay}) is the cheapest per-photo option for small projects. Growth (${growth.credits} credits for ${growth.priceDisplay}, ${perPhotoPrice(growth)} per restoration) covers a full album. Premium (${premium.credits} credits for ${premium.priceDisplay}, ${perPhotoPrice(premium)} per restoration) is best for photographers, genealogists, or anyone digitizing decades of prints.`,
   },
   {
     question: "How much does each restoration cost?",
     answer:
-      `The per-restoration cost drops as you buy larger packs. Starter: ${perPhoto(starter)}/photo. Growth: ${perPhoto(growth)}/photo. Premium: ${perPhoto(premium)}/photo. Compared to manual professional restoration ($25-$150 per photo) or Remini's $9.99/week subscription, even our smallest pack is significantly cheaper for most users.`,
+      `The per-restoration cost drops as you buy larger packs. Starter: ${perPhotoPrice(starter)}/photo. Growth: ${perPhotoPrice(growth)}/photo. Premium: ${perPhotoPrice(premium)}/photo. Compared to manual professional restoration ($25-$150 per photo) or Remini's $9.99/week subscription, even our smallest pack is significantly cheaper for most users.`,
   },
   {
     question: "Why is pricing in Euros instead of USD?",
@@ -119,8 +116,8 @@ const NOT_SUBSCRIPTION = [
     body: "Credits stay in your account until you use them. No monthly reset, no forced renewal.",
   },
   {
-    title: `As low as ${perPhoto(premium)} per photo`,
-    body: `Larger packs mean cheaper per-restoration cost. Premium works out to ${perPhoto(premium)} per photo — a fraction of professional retouching.`,
+    title: `As low as ${perPhotoPrice(premium)} per photo`,
+    body: `Larger packs mean cheaper per-restoration cost. Premium works out to ${perPhotoPrice(premium)} per photo — a fraction of professional retouching.`,
   },
   {
     title: "Free daily, no card",
@@ -139,18 +136,18 @@ const WHICH_PLAN = [
   },
   {
     title: "A full photo album? → Growth (€19.99)",
-    body: `${growth.credits} credits at ${perPhoto(growth)} each. Covers an entire wedding album, a decade of school photos, or a multi-generation family archive.`,
+    body: `${growth.credits} credits at ${perPhotoPrice(growth)} each. Covers an entire wedding album, a decade of school photos, or a multi-generation family archive.`,
   },
   {
     title: "A photographer or genealogist? → Premium (€29.99)",
-    body: `${premium.credits} credits at ${perPhoto(premium)} each — the cheapest per-photo rate. Best for anyone digitizing a long family archive or running client projects.`,
+    body: `${premium.credits} credits at ${perPhotoPrice(premium)} each — the cheapest per-photo rate. Best for anyone digitizing a long family archive or running client projects.`,
   },
 ];
 
 export const metadata: Metadata = {
   title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
   description:
-    `Pay once, restore forever. Credits never expire — ${starter.priceDisplay} for ${starter.credits} restorations, down to ${perPhoto(premium)}/photo. Or 1 free per day, no card required. No subscription.`,
+    `Pay once, restore forever. Credits never expire — ${starter.priceDisplay} for ${starter.credits} restorations, down to ${perPhotoPrice(premium)}/photo. Or 1 free per day, no card required. No subscription.`,
   alternates: {
     canonical: getCanonicalUrl("/pricing"),
   },
@@ -193,7 +190,7 @@ export default async function PricingPage() {
     "@type": "Product",
     name: "Magic Memory AI Photo Restoration Credits",
     description:
-      `One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from ${starter.priceDisplay} (${perPhoto(starter)}/photo) to ${premium.priceDisplay} (${perPhoto(premium)}/photo). Free 1/day tier available with no credit card.`,
+      `One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from ${starter.priceDisplay} (${perPhotoPrice(starter)}/photo) to ${premium.priceDisplay} (${perPhotoPrice(premium)}/photo). Free 1/day tier available with no credit card.`,
     image: [getOgImageUrl()],
     brand: { "@type": "Brand", name: "Magic Memory" },
     offers: {
@@ -321,14 +318,19 @@ export default async function PricingPage() {
             </div>
           </StackedSection>
 
-          <StackedSection tone="paper" className="grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <SectionLabel index="01" tone="paper">Questions</SectionLabel>
-              <h2 className="font-serif mt-6 text-[clamp(2.5rem,4.4vw,4.25rem)] leading-[1] tracking-[-0.02em]">
-                Pricing FAQ
-              </h2>
-            </div>
-            <div>
+          <StackedSection tone="paper">
+            <SectionColumns
+              className="gap-12"
+              stickyAside
+              aside={
+                <>
+                  <SectionLabel index="01" tone="paper">Questions</SectionLabel>
+                  <h2 className="font-serif mt-6 text-[clamp(2.5rem,4.4vw,4.25rem)] leading-[1] tracking-[-0.02em]">
+                    Pricing FAQ
+                  </h2>
+                </>
+              }
+            >
               <Accordion type="single" collapsible className="w-full border-t border-ink/12">
                 {pricingFaqs.map((faq, i) => (
                   <AccordionItem key={faq.question} value={`item-${i}`}>
@@ -337,7 +339,7 @@ export default async function PricingPage() {
                   </AccordionItem>
                 ))}
               </Accordion>
-            </div>
+            </SectionColumns>
           </StackedSection>
 
           <StackedSection className="text-center">

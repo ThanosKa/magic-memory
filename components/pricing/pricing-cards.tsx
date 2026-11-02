@@ -1,14 +1,14 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Check } from "lucide-react";
-import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
 import { useState } from "react";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { SignUpButton, useUser } from "@clerk/nextjs";
+import { Check } from "lucide-react";
+import { toast } from "sonner";
+import { PlanCell, PlanGrid } from "@/components/pricing/plan-grid";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 type PricingCardsProps = {
@@ -21,29 +21,6 @@ const FREE_FEATURES = [
   "High-quality results",
   "No credit card required",
 ];
-
-type PlanShellProps = {
-  popular?: boolean;
-  index: number;
-  children: ReactNode;
-};
-
-function PlanShell({ popular = false, index, children }: PlanShellProps) {
-  return (
-    <li
-      className={cn(
-        "relative flex flex-col border-ink/12 p-7 sm:p-8",
-        index > 0 && "border-t sm:border-t-0",
-        index % 2 === 1 && "sm:border-l",
-        index >= 2 && "sm:border-t lg:border-t-0",
-        index === 2 && "lg:border-l",
-        popular && "bg-ink text-paper"
-      )}
-    >
-      {children}
-    </li>
-  );
-}
 
 type FeatureListProps = {
   items: string[];
@@ -119,9 +96,8 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
 
   return (
     <div>
-      <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
-        {/* Free Tier */}
-        <PlanShell index={0}>
+      <PlanGrid>
+        <PlanCell index={0}>
           <div className="flex h-6 items-center">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/65">Free</h3>
           </div>
@@ -143,11 +119,10 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
               </SignUpButton>
             )}
           </div>
-        </PlanShell>
+        </PlanCell>
 
-        {/* Paid Tiers */}
         {packages.map(([key, pkg], i) => (
-          <PlanShell key={key} index={i + 1} popular={pkg.popular}>
+          <PlanCell key={key} index={i + 1} popular={pkg.popular}>
             <div className="flex h-6 items-center justify-between gap-3">
               <h3
                 className={cn(
@@ -197,9 +172,9 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
                 </SignUpButton>
               )}
             </div>
-          </PlanShell>
+          </PlanCell>
         ))}
-      </ul>
+      </PlanGrid>
     </div>
   );
 }

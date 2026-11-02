@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button, ButtonArrow } from "@/components/ui/button";
 
 export function BestAIPhotoRestorationContent() {
   return (
@@ -10,12 +11,12 @@ export function BestAIPhotoRestorationContent() {
         <p className="text-muted-foreground mb-4">
           After running the same scanned 1962 portrait through five tools, <strong>Magic Memory</strong> produced the sharpest face (€0.25/photo on the largest pack, 1 free/day for casual use). <strong>Remini</strong> is the strongest mobile-app pick at $9.99/week. <strong>MyHeritage Photo Enhancer</strong> is bundled into a $119–$259/yr genealogy subscription — overpriced unless you also want family-tree tools. <strong>VanceAI</strong> wins for pros who batch-process or also need upscaling/colorization. <strong>Fotor</strong> is the right call only if you also need a full photo editor.
         </p>
-        <Link
-          href="/"
-          className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-        >
-          Try Magic Memory free →
-        </Link>
+        <Button asChild>
+          <Link href="/">
+            Try Magic Memory free
+            <ButtonArrow />
+          </Link>
+        </Button>
         <p className="text-xs text-muted-foreground mt-3">
           1 restoration per day, no credit card. Pricing & free-tier limits last verified 2026-06-13.
         </p>

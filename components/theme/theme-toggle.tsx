@@ -2,8 +2,8 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
 import { useMounted } from "@/components/theme/use-mounted";
+import { cn } from "@/lib/utils";
 
 type ThemeToggleProps = {
   /** `icon` for the header bar, `row` for the mobile menu sheet. */

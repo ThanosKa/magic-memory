@@ -10,7 +10,8 @@ type BrandMarkProps = {
  *
  * Paper parts use `currentColor` and the seam uses the ember token, so the mark
  * follows the active theme. public/icon.svg, app/icon.png and app/apple-icon.png
- * are the same geometry on an ink tile; regenerate them if this changes.
+ * draw the same lens on an ink tile, with a wider, full-height seam so it stays
+ * visible at small sizes; regenerate them if the lens changes.
  */
 export function BrandMark({ className }: BrandMarkProps) {
   return (

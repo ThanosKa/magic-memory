@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -80,7 +81,7 @@ export default function GlossaryFaceRestorationPage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">How Face Restoration Works</h2>
+                <ArticleHeading>How Face Restoration Works</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   AI face restoration follows a three-step pipeline:
                 </p>
@@ -92,7 +93,7 @@ export default function GlossaryFaceRestorationPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Face Restoration vs Other Techniques</h2>
+                <ArticleHeading>Face Restoration vs Other Techniques</ArticleHeading>
                 <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                   <div className="space-y-4">
                     <div>
@@ -112,7 +113,7 @@ export default function GlossaryFaceRestorationPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Common Use Cases</h2>
+                <ArticleHeading>Common Use Cases</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Old family photos</strong> — Restoring grandparent and great-grandparent portraits from the pre-digital era</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Low-resolution scans</strong> — Enhancing photos scanned at low DPI or from old digital cameras</li>
@@ -123,7 +124,7 @@ export default function GlossaryFaceRestorationPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Leading Face Restoration Models</h2>
+                <ArticleHeading>Leading Face Restoration Models</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper"><Link href="/glossary/gfpgan" className="underline hover:text-paper">GFPGAN</Link></strong> — Uses generative facial priors from a pre-trained StyleGAN2. Known for sharp, high-quality results. Powers Magic Memory.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">CodeFormer</strong> — Uses a transformer-based codebook approach with an adjustable fidelity-quality trade-off slider.</li>

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -80,7 +81,7 @@ export default function GlossaryImageUpscalingPage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Traditional vs AI Upscaling</h2>
+                <ArticleHeading>Traditional vs AI Upscaling</ArticleHeading>
                 <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
@@ -108,7 +109,7 @@ export default function GlossaryImageUpscalingPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">How AI Upscaling Works</h2>
+                <ArticleHeading>How AI Upscaling Works</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   AI super-resolution models are trained on pairs of images: a high-resolution original and a synthetically degraded low-resolution version. The model learns to reverse the degradation process — given a low-resolution input, it predicts what the high-resolution version should look like.
                 </p>
@@ -118,7 +119,7 @@ export default function GlossaryImageUpscalingPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Leading Upscaling Models</h2>
+                <ArticleHeading>Leading Upscaling Models</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Real-ESRGAN</strong> — General-purpose upscaling model that handles real-world degradations. Supports 2x and 4x scales. Works on any image type.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">SwinIR</strong> — Transformer-based model with state-of-the-art PSNR scores. More computationally expensive but produces very clean results.</li>
@@ -128,7 +129,7 @@ export default function GlossaryImageUpscalingPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Upscaling vs Face Restoration</h2>
+                <ArticleHeading>Upscaling vs Face Restoration</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   For old portrait photos, the question is often whether to use a general upscaler or a face restoration model. The answer depends on what you need:
                 </p>

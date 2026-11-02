@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -80,7 +81,7 @@ export default function GlossaryGFPGANPage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">How GFPGAN Works</h2>
+                <ArticleHeading>How GFPGAN Works</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   GFPGAN combines a degradation removal module with a pre-trained face generation model (StyleGAN2). The key innovation is using the rich facial details stored in the pre-trained generator as &quot;facial priors&quot; — reference knowledge of what high-quality faces look like.
                 </p>
@@ -95,7 +96,7 @@ export default function GlossaryGFPGANPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">What GFPGAN Can Fix</h2>
+                <ArticleHeading>What GFPGAN Can Fix</ArticleHeading>
                 <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
@@ -123,7 +124,7 @@ export default function GlossaryGFPGANPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">GFPGAN vs CodeFormer</h2>
+                <ArticleHeading>GFPGAN vs CodeFormer</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   CodeFormer, published at NeurIPS 2022, is the other major face restoration model. Both produce high-quality results, but they differ in approach:
                 </p>
@@ -147,7 +148,7 @@ export default function GlossaryGFPGANPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Technical Requirements</h2>
+                <ArticleHeading>Technical Requirements</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   Running GFPGAN locally requires Python 3.7+, PyTorch 1.7+, and a CUDA-compatible GPU with at least 4GB VRAM. The model weights are approximately 330MB. For users without the technical setup, hosted services provide the same restoration through a web interface.
                 </p>

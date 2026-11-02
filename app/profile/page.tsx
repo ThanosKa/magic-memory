@@ -24,7 +24,7 @@ export default function ProfilePage() {
             <PageContainer className="py-24">
                 <SectionLabel index="01">Account</SectionLabel>
                 <h1 className="font-serif mt-6 mb-12 text-[clamp(2.5rem,4.8vw,4.75rem)] leading-[1] tracking-[-0.02em] text-paper">
-                    Your <span className="italic text-paper/60">profile</span>
+                    Your <span className="italic text-paper/60">Profile</span>
                 </h1>
                 <div className="rounded-2xl border border-border bg-card p-2 sm:p-4">
                     <Suspense

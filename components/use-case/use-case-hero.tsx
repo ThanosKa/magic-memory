@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button, ButtonArrow } from "@/components/ui/button";
+import { PRINT_FRAME_CLASS } from "@/components/layout/film";
 import { PageContainer } from "@/components/layout/page-container";
+import { SecondaryLink } from "@/components/layout/secondary-link";
+import { Button, ButtonArrow } from "@/components/ui/button";
 
 type UseCaseHeroProps = {
   headline: string;
@@ -10,17 +12,25 @@ type UseCaseHeroProps = {
   ctaHref?: string;
 };
 
-function Frame({ src, alt, label }: { src: string; alt: string; label: string }) {
+type HeroPrintProps = {
+  src: string;
+  alt: string;
+  label: string;
+};
+
+function HeroPrint({ src, alt, label }: HeroPrintProps) {
   return (
     <figure className="space-y-3">
-      <div className="relative aspect-[3/4] overflow-hidden rounded-[6px] border border-paper/10 bg-surface-2">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 50vw, 25vw"
-        />
+      <div className={PRINT_FRAME_CLASS}>
+        <div className="relative aspect-[3/4] overflow-hidden bg-scrim">
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 50vw, 25vw"
+          />
+        </div>
       </div>
       <figcaption className="font-mono text-center text-[11px] uppercase tracking-[0.18em] text-paper/60">
         {label}
@@ -47,20 +57,15 @@ export function UseCaseHero({ headline, subheadline, ctaHref = "/" }: UseCaseHer
                 <ButtonArrow />
               </Link>
             </Button>
-            <Link
-              href="/pricing"
-              className="focus-ring group inline-flex min-h-11 items-center text-[15px] font-medium text-paper/80 transition-colors hover:text-paper"
-            >
-              <span className="mm-underline">View Pricing</span>
-            </Link>
+            <SecondaryLink href="/pricing">View Pricing</SecondaryLink>
           </div>
           <p className="font-mono mt-8 text-[11px] uppercase tracking-[0.16em] text-paper/60">
             1 free restoration per day. No credit card required.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <Frame src="/couple-before.jpg" alt="Old photo before AI restoration" label="Before" />
-          <Frame src="/couple-after.png" alt="Photo after AI restoration" label="After" />
+          <HeroPrint src="/couple-before.jpg" alt="Old photo before AI restoration" label="Before" />
+          <HeroPrint src="/couple-after.png" alt="Photo after AI restoration" label="After" />
         </div>
       </PageContainer>
     </section>

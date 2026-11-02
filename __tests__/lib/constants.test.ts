@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { CREDIT_PACKAGES, APP_CONFIG, type PackageType } from "@/lib/constants"
+import { CREDIT_PACKAGES, APP_CONFIG, perPhotoPrice, type PackageType } from "@/lib/constants"
 
 describe("constants", () => {
     describe("CREDIT_PACKAGES", () => {
@@ -31,6 +31,12 @@ describe("constants", () => {
             const names = Object.values(CREDIT_PACKAGES).map((pkg) => pkg.name)
             const uniqueNames = new Set(names)
             expect(uniqueNames.size).toBe(names.length)
+        })
+
+        it("shows each pack's price per photo in euros", () => {
+            expect(perPhotoPrice(CREDIT_PACKAGES.starter)).toBe("€0.50")
+            expect(perPhotoPrice(CREDIT_PACKAGES.growth)).toBe("€0.33")
+            expect(perPhotoPrice(CREDIT_PACKAGES.premium)).toBe("€0.25")
         })
 
         it("marks only growth as popular", () => {

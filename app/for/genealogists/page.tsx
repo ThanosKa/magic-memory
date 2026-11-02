@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -79,7 +80,7 @@ export default function ForGenealogistsPage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Why Genealogists Need Photo Restoration</h2>
+                <ArticleHeading>Why Genealogists Need Photo Restoration</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   The photos that matter most to genealogy research are often the hardest to work with. Photos from the early 1900s and before were printed on fragile paper, stored in attics and basements, and scanned at low resolution decades ago. By the time they reach your family tree project, faces are often unrecognizable.
                 </p>
@@ -92,7 +93,7 @@ export default function ForGenealogistsPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">How Magic Memory Helps</h2>
+                <ArticleHeading>How Magic Memory Helps</ArticleHeading>
                 <div className="space-y-4">
                   <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                     <h3 className="font-semibold text-paper mb-2">Restore faces in ancestor portraits</h3>
@@ -114,7 +115,7 @@ export default function ForGenealogistsPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Genealogy Photo Restoration Workflow</h2>
+                <ArticleHeading>Genealogy Photo Restoration Workflow</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">1.</span> <strong className="text-paper">Scan at high resolution</strong> — Use a flatbed scanner at 600 DPI or higher. Save as JPEG (90%+ quality) or PNG.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">Upload to Magic Memory</strong> — Supports JPEG, PNG, and WebP up to 10MB. No app to install.</li>
@@ -124,7 +125,7 @@ export default function ForGenealogistsPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Magic Memory vs MyHeritage Photo Enhancer</h2>
+                <ArticleHeading>Magic Memory vs MyHeritage Photo Enhancer</ArticleHeading>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>

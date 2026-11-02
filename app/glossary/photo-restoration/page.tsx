@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -80,7 +81,7 @@ export default function GlossaryPhotoRestorationPage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Types of Photo Damage</h2>
+                <ArticleHeading>Types of Photo Damage</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   Photos degrade through several mechanisms, each requiring different restoration approaches:
                 </p>
@@ -94,7 +95,7 @@ export default function GlossaryPhotoRestorationPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Manual vs AI Photo Restoration</h2>
+                <ArticleHeading>Manual vs AI Photo Restoration</ArticleHeading>
                 <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
@@ -122,7 +123,7 @@ export default function GlossaryPhotoRestorationPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">How AI Photo Restoration Works</h2>
+                <ArticleHeading>How AI Photo Restoration Works</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   AI photo restoration models like GFPGAN use generative adversarial networks (GANs) trained on millions of high-resolution face images. The model learns what faces should look like at high quality, then applies that knowledge to reconstruct degraded faces.
                 </p>
@@ -135,7 +136,7 @@ export default function GlossaryPhotoRestorationPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">When to Use Each Method</h2>
+                <ArticleHeading>When to Use Each Method</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">AI restoration</strong> — Best for face-focused photos that are blurry, faded, or low resolution. Fast and affordable.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Manual restoration</strong> — Best for photos with physical tears, missing corners, or complex non-face damage that requires creative reconstruction.</li>

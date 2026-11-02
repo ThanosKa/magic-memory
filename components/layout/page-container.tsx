@@ -8,8 +8,8 @@ type PageContainerProps = {
 };
 
 /** Max width and side gutters shared by every page (matches the home page). */
-export const pageContainerClass = "mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-14";
+export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-14";
 
 export function PageContainer({ children, className, as: Component = "div" }: PageContainerProps) {
-  return <Component className={cn(pageContainerClass, className)}>{children}</Component>;
+  return <Component className={cn(PAGE_CONTAINER_CLASS, className)}>{children}</Component>;
 }

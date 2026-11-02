@@ -1,29 +1,33 @@
+import type { Tone } from "@/components/layout/tone";
 import { cn } from "@/lib/utils";
 
 type SectionLabelProps = {
-  /** Two-digit section number shown in ember, e.g. "01". */
   index: string;
   children: string;
-  /** `paper` on cream sections. */
-  tone?: "dark" | "paper";
+  tone?: Tone;
   className?: string;
 };
 
-/** Mono uppercase label: ember index, short rule, label. */
+const TONE_CLASSES: Record<Tone, { text: string; rule: string }> = {
+  "dark": { text: "text-paper/60", rule: "bg-paper/25" },
+  "paper": { text: "text-ink/65", rule: "bg-ink/25" },
+};
+
+/**
+ * Mono uppercase label: ember `index` (two digits, e.g. "01"), short rule,
+ * label. Use `tone="paper"` on cream sections.
+ */
 export function SectionLabel({ index, children, tone = "dark", className }: SectionLabelProps) {
   return (
     <p
       className={cn(
         "font-mono flex items-center gap-3 text-[11px] uppercase tracking-[0.22em]",
-        tone === "dark" ? "text-paper/60" : "text-ink/65",
+        TONE_CLASSES[tone].text,
         className
       )}
     >
       <span className="text-ember">{index}</span>
-      <span
-        className={cn("h-px w-10", tone === "dark" ? "bg-paper/25" : "bg-ink/25")}
-        aria-hidden="true"
-      />
+      <span className={cn("h-px w-10", TONE_CLASSES[tone].rule)} aria-hidden="true" />
       {children}
     </p>
   );

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
 import { FinalCta } from "@/components/layout/final-cta";
 import { Button, ButtonArrow } from "@/components/ui/button";
@@ -79,7 +80,7 @@ export default function ForPhotographersPage() {
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">How Photographers Use AI Restoration</h2>
+                <ArticleHeading>How Photographers Use AI Restoration</ArticleHeading>
                 <div className="space-y-4">
                   <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                     <h3 className="font-semibold text-paper mb-2">Rescue old client photos</h3>
@@ -101,7 +102,7 @@ export default function ForPhotographersPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Photographer Workflow</h2>
+                <ArticleHeading>Photographer Workflow</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">1.</span> <strong className="text-paper">Receive client photo</strong> — Scan the physical print at 600+ DPI, or ask the client for the highest resolution digital version available.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">Run AI face restoration</strong> — Upload to Magic Memory. GFPGAN restores facial detail in 5-15 seconds.</li>
@@ -111,7 +112,7 @@ export default function ForPhotographersPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">AI Restoration vs Manual Retouching</h2>
+                <ArticleHeading>AI Restoration vs Manual Retouching</ArticleHeading>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
@@ -136,7 +137,7 @@ export default function ForPhotographersPage() {
               </div>
 
               <div>
-                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Pricing for Photography Businesses</h2>
+                <ArticleHeading>Pricing for Photography Businesses</ArticleHeading>
                 <p className="text-paper/70 mb-4">
                   At {"\u20ac"}9.99 for 20 restorations ({"\u20ac"}0.50 per photo), Magic Memory is a cost-effective tool for photographers who offer restoration services. Credits never expire, so you can buy a pack and use them as client requests come in over months.
                 </p>

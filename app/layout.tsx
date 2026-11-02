@@ -4,7 +4,8 @@ import dynamic from "next/dynamic";
 import "./globals.css";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { AnalyticsProvider } from "@/app/analytics-provider";
-import { fontVariables } from "@/lib/fonts";
+import { FONT_VARIABLES } from "@/lib/fonts";
+import { ThemeColorScript } from "@/components/theme/theme-color-script";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemedToaster } from "@/components/theme/themed-toaster";
 
@@ -134,7 +135,7 @@ export default function RootLayout({
 }>) {
   return (
     <ConditionalClerkProvider>
-      <html lang="en" className={fontVariables} suppressHydrationWarning>
+      <html lang="en" className={FONT_VARIABLES} suppressHydrationWarning>
         <head>
           <script
             type="application/ld+json"
@@ -201,6 +202,7 @@ export default function RootLayout({
         </head>
         <body className="font-sans antialiased">
           <ThemeProvider>
+            <ThemeColorScript />
             <WebVitalsTracker />
             {children}
             <CookieConsent />

@@ -50,6 +50,11 @@ export const CREDIT_PACKAGES = {
 
 export type PackageType = keyof typeof CREDIT_PACKAGES;
 
+/** A pack's price per restoration, e.g. "€0.33". */
+export function perPhotoPrice(pkg: { price: number; credits: number }): string {
+  return `€${(pkg.price / pkg.credits / 100).toFixed(2)}`;
+}
+
 export const APP_CONFIG = {
   name: "Magic Memory",
   description: "Magic Memory restores your old photos with AI",

@@ -1,15 +1,12 @@
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 
-// The three theme fonts, loaded once in the root layout.
-// app/globals.css maps them to Tailwind's font-sans, font-serif and font-mono.
-
-export const fontSans = Inter({
+export const FONT_SANS = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
 
-export const fontSerif = Instrument_Serif({
+export const FONT_SERIF = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
@@ -17,11 +14,15 @@ export const fontSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
 });
 
-export const fontMono = JetBrains_Mono({
+export const FONT_MONO = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
   variable: "--font-jetbrains-mono",
 });
 
-export const fontVariables = `${fontSans.variable} ${fontSerif.variable} ${fontMono.variable}`;
+/**
+ * CSS variables for the three theme fonts, set once on <html> in the root layout.
+ * app/globals.css maps them to Tailwind's font-sans, font-serif and font-mono.
+ */
+export const FONT_VARIABLES = `${FONT_SANS.variable} ${FONT_SERIF.variable} ${FONT_MONO.variable}`;

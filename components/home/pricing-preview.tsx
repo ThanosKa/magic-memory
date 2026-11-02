@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { ArrowUpRight, Ban, Globe, ShieldCheck, Undo2 } from "lucide-react";
 import { StackedSection } from "@/components/layout/stacked-section";
+import { SectionColumns } from "@/components/layout/section-columns";
 import { SectionLabel } from "@/components/layout/section-label";
-import { CREDIT_PACKAGES } from "@/lib/constants";
+import { PlanCell, PlanGrid } from "@/components/pricing/plan-grid";
+import { CREDIT_PACKAGES, perPhotoPrice } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-function perPhoto(priceCents: number, credits: number) {
-  return `€${(priceCents / credits / 100).toFixed(2)}`;
-}
 
 const PLANS = [
   {
@@ -21,7 +19,7 @@ const PLANS = [
     name: pkg.name,
     price: pkg.priceDisplay,
     amount: `${pkg.credits} photos`,
-    detail: `${perPhoto(pkg.price, pkg.credits)} per photo, paid once`,
+    detail: `${perPhotoPrice(pkg)} per photo, paid once`,
     popular: pkg.popular,
   })),
 ];
@@ -36,38 +34,21 @@ const PROMISES = [
 export function PricingPreview() {
   return (
     <StackedSection tone="paper" className="pb-28 md:pb-36">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-        <div>
-          <SectionLabel index="04" tone="paper">
-            Pricing
-          </SectionLabel>
-        </div>
-        <div>
-          <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
-            Pay once.{" "}
-            <span className="italic text-ink/55">Credits never expire.</span>
-          </h2>
-          <p className="mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-ink/65">
-            Everyone gets one free restoration a day. Need more? Buy a pack
-            once. No subscription, no auto-renewal.
-          </p>
-        </div>
-      </div>
+      <SectionColumns aside={<SectionLabel index="04" tone="paper">Pricing</SectionLabel>}>
+        <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
+          Pay once.{" "}
+          <span className="italic text-ink/55">Credits never expire.</span>
+        </h2>
+        <p className="mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-ink/65">
+          Everyone gets one free restoration a day. Need more? Buy a pack
+          once. No subscription, no auto-renewal.
+        </p>
+      </SectionColumns>
 
       <div className="mt-16 md:mt-20">
-        <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
+        <PlanGrid>
           {PLANS.map((plan, i) => (
-            <li
-              key={plan.name}
-              className={cn(
-                "relative flex flex-col gap-1 border-ink/12 p-7 sm:p-8",
-                i > 0 && "border-t sm:border-t-0",
-                i % 2 === 1 && "sm:border-l",
-                i >= 2 && "sm:border-t lg:border-t-0",
-                i === 2 && "lg:border-l",
-                plan.popular && "bg-ink text-paper"
-              )}
-            >
+            <PlanCell key={plan.name} index={i} popular={plan.popular} className="gap-1">
               <div className="flex h-6 items-center justify-between gap-3">
                 <p
                   className={cn(
@@ -88,9 +69,9 @@ export function PricingPreview() {
               <p className={cn("text-[14px]", plan.popular ? "text-paper/65" : "text-ink/65")}>
                 {plan.detail}
               </p>
-            </li>
+            </PlanCell>
           ))}
-        </ul>
+        </PlanGrid>
       </div>
 
       <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">

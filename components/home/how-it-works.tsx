@@ -1,11 +1,9 @@
 import Image from "next/image";
 import { Download, ImageUp } from "lucide-react";
 import { StackedSection } from "@/components/layout/stacked-section";
+import { SectionColumns } from "@/components/layout/section-columns";
 import { SectionLabel } from "@/components/layout/section-label";
-
-function Sprockets() {
-  return <div className="mm-sprockets h-[14px] w-full" aria-hidden="true" />;
-}
+import { Sprockets } from "@/components/layout/film";
 
 function UploadVisual() {
   return (
@@ -91,18 +89,11 @@ const STEPS = [
 export function HowItWorks() {
   return (
     <StackedSection tone="paper" id="how-it-works">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-        <div>
-          <SectionLabel index="02" tone="paper">
-            How it works
-          </SectionLabel>
-        </div>
-        <div>
-          <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
-            Upload. <span className="italic text-ink/55">Breathe.</span> Download.
-          </h2>
-        </div>
-      </div>
+      <SectionColumns aside={<SectionLabel index="02" tone="paper">How it works</SectionLabel>}>
+        <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
+          Upload. <span className="italic text-ink/55">Breathe.</span> Download.
+        </h2>
+      </SectionColumns>
 
       <div className="mt-16 md:mt-20">
         <div className="rounded-[6px] bg-ink px-3 py-2 shadow-[0_30px_60px_-30px_rgba(13,11,9,0.55)] sm:px-4">

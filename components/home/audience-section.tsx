@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { StackedSection } from "@/components/layout/stacked-section";
+import { SectionColumns } from "@/components/layout/section-columns";
 import { SectionLabel } from "@/components/layout/section-label";
 
 const AUDIENCES = [
@@ -27,18 +28,13 @@ const AUDIENCES = [
 export function AudienceSection() {
   return (
     <StackedSection>
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-        <div>
-          <SectionLabel index="03">Who it&rsquo;s for</SectionLabel>
-        </div>
-        <div>
-          <h2 className="font-serif text-[clamp(2.5rem,4.8vw,4.75rem)] leading-[1] tracking-[-0.02em] text-paper">
-            <span className="sm:block">For the shoebox,</span>{" "}
-            <span className="sm:block">the family tree</span>{" "}
-            <span className="italic text-paper/55 sm:block">and the client folder.</span>
-          </h2>
-        </div>
-      </div>
+      <SectionColumns aside={<SectionLabel index="03">Who it&rsquo;s for</SectionLabel>}>
+        <h2 className="font-serif text-[clamp(2.5rem,4.8vw,4.75rem)] leading-[1] tracking-[-0.02em] text-paper">
+          <span className="sm:block">For the shoebox,</span>{" "}
+          <span className="sm:block">the family tree</span>{" "}
+          <span className="italic text-paper/55 sm:block">and the client folder.</span>
+        </h2>
+      </SectionColumns>
 
       <ul className="mt-16 grid gap-x-10 gap-y-12 md:mt-24 md:grid-cols-3">
         {AUDIENCES.map((item) => (

@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ArrowRight } from "lucide-react";
 
+import type { Tone } from "@/components/layout/tone";
 import { cn } from "@/lib/utils";
 
 /**
@@ -38,7 +39,7 @@ const buttonVariants = cva(
       tone: {
         "dark": "",
         "paper": "",
-      },
+      } satisfies Record<Tone, string>,
     },
     compoundVariants: [
       { variant: "link", class: "h-auto rounded-none px-0 active:scale-100" },

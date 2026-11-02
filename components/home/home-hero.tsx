@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { RestorationLens } from "@/components/home/restoration-lens";
 import { PageContainer } from "@/components/layout/page-container";
+import { SecondaryLink } from "@/components/layout/secondary-link";
 import { StartButton } from "@/components/layout/start-button";
 
 const HEADLINE: { text: string; italic?: boolean; br?: boolean }[] = [
@@ -45,12 +45,7 @@ export function HomeHero() {
 
           <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
             <StartButton />
-            <Link
-              href="/pricing"
-              className="focus-ring group inline-flex min-h-11 items-center text-[15px] font-medium text-paper/80 transition-colors hover:text-paper"
-            >
-              <span className="mm-underline">See pricing</span>
-            </Link>
+            <SecondaryLink href="/pricing">See pricing</SecondaryLink>
           </div>
 
           <ul className="font-mono mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-paper/60">
