@@ -3,10 +3,12 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
+import { PageContainer } from "@/components/layout/page-container";
+import { FinalCta } from "@/components/layout/final-cta";
+import { Button, ButtonArrow } from "@/components/ui/button";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
-const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
   title: "What Is AI Photo Enhancement? Tools, Models, and Use Cases",
@@ -59,52 +61,53 @@ export default function GlossaryAIPhotoEnhancementPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
       <main className="flex-1">
-        <section className="py-20 sm:py-32">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">Home</Link>
+        <section>
+          <PageContainer className="py-20 sm:py-32">
+          <div className="max-w-3xl">
+            <nav className="font-mono mb-8 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-paper/60">
+              <Link href="/" className="focus-ring rounded-sm hover:text-paper">Home</Link>
               <span>/</span>
-              <span className="text-foreground">AI Photo Enhancement</span>
+              <span className="text-paper">AI Photo Enhancement</span>
             </nav>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
+            <h1 className="font-serif text-4xl tracking-[-0.02em] text-paper sm:text-6xl text-balance mb-6">
               What Is AI Photo Enhancement?
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg text-paper/70 mb-8">
               AI photo enhancement uses neural networks to automatically improve photograph quality. It covers multiple sub-tasks — denoising, deblurring, upscaling, color correction, and face restoration — each powered by specialized models trained on millions of images. The result is professional-quality improvements in seconds, with no manual editing required.
             </p>
 
             <div className="space-y-8 mb-12">
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-4">Types of AI Photo Enhancement</h2>
+                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Types of AI Photo Enhancement</h2>
                 <div className="space-y-4">
-                  <div className="rounded-2xl border border-border bg-card p-6">
-                    <h3 className="font-semibold mb-2">Face restoration</h3>
-                    <p className="text-sm text-muted-foreground">Reconstructs facial detail in degraded photos using generative models trained on faces. The most widely used model is <Link href="/glossary/gfpgan" className="underline hover:text-foreground">GFPGAN</Link>. Best for old portraits and family photos.</p>
+                  <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
+                    <h3 className="font-semibold text-paper mb-2">Face restoration</h3>
+                    <p className="text-sm text-paper/70">Reconstructs facial detail in degraded photos using generative models trained on faces. The most widely used model is <Link href="/glossary/gfpgan" className="underline hover:text-paper">GFPGAN</Link>. Best for old portraits and family photos.</p>
                   </div>
-                  <div className="rounded-2xl border border-border bg-card p-6">
-                    <h3 className="font-semibold mb-2">Image super-resolution (upscaling)</h3>
-                    <p className="text-sm text-muted-foreground">Increases image resolution by generating new pixels with AI. Models like Real-ESRGAN can 2x-4x the resolution while maintaining sharpness. Best for enlarging photos for print. <Link href="/glossary/image-upscaling" className="underline hover:text-foreground">Learn more about upscaling</Link>.</p>
+                  <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
+                    <h3 className="font-semibold text-paper mb-2">Image super-resolution (upscaling)</h3>
+                    <p className="text-sm text-paper/70">Increases image resolution by generating new pixels with AI. Models like Real-ESRGAN can 2x-4x the resolution while maintaining sharpness. Best for enlarging photos for print. <Link href="/glossary/image-upscaling" className="underline hover:text-paper">Learn more about upscaling</Link>.</p>
                   </div>
-                  <div className="rounded-2xl border border-border bg-card p-6">
-                    <h3 className="font-semibold mb-2">Denoising</h3>
-                    <p className="text-sm text-muted-foreground">Removes grain, noise, and digital artifacts while preserving detail. Works on both film grain from old photos and digital noise from high-ISO photography.</p>
+                  <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
+                    <h3 className="font-semibold text-paper mb-2">Denoising</h3>
+                    <p className="text-sm text-paper/70">Removes grain, noise, and digital artifacts while preserving detail. Works on both film grain from old photos and digital noise from high-ISO photography.</p>
                   </div>
-                  <div className="rounded-2xl border border-border bg-card p-6">
-                    <h3 className="font-semibold mb-2">Color correction and restoration</h3>
-                    <p className="text-sm text-muted-foreground">Fixes faded colors, white balance issues, and exposure problems. Some models can colorize black and white photos by predicting what colors should be based on the image content.</p>
+                  <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
+                    <h3 className="font-semibold text-paper mb-2">Color correction and restoration</h3>
+                    <p className="text-sm text-paper/70">Fixes faded colors, white balance issues, and exposure problems. Some models can colorize black and white photos by predicting what colors should be based on the image content.</p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-4">AI Enhancement vs Manual Editing</h2>
-                <div className="rounded-2xl border border-border bg-card p-6">
+                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">AI Enhancement vs Manual Editing</h2>
+                <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
-                      <h3 className="font-semibold mb-3">Manual editing (Photoshop, Lightroom)</h3>
-                      <ul className="space-y-2 text-sm text-muted-foreground">
+                      <h3 className="font-semibold text-paper mb-3">Manual editing (Photoshop, Lightroom)</h3>
+                      <ul className="space-y-2 text-sm text-paper/70">
                         <li>- Full creative control over every adjustment</li>
                         <li>- Can handle complex, unusual damage</li>
                         <li>- Requires skill and practice</li>
@@ -113,8 +116,8 @@ export default function GlossaryAIPhotoEnhancementPage() {
                       </ul>
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-3">AI enhancement</h3>
-                      <ul className="space-y-2 text-sm text-muted-foreground">
+                      <h3 className="font-semibold text-paper mb-3">AI enhancement</h3>
+                      <ul className="space-y-2 text-sm text-paper/70">
                         <li>- Automatic, no technical skill needed</li>
                         <li>- Processes in seconds</li>
                         <li>- Can generate missing detail (faces, texture)</li>
@@ -127,72 +130,81 @@ export default function GlossaryAIPhotoEnhancementPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-4">Key Models and Tools</h2>
+                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Key Models and Tools</h2>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-border">
+                      <tr className="border-b border-paper/10">
                         <th className="py-2 text-left font-semibold">Model</th>
                         <th className="py-2 text-left font-semibold">Task</th>
                         <th className="py-2 text-left font-semibold">Best for</th>
                       </tr>
                     </thead>
-                    <tbody className="text-muted-foreground">
-                      <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">GFPGAN</td><td className="py-2">Face restoration</td><td className="py-2">Old portraits, family photos</td></tr>
-                      <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">CodeFormer</td><td className="py-2">Face restoration</td><td className="py-2">Adjustable fidelity control</td></tr>
-                      <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Real-ESRGAN</td><td className="py-2">Super-resolution</td><td className="py-2">General image upscaling</td></tr>
-                      <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">SwinIR</td><td className="py-2">Super-resolution</td><td className="py-2">Maximum quality upscaling</td></tr>
-                      <tr><td className="py-2 font-medium text-foreground">NAFNet</td><td className="py-2">Denoising / deblurring</td><td className="py-2">Removing noise and blur</td></tr>
+                    <tbody className="text-paper/70">
+                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">GFPGAN</td><td className="py-2">Face restoration</td><td className="py-2">Old portraits, family photos</td></tr>
+                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">CodeFormer</td><td className="py-2">Face restoration</td><td className="py-2">Adjustable fidelity control</td></tr>
+                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Real-ESRGAN</td><td className="py-2">Super-resolution</td><td className="py-2">General image upscaling</td></tr>
+                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">SwinIR</td><td className="py-2">Super-resolution</td><td className="py-2">Maximum quality upscaling</td></tr>
+                      <tr><td className="py-2 font-medium text-paper">NAFNet</td><td className="py-2">Denoising / deblurring</td><td className="py-2">Removing noise and blur</td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-4">Who Uses AI Photo Enhancement</h2>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex gap-3"><span className="text-primary font-bold">→</span> <strong className="text-foreground">Families</strong> — Restoring old photos of parents, grandparents, and ancestors for preservation or display</li>
-                  <li className="flex gap-3"><span className="text-primary font-bold">→</span> <strong className="text-foreground">Genealogists</strong> — Enhancing faces in historical photos to identify and document family members</li>
-                  <li className="flex gap-3"><span className="text-primary font-bold">→</span> <strong className="text-foreground">Photographers</strong> — Upscaling and denoising to prepare images for large prints</li>
-                  <li className="flex gap-3"><span className="text-primary font-bold">→</span> <strong className="text-foreground">Real estate professionals</strong> — Enhancing property photos for listings</li>
-                  <li className="flex gap-3"><span className="text-primary font-bold">→</span> <strong className="text-foreground">Social media users</strong> — Improving photo quality before sharing online</li>
+                <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Who Uses AI Photo Enhancement</h2>
+                <ul className="space-y-3 text-paper/70">
+                  <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Families</strong> — Restoring old photos of parents, grandparents, and ancestors for preservation or display</li>
+                  <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Genealogists</strong> — Enhancing faces in historical photos to identify and document family members</li>
+                  <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Photographers</strong> — Upscaling and denoising to prepare images for large prints</li>
+                  <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Real estate professionals</strong> — Enhancing property photos for listings</li>
+                  <li className="flex gap-3"><span className="text-ember font-bold">→</span> <strong className="text-paper">Social media users</strong> — Improving photo quality before sharing online</li>
                 </ul>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 mb-12">
-              <h2 className="text-xl font-semibold mb-3">Try AI Face Restoration Free</h2>
-              <p className="text-muted-foreground mb-4">
+            <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
+              <h2 className="font-serif text-2xl text-paper mb-3">Try AI Face Restoration Free</h2>
+              <p className="text-paper/70 mb-4">
                 Magic Memory uses GFPGAN for AI-powered face restoration. Upload any photo with faces, get a restored version in under 15 seconds. 1 free restoration per day, no credit card required. Additional credits from {"\u20ac"}9.99 for 30 restorations.
               </p>
-              <Link
-                href="/restore"
-                className="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-              >
-                Restore a photo now
-              </Link>
+              <Button asChild>
+                <Link href="/restore">
+                  Restore a photo now
+                  <ButtonArrow />
+                </Link>
+              </Button>
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-8">Frequently Asked Questions</h2>
+            <h2 className="font-serif text-4xl tracking-[-0.01em] text-paper mb-8">Frequently Asked Questions</h2>
             <div className="space-y-4 mb-12">
               {faqs.map((faq, i) => (
-                <div key={i} className="border-b border-border pb-4 last:border-0">
-                  <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-muted-foreground text-sm">{faq.answer}</p>
+                <div key={i} className="border-b border-paper/10 pb-4 last:border-0">
+                  <h3 className="font-semibold text-paper mb-2">{faq.question}</h3>
+                  <p className="text-paper/70 text-sm">{faq.answer}</p>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-              <Link href="/glossary/photo-restoration" className="hover:text-foreground">What Is Photo Restoration?</Link>
-              <Link href="/glossary/gfpgan" className="hover:text-foreground">What Is GFPGAN?</Link>
-              <Link href="/glossary/face-restoration" className="hover:text-foreground">What Is Face Restoration?</Link>
-              <Link href="/glossary/image-upscaling" className="hover:text-foreground">What Is Image Upscaling?</Link>
+            <div className="flex flex-wrap gap-4 text-sm text-paper/70">
+              <Link href="/glossary/photo-restoration" className="hover:text-paper">What Is Photo Restoration?</Link>
+              <Link href="/glossary/gfpgan" className="hover:text-paper">What Is GFPGAN?</Link>
+              <Link href="/glossary/face-restoration" className="hover:text-paper">What Is Face Restoration?</Link>
+              <Link href="/glossary/image-upscaling" className="hover:text-paper">What Is Image Upscaling?</Link>
             </div>
           </div>
+          </PageContainer>
         </section>
 
-        <CTASection />
+        <FinalCta
+          title={
+            <>
+              Ready to restore{" "}
+              <span className="italic text-paper/55">your memories?</span>
+            </>
+          }
+          note="Start with your free daily restoration. No credit card required."
+        />
       </main>
       <Footer />
     </div>
