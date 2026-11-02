@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { BrandMark } from "@/components/brand-mark";
 import { PageContainer } from "@/components/layout/page-container";
 
 export function Footer() {
@@ -9,13 +9,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-6">
           <div className="space-y-5 text-center md:col-span-1 md:text-left">
             <div className="flex items-center gap-2">
-              <Image
-                src="/icon.png"
-                alt="Magic Memory Logo"
-                width={32}
-                height={32}
-                className="rounded-lg"
-              />
+              <BrandMark className="text-paper" />
               <span className="font-serif text-[22px] leading-none tracking-[-0.01em] text-paper">Magic Memory</span>
             </div>
             <p className="text-sm leading-relaxed text-paper/60">

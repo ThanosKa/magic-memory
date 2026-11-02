@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 import { Menu, Coins } from "lucide-react";
 import useSWR from "swr";
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/brand-mark";
 import { PageContainer } from "@/components/layout/page-container";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -35,13 +35,7 @@ function navLinkClass(isActive: boolean, variant: "desktop" | "mobile") {
 function Brand() {
   return (
     <Link href="/" className="focus-ring flex items-center gap-2.5 rounded-md">
-      <Image
-        src="/icon.png"
-        alt="Magic Memory Logo"
-        width={32}
-        height={32}
-        className="rounded-lg"
-      />
+      <BrandMark className="text-paper" />
       <span className="font-serif text-[22px] leading-none tracking-[-0.01em] text-paper">
         Magic Memory
       </span>
