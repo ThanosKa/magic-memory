@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { FinalCta } from "@/components/layout/final-cta";
+import { PageContainer } from "@/components/layout/page-container";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import { ComparisonTable } from "@/components/competitor/comparison-table";
 import { competitors } from "@/lib/competitors/data";
@@ -8,7 +10,6 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
-const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
   title: "MyHeritage Photo Enhancer Pricing 2026: Free Limits + Cheaper Alternative",
@@ -78,29 +79,30 @@ export default function MyHeritageAlternativePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
       <main className="flex-1">
-        <section className="py-20 sm:py-32">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">Home</Link>
+        <section className="pb-24 pt-10 md:pb-32 md:pt-14">
+          <PageContainer>
+          <div className="max-w-4xl">
+            <nav className="mb-10 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/60">
+              <Link href="/" className="mm-underline hover:text-paper">Home</Link>
               <span>/</span>
-              <Link href="/alternatives" className="hover:text-foreground">Alternatives</Link>
+              <Link href="/alternatives" className="mm-underline hover:text-paper">Alternatives</Link>
               <span>/</span>
-              <span className="text-foreground">MyHeritage Alternative</span>
+              <span className="text-paper">MyHeritage Alternative</span>
             </nav>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
+            <h1 className="font-serif text-balance mb-8 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
               MyHeritage Photo Enhancer Pricing 2026 — Free Limits &amp; Cheaper Alternative
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-4">
+            <p className="text-lg leading-[1.6] text-paper/70 mb-4">
               MyHeritage Photo Enhancer is sold only as part of MyHeritage&apos;s annual genealogy plans, which cost $119, $189, or $259 per year as of 2026. The free tier is a watermarked preview — to enhance and download a clean image, you need at least the Basic plan. If you only want photo restoration, you are paying $119–$259 for family-tree, DNA, and historical-record features you may never use.
             </p>
-            <p className="text-sm text-muted-foreground mb-10">
+            <p className="text-sm text-paper/70 mb-10">
               Magic Memory offers standalone AI photo restoration from €9.99 one-time (credits never expire) or 1 free restoration per day. <em>Pricing verified directly on each vendor&apos;s site on 2026-05-19.</em>
             </p>
 
-            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 mb-10">
-              <h2 className="text-xl font-semibold mb-4">MyHeritage Photo Enhancer pricing tiers (2026)</h2>
+            <div className="rounded-2xl border border-ember/30 bg-ember/5 p-6 mb-10">
+              <h2 className="font-serif text-2xl text-paper mb-4">MyHeritage Photo Enhancer pricing tiers (2026)</h2>
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-sm">
                   <thead>
@@ -111,11 +113,11 @@ export default function MyHeritageAlternativePage() {
                       <th className="py-2 text-left font-semibold">Genealogy bundled?</th>
                     </tr>
                   </thead>
-                  <tbody className="text-muted-foreground">
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Free</td><td className="py-2">$0</td><td className="py-2">Watermarked preview only</td><td className="py-2">Limited</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Basic</td><td className="py-2">$119/yr</td><td className="py-2">Photo Enhancer + In Color + Deep Nostalgia</td><td className="py-2">Yes — full bundle</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Premium</td><td className="py-2">$189/yr</td><td className="py-2">All photo tools + DeepStory</td><td className="py-2">Yes — full bundle</td></tr>
-                    <tr><td className="py-2 font-medium text-foreground">Complete</td><td className="py-2">$259/yr</td><td className="py-2">All photo tools + DeepStory</td><td className="py-2">Yes — includes records</td></tr>
+                  <tbody className="text-paper/70">
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free</td><td className="py-2">$0</td><td className="py-2">Watermarked preview only</td><td className="py-2">Limited</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Basic</td><td className="py-2">$119/yr</td><td className="py-2">Photo Enhancer + In Color + Deep Nostalgia</td><td className="py-2">Yes — full bundle</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Premium</td><td className="py-2">$189/yr</td><td className="py-2">All photo tools + DeepStory</td><td className="py-2">Yes — full bundle</td></tr>
+                    <tr><td className="py-2 font-medium text-paper">Complete</td><td className="py-2">$259/yr</td><td className="py-2">All photo tools + DeepStory</td><td className="py-2">Yes — includes records</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -127,57 +129,57 @@ export default function MyHeritageAlternativePage() {
                     <tr className="border-b border-border">
                       <th className="py-2 text-left font-semibold"></th>
                       <th className="py-2 text-left font-semibold">MyHeritage Photo Enhancer</th>
-                      <th className="py-2 text-left font-semibold text-primary">Magic Memory</th>
+                      <th className="py-2 text-left font-semibold text-ember">Magic Memory</th>
                     </tr>
                   </thead>
-                  <tbody className="text-muted-foreground">
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Pricing model</td><td className="py-2">Annual genealogy subscription</td><td className="py-2">One-time credits, never expire</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Lowest paid tier</td><td className="py-2">$119/year (Basic)</td><td className="py-2">€9.99 (30 credits)</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Highest paid tier</td><td className="py-2">$259/year (Complete)</td><td className="py-2">€29.99 (350 credits)</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Free tier</td><td className="py-2">Watermarked preview only</td><td className="py-2">1 restoration/day, no card</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-foreground">Photo-only purchase?</td><td className="py-2">No — bundled with genealogy</td><td className="py-2">Yes — standalone</td></tr>
-                    <tr><td className="py-2 font-medium text-foreground">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.09</td></tr>
+                  <tbody className="text-paper/70">
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Pricing model</td><td className="py-2">Annual genealogy subscription</td><td className="py-2">One-time credits, never expire</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Lowest paid tier</td><td className="py-2">$119/year (Basic)</td><td className="py-2">€9.99 (30 credits)</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Highest paid tier</td><td className="py-2">$259/year (Complete)</td><td className="py-2">€29.99 (350 credits)</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Watermarked preview only</td><td className="py-2">1 restoration/day, no card</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo-only purchase?</td><td className="py-2">No — bundled with genealogy</td><td className="py-2">Yes — standalone</td></tr>
+                    <tr><td className="py-2 font-medium text-paper">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.09</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
-              <h2 className="text-xl font-semibold mb-2">TL;DR</h2>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><strong className="text-foreground">Magic Memory:</strong> Standalone photo restoration, €9.99–€29.99 one-time, 1 free/day</li>
-                <li><strong className="text-foreground">MyHeritage:</strong> Photo enhancement bundled in genealogy subscription ($119–$259/year), excellent for genealogy research</li>
+              <h2 className="font-serif text-2xl text-paper mb-2">TL;DR</h2>
+              <ul className="space-y-2 text-paper/70">
+                <li><strong className="text-paper">Magic Memory:</strong> Standalone photo restoration, €9.99–€29.99 one-time, 1 free/day</li>
+                <li><strong className="text-paper">MyHeritage:</strong> Photo enhancement bundled in genealogy subscription ($119–$259/year), excellent for genealogy research</li>
               </ul>
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-6">The MyHeritage Bundle Problem</h2>
-            <p className="text-muted-foreground mb-4">
+            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">The MyHeritage Bundle Problem</h2>
+            <p className="text-paper/70 mb-4">
               MyHeritage is genuinely excellent at what it does: genealogy research. The platform has one of the largest genealogy databases in the world, strong DNA testing products, and intuitive family tree tools.
             </p>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-paper/70 mb-4">
               But its photo enhancement feature — MyHeritage In Color, DeepNostalgia, and photo enhancer — are sold as part of the genealogy package. If you do not need genealogy tools, you pay $119–$259/year for a photo enhancement feature you could access for €9.99 one-time.
             </p>
-            <p className="text-muted-foreground mb-12">
+            <p className="text-paper/70 mb-12">
               Magic Memory is built specifically for photo restoration. There is no genealogy bundling, no subscription, no upsell toward DNA tests.
             </p>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-6">Feature Comparison</h2>
+            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Feature Comparison</h2>
             <div className="mb-12">
               <ComparisonTable competitorName="MyHeritage" features={myheritage.features} />
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 mb-12">
               <div className="rounded-2xl border border-border bg-card p-6">
-                <h3 className="text-lg font-semibold mb-3">When Magic Memory makes sense</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-serif text-xl text-paper mb-3">When Magic Memory makes sense</h3>
+                <ul className="space-y-2 text-sm text-paper/70">
                   <li>→ You only want photo restoration, not genealogy tools</li>
                   <li>→ You restore photos occasionally and want pay-per-use</li>
                   <li>→ You already have a genealogy platform you like</li>
                 </ul>
               </div>
               <div className="rounded-2xl border border-border bg-card p-6">
-                <h3 className="text-lg font-semibold mb-3">When MyHeritage makes sense</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-serif text-xl text-paper mb-3">When MyHeritage makes sense</h3>
+                <ul className="space-y-2 text-sm text-paper/70">
                   <li>→ You actively research genealogy and family history</li>
                   <li>→ You want photos integrated with your family tree</li>
                   <li>→ You also want DNA testing and historical records</li>
@@ -185,24 +187,33 @@ export default function MyHeritageAlternativePage() {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-8">Frequently Asked Questions</h2>
+            <h2 className="font-serif mb-8 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Frequently Asked Questions</h2>
             <div className="space-y-4 mb-12">
               {faqs.map((faq, i) => (
                 <div key={i} className="border-b border-border pb-4 last:border-0">
                   <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-muted-foreground text-sm">{faq.answer}</p>
+                  <p className="text-paper/70 text-sm">{faq.answer}</p>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-              <Link href="/alternatives" className="hover:text-foreground">All Alternatives →</Link>
-              <Link href="/alternatives/remini" className="hover:text-foreground">Remini Alternative →</Link>
+            <div className="flex flex-wrap gap-4 text-sm text-paper/70">
+              <Link href="/alternatives" className="mm-underline hover:text-paper">All Alternatives →</Link>
+              <Link href="/alternatives/remini" className="mm-underline hover:text-paper">Remini Alternative →</Link>
             </div>
           </div>
+          </PageContainer>
         </section>
 
-        <CTASection />
+        <FinalCta
+          title={
+            <>
+              Ready to restore{" "}
+              <span className="italic text-paper/55">your memories?</span>
+            </>
+          }
+          note="Start with your free daily restoration. No credit card required."
+        />
       </main>
       <Footer />
     </div>

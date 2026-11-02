@@ -1,13 +1,14 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { FinalCta } from "@/components/layout/final-cta";
+import { PageContainer } from "@/components/layout/page-container";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import { listicleItemListJsonLd } from "@/lib/seo/listicle-schema";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
-const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
   title: "5 Best AI Photo Restoration Tools 2026 (Tested & Compared)",
@@ -117,19 +118,20 @@ export default function AlternativesPage() {
       )}
       <Header />
       <main className="flex-1">
-        <section className="py-20 sm:py-32">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">Home</Link>
+        <section className="pb-24 pt-10 md:pb-32 md:pt-14">
+          <PageContainer>
+          <div className="max-w-5xl">
+            <nav className="mb-10 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/60">
+              <Link href="/" className="mm-underline hover:text-paper">Home</Link>
               <span>/</span>
-              <span className="text-foreground">AI Photo Restoration Alternatives</span>
+              <span className="text-paper">AI Photo Restoration Alternatives</span>
             </nav>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
+            <h1 className="font-serif text-balance mb-8 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
               5 Best AI Photo Restoration Tools 2026 (Tested &amp; Compared)
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-16 max-w-3xl">
+            <p className="text-lg leading-[1.6] text-paper/70 mb-16 max-w-3xl">
               We tested the 5 best AI photo restoration tools of 2026 on the same old photo and compared them honestly — including their weaknesses. Find the right AI photo restorer for your use case, budget, and platform. Last verified 2026-05-19.
             </p>
 
@@ -139,43 +141,43 @@ export default function AlternativesPage() {
                   key={tool.name}
                   className={`rounded-2xl border p-6 ${
                     tool.highlight
-                      ? "border-primary/50 bg-card shadow-md"
+                      ? "border-ember/50 bg-card "
                       : "border-border bg-card"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4 flex-wrap mb-4">
                     <div>
                       <div className="flex items-center gap-2">
-                        <h2 className="text-xl font-semibold">{tool.name}</h2>
+                        <h2 className="font-serif text-2xl text-paper">{tool.name}</h2>
                         {tool.highlight && (
-                          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                          <span className="rounded-full bg-ember/15 px-2 py-0.5 text-xs font-medium text-ember">
                             This site
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground mt-1">{tool.pricing}</p>
+                      <p className="text-sm text-paper/70 mt-1">{tool.pricing}</p>
                     </div>
-                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">{tool.platform}</span>
+                    <span className="text-xs text-paper/70 bg-paper/10 px-2 py-1 rounded">{tool.platform}</span>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-4">
-                    <strong className="text-foreground">Best for:</strong> {tool.bestFor}
+                  <p className="text-sm text-paper/70 mb-4">
+                    <strong className="text-paper">Best for:</strong> {tool.bestFor}
                   </p>
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-2">Strengths</p>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-ember mb-2">Strengths</p>
                       <ul className="space-y-1">
                         {tool.strengths.map((s) => (
-                          <li key={s} className="text-sm text-muted-foreground">+ {s}</li>
+                          <li key={s} className="text-sm text-paper/70">+ {s}</li>
                         ))}
                       </ul>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Limitations</p>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-paper/70 mb-2">Limitations</p>
                       <ul className="space-y-1">
                         {tool.weaknesses.map((w) => (
-                          <li key={w} className="text-sm text-muted-foreground">- {w}</li>
+                          <li key={w} className="text-sm text-paper/70">- {w}</li>
                         ))}
                       </ul>
                     </div>
@@ -185,7 +187,7 @@ export default function AlternativesPage() {
             </div>
 
             <div className="mb-16">
-              <h2 className="text-3xl font-bold tracking-tight mb-6">Individual Comparisons</h2>
+              <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Individual Comparisons</h2>
               <div className="grid gap-4 sm:grid-cols-3">
                 {[
                   { href: "/alternatives/remini", label: "Remini Alternative" },
@@ -197,7 +199,7 @@ export default function AlternativesPage() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="rounded-2xl border border-border bg-card p-5 text-sm font-medium hover:border-primary/50 hover:shadow-md transition-all"
+                    className="rounded-2xl border border-border bg-card p-5 text-sm font-medium hover:border-ember/50 hover: transition-all"
                   >
                     {link.label} →
                   </Link>
@@ -205,19 +207,28 @@ export default function AlternativesPage() {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-8">Frequently Asked Questions</h2>
+            <h2 className="font-serif mb-8 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Frequently Asked Questions</h2>
             <div className="space-y-4 mb-12">
               {faqs.map((faq, i) => (
                 <div key={i} className="border-b border-border pb-4 last:border-0">
                   <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-muted-foreground text-sm">{faq.answer}</p>
+                  <p className="text-paper/70 text-sm">{faq.answer}</p>
                 </div>
               ))}
             </div>
           </div>
+          </PageContainer>
         </section>
 
-        <CTASection />
+        <FinalCta
+          title={
+            <>
+              Ready to restore{" "}
+              <span className="italic text-paper/55">your memories?</span>
+            </>
+          }
+          note="Start with your free daily restoration. No credit card required."
+        />
       </main>
       <Footer />
     </div>

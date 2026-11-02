@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { FinalCta } from "@/components/layout/final-cta";
+import { PageContainer } from "@/components/layout/page-container";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import { ComparisonTable } from "@/components/competitor/comparison-table";
 import { competitors } from "@/lib/competitors/data";
@@ -8,7 +10,6 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
-const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
   title: "Magic Memory vs MyHeritage Photo Enhancer — Which Is Better?",
@@ -105,28 +106,29 @@ export default function VsMyHeritagePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
       <main className="flex-1">
-        <section className="py-20 sm:py-32">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">Home</Link>
+        <section className="pb-24 pt-10 md:pb-32 md:pt-14">
+          <PageContainer>
+          <div className="max-w-4xl">
+            <nav className="mb-10 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/60">
+              <Link href="/" className="mm-underline hover:text-paper">Home</Link>
               <span>/</span>
-              <span className="text-foreground">Magic Memory vs MyHeritage</span>
+              <span className="text-paper">Magic Memory vs MyHeritage</span>
             </nav>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
+            <h1 className="font-serif text-balance mb-8 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
               Magic Memory vs MyHeritage Photo Enhancer
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg leading-[1.6] text-paper/70 mb-8">
               MyHeritage is a genealogy platform that includes photo enhancement as a bundled feature. Magic Memory is a standalone AI photo restoration tool. If you only need photo restoration, the choice is straightforward.
             </p>
 
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
-              <h2 className="text-xl font-semibold mb-3">TL;DR</h2>
+              <h2 className="font-serif text-2xl text-paper mb-3">TL;DR</h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <p className="font-semibold text-primary mb-2">Choose Magic Memory if you:</p>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
+                  <p className="font-semibold text-ember mb-2">Choose Magic Memory if you:</p>
+                  <ul className="space-y-1 text-sm text-paper/70">
                     <li>→ Only need photo restoration</li>
                     <li>→ Want affordable, pay-as-you-go pricing</li>
                     <li>→ Prefer no photo storage (privacy-first)</li>
@@ -135,7 +137,7 @@ export default function VsMyHeritagePage() {
                 </div>
                 <div>
                   <p className="font-semibold mb-2">Choose MyHeritage if you:</p>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
+                  <ul className="space-y-1 text-sm text-paper/70">
                     <li>→ Already have a MyHeritage subscription</li>
                     <li>→ Want genealogy + photo tools in one place</li>
                     <li>→ Need family tree building features</li>
@@ -144,50 +146,59 @@ export default function VsMyHeritagePage() {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-6">Quick Comparison</h2>
+            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Quick Comparison</h2>
             <div className="mb-12">
               <ComparisonTable competitorName="MyHeritage" features={myheritage.features} />
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-6">Detailed Comparison</h2>
+            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Detailed Comparison</h2>
             <div className="space-y-6 mb-12">
               {detailedComparison.map((row) => (
                 <div key={row.category} className="rounded-2xl border border-border bg-card p-6">
                   <h3 className="font-semibold mb-3">{row.category}</h3>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs font-semibold text-primary mb-1 uppercase tracking-wide">Magic Memory</p>
-                      <p className="text-sm text-muted-foreground">{row.magicMemory}</p>
+                      <p className="text-xs font-semibold text-ember mb-1 uppercase tracking-wide">Magic Memory</p>
+                      <p className="text-sm text-paper/70">{row.magicMemory}</p>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold mb-1 uppercase tracking-wide text-muted-foreground">MyHeritage</p>
-                      <p className="text-sm text-muted-foreground">{row.competitor}</p>
+                      <p className="text-xs font-semibold mb-1 uppercase tracking-wide text-paper/70">MyHeritage</p>
+                      <p className="text-sm text-paper/70">{row.competitor}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-8">Frequently Asked Questions</h2>
+            <h2 className="font-serif mb-8 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Frequently Asked Questions</h2>
             <div className="space-y-4 mb-12">
               {faqs.map((faq, i) => (
                 <div key={i} className="border-b border-border pb-4 last:border-0">
                   <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-muted-foreground text-sm">{faq.answer}</p>
+                  <p className="text-paper/70 text-sm">{faq.answer}</p>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-              <Link href="/alternatives/myheritage" className="hover:text-foreground">MyHeritage Alternative →</Link>
-              <Link href="/alternatives" className="hover:text-foreground">All Alternatives →</Link>
-              <Link href="/vs/remini" className="hover:text-foreground">Magic Memory vs Remini →</Link>
-              <Link href="/pricing" className="hover:text-foreground">View Magic Memory Pricing →</Link>
+            <div className="flex flex-wrap gap-4 text-sm text-paper/70">
+              <Link href="/alternatives/myheritage" className="mm-underline hover:text-paper">MyHeritage Alternative →</Link>
+              <Link href="/alternatives" className="mm-underline hover:text-paper">All Alternatives →</Link>
+              <Link href="/vs/remini" className="mm-underline hover:text-paper">Magic Memory vs Remini →</Link>
+              <Link href="/pricing" className="mm-underline hover:text-paper">View Magic Memory Pricing →</Link>
             </div>
           </div>
+          </PageContainer>
         </section>
 
-        <CTASection />
+        <FinalCta
+          title={
+            <>
+              Ready to restore{" "}
+              <span className="italic text-paper/55">your memories?</span>
+            </>
+          }
+          note="Start with your free daily restoration. No credit card required."
+        />
       </main>
       <Footer />
     </div>

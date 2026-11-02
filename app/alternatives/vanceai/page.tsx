@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { FinalCta } from "@/components/layout/final-cta";
+import { PageContainer } from "@/components/layout/page-container";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
 import { ComparisonTable } from "@/components/competitor/comparison-table";
 import { competitors } from "@/lib/competitors/data";
@@ -8,7 +10,6 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
-const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
   title: "VanceAI Alternative for Photo Restoration (One-Click)",
@@ -68,57 +69,58 @@ export default function VanceAIAlternativePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
       <main className="flex-1">
-        <section className="py-20 sm:py-32">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">Home</Link>
+        <section className="pb-24 pt-10 md:pb-32 md:pt-14">
+          <PageContainer>
+          <div className="max-w-4xl">
+            <nav className="mb-10 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/60">
+              <Link href="/" className="mm-underline hover:text-paper">Home</Link>
               <span>/</span>
-              <Link href="/alternatives" className="hover:text-foreground">Alternatives</Link>
+              <Link href="/alternatives" className="mm-underline hover:text-paper">Alternatives</Link>
               <span>/</span>
-              <span className="text-foreground">VanceAI Alternative</span>
+              <span className="text-paper">VanceAI Alternative</span>
             </nav>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-balance mb-6">
+            <h1 className="font-serif text-balance mb-8 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
               VanceAI Alternative for Photo Restoration
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-12">
+            <p className="text-lg leading-[1.6] text-paper/70 mb-12">
               VanceAI is a powerful tool suite for professionals who want manual control over many AI image operations. Magic Memory is for people who want one thing done simply: restore old portrait photos.
             </p>
 
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
-              <h2 className="text-xl font-semibold mb-2">TL;DR</h2>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><strong className="text-foreground">Magic Memory:</strong> One-click portrait restoration, €9.99–€29.99 one-time, simple interface</li>
-                <li><strong className="text-foreground">VanceAI:</strong> Multi-tool AI suite, subscription from $4.95/month, powerful but complex</li>
+              <h2 className="font-serif text-2xl text-paper mb-2">TL;DR</h2>
+              <ul className="space-y-2 text-paper/70">
+                <li><strong className="text-paper">Magic Memory:</strong> One-click portrait restoration, €9.99–€29.99 one-time, simple interface</li>
+                <li><strong className="text-paper">VanceAI:</strong> Multi-tool AI suite, subscription from $4.95/month, powerful but complex</li>
               </ul>
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-6">Simplicity vs. Power</h2>
-            <p className="text-muted-foreground mb-4">
+            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Simplicity vs. Power</h2>
+            <p className="text-paper/70 mb-4">
               VanceAI is built for power users — photographers, designers, and professionals who want control over multiple AI image operations. It offers upscaling, denoising, sharpening, background removal, colorization, and more, each with adjustable parameters.
             </p>
-            <p className="text-muted-foreground mb-12">
+            <p className="text-paper/70 mb-12">
               Magic Memory is built for everyone else: people who have an old family photo that needs restoration, want it done in 15 seconds, and do not want to navigate a complex interface with dozens of settings. Upload, wait 15 seconds, download.
             </p>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-6">Feature Comparison</h2>
+            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Feature Comparison</h2>
             <div className="mb-12">
               <ComparisonTable competitorName="VanceAI" features={vanceai.features} />
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 mb-12">
               <div className="rounded-2xl border border-border bg-card p-6">
-                <h3 className="text-lg font-semibold mb-3">When Magic Memory makes sense</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-serif text-xl text-paper mb-3">When Magic Memory makes sense</h3>
+                <ul className="space-y-2 text-sm text-paper/70">
                   <li>→ You want simple, fast portrait restoration</li>
                   <li>→ You do not need batch processing or complex tools</li>
                   <li>→ You prefer pay-once-use-forever over subscription</li>
                 </ul>
               </div>
               <div className="rounded-2xl border border-border bg-card p-6">
-                <h3 className="text-lg font-semibold mb-3">When VanceAI makes sense</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-serif text-xl text-paper mb-3">When VanceAI makes sense</h3>
+                <ul className="space-y-2 text-sm text-paper/70">
                   <li>→ You need multiple types of AI image editing</li>
                   <li>→ You want manual control over AI parameters</li>
                   <li>→ You batch process large numbers of photos</li>
@@ -126,24 +128,33 @@ export default function VanceAIAlternativePage() {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight mb-8">Frequently Asked Questions</h2>
+            <h2 className="font-serif mb-8 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Frequently Asked Questions</h2>
             <div className="space-y-4 mb-12">
               {faqs.map((faq, i) => (
                 <div key={i} className="border-b border-border pb-4 last:border-0">
                   <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-muted-foreground text-sm">{faq.answer}</p>
+                  <p className="text-paper/70 text-sm">{faq.answer}</p>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-              <Link href="/alternatives" className="hover:text-foreground">All Alternatives →</Link>
-              <Link href="/alternatives/remini" className="hover:text-foreground">Remini Alternative →</Link>
+            <div className="flex flex-wrap gap-4 text-sm text-paper/70">
+              <Link href="/alternatives" className="mm-underline hover:text-paper">All Alternatives →</Link>
+              <Link href="/alternatives/remini" className="mm-underline hover:text-paper">Remini Alternative →</Link>
             </div>
           </div>
+          </PageContainer>
         </section>
 
-        <CTASection />
+        <FinalCta
+          title={
+            <>
+              Ready to restore{" "}
+              <span className="italic text-paper/55">your memories?</span>
+            </>
+          }
+          note="Start with your free daily restoration. No credit card required."
+        />
       </main>
       <Footer />
     </div>
