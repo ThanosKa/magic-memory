@@ -1,10 +1,11 @@
-import { Reveal } from "@/components/home/reveal";
-import { SectionLabel } from "@/components/home/section-label";
+import { PageContainer } from "@/components/layout/page-container";
+import { Reveal } from "@/components/layout/reveal";
+import { SectionLabel } from "@/components/layout/section-label";
 
 export function PlainWordsSection() {
   return (
     <section className="border-t border-paper/10">
-      <div className="mx-auto grid max-w-[1360px] gap-10 px-5 py-24 sm:px-8 md:py-32 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:px-14 lg:py-40">
+      <PageContainer className="grid gap-10 py-24 md:py-32 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:py-40">
         <Reveal>
           <SectionLabel index="01">In plain words</SectionLabel>
         </Reveal>
@@ -16,7 +17,7 @@ export function PlainWordsSection() {
             <span className="italic text-paper/50">That&rsquo;s Magic Memory.</span>
           </p>
         </Reveal>
-      </div>
+      </PageContainer>
     </section>
   );
 }

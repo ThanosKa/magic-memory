@@ -5,7 +5,4 @@
 components/landing/hero-section.tsx
 components/restore/image-comparison-slider.tsx
 components/restore/restore-uploader.tsx
-components/ui/badge.tsx
-components/ui/button.tsx
 components/ui/highlighter.tsx
-components/ui/sheet.tsx

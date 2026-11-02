@@ -7,7 +7,7 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { AudienceSection } from "@/components/home/audience-section";
 import { PricingPreview } from "@/components/home/pricing-preview";
 import { HomeFaq } from "@/components/home/home-faq";
-import { FinalCta } from "@/components/home/final-cta";
+import { FinalCta } from "@/components/layout/final-cta";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd } from "@/lib/seo/metadata-helpers";
 import { homepageFaqs } from "@/lib/seo/faq-data";
 
@@ -91,7 +91,15 @@ export default function Page() {
         <AudienceSection />
         <PricingPreview />
         <HomeFaq />
-        <FinalCta />
+        <FinalCta
+          title={
+            <>
+              That photo in the drawer has waited{" "}
+              <span className="italic text-paper/55">long enough.</span>
+            </>
+          }
+          note="Your first restoration today is free"
+        />
       </main>
       <Footer />
     </div>

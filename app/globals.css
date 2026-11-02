@@ -193,6 +193,15 @@
 /* Signature details shared across pages                                */
 /* ------------------------------------------------------------------ */
 
+/* Ember keyboard focus ring. An outline (not a box-shadow ring) so the gap
+   is transparent and it reads the same on ink and on paper. */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--ember);
+    outline-offset: 2px;
+  }
+}
+
 /* Link underline that grows from the left on hover. */
 .mm-underline {
   background-image: linear-gradient(currentColor, currentColor);

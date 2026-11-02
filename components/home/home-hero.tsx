@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { RestorationLens } from "@/components/home/restoration-lens";
-import { StartButton } from "@/components/home/start-button";
+import { PageContainer } from "@/components/layout/page-container";
+import { StartButton } from "@/components/layout/start-button";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -29,7 +30,7 @@ export function HomeHero() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="mx-auto grid min-h-[calc(100svh-4rem)] max-w-[1360px] items-center gap-12 px-5 pb-16 pt-10 sm:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:px-14 lg:pb-20 lg:pt-12">
+      <PageContainer className="grid min-h-[calc(100svh-4rem)] items-center gap-12 pb-16 pt-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:pb-20 lg:pt-12">
         <div className="max-w-xl">
           <motion.p
             {...rise(0.05)}
@@ -107,7 +108,7 @@ export function HomeHero() {
             preload
           />
         </motion.div>
-      </div>
+      </PageContainer>
     </section>
   );
 }

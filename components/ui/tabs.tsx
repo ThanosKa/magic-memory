@@ -5,6 +5,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs"
 
 import { cn } from "@/lib/utils"
 
+/** Pill segmented control, same look as the home lens mode switch. */
 const Tabs = TabsPrimitive.Root
 
 const TabsList = React.forwardRef<
@@ -14,7 +15,7 @@ const TabsList = React.forwardRef<
     <TabsPrimitive.List
         ref={ref}
         className={cn(
-            "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
+            "inline-flex items-center justify-center gap-1 rounded-full border border-paper/12 bg-paper/[0.04] p-1 text-paper/60",
             className
         )}
         {...props}
@@ -29,7 +30,7 @@ const TabsTrigger = React.forwardRef<
     <TabsPrimitive.Trigger
         ref={ref}
         className={cn(
-            "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+            "font-mono focus-ring inline-flex min-h-9 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full px-3.5 text-[11px] uppercase tracking-[0.16em] transition-colors duration-200 hover:text-paper disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-paper data-[state=active]:text-ink [&_svg]:size-3.5",
             className
         )}
         {...props}
@@ -43,10 +44,7 @@ const TabsContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <TabsPrimitive.Content
         ref={ref}
-        className={cn(
-            "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-            className
-        )}
+        className={cn("focus-ring mt-4 rounded-[4px]", className)}
         {...props}
     />
 ))

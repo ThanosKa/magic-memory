@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { SignUpButton, useUser } from "@clerk/nextjs";
-import { ArrowRight } from "lucide-react";
+import { ButtonArrow, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type StartButtonProps = {
@@ -11,17 +11,14 @@ type StartButtonProps = {
   className?: string;
 };
 
-const pillClass =
-  "group inline-flex h-12 items-center gap-2.5 rounded-full bg-paper px-6 text-[15px] font-medium text-ink transition-[filter,transform] duration-200 hover:brightness-105 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-ink";
+/** The primary pill: opens sign-up for visitors, links to /restore when signed in. */
+const pillClass = buttonVariants({ size: "lg" });
 
 function PillContent({ label }: { label: string }) {
   return (
     <>
       <span>{label}</span>
-      <ArrowRight
-        className="size-4 transition-transform duration-200 group-hover:translate-x-1"
-        aria-hidden="true"
-      />
+      <ButtonArrow />
     </>
   );
 }

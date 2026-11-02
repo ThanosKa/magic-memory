@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Download, ImageUp } from "lucide-react";
-import { Reveal } from "@/components/home/reveal";
-import { SectionLabel } from "@/components/home/section-label";
+import { StackedSection } from "@/components/layout/stacked-section";
+import { Reveal } from "@/components/layout/reveal";
+import { SectionLabel } from "@/components/layout/section-label";
 
 function Sprockets() {
   return <div className="mm-sprockets h-[14px] w-full" aria-hidden="true" />;
@@ -90,49 +91,44 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section
-      id="how-it-works"
-      className="relative z-10 -mt-10 rounded-t-[40px] bg-paper text-ink md:rounded-t-[56px]"
-    >
-      <div className="mx-auto max-w-[1360px] px-5 pb-24 pt-20 sm:px-8 md:pb-32 md:pt-28 lg:px-14">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-          <Reveal>
-            <SectionLabel index="02" tone="paper">
-              How it works
-            </SectionLabel>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
-              Upload. <span className="italic text-ink/55">Breathe.</span> Download.
-            </h2>
-          </Reveal>
-        </div>
-
-        <Reveal delay={0.12} className="mt-16 md:mt-20">
-          <div className="rounded-[6px] bg-ink px-3 py-2 shadow-[0_30px_60px_-30px_rgba(13,11,9,0.55)] sm:px-4">
-            <Sprockets />
-            <ol className="grid gap-3 py-2 md:grid-cols-3">
-              {STEPS.map(({ frame, title, body, Visual }) => (
-                <li key={frame} className="flex flex-col gap-5 rounded-[3px] bg-surface-2 p-4 sm:p-5">
-                  <div className="aspect-[4/3]">
-                    <Visual />
-                  </div>
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ember">
-                      Frame {frame}
-                    </p>
-                    <h3 className="mt-2 text-[20px] font-medium tracking-[-0.01em] text-paper">
-                      {title}
-                    </h3>
-                    <p className="mt-2 text-[15px] leading-[1.6] text-paper/60">{body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <Sprockets />
-          </div>
+    <StackedSection tone="paper" id="how-it-works">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+        <Reveal>
+          <SectionLabel index="02" tone="paper">
+            How it works
+          </SectionLabel>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
+            Upload. <span className="italic text-ink/55">Breathe.</span> Download.
+          </h2>
         </Reveal>
       </div>
-    </section>
+
+      <Reveal delay={0.12} className="mt-16 md:mt-20">
+        <div className="rounded-[6px] bg-ink px-3 py-2 shadow-[0_30px_60px_-30px_rgba(13,11,9,0.55)] sm:px-4">
+          <Sprockets />
+          <ol className="grid gap-3 py-2 md:grid-cols-3">
+            {STEPS.map(({ frame, title, body, Visual }) => (
+              <li key={frame} className="flex flex-col gap-5 rounded-[3px] bg-surface-2 p-4 sm:p-5">
+                <div className="aspect-[4/3]">
+                  <Visual />
+                </div>
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ember">
+                    Frame {frame}
+                  </p>
+                  <h3 className="mt-2 text-[20px] font-medium tracking-[-0.01em] text-paper">
+                    {title}
+                  </h3>
+                  <p className="mt-2 text-[15px] leading-[1.6] text-paper/60">{body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <Sprockets />
+        </div>
+      </Reveal>
+    </StackedSection>
   );
 }
