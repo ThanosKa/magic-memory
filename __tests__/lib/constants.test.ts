@@ -4,9 +4,15 @@ import { CREDIT_PACKAGES, APP_CONFIG, type PackageType } from "@/lib/constants"
 describe("constants", () => {
     describe("CREDIT_PACKAGES", () => {
         it("has correct credit values for each package", () => {
-            expect(CREDIT_PACKAGES.starter.credits).toBe(30)
-            expect(CREDIT_PACKAGES.growth.credits).toBe(120)
-            expect(CREDIT_PACKAGES.premium.credits).toBe(350)
+            expect(CREDIT_PACKAGES.starter.credits).toBe(20)
+            expect(CREDIT_PACKAGES.growth.credits).toBe(60)
+            expect(CREDIT_PACKAGES.premium.credits).toBe(120)
+        })
+
+        it("states each pack's restoration count in its features", () => {
+            expect(CREDIT_PACKAGES.starter.features).toContain("20 photo restorations")
+            expect(CREDIT_PACKAGES.growth.features).toContain("60 photo restorations")
+            expect(CREDIT_PACKAGES.premium.features).toContain("120 photo restorations")
         })
 
         it("has correct prices in cents", () => {

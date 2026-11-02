@@ -43,7 +43,7 @@ const faqs: FAQItem[] = [
   {
     question: "Can I offer photo restoration as a service to clients?",
     answer:
-      "Yes. Many photographers offer old photo restoration as an add-on service. Magic Memory credit packs (\u20ac9.99 for 30 restorations) make it affordable to process client photos at scale. The AI handles the time-consuming face restoration, and you can add your professional finishing touches.",
+      "Yes. Many photographers offer old photo restoration as an add-on service. Magic Memory credit packs (\u20ac9.99 for 20 restorations) make it affordable to process client photos at scale. The AI handles the time-consuming face restoration, and you can add your professional finishing touches.",
   },
 ];
 
@@ -125,7 +125,7 @@ export default function ForPhotographersPage() {
                       <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Face restoration</td><td className="py-2">15 seconds, automated</td><td className="py-2">1-4 hours, skilled work</td></tr>
                       <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Background repair</td><td className="py-2">Not handled</td><td className="py-2">Full control</td></tr>
                       <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Color grading</td><td className="py-2">Not handled</td><td className="py-2">Full control</td></tr>
-                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Cost per photo</td><td className="py-2">~{"\u20ac"}0.33</td><td className="py-2">$25-$150+</td></tr>
+                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Cost per photo</td><td className="py-2">~{"\u20ac"}0.50</td><td className="py-2">$25-$150+</td></tr>
                       <tr><td className="py-2 font-medium text-paper">Best for</td><td className="py-2">Face detail recovery</td><td className="py-2">Everything else</td></tr>
                     </tbody>
                   </table>
@@ -138,10 +138,10 @@ export default function ForPhotographersPage() {
               <div>
                 <h2 className="font-serif text-3xl tracking-[-0.01em] text-paper mb-4">Pricing for Photography Businesses</h2>
                 <p className="text-paper/70 mb-4">
-                  At {"\u20ac"}9.99 for 30 restorations ({"\u20ac"}0.33 per photo), Magic Memory is a cost-effective tool for photographers who offer restoration services. Credits never expire, so you can buy a pack and use them as client requests come in over months.
+                  At {"\u20ac"}9.99 for 20 restorations ({"\u20ac"}0.50 per photo), Magic Memory is a cost-effective tool for photographers who offer restoration services. Credits never expire, so you can buy a pack and use them as client requests come in over months.
                 </p>
                 <p className="text-paper/70">
-                  If you charge clients $25-$75 per restored photo and the AI costs {"\u20ac"}0.33, the margin on restoration services is significant — and the AI saves you hours of manual work per photo.
+                  If you charge clients $25-$75 per restored photo and the AI costs {"\u20ac"}0.50, the margin on restoration services is significant — and the AI saves you hours of manual work per photo.
                 </p>
               </div>
             </div>

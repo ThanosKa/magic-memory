@@ -7,9 +7,9 @@ Magic Memory is positioned as the privacy-conscious, non-subscription alternativ
 ## Pricing snapshot (2026-05-19)
 
 - Free: 1 restoration per day, no credit card required
-- Starter: €9.99 one-time for 30 credits (€0.33/photo)
-- Growth: €19.99 one-time for 120 credits (€0.17/photo)
-- Premium: €29.99 one-time for 350 credits (€0.09/photo) — cheapest per-photo rate
+- Starter: €9.99 one-time for 20 credits (€0.50/photo)
+- Growth: €19.99 one-time for 60 credits (€0.33/photo)
+- Premium: €29.99 one-time for 120 credits (€0.25/photo) — cheapest per-photo rate
 - All paid credits never expire. No subscription, no auto-renewal.
 
 ## Competitor pricing snapshot (2026-05-19)

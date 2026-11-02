@@ -8,7 +8,7 @@ export function BestAIPhotoRestorationContent() {
           Quick answer (June 2026)
         </p>
         <p className="text-muted-foreground mb-4">
-          After running the same scanned 1962 portrait through five tools, <strong>Magic Memory</strong> produced the sharpest face at the lowest effective cost (€0.09/photo on the largest pack, 1 free/day for casual use). <strong>Remini</strong> is the strongest mobile-app pick at $9.99/week. <strong>MyHeritage Photo Enhancer</strong> is bundled into a $119–$259/yr genealogy subscription — overpriced unless you also want family-tree tools. <strong>VanceAI</strong> wins for pros who batch-process or also need upscaling/colorization. <strong>Fotor</strong> is the right call only if you also need a full photo editor.
+          After running the same scanned 1962 portrait through five tools, <strong>Magic Memory</strong> produced the sharpest face (€0.25/photo on the largest pack, 1 free/day for casual use). <strong>Remini</strong> is the strongest mobile-app pick at $9.99/week. <strong>MyHeritage Photo Enhancer</strong> is bundled into a $119–$259/yr genealogy subscription — overpriced unless you also want family-tree tools. <strong>VanceAI</strong> wins for pros who batch-process or also need upscaling/colorization. <strong>Fotor</strong> is the right call only if you also need a full photo editor.
         </p>
         <Link
           href="/"
@@ -64,7 +64,7 @@ export function BestAIPhotoRestorationContent() {
           <li>· Remini moved to a $9.99/week subscription (previously billed monthly), making it the most expensive option for one-off restorations.</li>
           <li>· MyHeritage Photo Enhancer removed its standalone photo plan — enhancement now requires a $119–$259/yr genealogy bundle.</li>
           <li>· VanceAI lowered its entry tier to $4.95/month; free allowance unchanged at 3 credits/month.</li>
-          <li>· Magic Memory&apos;s €29.99 / 350-credit pack brings the lowest verified per-photo cost in this roundup at €0.09/photo.</li>
+          <li>· Magic Memory&apos;s €29.99 / 120-credit pack works out to €0.25/photo.</li>
         </ul>
       </div>
 
@@ -82,7 +82,7 @@ export function BestAIPhotoRestorationContent() {
           <tbody>
             <tr className="border-b border-border">
               <td className="px-4 py-3 font-medium text-primary">Magic Memory</td>
-              <td className="px-4 py-3 text-muted-foreground">€9.99 one-time (30 credits) — €0.33/photo, €0.09/photo on €29.99 pack</td>
+              <td className="px-4 py-3 text-muted-foreground">€9.99 one-time (20 credits) — €0.50/photo, €0.25/photo on €29.99 pack</td>
               <td className="px-4 py-3 text-muted-foreground">1/day, no card</td>
               <td className="px-4 py-3 text-muted-foreground">8–12s</td>
               <td className="px-4 py-3 text-muted-foreground">Web, occasional users, privacy</td>
@@ -142,7 +142,7 @@ export function BestAIPhotoRestorationContent() {
       <ul>
         <li><strong>Best for:</strong> Portrait and family photo restoration, occasional users, privacy-conscious users</li>
         <li><strong>Pricing:</strong> 1 free restoration per day + €9.99–€29.99 one-time credit packages (never expire)</li>
-        <li><strong>Effective cost:</strong> €0.33/photo on the smallest pack, €0.09/photo on the €29.99 / 350-credit pack</li>
+        <li><strong>Effective cost:</strong> €0.50/photo on the smallest pack, €0.25/photo on the €29.99 / 120-credit pack</li>
         <li><strong>Platform:</strong> Web — works on any device, no app required</li>
         <li><strong>Processing time:</strong> 8–12 seconds in our 2026-05-19 test</li>
         <li><strong>Privacy:</strong> No persistent photo storage after processing</li>
@@ -250,7 +250,7 @@ export function BestAIPhotoRestorationContent() {
         <li><strong>Genealogy researcher:</strong> MyHeritage — worth it if you are already using the platform</li>
         <li><strong>Professional needing multiple tools:</strong> VanceAI — most capable but most complex</li>
         <li><strong>Privacy-conscious user:</strong> Magic Memory — no persistent cloud photo storage</li>
-        <li><strong>Lowest per-photo cost for 100+ photos:</strong> Magic Memory (€0.09/photo on €29.99 pack) — Remini works out to ~$5.20/photo if you only need one week of access</li>
+        <li><strong>Lowest per-photo cost for 100+ photos:</strong> Magic Memory (€0.25/photo on €29.99 pack) — Remini works out to ~$5.20/photo if you only need one week of access</li>
       </ul>
 
       <h2>Frequently asked questions</h2>
@@ -267,7 +267,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>What is the cheapest AI photo restoration for 20+ photos?</h3>
       <p>
-        Magic Memory&apos;s €29.99 / 350-credit pack works out to roughly €0.09 per photo and credits never expire. Remini at $9.99/week works out to ~$0.50/photo only if you restore 20 photos in a single week — otherwise the cost per photo balloons. MyHeritage bundles photo enhancement with a $119–$259/yr genealogy plan, so 20 photos at MyHeritage cost $6–$13 per photo if you do not also use the genealogy tools.
+        Magic Memory&apos;s €29.99 / 120-credit pack works out to roughly €0.25 per photo and credits never expire. Remini at $9.99/week works out to ~$0.50/photo only if you restore 20 photos in a single week — otherwise the cost per photo balloons. MyHeritage bundles photo enhancement with a $119–$259/yr genealogy plan, so 20 photos at MyHeritage cost $6–$13 per photo if you do not also use the genealogy tools.
       </p>
 
       <h3>Which tool works without downloading an app?</h3>

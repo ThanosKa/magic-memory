@@ -20,13 +20,13 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     name: "Magic Memory",
     url: `${SITE_URL}/`,
     description:
-      "Web-based AI photo restoration using GFPGAN. Free daily credit, one-time credit packs that never expire (€9.99–€29.99, €0.09/photo at the largest pack), no persistent photo storage.",
+      "Web-based AI photo restoration using GFPGAN. Free daily credit, one-time credit packs that never expire (€9.99–€29.99, €0.25/photo at the largest pack), no persistent photo storage.",
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web",
     offers: { price: "0", priceCurrency: "EUR" },
     rating: { value: "4.7", reviewCount: "126" },
     reviewBody:
-      "Best for web-based portrait restoration. Fast (8–12s in our 2026-05-19 test), generous free tier (1/day, no card), and the lowest per-photo cost for users restoring 20+ photos. GFPGAN model excels at faces.",
+      "Best for web-based portrait restoration. Fast (8–12s in our 2026-05-19 test), generous free tier (1/day, no card). GFPGAN model excels at faces.",
   },
   {
     position: 2,
@@ -104,7 +104,7 @@ const listicleFaqs: Record<string, ListicleFaq[]> = {
     {
       question: "What is the cheapest AI photo restoration for 20+ photos?",
       answer:
-        "Magic Memory's €29.99 / 350-credit pack works out to roughly €0.09 per photo and credits never expire. Remini at $9.99/week works out to ~$0.50/photo only if you restore 20 photos in a single week — otherwise the cost per photo balloons. MyHeritage bundles photo enhancement with a $119–$259/yr genealogy plan, so 20 photos cost $6–$13 each if you do not also use the genealogy tools.",
+        "Magic Memory's €29.99 / 120-credit pack works out to roughly €0.25 per photo and credits never expire. Remini at $9.99/week works out to ~$0.50/photo only if you restore 20 photos in a single week — otherwise the cost per photo balloons. MyHeritage bundles photo enhancement with a $119–$259/yr genealogy plan, so 20 photos cost $6–$13 each if you do not also use the genealogy tools.",
     },
     {
       question: "Which tool works without downloading an app?",

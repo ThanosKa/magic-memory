@@ -31,7 +31,7 @@ const faqs: FAQItem[] = [
   {
     question: "Remini vs MyHeritage Photo Enhancer in 2026: which is better?",
     answer:
-      "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a $9.99/week subscription. MyHeritage Photo Enhancer is better if you're already paying for MyHeritage genealogy ($119–$259/yr) and want photo enhancement bundled in. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at 1 free/day plus €9.99 one-time for 30 credits.",
+      "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a $9.99/week subscription. MyHeritage Photo Enhancer is better if you're already paying for MyHeritage genealogy ($119–$259/yr) and want photo enhancement bundled in. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at 1 free/day plus €9.99 one-time for 20 credits.",
   },
   {
     question: "Remini vs Magic Memory: which has better photo restoration quality?",

@@ -16,6 +16,7 @@ import { PageContainer } from "@/components/layout/page-container";
 import { StackedSection } from "@/components/layout/stacked-section";
 import { Reveal } from "@/components/layout/reveal";
 import { SectionLabel } from "@/components/layout/section-label";
+import { CREDIT_PACKAGES } from "@/lib/constants";
 
 const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
@@ -39,6 +40,12 @@ const PricingCards = dynamic(
   }
 );
 
+const { starter, growth, premium } = CREDIT_PACKAGES;
+
+function perPhoto(pkg: { price: number; credits: number }) {
+  return `€${(pkg.price / pkg.credits / 100).toFixed(2)}`;
+}
+
 const PRICING_OFFERS = [
   {
     name: "Free Daily",
@@ -46,31 +53,19 @@ const PRICING_OFFERS = [
     price: 0,
     credits: 1,
   },
-  {
-    name: "Starter Plan",
-    description: "30 restoration credits that never expire",
-    price: 9.99,
-    credits: 30,
-  },
-  {
-    name: "Growth Plan",
-    description: "120 restoration credits that never expire",
-    price: 19.99,
-    credits: 120,
-  },
-  {
-    name: "Premium Plan",
-    description: "350 restoration credits that never expire",
-    price: 29.99,
-    credits: 350,
-  },
+  ...Object.values(CREDIT_PACKAGES).map((pkg) => ({
+    name: `${pkg.name} Plan`,
+    description: `${pkg.credits} restoration credits that never expire`,
+    price: pkg.price / 100,
+    credits: pkg.credits,
+  })),
 ];
 
 const pricingFaqs: FAQItem[] = [
   {
     question: "Is Magic Memory a subscription?",
     answer:
-      "No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge $9.99 per week; you can buy 30 Magic Memory credits for €9.99 and keep them forever.",
+      `No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge $9.99 per week; you can buy ${starter.credits} Magic Memory credits for ${starter.priceDisplay} and keep them forever.`,
   },
   {
     question: "Do my credits ever expire?",
@@ -80,12 +75,12 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Which plan is right for me?",
     answer:
-      "If you only need to restore a few photos, start with the free daily tier — 1 restoration per day, no card required. If you have a batch of 10-30 family photos to get through, Starter (30 credits for €9.99) is the cheapest per-photo option for small projects. Growth (120 credits for €19.99, €0.17 per restoration) covers a full album. Premium (350 credits for €29.99, €0.09 per restoration) is best for photographers, genealogists, or anyone digitizing decades of prints.",
+      `If you only need to restore a few photos, start with the free daily tier — 1 restoration per day, no card required. If you have a batch of 10-${starter.credits} family photos to get through, Starter (${starter.credits} credits for ${starter.priceDisplay}) is the cheapest per-photo option for small projects. Growth (${growth.credits} credits for ${growth.priceDisplay}, ${perPhoto(growth)} per restoration) covers a full album. Premium (${premium.credits} credits for ${premium.priceDisplay}, ${perPhoto(premium)} per restoration) is best for photographers, genealogists, or anyone digitizing decades of prints.`,
   },
   {
     question: "How much does each restoration cost?",
     answer:
-      "The per-restoration cost drops as you buy larger packs. Starter: €0.33/photo. Growth: €0.17/photo. Premium: €0.09/photo. Compared to manual professional restoration ($25-$150 per photo) or Remini's $9.99/week subscription, even our smallest pack is significantly cheaper for most users.",
+      `The per-restoration cost drops as you buy larger packs. Starter: ${perPhoto(starter)}/photo. Growth: ${perPhoto(growth)}/photo. Premium: ${perPhoto(premium)}/photo. Compared to manual professional restoration ($25-$150 per photo) or Remini's $9.99/week subscription, even our smallest pack is significantly cheaper for most users.`,
   },
   {
     question: "Why is pricing in Euros instead of USD?",
@@ -105,12 +100,12 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Can I share credits with family members?",
     answer:
-      "Credits are tied to the account that purchased them, but there's no limit on how many photos from different sources you can restore. A single Growth pack (120 credits) is enough for a whole family's photo archive. If you need separate accounts for privacy reasons, each account starts with its own free daily credit.",
+      `Credits are tied to the account that purchased them, but there's no limit on how many photos from different sources you can restore. A single Growth pack (${growth.credits} credits) is enough for a whole family's photo archive. If you need separate accounts for privacy reasons, each account starts with its own free daily credit.`,
   },
   {
     question: "How does Magic Memory compare to Remini or MyHeritage on price?",
     answer:
-      "Remini costs $9.99/week ($519/year if used continuously). MyHeritage bundles photo tools into a $119-$259/year genealogy subscription. Magic Memory's Premium pack is €29.99 for 350 never-expiring credits — roughly the same as 3 weeks of Remini, but with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.",
+      `Remini costs $9.99/week ($519/year if used continuously). MyHeritage bundles photo tools into a $119-$259/year genealogy subscription. Magic Memory's Premium pack is ${premium.priceDisplay} for ${premium.credits} never-expiring credits — roughly the same as 3 weeks of Remini, but with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.`,
   },
   {
     question: "Is my payment information secure?",
@@ -125,8 +120,8 @@ const NOT_SUBSCRIPTION = [
     body: "Credits stay in your account until you use them. No monthly reset, no forced renewal.",
   },
   {
-    title: "As low as €0.09 per photo",
-    body: "Larger packs mean cheaper per-restoration cost. Premium works out to €0.09 per photo — a fraction of professional retouching.",
+    title: `As low as ${perPhoto(premium)} per photo`,
+    body: `Larger packs mean cheaper per-restoration cost. Premium works out to ${perPhoto(premium)} per photo — a fraction of professional retouching.`,
   },
   {
     title: "Free daily, no card",
@@ -141,29 +136,29 @@ const WHICH_PLAN = [
   },
   {
     title: "A small batch of family photos? → Starter (€9.99)",
-    body: "30 credits. Good for a single shoebox of old prints or your immediate family's portraits.",
+    body: `${starter.credits} credits. Good for a single shoebox of old prints or your immediate family's portraits.`,
   },
   {
     title: "A full photo album? → Growth (€19.99)",
-    body: "120 credits at €0.17 each. Covers an entire wedding album, a decade of school photos, or a multi-generation family archive.",
+    body: `${growth.credits} credits at ${perPhoto(growth)} each. Covers an entire wedding album, a decade of school photos, or a multi-generation family archive.`,
   },
   {
     title: "A photographer or genealogist? → Premium (€29.99)",
-    body: "350 credits at €0.09 each — the cheapest per-photo rate. Best for anyone digitizing a long family archive or running client projects.",
+    body: `${premium.credits} credits at ${perPhoto(premium)} each — the cheapest per-photo rate. Best for anyone digitizing a long family archive or running client projects.`,
   },
 ];
 
 export const metadata: Metadata = {
   title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
   description:
-    "Pay once, restore forever. Credits never expire — €9.99 for 30 restorations, down to €0.09/photo. Or 1 free per day, no card required. No subscription.",
+    `Pay once, restore forever. Credits never expire — ${starter.priceDisplay} for ${starter.credits} restorations, down to ${perPhoto(premium)}/photo. Or 1 free per day, no card required. No subscription.`,
   alternates: {
     canonical: getCanonicalUrl("/pricing"),
   },
   openGraph: {
     title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
     description:
-      "Pay once, restore forever. Credits never expire \u2014 \u20ac9.99 for 30 restorations. Or 1 free per day, no card required. No subscription, no monthly fees.",
+      `Pay once, restore forever. Credits never expire \u2014 ${starter.priceDisplay} for ${starter.credits} restorations. Or 1 free per day, no card required. No subscription, no monthly fees.`,
     url: getCanonicalUrl("/pricing"),
     type: "website",
     images: [
@@ -179,7 +174,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
     description:
-      "Pay once, restore forever. Credits never expire \u2014 \u20ac9.99 for 30 restorations. Or 1 free per day, no card required. No subscription, no monthly fees.",
+      `Pay once, restore forever. Credits never expire \u2014 ${starter.priceDisplay} for ${starter.credits} restorations. Or 1 free per day, no card required. No subscription, no monthly fees.`,
     images: [getOgImageUrl()],
   },
   robots: {
@@ -199,7 +194,7 @@ export default async function PricingPage() {
     "@type": "Product",
     name: "Magic Memory AI Photo Restoration Credits",
     description:
-      "One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from €9.99 (€0.33/photo) to €29.99 (€0.09/photo). Free 1/day tier available with no credit card.",
+      `One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from ${starter.priceDisplay} (${perPhoto(starter)}/photo) to ${premium.priceDisplay} (${perPhoto(premium)}/photo). Free 1/day tier available with no credit card.`,
     image: [getOgImageUrl()],
     brand: { "@type": "Brand", name: "Magic Memory" },
     offers: {

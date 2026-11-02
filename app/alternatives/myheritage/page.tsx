@@ -46,7 +46,7 @@ const faqs: FAQItem[] = [
   {
     question: "What's the cheapest MyHeritage Photo Enhancer alternative in 2026?",
     answer:
-      "Magic Memory is the cheapest standalone alternative — 1 free restoration per day with no credit card, plus one-time credit packs from €9.99 (30 credits, never expire) up to €29.99 (350 credits, €0.09/photo). Restoring 100 photos on MyHeritage requires a $119/yr subscription. The same 100 photos on Magic Memory cost €9 in credits if you use the largest pack.",
+      "Magic Memory is the cheapest standalone alternative — 1 free restoration per day with no credit card, plus one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Restoring 100 photos on MyHeritage requires a $119/yr subscription. The same 100 photos on Magic Memory cost €25 in credits if you use the largest pack.",
   },
   {
     question: "Does Magic Memory offer genealogy features?",
@@ -134,11 +134,11 @@ export default function MyHeritageAlternativePage() {
                   </thead>
                   <tbody className="text-paper/70">
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Pricing model</td><td className="py-2">Annual genealogy subscription</td><td className="py-2">One-time credits, never expire</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Lowest paid tier</td><td className="py-2">$119/year (Basic)</td><td className="py-2">€9.99 (30 credits)</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Highest paid tier</td><td className="py-2">$259/year (Complete)</td><td className="py-2">€29.99 (350 credits)</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Lowest paid tier</td><td className="py-2">$119/year (Basic)</td><td className="py-2">€9.99 (20 credits)</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Highest paid tier</td><td className="py-2">$259/year (Complete)</td><td className="py-2">€29.99 (120 credits)</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Watermarked preview only</td><td className="py-2">1 restoration/day, no card</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo-only purchase?</td><td className="py-2">No — bundled with genealogy</td><td className="py-2">Yes — standalone</td></tr>
-                    <tr><td className="py-2 font-medium text-paper">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.09</td></tr>
+                    <tr><td className="py-2 font-medium text-paper">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.25</td></tr>
                   </tbody>
                 </table>
               </div>

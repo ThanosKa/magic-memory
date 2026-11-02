@@ -45,7 +45,7 @@ export function AIPhotoRestorationVsPhotoshopContent() {
 
       <h3>Speed and cost</h3>
       <p>
-        AI restoration takes 5–15 seconds and costs nothing (free daily) or €0.01–€0.10 per photo with paid credits. Photoshop retouching takes 30 minutes to several hours and costs $20.99/month for the software, plus significant time investment per photo.
+        AI restoration takes 5–15 seconds and costs nothing (free daily) or €0.25–€0.50 per photo with paid credits. Photoshop retouching takes 30 minutes to several hours and costs $20.99/month for the software, plus significant time investment per photo.
       </p>
 
       <h3>No skill required</h3>
@@ -107,7 +107,7 @@ export function AIPhotoRestorationVsPhotoshopContent() {
             </tr>
             <tr className="border-b border-border">
               <td className="px-4 py-3 font-medium">Cost per photo</td>
-              <td className="px-4 py-3 text-muted-foreground">Free (1/day) or €0.01–0.10</td>
+              <td className="px-4 py-3 text-muted-foreground">Free (1/day) or €0.25–0.50</td>
               <td className="px-4 py-3 text-muted-foreground">Your time + $20.99/mo</td>
               <td className="px-4 py-3 text-muted-foreground">$25–100 per photo</td>
             </tr>

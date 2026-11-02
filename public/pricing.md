@@ -17,24 +17,24 @@ Payment processor: Stripe (PCI DSS Level 1).
 ## Starter Plan
 
 - Price: €9.99 one-time
-- Credits: 30 restorations
-- Per-restoration cost: €0.33
+- Credits: 20 restorations
+- Per-restoration cost: €0.50
 - Expiration: Never
 - Best for: A small batch of family photos (e.g., one shoebox of old prints)
 
 ## Growth Plan
 
 - Price: €19.99 one-time
-- Credits: 120 restorations
-- Per-restoration cost: €0.17
+- Credits: 60 restorations
+- Per-restoration cost: €0.33
 - Expiration: Never
 - Best for: A full photo album, a decade of school photos, or a multi-generation family archive
 
 ## Premium Plan
 
 - Price: €29.99 one-time
-- Credits: 350 restorations
-- Per-restoration cost: €0.09 (lowest per-photo rate)
+- Credits: 120 restorations
+- Per-restoration cost: €0.25 (lowest per-photo rate)
 - Expiration: Never
 - Best for: Photographers, genealogists, anyone digitizing a long archive or running client projects
 

@@ -166,7 +166,7 @@ export default function GlossaryAIPhotoEnhancementPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Try AI Face Restoration Free</h2>
               <p className="text-paper/70 mb-4">
-                Magic Memory uses GFPGAN for AI-powered face restoration. Upload any photo with faces, get a restored version in under 15 seconds. 1 free restoration per day, no credit card required. Additional credits from {"\u20ac"}9.99 for 30 restorations.
+                Magic Memory uses GFPGAN for AI-powered face restoration. Upload any photo with faces, get a restored version in under 15 seconds. 1 free restoration per day, no credit card required. Additional credits from {"\u20ac"}9.99 for 20 restorations.
               </p>
               <Button asChild>
                 <Link href="/restore">
