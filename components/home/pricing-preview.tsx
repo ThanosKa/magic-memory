@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Ban, Globe, ShieldCheck, Undo2 } from "lucide-react";
 import { StackedSection } from "@/components/layout/stacked-section";
-import { Reveal } from "@/components/layout/reveal";
 import { SectionLabel } from "@/components/layout/section-label";
 import { CREDIT_PACKAGES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -38,12 +37,12 @@ export function PricingPreview() {
   return (
     <StackedSection tone="paper" className="pb-28 md:pb-36">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-        <Reveal>
+        <div>
           <SectionLabel index="04" tone="paper">
             Pricing
           </SectionLabel>
-        </Reveal>
-        <Reveal delay={0.08}>
+        </div>
+        <div>
           <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
             Pay once.{" "}
             <span className="italic text-ink/55">Credits never expire.</span>
@@ -52,10 +51,10 @@ export function PricingPreview() {
             Everyone gets one free restoration a day. Need more? Buy a pack
             once. No subscription, no auto-renewal.
           </p>
-        </Reveal>
+        </div>
       </div>
 
-      <Reveal delay={0.1} className="mt-16 md:mt-20">
+      <div className="mt-16 md:mt-20">
         <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
           {PLANS.map((plan, i) => (
             <li
@@ -92,7 +91,7 @@ export function PricingPreview() {
             </li>
           ))}
         </ul>
-      </Reveal>
+      </div>
 
       <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-[44rem] text-[13px] leading-[1.6] text-ink/50">
@@ -113,11 +112,11 @@ export function PricingPreview() {
       </div>
 
       <ul className="mt-20 grid gap-x-8 gap-y-6 border-t border-ink/12 pt-10 sm:grid-cols-2 lg:grid-cols-4">
-        {PROMISES.map(({ Icon, text }, i) => (
-          <Reveal as="li" key={text} delay={i * 0.08} className="flex items-start gap-3">
+        {PROMISES.map(({ Icon, text }) => (
+          <li key={text} className="flex items-start gap-3">
             <Icon className="mt-0.5 size-5 shrink-0 text-ink/70" strokeWidth={1.6} aria-hidden="true" />
             <span className="text-[15px] leading-[1.5] text-ink/80">{text}</span>
-          </Reveal>
+          </li>
         ))}
       </ul>
     </StackedSection>

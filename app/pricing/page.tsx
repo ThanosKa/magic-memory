@@ -14,7 +14,6 @@ import { LoadingSpinner } from "@/components/ui/loading-states";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PageContainer } from "@/components/layout/page-container";
 import { StackedSection } from "@/components/layout/stacked-section";
-import { Reveal } from "@/components/layout/reveal";
 import { SectionLabel } from "@/components/layout/section-label";
 import { CREDIT_PACKAGES } from "@/lib/constants";
 
@@ -267,14 +266,14 @@ export default async function PricingPage() {
         <main className="flex-1">
           <section>
             <PageContainer className="pb-24 pt-32 text-center md:pb-32 md:pt-44">
-              <Reveal>
+              <div>
                 <h1 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-paper">
                   AI Photo Restoration Pricing
                 </h1>
                 <p className="mx-auto mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-paper/65">
                   One-time credits that never expire. No subscription. Start free.
                 </p>
-              </Reveal>
+              </div>
             </PageContainer>
           </section>
 
@@ -284,52 +283,52 @@ export default async function PricingPage() {
 
           <StackedSection className="space-y-24 md:space-y-32">
             <div className="mx-auto max-w-4xl">
-              <Reveal>
+              <div>
                 <h2 className="font-serif text-center text-[clamp(2rem,3.6vw,3.25rem)] leading-[1] tracking-[-0.02em] text-paper">
                   Not a subscription
                 </h2>
                 <p className="mx-auto mb-12 mt-5 max-w-[40rem] text-center text-[17px] leading-[1.6] text-paper/65">
                   Most AI photo tools charge you every month — even when you&apos;re not using them. Magic Memory is different.
                 </p>
-              </Reveal>
+              </div>
               <ul className="grid gap-4 sm:grid-cols-3">
-                {NOT_SUBSCRIPTION.map((item, i) => (
-                  <Reveal as="li" key={item.title} delay={i * 0.08} className="rounded-2xl border border-border bg-card p-6">
+                {NOT_SUBSCRIPTION.map((item) => (
+                  <li key={item.title} className="rounded-2xl border border-border bg-card p-6">
                     <h3 className="font-serif mb-3 text-[22px] leading-[1.15] text-paper">{item.title}</h3>
                     <p className="text-[15px] leading-[1.6] text-paper/65">{item.body}</p>
-                  </Reveal>
+                  </li>
                 ))}
               </ul>
             </div>
 
             <div className="mx-auto max-w-4xl">
-              <Reveal>
+              <div>
                 <h2 className="font-serif text-center text-[clamp(2rem,3.6vw,3.25rem)] leading-[1] tracking-[-0.02em] text-paper">
                   Which plan is right for you?
                 </h2>
                 <p className="mx-auto mb-12 mt-5 max-w-[40rem] text-center text-[17px] leading-[1.6] text-paper/65">
                   Pick based on how many photos you plan to restore — not how often.
                 </p>
-              </Reveal>
+              </div>
               <ul className="space-y-4">
-                {WHICH_PLAN.map((item, i) => (
-                  <Reveal as="li" key={item.title} delay={i * 0.06} className="rounded-2xl border border-border bg-card p-6">
+                {WHICH_PLAN.map((item) => (
+                  <li key={item.title} className="rounded-2xl border border-border bg-card p-6">
                     <h3 className="font-serif mb-2 text-[22px] leading-[1.15] text-paper">{item.title}</h3>
                     <p className="text-[15px] leading-[1.6] text-paper/65">{item.body}</p>
-                  </Reveal>
+                  </li>
                 ))}
               </ul>
             </div>
           </StackedSection>
 
           <StackedSection tone="paper" className="grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-            <Reveal className="lg:sticky lg:top-28 lg:self-start">
+            <div className="lg:sticky lg:top-28 lg:self-start">
               <SectionLabel index="01" tone="paper">Questions</SectionLabel>
               <h2 className="font-serif mt-6 text-[clamp(2.5rem,4.4vw,4.25rem)] leading-[1] tracking-[-0.02em]">
                 Pricing FAQ
               </h2>
-            </Reveal>
-            <Reveal delay={0.08}>
+            </div>
+            <div>
               <Accordion type="single" collapsible className="w-full border-t border-ink/12">
                 {pricingFaqs.map((faq, i) => (
                   <AccordionItem key={faq.question} value={`item-${i}`}>
@@ -338,11 +337,11 @@ export default async function PricingPage() {
                   </AccordionItem>
                 ))}
               </Accordion>
-            </Reveal>
+            </div>
           </StackedSection>
 
           <StackedSection className="text-center">
-            <Reveal>
+            <div>
               <h2 className="font-serif text-[clamp(1.75rem,2.8vw,2.5rem)] leading-[1.05] tracking-[-0.02em] text-paper">
                 Compared to other tools
               </h2>
@@ -366,7 +365,7 @@ export default async function PricingPage() {
                   Full alternatives comparison
                 </Link>
               </div>
-            </Reveal>
+            </div>
           </StackedSection>
         </main>
         <Footer />

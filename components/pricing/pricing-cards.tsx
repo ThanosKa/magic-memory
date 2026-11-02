@@ -3,7 +3,6 @@
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Reveal } from "@/components/layout/reveal";
 import { Check } from "lucide-react";
 import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
 import { useState } from "react";
@@ -119,7 +118,7 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
   ][];
 
   return (
-    <Reveal>
+    <div>
       <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
         {/* Free Tier */}
         <PlanShell index={0}>
@@ -201,6 +200,6 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
           </PlanShell>
         ))}
       </ul>
-    </Reveal>
+    </div>
   );
 }

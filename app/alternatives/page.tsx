@@ -199,7 +199,7 @@ export default function AlternativesPage() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="rounded-2xl border border-border bg-card p-5 text-sm font-medium hover:border-ember/50 hover: transition-all"
+                    className="rounded-2xl border border-border bg-card p-5 text-sm font-medium transition-colors hover:border-ember/50"
                   >
                     {link.label} →
                   </Link>

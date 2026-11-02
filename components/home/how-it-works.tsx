@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Download, ImageUp } from "lucide-react";
 import { StackedSection } from "@/components/layout/stacked-section";
-import { Reveal } from "@/components/layout/reveal";
 import { SectionLabel } from "@/components/layout/section-label";
 
 function Sprockets() {
@@ -93,19 +92,19 @@ export function HowItWorks() {
   return (
     <StackedSection tone="paper" id="how-it-works">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-        <Reveal>
+        <div>
           <SectionLabel index="02" tone="paper">
             How it works
           </SectionLabel>
-        </Reveal>
-        <Reveal delay={0.08}>
+        </div>
+        <div>
           <h2 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em]">
             Upload. <span className="italic text-ink/55">Breathe.</span> Download.
           </h2>
-        </Reveal>
+        </div>
       </div>
 
-      <Reveal delay={0.12} className="mt-16 md:mt-20">
+      <div className="mt-16 md:mt-20">
         <div className="rounded-[6px] bg-ink px-3 py-2 shadow-[0_30px_60px_-30px_rgba(13,11,9,0.55)] sm:px-4">
           <Sprockets />
           <ol className="grid gap-3 py-2 md:grid-cols-3">
@@ -128,7 +127,7 @@ export function HowItWorks() {
           </ol>
           <Sprockets />
         </div>
-      </Reveal>
+      </div>
     </StackedSection>
   );
 }

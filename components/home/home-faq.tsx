@@ -1,13 +1,12 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { StackedSection } from "@/components/layout/stacked-section";
-import { Reveal } from "@/components/layout/reveal";
 import { SectionLabel } from "@/components/layout/section-label";
 import { homepageFaqs } from "@/lib/seo/faq-data";
 
 export function HomeFaq() {
   return (
     <StackedSection className="grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-      <Reveal className="lg:sticky lg:top-28 lg:self-start">
+      <div className="lg:sticky lg:top-28 lg:self-start">
         <SectionLabel index="05">Questions</SectionLabel>
         <h2 className="font-serif mt-6 text-[clamp(2.5rem,4.4vw,4.25rem)] leading-[1] tracking-[-0.02em] text-paper">
           Good questions,{" "}
@@ -23,9 +22,9 @@ export function HomeFaq() {
           </a>
           .
         </p>
-      </Reveal>
+      </div>
 
-      <Reveal delay={0.08}>
+      <div>
         <Accordion type="single" collapsible className="w-full border-t border-border">
           {homepageFaqs.map((faq, index) => (
             <AccordionItem key={faq.question} value={`item-${index}`}>
@@ -34,7 +33,7 @@ export function HomeFaq() {
             </AccordionItem>
           ))}
         </Accordion>
-      </Reveal>
+      </div>
     </StackedSection>
   );
 }

@@ -120,7 +120,7 @@ export default function EnhanceOldPhotosPage() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-2xl border border-border bg-card p-6 text-sm font-medium hover:border-primary/50 hover:shadow-md transition-all"
+                  className="rounded-2xl border border-border bg-card p-6 text-sm font-medium transition-colors hover:border-primary/50"
                 >
                   {link.label} →
                 </Link>

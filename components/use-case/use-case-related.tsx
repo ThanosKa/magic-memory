@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PageContainer } from "@/components/layout/page-container";
-import { Reveal } from "@/components/layout/reveal";
 
 type UseCaseRelatedProps = {
   links: { href: string; label: string }[];
@@ -11,7 +10,7 @@ export function UseCaseRelated({ links, title = "Related Restorations" }: UseCas
   return (
     <section className="border-t border-paper/10">
       <PageContainer className="py-20 md:py-24">
-        <Reveal>
+        <div>
           <h2 className="font-serif text-[clamp(1.75rem,2.8vw,2.25rem)] leading-[1.1] tracking-[-0.01em] text-paper">
             {title}
           </h2>
@@ -26,7 +25,7 @@ export function UseCaseRelated({ links, title = "Related Restorations" }: UseCas
               </Link>
             ))}
           </div>
-        </Reveal>
+        </div>
       </PageContainer>
     </section>
   );

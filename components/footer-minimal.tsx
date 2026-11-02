@@ -1,18 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Github, Mail, X } from "lucide-react";
 
 export function FooterMinimal() {
   return (
-    <motion.footer
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-      viewport={{ once: true }}
-      className="border-t border-paper/10 bg-ink py-6"
-    >
+    <footer className="border-t border-paper/10 bg-ink py-6">
       <div className="mx-auto flex w-full max-w-[1360px] flex-col gap-4 px-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-14">
         <div className="flex items-center justify-center sm:justify-start">
           <span className="font-serif text-[20px] leading-none text-paper">
@@ -54,6 +45,6 @@ export function FooterMinimal() {
           </p>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }
