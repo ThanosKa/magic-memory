@@ -1,37 +1,81 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/layout/reveal";
 import { Check } from "lucide-react";
 import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { SignUpButton, useUser } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
 
-interface PricingCardsProps {
+type PricingCardsProps = {
   isSignedIn: boolean;
+};
+
+const FREE_FEATURES = [
+  "1 restoration per day",
+  "Resets every 24 hours",
+  "High-quality results",
+  "No credit card required",
+];
+
+type PlanShellProps = {
+  popular?: boolean;
+  index: number;
+  children: ReactNode;
+};
+
+function PlanShell({ popular = false, index, children }: PlanShellProps) {
+  return (
+    <li
+      className={cn(
+        "relative flex flex-col border-ink/12 p-7 sm:p-8",
+        index > 0 && "border-t sm:border-t-0",
+        index % 2 === 1 && "sm:border-l",
+        index >= 2 && "sm:border-t lg:border-t-0",
+        index === 2 && "lg:border-l",
+        popular && "bg-ink text-paper"
+      )}
+    >
+      {children}
+    </li>
+  );
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+type FeatureListProps = {
+  items: string[];
+  popular?: boolean;
+  emphasizeFirst?: boolean;
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+function FeatureList({ items, popular = false, emphasizeFirst = false }: FeatureListProps) {
+  return (
+    <ul className="mt-6 space-y-3">
+      {items.map((item, i) => (
+        <li
+          key={item}
+          className={cn(
+            "flex items-start gap-2.5 text-[14px] leading-[1.5]",
+            popular ? "text-paper/80" : "text-ink/75",
+            emphasizeFirst && i === 0 && "text-[15px] font-medium",
+            emphasizeFirst && i === 0 && (popular ? "text-paper" : "text-ink")
+          )}
+        >
+          <Check
+            className={cn("mt-0.5 size-4 shrink-0", popular ? "text-ember" : "text-ink")}
+            strokeWidth={1.8}
+            aria-hidden="true"
+          />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function PricingCards({ isSignedIn }: PricingCardsProps) {
   const router = useRouter();
@@ -69,120 +113,78 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
     }
   };
 
+  const packages = Object.entries(CREDIT_PACKAGES) as [
+    PackageType,
+    (typeof CREDIT_PACKAGES)[PackageType]
+  ][];
+
   return (
-    <motion.div
-      className="mt-16 grid gap-8 lg:grid-cols-4"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      variants={containerVariants}
-    >
-      {/* Free Tier */}
-      <motion.div variants={cardVariants}>
-        <Card className="relative border-border h-full flex flex-col">
-          <CardHeader className="pb-4">
-            <h3 className="text-xl font-semibold">Free</h3>
-            <div className="mt-4">
-              <span className="text-4xl font-bold">€0</span>
-              <span className="text-muted-foreground">/day</span>
-            </div>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Perfect for trying out
-            </p>
-          </CardHeader>
-          <CardContent className="pb-4">
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
-                <span>1 restoration per day</span>
-              </li>
-              <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
-                <span>Resets every 24 hours</span>
-              </li>
-              <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
-                <span>High-quality results</span>
-              </li>
-              <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
-                <span>No credit card required</span>
-              </li>
-            </ul>
-          </CardContent>
-          <CardFooter className="mt-auto">
+    <Reveal>
+      <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Free Tier */}
+        <PlanShell index={0}>
+          <div className="flex h-6 items-center">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/65">Free</h3>
+          </div>
+          <p className="font-serif mt-5 text-[56px] leading-none tracking-[-0.02em]">
+            €0<span className="font-sans text-[15px] tracking-normal text-ink/65">/day</span>
+          </p>
+          <p className="mt-5 text-[14px] text-ink/65">Perfect for trying out</p>
+          <FeatureList items={FREE_FEATURES} />
+          <div className="mt-auto pt-8">
             {isSignedIn ? (
-              <Button
-                variant="outline"
-                className="w-full bg-transparent"
-                onClick={() => router.push("/restore")}
-              >
+              <Button tone="paper" className="w-full" onClick={() => router.push("/restore")}>
                 Go to Restore
               </Button>
             ) : (
               <SignUpButton mode="modal">
-                <Button
-                  variant="outline"
-                  size="default"
-                  className="w-full bg-transparent"
-                >
+                <Button tone="paper" className="w-full">
                   Get Started Free
                 </Button>
               </SignUpButton>
             )}
-          </CardFooter>
-        </Card>
-      </motion.div>
+          </div>
+        </PlanShell>
 
-      {/* Paid Tiers */}
-      {(
-        Object.entries(CREDIT_PACKAGES) as [
-          PackageType,
-          (typeof CREDIT_PACKAGES)[PackageType]
-        ][]
-      ).map(([key, pkg]) => (
-        <motion.div key={key} variants={cardVariants}>
-          <Card
-            className={`relative h-full flex flex-col ${
-              pkg.popular
-                ? "border-primary shadow-lg ring-1 ring-primary"
-                : "border-border"
-            }`}
-          >
-            {pkg.popular && (
-              <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
-                Most Popular
-              </Badge>
-            )}
-            <CardHeader className="pb-4">
-              <h3 className="text-xl font-semibold">{pkg.name}</h3>
-              <div className="mt-4">
-                <span className="text-4xl font-bold">{pkg.priceDisplay}</span>
-                <span className="text-muted-foreground"> one-time</span>
-              </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {pkg.description}
-              </p>
-            </CardHeader>
-            <CardContent className="pb-4">
-              <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-sm font-medium">
-                  <Check className="h-4 w-4 text-primary" />
-                  <span>{pkg.credits} photo restorations</span>
-                </li>
-                {pkg.features.slice(1).map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-sm">
-                    <Check className="h-4 w-4 text-primary" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-            <CardFooter className="mt-auto">
+        {/* Paid Tiers */}
+        {packages.map(([key, pkg], i) => (
+          <PlanShell key={key} index={i + 1} popular={pkg.popular}>
+            <div className="flex h-6 items-center justify-between gap-3">
+              <h3
+                className={cn(
+                  "font-mono text-[11px] uppercase tracking-[0.2em]",
+                  pkg.popular ? "text-paper/70" : "text-ink/65"
+                )}
+              >
+                {pkg.name}
+              </h3>
+              {pkg.popular && <Badge variant="ember">Most Popular</Badge>}
+            </div>
+            <p className="font-serif mt-5 text-[56px] leading-none tracking-[-0.02em]">
+              {pkg.priceDisplay}
+              <span
+                className={cn(
+                  "font-sans text-[15px] tracking-normal",
+                  pkg.popular ? "text-paper/70" : "text-ink/65"
+                )}
+              >
+                {" "}
+                one-time
+              </span>
+            </p>
+            <p className={cn("mt-5 text-[14px]", pkg.popular ? "text-paper/70" : "text-ink/65")}>
+              {pkg.description}
+            </p>
+            <FeatureList
+              popular={pkg.popular}
+              emphasizeFirst
+              items={[`${pkg.credits} photo restorations`, ...pkg.features.slice(1)]}
+            />
+            <div className="mt-auto pt-8">
               {isSignedIn ? (
                 <Button
+                  tone={pkg.popular ? "dark" : "paper"}
                   className="w-full"
-                  variant={pkg.popular ? "default" : "outline"}
                   onClick={() => handlePurchase(key)}
                   disabled={loading === key}
                 >
@@ -190,19 +192,15 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
                 </Button>
               ) : (
                 <SignUpButton mode="modal">
-                  <Button
-                    variant={pkg.popular ? "default" : "outline"}
-                    size="default"
-                    className="w-full"
-                  >
+                  <Button tone={pkg.popular ? "dark" : "paper"} className="w-full">
                     {isLoaded ? "Sign Up to Purchase" : "Loading..."}
                   </Button>
                 </SignUpButton>
               )}
-            </CardFooter>
-          </Card>
-        </motion.div>
-      ))}
-    </motion.div>
+            </div>
+          </PlanShell>
+        ))}
+      </ul>
+    </Reveal>
   );
 }

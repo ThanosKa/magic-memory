@@ -11,6 +11,11 @@ import {
 } from "@/lib/seo/metadata-helpers";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { LoadingSpinner } from "@/components/ui/loading-states";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { PageContainer } from "@/components/layout/page-container";
+import { StackedSection } from "@/components/layout/stacked-section";
+import { Reveal } from "@/components/layout/reveal";
+import { SectionLabel } from "@/components/layout/section-label";
 
 const Header = dynamic(
   () => import("@/components/header").then((m) => m.Header),
@@ -111,6 +116,40 @@ const pricingFaqs: FAQItem[] = [
     question: "Is my payment information secure?",
     answer:
       "Yes. Payments are processed by Stripe, which is PCI DSS Level 1 certified — the highest level of payment security. We never see or store your card details. Your photos are processed on secure servers and are not stored after your session ends.",
+  },
+];
+
+const NOT_SUBSCRIPTION = [
+  {
+    title: "Buy once, use anytime",
+    body: "Credits stay in your account until you use them. No monthly reset, no forced renewal.",
+  },
+  {
+    title: "As low as €0.09 per photo",
+    body: "Larger packs mean cheaper per-restoration cost. Premium works out to €0.09 per photo — a fraction of professional retouching.",
+  },
+  {
+    title: "Free daily, no card",
+    body: "1 restoration every day, free — no credit card required. Good for trying Magic Memory on a real photo before you buy.",
+  },
+];
+
+const WHICH_PLAN = [
+  {
+    title: "Just trying it out? → Free daily",
+    body: "1 photo per day, no card required. Enough to restore a single important photo or test results before committing.",
+  },
+  {
+    title: "A small batch of family photos? → Starter (€9.99)",
+    body: "30 credits. Good for a single shoebox of old prints or your immediate family's portraits.",
+  },
+  {
+    title: "A full photo album? → Growth (€19.99)",
+    body: "120 credits at €0.17 each. Covers an entire wedding album, a decade of school photos, or a multi-generation family archive.",
+  },
+  {
+    title: "A photographer or genealogist? → Premium (€29.99)",
+    body: "350 credits at €0.09 each — the cheapest per-photo rate. Best for anyone digitizing a long family archive or running client projects.",
   },
 ];
 
@@ -230,122 +269,110 @@ export default async function PricingPage() {
       />
       <Suspense fallback={<PricingPageFallback />}>
         <Header />
-        <main className="flex-1 py-20 sm:py-32">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                AI Photo Restoration Pricing
-              </h1>
-              <p className="mt-4 text-lg text-muted-foreground">
-                One-time credits that never expire. No subscription. Start free.
-              </p>
-            </div>
+        <main className="flex-1">
+          <section>
+            <PageContainer className="pb-24 pt-32 text-center md:pb-32 md:pt-44">
+              <Reveal>
+                <h1 className="font-serif text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-paper">
+                  AI Photo Restoration Pricing
+                </h1>
+                <p className="mx-auto mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-paper/65">
+                  One-time credits that never expire. No subscription. Start free.
+                </p>
+              </Reveal>
+            </PageContainer>
+          </section>
+
+          <StackedSection tone="paper">
             <PricingCards isSignedIn={!!userId} />
+          </StackedSection>
 
-            <section className="mx-auto mt-24 max-w-4xl">
-              <h2 className="text-3xl font-bold tracking-tight text-center mb-4">
-                Not a subscription
-              </h2>
-              <p className="text-lg text-muted-foreground text-center mb-12">
-                Most AI photo tools charge you every month — even when you&apos;re not using them. Magic Memory is different.
-              </p>
-              <div className="grid gap-6 sm:grid-cols-3">
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="text-lg font-semibold mb-2">Buy once, use anytime</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Credits stay in your account until you use them. No monthly reset, no forced renewal.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="text-lg font-semibold mb-2">As low as €0.09 per photo</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Larger packs mean cheaper per-restoration cost. Premium works out to €0.09 per photo — a fraction of professional retouching.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="text-lg font-semibold mb-2">Free daily, no card</h3>
-                  <p className="text-sm text-muted-foreground">
-                    1 restoration every day, free — no credit card required. Good for trying Magic Memory on a real photo before you buy.
-                  </p>
-                </div>
-              </div>
-            </section>
+          <StackedSection className="space-y-24 md:space-y-32">
+            <div className="mx-auto max-w-4xl">
+              <Reveal>
+                <h2 className="font-serif text-center text-[clamp(2rem,3.6vw,3.25rem)] leading-[1] tracking-[-0.02em] text-paper">
+                  Not a subscription
+                </h2>
+                <p className="mx-auto mb-12 mt-5 max-w-[40rem] text-center text-[17px] leading-[1.6] text-paper/65">
+                  Most AI photo tools charge you every month — even when you&apos;re not using them. Magic Memory is different.
+                </p>
+              </Reveal>
+              <ul className="grid gap-4 sm:grid-cols-3">
+                {NOT_SUBSCRIPTION.map((item, i) => (
+                  <Reveal as="li" key={item.title} delay={i * 0.08} className="rounded-2xl border border-border bg-card p-6">
+                    <h3 className="font-serif mb-3 text-[22px] leading-[1.15] text-paper">{item.title}</h3>
+                    <p className="text-[15px] leading-[1.6] text-paper/65">{item.body}</p>
+                  </Reveal>
+                ))}
+              </ul>
+            </div>
 
-            <section className="mx-auto mt-24 max-w-4xl">
-              <h2 className="text-3xl font-bold tracking-tight text-center mb-4">
-                Which plan is right for you?
-              </h2>
-              <p className="text-lg text-muted-foreground text-center mb-12">
-                Pick based on how many photos you plan to restore — not how often.
-              </p>
-              <div className="space-y-4">
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="text-lg font-semibold mb-2">Just trying it out? → Free daily</h3>
-                  <p className="text-sm text-muted-foreground">
-                    1 photo per day, no card required. Enough to restore a single important photo or test results before committing.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="text-lg font-semibold mb-2">A small batch of family photos? → Starter (€9.99)</h3>
-                  <p className="text-sm text-muted-foreground">
-                    30 credits. Good for a single shoebox of old prints or your immediate family&apos;s portraits.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="text-lg font-semibold mb-2">A full photo album? → Growth (€19.99)</h3>
-                  <p className="text-sm text-muted-foreground">
-                    120 credits at €0.17 each. Covers an entire wedding album, a decade of school photos, or a multi-generation family archive.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="text-lg font-semibold mb-2">A photographer or genealogist? → Premium (€29.99)</h3>
-                  <p className="text-sm text-muted-foreground">
-                    350 credits at €0.09 each — the cheapest per-photo rate. Best for anyone digitizing a long family archive or running client projects.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <div className="mx-auto max-w-4xl">
+              <Reveal>
+                <h2 className="font-serif text-center text-[clamp(2rem,3.6vw,3.25rem)] leading-[1] tracking-[-0.02em] text-paper">
+                  Which plan is right for you?
+                </h2>
+                <p className="mx-auto mb-12 mt-5 max-w-[40rem] text-center text-[17px] leading-[1.6] text-paper/65">
+                  Pick based on how many photos you plan to restore — not how often.
+                </p>
+              </Reveal>
+              <ul className="space-y-4">
+                {WHICH_PLAN.map((item, i) => (
+                  <Reveal as="li" key={item.title} delay={i * 0.06} className="rounded-2xl border border-border bg-card p-6">
+                    <h3 className="font-serif mb-2 text-[22px] leading-[1.15] text-paper">{item.title}</h3>
+                    <p className="text-[15px] leading-[1.6] text-paper/65">{item.body}</p>
+                  </Reveal>
+                ))}
+              </ul>
+            </div>
+          </StackedSection>
 
-            <section className="mx-auto mt-24 max-w-4xl">
-              <h2 className="text-3xl font-bold tracking-tight text-center mb-12">
+          <StackedSection tone="paper" className="grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+            <Reveal className="lg:sticky lg:top-28 lg:self-start">
+              <SectionLabel index="01" tone="paper">Questions</SectionLabel>
+              <h2 className="font-serif mt-6 text-[clamp(2.5rem,4.4vw,4.25rem)] leading-[1] tracking-[-0.02em]">
                 Pricing FAQ
               </h2>
-              <div className="space-y-6">
+            </Reveal>
+            <Reveal delay={0.08}>
+              <Accordion type="single" collapsible className="w-full border-t border-ink/12">
                 {pricingFaqs.map((faq, i) => (
-                  <div key={i} className="border-b border-border pb-6 last:border-0">
-                    <h3 className="text-lg font-semibold mb-3">{faq.question}</h3>
-                    <p className="text-muted-foreground">{faq.answer}</p>
-                  </div>
+                  <AccordionItem key={faq.question} value={`item-${i}`}>
+                    <AccordionTrigger>{faq.question}</AccordionTrigger>
+                    <AccordionContent>{faq.answer}</AccordionContent>
+                  </AccordionItem>
                 ))}
-              </div>
-            </section>
+              </Accordion>
+            </Reveal>
+          </StackedSection>
 
-            <section className="mx-auto mt-24 max-w-4xl text-center">
-              <h2 className="text-2xl font-bold tracking-tight mb-4">
+          <StackedSection className="text-center">
+            <Reveal>
+              <h2 className="font-serif text-[clamp(1.75rem,2.8vw,2.5rem)] leading-[1.05] tracking-[-0.02em] text-paper">
                 Compared to other tools
               </h2>
-              <p className="text-muted-foreground mb-8">
+              <p className="mx-auto mb-8 mt-4 max-w-[36rem] text-[17px] leading-[1.6] text-paper/65">
                 See how Magic Memory pricing stacks up against the alternatives before you buy.
               </p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm">
-                <Link href="/vs/remini" className="text-primary hover:underline">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 text-[15px]">
+                <Link href="/vs/remini" className="mm-underline text-paper/80 hover:text-paper">
                   vs Remini
                 </Link>
-                <span className="text-muted-foreground">·</span>
-                <Link href="/vs/myheritage" className="text-primary hover:underline">
+                <span className="text-paper/60" aria-hidden="true">·</span>
+                <Link href="/vs/myheritage" className="mm-underline text-paper/80 hover:text-paper">
                   vs MyHeritage
                 </Link>
-                <span className="text-muted-foreground">·</span>
-                <Link href="/vs/vanceai" className="text-primary hover:underline">
+                <span className="text-paper/60" aria-hidden="true">·</span>
+                <Link href="/vs/vanceai" className="mm-underline text-paper/80 hover:text-paper">
                   vs VanceAI
                 </Link>
-                <span className="text-muted-foreground">·</span>
-                <Link href="/alternatives" className="text-primary hover:underline">
+                <span className="text-paper/60" aria-hidden="true">·</span>
+                <Link href="/alternatives" className="mm-underline text-paper/80 hover:text-paper">
                   Full alternatives comparison
                 </Link>
               </div>
-            </section>
-          </div>
+            </Reveal>
+          </StackedSection>
         </main>
         <Footer />
       </Suspense>
