@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -74,6 +74,19 @@ export function RestorationLens({
   const current = useRef({ x: 0, y: 0 });
   const seeded = useRef(false);
   const raf = useRef(0);
+  const reduceMotion = useRef(false);
+
+  // Pause the idle drift while the lens is off screen (see .mm-lens in
+  // globals.css). Written straight to the DOM so it never re-renders.
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    const observer = new window.IntersectionObserver(([entry]) => {
+      el.dataset.offscreen = entry.isIntersecting ? "false" : "true";
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const paint = () => {
     const el = frameRef.current;
@@ -81,8 +94,7 @@ export function RestorationLens({
       raf.current = 0;
       return;
     }
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const k = reduce ? 1 : LERP;
+    const k = reduceMotion.current ? 1 : LERP;
     current.current.x += (target.current.x - current.current.x) * k;
     current.current.y += (target.current.y - current.current.y) * k;
     el.style.setProperty("--mm-x", `${current.current.x.toFixed(1)}px`);
@@ -106,7 +118,10 @@ export function RestorationLens({
     }
     if (idle) setIdle(false);
     if (mode !== "lens") setMode("lens");
-    if (!raf.current) raf.current = window.requestAnimationFrame(paint);
+    if (!raf.current) {
+      reduceMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      raf.current = window.requestAnimationFrame(paint);
+    }
   };
 
   return (
@@ -143,12 +158,14 @@ export function RestorationLens({
               className="object-cover"
             />
           </div>
-          <div className="mm-lens__ring" aria-hidden="true">
-            <span className="font-mono absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink/70 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-paper/90 backdrop-blur-sm">
-              {captions.ring}
-            </span>
+          <div className="mm-lens__track" aria-hidden="true">
+            <div className="mm-lens__ring">
+              <span className="font-mono absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink/80 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-paper/90">
+                {captions.ring}
+              </span>
+            </div>
           </div>
-          <span className="font-mono pointer-events-none absolute left-3 top-3 rounded-full bg-ink/65 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-paper/85 backdrop-blur-sm sm:left-4 sm:top-4">
+          <span className="font-mono pointer-events-none absolute left-3 top-3 rounded-full bg-ink/75 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-paper/85 sm:left-4 sm:top-4">
             {mode === "restored" ? captions.restored : captions.original}
           </span>
         </div>

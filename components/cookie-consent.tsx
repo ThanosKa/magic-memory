@@ -10,8 +10,10 @@ const COOKIE_CONSENT_KEY = "cookie-consent"
 
 export function CookieConsent() {
     const [showBanner, setShowBanner] = useState(false)
-    // Reduced motion: fade only, no slide.
-    const offset = useReducedMotion() ? 0 : 100
+    const reduceMotion = useReducedMotion()
+    // Full transform strings (not the `y` shorthand) so Framer Motion can run
+    // this on the compositor. Reduced motion: fade only, no slide.
+    const hidden = { transform: `translateY(${reduceMotion ? 0 : 100}px)`, opacity: 0 }
 
     useEffect(() => {
         const consent = localStorage.getItem(COOKIE_CONSENT_KEY)
@@ -35,14 +37,14 @@ export function CookieConsent() {
         <AnimatePresence>
             {showBanner && (
                 <motion.div
-                    initial={{ y: offset, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: offset, opacity: 0 }}
+                    initial={hidden}
+                    animate={{ transform: "translateY(0px)", opacity: 1 }}
+                    exit={hidden}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6"
                 >
                         <div className="mx-auto max-w-4xl">
-                            <div className="flex flex-col gap-4 rounded-2xl border border-paper/15 bg-ink/95 p-6 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+                            <div className="flex flex-col gap-4 rounded-2xl border border-paper/15 bg-ink/95 p-6 shadow-2xl sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex items-start gap-4">
                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-paper/15">
                                     <Cookie className="size-5 text-ember" aria-hidden="true" />
