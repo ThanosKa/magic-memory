@@ -1,74 +1,16 @@
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { HomeHero } from "@/components/home/home-hero";
+import { PlainWordsSection } from "@/components/home/plain-words-section";
+import { HowItWorks } from "@/components/home/how-it-works";
+import { AudienceSection } from "@/components/home/audience-section";
+import { PricingPreview } from "@/components/home/pricing-preview";
+import { HomeFaq } from "@/components/home/home-faq";
+import { FinalCta } from "@/components/home/final-cta";
+import { homeMono, homeSerif } from "@/components/home/fonts";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd } from "@/lib/seo/metadata-helpers";
 import { homepageFaqs } from "@/lib/seo/faq-data";
-import { LoadingSpinner } from "@/components/ui/loading-states";
-
-const Header = dynamic(
-  () => import("@/components/header").then((m) => m.Header),
-  {
-    ssr: true,
-  }
-);
-
-const Footer = dynamic(
-  () => import("@/components/footer").then((m) => m.Footer),
-  {
-    ssr: true,
-  }
-);
-
-const HeroSection = dynamic(
-  () => import("@/components/landing/hero-section").then((m) => m.HeroSection),
-  {
-    ssr: true,
-  }
-);
-
-const HowItWorksSection = dynamic(
-  () =>
-    import("@/components/landing/how-it-works-section").then(
-      (m) => m.HowItWorksSection
-    ),
-  {
-    ssr: true,
-  }
-);
-
-const FeaturesSection = dynamic(
-  () =>
-    import("@/components/landing/features-section").then(
-      (m) => m.FeaturesSection
-    ),
-  {
-    ssr: true,
-  }
-);
-
-const ExploreSection = dynamic(
-  () =>
-    import("@/components/landing/explore-section").then(
-      (m) => m.ExploreSection
-    ),
-  {
-    ssr: true,
-  }
-);
-
-const FAQSection = dynamic(
-  () => import("@/components/landing/faq-section").then((m) => m.FAQSection),
-  {
-    ssr: true,
-  }
-);
-
-const CTASection = dynamic(
-  () => import("@/components/landing/cta-section").then((m) => m.CTASection),
-  {
-    ssr: true,
-  }
-);
 
 export const metadata: Metadata = {
   title: "Free AI Photo Restoration — Restore Old Photos in 15 Seconds",
@@ -133,7 +75,7 @@ export default function Page() {
   const faqJsonLd = faqPageJsonLd(homepageFaqs);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className={`mm-home flex min-h-screen flex-col ${homeSerif.variable} ${homeMono.variable}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -142,26 +84,17 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
-      <Suspense fallback={<LandingFallback />}>
-        <Header />
-        <main className="flex-1">
-          <HeroSection />
-          <HowItWorksSection />
-          <FeaturesSection />
-          <ExploreSection />
-          <FAQSection />
-          <CTASection />
-        </main>
-        <Footer />
-      </Suspense>
-    </div>
-  );
-}
-
-function LandingFallback() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <LoadingSpinner size="lg" />
+      <Header />
+      <main className="flex-1">
+        <HomeHero />
+        <PlainWordsSection />
+        <HowItWorks />
+        <AudienceSection />
+        <PricingPreview />
+        <HomeFaq />
+        <FinalCta />
+      </main>
+      <Footer />
     </div>
   );
 }

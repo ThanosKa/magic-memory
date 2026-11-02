@@ -188,3 +188,188 @@
   font-size: 1rem;
   line-height: 1.5;
 }
+
+/* ------------------------------------------------------------------ */
+/* Home (marketing landing page) — "darkroom" theme, scoped to .mm-home */
+/* ------------------------------------------------------------------ */
+
+@property --mm-x {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 46%;
+}
+
+@property --mm-y {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+@property --mm-r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+/* Re-map the shadcn tokens so the shared header/footer adopt the theme. */
+.mm-home {
+  --background: #0d0b09;
+  --foreground: #f1eadf;
+  --card: #14110e;
+  --card-foreground: #f1eadf;
+  --popover: #14110e;
+  --popover-foreground: #f1eadf;
+  --primary: #f1eadf;
+  --primary-foreground: #0d0b09;
+  --secondary: #1d1915;
+  --secondary-foreground: #f1eadf;
+  --muted: #16130f;
+  --muted-foreground: #a69d90;
+  --accent: #1d1915;
+  --accent-foreground: #f1eadf;
+  --border: rgb(241 234 223 / 0.12);
+  --input: rgb(241 234 223 / 0.12);
+  --ring: #ff5a36;
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html:has(.mm-home),
+body:has(.mm-home) {
+  background: #0d0b09;
+  color-scheme: dark;
+}
+
+.mm-home ::selection {
+  background: rgb(255 90 54 / 0.35);
+  color: #fff;
+}
+
+.mm-serif {
+  font-family: var(--font-mm-serif), "Times New Roman", Georgia, serif;
+  font-weight: 400;
+}
+
+.mm-mono {
+  font-family: var(--font-mm-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Link underline that grows from the left on hover. */
+.mm-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mm-underline:hover,
+.group:hover .mm-underline {
+  background-size: 100% 1px;
+}
+
+/* Film-strip sprocket holes. */
+.mm-sprockets {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 8px,
+    #f1eadf 8px 18px,
+    transparent 18px 26px
+  );
+  background-size: 26px 7px;
+  background-repeat: repeat-x;
+  background-position: 0 50%;
+  opacity: 0.85;
+  border-radius: 2px;
+}
+
+/* The restoration lens (hero signature). */
+.mm-lens {
+  --mm-r: 0px;
+  touch-action: pan-y;
+  transition: --mm-r 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mm-lens[data-mode="lens"] {
+  --mm-r: clamp(80px, 11vw, 150px);
+}
+.mm-lens[data-mode="restored"] {
+  --mm-r: 2000px;
+}
+.mm-lens[data-mode="lens"][data-idle="true"] {
+  animation: mm-drift 9s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite alternate both;
+}
+.mm-lens__reveal {
+  -webkit-mask-image: radial-gradient(
+    circle var(--mm-r) at var(--mm-x) var(--mm-y),
+    #000 0%,
+    #000 58%,
+    rgb(0 0 0 / 0.7) 74%,
+    rgb(0 0 0 / 0.25) 88%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--mm-r) at var(--mm-x) var(--mm-y),
+    #000 0%,
+    #000 58%,
+    rgb(0 0 0 / 0.7) 74%,
+    rgb(0 0 0 / 0.25) 88%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.mm-lens__ring {
+  position: absolute;
+  left: var(--mm-x);
+  top: var(--mm-y);
+  width: calc(var(--mm-r) * 1.5);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 90 54 / 0.75);
+  box-shadow: 0 0 0 1px rgb(13 11 9 / 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mm-lens[data-mode="lens"] .mm-lens__ring {
+  opacity: 1;
+}
+
+@keyframes mm-drift {
+  0% {
+    --mm-x: 44%;
+    --mm-y: 52%;
+  }
+  45% {
+    --mm-x: 60%;
+    --mm-y: 44%;
+  }
+  100% {
+    --mm-x: 77%;
+    --mm-y: 40%;
+  }
+}
+
+.mm-hint-touch {
+  display: none;
+}
+@media (hover: none) {
+  .mm-hint-hover {
+    display: none;
+  }
+  .mm-hint-touch {
+    display: inline;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-lens {
+    transition: none;
+  }
+  .mm-lens[data-mode="lens"][data-idle="true"] {
+    animation: none;
+  }
+}
