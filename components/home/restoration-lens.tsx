@@ -129,7 +129,7 @@ export function RestorationLens({
       <div className="rounded-[4px] bg-print p-2 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.85),0_2px_6px_rgba(0,0,0,0.3)] sm:p-3">
         <div
           ref={frameRef}
-          className="mm-lens relative w-full cursor-crosshair select-none overflow-hidden bg-scrim"
+          className="mm-lens relative w-full cursor-crosshair touch-pan-y select-none overflow-hidden bg-scrim"
           style={{ aspectRatio }}
           data-mode={mode}
           data-idle={idle}
@@ -184,7 +184,7 @@ export function RestorationLens({
               aria-pressed={mode === item.value}
               onClick={() => setMode(item.value)}
               className={cn(
-                "font-mono min-h-9 rounded-full px-3.5 text-[11px] uppercase tracking-[0.16em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember",
+                "font-mono min-h-11 rounded-full px-3.5 text-[11px] uppercase tracking-[0.16em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember",
                 mode === item.value
                   ? "bg-paper text-ink"
                   : "text-paper/60 hover:text-paper"
@@ -194,7 +194,7 @@ export function RestorationLens({
             </button>
           ))}
         </div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/45">
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/60">
           <span className="mm-hint-hover">Move over the photo</span>
           <span className="mm-hint-touch">Drag across the photo</span>
           {captions.note ? (

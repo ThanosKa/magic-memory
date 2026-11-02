@@ -24,7 +24,7 @@ export function FinalCta({ title, note, action = <StartButton /> }: FinalCtaProp
         <div className="mt-10 flex flex-col items-center gap-5">
           {action}
           {note && (
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/45">{note}</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/60">{note}</p>
           )}
         </div>
       </PageContainer>

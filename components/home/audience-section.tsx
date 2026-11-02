@@ -68,7 +68,7 @@ export function AudienceSection() {
           </p>
         </div>
         <div className="bg-surface p-7 sm:p-9">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/45">Less helpful for</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/60">Less helpful for</p>
           <p className="mt-4 text-[17px] leading-[1.6] text-paper/65">
             Landscapes, buildings or documents with no people in them. The
             model is built to restore faces, so that&rsquo;s where it shines.

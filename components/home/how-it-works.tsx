@@ -12,7 +12,7 @@ function UploadVisual() {
     <div className="flex h-full flex-col items-center justify-center gap-3 rounded-[3px] border border-dashed border-paper/25 bg-paper/[0.03] px-4 text-center">
       <ImageUp className="size-7 text-paper/70" strokeWidth={1.5} aria-hidden="true" />
       <p className="text-[14px] text-paper/80">Drop a photo here</p>
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/45">
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/60">
         JPEG · PNG · WebP · up to 10&nbsp;MB
       </p>
     </div>

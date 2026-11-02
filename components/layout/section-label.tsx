@@ -15,7 +15,7 @@ export function SectionLabel({ index, children, tone = "dark", className }: Sect
     <p
       className={cn(
         "font-mono flex items-center gap-3 text-[11px] uppercase tracking-[0.22em]",
-        tone === "dark" ? "text-paper/50" : "text-ink/55",
+        tone === "dark" ? "text-paper/60" : "text-ink/65",
         className
       )}
     >

@@ -36,6 +36,8 @@
   --paper: #f1eadf;
   --paper-deep: #ebe2d2;
   --ember: #ff5a36;
+  /* Ember for small text on the `paper` contrast sections (AA on cream). */
+  --ember-on-paper: #b0341a;
 
   /* Semantic colours that are not plain palette references */
   --muted-foreground: #a69d90;
@@ -54,6 +56,8 @@
   --paper: #050403;
   --paper-deep: #26211c;
   --ember: #ad3418;
+  /* In light the paper sections are ink, so the bright ember reads again. */
+  --ember-on-paper: #ff5a36;
 
   --muted-foreground: #5c544a;
   --destructive: #b3262d;
@@ -235,6 +239,11 @@
 
 .article-body .not-prose {
   all: revert;
+}
+
+/* `all: revert` also drops utility classes; keep wide tables scrollable. */
+.article-body div.not-prose {
+  overflow-x: auto;
 }
 
 .not-prose {

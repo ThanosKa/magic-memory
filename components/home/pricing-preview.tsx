@@ -72,7 +72,7 @@ export function PricingPreview() {
                 <p
                   className={cn(
                     "font-mono text-[11px] uppercase tracking-[0.2em]",
-                    plan.popular ? "text-paper/60" : "text-ink/55"
+                    plan.popular ? "text-paper/60" : "text-ink/65"
                   )}
                 >
                   {plan.name}
@@ -94,7 +94,7 @@ export function PricingPreview() {
       </div>
 
       <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-[44rem] text-[13px] leading-[1.6] text-ink/50">
+        <p className="max-w-[44rem] text-[13px] leading-[1.6] text-ink/65">
           For comparison: Remini costs $9.99 a week and MyHeritage&rsquo;s
           enhancer comes with genealogy plans from $119 a year (prices checked
           May 2026).

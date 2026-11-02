@@ -35,7 +35,7 @@ function navLinkClass(isActive: boolean, variant: "desktop" | "mobile") {
 
 function Brand() {
   return (
-    <Link href="/" className="focus-ring flex items-center gap-2.5 rounded-md">
+    <Link href="/" className="focus-ring flex min-h-11 items-center gap-2.5 rounded-md">
       <BrandMark className="text-paper" />
       <span className="font-serif text-[22px] leading-none tracking-[-0.01em] text-paper">
         Magic Memory

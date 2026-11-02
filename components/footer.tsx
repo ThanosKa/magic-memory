@@ -2,6 +2,26 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
 import { PageContainer } from "@/components/layout/page-container";
 
+// The underline sits on an inline span so it follows wrapped text line by line
+// instead of stretching across the whole column.
+function FooterLink({ href, children, ...rest }: React.ComponentProps<"a">) {
+  const external = typeof href === "string" && /^(https?:|mailto:)/.test(href);
+  const className = "focus-ring group text-sm text-paper/70 transition-colors hover:text-paper";
+  const label = <span className="mm-underline">{children}</span>;
+  if (external) {
+    return (
+      <a href={href} className={className} {...rest}>
+        {label}
+      </a>
+    );
+  }
+  return (
+    <Link href={href ?? "/"} className={className}>
+      {label}
+    </Link>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="border-t border-paper/10 bg-ink">
@@ -20,65 +40,65 @@ export function Footer() {
           <div className="space-y-5 text-center md:text-left">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Product</h3>
             <nav className="flex flex-col items-center gap-3 md:items-start">
-              <Link href="/" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Home</Link>
-              <Link href="/pricing" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Pricing</Link>
-              <Link href="/restore" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore a photo</Link>
-              <Link href="/blog" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Blog</Link>
-              <Link href="/blog/best-ai-photo-restoration" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Best AI photo restoration 2026</Link>
-              <Link href="/blog/ai-photo-restoration-vs-photoshop" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">AI vs Photoshop</Link>
+              <FooterLink href="/">Home</FooterLink>
+              <FooterLink href="/pricing">Pricing</FooterLink>
+              <FooterLink href="/restore">Restore a photo</FooterLink>
+              <FooterLink href="/blog">Blog</FooterLink>
+              <FooterLink href="/blog/best-ai-photo-restoration">Best AI photo restoration 2026</FooterLink>
+              <FooterLink href="/blog/ai-photo-restoration-vs-photoshop">AI vs Photoshop</FooterLink>
             </nav>
           </div>
 
           <div className="space-y-5 text-center md:text-left">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">By photo type</h3>
             <nav className="flex flex-col items-center gap-3 md:items-start">
-              <Link href="/restore-old-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore old photos</Link>
-              <Link href="/restore-family-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore family photos</Link>
-              <Link href="/restore-wedding-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore wedding photos</Link>
-              <Link href="/restore-vintage-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore vintage photos</Link>
-              <Link href="/restore-portrait-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore portrait photos</Link>
-              <Link href="/restore-faded-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore faded photos</Link>
-              <Link href="/restore-black-and-white-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore B&amp;W photos</Link>
-              <Link href="/restore-damaged-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Restore damaged photos</Link>
-              <Link href="/fix-blurry-photos" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Fix blurry photos</Link>
+              <FooterLink href="/restore-old-photos">Restore old photos</FooterLink>
+              <FooterLink href="/restore-family-photos">Restore family photos</FooterLink>
+              <FooterLink href="/restore-wedding-photos">Restore wedding photos</FooterLink>
+              <FooterLink href="/restore-vintage-photos">Restore vintage photos</FooterLink>
+              <FooterLink href="/restore-portrait-photos">Restore portrait photos</FooterLink>
+              <FooterLink href="/restore-faded-photos">Restore faded photos</FooterLink>
+              <FooterLink href="/restore-black-and-white-photos">Restore B&amp;W photos</FooterLink>
+              <FooterLink href="/restore-damaged-photos">Restore damaged photos</FooterLink>
+              <FooterLink href="/fix-blurry-photos">Fix blurry photos</FooterLink>
             </nav>
           </div>
 
           <div className="space-y-5 text-center md:text-left">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Compare</h3>
             <nav className="flex flex-col items-center gap-3 md:items-start">
-              <Link href="/alternatives" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">All alternatives</Link>
-              <Link href="/vs/remini" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">vs Remini</Link>
-              <Link href="/vs/myheritage" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">vs MyHeritage</Link>
-              <Link href="/vs/vanceai" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">vs VanceAI</Link>
-              <Link href="/alternatives/remini" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Remini alternative</Link>
-              <Link href="/alternatives/myheritage" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">MyHeritage alternative</Link>
-              <Link href="/alternatives/vanceai" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">VanceAI alternative</Link>
+              <FooterLink href="/alternatives">All alternatives</FooterLink>
+              <FooterLink href="/vs/remini">vs Remini</FooterLink>
+              <FooterLink href="/vs/myheritage">vs MyHeritage</FooterLink>
+              <FooterLink href="/vs/vanceai">vs VanceAI</FooterLink>
+              <FooterLink href="/alternatives/remini">Remini alternative</FooterLink>
+              <FooterLink href="/alternatives/myheritage">MyHeritage alternative</FooterLink>
+              <FooterLink href="/alternatives/vanceai">VanceAI alternative</FooterLink>
             </nav>
           </div>
 
           <div className="space-y-5 text-center md:text-left">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Learn</h3>
             <nav className="flex flex-col items-center gap-3 md:items-start">
-              <Link href="/glossary/photo-restoration" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">What is photo restoration?</Link>
-              <Link href="/glossary/gfpgan" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">What is GFPGAN?</Link>
-              <Link href="/glossary/face-restoration" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">What is face restoration?</Link>
-              <Link href="/glossary/image-upscaling" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">What is image upscaling?</Link>
-              <Link href="/glossary/ai-photo-enhancement" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">What is AI photo enhancement?</Link>
-              <Link href="/for/photographers" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">For photographers</Link>
-              <Link href="/for/genealogists" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">For genealogists</Link>
-              <Link href="/for/real-estate" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">For real estate</Link>
+              <FooterLink href="/glossary/photo-restoration">What is photo restoration?</FooterLink>
+              <FooterLink href="/glossary/gfpgan">What is GFPGAN?</FooterLink>
+              <FooterLink href="/glossary/face-restoration">What is face restoration?</FooterLink>
+              <FooterLink href="/glossary/image-upscaling">What is image upscaling?</FooterLink>
+              <FooterLink href="/glossary/ai-photo-enhancement">What is AI photo enhancement?</FooterLink>
+              <FooterLink href="/for/photographers">For photographers</FooterLink>
+              <FooterLink href="/for/genealogists">For genealogists</FooterLink>
+              <FooterLink href="/for/real-estate">For real estate</FooterLink>
             </nav>
           </div>
 
           <div className="space-y-5 text-center md:text-left">
             <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Connect</h3>
             <nav className="flex flex-col items-center gap-3 md:items-start">
-              <a href="https://github.com/ThanosKa/magic-memory" target="_blank" rel="noopener noreferrer" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">GitHub</a>
-              <a href="https://twitter.com/KazakisThanos" target="_blank" rel="noopener noreferrer" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Twitter / X</a>
-              <a href="mailto:kazakis.th@gmail.com" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Support</a>
-              <Link href="/terms" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Terms</Link>
-              <Link href="/privacy" className="focus-ring mm-underline text-sm text-paper/70 transition-colors hover:text-paper">Privacy</Link>
+              <FooterLink href="https://github.com/ThanosKa/magic-memory" target="_blank" rel="noopener noreferrer">GitHub</FooterLink>
+              <FooterLink href="https://twitter.com/KazakisThanos" target="_blank" rel="noopener noreferrer">Twitter / X</FooterLink>
+              <FooterLink href="mailto:kazakis.th@gmail.com">Support</FooterLink>
+              <FooterLink href="/terms">Terms</FooterLink>
+              <FooterLink href="/privacy">Privacy</FooterLink>
             </nav>
           </div>
         </div>

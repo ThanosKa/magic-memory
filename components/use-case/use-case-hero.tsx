@@ -49,9 +49,9 @@ export function UseCaseHero({ headline, subheadline, ctaHref = "/" }: UseCaseHer
             </Button>
             <Link
               href="/pricing"
-              className="mm-underline text-[15px] font-medium text-paper/80 transition-colors hover:text-paper"
+              className="focus-ring group inline-flex min-h-11 items-center text-[15px] font-medium text-paper/80 transition-colors hover:text-paper"
             >
-              View Pricing
+              <span className="mm-underline">View Pricing</span>
             </Link>
           </div>
           <p className="font-mono mt-8 text-[11px] uppercase tracking-[0.16em] text-paper/60">

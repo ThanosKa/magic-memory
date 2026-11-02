@@ -22,7 +22,7 @@ export function StackedSection({ children, tone = "dark", id, className }: Stack
       id={id}
       className={cn(
         "relative isolate -mt-10 rounded-t-[40px] md:rounded-t-[56px]",
-        tone === "dark" ? "bg-ink text-paper" : "bg-paper text-ink"
+        tone === "dark" ? "bg-ink text-paper" : "bg-paper text-ink [--ember:var(--ember-on-paper)]"
       )}
     >
       <div className={cn(pageContainerClass, "pb-24 pt-20 md:pb-32 md:pt-28", className)}>

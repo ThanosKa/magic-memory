@@ -47,13 +47,13 @@ export function HomeHero() {
             <StartButton />
             <Link
               href="/pricing"
-              className="mm-underline text-[15px] font-medium text-paper/80 transition-colors hover:text-paper"
+              className="focus-ring group inline-flex min-h-11 items-center text-[15px] font-medium text-paper/80 transition-colors hover:text-paper"
             >
-              See pricing
+              <span className="mm-underline">See pricing</span>
             </Link>
           </div>
 
-          <ul className="font-mono mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-paper/45">
+          <ul className="font-mono mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-paper/60">
             <li>1 free photo a day</li>
             <li>No credit card</li>
             <li>Nothing to install</li>
