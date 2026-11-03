@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useDropzone } from "react-dropzone";
 import useSWR, { mutate } from "swr";
 import { Download, ImageIcon, RefreshCw } from "lucide-react";
-import { RestorationLens } from "@/components/home/restoration-lens";
+import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { SectionLabel } from "@/components/layout/section-label";
 import {
   OutOfCreditsNote,
@@ -389,11 +389,10 @@ export function RestoreUploader() {
 
         {preview && restoredImage && (
           <div className="mx-auto w-full" style={photoWidthStyle(aspectRatio)}>
-            <RestorationLens
+            <BeforeAfterSlider
               key={restoredImage}
-              before={{ src: preview, alt: "Original photo" }}
-              after={{ src: restoredImage, alt: "Restored photo" }}
-              captions={{ original: "Before", restored: "After", ring: "After" }}
+              before={{ src: preview, alt: "Original photo", label: "Before" }}
+              after={{ src: restoredImage, alt: "Restored photo", label: "After" }}
               aspectRatio={aspectRatio}
               sizes="(max-width: 1024px) 100vw, 58vw"
               unoptimized

@@ -3,8 +3,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs"
 import path from "node:path"
 
 /**
- * Motion guard: people who ask for reduced motion get no entrance animations
- * and no lens drift.
+ * Motion guard: people who ask for reduced motion get no entrance animations.
  *
  * - Every CSS animation declared in the theme file is switched off inside a
  *   `prefers-reduced-motion: reduce` block.

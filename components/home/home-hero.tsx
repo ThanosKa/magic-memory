@@ -1,4 +1,4 @@
-import { RestorationLens } from "@/components/home/restoration-lens";
+import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { PageContainer } from "@/components/layout/page-container";
 import { SecondaryLink } from "@/components/layout/secondary-link";
 import { StartButton } from "@/components/layout/start-button";
@@ -56,21 +56,18 @@ export function HomeHero() {
         </div>
 
         <div className="mm-rise mm-rise--frame">
-          <RestorationLens
+          <BeforeAfterSlider
             before={{
               src: "/couple-before.jpg",
               alt: "Original photo: a blurry snapshot of a couple at a night fair",
+              label: "Original",
             }}
             after={{
               src: "/couple-after.png",
               alt: "The same photo restored: faces are sharp, with clear eyes and skin detail",
+              label: "Restored",
             }}
-            captions={{
-              original: "Original scan",
-              restored: "Restored by Magic Memory",
-              ring: "Restored",
-              note: "Sample restoration",
-            }}
+            note="Sample restoration"
             preload
           />
         </div>

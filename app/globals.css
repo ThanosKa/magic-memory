@@ -7,24 +7,6 @@
 /* then the shadcn semantic tokens built from it.                      */
 /* ------------------------------------------------------------------ */
 
-@property --mm-x {
-  syntax: "<length-percentage>";
-  inherits: true;
-  initial-value: 46%;
-}
-
-@property --mm-y {
-  syntax: "<length-percentage>";
-  inherits: true;
-  initial-value: 50%;
-}
-
-@property --mm-r {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-
 :root, :root[data-theme="dark"] {
   /* Palette (dark, the default). `ink` is the page, `paper` is the text and
      the contrast sections; light swaps them, so components never need a
@@ -316,109 +298,9 @@
   border-radius: 2px;
 }
 
-/* The restoration lens (hero signature). */
-.mm-lens {
-  --mm-r: 0px;
-  touch-action: pan-y;
-  transition: --mm-r 0.6s var(--ease-out);
-}
-.mm-lens[data-mode="lens"] {
-  --mm-r: clamp(80px, 11vw, 150px);
-}
-.mm-lens[data-mode="restored"] {
-  --mm-r: 2000px;
-}
-.mm-lens[data-mode="lens"][data-idle="true"] {
-  animation: mm-drift 9s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite alternate both;
-}
-/* The drift repaints the mask every frame on the main thread; stop it while
-   the lens is scrolled out of view (data-offscreen is set by the component). */
-.mm-lens[data-mode="lens"][data-idle="true"][data-offscreen="true"] {
-  animation-play-state: paused;
-}
-.mm-lens__reveal {
-  -webkit-mask-image: radial-gradient(
-    circle var(--mm-r) at var(--mm-x) var(--mm-y),
-    #000 0%,
-    #000 58%,
-    rgb(0 0 0 / 0.7) 74%,
-    rgb(0 0 0 / 0.25) 88%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle var(--mm-r) at var(--mm-x) var(--mm-y),
-    #000 0%,
-    #000 58%,
-    rgb(0 0 0 / 0.7) 74%,
-    rgb(0 0 0 / 0.25) 88%,
-    transparent 100%
-  );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-/* Full-frame layer that carries the ring. Moving it with `translate` (whose
-   percentages match the frame because the layer is frame-sized) avoids a
-   layout pass on every pointer frame, which `left`/`top` would cost. */
-.mm-lens__track {
-  position: absolute;
-  inset: 0;
-  translate: var(--mm-x) var(--mm-y);
-  pointer-events: none;
-}
-.mm-lens__ring {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: calc(var(--mm-r) * 1.5);
-  aspect-ratio: 1;
-  translate: -50% -50%;
-  border-radius: 9999px;
-  border: 1px solid rgb(255 90 54 / 0.75);
-  box-shadow: 0 0 0 1px rgb(13 11 9 / 0.25);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s var(--ease-out);
-}
-.mm-lens[data-mode="lens"] .mm-lens__ring {
-  opacity: 1;
-}
-
-@keyframes mm-drift {
-  0% {
-    --mm-x: 44%;
-    --mm-y: 52%;
-  }
-  45% {
-    --mm-x: 60%;
-    --mm-y: 44%;
-  }
-  100% {
-    --mm-x: 77%;
-    --mm-y: 40%;
-  }
-}
-
-.mm-hint-touch {
-  display: none;
-}
-@media (hover: none) {
-  .mm-hint-hover {
-    display: none;
-  }
-  .mm-hint-touch {
-    display: inline;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .mm-rise,
   .mm-rise--frame {
-    animation: none;
-  }
-  .mm-lens {
-    transition: none;
-  }
-  .mm-lens[data-mode="lens"][data-idle="true"] {
     animation: none;
   }
 }

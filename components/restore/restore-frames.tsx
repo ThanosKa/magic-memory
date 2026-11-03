@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Caps a photo's width so a tall portrait still fits the viewport.
- * Used for both the preview and the lens so the frame does not jump
+ * Used for both the preview and the slider so the frame does not jump
  * when the result arrives.
  */
 export function photoWidthStyle(aspectRatio: number): React.CSSProperties {
