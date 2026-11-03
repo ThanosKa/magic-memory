@@ -129,7 +129,9 @@ function HeaderWithClerk() {
                 </Link>
               ))}
 
-            {isLoaded && !isSignedIn && (
+            {/* Rendered while Clerk is still loading too, so the header is never
+                empty; Clerk queues a click until it has loaded. */}
+            {!isSignedIn && (
               <div className="hidden items-center gap-2 md:flex">
                 <SignInButton mode="modal">
                   <Button variant="ghost" size="sm">
