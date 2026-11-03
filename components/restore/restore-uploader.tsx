@@ -2,23 +2,20 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import Image from "next/image";
-import Link from "next/link";
 import { useDropzone } from "react-dropzone";
 import useSWR, { mutate } from "swr";
+import { Download, ImageIcon, RefreshCw } from "lucide-react";
+import { BeforeAfterSlider } from "@/components/before-after-slider";
+import { SectionLabel } from "@/components/layout/section-label";
 import {
-  CloudUpload,
-  Download,
-  ImageIcon,
-  LayoutGrid,
-  RefreshCw,
-  SlidersHorizontal,
-} from "lucide-react";
-import { ImageComparisonSlider } from "./image-comparison-slider";
+  OutOfCreditsNote,
+  PhotoFrame,
+  UploadFrame,
+  photoWidthStyle,
+} from "./restore-frames";
 import { Button } from "@/components/ui/button";
 import { ErrorAlert, type ErrorType } from "@/components/ui/error-alert";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 type RestorationStage = "idle" | "restoring" | "complete";
@@ -113,6 +110,7 @@ export function RestoreUploader() {
   const [originalFilename, setOriginalFilename] = useState<string>("photo");
   const [imageDimensions, setImageDimensions] =
     useState<ImageDimensions | null>(null);
+  const [isPreparing, setIsPreparing] = useState(false);
 
   const { data: creditsData } = useSWR("/api/credits", fetcher);
   const totalCredits = creditsData?.data?.totalCredits ?? 0;
@@ -185,6 +183,7 @@ export function RestoreUploader() {
         URL.revokeObjectURL(preview);
       }
 
+      setIsPreparing(true);
       try {
         const { file: processedFile, width, height } =
           await compressImage(selectedFile);
@@ -199,6 +198,8 @@ export function RestoreUploader() {
           type: "generic",
           message: "Could not process this image. Please try a different photo.",
         });
+      } finally {
+        setIsPreparing(false);
       }
     },
     [preview]
@@ -335,244 +336,95 @@ export function RestoreUploader() {
     imageDimensions && imageDimensions.height
       ? imageDimensions.width / imageDimensions.height
       : 1;
-  const displayWidth = imageDimensions?.width ?? 1200;
-  const displayHeight = imageDimensions?.height ?? 800;
-  const comparisonContainerClass = "w-full max-w-5xl mx-auto px-0 sm:px-4";
+  const step = restoredImage
+    ? { index: "03", label: "Compare and download" }
+    : preview
+      ? { index: "02", label: "Restore" }
+      : { index: "01", label: "Upload" };
 
   return (
-    <div className="mt-4 space-y-8">
-      {!restoredImage && !isProcessing && (
-        <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Restore Your Photo
-          </h1>
-          <p className="mt-4 text-muted-foreground">
+    <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-x-16 lg:gap-y-10">
+      <div className="max-w-xl lg:self-end">
+        <SectionLabel index={step.index}>{step.label}</SectionLabel>
+        <h1 className="font-serif mt-6 text-[clamp(2.75rem,5.6vw,5rem)] leading-[0.95] tracking-[-0.02em] text-paper">
+          Restore <span className="italic text-paper/70">Your Photo</span>
+        </h1>
+        {!restoredImage && !isProcessing && (
+          <p className="mt-6 max-w-[30rem] text-[17px] leading-[1.6] text-paper/70">
             Upload an old, blurry, or damaged photo and let AI work its magic.
           </p>
-        </div>
-      )}
+        )}
 
-      {error && (
-        <div className="mx-auto max-w-lg">
-          <ErrorAlert
-            type={error.type}
-            message={error.message}
-            freeResetTime={freeResetTime}
-            onDismiss={() => setError(null)}
-            onRetry={error.type === "generic" ? handleRestore : undefined}
-          />
-        </div>
-      )}
-
-      {!preview && (
-        <div className="relative group w-full max-w-2xl mx-auto">
-          {/* Gradient glow effect */}
-          <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-50 blur transition duration-500 group-hover:opacity-100" />
-
-          {/* Main upload container */}
-          <div className="relative rounded-xl bg-background p-2 ring-1 ring-border">
-            <div
-              {...getRootProps()}
-              className={`flex justify-center rounded-md border mt-2 border-dashed border-input px-6 py-12 transition-colors ${
-                isDragActive
-                  ? "bg-accent/50"
-                  : "hover:bg-muted/50 cursor-pointer"
-              }`}
-            >
-              <input {...getInputProps()} />
-              <div className="text-center relative w-full">
-                <CloudUpload className="mx-auto h-12 w-12 text-muted-foreground" />
-                <div className="mt-4 flex text-sm leading-6 text-muted-foreground justify-center">
-                  <p>Drag and drop or</p>
-                  <span className="relative cursor-pointer rounded-sm pl-1 font-medium text-primary hover:underline hover:underline-offset-4">
-                    choose file
-                  </span>
-                  <p className="pl-1">to upload</p>
-                </div>
-                <p className="mt-2 text-xs text-muted-foreground">
-                  JPG, PNG, WebP up to 20MB
-                </p>
-              </div>
-            </div>
+        {error && (
+          <div className="mt-8">
+            <ErrorAlert
+              type={error.type}
+              message={error.message}
+              freeResetTime={freeResetTime}
+              onDismiss={() => setError(null)}
+              onRetry={error.type === "generic" ? handleRestore : undefined}
+            />
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
+      <div className={cn(preview && "lg:row-span-2")}>
+        {!preview && (
+          <UploadFrame
+            rootProps={getRootProps()}
+            inputProps={getInputProps()}
+            isDragActive={isDragActive}
+            isPreparing={isPreparing}
+          />
+        )}
+
+        {preview && !restoredImage && (
+          <PhotoFrame
+            src={preview}
+            alt="Original photo"
+            aspectRatio={aspectRatio}
+            progress={isProcessing ? progress : undefined}
+          />
+        )}
+
+        {preview && restoredImage && (
+          <div className="mx-auto w-full" style={photoWidthStyle(aspectRatio)}>
+            <BeforeAfterSlider
+              key={restoredImage}
+              before={{ src: preview, alt: "Original photo", label: "Before" }}
+              after={{ src: restoredImage, alt: "Restored photo", label: "After" }}
+              aspectRatio={aspectRatio}
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              unoptimized
+            />
+          </div>
+        )}
+      </div>
 
       {preview && (
-        <div className="space-y-6">
-          {!hasCredits && (
-            <div className="text-center">
-              <p className="text-muted-foreground">
-                You have <strong>0 generations</strong> left.{" "}
-                <Link href="/pricing" className="text-primary hover:underline">
-                  Buy more credits here.
-                </Link>
-              </p>
-            </div>
-          )}
+        <div className="flex max-w-xl flex-col gap-6 lg:col-start-1 lg:row-start-2 lg:self-start">
+          {!hasCredits && <OutOfCreditsNote />}
 
-          {restoredImage && (
-            <div className="flex justify-center">
-              <Tabs defaultValue="side-by-side" className="w-full max-w-4xl">
-                <div className="flex justify-center">
-                  <TabsList className="grid w-full max-w-[400px] grid-cols-2">
-                    <TabsTrigger
-                      value="side-by-side"
-                      className="flex items-center gap-2"
-                    >
-                      <LayoutGrid className="h-4 w-4" />
-                      Side by Side
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="slider"
-                      className="flex items-center gap-2"
-                    >
-                      <SlidersHorizontal className="h-4 w-4" />
-                      Slider
-                    </TabsTrigger>
-                  </TabsList>
-                </div>
-
-                <div className="mt-6">
-                  <TabsContent value="slider">
-                    <div className={comparisonContainerClass}>
-                      <ImageComparisonSlider
-                        originalImage={preview}
-                        restoredImage={restoredImage}
-                        aspectRatio={aspectRatio}
-                      />
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="side-by-side">
-                    <div className={comparisonContainerClass}>
-                      <div
-                        className={`grid gap-6 ${
-                          restoredImage
-                            ? "md:grid-cols-2"
-                            : "md:grid-cols-1 max-w-md mx-auto"
-                        }`}
-                      >
-                        <div className="relative w-full">
-                          {restoredImage && (
-                            <div className="absolute left-4 top-4 z-10 rounded-full bg-background/90 px-3 py-1 text-sm font-medium backdrop-blur shadow-lg">
-                              Before
-                            </div>
-                          )}
-                          <Image
-                            src={preview || "/placeholder.svg"}
-                            alt="Original photo"
-                            width={displayWidth}
-                            height={displayHeight}
-                            className="h-auto w-full rounded-lg"
-                            unoptimized
-                          />
-                        </div>
-
-                        {restoredImage && (
-                          <div className="relative w-full">
-                            <div className="absolute right-4 top-4 z-10 rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground shadow-lg">
-                              After
-                            </div>
-                            <Image
-                              src={restoredImage || "/placeholder.svg"}
-                              alt="Restored photo"
-                              width={displayWidth}
-                              height={displayHeight}
-                              className="h-auto w-full rounded-lg"
-                              unoptimized
-                            />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </TabsContent>
-                </div>
-              </Tabs>
-            </div>
-          )}
-
-          {!restoredImage && (
-            <div className={comparisonContainerClass}>
-              <div className="flex justify-center">
-                <div className="relative max-w-md w-full">
-                  <Image
-                    src={preview || "/placeholder.svg"}
-                    alt="Original photo"
-                    width={displayWidth}
-                    height={displayHeight}
-                    className="h-auto w-full rounded-lg"
-                    unoptimized
-                  />
-
-                  {isProcessing && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg bg-black/10 backdrop-blur-sm transition-all duration-300">
-                      <div className="w-48 space-y-4 text-center">
-                        <div className="relative h-16 w-16 mx-auto">
-                          <div className="absolute inset-0 rounded-full border-4 border-primary/10" />
-                          <div className="absolute inset-0 rounded-full border-4 border-primary/70 border-t-transparent animate-spin" />
-                          <ImageIcon className="absolute inset-0 m-auto h-6 w-6 text-primary" />
-                        </div>
-                        <div className="space-y-1">
-                          <p className="text-sm font-medium text-white">
-                            Restoring your photo...
-                          </p>
-                          <p className="text-lg font-bold text-white">
-                            {Math.round(progress)}%
-                          </p>
-                        </div>
-                        <Progress
-                          value={progress}
-                          className="h-1.5 bg-white/20"
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {!isProcessing && (
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          {!isProcessing && (restoredImage || hasCredits) && (
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {!restoredImage ? (
-                hasCredits ? (
-                  <div className="flex gap-4">
-                    <Button
-                      size="lg"
-                      onClick={handleRestore}
-                      className="gap-2 px-8"
-                    >
-                      <ImageIcon className="h-4 w-4" />
-                      Restore Photo
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={handleClear}
-                      className="px-8 bg-transparent"
-                    >
-                      Remove
-                    </Button>
-                  </div>
-                ) : null
+                <>
+                  <Button size="lg" onClick={handleRestore}>
+                    <ImageIcon aria-hidden="true" />
+                    Restore Photo
+                  </Button>
+                  <Button variant="outline" size="lg" onClick={handleClear}>
+                    Remove
+                  </Button>
+                </>
               ) : (
                 <>
-                  <Button
-                    size="lg"
-                    onClick={handleDownload}
-                    className="gap-2 px-8"
-                  >
-                    <Download className="h-4 w-4" />
+                  <Button size="lg" onClick={handleDownload}>
+                    <Download aria-hidden="true" />
                     Download
                   </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    onClick={handleRestoreAnother}
-                    className="gap-2 px-8 bg-transparent"
-                  >
-                    <RefreshCw className="h-4 w-4" />
+                  <Button variant="outline" size="lg" onClick={handleRestoreAnother}>
+                    <RefreshCw aria-hidden="true" />
                     Restore Another Photo
                   </Button>
                 </>

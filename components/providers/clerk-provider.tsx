@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
+import { clerkAppearance } from "@/lib/theme/clerk-appearance";
 
 export function ConditionalClerkProvider({
   children,
@@ -14,6 +15,7 @@ export function ConditionalClerkProvider({
 
   return (
     <ClerkProvider
+      appearance={clerkAppearance}
       afterSignOutUrl="/"
       signInFallbackRedirectUrl="/restore"
       signUpFallbackRedirectUrl="/restore"

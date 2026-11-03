@@ -5,30 +5,35 @@ type ComparisonTableProps = {
   features: CompetitorFeature[];
 };
 
+/** Feature table on ink. The Magic Memory column is tinted ember; scrolls sideways on narrow screens. */
 export function ComparisonTable({ competitorName, features }: ComparisonTableProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border">
-      <table className="w-full text-sm">
+    <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+      <table className="w-full min-w-[34rem] text-sm">
         <thead>
-          <tr className="border-b border-border bg-muted/50">
-            <th className="px-6 py-4 text-left font-semibold text-muted-foreground">Feature</th>
-            <th className="px-6 py-4 text-center font-semibold">Magic Memory</th>
-            <th className="px-6 py-4 text-center font-semibold text-muted-foreground">
+          <tr className="border-b border-border">
+            <th
+              scope="col"
+              className="px-5 py-4 text-left font-mono text-[11px] font-normal uppercase tracking-[0.18em] text-paper/60 sm:px-6"
+            >
+              Feature
+            </th>
+            <th scope="col" className="bg-ember/10 px-5 py-4 text-left font-semibold text-ember sm:px-6">
+              Magic Memory
+            </th>
+            <th scope="col" className="px-5 py-4 text-left font-semibold text-paper/80 sm:px-6">
               {competitorName}
             </th>
           </tr>
         </thead>
         <tbody>
-          {features.map((row, i) => (
-            <tr
-              key={row.label}
-              className={`border-b border-border last:border-0 ${
-                i % 2 === 0 ? "bg-background" : "bg-muted/20"
-              }`}
-            >
-              <td className="px-6 py-4 font-medium">{row.label}</td>
-              <td className="px-6 py-4 text-center text-primary font-medium">{row.magicMemory}</td>
-              <td className="px-6 py-4 text-center text-muted-foreground">{row.competitor}</td>
+          {features.map((row) => (
+            <tr key={row.label} className="border-b border-border last:border-0">
+              <th scope="row" className="px-5 py-4 text-left font-medium text-paper sm:px-6">
+                {row.label}
+              </th>
+              <td className="bg-ember/5 px-5 py-4 font-medium text-paper sm:px-6">{row.magicMemory}</td>
+              <td className="px-5 py-4 text-paper/70 sm:px-6">{row.competitor}</td>
             </tr>
           ))}
         </tbody>

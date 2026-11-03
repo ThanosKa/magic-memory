@@ -1,99 +1,114 @@
 import Link from "next/link";
-import Image from "next/image";
+import { BrandMark } from "@/components/brand-mark";
+import { PageContainer } from "@/components/layout/page-container";
+
+// The underline sits on an inline span so it follows wrapped text line by line
+// instead of stretching across the whole column.
+function FooterLink({ href, children, ...rest }: React.ComponentProps<"a">) {
+  const external = typeof href === "string" && /^(https?:|mailto:)/.test(href);
+  const className = "focus-ring group text-sm text-paper/70 transition-colors hover:text-paper";
+  const label = <span className="mm-underline">{children}</span>;
+  if (external) {
+    return (
+      <a href={href} className={className} {...rest}>
+        {label}
+      </a>
+    );
+  }
+  return (
+    <Link href={href ?? "/"} className={className}>
+      {label}
+    </Link>
+  );
+}
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-6">
-          <div className="space-y-4 text-center md:col-span-1 md:text-left">
+    <footer className="border-t border-paper/10 bg-ink">
+      <PageContainer className="py-16 md:py-20">
+        <div className="grid gap-12 md:grid-cols-6">
+          <div className="space-y-5 text-center md:col-span-1 md:text-left">
             <div className="flex items-center gap-2">
-              <Image
-                src="/icon.png"
-                alt="Magic Memory Logo"
-                width={32}
-                height={32}
-                className="rounded-lg"
-              />
-              <span className="text-xl font-bold">Magic Memory</span>
+              <BrandMark className="text-paper" />
+              <span className="font-serif text-[22px] leading-none tracking-[-0.01em] text-paper">Magic Memory</span>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm leading-relaxed text-paper/60">
               Bring your old photos back to life with AI-powered restoration.
             </p>
           </div>
 
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="font-semibold">Product</h3>
-            <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">Home</Link>
-              <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">Pricing</Link>
-              <Link href="/restore" className="text-sm text-muted-foreground hover:text-foreground">Restore a photo</Link>
-              <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">Blog</Link>
-              <Link href="/blog/best-ai-photo-restoration" className="text-sm text-muted-foreground hover:text-foreground">Best AI photo restoration 2026</Link>
-              <Link href="/blog/ai-photo-restoration-vs-photoshop" className="text-sm text-muted-foreground hover:text-foreground">AI vs Photoshop</Link>
+          <div className="space-y-5 text-center md:text-left">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Product</h3>
+            <nav className="flex flex-col items-center gap-3 md:items-start">
+              <FooterLink href="/">Home</FooterLink>
+              <FooterLink href="/pricing">Pricing</FooterLink>
+              <FooterLink href="/restore">Restore a photo</FooterLink>
+              <FooterLink href="/blog">Blog</FooterLink>
+              <FooterLink href="/blog/best-ai-photo-restoration">Best AI photo restoration 2026</FooterLink>
+              <FooterLink href="/blog/ai-photo-restoration-vs-photoshop">AI vs Photoshop</FooterLink>
             </nav>
           </div>
 
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="font-semibold">By photo type</h3>
-            <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link href="/restore-old-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore old photos</Link>
-              <Link href="/restore-family-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore family photos</Link>
-              <Link href="/restore-wedding-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore wedding photos</Link>
-              <Link href="/restore-vintage-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore vintage photos</Link>
-              <Link href="/restore-portrait-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore portrait photos</Link>
-              <Link href="/restore-faded-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore faded photos</Link>
-              <Link href="/restore-black-and-white-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore B&amp;W photos</Link>
-              <Link href="/restore-damaged-photos" className="text-sm text-muted-foreground hover:text-foreground">Restore damaged photos</Link>
-              <Link href="/fix-blurry-photos" className="text-sm text-muted-foreground hover:text-foreground">Fix blurry photos</Link>
+          <div className="space-y-5 text-center md:text-left">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">By photo type</h3>
+            <nav className="flex flex-col items-center gap-3 md:items-start">
+              <FooterLink href="/restore-old-photos">Restore old photos</FooterLink>
+              <FooterLink href="/restore-family-photos">Restore family photos</FooterLink>
+              <FooterLink href="/restore-wedding-photos">Restore wedding photos</FooterLink>
+              <FooterLink href="/restore-vintage-photos">Restore vintage photos</FooterLink>
+              <FooterLink href="/restore-portrait-photos">Restore portrait photos</FooterLink>
+              <FooterLink href="/restore-faded-photos">Restore faded photos</FooterLink>
+              <FooterLink href="/restore-black-and-white-photos">Restore B&amp;W photos</FooterLink>
+              <FooterLink href="/restore-damaged-photos">Restore damaged photos</FooterLink>
+              <FooterLink href="/fix-blurry-photos">Fix blurry photos</FooterLink>
             </nav>
           </div>
 
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="font-semibold">Compare</h3>
-            <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link href="/alternatives" className="text-sm text-muted-foreground hover:text-foreground">All alternatives</Link>
-              <Link href="/vs/remini" className="text-sm text-muted-foreground hover:text-foreground">vs Remini</Link>
-              <Link href="/vs/myheritage" className="text-sm text-muted-foreground hover:text-foreground">vs MyHeritage</Link>
-              <Link href="/vs/vanceai" className="text-sm text-muted-foreground hover:text-foreground">vs VanceAI</Link>
-              <Link href="/alternatives/remini" className="text-sm text-muted-foreground hover:text-foreground">Remini alternative</Link>
-              <Link href="/alternatives/myheritage" className="text-sm text-muted-foreground hover:text-foreground">MyHeritage alternative</Link>
-              <Link href="/alternatives/vanceai" className="text-sm text-muted-foreground hover:text-foreground">VanceAI alternative</Link>
+          <div className="space-y-5 text-center md:text-left">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Compare</h3>
+            <nav className="flex flex-col items-center gap-3 md:items-start">
+              <FooterLink href="/alternatives">All alternatives</FooterLink>
+              <FooterLink href="/vs/remini">vs Remini</FooterLink>
+              <FooterLink href="/vs/myheritage">vs MyHeritage</FooterLink>
+              <FooterLink href="/vs/vanceai">vs VanceAI</FooterLink>
+              <FooterLink href="/alternatives/remini">Remini alternative</FooterLink>
+              <FooterLink href="/alternatives/myheritage">MyHeritage alternative</FooterLink>
+              <FooterLink href="/alternatives/vanceai">VanceAI alternative</FooterLink>
             </nav>
           </div>
 
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="font-semibold">Learn</h3>
-            <nav className="flex flex-col gap-2 items-center md:items-start">
-              <Link href="/glossary/photo-restoration" className="text-sm text-muted-foreground hover:text-foreground">What is photo restoration?</Link>
-              <Link href="/glossary/gfpgan" className="text-sm text-muted-foreground hover:text-foreground">What is GFPGAN?</Link>
-              <Link href="/glossary/face-restoration" className="text-sm text-muted-foreground hover:text-foreground">What is face restoration?</Link>
-              <Link href="/glossary/image-upscaling" className="text-sm text-muted-foreground hover:text-foreground">What is image upscaling?</Link>
-              <Link href="/glossary/ai-photo-enhancement" className="text-sm text-muted-foreground hover:text-foreground">What is AI photo enhancement?</Link>
-              <Link href="/for/photographers" className="text-sm text-muted-foreground hover:text-foreground">For photographers</Link>
-              <Link href="/for/genealogists" className="text-sm text-muted-foreground hover:text-foreground">For genealogists</Link>
-              <Link href="/for/real-estate" className="text-sm text-muted-foreground hover:text-foreground">For real estate</Link>
+          <div className="space-y-5 text-center md:text-left">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Learn</h3>
+            <nav className="flex flex-col items-center gap-3 md:items-start">
+              <FooterLink href="/glossary/photo-restoration">What is photo restoration?</FooterLink>
+              <FooterLink href="/glossary/gfpgan">What is GFPGAN?</FooterLink>
+              <FooterLink href="/glossary/face-restoration">What is face restoration?</FooterLink>
+              <FooterLink href="/glossary/image-upscaling">What is image upscaling?</FooterLink>
+              <FooterLink href="/glossary/ai-photo-enhancement">What is AI photo enhancement?</FooterLink>
+              <FooterLink href="/for/photographers">For photographers</FooterLink>
+              <FooterLink href="/for/genealogists">For genealogists</FooterLink>
+              <FooterLink href="/for/real-estate">For real estate</FooterLink>
             </nav>
           </div>
 
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="font-semibold">Connect</h3>
-            <nav className="flex flex-col gap-2 items-center md:items-start">
-              <a href="https://github.com/ThanosKa/magic-memory" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">GitHub</a>
-              <a href="https://twitter.com/KazakisThanos" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">Twitter / X</a>
-              <a href="mailto:kazakis.th@gmail.com" className="text-sm text-muted-foreground hover:text-foreground">Support</a>
-              <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">Terms</Link>
-              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy</Link>
+          <div className="space-y-5 text-center md:text-left">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/60">Connect</h3>
+            <nav className="flex flex-col items-center gap-3 md:items-start">
+              <FooterLink href="https://github.com/ThanosKa/magic-memory" target="_blank" rel="noopener noreferrer">GitHub</FooterLink>
+              <FooterLink href="https://twitter.com/KazakisThanos" target="_blank" rel="noopener noreferrer">Twitter / X</FooterLink>
+              <FooterLink href="mailto:kazakis.th@gmail.com">Support</FooterLink>
+              <FooterLink href="/terms">Terms</FooterLink>
+              <FooterLink href="/privacy">Privacy</FooterLink>
             </nav>
           </div>
         </div>
 
-        <div className="mt-8 border-t border-border pt-8">
-          <p className="text-center text-sm text-muted-foreground">
+        <div className="mt-14 border-t border-paper/10 pt-8">
+          <p className="font-mono text-center text-[11px] uppercase tracking-[0.18em] text-paper/60">
             &copy; 2026 Thaka — All rights reserved.
           </p>
         </div>
-      </div>
+      </PageContainer>
     </footer>
   );
 }

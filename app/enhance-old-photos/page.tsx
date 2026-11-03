@@ -1,15 +1,16 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd, useCaseSoftwareJsonLd } from "@/lib/seo/metadata-helpers";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
+import { FinalCta } from "@/components/layout/final-cta";
+import { UseCaseArticle } from "@/components/use-case/use-case-article";
+import { UseCaseRelated } from "@/components/use-case/use-case-related";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
-const CTASection = dynamic(() => import("@/components/landing/cta-section").then((m) => m.CTASection), { ssr: true });
 
 export const metadata: Metadata = {
   title: "Enhance Old Photos With AI — Improve Clarity and Detail | Magic Memory",
@@ -85,51 +86,44 @@ export default function EnhanceOldPhotosPage() {
           keyword="enhance old photos"
         />
 
-        <section className="py-20 sm:py-32 bg-muted/30">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold tracking-tight mb-6">Enhancement vs. Restoration</h2>
-            <p className="text-muted-foreground mb-4">
-              The distinction matters practically. If you are searching for photo enhancement, you likely have a photo that is okay but not great — perhaps slightly soft, lacking fine detail, or below the quality you want for printing or sharing.
-            </p>
-            <p className="text-muted-foreground mb-4">
-              GFPGAN does both at once. It recovers lost detail from degradation (restoration) and improves the apparent sharpness and quality of the face (enhancement). For most photos, this means faces go from looking like old photographs to looking like modern, sharp portraits.
-            </p>
+        <UseCaseArticle>
+          <h2>Enhancement vs. Restoration</h2>
+          <p>
+            The distinction matters practically. If you are searching for photo enhancement, you likely have a photo that is okay but not great — perhaps slightly soft, lacking fine detail, or below the quality you want for printing or sharing.
+          </p>
+          <p>
+            GFPGAN does both at once. It recovers lost detail from degradation (restoration) and improves the apparent sharpness and quality of the face (enhancement). For most photos, this means faces go from looking like old photographs to looking like modern, sharp portraits.
+          </p>
 
-            <h2 className="text-3xl font-bold tracking-tight mt-12 mb-6">Who Enhances Old Photos</h2>
-            <ul className="space-y-3 text-muted-foreground">
-              <li className="flex gap-3"><span className="text-primary font-bold">→</span> People digitizing photo albums who want the best possible quality</li>
-              <li className="flex gap-3"><span className="text-primary font-bold">→</span> Anyone printing photos larger than 5x7 and needing sharp source material</li>
-              <li className="flex gap-3"><span className="text-primary font-bold">→</span> Genealogists building visual family histories</li>
-              <li className="flex gap-3"><span className="text-primary font-bold">→</span> People creating memorial displays or tribute books</li>
-            </ul>
-          </div>
-        </section>
+          <h2>Who Enhances Old Photos</h2>
+          <ul className="list-disc pl-5">
+            <li>People digitizing photo albums who want the best possible quality</li>
+            <li>Anyone printing photos larger than 5x7 and needing sharp source material</li>
+            <li>Genealogists building visual family histories</li>
+            <li>People creating memorial displays or tribute books</li>
+          </ul>
+        </UseCaseArticle>
 
         <UseCaseHowItWorks />
         <UseCaseFAQ faqs={faqs} />
 
-        <section className="py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold tracking-tight mb-6">Related Restorations</h2>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {[
-                { href: "/fix-blurry-photos", label: "Fix Blurry Photos" },
-                { href: "/restore-old-photos", label: "Restore Old Photos" },
-                { href: "/restore-portrait-photos", label: "Restore Portrait Photos" },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-2xl border border-border bg-card p-6 text-sm font-medium hover:border-primary/50 hover:shadow-md transition-all"
-                >
-                  {link.label} →
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        <UseCaseRelated
+          links={[
+            { href: "/fix-blurry-photos", label: "Fix Blurry Photos" },
+            { href: "/restore-old-photos", label: "Restore Old Photos" },
+            { href: "/restore-portrait-photos", label: "Restore Portrait Photos" },
+          ]}
+        />
 
-        <CTASection />
+        <FinalCta
+          title={
+            <>
+              Ready to restore{" "}
+              <span className="italic text-paper/55">your memories?</span>
+            </>
+          }
+          note="Start with your free daily restoration. No credit card required."
+        />
       </main>
       <Footer />
     </div>

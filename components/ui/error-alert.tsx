@@ -3,8 +3,9 @@
 import type React from "react";
 
 import { AlertCircle, CreditCard, Upload, ShieldAlert, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonArrow } from "@/components/ui/button";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export type ErrorType =
   | "out_of_credits"
@@ -12,7 +13,7 @@ export type ErrorType =
   | "auth_error"
   | "generic";
 
-interface ErrorAlertProps {
+type ErrorAlertProps = {
   type: ErrorType;
   message?: string;
   freeResetTime?: string;
@@ -84,40 +85,51 @@ export function ErrorAlert({
   }
 
   return (
-    <div className="relative rounded-lg border border-destructive/50 bg-destructive/10 p-4">
+    <div
+      role="alert"
+      className="relative rounded-[20px] border border-destructive/35 bg-surface p-5 sm:p-6"
+    >
       {onDismiss && (
         <button
+          type="button"
           onClick={onDismiss}
-          className="absolute right-2 top-2 rounded-md p-1 text-destructive hover:bg-destructive/20"
+          className="focus-ring absolute right-2 top-2 inline-flex size-10 cursor-pointer items-center justify-center rounded-full text-paper/60 transition-colors hover:bg-paper/[0.06] hover:text-paper"
           aria-label="Dismiss"
         >
-          <X className="h-4 w-4" />
+          <X className="size-4" />
         </button>
       )}
-      <div className="flex gap-3">
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-destructive/20">
-          <Icon className="h-5 w-5 text-destructive" />
+      <div className="flex gap-4">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-destructive/15">
+          <Icon className="size-5 text-destructive" />
         </div>
-        <div className="flex-1 space-y-2">
-          <h3 className="font-semibold text-destructive">{config.title}</h3>
-          <p className="text-sm text-destructive/90">
+        <div className={cn("flex-1 space-y-2", onDismiss && "pr-8")}>
+          <h3 className="text-[17px] font-medium text-paper">{config.title}</h3>
+          <p className="text-[15px] leading-[1.6] text-paper/70">
             {message || config.defaultMessage}
           </p>
           {resetMessage && (
-            <p className="text-sm text-destructive/80">{resetMessage}</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/60">
+              {resetMessage}
+            </p>
           )}
-          <div className="flex gap-2 pt-2">
-            {config.actionHref && config.actionLabel && (
-              <Button asChild size="sm" variant="destructive">
-                <Link href={config.actionHref}>{config.actionLabel}</Link>
-              </Button>
-            )}
-            {onRetry && (
-              <Button size="sm" variant="outline" onClick={onRetry}>
-                Try Again
-              </Button>
-            )}
-          </div>
+          {((config.actionHref && config.actionLabel) || onRetry) && (
+            <div className="flex flex-wrap gap-3 pt-3">
+              {config.actionHref && config.actionLabel && (
+                <Button asChild size="sm">
+                  <Link href={config.actionHref}>
+                    {config.actionLabel}
+                    <ButtonArrow />
+                  </Link>
+                </Button>
+              )}
+              {onRetry && (
+                <Button size="sm" variant="outline" onClick={onRetry}>
+                  Try Again
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

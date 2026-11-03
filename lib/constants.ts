@@ -1,14 +1,14 @@
 export const CREDIT_PACKAGES = {
   starter: {
     name: "Starter",
-    credits: 30,
+    credits: 20,
     price: 999, // in cents (€9.99)
     priceDisplay: "€9.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER ?? "",
     description: "Best for occasional use",
     popular: false,
     features: [
-      "30 photo restorations",
+      "20 photo restorations",
       "Credits never expire",
       "High-quality results",
       "Fast processing",
@@ -16,14 +16,14 @@ export const CREDIT_PACKAGES = {
   },
   growth: {
     name: "Growth",
-    credits: 120,
+    credits: 60,
     price: 1999, // in cents (€19.99)
     priceDisplay: "€19.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_GROWTH ?? "",
     description: "Best for regular users",
     popular: true,
     features: [
-      "120 photo restorations",
+      "60 photo restorations",
       "Credits never expire",
       "High-quality results",
       "Fast processing",
@@ -32,14 +32,14 @@ export const CREDIT_PACKAGES = {
   },
   premium: {
     name: "Premium",
-    credits: 350,
+    credits: 120,
     price: 2999, // in cents (€29.99)
     priceDisplay: "€29.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PREMIUM ?? "",
     description: "Best for professionals",
     popular: false,
     features: [
-      "350 photo restorations",
+      "120 photo restorations",
       "Credits never expire",
       "High-quality results",
       "Fast processing",
@@ -49,6 +49,11 @@ export const CREDIT_PACKAGES = {
 } as const;
 
 export type PackageType = keyof typeof CREDIT_PACKAGES;
+
+/** A pack's price per restoration, e.g. "€0.33". */
+export function perPhotoPrice(pkg: { price: number; credits: number }): string {
+  return `€${(pkg.price / pkg.credits / 100).toFixed(2)}`;
+}
 
 export const APP_CONFIG = {
   name: "Magic Memory",

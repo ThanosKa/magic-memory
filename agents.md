@@ -10,7 +10,7 @@ Instructions below are for AI assistants. Keep responses concise and aligned wit
 
 ## Repo Map
 
-- Primary framework: **Next.js 15 App Router** + TypeScript + React 19
+- Primary framework: **Next.js 16 App Router** + TypeScript + React 19
 - Auth in `proxy.ts` (Clerk route protection); API routes in `app/api/`
 - Photo restoration logic in `app/api/restore/`, `app/api/upload/`
 - Credit system in `app/api/credits/`, `lib/redis.ts` (free), `lib/supabase/` (paid)
@@ -51,7 +51,7 @@ Instructions below are for AI assistants. Keep responses concise and aligned wit
 
 ## Tech Stack
 
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript (strict mode)
 - **Database:** Supabase (PostgreSQL)
 - **Storage:** Supabase Storage

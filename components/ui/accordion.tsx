@@ -6,6 +6,11 @@ import { ChevronDownIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
+/**
+ * Home FAQ style: hairline dividers, large sans question, muted answer.
+ * Text takes the section's colour, so it works on ink and cream sections.
+ * Give the root `border-t border-border` for a top rule above the first item.
+ */
 function Accordion({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
@@ -19,7 +24,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn('border-b last:border-b-0', className)}
+      className={cn('border-b border-border', className)}
       {...props}
     />
   )
@@ -35,30 +40,44 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
+          'focus-ring flex flex-1 cursor-pointer items-start justify-between gap-4 rounded-[4px] py-6 text-left text-[17px] font-normal transition-colors disabled:pointer-events-none disabled:opacity-50 sm:text-[19px] [&[data-state=open]>svg]:rotate-180',
           className,
         )}
         {...props}
       >
         {children}
-        <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" />
+        <ChevronDownIcon className="pointer-events-none size-5 shrink-0 translate-y-0.5 opacity-50 transition-transform duration-200" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
 }
 
+/**
+ * Answers stay in the HTML while closed (FAQPage structured data lists them),
+ * so the item is force-mounted and collapsed with CSS: grid rows 0fr → 1fr,
+ * and `invisible` once closed so hidden answers leave the tab order and the
+ * accessibility tree. The transition sits on the inner grid because Radix
+ * zeroes transitions on the content node while it measures.
+ */
 function AccordionContent({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Content>) {
+}: Omit<React.ComponentProps<typeof AccordionPrimitive.Content>, 'forceMount'>) {
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
-      className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
+      forceMount
+      className="group/accordion-content"
       {...props}
     >
-      <div className={cn('pt-0 pb-4', className)}>{children}</div>
+      <div className="invisible grid grid-rows-[0fr] transition-[grid-template-rows,visibility] duration-200 ease-out group-data-[state=open]/accordion-content:visible group-data-[state=open]/accordion-content:grid-rows-[1fr] motion-reduce:transition-none">
+        <div className="min-h-0 overflow-hidden">
+          <div className={cn('max-w-[60ch] pb-6 text-[15px] leading-[1.7] text-current/60', className)}>
+            {children}
+          </div>
+        </div>
+      </div>
     </AccordionPrimitive.Content>
   )
 }
