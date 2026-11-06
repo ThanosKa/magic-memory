@@ -25,7 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Restore Faded Photos — Bring Color and Contrast Back | Magic Memory",
+  title: "Restore Faded Photos — Bring Color and Contrast Back",
   description:
     "Fix faded photos with AI. GFPGAN restores facial detail and contrast lost to UV exposure, time, and poor storage. Free daily restoration, no credit card required.",
   alternates: { canonical: getCanonicalUrl("/restore-faded-photos") },

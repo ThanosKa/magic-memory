@@ -25,8 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title:
-    "AI Family Photo Restoration — Bring Memories Back to Life | Magic Memory",
+  title: "AI Family Photo Restoration — Bring Memories Back to Life",
   description:
     "Restore old family photos with AI. Perfect for genealogy, family reunions, and passing restored memories to future generations. Free daily restoration.",
   alternates: { canonical: getCanonicalUrl("/restore-family-photos") },

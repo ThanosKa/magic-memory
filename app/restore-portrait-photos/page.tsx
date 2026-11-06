@@ -25,8 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title:
-    "AI Portrait Photo Restoration — Restore Old Portraits With Precision | Magic Memory",
+  title: "AI Portrait Photo Restoration — Restore Old Portraits",
   description:
     "Restore old portrait photos with AI precision. GFPGAN was designed for faces — professional portraits, school photos, and formal portraits all benefit. Free daily.",
   alternates: { canonical: getCanonicalUrl("/restore-portrait-photos") },

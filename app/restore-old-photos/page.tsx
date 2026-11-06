@@ -25,7 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Restore Old Photos Online Free — AI Photo Restoration | Magic Memory",
+  title: "Restore Old Photos Online Free — AI Photo Restoration",
   description:
     "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. Free daily restoration, no credit card required.",
   alternates: { canonical: getCanonicalUrl("/restore-old-photos") },

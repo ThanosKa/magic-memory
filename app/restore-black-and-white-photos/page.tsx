@@ -25,7 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Restore Black and White Photos With AI | Magic Memory",
+  title: "Restore Black and White Photos With AI",
   description:
     "Restore and sharpen old black and white photos with AI. GFPGAN recovers facial detail and reduces grain. Free daily restoration, no credit card required.",
   alternates: { canonical: getCanonicalUrl("/restore-black-and-white-photos") },

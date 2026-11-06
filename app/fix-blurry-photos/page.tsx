@@ -25,7 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Fix Blurry Photos Online — AI Sharpening in Seconds | Magic Memory",
+  title: "Fix Blurry Photos Online — AI Sharpening in Seconds",
   description:
     "Fix blurry photos with AI in seconds. Magic Memory sharpens faces using GFPGAN, recovering detail lost to motion blur, focus blur, and compression. Free daily.",
   alternates: { canonical: getCanonicalUrl("/fix-blurry-photos") },
