@@ -14,7 +14,7 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 export const metadata: Metadata = {
   title: "AI Photo Restoration for Photographers — Fix Old Client Photos",
   description:
-    "Restore old and degraded client photos with GFPGAN AI. Magic Memory helps photographers rescue blurry portraits, fix damaged prints, and deliver restored versions to clients. 1 free restoration per day.",
+    "Restore old and degraded client photos with GFPGAN AI. Magic Memory helps photographers rescue blurry portraits, fix damaged prints, and deliver restored versions to clients. No subscription.",
   alternates: { canonical: getCanonicalUrl("/for/photographers") },
   openGraph: {
     title: "AI Photo Restoration for Photographers — Fix Old Client Photos",
@@ -92,7 +92,7 @@ export default function ForPhotographersPage() {
                   </div>
                   <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                     <h3 className="font-semibold text-paper mb-2">Quick previews for clients</h3>
-                    <p className="text-sm text-paper/70">Use the free daily restoration to generate a quick preview for potential clients. Show them what AI restoration can achieve in seconds, then deliver a refined version with your professional touch.</p>
+                    <p className="text-sm text-paper/70">Run a client&apos;s photo through Magic Memory to generate a quick preview. Show them what AI restoration can achieve in seconds, then deliver a refined version with your professional touch.</p>
                   </div>
                   <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                     <h3 className="font-semibold text-paper mb-2">Combine with manual editing</h3>
@@ -150,7 +150,7 @@ export default function ForPhotographersPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Try It On a Client Photo</h2>
               <p className="text-paper/70 mb-4">
-                Upload a client&apos;s old photo and see the AI restoration in under 15 seconds. 1 free restoration per day, no credit card required. See what GFPGAN can do before you commit to a credit pack.
+                Upload a client&apos;s old photo and see the AI restoration in under 15 seconds. One-time credit packs from {"\u20ac"}9.99 for 20 restorations, and credits never expire.
               </p>
               <Button asChild>
                 <Link href="/restore">
@@ -187,7 +187,7 @@ export default function ForPhotographersPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

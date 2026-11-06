@@ -36,7 +36,7 @@ const faqs: FAQItem[] = [
   {
     question: "How much does MyHeritage photo restoration cost vs Magic Memory?",
     answer:
-      "Magic Memory offers one-time credit packages starting at €9.99 for 20 restorations, plus 1 free restoration per day. MyHeritage requires a genealogy subscription that starts at around $13/month. If you only want photo restoration, Magic Memory is substantially cheaper.",
+      "Magic Memory offers one-time credit packages starting at €9.99 for 20 restorations, and the credits never expire. MyHeritage requires a genealogy subscription that starts at around $13/month. If you only want photo restoration, Magic Memory is substantially cheaper.",
   },
   {
     question: "Does MyHeritage store my photos?",
@@ -80,7 +80,7 @@ export default function VsMyHeritagePage() {
     },
     {
       category: "Free tier",
-      magicMemory: "1 restoration per day, no credit card required",
+      magicMemory: "None (a failed restoration costs no credit)",
       competitor: "Very limited free trial",
     },
     {
@@ -132,7 +132,7 @@ export default function VsMyHeritagePage() {
                     <li>→ Only need photo restoration</li>
                     <li>→ Want affordable, pay-as-you-go pricing</li>
                     <li>→ Prefer no photo storage (privacy-first)</li>
-                    <li>→ Want a free daily restoration</li>
+                    <li>→ Want credits that never expire</li>
                   </ul>
                 </div>
                 <div>
@@ -197,7 +197,7 @@ export default function VsMyHeritagePage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

@@ -12,16 +12,16 @@ import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd } from "@/lib/seo/metadat
 import { homepageFaqs } from "@/lib/seo/faq-data";
 
 export const metadata: Metadata = {
-  title: "Free AI Photo Restoration — Restore Old Photos in 15 Seconds",
+  title: "AI Photo Restoration — Restore Old Photos Online | Magic Memory",
   description:
-    "Restore old, blurry, and damaged photos free with GFPGAN AI. 1 free restoration daily, no credit card. No subscription, no app — just upload and download in under 15 seconds. Cheaper than Remini ($9.99/wk) and MyHeritage ($119/yr). Photos never stored.",
+    "Restore old, blurry and damaged photos with GFPGAN AI. One-time credit packs from €9.99 that never expire: no subscription, no app. Photos are never stored.",
   alternates: {
     canonical: getCanonicalUrl("/"),
   },
   openGraph: {
-    title: "Free AI Photo Restoration — Restore Old Photos in 15 Seconds | Magic Memory",
+    title: "AI Photo Restoration — Restore Old Photos Online | Magic Memory",
     description:
-      "Restore old, blurry, and damaged photos free with GFPGAN AI. 1 free restoration daily, no credit card. No subscription, no app — just upload and download. Photos never stored.",
+      "Restore old, blurry and damaged photos with GFPGAN AI. One-time credit packs from €9.99 that never expire: no subscription, no app. Photos are never stored.",
     url: getCanonicalUrl("/"),
     images: [
       {
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free AI Photo Restoration — Restore Old Photos in 15 Seconds | Magic Memory",
+    title: "AI Photo Restoration — Restore Old Photos Online | Magic Memory",
     description:
-      "1 free restoration daily, no credit card. Cheaper than Remini and MyHeritage. Photos never stored.",
+      "One-time credit packs that never expire. No subscription. Cheaper than Remini and MyHeritage. Photos never stored.",
     images: [getOgImageUrl()],
   },
   robots: {
@@ -98,7 +98,7 @@ export default function Page() {
               <span className="italic text-paper/55">long enough.</span>
             </>
           }
-          note="Your first restoration today is free"
+          note="One-time credit packs. Credits never expire."
         />
       </main>
       <Footer />

@@ -34,7 +34,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is GFPGAN free to use?",
     answer:
-      "GFPGAN is open-source software released under a BSD-style license. You can run it yourself if you have the technical setup (Python, PyTorch, a compatible GPU). Alternatively, services like Magic Memory provide a hosted version where you can use GFPGAN through a web interface with 1 free restoration per day.",
+      "GFPGAN is open-source software released under a BSD-style license. You can run it yourself if you have the technical setup (Python, PyTorch, a compatible GPU). Alternatively, services like Magic Memory provide a hosted version where you can use GFPGAN through a web interface, paying per photo with one-time credits.",
   },
   {
     question: "How is GFPGAN different from CodeFormer?",
@@ -161,7 +161,7 @@ export default function GlossaryGFPGANPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Try GFPGAN Without Setup</h2>
               <p className="text-paper/70 mb-4">
-                Magic Memory runs GFPGAN in the cloud so you can restore photos from any device. Upload a photo, get a restored version in under 15 seconds. 1 free restoration per day, no credit card required.
+                Magic Memory runs GFPGAN in the cloud so you can restore photos from any device. Upload a photo, get a restored version in under 15 seconds. One-time credits that never expire, no subscription.
               </p>
               <Button asChild>
                 <Link href="/restore">
@@ -198,7 +198,7 @@ export default function GlossaryGFPGANPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

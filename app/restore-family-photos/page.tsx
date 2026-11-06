@@ -27,12 +27,12 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "AI Family Photo Restoration — Bring Memories Back to Life",
   description:
-    "Restore old family photos with AI. Perfect for genealogy, family reunions, and passing restored memories to future generations. Free daily restoration.",
+    "Restore old family photos with AI. Perfect for genealogy, family reunions, and passing restored memories to future generations. No subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-family-photos") },
   openGraph: {
     title: "AI Family Photo Restoration — Bring Memories Back to Life",
     description:
-      "Restore your old family photos with AI. Free daily restoration, no credit card required.",
+      "Restore your old family photos with AI. One-time credits, no subscription.",
     url: getCanonicalUrl("/restore-family-photos"),
     images: [
       {
@@ -73,7 +73,7 @@ const faqs: FAQItem[] = [
   {
     question: "How do I organize a family photo restoration project?",
     answer:
-      "Sort photos by condition (most degraded first), then by importance (unique photos of people who have passed, rare group portraits). Scan in batches at 600 DPI, name files systematically (e.g., last name + year + description), and restore the highest-priority photos first using your free daily restoration.",
+      "Sort photos by condition (most degraded first), then by importance (unique photos of people who have passed, rare group portraits). Scan in batches at 600 DPI, name files systematically (e.g., last name + year + description), and restore the highest-priority photos first.",
   },
   {
     question: "Can restored family photos be used for genealogy research?",
@@ -91,7 +91,7 @@ export default function RestoreFamilyPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Restore Family Photos with AI",
     description:
-      "Restore old family photos with GFPGAN AI. Perfect for genealogy, family reunions, and preserving ancestor portraits. 1 free per day, no card.",
+      "Restore old family photos with GFPGAN AI. Perfect for genealogy, family reunions, and preserving ancestor portraits. No subscription.",
     url: "/restore-family-photos",
   });
 
@@ -170,7 +170,7 @@ export default function RestoreFamilyPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

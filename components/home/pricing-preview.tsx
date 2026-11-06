@@ -8,13 +8,6 @@ import { CREDIT_PACKAGES, perPhotoPrice } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const PLANS = [
-  {
-    name: "Free",
-    price: "€0",
-    amount: "1 photo every day",
-    detail: "Resets at midnight UTC",
-    popular: false,
-  },
   ...Object.values(CREDIT_PACKAGES).map((pkg) => ({
     name: pkg.name,
     price: pkg.priceDisplay,
@@ -40,8 +33,8 @@ export function PricingPreview() {
           <span className="italic text-ink/55">Credits never expire.</span>
         </h2>
         <p className="mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-ink/65">
-          Everyone gets one free restoration a day. Need more? Buy a pack
-          once. No subscription, no auto-renewal.
+          Buy a pack once and use it whenever you like. No subscription,
+          no auto-renewal.
         </p>
       </SectionColumns>
 

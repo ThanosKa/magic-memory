@@ -31,14 +31,14 @@ export const webApplicationJsonLd = (): Thing => ({
   operatingSystem: "Web",
   offers: {
     "@type": "Offer",
-    price: "0",
+    price: "9.99",
     priceCurrency: "EUR",
     description:
-      "1 free restoration per day, with paid credit packages available",
+      "One-time credit packages that never expire, from €9.99 for 20 restorations",
   },
   featureList: [
     "AI-powered face restoration using GFPGAN",
-    "Free daily restoration credit",
+    "One-time credit packs that never expire",
     "Instant results in 5-15 seconds",
     "Interactive before/after comparison",
     "No persistent image storage",
@@ -161,11 +161,11 @@ export const useCaseSoftwareJsonLd = (params: {
   offers: {
     "@type": "AggregateOffer",
     priceCurrency: "EUR",
-    lowPrice: "0",
+    lowPrice: "9.99",
     highPrice: "29.99",
-    offerCount: 4,
+    offerCount: 3,
     description:
-      "1 free restoration per day plus one-time credit packs from €9.99 to €29.99",
+      "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
   },
   aggregateRating: {
     "@type": "AggregateRating",

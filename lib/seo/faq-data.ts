@@ -20,14 +20,14 @@ export const homepageFaqs: FAQItem[] = [
       "Most restorations complete within 5-15 seconds. The exact time depends on the image size and current server load. You'll see a progress indicator while your photo is being processed.",
   },
   {
-    question: "Do my free credits expire?",
+    question: "Do my credits expire?",
     answer:
-      "Free credits reset daily at midnight UTC. You get 1 free restoration per day. If you don't use it, it doesn't roll over. However, purchased credits never expire and remain in your account until you use them.",
+      "No. Purchased credits never expire and stay in your account until you use them. There is no subscription and no monthly reset.",
   },
   {
-    question: "What's the difference between free and paid credits?",
+    question: "Is there a free trial?",
     answer:
-      "Free credits give you 1 restoration per day and reset at midnight UTC. Paid credits are purchased in packages (20, 60, or 120 credits) and never expire. When you restore a photo, we use your free credit first, then your paid credits.",
+      "No. Each restoration uses one credit from a one-time pack (20, 60, or 120 credits, from €9.99). A credit is only deducted after the restored photo comes back, so a failed restoration costs nothing.",
   },
   {
     question: "Can I get a refund for purchased credits?",

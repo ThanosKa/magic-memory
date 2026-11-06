@@ -29,10 +29,10 @@ const tools = [
   {
     name: "Magic Memory",
     url: "/",
-    pricing: "Free (1/day) + €9.99–€29.99 one-time credits",
+    pricing: "€9.99–€29.99 one-time credits (never expire)",
     platform: "Web (any device)",
     bestFor: "One-click portrait restoration, occasional users, privacy-conscious",
-    strengths: ["GFPGAN face restoration", "No subscription", "1 free per day", "No photo storage"],
+    strengths: ["GFPGAN face restoration", "No subscription", "Credits never expire", "No photo storage"],
     weaknesses: ["No mobile app", "No batch processing", "Portraits only"],
     highlight: true,
   },
@@ -82,7 +82,7 @@ const faqs: FAQItem[] = [
   {
     question: "What is the best free AI photo restoration tool?",
     answer:
-      "Magic Memory offers the most generous free tier: 1 restoration per day with no credit card required. This is genuinely unlimited for users who restore photos occasionally. Most competitors offer limited free trials or heavily restricted free tiers.",
+      "Magic Memory has no free tier: each restoration uses one credit from a one-time pack (from €9.99 for 20), and a failed restoration costs no credit. Most competitors offer limited free trials or heavily restricted free tiers; the pricing column above lists each tool's.",
   },
   {
     question: "Which AI photo restoration tool has the best face restoration quality?",
@@ -92,7 +92,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which photo restoration tool is best without a subscription?",
     answer:
-      "Magic Memory offers one-time credit packages (€9.99–€29.99) that never expire, plus 1 free restoration per day. This is the only top-tier photo restoration tool with no subscription requirement and a meaningful free tier.",
+      "Magic Memory offers one-time credit packages (€9.99–€29.99) that never expire. This is the only top-tier photo restoration tool with no subscription requirement.",
   },
   {
     question: "What is the most private AI photo restoration tool?",
@@ -227,7 +227,7 @@ export default function AlternativesPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

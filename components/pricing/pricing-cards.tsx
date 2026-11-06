@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { SignUpButton, useUser } from "@clerk/nextjs";
 import { Check } from "lucide-react";
 import { toast } from "sonner";
@@ -14,13 +13,6 @@ import { cn } from "@/lib/utils";
 type PricingCardsProps = {
   isSignedIn: boolean;
 };
-
-const FREE_FEATURES = [
-  "1 restoration per day",
-  "Resets every 24 hours",
-  "High-quality results",
-  "No credit card required",
-];
 
 type FeatureListProps = {
   items: string[];
@@ -54,7 +46,6 @@ function FeatureList({ items, popular = false, emphasizeFirst = false }: Feature
 }
 
 export function PricingCards({ isSignedIn }: PricingCardsProps) {
-  const router = useRouter();
   const [loading, setLoading] = useState<PackageType | null>(null);
   const { isLoaded } = useUser();
 
@@ -97,32 +88,8 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
   return (
     <div>
       <PlanGrid>
-        <PlanCell index={0}>
-          <div className="flex h-6 items-center">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/65">Free</h3>
-          </div>
-          <p className="font-serif mt-5 text-[56px] leading-none tracking-[-0.02em]">
-            €0<span className="font-sans text-[15px] tracking-normal text-ink/65">/day</span>
-          </p>
-          <p className="mt-5 text-[14px] text-ink/65">Perfect for trying out</p>
-          <FeatureList items={FREE_FEATURES} />
-          <div className="mt-auto pt-8">
-            {isSignedIn ? (
-              <Button tone="paper" className="w-full" onClick={() => router.push("/restore")}>
-                Go to Restore
-              </Button>
-            ) : (
-              <SignUpButton mode="modal">
-                <Button tone="paper" className="w-full">
-                  Get Started Free
-                </Button>
-              </SignUpButton>
-            )}
-          </div>
-        </PlanCell>
-
         {packages.map(([key, pkg], i) => (
-          <PlanCell key={key} index={i + 1} popular={pkg.popular}>
+          <PlanCell key={key} index={i} popular={pkg.popular}>
             <div className="flex h-6 items-center justify-between gap-3">
               <h3
                 className={cn(

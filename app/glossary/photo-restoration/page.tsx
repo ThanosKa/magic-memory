@@ -34,7 +34,7 @@ const faqs: FAQItem[] = [
   {
     question: "How much does professional photo restoration cost?",
     answer:
-      "Professional manual photo restoration typically costs $25-$150+ per photo depending on the damage level and turnaround time. AI-powered tools like Magic Memory offer the same face restoration for a fraction of the cost — starting with 1 free restoration per day and credit packs from \u20ac9.99 for 20 restorations.",
+      "Professional manual photo restoration typically costs $25-$150+ per photo depending on the damage level and turnaround time. AI-powered tools like Magic Memory offer the same face restoration for a fraction of the cost — with one-time credit packs from \u20ac9.99 for 20 restorations.",
   },
   {
     question: "Is AI photo restoration as good as manual restoration?",
@@ -146,9 +146,9 @@ export default function GlossaryPhotoRestorationPage() {
             </div>
 
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
-              <h2 className="font-serif text-2xl text-paper mb-3">Try AI Photo Restoration Free</h2>
+              <h2 className="font-serif text-2xl text-paper mb-3">Try AI Photo Restoration</h2>
               <p className="text-paper/70 mb-4">
-                Magic Memory uses GFPGAN to restore faces in old and damaged photos. Upload a photo, get a restored version in under 15 seconds. 1 free restoration per day, no credit card required. Additional credits from {"\u20ac"}9.99 for 20 restorations.
+                Magic Memory uses GFPGAN to restore faces in old and damaged photos. Upload a photo, get a restored version in under 15 seconds. One-time credit packs from {"\u20ac"}9.99 for 20 restorations.
               </p>
               <Button asChild>
                 <Link href="/restore">
@@ -185,7 +185,7 @@ export default function GlossaryPhotoRestorationPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

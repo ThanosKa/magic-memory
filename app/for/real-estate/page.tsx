@@ -116,7 +116,7 @@ export default function ForRealEstatePage() {
                   <div className="grid gap-4 sm:grid-cols-3">
                     <div>
                       <p className="font-semibold text-paper mb-1">Solo agent</p>
-                      <p className="text-sm text-paper/70">1 free restoration per day. Enough for trying the tool and processing a few headshots over time.</p>
+                      <p className="text-sm text-paper/70">{"\u20ac"}9.99 for 20 credits. Enough for your own headshots and a few listings, and the credits never expire.</p>
                     </div>
                     <div>
                       <p className="font-semibold text-paper mb-1">Small team (5-20 agents)</p>
@@ -141,7 +141,7 @@ export default function ForRealEstatePage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Enhance Your Agent Headshot</h2>
               <p className="text-paper/70 mb-4">
-                Upload your current headshot and see what AI face restoration can do. 1 free enhancement per day, no credit card required. Results in under 15 seconds.
+                Upload your current headshot and see what AI face restoration can do. One-time credits that never expire, no subscription. Results in under 15 seconds.
               </p>
               <Button asChild>
                 <Link href="/restore">
@@ -178,7 +178,7 @@ export default function ForRealEstatePage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

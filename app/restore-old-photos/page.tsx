@@ -25,15 +25,15 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Restore Old Photos Online Free — AI Photo Restoration",
+  title: "Restore Old Photos Online — AI Photo Restoration",
   description:
-    "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. Free daily restoration, no credit card required.",
+    "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-old-photos") },
   openGraph: {
     title:
-      "Restore Old Photos Online Free — AI Photo Restoration | Magic Memory",
+      "Restore Old Photos Online — AI Photo Restoration | Magic Memory",
     description:
-      "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. Free daily restoration, no credit card required.",
+      "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
     url: getCanonicalUrl("/restore-old-photos"),
     images: [
       {
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Restore Old Photos Online Free",
+    title: "Restore Old Photos Online",
     description:
-      "Restore your old photos in seconds with AI. Free daily restoration.",
+      "Restore your old photos in seconds with AI. No subscription.",
     images: [getOgImageUrl()],
   },
   robots: { index: true, follow: true },
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
 
 const faqs: FAQItem[] = [
   {
-    question: "Can I restore old photos for free?",
+    question: "How much does it cost to restore an old photo?",
     answer:
-      "Yes. Magic Memory gives you 1 free restoration every day, no credit card required. Sign in with Google and upload your photo — your first restoration is free. Additional restorations use purchased credits that never expire.",
+      "One restoration costs one credit. Credit packs are one-time payments from \u20ac9.99 for 20 photos to \u20ac29.99 for 120 photos (\u20ac0.25 each), and credits never expire. A failed restoration costs no credit.",
   },
   {
     question: "What makes old photos blurry?",
@@ -114,7 +114,7 @@ export default function RestoreOldPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Restore Old Photos Online",
     description:
-      "Restore old, faded, blurry photos online with GFPGAN AI. 1 free restoration per day, no credit card. One-time credit packs from €9.99.",
+      "Restore old, faded, blurry photos online with GFPGAN AI. One-time credit packs from €9.99, credits never expire.",
     url: "/restore-old-photos",
   });
 
@@ -139,8 +139,8 @@ export default function RestoreOldPhotosPage() {
       <Header />
       <main className="flex-1">
         <UseCaseHero
-          headline="Restore Old Photos Online — Free With AI"
-          subheadline="Find an old photo box and see blurry grandparent photos that deserve better? Magic Memory uses GFPGAN AI to restore faces, recover lost detail, and bring your most important memories back to life in 5–15 seconds. One free restoration every day, no credit card required."
+          headline="Restore Old Photos Online With AI"
+          subheadline="Find an old photo box and see blurry grandparent photos that deserve better? Magic Memory uses GFPGAN AI to restore faces, recover lost detail, and bring your most important memories back to life in 5–15 seconds. Pay once per photo, with credits that never expire."
           keyword="restore old photos"
         />
 
@@ -215,7 +215,7 @@ export default function RestoreOldPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

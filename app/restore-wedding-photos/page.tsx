@@ -27,12 +27,12 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "Restore Old Wedding Photos With AI",
   description:
-    "Restore your parents' or grandparents' wedding photos with AI. Perfect for anniversaries, digitizing albums, and preserving formal portraits. Free daily restoration.",
+    "Restore your parents' or grandparents' wedding photos with AI. Perfect for anniversaries, digitizing albums, and preserving formal portraits. No subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-wedding-photos") },
   openGraph: {
     title: "Restore Old Wedding Photos With AI — Magic Memory",
     description:
-      "Restore wedding photos from any era. Perfect anniversary gift. Free daily restoration.",
+      "Restore wedding photos from any era. Perfect anniversary gift. No subscription.",
     url: getCanonicalUrl("/restore-wedding-photos"),
     images: [
       {
@@ -90,7 +90,7 @@ export default function RestoreWeddingPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Restore Old Wedding Photos with AI",
     description:
-      "Restore old wedding photos with AI. Perfect for anniversaries and digitizing albums. GFPGAN sharpens formal portraits. 1 free restoration per day.",
+      "Restore old wedding photos with AI. Perfect for anniversaries and digitizing albums. GFPGAN sharpens formal portraits. No subscription.",
     url: "/restore-wedding-photos",
   });
 
@@ -112,7 +112,7 @@ export default function RestoreWeddingPhotosPage() {
       <main className="flex-1">
         <UseCaseHero
           headline="Restore Old Wedding Photos With AI"
-          subheadline="Wedding albums fade, yellow, and crease over decades. Magic Memory restores the faces in your parents' or grandparents' wedding photos — making them vivid enough to reprint, frame, and give as anniversary gifts. Free daily restoration, no credit card required."
+          subheadline="Wedding albums fade, yellow, and crease over decades. Magic Memory restores the faces in your parents' or grandparents' wedding photos — making them vivid enough to reprint, frame, and give as anniversary gifts. One-time credits, no subscription."
           keyword="restore wedding photos"
         />
 
@@ -165,7 +165,7 @@ export default function RestoreWeddingPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

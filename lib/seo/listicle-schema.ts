@@ -20,13 +20,13 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     name: "Magic Memory",
     url: `${SITE_URL}/`,
     description:
-      "Web-based AI photo restoration using GFPGAN. Free daily credit, one-time credit packs that never expire (€9.99–€29.99, €0.25/photo at the largest pack), no persistent photo storage.",
+      "Web-based AI photo restoration using GFPGAN. One-time credit packs that never expire (€9.99–€29.99, €0.25/photo at the largest pack), no persistent photo storage.",
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web",
-    offers: { price: "0", priceCurrency: "EUR" },
+    offers: { price: "9.99", priceCurrency: "EUR" },
     rating: { value: "4.7", reviewCount: "126" },
     reviewBody:
-      "Best for web-based portrait restoration. Fast (8–12s in our 2026-05-19 test), generous free tier (1/day, no card). GFPGAN model excels at faces.",
+      "Best for web-based portrait restoration. Fast (8–12s in our 2026-05-19 test), no subscription, credits never expire. GFPGAN model excels at faces.",
   },
   {
     position: 2,
@@ -94,12 +94,12 @@ const listicleFaqs: Record<string, ListicleFaq[]> = {
     {
       question: "What are the most popular AI photo restoration tools in 2026?",
       answer:
-        "The five most-used AI photo restoration tools in 2026 are Remini (mobile-first, largest user base), MyHeritage Photo Enhancer (bundled in genealogy plans), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, free daily), and Fotor (general photo editor with AI enhancement). Together they cover roughly every realistic use case — from one-off family photos to batch professional jobs.",
+        "The five most-used AI photo restoration tools in 2026 are Remini (mobile-first, largest user base), MyHeritage Photo Enhancer (bundled in genealogy plans), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, one-time credits), and Fotor (general photo editor with AI enhancement). Together they cover roughly every realistic use case — from one-off family photos to batch professional jobs.",
     },
     {
       question: "What is the best free AI photo restoration tool in 2026?",
       answer:
-        "Magic Memory offers the most generous free tier: 1 restoration per day with no credit card required. For occasional users, that is effectively unlimited. Most other tools restrict free usage to a one-time trial, a watermarked preview, or 3 credits per month.",
+        "Magic Memory has no free tier: restorations use one-time credits from €9.99 for 20, and a failed restoration costs no credit. The other tools here restrict free usage to a one-time trial, a watermarked preview, or 3 credits per month.",
     },
     {
       question: "What is the cheapest AI photo restoration for 20+ photos?",

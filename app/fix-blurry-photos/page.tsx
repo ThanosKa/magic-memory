@@ -27,12 +27,12 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "Fix Blurry Photos Online — AI Sharpening in Seconds",
   description:
-    "Fix blurry photos with AI in seconds. Magic Memory sharpens faces using GFPGAN, recovering detail lost to motion blur, focus blur, and compression. Free daily.",
+    "Fix blurry photos with AI in seconds. Magic Memory sharpens faces using GFPGAN, recovering detail lost to motion blur, focus blur, and compression. No subscription.",
   alternates: { canonical: getCanonicalUrl("/fix-blurry-photos") },
   openGraph: {
     title: "Fix Blurry Photos Online — AI Sharpening | Magic Memory",
     description:
-      "Fix blurry photos in seconds. AI sharpens faces and recovers lost detail. Free daily.",
+      "Fix blurry photos in seconds. AI sharpens faces and recovers lost detail. No subscription.",
     url: getCanonicalUrl("/fix-blurry-photos"),
     images: [
       {
@@ -89,7 +89,7 @@ export default function FixBlurryPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Fix Blurry Photos with AI",
     description:
-      "Fix blurry photos online with GFPGAN AI sharpening. Recovers focus blur, film grain, and compression artifacts in seconds. 1 free restoration per day.",
+      "Fix blurry photos online with GFPGAN AI sharpening. Recovers focus blur, film grain, and compression artifacts in seconds. No subscription.",
     url: "/fix-blurry-photos",
   });
 
@@ -181,7 +181,7 @@ export default function FixBlurryPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

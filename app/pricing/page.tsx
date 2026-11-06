@@ -43,12 +43,6 @@ const PricingCards = dynamic(
 const { starter, growth, premium } = CREDIT_PACKAGES;
 
 const PRICING_OFFERS = [
-  {
-    name: "Free Daily",
-    description: "1 free restoration every day",
-    price: 0,
-    credits: 1,
-  },
   ...Object.values(CREDIT_PACKAGES).map((pkg) => ({
     name: `${pkg.name} Plan`,
     description: `${pkg.credits} restoration credits that never expire`,
@@ -66,12 +60,12 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Do my credits ever expire?",
     answer:
-      "Paid credits never expire. Once you buy a Starter, Growth, or Premium pack, those restorations stay in your account until you use them — no monthly deadline, no forced renewal. Free daily credits reset at midnight UTC and don't roll over.",
+      "Paid credits never expire. Once you buy a Starter, Growth, or Premium pack, those restorations stay in your account until you use them — no monthly deadline, no forced renewal.",
   },
   {
     question: "Which plan is right for me?",
     answer:
-      `If you only need to restore a few photos, start with the free daily tier — 1 restoration per day, no card required. If you have a batch of 10-${starter.credits} family photos to get through, Starter (${starter.credits} credits for ${starter.priceDisplay}) is the cheapest per-photo option for small projects. Growth (${growth.credits} credits for ${growth.priceDisplay}, ${perPhotoPrice(growth)} per restoration) covers a full album. Premium (${premium.credits} credits for ${premium.priceDisplay}, ${perPhotoPrice(premium)} per restoration) is best for photographers, genealogists, or anyone digitizing decades of prints.`,
+      `If you have a few photos or a batch of up to ${starter.credits} family photos to get through, Starter (${starter.credits} credits for ${starter.priceDisplay}) is the cheapest per-photo option for small projects. Growth (${growth.credits} credits for ${growth.priceDisplay}, ${perPhotoPrice(growth)} per restoration) covers a full album. Premium (${premium.credits} credits for ${premium.priceDisplay}, ${perPhotoPrice(premium)} per restoration) is best for photographers, genealogists, or anyone digitizing decades of prints.`,
   },
   {
     question: "How much does each restoration cost?",
@@ -96,7 +90,7 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Can I share credits with family members?",
     answer:
-      `Credits are tied to the account that purchased them, but there's no limit on how many photos from different sources you can restore. A single Growth pack (${growth.credits} credits) is enough for a whole family's photo archive. If you need separate accounts for privacy reasons, each account starts with its own free daily credit.`,
+      `Credits are tied to the account that purchased them, but there's no limit on how many photos from different sources you can restore. A single Growth pack (${growth.credits} credits) is enough for a whole family's photo archive.`,
   },
   {
     question: "How does Magic Memory compare to Remini or MyHeritage on price?",
@@ -120,16 +114,12 @@ const NOT_SUBSCRIPTION = [
     body: `Larger packs mean cheaper per-restoration cost. Premium works out to ${perPhotoPrice(premium)} per photo — a fraction of professional retouching.`,
   },
   {
-    title: "Free daily, no card",
-    body: "1 restoration every day, free — no credit card required. Good for trying Magic Memory on a real photo before you buy.",
+    title: "No charge for failed restorations",
+    body: "A credit is deducted only after your restored photo comes back. If a restoration fails, your balance stays the same.",
   },
 ];
 
 const WHICH_PLAN = [
-  {
-    title: "Just trying it out? → Free daily",
-    body: "1 photo per day, no card required. Enough to restore a single important photo or test results before committing.",
-  },
   {
     title: "A small batch of family photos? → Starter (€9.99)",
     body: `${starter.credits} credits. Good for a single shoebox of old prints or your immediate family's portraits.`,
@@ -145,16 +135,16 @@ const WHICH_PLAN = [
 ];
 
 export const metadata: Metadata = {
-  title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
+  title: "AI Photo Restoration Pricing: €9.99–€29.99, No Subscription",
   description:
-    `Pay once, restore forever. Credits never expire — ${starter.priceDisplay} for ${starter.credits} restorations, down to ${perPhotoPrice(premium)}/photo. Or 1 free per day, no card required. No subscription.`,
+    `Pay once, restore forever. Credits never expire — ${starter.priceDisplay} for ${starter.credits} restorations, down to ${perPhotoPrice(premium)}/photo. No subscription.`,
   alternates: {
     canonical: getCanonicalUrl("/pricing"),
   },
   openGraph: {
-    title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
+    title: "AI Photo Restoration Pricing: €9.99–€29.99, No Subscription",
     description:
-      `Pay once, restore forever. Credits never expire \u2014 ${starter.priceDisplay} for ${starter.credits} restorations. Or 1 free per day, no card required. No subscription, no monthly fees.`,
+      `Pay once, restore forever. Credits never expire \u2014 ${starter.priceDisplay} for ${starter.credits} restorations. No subscription, no monthly fees.`,
     url: getCanonicalUrl("/pricing"),
     type: "website",
     images: [
@@ -168,9 +158,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Photo Restoration Pricing — From Free to €29.99 (No Subscription)",
+    title: "AI Photo Restoration Pricing: €9.99–€29.99, No Subscription",
     description:
-      `Pay once, restore forever. Credits never expire \u2014 ${starter.priceDisplay} for ${starter.credits} restorations. Or 1 free per day, no card required. No subscription, no monthly fees.`,
+      `Pay once, restore forever. Credits never expire \u2014 ${starter.priceDisplay} for ${starter.credits} restorations. No subscription, no monthly fees.`,
     images: [getOgImageUrl()],
   },
   robots: {
@@ -190,13 +180,13 @@ export default async function PricingPage() {
     "@type": "Product",
     name: "Magic Memory AI Photo Restoration Credits",
     description:
-      `One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from ${starter.priceDisplay} (${perPhotoPrice(starter)}/photo) to ${premium.priceDisplay} (${perPhotoPrice(premium)}/photo). Free 1/day tier available with no credit card.`,
+      `One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from ${starter.priceDisplay} (${perPhotoPrice(starter)}/photo) to ${premium.priceDisplay} (${perPhotoPrice(premium)}/photo).`,
     image: [getOgImageUrl()],
     brand: { "@type": "Brand", name: "Magic Memory" },
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "EUR",
-      lowPrice: "0",
+      lowPrice: (starter.price / 100).toFixed(2),
       highPrice: "29.99",
       offerCount: PRICING_OFFERS.length,
       offers: PRICING_OFFERS.map((offer) => ({
@@ -234,9 +224,9 @@ export default async function PricingPage() {
       "AI-powered photo restoration using the GFPGAN face restoration model. Restores old, blurry, faded, and damaged portrait photos in 5–15 seconds.",
     offers: {
       "@type": "Offer",
-      price: "0",
+      price: (starter.price / 100).toFixed(2),
       priceCurrency: "EUR",
-      description: "1 free restoration per day, no credit card required.",
+      description: `${starter.credits} restoration credits for ${starter.priceDisplay}, paid once. Credits never expire.`,
     },
   };
 
@@ -268,7 +258,7 @@ export default async function PricingPage() {
                   AI Photo Restoration Pricing
                 </h1>
                 <p className="mx-auto mt-6 max-w-[36rem] text-[17px] leading-[1.6] text-paper/65">
-                  One-time credits that never expire. No subscription. Start free.
+                  One-time credits that never expire. No subscription.
                 </p>
               </div>
             </PageContainer>

@@ -27,7 +27,7 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "Restore Black and White Photos With AI",
   description:
-    "Restore and sharpen old black and white photos with AI. GFPGAN recovers facial detail and reduces grain. Free daily restoration, no credit card required.",
+    "Restore and sharpen old black and white photos with AI. GFPGAN recovers facial detail and reduces grain. One-time credits, no subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-black-and-white-photos") },
   openGraph: {
     title: "Restore Black and White Photos With AI | Magic Memory",
@@ -93,7 +93,7 @@ export default function RestoreBlackAndWhitePhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Restore Black and White Photos",
     description:
-      "Restore and sharpen black and white photos with GFPGAN AI. Recovers facial detail and reduces grain in seconds. Output stays B&W. 1 free per day.",
+      "Restore and sharpen black and white photos with GFPGAN AI. Recovers facial detail and reduces grain in seconds. Output stays B&W. No subscription.",
     url: "/restore-black-and-white-photos",
   });
 
@@ -178,7 +178,7 @@ export default function RestoreBlackAndWhitePhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

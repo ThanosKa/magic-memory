@@ -51,7 +51,7 @@ const faqs: FAQItem[] = [
   {
     question: "Can I try Magic Memory before paying?",
     answer:
-      "Yes. Magic Memory gives you 1 free restoration every day, no credit card required. Sign in with Google and restore a photo immediately. If you need more, purchase a credit package. There is no subscription, no commitment, and no auto-renewal.",
+      "No. Magic Memory has no free tier: sign in with Google, buy a one-time credit pack (from €9.99 for 20 restorations) and each restoration uses one credit. A failed restoration costs no credit. There is no subscription, no commitment, and no auto-renewal.",
   },
 ];
 
@@ -91,7 +91,7 @@ export default function ReminiAlternativePage() {
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-2">TL;DR</h2>
               <ul className="space-y-2 text-paper/70">
-                <li><strong className="text-paper">Magic Memory:</strong> Web app, one-time credits (€9.99–€29.99), no photo storage, 1 free/day</li>
+                <li><strong className="text-paper">Magic Memory:</strong> Web app, one-time credits (€9.99–€29.99), no photo storage, credits never expire</li>
                 <li><strong className="text-paper">Remini:</strong> Mobile app only, $9.99/week subscription, cloud photo storage, more editing features</li>
               </ul>
             </div>
@@ -154,7 +154,7 @@ export default function ReminiAlternativePage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />
