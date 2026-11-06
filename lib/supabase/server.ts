@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import logger from "@/lib/logger";
 
 export async function getSupabaseServerClient() {
   const cookieStore = await cookies();
@@ -21,7 +22,10 @@ export async function getSupabaseServerClient() {
             cookieStore.set(name, value, options)
           );
         } catch (error) {
-          console.error("Failed to set Supabase cookies", error);
+          logger.error(
+            { error: error instanceof Error ? error.message : "Unknown error" },
+            "Failed to set Supabase cookies"
+          );
         }
       },
     },

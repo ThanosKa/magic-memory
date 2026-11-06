@@ -54,3 +54,15 @@ jobs:
 
       - name: Run Tests
         run: pnpm run test
+
+      - name: Build
+        run: pnpm run build
+        env:
+          # Placeholders so `next build` can evaluate modules that read env
+          # vars at import time. Not real credentials.
+          LOG_LEVEL: warn
+          CLERK_WEBHOOK_SECRET: whsec_ci_placeholder
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_placeholder
+          UPSTASH_REDIS_REST_URL: https://ci-placeholder.upstash.io
+          UPSTASH_REDIS_REST_TOKEN: ci-placeholder-token
+          RESEND_API_KEY: re_ci_placeholder
