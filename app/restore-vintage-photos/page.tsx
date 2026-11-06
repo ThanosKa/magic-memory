@@ -25,8 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title:
-    "Restore Vintage Photos — AI That Understands Old Photography | Magic Memory",
+  title: "Restore Vintage Photos — AI That Understands Old Photography",
   description:
     "Restore vintage photos from the 1920s through 1970s with AI. GFPGAN handles film grain, sepia tones, and period portrait conventions. Free daily restoration.",
   alternates: { canonical: getCanonicalUrl("/restore-vintage-photos") },

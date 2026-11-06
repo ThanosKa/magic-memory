@@ -13,7 +13,7 @@ const Header = dynamic(() => import("@/components/header").then((m) => m.Header)
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "Enhance Old Photos With AI — Improve Clarity and Detail | Magic Memory",
+  title: "Enhance Old Photos With AI — Improve Clarity and Detail",
   description:
     "Enhance old photos with AI to improve clarity, sharpness, and facial detail. Magic Memory uses GFPGAN to upgrade photo quality in seconds. Free daily enhancement.",
   alternates: { canonical: getCanonicalUrl("/enhance-old-photos") },

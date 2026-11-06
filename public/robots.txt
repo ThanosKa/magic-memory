@@ -5,7 +5,6 @@ Allow: /
 Disallow: /api/
 Disallow: /restore$
 Disallow: /profile$
-Disallow: /_next/
 Disallow: /.well-known/
 
 # AI Search Bots — explicitly allowed for citations

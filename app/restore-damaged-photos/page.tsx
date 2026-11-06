@@ -25,8 +25,7 @@ const Footer = dynamic(
 );
 
 export const metadata: Metadata = {
-  title:
-    "Fix Damaged Photos With AI — Scratches, Tears, and Fading | Magic Memory",
+  title: "Fix Damaged Photos With AI — Scratches, Tears, and Fading",
   description:
     "Restore water-damaged, torn, scratched, or faded photos with AI. GFPGAN recovers facial detail even in severely damaged photos. Free daily restoration.",
   alternates: { canonical: getCanonicalUrl("/restore-damaged-photos") },
