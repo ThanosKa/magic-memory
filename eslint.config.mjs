@@ -90,7 +90,7 @@ export default [
         'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-non-null-assertion': 'warn',
 
@@ -114,6 +114,23 @@ export default [
       next: {
         rootDir: '.',
       },
+    },
+  },
+  // Server code logs through lib/logger.ts. Client code and scripts/ keep the rule above.
+  {
+    files: [
+      'app/api/**/*.{ts,tsx}',
+      'lib/email.ts',
+      'lib/logger.ts',
+      'lib/redis.ts',
+      'lib/supabase/ensure-user.ts',
+      'lib/supabase/server.ts',
+      'lib/supabase/transactions.ts',
+      'lib/validations/**/*.ts',
+    ],
+    rules: {
+      // The empty options object drops the allow list; a bare severity would inherit it.
+      'no-console': ['error', {}],
     },
   },
 ];
