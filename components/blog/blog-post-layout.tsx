@@ -49,11 +49,11 @@ export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
             Ready to restore your photos?
           </h2>
           <p className="text-paper/65 mb-8">
-            Start with your free daily restoration. No credit card required.
+            One-time credit packs. Credits never expire.
           </p>
           <Button asChild size="lg">
             <Link href="/">
-              Restore a Photo Free
+              Restore a Photo
               <ButtonArrow />
             </Link>
           </Button>

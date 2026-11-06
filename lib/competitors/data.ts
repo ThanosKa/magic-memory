@@ -47,7 +47,7 @@ export const competitors: Record<string, Competitor> = {
       },
       {
         label: "Free tier",
-        magicMemory: "1 restoration/day, no credit card",
+        magicMemory: "None (a failed restoration costs no credit)",
         competitor: "Limited free tier",
       },
       {
@@ -105,7 +105,7 @@ export const competitors: Record<string, Competitor> = {
       },
       {
         label: "Free tier",
-        magicMemory: "1 restoration/day, no credit card",
+        magicMemory: "None (a failed restoration costs no credit)",
         competitor: "Very limited",
       },
       {
@@ -163,7 +163,7 @@ export const competitors: Record<string, Competitor> = {
       },
       {
         label: "Free tier",
-        magicMemory: "1 restoration/day, no credit card",
+        magicMemory: "None (a failed restoration costs no credit)",
         competitor: "3 free images/month",
       },
       {

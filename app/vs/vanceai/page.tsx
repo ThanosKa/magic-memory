@@ -36,7 +36,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which is cheaper for occasional use: Magic Memory or VanceAI?",
     answer:
-      "Magic Memory is cheaper for occasional users. You get 1 free restoration per day, and the smallest credit pack is €9.99 for 20 credits that never expire. VanceAI starts at $4.95/month with limited credits, and unused credits may expire depending on your plan.",
+      "Magic Memory is cheaper for occasional users. The smallest credit pack is €9.99 for 20 credits that never expire. VanceAI starts at $4.95/month with limited credits, and unused credits may expire depending on your plan.",
   },
   {
     question: "Does VanceAI offer batch processing?",
@@ -80,7 +80,7 @@ export default function VsVanceAIPage() {
     },
     {
       category: "Free tier",
-      magicMemory: "1 restoration per day, no credit card required",
+      magicMemory: "None (a failed restoration costs no credit)",
       competitor: "3 free images per month",
     },
     {
@@ -198,7 +198,7 @@ export default function VsVanceAIPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

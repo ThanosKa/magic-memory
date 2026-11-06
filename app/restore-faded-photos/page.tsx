@@ -27,13 +27,13 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "Restore Faded Photos — Bring Color and Contrast Back",
   description:
-    "Fix faded photos with AI. GFPGAN restores facial detail and contrast lost to UV exposure, time, and poor storage. Free daily restoration, no credit card required.",
+    "Fix faded photos with AI. GFPGAN restores facial detail and contrast lost to UV exposure, time, and poor storage. One-time credits, no subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-faded-photos") },
   openGraph: {
     title:
       "Restore Faded Photos — Bring Color and Contrast Back | Magic Memory",
     description:
-      "Fix faded photos with AI. Restore contrast and facial detail. Free daily.",
+      "Fix faded photos with AI. Restore contrast and facial detail. No subscription.",
     url: getCanonicalUrl("/restore-faded-photos"),
     images: [
       {
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Restore Faded Photos With AI",
     description:
-      "Fix faded photos. Restore contrast and detail. Free daily restoration.",
+      "Fix faded photos. Restore contrast and detail. No subscription.",
     images: [getOgImageUrl()],
   },
   robots: { index: true, follow: true },
@@ -91,7 +91,7 @@ export default function RestoreFadedPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Restore Faded Photos with AI",
     description:
-      "Fix faded photos with GFPGAN AI. Restores facial detail and contrast lost to UV exposure, time, and poor storage. 1 free restoration per day.",
+      "Fix faded photos with GFPGAN AI. Restores facial detail and contrast lost to UV exposure, time, and poor storage. No subscription.",
     url: "/restore-faded-photos",
   });
 
@@ -170,7 +170,7 @@ export default function RestoreFadedPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

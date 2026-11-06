@@ -27,12 +27,12 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "AI Portrait Photo Restoration — Restore Old Portraits",
   description:
-    "Restore old portrait photos with AI precision. GFPGAN was designed for faces — professional portraits, school photos, and formal portraits all benefit. Free daily.",
+    "Restore old portrait photos with AI precision. GFPGAN was designed for faces — professional portraits, school photos, and formal portraits all benefit. No subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-portrait-photos") },
   openGraph: {
     title: "AI Portrait Photo Restoration | Magic Memory",
     description:
-      "Restore old portrait photos with AI precision. GFPGAN designed for faces. Free daily.",
+      "Restore old portrait photos with AI precision. GFPGAN designed for faces. No subscription.",
     url: getCanonicalUrl("/restore-portrait-photos"),
     images: [
       {
@@ -91,7 +91,7 @@ export default function RestorePortraitPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Restore Portrait Photos with AI",
     description:
-      "Restore old portrait photos with GFPGAN AI — purpose-built for faces. Professional portraits, school photos, and formal portraits all benefit. 1 free per day.",
+      "Restore old portrait photos with GFPGAN AI — purpose-built for faces. Professional portraits, school photos, and formal portraits all benefit. No subscription.",
     url: "/restore-portrait-photos",
   });
 
@@ -191,7 +191,7 @@ export default function RestorePortraitPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

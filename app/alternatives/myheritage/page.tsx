@@ -14,7 +14,7 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 export const metadata: Metadata = {
   title: "MyHeritage Photo Enhancer Pricing 2026: Free Limits + Cheaper Alternative",
   description:
-    "MyHeritage Photo Enhancer pricing in 2026: $119 Basic, $189 Premium, $259 Complete — all annual, all bundled with genealogy. Free tier is a watermarked preview only. Magic Memory offers standalone AI restoration from €9.99 one-time or 1 free per day. Full breakdown.",
+    "MyHeritage Photo Enhancer pricing in 2026: $119 Basic, $189 Premium, $259 Complete — all annual, all bundled with genealogy. Free tier is a watermarked preview only. Magic Memory offers standalone AI restoration from €9.99 one-time. Full breakdown.",
   alternates: { canonical: getCanonicalUrl("/alternatives/myheritage") },
   openGraph: {
     title: "MyHeritage Photo Enhancer Pricing 2026 — Free Limits & Alternative",
@@ -46,7 +46,7 @@ const faqs: FAQItem[] = [
   {
     question: "What's the cheapest MyHeritage Photo Enhancer alternative in 2026?",
     answer:
-      "Magic Memory is the cheapest standalone alternative — 1 free restoration per day with no credit card, plus one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Restoring 100 photos on MyHeritage requires a $119/yr subscription. The same 100 photos on Magic Memory cost €25 in credits if you use the largest pack.",
+      "Magic Memory is the cheapest standalone alternative — one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Restoring 100 photos on MyHeritage requires a $119/yr subscription. The same 100 photos on Magic Memory cost €25 in credits if you use the largest pack.",
   },
   {
     question: "Does Magic Memory offer genealogy features?",
@@ -98,7 +98,7 @@ export default function MyHeritageAlternativePage() {
               MyHeritage Photo Enhancer is sold only as part of MyHeritage&apos;s annual genealogy plans, which cost $119, $189, or $259 per year as of 2026. The free tier is a watermarked preview — to enhance and download a clean image, you need at least the Basic plan. If you only want photo restoration, you are paying $119–$259 for family-tree, DNA, and historical-record features you may never use.
             </p>
             <p className="text-sm text-paper/70 mb-10">
-              Magic Memory offers standalone AI photo restoration from €9.99 one-time (credits never expire) or 1 free restoration per day. <em>Pricing verified directly on each vendor&apos;s site on 2026-05-19.</em>
+              Magic Memory offers standalone AI photo restoration from €9.99 one-time (credits never expire). <em>Pricing verified directly on each vendor&apos;s site on 2026-05-19.</em>
             </p>
 
             <div className="rounded-2xl border border-ember/30 bg-ember/5 p-6 mb-10">
@@ -136,7 +136,7 @@ export default function MyHeritageAlternativePage() {
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Pricing model</td><td className="py-2">Annual genealogy subscription</td><td className="py-2">One-time credits, never expire</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Lowest paid tier</td><td className="py-2">$119/year (Basic)</td><td className="py-2">€9.99 (20 credits)</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Highest paid tier</td><td className="py-2">$259/year (Complete)</td><td className="py-2">€29.99 (120 credits)</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Watermarked preview only</td><td className="py-2">1 restoration/day, no card</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Watermarked preview only</td><td className="py-2">None</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo-only purchase?</td><td className="py-2">No — bundled with genealogy</td><td className="py-2">Yes — standalone</td></tr>
                     <tr><td className="py-2 font-medium text-paper">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.25</td></tr>
                   </tbody>
@@ -147,7 +147,7 @@ export default function MyHeritageAlternativePage() {
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-2">TL;DR</h2>
               <ul className="space-y-2 text-paper/70">
-                <li><strong className="text-paper">Magic Memory:</strong> Standalone photo restoration, €9.99–€29.99 one-time, 1 free/day</li>
+                <li><strong className="text-paper">Magic Memory:</strong> Standalone photo restoration, €9.99–€29.99 one-time, credits never expire</li>
                 <li><strong className="text-paper">MyHeritage:</strong> Photo enhancement bundled in genealogy subscription ($119–$259/year), excellent for genealogy research</li>
               </ul>
             </div>
@@ -212,7 +212,7 @@ export default function MyHeritageAlternativePage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

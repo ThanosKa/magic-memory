@@ -15,7 +15,7 @@ type StartButtonWithClerkProps = Required<Omit<StartButtonProps, "className">> &
   Pick<StartButtonProps, "className">;
 
 const PILL_CLASS = buttonVariants({ size: "lg" });
-const DEFAULT_LABEL = "Restore a photo free";
+const DEFAULT_LABEL = "Restore a photo";
 const DEFAULT_SIGNED_IN_LABEL = "Restore a photo";
 
 function PillContent({ label }: { label: string }) {

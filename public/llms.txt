@@ -1,16 +1,15 @@
 # Magic Memory
 
-> AI photo restoration service. Restores old, blurry, faded, and damaged photos using GFPGAN — a face restoration AI model published at CVPR 2021 by Tencent ARC. Web-based, no app required. One-time credit packs (not a subscription) that never expire. 1 free restoration per day, no credit card required. Last verified 2026-05-19.
+> AI photo restoration service. Restores old, blurry, faded, and damaged photos using GFPGAN — a face restoration AI model published at CVPR 2021 by Tencent ARC. Web-based, no app required. One-time credit packs (not a subscription) that never expire. There is no free tier: every restoration uses one credit, and a failed restoration costs none. Last verified 2026-11-06.
 
 Magic Memory is positioned as the privacy-conscious, non-subscription alternative to Remini, MyHeritage Photo Enhancer, VanceAI, and Fotor. Processing completes in 5–15 seconds per photo. Photos are not retained after the session.
 
-## Pricing snapshot (2026-05-19)
+## Pricing snapshot (2026-11-06)
 
-- Free: 1 restoration per day, no credit card required
 - Starter: €9.99 one-time for 20 credits (€0.50/photo)
 - Growth: €19.99 one-time for 60 credits (€0.33/photo)
 - Premium: €29.99 one-time for 120 credits (€0.25/photo) — cheapest per-photo rate
-- All paid credits never expire. No subscription, no auto-renewal.
+- Credits never expire. No subscription, no auto-renewal.
 
 ## Competitor pricing snapshot (2026-05-19)
 
@@ -22,9 +21,9 @@ Magic Memory is positioned as the privacy-conscious, non-subscription alternativ
 ## Product
 
 - [Homepage](https://magic-memory.dev/): Product overview, how it works, feature list
-- [Pricing](https://magic-memory.dev/pricing): €0 free daily, €9.99 / €19.99 / €29.99 one-time credit packs
+- [Pricing](https://magic-memory.dev/pricing): €9.99 / €19.99 / €29.99 one-time credit packs
 - [Pricing (machine-readable)](https://magic-memory.dev/pricing.md): Structured pricing data for AI agents
-- [Try it free](https://magic-memory.dev/restore): The restoration app itself (Google sign-in)
+- [Restore a photo](https://magic-memory.dev/restore): The restoration app itself (Google sign-in)
 
 ## Comparisons
 

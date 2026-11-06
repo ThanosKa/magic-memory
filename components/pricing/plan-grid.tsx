@@ -5,10 +5,10 @@ type PlanGridProps = {
   children: ReactNode;
 };
 
-/** Four plans as one bordered sheet: 1 column on phones, 2 on tablets, 4 on desktop. */
+/** Three plans as one bordered sheet: stacked on phones and tablets, 3 columns on desktop. */
 export function PlanGrid({ children }: PlanGridProps) {
   return (
-    <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
+    <ul className="grid overflow-hidden rounded-[20px] border border-ink/12 lg:grid-cols-3">
       {children}
     </ul>
   );
@@ -30,10 +30,7 @@ export function PlanCell({ index, popular = false, className, children }: PlanCe
     <li
       className={cn(
         "relative flex flex-col border-ink/12 p-7 sm:p-8",
-        index > 0 && "border-t sm:border-t-0",
-        index % 2 === 1 && "sm:border-l",
-        index >= 2 && "sm:border-t lg:border-t-0",
-        index === 2 && "lg:border-l",
+        index > 0 && "border-t lg:border-l lg:border-t-0",
         popular && "bg-ink text-paper",
         className
       )}

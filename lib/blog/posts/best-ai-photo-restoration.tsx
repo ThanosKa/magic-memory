@@ -9,16 +9,16 @@ export function BestAIPhotoRestorationContent() {
           Quick answer (June 2026)
         </p>
         <p className="text-muted-foreground mb-4">
-          After running the same scanned 1962 portrait through five tools, <strong>Magic Memory</strong> produced the sharpest face (€0.25/photo on the largest pack, 1 free/day for casual use). <strong>Remini</strong> is the strongest mobile-app pick at $9.99/week. <strong>MyHeritage Photo Enhancer</strong> is bundled into a $119–$259/yr genealogy subscription — overpriced unless you also want family-tree tools. <strong>VanceAI</strong> wins for pros who batch-process or also need upscaling/colorization. <strong>Fotor</strong> is the right call only if you also need a full photo editor.
+          After running the same scanned 1962 portrait through five tools, <strong>Magic Memory</strong> produced the sharpest face (€0.25/photo on the largest pack, €9.99 for 20 photos, credits never expire). <strong>Remini</strong> is the strongest mobile-app pick at $9.99/week. <strong>MyHeritage Photo Enhancer</strong> is bundled into a $119–$259/yr genealogy subscription — overpriced unless you also want family-tree tools. <strong>VanceAI</strong> wins for pros who batch-process or also need upscaling/colorization. <strong>Fotor</strong> is the right call only if you also need a full photo editor.
         </p>
         <Button asChild>
           <Link href="/">
-            Try Magic Memory free
+            Try Magic Memory
             <ButtonArrow />
           </Link>
         </Button>
         <p className="text-xs text-muted-foreground mt-3">
-          1 restoration per day, no credit card. Pricing & free-tier limits last verified 2026-06-13.
+          One-time credit packs, no subscription. Pricing & free-tier limits last verified 2026-06-13.
         </p>
       </div>
 
@@ -84,7 +84,7 @@ export function BestAIPhotoRestorationContent() {
             <tr className="border-b border-border">
               <td className="px-4 py-3 font-medium text-primary">Magic Memory</td>
               <td className="px-4 py-3 text-muted-foreground">€9.99 one-time (20 credits) — €0.50/photo, €0.25/photo on €29.99 pack</td>
-              <td className="px-4 py-3 text-muted-foreground">1/day, no card</td>
+              <td className="px-4 py-3 text-muted-foreground">None</td>
               <td className="px-4 py-3 text-muted-foreground">8–12s</td>
               <td className="px-4 py-3 text-muted-foreground">Web, occasional users, privacy</td>
             </tr>
@@ -142,7 +142,7 @@ export function BestAIPhotoRestorationContent() {
       </p>
       <ul>
         <li><strong>Best for:</strong> Portrait and family photo restoration, occasional users, privacy-conscious users</li>
-        <li><strong>Pricing:</strong> 1 free restoration per day + €9.99–€29.99 one-time credit packages (never expire)</li>
+        <li><strong>Pricing:</strong> €9.99–€29.99 one-time credit packages (never expire); no free tier</li>
         <li><strong>Effective cost:</strong> €0.50/photo on the smallest pack, €0.25/photo on the €29.99 / 120-credit pack</li>
         <li><strong>Platform:</strong> Web — works on any device, no app required</li>
         <li><strong>Processing time:</strong> 8–12 seconds in our 2026-05-19 test</li>
@@ -213,7 +213,7 @@ export function BestAIPhotoRestorationContent() {
             <tr className="border-b border-border">
               <td className="px-4 py-3 font-medium text-primary">Magic Memory</td>
               <td className="px-4 py-3 text-muted-foreground">€9.99–€29.99 one-time</td>
-              <td className="px-4 py-3 text-muted-foreground">1/day, no card</td>
+              <td className="px-4 py-3 text-muted-foreground">None</td>
               <td className="px-4 py-3 text-muted-foreground">Web</td>
             </tr>
             <tr className="border-b border-border bg-muted/20">
@@ -246,7 +246,7 @@ export function BestAIPhotoRestorationContent() {
 
       <h2>Recommendation by use case</h2>
       <ul>
-        <li><strong>One-time use, restoring a few family photos:</strong> Magic Memory — free tier covers occasional use, no subscription</li>
+        <li><strong>One-time use, restoring a few family photos:</strong> Magic Memory — €9.99 for 20 photos, credits never expire, no subscription</li>
         <li><strong>Mobile user who wants an app:</strong> Remini — best mobile experience</li>
         <li><strong>Genealogy researcher:</strong> MyHeritage — worth it if you are already using the platform</li>
         <li><strong>Professional needing multiple tools:</strong> VanceAI — most capable but most complex</li>
@@ -258,12 +258,12 @@ export function BestAIPhotoRestorationContent() {
 
       <h3>What are the most popular AI photo restoration tools in 2026?</h3>
       <p>
-        The five most-used AI photo restoration tools in 2026 are Remini (mobile-first, largest user base), MyHeritage Photo Enhancer (bundled in genealogy plans, popular for ancestry research), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, free daily), and Fotor (general photo editor with AI enhancement). Together they cover roughly every realistic use case — from one-off family photos to batch professional jobs.
+        The five most-used AI photo restoration tools in 2026 are Remini (mobile-first, largest user base), MyHeritage Photo Enhancer (bundled in genealogy plans, popular for ancestry research), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, one-time credits), and Fotor (general photo editor with AI enhancement). Together they cover roughly every realistic use case — from one-off family photos to batch professional jobs.
       </p>
 
       <h3>What is the best free AI photo restoration tool in 2026?</h3>
       <p>
-        Magic Memory offers the most generous free tier: 1 restoration per day with no credit card required. For occasional users, that is effectively unlimited. Most other tools restrict free usage to a one-time trial, a watermarked preview, or 3 credits per month.
+        Magic Memory has no free tier: restorations use one-time credits from €9.99 for 20, and a failed restoration costs no credit. The other tools here restrict free usage to a one-time trial, a watermarked preview, or 3 credits per month.
       </p>
 
       <h3>What is the cheapest AI photo restoration for 20+ photos?</h3>
@@ -324,10 +324,10 @@ export function BestAIPhotoRestorationContent() {
           <div>
             <p className="font-semibold text-foreground mb-2">Ready to restore?</p>
             <ul className="space-y-1 text-muted-foreground">
-              <li><Link href="/pricing" className="text-primary hover:underline">See pricing (free tier, no card)</Link></li>
+              <li><Link href="/pricing" className="text-primary hover:underline">See pricing (one-time credit packs)</Link></li>
               <li><Link href="/for/photographers" className="text-primary hover:underline">For photographers</Link></li>
               <li><Link href="/for/genealogists" className="text-primary hover:underline">For genealogists</Link></li>
-              <li><Link href="/restore" className="text-primary hover:underline">Try Magic Memory free</Link></li>
+              <li><Link href="/restore" className="text-primary hover:underline">Try Magic Memory</Link></li>
             </ul>
           </div>
         </div>

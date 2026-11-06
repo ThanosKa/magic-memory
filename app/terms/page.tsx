@@ -83,8 +83,8 @@ export default function TermsPage() {
                   images on our infrastructure. We may store restoration
                   metadata (Replicate output link, filename label, credit usage,
                   timestamps, and your user ID) in our database for your account
-                  history and billing audit. We offer both free daily credits
-                  and paid credit packages for photo restorations.
+                  history and billing audit. Photo restorations are paid for with
+                  credits from one-time credit packages.
                 </p>
               </section>
 
@@ -110,8 +110,7 @@ export default function TermsPage() {
               <section>
                 <h2>5. Credits and Payments</h2>
                 <p>
-                  Purchased credits never expire. Free daily credits reset at
-                  midnight UTC. All payments are processed securely through
+                  Purchased credits never expire. All payments are processed securely through
                   Stripe. All sales are final: we do not issue refunds under any
                   circumstances, including unused credits, partial usage, or
                   dissatisfaction with restoration results. If a restoration

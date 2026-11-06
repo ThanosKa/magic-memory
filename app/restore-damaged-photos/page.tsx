@@ -27,12 +27,12 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "Fix Damaged Photos With AI — Scratches, Tears, and Fading",
   description:
-    "Restore water-damaged, torn, scratched, or faded photos with AI. GFPGAN recovers facial detail even in severely damaged photos. Free daily restoration.",
+    "Restore water-damaged, torn, scratched, or faded photos with AI. GFPGAN recovers facial detail even in severely damaged photos. No subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-damaged-photos") },
   openGraph: {
     title: "Fix Damaged Photos With AI — Magic Memory",
     description:
-      "AI photo restoration for water-damaged, torn, and faded photos. Free daily restoration.",
+      "AI photo restoration for water-damaged, torn, and faded photos. No subscription.",
     url: getCanonicalUrl("/restore-damaged-photos"),
     images: [
       {
@@ -89,7 +89,7 @@ export default function RestoreDamagedPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Fix Damaged Photos with AI",
     description:
-      "Restore water-damaged, torn, scratched, or faded photos with GFPGAN AI. Recovers facial detail even in severely damaged scans. 1 free per day.",
+      "Restore water-damaged, torn, scratched, or faded photos with GFPGAN AI. Recovers facial detail even in severely damaged scans. No subscription.",
     url: "/restore-damaged-photos",
   });
 
@@ -111,7 +111,7 @@ export default function RestoreDamagedPhotosPage() {
       <main className="flex-1">
         <UseCaseHero
           headline="Fix Damaged Photos With AI — Scratches, Tears, and Fading"
-          subheadline="Water damage, fire, torn prints, mold, and decades of poor storage can destroy irreplaceable photos. Magic Memory uses GFPGAN AI to recover the facial detail that matters most — even in severely damaged photos. Free daily restoration, no credit card required."
+          subheadline="Water damage, fire, torn prints, mold, and decades of poor storage can destroy irreplaceable photos. Magic Memory uses GFPGAN AI to recover the facial detail that matters most — even in severely damaged photos. One-time credits, no subscription."
           keyword="restore damaged photos"
         />
 
@@ -191,7 +191,7 @@ export default function RestoreDamagedPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

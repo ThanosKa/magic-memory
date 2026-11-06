@@ -153,10 +153,10 @@ export default function RootLayout({
                     offers: {
                       "@type": "AggregateOffer",
                       priceCurrency: "EUR",
-                      lowPrice: "0",
+                      lowPrice: "9.99",
                       highPrice: "29.99",
-                      offerCount: 4,
-                      description: "1 free restoration per day plus three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+                      offerCount: 3,
+                      description: "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
                     },
                     aggregateRating: {
                       "@type": "AggregateRating",
@@ -167,7 +167,6 @@ export default function RootLayout({
                     },
                     featureList: [
                       "AI-powered face restoration with GFPGAN (CVPR 2021)",
-                      "1 free restoration daily, no credit card",
                       "One-time credit packs that never expire (€9.99–€29.99)",
                       "Instant results in 5–15 seconds",
                       "Web-based — works on any device, no app required",

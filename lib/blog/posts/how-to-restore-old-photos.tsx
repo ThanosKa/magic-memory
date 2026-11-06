@@ -39,7 +39,7 @@ export function HowToRestoreOldPhotosContent() {
 
       <h3>3. AI Photo Restoration</h3>
       <p>
-        AI tools like Magic Memory use models trained on millions of photos to automatically restore detail. Cost: free to low cost. Time: 5–15 seconds per photo. Best for: portrait and face-focused photos, batch restoration projects, users without Photoshop skills. Not ideal for: complex physical damage (tears, mold) or non-face areas needing detailed restoration.
+        AI tools like Magic Memory use models trained on millions of photos to automatically restore detail. Cost: €0.25–€0.50 per photo on Magic Memory. Time: 5–15 seconds per photo. Best for: portrait and face-focused photos, batch restoration projects, users without Photoshop skills. Not ideal for: complex physical damage (tears, mold) or non-face areas needing detailed restoration.
       </p>
 
       <h2>How to Restore Photos with AI: Step by Step</h2>
@@ -49,7 +49,7 @@ export function HowToRestoreOldPhotosContent() {
           <strong>Scan your photo at 600 DPI minimum.</strong> Use a flatbed scanner for best results. Clean the scanner glass before scanning. For photos smaller than 4&times;6 inches, use 1200 DPI. Save as JPEG at 90%+ quality or PNG.
         </li>
         <li>
-          <strong>Sign in to Magic Memory.</strong> Go to the homepage and sign in with Google. No credit card required — you get 1 free restoration per day.
+          <strong>Sign in to Magic Memory.</strong> Go to the homepage and sign in with Google, then buy a one-time credit pack (from €9.99 for 20 photos).
         </li>
         <li>
           <strong>Upload your photo.</strong> Drag and drop or click to upload. Supported formats: JPEG, PNG, WebP up to 10MB.
@@ -81,9 +81,9 @@ export function HowToRestoreOldPhotosContent() {
 
       <h2>Frequently Asked Questions</h2>
 
-      <h3>Can I restore old photos for free?</h3>
+      <h3>How much does it cost to restore old photos with AI?</h3>
       <p>
-        Yes. Magic Memory gives you 1 free restoration per day, no credit card required. For more restorations, purchase a credit package (€9.99–€29.99) with credits that never expire.
+        On Magic Memory, one photo costs one credit. Credit packs cost €9.99–€29.99 (€0.25–€0.50 per photo), are paid once, and never expire. A failed restoration costs no credit.
       </p>
 
       <h3>How do I scan old photos at home?</h3>

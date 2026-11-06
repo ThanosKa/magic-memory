@@ -53,14 +53,14 @@ export function UseCaseHero({ headline, subheadline, ctaHref = "/" }: UseCaseHer
           <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
             <Button asChild size="lg">
               <Link href={ctaHref}>
-                Restore Your Photo Free
+                Restore Your Photo
                 <ButtonArrow />
               </Link>
             </Button>
             <SecondaryLink href="/pricing">View Pricing</SecondaryLink>
           </div>
           <p className="font-mono mt-8 text-[11px] uppercase tracking-[0.16em] text-paper/60">
-            1 free restoration per day. No credit card required.
+            One-time credits. No subscription.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">

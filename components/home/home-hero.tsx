@@ -49,8 +49,8 @@ export function HomeHero() {
           </div>
 
           <ul className="font-mono mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-paper/60">
-            <li>1 free photo a day</li>
-            <li>No credit card</li>
+            <li>No subscription</li>
+            <li>Credits never expire</li>
             <li>Nothing to install</li>
           </ul>
         </div>

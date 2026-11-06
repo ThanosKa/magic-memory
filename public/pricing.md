@@ -2,17 +2,10 @@
 
 AI-powered photo restoration using GFPGAN. No subscription — one-time credit packages that never expire.
 
-Last updated: 2026-05-19
+Last updated: 2026-11-06
 Currency: EUR (Euro). Your bank converts to local currency at purchase.
 Payment processor: Stripe (PCI DSS Level 1).
-
-## Free Daily
-
-- Price: €0 / day
-- Credits: 1 restoration per day (resets at midnight UTC)
-- Credit card required: No
-- Expiration: Unused daily credits do not roll over
-- Best for: Trying the product, restoring a single important photo
+Free tier: none. Every restoration uses one credit from a pack below.
 
 ## Starter Plan
 

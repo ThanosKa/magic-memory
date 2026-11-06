@@ -41,7 +41,7 @@ const faqs: FAQItem[] = [
   {
     question: "What does VanceAI cost compared to Magic Memory?",
     answer:
-      "VanceAI offers subscription plans starting from $4.95/month and credit packs. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire, plus 1 free restoration per day. Pricing depends on usage frequency — compare the per-photo cost for your expected usage.",
+      "VanceAI offers subscription plans starting from $4.95/month and credit packs. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. Pricing depends on usage frequency — compare the per-photo cost for your expected usage.",
   },
   {
     question: "Which tool has better face restoration quality?",
@@ -153,7 +153,7 @@ export default function VanceAIAlternativePage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

@@ -27,12 +27,12 @@ const Footer = dynamic(
 export const metadata: Metadata = {
   title: "Restore Vintage Photos — AI That Understands Old Photography",
   description:
-    "Restore vintage photos from the 1920s through 1970s with AI. GFPGAN handles film grain, sepia tones, and period portrait conventions. Free daily restoration.",
+    "Restore vintage photos from the 1920s through 1970s with AI. GFPGAN handles film grain, sepia tones, and period portrait conventions. No subscription.",
   alternates: { canonical: getCanonicalUrl("/restore-vintage-photos") },
   openGraph: {
     title: "Restore Vintage Photos — AI For Old Photography | Magic Memory",
     description:
-      "Restore vintage photos with AI. Film grain, sepia, 1920s–1970s portraits. Free daily.",
+      "Restore vintage photos with AI. Film grain, sepia, 1920s–1970s portraits. No subscription.",
     url: getCanonicalUrl("/restore-vintage-photos"),
     images: [
       {
@@ -90,7 +90,7 @@ export default function RestoreVintagePhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Restore Vintage Photos with AI",
     description:
-      "Restore vintage photos from the 1920s through 1970s with GFPGAN AI. Handles film grain, sepia tones, and period portrait conventions. 1 free per day.",
+      "Restore vintage photos from the 1920s through 1970s with GFPGAN AI. Handles film grain, sepia tones, and period portrait conventions. No subscription.",
     url: "/restore-vintage-photos",
   });
 
@@ -169,7 +169,7 @@ export default function RestoreVintagePhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

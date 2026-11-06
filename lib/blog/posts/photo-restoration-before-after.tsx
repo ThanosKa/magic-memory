@@ -104,7 +104,7 @@ export function PhotoRestorationBeforeAfterContent() {
 
       <h3>Can I see more before-and-after examples?</h3>
       <p>
-        The best way to see results is to try it yourself — sign in and use your free daily restoration. The comparison slider in Magic Memory shows your own before-and-after immediately after processing.
+        The best way to see results is to try it yourself — sign in and restore one of your own photos. The comparison slider in Magic Memory shows your own before-and-after immediately after processing.
       </p>
 
       <h3>How does Magic Memory compare to Photoshop for photo restoration?</h3>

@@ -50,13 +50,13 @@ export function RestoreOldFamilyPhotosTipsContent() {
         <li><strong>Sort by condition:</strong> Separate into three piles — excellent condition (digital backup only needed), moderate degradation (AI restoration will help significantly), severe damage (may need manual restoration or acceptance of limitations).</li>
         <li><strong>Sort by importance:</strong> Within each condition category, prioritize photos of people who have passed, sole existing photos of specific family members, and photos with historical significance.</li>
         <li><strong>Name files systematically:</strong> Use a naming convention like <code>LastName_Year_Description.jpg</code> (e.g., <code>Smith_1955_GrandpaWeddingPortrait.jpg</code>). This makes organizing and searching easier long-term.</li>
-        <li><strong>Restore highest priority first:</strong> Use your 1 free daily restoration on the most important photos. Purchase credits when you have a batch to process.</li>
+        <li><strong>Restore highest priority first:</strong> Start with the most important photos, then work through the rest as a batch. Credits never expire, so there is no rush.</li>
       </ol>
 
       <h2>Step-by-Step AI Restoration</h2>
       <ol>
         <li>Scan your photo at 600+ DPI and save as JPEG (90%+) or PNG</li>
-        <li>Sign in to Magic Memory with Google (1 free restoration per day, no credit card)</li>
+        <li>Sign in to Magic Memory with Google and buy a one-time credit pack (from €9.99 for 20 photos)</li>
         <li>Upload your scanned photo</li>
         <li>Wait 5–15 seconds for the AI to process</li>
         <li>Compare before and after, download the restored version</li>

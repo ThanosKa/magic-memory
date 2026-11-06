@@ -15,11 +15,11 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 export const metadata: Metadata = {
   title: "Enhance Old Photos With AI — Improve Clarity and Detail",
   description:
-    "Enhance old photos with AI to improve clarity, sharpness, and facial detail. Magic Memory uses GFPGAN to upgrade photo quality in seconds. Free daily enhancement.",
+    "Enhance old photos with AI to improve clarity, sharpness, and facial detail. Magic Memory uses GFPGAN to upgrade photo quality in seconds. No subscription.",
   alternates: { canonical: getCanonicalUrl("/enhance-old-photos") },
   openGraph: {
     title: "Enhance Old Photos With AI | Magic Memory",
-    description: "Enhance old photos with AI. Improve clarity and detail in seconds. Free daily.",
+    description: "Enhance old photos with AI. Improve clarity and detail in seconds. No subscription.",
     url: getCanonicalUrl("/enhance-old-photos"),
     images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Enhance Old Photos" }],
   },
@@ -69,7 +69,7 @@ export default function EnhanceOldPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Enhance Old Photos with AI",
     description:
-      "Improve clarity and detail of old photos with GFPGAN AI. Sharpens faces, recovers texture, and enhances quality in 5–15 seconds. 1 free per day.",
+      "Improve clarity and detail of old photos with GFPGAN AI. Sharpens faces, recovers texture, and enhances quality in 5–15 seconds. No subscription.",
     url: "/enhance-old-photos",
   });
 
@@ -122,7 +122,7 @@ export default function EnhanceOldPhotosPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

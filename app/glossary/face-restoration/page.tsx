@@ -134,9 +134,9 @@ export default function GlossaryFaceRestorationPage() {
             </div>
 
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
-              <h2 className="font-serif text-2xl text-paper mb-3">Try Face Restoration Free</h2>
+              <h2 className="font-serif text-2xl text-paper mb-3">Try Face Restoration</h2>
               <p className="text-paper/70 mb-4">
-                Magic Memory uses GFPGAN to restore faces in any photo. Upload a portrait, get a restored version in under 15 seconds. 1 free restoration per day, no credit card required.
+                Magic Memory uses GFPGAN to restore faces in any photo. Upload a portrait, get a restored version in under 15 seconds. One-time credits that never expire, no subscription.
               </p>
               <Button asChild>
                 <Link href="/restore">
@@ -173,7 +173,7 @@ export default function GlossaryFaceRestorationPage() {
               <span className="italic text-paper/55">your memories?</span>
             </>
           }
-          note="Start with your free daily restoration. No credit card required."
+          note="One-time credit packs. Credits never expire. No subscription."
         />
       </main>
       <Footer />

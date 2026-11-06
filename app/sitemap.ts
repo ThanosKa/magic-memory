@@ -4,7 +4,7 @@ import { blogPosts } from "@/lib/blog/posts";
 const BASE_URL =
   process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 
-const LAST_REVIEWED = new Date("2026-05-19");
+const LAST_REVIEWED = new Date("2026-11-06");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
