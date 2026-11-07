@@ -9,7 +9,7 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 - A new user gets one one-time credit, set in two places that must agree: `app/api/clerk/webhook/route.ts` and `lib/supabase/ensure-user.ts`.
 - The daily free credit was removed on purpose (commits `dca4871`, `fcd4c84`, `1555030`). `/api/restore` gates on `paid_credits` alone, and `/api/credits` reports `hasFreeDaily: false`, because adding it showed users a phantom credit that returned 403 when spent. `__tests__/api/restore/route.test.ts` holds the regression test.
 - These free-credit leftovers are inert, so leave them unwired: the helpers in `lib/redis.ts`, the free columns from `check_user_credits`, `restorations.used_free_credit`, `APP_CONFIG.freeRestorationPerDay`.
-- Public copy (`public/pricing.md`, many `app/` marketing pages) still advertises a free daily restoration. Treat the code as the spec for behaviour.
+- Public copy must not promise the daily credit back; `__tests__/copy/free-credit-claims.test.ts` fails if it does.
 
 ## `POST /api/restore`
 
