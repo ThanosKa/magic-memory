@@ -7,6 +7,8 @@ export default defineConfig({
     compatibilityDate: "2026-11-07",
     compatibilityFlags: ["nodejs_compat"],
     observability: { enabled: true },
+    // Temporary test hostname: Clerk live keys reject workers.dev. Remove at cutover.
+    domains: ["cf-test.magic-memory.dev"],
     assets: {
       htmlHandling: "none",
       notFoundHandling: "none",

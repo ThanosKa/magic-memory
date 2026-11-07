@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import "./globals.css";
+import { CloudflareWebAnalytics } from "@/components/cloudflare-web-analytics";
 import { LoadingSpinner } from "@/components/ui/loading-states";
 import { FONT_VARIABLES } from "@/lib/fonts";
 import { ThemeColorScript } from "@/components/theme/theme-color-script";
@@ -206,6 +207,7 @@ export default function RootLayout({
             <CookieConsent />
             <ThemedToaster />
           </ThemeProvider>
+          <CloudflareWebAnalytics />
         </body>
       </html>
     </ConditionalClerkProvider>
