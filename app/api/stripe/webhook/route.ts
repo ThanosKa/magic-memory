@@ -189,12 +189,13 @@ export async function POST(request: NextRequest) {
       const customerEmail = session.customer_details?.email;
       if (customerEmail) {
         const customerName = session.customer_details?.name || null;
-        sendPurchaseEmail(
+        // Awaited: Workers can cancel work still running after the response.
+        await sendPurchaseEmail(
           customerEmail,
           customerName,
           pkg.name,
           creditsToAdd,
-        ).catch(() => {});
+        );
       }
     }
 

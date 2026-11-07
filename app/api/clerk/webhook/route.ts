@@ -120,7 +120,8 @@ export async function POST(request: NextRequest) {
                 }
 
                 logger.info({ userId: id, email }, "User created in database");
-                sendWelcomeEmail(email, name).catch(() => {});
+                // Awaited: Workers can cancel work still running after the response.
+                await sendWelcomeEmail(email, name);
                 break;
             }
 
