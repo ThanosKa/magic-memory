@@ -4,6 +4,8 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
+  // Put metadata in the initial <head> for every visitor, not only known bots.
+  htmlLimitedBots: /.*/,
   typescript: {
     ignoreBuildErrors: true,
   },

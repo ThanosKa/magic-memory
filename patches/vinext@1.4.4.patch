@@ -1,0 +1,13 @@
+diff --git a/dist/shims/image.js b/dist/shims/image.js
+index 338074c0e4f73224f56d5ffd3bac11bf203ace75..8a039d4131cbb76971f44db286a9c06d83cadfd9 100644
+--- a/dist/shims/image.js
++++ b/dist/shims/image.js
+@@ -295,7 +295,7 @@ const Image = forwardRef(function Image({ src: srcProp, alt, width, height, fill
+ 	}
+ 	const imgQuality = parseImageQuality(quality) ?? 75;
+ 	const skipOptimization = isSvgUrl(src) && !__dangerouslyAllowSVG;
+-	const optimizedAttributes = imgWidth && !fill && !skipOptimization ? generateImageAttributes(src, imgWidth, imgQuality, sizes) : void 0;
++	const optimizedAttributes = (imgWidth || fill) && !skipOptimization ? generateImageAttributes(src, imgWidth, imgQuality, fill ? sizes ?? "100vw" : sizes) : void 0;
+ 	const srcSet = optimizedAttributes ? optimizedAttributes.srcSet : imgWidth && !fill ? RESPONSIVE_WIDTHS.filter((w) => w <= imgWidth * 2).map((w) => `${src} ${w}w`).join(", ") || `${src} ${imgWidth}w` : void 0;
+ 	const optimizedSrc = skipOptimization ? src : optimizedAttributes ? optimizedAttributes.src : imageOptimizationUrl(src, RESPONSIVE_WIDTHS[0], imgQuality);
+ 	const sanitizedLocalBlur = imgBlurDataURL ? sanitizeBlurDataURL(imgBlurDataURL) : void 0;

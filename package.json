@@ -123,6 +123,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "workerd"
-    ]
+    ],
+    "patchedDependencies": {
+      "vinext@1.4.4": "patches/vinext@1.4.4.patch"
+    }
   }
 }
