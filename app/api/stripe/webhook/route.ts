@@ -50,7 +50,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const stripe = getStripeClient();
-    const event = stripe.webhooks.constructEvent(
+    // Workers only offer async crypto: the sync constructEvent throws there.
+    const event = await stripe.webhooks.constructEventAsync(
       body,
       signature,
       webhookSecret

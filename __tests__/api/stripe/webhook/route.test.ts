@@ -17,7 +17,7 @@ vi.mock("stripe", () => {
     default: function () {
       return {
         webhooks: {
-          constructEvent: mockStripeConstructEvent,
+          constructEventAsync: mockStripeConstructEvent,
         },
       };
     },

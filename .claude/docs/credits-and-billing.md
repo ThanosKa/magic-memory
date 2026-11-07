@@ -21,7 +21,7 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 
 ## Stripe
 
-- The webhook reads the raw `request.text()` body and verifies it with `stripe.webhooks.constructEvent` before trusting anything.
+- The webhook reads the raw `request.text()` body and verifies it with `stripe.webhooks.constructEventAsync` before trusting anything. The sync `constructEvent` throws on Cloudflare Workers.
 - `metadata.userId` on the checkout session is `users.id` (UUID), not the Clerk id, which travels separately as `metadata.clerkUserId`.
 - Before granting credits the webhook checks metadata, package, price id, amount (discounts included) and currency `eur` against `CREDIT_PACKAGES`. A mismatch is logged and answered with 200, since a retry cannot fix it.
 - A 100% discount session has no `payment_intent`; the webhook uses `session.id` as the payment id.
