@@ -9,6 +9,8 @@ export default defineConfig({
     observability: { enabled: true },
     // Temporary test hostname: Clerk live keys reject workers.dev. Remove at cutover.
     domains: ["cf-test.magic-memory.dev"],
+    // Declaring a domain would otherwise switch workers.dev off.
+    workersDev: true,
     assets: {
       htmlHandling: "none",
       notFoundHandling: "none",
