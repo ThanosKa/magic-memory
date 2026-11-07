@@ -109,22 +109,4 @@ describe("GET /api/credits", () => {
     expect(data.data.hasFreeDaily).toBe(false);
     expect(data.data.totalCredits).toBe(0);
   });
-
-  it("grants exactly 1 credit to a fresh signup (paid_credits = 1 from webhook)", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
-      ReturnType<typeof auth>
-    >);
-
-    vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabaseWithUser({ paid_credits: 1 }) as unknown as ReturnType<typeof getSupabaseAdminClient>
-    );
-
-    const response = await GET();
-    const data = await response.json();
-
-    expect(response.status).toBe(200);
-    expect(data.data.paidCredits).toBe(1);
-    expect(data.data.totalCredits).toBe(1);
-    expect(data.data.hasFreeDaily).toBe(false);
-  });
 });

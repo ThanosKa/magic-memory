@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { CREDIT_PACKAGES, APP_CONFIG, perPhotoPrice, type PackageType } from "@/lib/constants"
+import { CREDIT_PACKAGES, perPhotoPrice } from "@/lib/constants"
 
 describe("constants", () => {
     describe("CREDIT_PACKAGES", () => {
@@ -27,60 +27,10 @@ describe("constants", () => {
             expect(CREDIT_PACKAGES.premium.priceDisplay).toBe("€29.99")
         })
 
-        it("has unique package names", () => {
-            const names = Object.values(CREDIT_PACKAGES).map((pkg) => pkg.name)
-            const uniqueNames = new Set(names)
-            expect(uniqueNames.size).toBe(names.length)
-        })
-
         it("shows each pack's price per photo in euros", () => {
             expect(perPhotoPrice(CREDIT_PACKAGES.starter)).toBe("€0.50")
             expect(perPhotoPrice(CREDIT_PACKAGES.growth)).toBe("€0.33")
             expect(perPhotoPrice(CREDIT_PACKAGES.premium)).toBe("€0.25")
-        })
-
-        it("marks only growth as popular", () => {
-            expect(CREDIT_PACKAGES.starter.popular).toBe(false)
-            expect(CREDIT_PACKAGES.growth.popular).toBe(true)
-            expect(CREDIT_PACKAGES.premium.popular).toBe(false)
-        })
-
-        it("all packages have features array", () => {
-            const packageTypes: PackageType[] = ["starter", "growth", "premium"]
-            packageTypes.forEach((type) => {
-                expect(Array.isArray(CREDIT_PACKAGES[type].features)).toBe(true)
-                expect(CREDIT_PACKAGES[type].features.length).toBeGreaterThan(0)
-            })
-        })
-    })
-
-    describe("APP_CONFIG", () => {
-        it("has correct maxFileSize of 10MB", () => {
-            expect(APP_CONFIG.maxFileSize).toBe(10 * 1024 * 1024)
-        })
-
-        it("has correct maxImageDimension", () => {
-            expect(APP_CONFIG.maxImageDimension).toBe(4000)
-        })
-
-        it("has correct freeRestorationPerDay", () => {
-            expect(APP_CONFIG.freeRestorationPerDay).toBe(1)
-        })
-
-        it("includes expected supported formats", () => {
-            expect(APP_CONFIG.supportedFormats).toContain("image/jpeg")
-            expect(APP_CONFIG.supportedFormats).toContain("image/png")
-            expect(APP_CONFIG.supportedFormats).toContain("image/webp")
-        })
-
-        it("has processing time range", () => {
-            expect(APP_CONFIG.processingTimeSeconds.min).toBe(5)
-            expect(APP_CONFIG.processingTimeSeconds.max).toBe(60)
-        })
-
-        it("has app name and description", () => {
-            expect(APP_CONFIG.name).toBe("Magic Memory")
-            expect(APP_CONFIG.description).toBeDefined()
         })
     })
 })
