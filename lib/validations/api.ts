@@ -45,7 +45,6 @@ export const restoreResponseSchema = z.object({
   restoredImagePath: z.string().optional(),
   usedFreeCredit: z.boolean(),
   remainingPaidCredits: z.number().int().nonnegative().optional(),
-  restorationId: z.string().uuid().optional(),
 });
 
 export type RestoreResponse = z.infer<typeof restoreResponseSchema>;
