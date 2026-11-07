@@ -77,7 +77,7 @@ Magic Memory lets anyone restore old, blurry, or damaged photos in seconds. Uplo
 ## Features
 
 - One-click restoration with GFPGAN on Replicate.
-- Credit system with a daily free credit plus paid packs that never expire.
+- Credit system with one free credit at sign-up plus paid packs that never expire.
 - Real-time restoration status, before/after slider, and direct download of results.
 - Supabase-backed history (metadata only, no binary image storage) so users can revisit prior restorations.
 - Authentication with Clerk; payments via Stripe Checkout.
@@ -197,7 +197,7 @@ NEXT_PUBLIC_APP_URL=https://your-domain.com pnpm seo:audit
 
 1. Sign in with Clerk.
 2. Upload a photo.
-3. Confirm credit use (daily free credit or paid pack).
+3. Confirm credit use (sign-up credit or paid pack).
 4. Wait for the Replicate job; watch progress in real time.
 5. Compare before/after and download the restored image.
 6. View history and receipts in your account.
@@ -218,7 +218,7 @@ magic-memory/
 
 - App Router pages in `app/`; API handlers in `app/api/`.
 - Auth via Clerk middleware in `proxy.ts`.
-- Credits tracked in Supabase with atomic SQL functions; daily free credit plus non-expiring paid credits.
+- Credits tracked in Supabase with atomic SQL functions; one free credit at sign-up plus non-expiring paid credits.
 - No binary storage; only restoration metadata/URLs in Supabase; rate limiting via Upstash Redis.
 - AI restoration through Replicate GFPGAN; metadata persisted for history.
 - Logging with Pino and validation with Zod; SWR for client data fetching.

@@ -35,7 +35,7 @@ const errorConfig: Record<
     icon: CreditCard,
     title: "Out of Credits",
     defaultMessage:
-      "You're out of credits. Your free credit resets at midnight UTC, or purchase more credits now.",
+      "You're out of credits. Buy a credit pack to keep restoring photos.",
     actionLabel: "Get More Credits",
     actionHref: "/pricing",
   },
