@@ -234,6 +234,8 @@ magic-memory.dev runs on Cloudflare Workers through [vinext](https://github.com/
 3. Upload every other value as a Worker secret. Each name must be listed as `bindings.secret()` in `cloudflare.config.ts`, or the app will not see it.
 4. Run `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`.
 
+Merging to `main` does not update the Worker. A change reaches production only when someone runs step 4, so run it after each merge.
+
 ### Manual Deploy
 
 Build locally and run on Node 20+ with the same environment as `.env.local`:
