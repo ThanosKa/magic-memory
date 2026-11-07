@@ -135,3 +135,42 @@ export async function rollbackRestoration(
     return false;
   }
 }
+
+export type GrantPurchaseResult =
+  | { ok: true; granted: boolean }
+  | { ok: false; error: string };
+
+/**
+ * Records a Stripe purchase and adds its credits in one transaction.
+ * `granted` is false when this payment was already granted, so a redelivered
+ * event changes nothing. `userId` is `users.id`, not the Clerk id.
+ */
+export async function grantPurchaseCredits({
+  userId,
+  stripePaymentId,
+  credits,
+  amountPaid,
+  packageType,
+}: {
+  userId: string;
+  stripePaymentId: string;
+  credits: number;
+  amountPaid: number;
+  packageType: string;
+}): Promise<GrantPurchaseResult> {
+  const supabase = getSupabaseAdminClient();
+
+  const { data, error } = await supabase.rpc("grant_purchase_credits", {
+    p_user_id: userId,
+    p_stripe_payment_id: stripePaymentId,
+    p_credits: credits,
+    p_amount_paid: amountPaid,
+    p_package_type: packageType,
+  });
+
+  if (error) {
+    return { ok: false, error: error.message };
+  }
+
+  return { ok: true, granted: data === true };
+}

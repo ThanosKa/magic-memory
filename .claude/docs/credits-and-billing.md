@@ -25,9 +25,9 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 - `metadata.userId` on the checkout session is `users.id` (UUID), not the Clerk id, which travels separately as `metadata.clerkUserId`.
 - Before granting credits the webhook checks metadata, package, price id, amount (discounts included) and currency `eur` against `CREDIT_PACKAGES`. A mismatch is logged and answered with 200, since a retry cannot fix it.
 - A 100% discount session has no `payment_intent`; the webhook uses `session.id` as the payment id.
-- Stripe redelivers events, so the `purchases.stripe_payment_id` lookup stays ahead of any grant.
+- Grant credits only through the `grant_purchase_credits` SQL function (`scripts/006_atomic_purchase_grant.sql`), via `grantPurchaseCredits` in `lib/supabase/transactions.ts`. It records the purchase and adds the credits in one transaction, and the unique index on `purchases.stripe_payment_id` makes a redelivered event change nothing.
+- A failed grant answers 500 so Stripe redelivers it. Answering 200 would leave a paid customer without credits.
 - The API version is pinned with `@ts-expect-error` in `app/api/stripe/webhook/route.ts` and `app/api/stripe/create-checkout/route.ts`; change the two together.
-- Any change to the credit grant moves it into a SQL function, like the deduction path.
 
 ## Credit packs
 
