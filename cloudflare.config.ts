@@ -7,9 +7,7 @@ export default defineConfig({
     compatibilityDate: "2026-11-07",
     compatibilityFlags: ["nodejs_compat"],
     observability: { enabled: true },
-    // cf-test is the temporary test hostname: Clerk live keys reject workers.dev.
-    // Remove it once the real domain is confirmed.
-    domains: ["magic-memory.dev", "cf-test.magic-memory.dev"],
+    domains: ["magic-memory.dev"],
     // Declaring a domain would otherwise switch workers.dev off.
     workersDev: true,
     assets: {
