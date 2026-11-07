@@ -9,6 +9,8 @@ export default [
   {
     ignores: [
       '.next/**',
+      '.cloudflare/**',
+      '.vinext/**',
       'node_modules/**',
       'out/**',
       'build/**',
