@@ -55,7 +55,7 @@
 - [Project Structure](#project-structure)
 - [Architecture](#architecture)
 - [Deployment](#deployment)
-  - [Deploy to Vercel](#deploy-to-vercel)
+  - [Deploy to Cloudflare Workers](#deploy-to-cloudflare-workers)
   - [Manual Deploy](#manual-deploy)
   - [Production Checklist](#production-checklist)
 - [CI](#ci)
@@ -100,7 +100,7 @@ Magic Memory lets anyone restore old, blurry, or damaged photos in seconds. Uplo
 ## Demo
 
 - Run locally with `pnpm dev` at `http://localhost:3000`.
-- Deploy to Vercel with the one-click button above and plug in your env vars.
+- Deploy to Cloudflare Workers with the steps under [Deployment](#deployment).
 
 Quick preview of the flow: upload → Replicate GFPGAN → credit deduction → download and view history (no persistent binary storage).
 
@@ -225,17 +225,14 @@ magic-memory/
 
 ## Deployment
 
-### Deploy to Vercel
+### Deploy to Cloudflare Workers
 
-The easiest way to deploy magic-memory.dev is with Vercel:
+magic-memory.dev runs on Cloudflare Workers through [vinext](https://github.com/cloudflare/vinext). `cloudflare.config.ts` is the source of truth for the Worker.
 
-1. Push your code to GitHub.
-2. Import the project in Vercel.
-3. Add all environment variables from `.env.local`.
-4. Update `NEXT_PUBLIC_APP_URL` to your production domain.
-5. Deploy.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FThanosKa%2Fmagic-memory)
+1. Use Node `^22.23` or `^24.22`, and sign in with `pnpm exec cf auth login`.
+2. Put production values in `.env.production.local`. `vite build` reads the `NEXT_PUBLIC_*` values from it.
+3. Upload every other value as a Worker secret. Each name must be listed as `bindings.secret()` in `cloudflare.config.ts`, or the app will not see it.
+4. Run `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`.
 
 ### Manual Deploy
 
@@ -272,7 +269,7 @@ Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Avo
 - [GFPGAN](https://github.com/TencentARC/GFPGAN)
 - [Replicate](https://replicate.com)
 - [shadcn/ui](https://ui.shadcn.com)
-- [Vercel](https://vercel.com)
+- [Cloudflare Workers](https://workers.cloudflare.com)
 
 ## Star History
 
