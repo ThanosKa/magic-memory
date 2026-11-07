@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import "./globals.css";
 import { LoadingSpinner } from "@/components/ui/loading-states";
-import { AnalyticsProvider } from "@/app/analytics-provider";
 import { FONT_VARIABLES } from "@/lib/fonts";
 import { ThemeColorScript } from "@/components/theme/theme-color-script";
 import { ThemeProvider } from "@/components/theme/theme-provider";
@@ -205,7 +204,6 @@ export default function RootLayout({
             <WebVitalsTracker />
             {children}
             <CookieConsent />
-            <AnalyticsProvider />
             <ThemedToaster />
           </ThemeProvider>
         </body>
