@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import Stripe from "stripe";
-import { getSupabaseAdminClient } from "@/lib/supabase/server";
+import { grantPurchaseCredits } from "@/lib/supabase/transactions";
 import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
 import { sendPurchaseEmail } from "@/lib/email";
 import logger from "@/lib/logger";
@@ -147,15 +147,32 @@ export async function POST(request: NextRequest) {
       }
 
       const creditsToAdd = Number.parseInt(credits, 10);
-      const supabase = getSupabaseAdminClient();
 
-      const { data: existingPurchase } = await supabase
-        .from("purchases")
-        .select("id")
-        .eq("stripe_payment_id", paymentId)
-        .single();
+      logger.info(
+        { userId, packageType, credits: creditsToAdd, paymentIntent },
+        "Processing successful payment"
+      );
 
-      if (existingPurchase) {
+      const grant = await grantPurchaseCredits({
+        userId,
+        stripePaymentId: paymentId,
+        credits: creditsToAdd,
+        amountPaid: amountTotal,
+        packageType,
+      });
+
+      if (!grant.ok) {
+        logger.error(
+          { userId, paymentId, error: grant.error },
+          "Failed to grant purchased credits"
+        );
+        return NextResponse.json(
+          { success: false, error: "Failed to grant credits" },
+          { status: 500 }
+        );
+      }
+
+      if (!grant.granted) {
         logger.info(
           { paymentId, userId },
           "Payment already processed, skipping (idempotency)"
@@ -164,63 +181,7 @@ export async function POST(request: NextRequest) {
       }
 
       logger.info(
-        { userId, packageType, credits: creditsToAdd, paymentIntent },
-        "Processing successful payment"
-      );
-
-      const { data: user, error: fetchError } = await supabase
-        .from("users")
-        .select("paid_credits")
-        .eq("id", userId)
-        .single();
-
-      if (fetchError) {
-        logger.error(
-          { userId, error: fetchError.message },
-          "Failed to fetch user"
-        );
-        return NextResponse.json({ success: true, data: { received: true } });
-      }
-
-      const previousCredits = user?.paid_credits ?? 0;
-      const newCredits = previousCredits + creditsToAdd;
-
-      const { error: updateError } = await supabase
-        .from("users")
-        .update({ paid_credits: newCredits })
-        .eq("id", userId);
-
-      if (updateError) {
-        logger.error(
-          { userId, error: updateError.message },
-          "Failed to update credits"
-        );
-        return NextResponse.json({ success: true, data: { received: true } });
-      }
-
-      const { error: purchaseError } = await supabase.from("purchases").insert({
-        user_id: userId,
-        stripe_payment_id: paymentId,
-        credits_purchased: creditsToAdd,
-        amount_paid: session.amount_total ?? 0,
-        package_type: packageType,
-      });
-
-      if (purchaseError) {
-        logger.error(
-          { userId, error: purchaseError.message },
-          "Failed to record purchase"
-        );
-      }
-
-      logger.info(
-        {
-          userId,
-          previousCredits,
-          newCredits,
-          creditsAdded: creditsToAdd,
-          packageType,
-        },
+        { userId, creditsAdded: creditsToAdd, packageType },
         "Credits added successfully"
       );
 

@@ -3,6 +3,7 @@ import { NextRequest } from "next/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { POST } from "@/app/api/stripe/webhook/route";
 import { CREDIT_PACKAGES } from "@/lib/constants";
+import { sendPurchaseEmail } from "@/lib/email";
 
 vi.mock("@/lib/supabase/server");
 vi.mock("@/lib/logger");
@@ -78,323 +79,148 @@ describe("POST /api/stripe/webhook", () => {
     expect(data.data?.received).toBe(true);
   });
 
-  it("skips duplicate payments (idempotency)", async () => {
-    const mockSession = {
-      id: "cs_test_123",
-      metadata: {
-        userId: "user-uuid",
-        packageType: "starter",
-        credits: "20",
-        priceId: "price_starter",
-      },
-      payment_intent: "pi_existing",
-      amount_total: 999,
-      currency: "eur",
-    };
-
-    mockStripeConstructEvent.mockReturnValue({
-      type: "checkout.session.completed",
-      id: "evt_123",
-      data: { object: mockSession },
-    });
-
-    const mockSupabase = {
-      from: vi.fn((table: string) => {
-        if (table === "purchases") {
-          return {
-            select: vi.fn().mockReturnValue({
-              eq: vi.fn().mockReturnValue({
-                single: vi.fn().mockResolvedValue({
-                  data: { id: "existing-purchase" },
-                  error: null,
-                }),
-              }),
-            }),
-            insert: vi.fn(),
-          };
-        }
-        return {
-          select: vi.fn().mockReturnValue({
-            eq: vi.fn().mockReturnValue({
-              single: vi
-                .fn()
-                .mockResolvedValue({ data: { paid_credits: 0 }, error: null }),
-            }),
-          }),
-          update: vi.fn().mockReturnValue({
-            eq: vi.fn().mockResolvedValue({ error: null }),
-          }),
-        };
-      }),
-    };
-    vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
-    );
-
+  describe("checkout.session.completed", () => {
     const originalPriceId = CREDIT_PACKAGES.starter.priceId;
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: "price_starter",
-      writable: true,
-      configurable: true,
+
+    function setStarterPriceId(value: string) {
+      Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
+        value,
+        writable: true,
+        configurable: true,
+      });
+    }
+
+    function deliver(overrides: Record<string, unknown> = {}) {
+      mockStripeConstructEvent.mockReturnValue({
+        type: "checkout.session.completed",
+        id: "evt_123",
+        data: {
+          object: {
+            id: "cs_test_123",
+            metadata: {
+              userId: "user-uuid",
+              packageType: "starter",
+              credits: "20",
+              priceId: "price_starter",
+            },
+            payment_intent: "pi_new_123",
+            amount_total: 999,
+            currency: "eur",
+            customer_details: { email: "buyer@example.com", name: "Buyer" },
+            ...overrides,
+          },
+        },
+      });
+
+      return POST(createMockRequest("{}"));
+    }
+
+    function useGrantResult(result: { data: boolean | null; error: { message: string } | null }) {
+      const rpc = vi.fn().mockResolvedValue(result);
+      vi.mocked(getSupabaseAdminClient).mockReturnValue({
+        rpc,
+      } as unknown as ReturnType<typeof getSupabaseAdminClient>);
+      return rpc;
+    }
+
+    beforeEach(() => {
+      vi.mocked(sendPurchaseEmail).mockClear();
+      setStarterPriceId("price_starter");
     });
 
-    const request = createMockRequest("{}");
-    const response = await POST(request);
-    const data = await response.json();
-
-    expect(response.status).toBe(200);
-    expect(data.data?.received).toBe(true);
-
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: originalPriceId,
-      writable: true,
-      configurable: true,
-    });
-  });
-
-  it("adds correct credits for valid starter package", async () => {
-    const mockSession = {
-      id: "cs_test_123",
-      metadata: {
-        userId: "user-uuid",
-        packageType: "starter",
-        credits: "20",
-        priceId: "price_starter",
-      },
-      payment_intent: "pi_new_123",
-      amount_total: 999,
-      currency: "eur",
-    };
-
-    mockStripeConstructEvent.mockReturnValue({
-      type: "checkout.session.completed",
-      id: "evt_123",
-      data: { object: mockSession },
+    afterAll(() => {
+      setStarterPriceId(originalPriceId);
     });
 
-    const mockUpdate = vi.fn().mockReturnValue({
-      eq: vi.fn().mockResolvedValue({ error: null }),
-    });
-    const mockInsert = vi.fn().mockResolvedValue({ error: null });
+    it("grants the package through one atomic call and emails the buyer", async () => {
+      const rpc = useGrantResult({ data: true, error: null });
 
-    const mockSupabase = {
-      from: vi.fn((table: string) => {
-        if (table === "purchases") {
-          return {
-            select: vi.fn().mockReturnValue({
-              eq: vi.fn().mockReturnValue({
-                single: vi.fn().mockResolvedValue({
-                  data: null,
-                  error: { code: "PGRST116" },
-                }),
-              }),
-            }),
-            insert: mockInsert,
-          };
-        }
-        return {
-          select: vi.fn().mockReturnValue({
-            eq: vi.fn().mockReturnValue({
-              single: vi
-                .fn()
-                .mockResolvedValue({ data: { paid_credits: 50 }, error: null }),
-            }),
-          }),
-          update: mockUpdate,
-        };
-      }),
-    };
-    vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
-    );
+      const response = await deliver();
+      const data = await response.json();
 
-    const originalPriceId = CREDIT_PACKAGES.starter.priceId;
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: "price_starter",
-      writable: true,
-      configurable: true,
+      expect(response.status).toBe(200);
+      expect(data.data?.received).toBe(true);
+      expect(rpc).toHaveBeenCalledWith("grant_purchase_credits", {
+        p_user_id: "user-uuid",
+        p_stripe_payment_id: "pi_new_123",
+        p_credits: 20,
+        p_amount_paid: 999,
+        p_package_type: "starter",
+      });
+      expect(sendPurchaseEmail).toHaveBeenCalledTimes(1);
     });
 
-    const request = createMockRequest("{}");
-    const response = await POST(request);
-    const data = await response.json();
+    it("answers 500 when the grant fails, so Stripe redelivers", async () => {
+      useGrantResult({ data: null, error: { message: "database unavailable" } });
 
-    expect(response.status).toBe(200);
-    expect(data.data?.received).toBe(true);
-    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 70 });
+      const response = await deliver();
+      const data = await response.json();
 
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: originalPriceId,
-      writable: true,
-      configurable: true,
-    });
-  });
-
-  it("processes discounted totals when subtotal matches package price", async () => {
-    const mockSession = {
-      id: "cs_test_discount",
-      metadata: {
-        userId: "user-uuid",
-        packageType: "starter",
-        credits: "20",
-        priceId: "price_starter",
-      },
-      payment_intent: "pi_discount_123",
-      amount_total: 799,
-      amount_subtotal: 999,
-      total_details: { amount_discount: 200 },
-      currency: "eur",
-    };
-
-    mockStripeConstructEvent.mockReturnValue({
-      type: "checkout.session.completed",
-      id: "evt_discount",
-      data: { object: mockSession },
+      expect(response.status).toBe(500);
+      expect(data.success).toBe(false);
+      expect(sendPurchaseEmail).not.toHaveBeenCalled();
     });
 
-    const mockUpdate = vi.fn().mockReturnValue({
-      eq: vi.fn().mockResolvedValue({ error: null }),
-    });
-    const mockInsert = vi.fn().mockResolvedValue({ error: null });
+    it("answers 200 without a second email when the payment was already granted", async () => {
+      useGrantResult({ data: false, error: null });
 
-    const mockSupabase = {
-      from: vi.fn((table: string) => {
-        if (table === "purchases") {
-          return {
-            select: vi.fn().mockReturnValue({
-              eq: vi.fn().mockReturnValue({
-                single: vi.fn().mockResolvedValue({
-                  data: null,
-                  error: { code: "PGRST116" },
-                }),
-              }),
-            }),
-            insert: mockInsert,
-          };
-        }
-        return {
-          select: vi.fn().mockReturnValue({
-            eq: vi.fn().mockReturnValue({
-              single: vi
-                .fn()
-                .mockResolvedValue({ data: { paid_credits: 50 }, error: null }),
-            }),
-          }),
-          update: mockUpdate,
-        };
-      }),
-    };
-    vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
-    );
+      const response = await deliver();
 
-    const originalPriceId = CREDIT_PACKAGES.starter.priceId;
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: "price_starter",
-      writable: true,
-      configurable: true,
+      expect(response.status).toBe(200);
+      expect(sendPurchaseEmail).not.toHaveBeenCalled();
     });
 
-    const request = createMockRequest("{}");
-    const response = await POST(request);
-    const data = await response.json();
+    it("records what was actually paid on a discounted checkout", async () => {
+      const rpc = useGrantResult({ data: true, error: null });
 
-    expect(response.status).toBe(200);
-    expect(data.data?.received).toBe(true);
-    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 70 });
+      const response = await deliver({
+        payment_intent: "pi_discount_123",
+        amount_total: 799,
+        amount_subtotal: 999,
+        total_details: { amount_discount: 200 },
+      });
 
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: originalPriceId,
-      writable: true,
-      configurable: true,
-    });
-  });
-
-  it("processes 100% discount checkout with no payment intent", async () => {
-    const mockSession = {
-      id: "cs_test_full_discount",
-      metadata: {
-        userId: "user-uuid",
-        packageType: "starter",
-        credits: "20",
-        priceId: "price_starter",
-      },
-      payment_intent: null,
-      amount_total: 0,
-      amount_subtotal: 999,
-      total_details: { amount_discount: 999 },
-      currency: "eur",
-      payment_status: "no_payment_required",
-    };
-
-    mockStripeConstructEvent.mockReturnValue({
-      type: "checkout.session.completed",
-      id: "evt_full_discount",
-      data: { object: mockSession },
+      expect(response.status).toBe(200);
+      expect(rpc).toHaveBeenCalledWith(
+        "grant_purchase_credits",
+        expect.objectContaining({
+          p_stripe_payment_id: "pi_discount_123",
+          p_credits: 20,
+          p_amount_paid: 799,
+        })
+      );
     });
 
-    const mockUpdate = vi.fn().mockReturnValue({
-      eq: vi.fn().mockResolvedValue({ error: null }),
-    });
-    const mockInsert = vi.fn().mockResolvedValue({ error: null });
+    it("uses the session id as the payment id on a 100% discount", async () => {
+      const rpc = useGrantResult({ data: true, error: null });
 
-    const mockSupabase = {
-      from: vi.fn((table: string) => {
-        if (table === "purchases") {
-          return {
-            select: vi.fn().mockReturnValue({
-              eq: vi.fn().mockReturnValue({
-                single: vi.fn().mockResolvedValue({
-                  data: null,
-                  error: { code: "PGRST116" },
-                }),
-              }),
-            }),
-            insert: mockInsert,
-          };
-        }
-        return {
-          select: vi.fn().mockReturnValue({
-            eq: vi.fn().mockReturnValue({
-              single: vi
-                .fn()
-                .mockResolvedValue({ data: { paid_credits: 0 }, error: null }),
-            }),
-          }),
-          update: mockUpdate,
-        };
-      }),
-    };
-    vi.mocked(getSupabaseAdminClient).mockReturnValue(
-      mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>
-    );
+      const response = await deliver({
+        id: "cs_test_full_discount",
+        payment_intent: null,
+        amount_total: 0,
+        amount_subtotal: 999,
+        total_details: { amount_discount: 999 },
+        payment_status: "no_payment_required",
+      });
 
-    const originalPriceId = CREDIT_PACKAGES.starter.priceId;
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: "price_starter",
-      writable: true,
-      configurable: true,
+      expect(response.status).toBe(200);
+      expect(rpc).toHaveBeenCalledWith(
+        "grant_purchase_credits",
+        expect.objectContaining({
+          p_stripe_payment_id: "cs_test_full_discount",
+          p_credits: 20,
+          p_amount_paid: 0,
+        })
+      );
     });
 
-    const request = createMockRequest("{}");
-    const response = await POST(request);
-    const data = await response.json();
+    it("grants nothing when the amount does not match the package", async () => {
+      const rpc = useGrantResult({ data: true, error: null });
 
-    expect(response.status).toBe(200);
-    expect(data.data?.received).toBe(true);
-    expect(mockUpdate).toHaveBeenCalledWith({ paid_credits: 20 });
-    expect(mockInsert).toHaveBeenCalledWith({
-      user_id: "user-uuid",
-      stripe_payment_id: "cs_test_full_discount",
-      credits_purchased: 20,
-      amount_paid: 0,
-      package_type: "starter",
-    });
+      const response = await deliver({ amount_total: 100, amount_subtotal: 100 });
 
-    Object.defineProperty(CREDIT_PACKAGES.starter, "priceId", {
-      value: originalPriceId,
-      writable: true,
-      configurable: true,
+      expect(response.status).toBe(200);
+      expect(rpc).not.toHaveBeenCalled();
     });
   });
 });
