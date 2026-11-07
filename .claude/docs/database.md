@@ -11,7 +11,7 @@ Supabase Postgres, with no ORM and no migration tool. Ask the developer before r
 
 ## SQL functions
 
-- Follow `scripts/004_create_atomic_credit_functions.sql`: `SECURITY DEFINER`, `SET search_path = public`, and an explicit `GRANT EXECUTE ... TO service_role`.
+- Follow `scripts/006_atomic_purchase_grant.sql`: `SECURITY DEFINER`, `SET search_path = public`, `REVOKE ALL ... FROM PUBLIC, anon, authenticated`, then `GRANT EXECUTE ... TO service_role`. Skipping the revoke leaves the function callable with the public key, because Postgres lets everyone execute a new function by default.
 - Wrap each one in `lib/supabase/transactions.ts`, translating the Clerk id to `users.id` first.
 
 ## Access model

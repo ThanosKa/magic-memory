@@ -221,6 +221,6 @@ describe("POST /api/restore", () => {
 
         expect(response.status).toBe(200)
         expect(data.data.restoredImageUrl).toBe(expectedUrl)
-        expect(data.data.restorationId).toBe("restoration-uuid")
+        expect(data.data).not.toHaveProperty("restorationId")
     })
 })

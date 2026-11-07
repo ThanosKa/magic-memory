@@ -75,7 +75,6 @@ describe("API validation schemas", () => {
                 restoredImageUrl: "https://example.com/restored.jpg",
                 usedFreeCredit: true,
                 remainingPaidCredits: 49,
-                restorationId: "550e8400-e29b-41d4-a716-446655440000",
             }
             const result = restoreResponseSchema.safeParse(validResponse)
             expect(result.success).toBe(true)

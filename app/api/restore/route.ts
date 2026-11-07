@@ -227,7 +227,6 @@ export async function POST(request: NextRequest) {
         restoredImageUrl,
         usedFreeCredit,
         remainingPaidCredits: deductResult.remaining_paid_credits,
-        restorationId,
       },
     })
   } catch (error) {
