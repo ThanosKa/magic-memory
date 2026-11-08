@@ -231,7 +231,7 @@ magic-memory.dev runs on Cloudflare Workers through [vinext](https://github.com/
 
 1. Use Node `^22.23` or `^24.22`, and sign in with `pnpm exec cf auth login`.
 2. Put production values in `.env.production.local`. `vite build` reads the `NEXT_PUBLIC_*` values from it.
-3. Upload every other value as a Worker secret. Each name must be listed as `bindings.secret()` in `cloudflare.config.ts`, or the app will not see it. Plain settings such as `LOG_LEVEL` are `bindings.text()` values in the same file.
+3. Upload every other value as a Worker secret. Each name must be listed as `bindings.secret()` in `cloudflare.config.ts`, or the app will not see it.
 4. Run `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`. This is the only deploy path.
 
 The port changed a few versions on purpose: `vinext init` moved React and React DOM to 19.3.1 and `@vitejs/plugin-react` to 6, and Vitest had to follow to 4.1 to share Vite 8. `patches/vinext@1.4.4.patch` gives `fill` images a `srcset`.

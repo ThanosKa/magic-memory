@@ -19,12 +19,13 @@ export default defineConfig({
     env: {
       ASSETS: bindings.assets(),
       IMAGES: bindings.images(),
-      // Not secret, so a plain variable whose value shows in the dashboard.
-      LOG_LEVEL: bindings.text("info"),
       // Only declared names reach the Worker's process.env. Values come from
       // .env.<mode>.local locally and from Worker secrets once deployed.
       CLERK_SECRET_KEY: bindings.secret(),
       CLERK_WEBHOOK_SECRET: bindings.secret(),
+      // Not really secret. To make it bindings.text("info"), first delete the
+      // remote LOG_LEVEL secret, or cf deploy aborts on the name clash.
+      LOG_LEVEL: bindings.secret(),
       REPLICATE_API_TOKEN: bindings.secret(),
       RESEND_API_KEY: bindings.secret(),
       STRIPE_SECRET_KEY: bindings.secret(),
