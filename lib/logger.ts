@@ -5,10 +5,8 @@ const IS_WORKER_RUNTIME =
   typeof navigator !== "undefined" &&
   navigator.userAgent === "Cloudflare-Workers";
 
-// pino's numeric levels: 40 is warn, 50 is error, 60 is fatal.
-const PINO_WARN_LEVEL = 40;
-const PINO_ERROR_LEVEL = 50;
-const LEVEL_PATTERN = /"level":(\d+)/;
+const ERROR_LEVELS = new Set(["error", "fatal"]);
+const LEVEL_PATTERN = /"level":"(\w+)"/;
 
 const OPTIONS: LoggerOptions = {
   level: process.env.LOG_LEVEL || (IS_DEV ? "debug" : "info"),
@@ -37,18 +35,25 @@ const PRETTY_TRANSPORT: LoggerOptions["transport"] = {
  */
 const CONSOLE_DESTINATION: DestinationStream = {
   write(line) {
-    const level = Number(LEVEL_PATTERN.exec(line)?.[1] ?? 0);
+    const level = LEVEL_PATTERN.exec(line)?.[1] ?? "info";
     const text = line.trimEnd();
     /* eslint-disable no-console -- the one place server logs reach the console */
-    if (level >= PINO_ERROR_LEVEL) console.error(text);
-    else if (level >= PINO_WARN_LEVEL) console.warn(text);
+    if (ERROR_LEVELS.has(level)) console.error(text);
+    else if (level === "warn") console.warn(text);
     else console.log(text);
     /* eslint-enable no-console */
   },
 };
 
+// Workers Logs takes a JSON line's own "level" field as the log level, so it
+// must be the label ("error"), not pino's number (50).
+const WORKER_OPTIONS: LoggerOptions = {
+  ...OPTIONS,
+  formatters: { level: (label) => ({ level: label }) },
+};
+
 function createLogger() {
-  if (IS_WORKER_RUNTIME) return pino(OPTIONS, CONSOLE_DESTINATION);
+  if (IS_WORKER_RUNTIME) return pino(WORKER_OPTIONS, CONSOLE_DESTINATION);
   if (IS_DEV) return pino({ ...OPTIONS, transport: PRETTY_TRANSPORT });
   return pino(OPTIONS);
 }

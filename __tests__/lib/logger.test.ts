@@ -42,6 +42,8 @@ describe("logger on the Workers runtime", () => {
 
     const line = parseOnlyCall(error)
     expect(line.msg).toBe("Failed to grant purchased credits")
+    // Workers Logs reads a JSON line's own level field, so it must say "error".
+    expect(line.level).toBe("error")
     expect(line.userId).toBe("user_1")
     expect(log).not.toHaveBeenCalled()
     expect(warn).not.toHaveBeenCalled()
@@ -60,7 +62,9 @@ describe("logger on the Workers runtime", () => {
 
     logger.warn("Rate limiter unavailable, skipping")
 
-    expect(parseOnlyCall(warn).msg).toBe("Rate limiter unavailable, skipping")
+    const line = parseOnlyCall(warn)
+    expect(line.msg).toBe("Rate limiter unavailable, skipping")
+    expect(line.level).toBe("warn")
     expect(log).not.toHaveBeenCalled()
     expect(error).not.toHaveBeenCalled()
   })
@@ -70,7 +74,9 @@ describe("logger on the Workers runtime", () => {
 
     logger.info("Restoration completed successfully")
 
-    expect(parseOnlyCall(log).msg).toBe("Restoration completed successfully")
+    const line = parseOnlyCall(log)
+    expect(line.msg).toBe("Restoration completed successfully")
+    expect(line.level).toBe("info")
     expect(warn).not.toHaveBeenCalled()
     expect(error).not.toHaveBeenCalled()
   })
