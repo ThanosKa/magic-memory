@@ -56,7 +56,7 @@
 - [Architecture](#architecture)
 - [Deployment](#deployment)
   - [Deploy to Cloudflare Workers](#deploy-to-cloudflare-workers)
-  - [Manual Deploy](#manual-deploy)
+  - [Preview the Worker build locally](#preview-the-worker-build-locally)
   - [Production Checklist](#production-checklist)
 - [CI](#ci)
 - [Contributing](#contributing)
@@ -133,7 +133,7 @@ Quick preview of the flow: upload → Replicate GFPGAN → credit deduction → 
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js `^22.23` or `^24.22` (the vinext build and `cf` need it; `next dev` and `next build` also run on Node 20)
 - pnpm
 - Accounts: Clerk, Supabase, Stripe, Replicate, Upstash Redis
 
@@ -231,19 +231,23 @@ magic-memory.dev runs on Cloudflare Workers through [vinext](https://github.com/
 
 1. Use Node `^22.23` or `^24.22`, and sign in with `pnpm exec cf auth login`.
 2. Put production values in `.env.production.local`. `vite build` reads the `NEXT_PUBLIC_*` values from it.
-3. Upload every other value as a Worker secret. Each name must be listed as `bindings.secret()` in `cloudflare.config.ts`, or the app will not see it.
-4. Run `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`.
+3. Upload every other value as a Worker secret. Each name must be listed as `bindings.secret()` in `cloudflare.config.ts`, or the app will not see it. Plain settings such as `LOG_LEVEL` are `bindings.text()` values in the same file.
+4. Run `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`. This is the only deploy path.
+
+The port changed a few versions on purpose: `vinext init` moved React and React DOM to 19.3.1 and `@vitejs/plugin-react` to 6, and Vitest had to follow to 4.1 to share Vite 8. `patches/vinext@1.4.4.patch` gives `fill` images a `srcset`.
 
 Merging to `main` does not update the Worker. A change reaches production only when someone runs step 4, so run it after each merge.
 
-### Manual Deploy
+### Preview the Worker build locally
 
-Build locally and run on Node 20+ with the same environment as `.env.local`:
+Build with vinext and serve the result in the local Workers runtime, using the values in `.env.production.local`:
 
 ```bash
-pnpm build
-pnpm start
+pnpm build:vinext
+pnpm start:vinext
 ```
+
+`pnpm build` and `pnpm start` still run the plain Next.js build. Production does not use it; it stays only while the Vercel project is the way back.
 
 ### Production Checklist
 
@@ -256,7 +260,7 @@ pnpm start
 
 ## CI
 
-`.github/workflows/ci.yml` runs lint, type-check, and Vitest on Node 20 with pnpm cache.
+`.github/workflows/ci.yml` runs two jobs. On Node 20: lint, type-check, Vitest and the Next.js build. On Node 24: Vitest and `pnpm build:vinext`, the build that production runs. Neither job deploys.
 
 ## Contributing
 

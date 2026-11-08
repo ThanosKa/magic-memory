@@ -5,6 +5,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
   // Put metadata in the initial <head> for every visitor, not only known bots.
+  // vinext otherwise streams generateMetadata output into the body on pages
+  // Next would prerender, for browsers and Googlebot alike.
   htmlLimitedBots: /.*/,
   typescript: {
     ignoreBuildErrors: true,
