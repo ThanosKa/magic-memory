@@ -1,0 +1,3 @@
+# Files in public/ that must never be served by the Worker.
+.DS_Store
+**/.DS_Store
