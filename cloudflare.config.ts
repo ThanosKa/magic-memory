@@ -8,8 +8,9 @@ export default defineConfig({
     compatibilityFlags: ["nodejs_compat"],
     observability: { enabled: true },
     domains: ["magic-memory.dev"],
-    // Declaring a domain would otherwise switch workers.dev off.
-    workersDev: true,
+    // magic-memory.dev is the only public address. workers.dev would skip the
+    // zone's rules and serve a duplicate site where Clerk sign-in fails.
+    workersDev: false,
     assets: {
       htmlHandling: "none",
       notFoundHandling: "none",
@@ -18,11 +19,12 @@ export default defineConfig({
     env: {
       ASSETS: bindings.assets(),
       IMAGES: bindings.images(),
+      // Not secret, so a plain variable whose value shows in the dashboard.
+      LOG_LEVEL: bindings.text("info"),
       // Only declared names reach the Worker's process.env. Values come from
       // .env.<mode>.local locally and from Worker secrets once deployed.
       CLERK_SECRET_KEY: bindings.secret(),
       CLERK_WEBHOOK_SECRET: bindings.secret(),
-      LOG_LEVEL: bindings.secret(),
       REPLICATE_API_TOKEN: bindings.secret(),
       RESEND_API_KEY: bindings.secret(),
       STRIPE_SECRET_KEY: bindings.secret(),
