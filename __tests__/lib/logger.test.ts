@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
+import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest"
 
 // vitest.setup.ts replaces the logger with a stub for every other test.
 vi.unmock("@/lib/logger")
@@ -19,9 +19,9 @@ function parseOnlyCall(spy: { mock: { calls: unknown[][] } }) {
 }
 
 describe("logger on the Workers runtime", () => {
-  let log: ReturnType<typeof vi.spyOn>
-  let warn: ReturnType<typeof vi.spyOn>
-  let error: ReturnType<typeof vi.spyOn>
+  let log: MockInstance<typeof console.log>
+  let warn: MockInstance<typeof console.warn>
+  let error: MockInstance<typeof console.error>
 
   beforeEach(() => {
     log = vi.spyOn(console, "log").mockImplementation(() => {})

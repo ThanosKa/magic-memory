@@ -6,8 +6,10 @@ import { proxy } from "@/proxy"
 // vitest.setup.ts mocks @clerk/nextjs/server without clerkMiddleware, so with
 // both keys set the proxy's Clerk branch throws, as a broken Clerk import would.
 
-function request(path: string) {
-  return new NextRequest(new URL(path, "https://magic-memory.dev"))
+async function runProxy(path: string) {
+  const response = await proxy(new NextRequest(new URL(path, "https://magic-memory.dev")))
+  if (!response) throw new Error("proxy returned no response")
+  return response
 }
 
 function setClerkKeys({ secret }: { secret: string }) {
@@ -26,7 +28,7 @@ describe("proxy when Clerk is unavailable", () => {
     async (path) => {
       setClerkKeys({ secret: "" })
 
-      const response = await proxy(request(path))
+      const response = await runProxy(path)
 
       expect(response.status).toBe(307)
       expect(new URL(response.headers.get("location") ?? "").pathname).toBe("/")
@@ -37,7 +39,7 @@ describe("proxy when Clerk is unavailable", () => {
   it("sends a protected page to the home page when Clerk fails to load", async () => {
     setClerkKeys({ secret: "sk_test_Y2xlcmsuZXhhbXBsZS5jb20k" })
 
-    const response = await proxy(request("/restore"))
+    const response = await runProxy("/restore")
 
     expect(response.status).toBe(307)
     expect(new URL(response.headers.get("location") ?? "").pathname).toBe("/")
@@ -47,7 +49,7 @@ describe("proxy when Clerk is unavailable", () => {
   it.each(["/", "/pricing", "/api/credits"])("lets %s through", async (path) => {
     setClerkKeys({ secret: "" })
 
-    const response = await proxy(request(path))
+    const response = await runProxy(path)
 
     expect(response.headers.get("location")).toBeNull()
     expect(response.headers.get("x-middleware-next")).toBe("1")
