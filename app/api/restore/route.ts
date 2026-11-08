@@ -19,7 +19,9 @@ function getRateLimiter() {
   return new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(10, "1 m"),
-    analytics: true,
+    // Analytics writes run after the response; Workers would cancel them
+    // without ctx.waitUntil, which this route does not have.
+    analytics: false,
     prefix: "ratelimit:restore",
   })
 }
