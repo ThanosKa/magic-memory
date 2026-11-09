@@ -232,11 +232,11 @@ magic-memory.dev runs on Cloudflare Workers through [vinext](https://github.com/
 1. Use Node `^22.23` or `^24.22`, and sign in with `pnpm exec cf auth login`.
 2. Put production values in `.env.production.local`. `vite build` reads the `NEXT_PUBLIC_*` values from it.
 3. Upload every other value as a Worker secret. Each name must be listed as `bindings.secret()` in `cloudflare.config.ts`, or the app will not see it.
-4. Run `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`. This is the only deploy path.
+4. To deploy by hand, run `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`.
 
 The port changed a few versions on purpose: `vinext init` moved React and React DOM to 19.3.1 and `@vitejs/plugin-react` to 6, and Vitest had to follow to 4.1 to share Vite 8. `patches/vinext@1.4.4.patch` gives `fill` images a `srcset`.
 
-Merging to `main` does not update the Worker. A change reaches production only when someone runs step 4, so run it after each merge.
+Merging to `main` updates the Worker: `.github/workflows/deploy.yml` builds and deploys once CI passes on `main`. It needs the repo secret `CLOUDFLARE_API_TOKEN` and the repo variables `CLOUDFLARE_ACCOUNT_ID` and `NEXT_PUBLIC_*`; Worker secrets stay on the Worker. If a merge changes `scripts/*.sql`, the deploy stops: apply the migration, then press Run workflow in the Actions tab.
 
 ### Preview the Worker build locally
 
@@ -260,7 +260,7 @@ pnpm start:vinext
 
 ## CI
 
-`.github/workflows/ci.yml` runs two jobs. On Node 20: lint, type-check, Vitest and the Next.js build. On Node 24: Vitest and `pnpm build:vinext`, the build that production runs. Neither job deploys.
+`.github/workflows/ci.yml` runs two jobs. On Node 20: lint, type-check, Vitest and the Next.js build. On Node 24: Vitest and `pnpm build:vinext`, the build that production runs. Neither job deploys; `deploy.yml` does that after they pass.
 
 ## Contributing
 
