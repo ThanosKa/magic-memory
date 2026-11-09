@@ -167,13 +167,6 @@ export const useCaseSoftwareJsonLd = (params: {
     description:
       "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
   },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.7",
-    reviewCount: "126",
-    bestRating: "5",
-    worstRating: "1",
-  },
 });
 
 export const howToJsonLd = (params: {

@@ -63,26 +63,12 @@ const errorConfig: Record<
 export function ErrorAlert({
   type,
   message,
-  freeResetTime,
   onDismiss,
   onRetry,
 }: ErrorAlertProps) {
   const config = errorConfig[type];
   const Icon = config.icon;
 
-  // Calculate hours until reset for out_of_credits
-  let resetMessage = "";
-  if (type === "out_of_credits" && freeResetTime) {
-    const now = new Date();
-    const reset = new Date(freeResetTime);
-    const hoursUntilReset = Math.max(
-      0,
-      Math.ceil((reset.getTime() - now.getTime()) / (1000 * 60 * 60))
-    );
-    resetMessage = `Your free credit resets in ${hoursUntilReset} hour${
-      hoursUntilReset !== 1 ? "s" : ""
-    }.`;
-  }
 
   return (
     <div
@@ -108,11 +94,6 @@ export function ErrorAlert({
           <p className="text-[15px] leading-[1.6] text-paper/70">
             {message || config.defaultMessage}
           </p>
-          {resetMessage && (
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/60">
-              {resetMessage}
-            </p>
-          )}
           {((config.actionHref && config.actionLabel) || onRetry) && (
             <div className="flex flex-wrap gap-3 pt-3">
               {config.actionHref && config.actionLabel && (

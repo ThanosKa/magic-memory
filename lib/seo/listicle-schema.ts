@@ -10,7 +10,6 @@ type ListicleEntry = {
   applicationCategory: string;
   operatingSystem: string;
   offers: { price: string; priceCurrency: string };
-  rating: { value: string; reviewCount: string };
   reviewBody: string;
 };
 
@@ -24,7 +23,6 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web",
     offers: { price: "9.99", priceCurrency: "EUR" },
-    rating: { value: "4.7", reviewCount: "126" },
     reviewBody:
       "Best for web-based portrait restoration. Fast (8–12s in our 2026-05-19 test), no subscription, credits never expire. GFPGAN model excels at faces.",
   },
@@ -37,7 +35,6 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     applicationCategory: "PhotographyApplication",
     operatingSystem: "iOS, Android",
     offers: { price: "9.99", priceCurrency: "USD" },
-    rating: { value: "4.4", reviewCount: "98" },
     reviewBody:
       "Best for daily mobile users. Strong face enhancement and the only mainstream pick with video. Weekly subscription gets expensive for occasional use, and there is no web version.",
   },
@@ -50,7 +47,6 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web",
     offers: { price: "119", priceCurrency: "USD" },
-    rating: { value: "3.9", reviewCount: "84" },
     reviewBody:
       "Only worth it if you also pay for the genealogy plan ($119–$259/yr). Free tier is watermarked preview only. Enhancement quality is conservative and preserves the period look of old photos.",
   },
@@ -63,7 +59,6 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web, Windows, macOS",
     offers: { price: "4.95", priceCurrency: "USD" },
-    rating: { value: "4.2", reviewCount: "72" },
     reviewBody:
       "Best for pros who batch-process or also need upscaling, colorization, and background removal. Interface is overkill for users who just want one-click face restoration.",
   },
@@ -76,7 +71,6 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web, Windows, macOS",
     offers: { price: "3.33", priceCurrency: "USD" },
-    rating: { value: "4.0", reviewCount: "58" },
     reviewBody:
       "Picks up where a basic Photoshop replacement leaves off. AI restoration is less face-specialized than GFPGAN-based tools — fine for casual cleanup, weaker on severely degraded portraits.",
   },
@@ -154,24 +148,11 @@ export function listicleItemListJsonLd(slug: string): Thing | null {
           price: entry.offers.price,
           priceCurrency: entry.offers.priceCurrency,
         },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: entry.rating.value,
-          reviewCount: entry.rating.reviewCount,
-          bestRating: "5",
-          worstRating: "1",
-        },
         review: {
           "@type": "Review",
           author: { "@type": "Organization", name: "Magic Memory" },
           datePublished: "2026-05-19",
           reviewBody: entry.reviewBody,
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: entry.rating.value,
-            bestRating: "5",
-            worstRating: "1",
-          },
         },
       },
     })),
