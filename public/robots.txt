@@ -1,54 +1,40 @@
 # robots.txt — Magic Memory
+# /restore and /profile stay crawlable on purpose: they carry a noindex meta tag
+# and redirect signed-out visitors, which Google can only see if it may crawl them.
 
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 Disallow: /.well-known/
 
 # AI Search Bots — explicitly allowed for citations
 User-agent: GPTBot
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 
 User-agent: anthropic-ai
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 
 User-agent: Bingbot
 Allow: /
 Disallow: /api/
-Disallow: /restore$
-Disallow: /profile$
 
 # Block training-only crawler (no citation benefit)
 User-agent: CCBot
