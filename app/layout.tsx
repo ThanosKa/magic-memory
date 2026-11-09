@@ -158,13 +158,6 @@ export default function RootLayout({
                       offerCount: 3,
                       description: "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
                     },
-                    aggregateRating: {
-                      "@type": "AggregateRating",
-                      ratingValue: "4.7",
-                      reviewCount: "126",
-                      bestRating: "5",
-                      worstRating: "1",
-                    },
                     featureList: [
                       "AI-powered face restoration with GFPGAN (CVPR 2021)",
                       "One-time credit packs that never expire (€9.99–€29.99)",

@@ -200,13 +200,6 @@ export default async function PricingPage() {
         priceValidUntil: "2026-12-31",
       })),
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.7",
-      reviewCount: "126",
-      bestRating: "5",
-      worstRating: "1",
-    },
   };
 
   const serviceJsonLd = {
