@@ -11,16 +11,16 @@ const Header = dynamic(() => import("@/components/header").then((m) => m.Header)
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
 export const metadata: Metadata = {
-  title: "5 Best AI Photo Restoration Tools 2026 (Tested & Compared)",
+  title: "AI Photo Restoration Alternatives Compared (2026)",
   description:
-    "We tested the 5 best AI photo restoration tools in 2026 — Magic Memory, Remini, MyHeritage, VanceAI, and Fotor. Compare pricing, free tiers, and the best AI photo restorer for your use case.",
+    "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
   alternates: { canonical: getCanonicalUrl("/alternatives") },
   openGraph: {
-    title: "5 Best AI Photo Restoration Tools 2026 (Tested & Compared)",
+    title: "AI Photo Restoration Alternatives Compared (2026)",
     description:
-      "We tested the 5 best AI photo restoration tools in 2026 — pricing, free tiers, and which AI photo restorer is right for you.",
+      "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
     url: getCanonicalUrl("/alternatives"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Best AI Photo Restoration Tools 2026" }],
+    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "AI Photo Restoration Alternatives Compared" }],
   },
   robots: { index: true, follow: true },
 };
@@ -92,7 +92,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which photo restoration tool is best without a subscription?",
     answer:
-      "Magic Memory offers one-time credit packages (€9.99–€29.99) that never expire. This is the only top-tier photo restoration tool with no subscription requirement.",
+      "Magic Memory sells one-time credit packs (€9.99–€29.99) that never expire, with no subscription. Check each competitor's pricing column above for whether it needs a subscription.",
   },
   {
     question: "What is the most private AI photo restoration tool?",
@@ -128,11 +128,15 @@ export default function AlternativesPage() {
             </nav>
 
             <h1 className="font-serif text-balance mb-8 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
-              5 Best AI Photo Restoration Tools 2026 (Tested &amp; Compared)
+              AI Photo Restoration Alternatives Compared
             </h1>
 
             <p className="text-lg leading-[1.6] text-paper/70 mb-16 max-w-3xl">
-              We tested the 5 best AI photo restoration tools of 2026 on the same old photo and compared them honestly — including their weaknesses. Find the right AI photo restorer for your use case, budget, and platform. Last verified 2026-05-19.
+              Looking for an alternative to Remini, MyHeritage Photo Enhancer or VanceAI? Below are five AI photo restoration tools side by side, with each one&apos;s pricing model, platform, strengths and limits, including ours. For a longer review of each tool, read our{" "}
+              <Link href="/blog/best-ai-photo-restoration" className="mm-underline text-paper/80 hover:text-paper">
+                best AI photo restoration tools
+              </Link>{" "}
+              guide. Competitor details last verified 2026-05-19.
             </p>
 
             <div className="space-y-6 mb-16">
@@ -194,7 +198,7 @@ export default function AlternativesPage() {
                   { href: "/alternatives/myheritage", label: "MyHeritage Alternative" },
                   { href: "/alternatives/vanceai", label: "VanceAI Alternative" },
                   { href: "/vs/remini", label: "Magic Memory vs Remini" },
-                  { href: "/blog/best-ai-photo-restoration", label: "Best Tools Deep Dive (Blog)" },
+                  { href: "/blog/best-ai-photo-restoration", label: "Best AI photo restoration tools" },
                 ].map((link) => (
                   <Link
                     key={link.href}

@@ -300,7 +300,7 @@ export function BestAIPhotoRestorationContent() {
               <li><Link href="/vs/remini" className="text-primary hover:underline">Magic Memory vs Remini</Link></li>
               <li><Link href="/vs/myheritage" className="text-primary hover:underline">Magic Memory vs MyHeritage</Link></li>
               <li><Link href="/vs/vanceai" className="text-primary hover:underline">Magic Memory vs VanceAI</Link></li>
-              <li><Link href="/alternatives" className="text-primary hover:underline">Full alternatives comparison</Link></li>
+              <li><Link href="/alternatives" className="text-primary hover:underline">AI photo restoration alternatives compared</Link></li>
             </ul>
           </div>
           <div>
