@@ -9,7 +9,7 @@ type ListicleEntry = {
   description: string;
   applicationCategory: string;
   operatingSystem: string;
-  offers: { price: string; priceCurrency: string };
+  offers?: { price: string; priceCurrency: string };
   reviewBody: string;
 };
 
@@ -24,31 +24,29 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     operatingSystem: "Web",
     offers: { price: "9.99", priceCurrency: "EUR" },
     reviewBody:
-      "Best for web-based portrait restoration. Fast (8–12s in our 2026-05-19 test), no subscription, credits never expire. GFPGAN model excels at faces.",
+      "Best for web-based portrait restoration. GFPGAN face restoration at 2x resolution, no subscription, credits never expire, and photos are never stored on our servers.",
   },
   {
     position: 2,
     name: "Remini",
     url: "https://remini.ai",
     description:
-      "Mobile photo enhancement app with face restoration and video enhancement. $9.99/week subscription, mobile-only.",
+      "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
     applicationCategory: "PhotographyApplication",
-    operatingSystem: "iOS, Android",
-    offers: { price: "9.99", priceCurrency: "USD" },
+    operatingSystem: "iOS, Web",
     reviewBody:
-      "Best for daily mobile users. Strong face enhancement and the only mainstream pick with video. Weekly subscription gets expensive for occasional use, and there is no web version.",
+      "Best for phone users who want an app. Strong face enhancement. A recurring subscription is poor value for a few photos.",
   },
   {
     position: 3,
     name: "MyHeritage Photo Enhancer",
     url: "https://myheritage.com",
     description:
-      "Photo enhancement bundled with a genealogy subscription. Strong for users actively researching family history.",
+      "Photo enhancement inside a genealogy platform. Unlimited use comes with the Photo subscription or a plan that includes it.",
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web",
-    offers: { price: "119", priceCurrency: "USD" },
     reviewBody:
-      "Only worth it if you also pay for the genealogy plan ($119–$259/yr). Free tier is watermarked preview only. Enhancement quality is conservative and preserves the period look of old photos.",
+      "Best for people already researching their family history on MyHeritage. Sign-up is free, but unlimited enhancement needs a recurring plan, which is a lot for a one-off job.",
   },
   {
     position: 4,
@@ -57,8 +55,8 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     description:
       "Professional AI image suite including restoration, upscaling, denoising, and background removal. More controls, steeper learning curve.",
     applicationCategory: "PhotographyApplication",
-    operatingSystem: "Web, Windows, macOS",
-    offers: { price: "4.95", priceCurrency: "USD" },
+    operatingSystem: "Web, Windows",
+    offers: { price: "15", priceCurrency: "USD" },
     reviewBody:
       "Best for pros who batch-process or also need upscaling, colorization, and background removal. Interface is overkill for users who just want one-click face restoration.",
   },
@@ -70,7 +68,6 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
       "General-purpose photo editor with AI enhancement features. Good if you also need a full editor.",
     applicationCategory: "PhotographyApplication",
     operatingSystem: "Web, Windows, macOS",
-    offers: { price: "3.33", priceCurrency: "USD" },
     reviewBody:
       "Picks up where a basic Photoshop replacement leaves off. AI restoration is less face-specialized than GFPGAN-based tools — fine for casual cleanup, weaker on severely degraded portraits.",
   },
@@ -88,22 +85,22 @@ const listicleFaqs: Record<string, ListicleFaq[]> = {
     {
       question: "What are the most popular AI photo restoration tools in 2026?",
       answer:
-        "The five most-used AI photo restoration tools in 2026 are Remini (mobile-first, largest user base), MyHeritage Photo Enhancer (bundled in genealogy plans), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, one-time credits), and Fotor (general photo editor with AI enhancement). Together they cover roughly every realistic use case — from one-off family photos to batch professional jobs.",
+        "Five tools cover most needs in 2026: Remini (best known as a phone app), MyHeritage Photo Enhancer (part of a genealogy platform), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, one-time credits), and Fotor (general photo editor with AI enhancement). Together they span one-off family photos to batch professional jobs.",
     },
     {
       question: "What is the best free AI photo restoration tool in 2026?",
       answer:
-        "Magic Memory has no free tier: restorations use one-time credits from €9.99 for 20, and a failed restoration costs no credit. The other tools here restrict free usage to a one-time trial, a watermarked preview, or 3 credits per month.",
+        "Magic Memory has no free tier: restorations use one-time credits from €9.99 for 20, and a failed restoration costs no credit. Of the others, VanceAI gives 10 credits to try, Fotor has a free Basic plan with limited credits, and MyHeritage has free sign-up but does not publish a free-use limit.",
     },
     {
       question: "What is the cheapest AI photo restoration for 20+ photos?",
       answer:
-        "Magic Memory's €29.99 / 120-credit pack works out to roughly €0.25 per photo and credits never expire. Remini at $9.99/week works out to ~$0.50/photo only if you restore 20 photos in a single week — otherwise the cost per photo balloons. MyHeritage bundles photo enhancement with a $119–$259/yr genealogy plan, so 20 photos cost $6–$13 each if you do not also use the genealogy tools.",
+        "Magic Memory's €29.99 / 120-credit pack works out to €0.25 per photo, and €9.99 buys 20 photos; credits never expire. Remini and MyHeritage sell recurring subscriptions, so their cost per photo depends on how many photos you restore before you cancel.",
     },
     {
       question: "Which tool works without downloading an app?",
       answer:
-        "Magic Memory, MyHeritage, VanceAI, and Fotor all work directly in a web browser on any device — desktop, laptop, tablet, or phone — without downloading an app. Remini is the only major restoration tool that requires installing an iOS or Android app.",
+        "All five work in a web browser, so you can restore a photo without installing anything. Remini, MyHeritage, and Fotor also have mobile apps.",
     },
     {
       question: "What are the features of popular AI photo restoration tools?",
@@ -114,11 +111,6 @@ const listicleFaqs: Record<string, ListicleFaq[]> = {
       question: "Are AI photo restoration results permanent?",
       answer:
         "Yes. The restored photo you download is a permanent image file. It does not degrade or change after you download it. Save multiple copies in different locations for long-term preservation.",
-    },
-    {
-      question: "How do popular AI image restoration tools compare on accuracy and speed?",
-      answer:
-        "In our 2026-05-19 test, processing time ranged from 5–30 seconds across all five tools, with Magic Memory and VanceAI on the fast end. Face accuracy was strongest on Magic Memory and Remini (both produce identifiable, sharp faces from severely degraded inputs); MyHeritage and VanceAI produced more conservative output. Fotor's general-purpose AI was the least face-specialized.",
     },
   ],
 };
@@ -143,15 +135,17 @@ export function listicleItemListJsonLd(slug: string): Thing | null {
         description: entry.description,
         applicationCategory: entry.applicationCategory,
         operatingSystem: entry.operatingSystem,
-        offers: {
-          "@type": "Offer",
-          price: entry.offers.price,
-          priceCurrency: entry.offers.priceCurrency,
-        },
+        ...(entry.offers && {
+          offers: {
+            "@type": "Offer",
+            price: entry.offers.price,
+            priceCurrency: entry.offers.priceCurrency,
+          },
+        }),
         review: {
           "@type": "Review",
           author: { "@type": "Organization", name: "Magic Memory" },
-          datePublished: "2026-05-19",
+          datePublished: "2026-11-13",
           reviewBody: entry.reviewBody,
         },
       },
