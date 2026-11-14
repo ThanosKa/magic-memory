@@ -25,9 +25,19 @@ export type RestorerDeps = {
   maxAttempts?: number
 }
 
+export class RestorationError extends Error {
+  constructor(
+    message: string,
+    readonly reason: "failed" | "canceled" | "timed_out",
+  ) {
+    super(message)
+    this.name = "RestorationError"
+  }
+}
+
 /**
  * Restores a photo through Replicate (GFPGAN) and returns the restored image URL.
- * Throws when the prediction fails, is canceled or times out.
+ * Throws `RestorationError` when the prediction fails, is canceled or times out.
  * Must be called inside a route handler that already called `noStore()`, so
  * Next.js does not cache the polling requests.
  */
@@ -68,12 +78,15 @@ export async function restorePhoto(
         { predictionId: prediction.id, status: status.status, error: status.error },
         "Replicate prediction failed",
       )
-      throw new Error(`Restoration failed: ${status.error || status.status}`)
+      throw new RestorationError(
+        `Restoration failed: ${status.error || status.status}`,
+        status.status,
+      )
     }
 
     await sleep(POLL_INTERVAL_MS)
     attempts++
   }
 
-  throw new Error("Restoration timed out after 60 seconds")
+  throw new RestorationError("Restoration timed out after 60 seconds", "timed_out")
 }

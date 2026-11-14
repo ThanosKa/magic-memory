@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
-import { restorePhoto } from "@/lib/restore/restorer"
+import { restorePhoto, RestorationError } from "@/lib/restore/restorer"
 
 vi.mock("@/lib/logger")
 
@@ -38,26 +38,29 @@ describe("restorePhoto", () => {
     expect(sleep).toHaveBeenCalledWith(1000)
   })
 
-  it("throws with the Replicate message when the prediction fails", async () => {
+  it("throws a failed RestorationError with the Replicate message", async () => {
     const { client } = fakeClient([{ status: "failed", error: "model crashed" }])
-    await expect(restorePhoto(photo, { client, sleep })).rejects.toThrow(
-      "Restoration failed: model crashed",
-    )
+    const error = await restorePhoto(photo, { client, sleep }).catch((e) => e)
+    expect(error).toBeInstanceOf(RestorationError)
+    expect(error.reason).toBe("failed")
+    expect(error.message).toBe("Restoration failed: model crashed")
   })
 
-  it("throws when the prediction is canceled", async () => {
+  it("throws a canceled RestorationError", async () => {
     const { client } = fakeClient([{ status: "canceled" }])
-    await expect(restorePhoto(photo, { client, sleep })).rejects.toThrow(
-      "Restoration failed: canceled",
-    )
+    const error = await restorePhoto(photo, { client, sleep }).catch((e) => e)
+    expect(error).toBeInstanceOf(RestorationError)
+    expect(error.reason).toBe("canceled")
+    expect(error.message).toBe("Restoration failed: canceled")
   })
 
   it("times out after maxAttempts polls", async () => {
     const { client, get } = fakeClient([])
     get.mockResolvedValue({ status: "processing" })
-    await expect(restorePhoto(photo, { client, sleep, maxAttempts: 5 })).rejects.toThrow(
-      "Restoration timed out after 60 seconds",
-    )
+    const error = await restorePhoto(photo, { client, sleep, maxAttempts: 5 }).catch((e) => e)
+    expect(error).toBeInstanceOf(RestorationError)
+    expect(error.reason).toBe("timed_out")
+    expect(error.message).toBe("Restoration timed out after 60 seconds")
     expect(get).toHaveBeenCalledTimes(5)
   })
 
