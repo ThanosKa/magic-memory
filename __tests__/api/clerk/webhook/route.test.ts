@@ -2,9 +2,11 @@ import { describe, it, expect, vi, beforeEach, afterAll } from "vitest"
 import { NextRequest } from "next/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
 import { POST } from "@/app/api/clerk/webhook/route"
+import { sendWelcomeEmail } from "@/lib/email"
 
 vi.mock("@/lib/supabase/server")
 vi.mock("@/lib/logger")
+vi.mock("@/lib/email", () => ({ sendWelcomeEmail: vi.fn() }))
 
 const mockWebhookVerify = vi.fn()
 
@@ -232,5 +234,55 @@ describe("POST /api/clerk/webhook", () => {
 
         expect(response.status).toBe(500)
         expect(data.error).toBe("Failed to create user")
+    })
+
+    const userCreatedEvent = {
+        type: "user.created",
+        data: {
+            id: "clerk_user_123",
+            email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
+            first_name: "John",
+            last_name: "Doe",
+            image_url: null,
+        },
+    }
+
+    it("today: no welcome email when the fallback created the row", async () => {
+        const mockInsert = vi.fn().mockResolvedValue({
+            error: {
+                code: "23505",
+                message: 'duplicate key value violates unique constraint "users_clerk_user_id_key"',
+            },
+        })
+        const mockSupabase = { from: vi.fn().mockReturnValue({ insert: mockInsert }) }
+        vi.mocked(getSupabaseAdminClient).mockReturnValue(mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>)
+        mockWebhookVerify.mockReturnValue(userCreatedEvent)
+
+        const response = await POST(createMockRequest("{}"))
+
+        expect(response.status).toBe(200)
+        expect(sendWelcomeEmail).not.toHaveBeenCalled()
+    })
+
+    it("today: no re-link in the webhook", async () => {
+        const mockInsert = vi.fn().mockResolvedValue({
+            error: {
+                code: "23505",
+                message: 'duplicate key value violates unique constraint "users_email_key"',
+            },
+        })
+        const mockUpdate = vi.fn()
+        const mockSupabase = {
+            from: vi.fn().mockReturnValue({ insert: mockInsert, update: mockUpdate }),
+        }
+        vi.mocked(getSupabaseAdminClient).mockReturnValue(mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>)
+        mockWebhookVerify.mockReturnValue(userCreatedEvent)
+
+        const response = await POST(createMockRequest("{}"))
+
+        expect(response.status).toBe(200)
+        expect(mockUpdate).not.toHaveBeenCalled()
+        expect(mockSupabase.from).toHaveBeenCalledTimes(1)
+        expect(sendWelcomeEmail).not.toHaveBeenCalled()
     })
 })
