@@ -20,7 +20,7 @@ AI photo restoration SaaS on the Next.js 16 App Router. A signed-in user uploads
 
 ## Commands
 
-pnpm only. Run tests once with `pnpm test:run` (`pnpm test` is watch mode). Before committing run `pnpm lint`, `pnpm type-check` and `pnpm test:run`, the three checks CI runs before its build step. CI also runs `pnpm build` on pull requests, with placeholder env values (see `.github/workflows/ci.yml`). `pnpm build` ignores type errors (`ignoreBuildErrors` in `next.config.mjs`), so it never replaces `pnpm type-check`. `pnpm test:coverage` fails until `@vitest/coverage-v8` is installed.
+pnpm only. Run tests once with `pnpm test:run` (`pnpm test` is watch mode). Before committing run `pnpm lint`, `pnpm type-check` and `pnpm test:run`, the three checks CI runs before its build step. CI also runs `pnpm build` on pull requests, with placeholder env values (see `.github/workflows/ci.yml`). `pnpm build` ignores type errors (`ignoreBuildErrors` in `next.config.mjs`), so it never replaces `pnpm type-check`. `pnpm test:coverage` prints line coverage (provider `@vitest/coverage-v8`).
 
 ## Before working on
 
