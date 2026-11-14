@@ -59,8 +59,6 @@ export type PurchaseToGrant = {
 export type RestorationToCharge = {
   originalUrl: string
   restoredUrl: string
-  /** Unwired free-credit leftover, passed to SQL as today; removed in its own change. Default: false. */
-  useFreeCredit?: boolean
 }
 
 const creditRowSchema = z.object({ paid_credits: z.number() })
@@ -126,7 +124,7 @@ export function createCreditLedger(openDb: () => LedgerDb = supabaseLedgerDb): C
       }
     },
 
-    async chargeRestoration(user, { originalUrl, restoredUrl, useFreeCredit = false }) {
+    async chargeRestoration(user, { originalUrl, restoredUrl }) {
       const db = openDb()
 
       try {
@@ -138,7 +136,7 @@ export function createCreditLedger(openDb: () => LedgerDb = supabaseLedgerDb): C
           p_user_id: found.id,
           p_original_url: originalUrl,
           p_restored_url: restoredUrl,
-          p_use_free_credit: useFreeCredit,
+          p_use_free_credit: false,
         })
         if (error) {
           logger.error({ error, userId: user }, "Error deducting credit")

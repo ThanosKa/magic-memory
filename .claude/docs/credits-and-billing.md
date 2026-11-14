@@ -10,7 +10,7 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 - All sales are final: `app/terms/page.tsx` promises no refunds under any circumstances. `rollback_restoration` reverses a technical failure and is not a refund path.
 - A new user gets one one-time credit, defined once as `SIGNUP_CREDITS` in `lib/users/index.ts`, used by `app/api/clerk/webhook/route.ts` and `provisionUser` in the same file.
 - The daily free credit was removed on purpose (commits `dca4871`, `fcd4c84`, `1555030`). `/api/restore` gates on `paid_credits` alone, and `/api/credits` reports `hasFreeDaily: false`, because adding it showed users a phantom credit that returned 403 when spent. `__tests__/api/restore/route.test.ts` holds the regression test.
-- These free-credit leftovers are inert, so leave them unwired: the helpers in `lib/redis.ts`, the free columns from `check_user_credits`, `restorations.used_free_credit`, `APP_CONFIG.freeRestorationPerDay`.
+- These free-credit leftovers are inert, so leave them unwired: `chargeRestoration` always sends `p_use_free_credit: false` to SQL, the helpers in `lib/redis.ts`, the free columns from `check_user_credits`, `restorations.used_free_credit`, `APP_CONFIG.freeRestorationPerDay`.
 - Public copy must not promise the daily credit back; `__tests__/copy/free-credit-claims.test.ts` fails if it does.
 
 ## `POST /api/restore`

@@ -180,17 +180,6 @@ describe("createCreditLedger", () => {
       ])
     })
 
-    it("passes the free-credit flag through to SQL when given", async () => {
-      const { db, calls } = fakeLedgerDb({ users: { clerk_user_123: "user-uuid" } })
-
-      await createCreditLedger(() => db).chargeRestoration(CLERK_ID, {
-        ...restoration,
-        useFreeCredit: true,
-      })
-
-      expect(calls[0].args.p_use_free_credit).toBe(true)
-    })
-
     it("gives no_credits when SQL answers No paid credits available", async () => {
       const { db } = fakeLedgerDb({
         users: { clerk_user_123: "user-uuid" },
