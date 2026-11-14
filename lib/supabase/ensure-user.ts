@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { SIGNUP_CREDITS } from "@/lib/users";
 
 const UNIQUE_VIOLATION = "23505";
 
@@ -38,7 +39,7 @@ export async function ensureUser(
   const { data: created, error } = await supabase
     .from("users")
     .upsert(
-      { clerk_user_id: clerkUserId, email, name, paid_credits: 1 },
+      { clerk_user_id: clerkUserId, email, name, paid_credits: SIGNUP_CREDITS },
       { onConflict: "clerk_user_id", ignoreDuplicates: true }
     )
     .select()
