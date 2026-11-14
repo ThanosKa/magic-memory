@@ -4,6 +4,7 @@ import { z } from "zod";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { sendWelcomeEmail } from "@/lib/email";
 import logger from "@/lib/logger";
+import { SIGNUP_CREDITS } from "@/lib/users";
 
 const clerkWebhookSchema = z.discriminatedUnion("type", [
     z.object({
@@ -100,7 +101,7 @@ export async function POST(request: NextRequest) {
                     email,
                     name,
                     profile_image: image_url,
-                    paid_credits: 1,
+                    paid_credits: SIGNUP_CREDITS,
                 });
 
                 if (error) {
