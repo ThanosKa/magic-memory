@@ -1,0 +1,4007 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`marketing page head snapshot > records metadata and structured data for every page 1`] = `
+{
+  "/alternatives": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory has no free tier: each restoration uses one credit from a one-time pack (from €9.99 for 20), and a failed restoration costs no credit. Most competitors offer limited free trials or heavily restricted free tiers; the pricing column above lists each tool's.",
+              },
+              "name": "What is the best free AI photo restoration tool?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory uses GFPGAN (Generative Facial Prior GAN), a model published at CVPR 2021 specifically for face restoration. For portrait and face-focused photos, it consistently delivers strong results. Remini also performs well on faces with its proprietary model. The meaningful differences between top tools are more about pricing and platform than raw quality.",
+              },
+              "name": "Which AI photo restoration tool has the best face restoration quality?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory sells one-time credit packs (€9.99–€29.99) that never expire, with no subscription. Check each competitor's pricing column above for whether it needs a subscription.",
+              },
+              "name": "Which photo restoration tool is best without a subscription?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory does not retain photos after processing. Photos are handled for the restoration process and then deleted — there is no cloud photo library. This is the most privacy-respecting approach among major photo restoration tools.",
+              },
+              "name": "What is the most private AI photo restoration tool?",
+            },
+          ],
+        },
+        "sha256": "020adbafe968e72806654115187e64dbb4ddd7f60c76d1114d087c5432bc5c67",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/alternatives",
+              "name": "AI Photo Restoration Alternatives",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "3250b304eaf9bfcea3b7a3ed1c0265aa86292153c580bc269a38eafb40028a11",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Web-based AI photo restoration using GFPGAN. One-time credit packs that never expire (€9.99–€29.99, €0.25/photo at the largest pack), no persistent photo storage.",
+                "name": "Magic Memory",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "9.99",
+                  "priceCurrency": "EUR",
+                },
+                "operatingSystem": "Web",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for web-based portrait restoration. GFPGAN face restoration at 2x resolution, no subscription, credits never expire, and photos are never stored on our servers.",
+                },
+                "url": "https://magic-memory.dev/",
+              },
+              "position": 1,
+              "url": "https://magic-memory.dev/",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
+                "name": "Remini",
+                "operatingSystem": "iOS, Web",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for phone users who want an app. Strong face enhancement. A recurring subscription is poor value for a few photos.",
+                },
+                "url": "https://remini.ai",
+              },
+              "position": 2,
+              "url": "https://remini.ai",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Photo enhancement inside a genealogy platform. Unlimited use comes with the Photo subscription or a plan that includes it.",
+                "name": "MyHeritage Photo Enhancer",
+                "operatingSystem": "Web",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for people already researching their family history on MyHeritage. Sign-up is free, but unlimited enhancement needs a recurring plan, which is a lot for a one-off job.",
+                },
+                "url": "https://myheritage.com",
+              },
+              "position": 3,
+              "url": "https://myheritage.com",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Professional AI image suite including restoration, upscaling, denoising, and background removal. More controls, steeper learning curve.",
+                "name": "VanceAI",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "15",
+                  "priceCurrency": "USD",
+                },
+                "operatingSystem": "Web, Windows",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for pros who batch-process or also need upscaling, colorization, and background removal. Interface is overkill for users who just want one-click face restoration.",
+                },
+                "url": "https://vanceai.com",
+              },
+              "position": 4,
+              "url": "https://vanceai.com",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "General-purpose photo editor with AI enhancement features. Good if you also need a full editor.",
+                "name": "Fotor",
+                "operatingSystem": "Web, Windows, macOS",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Picks up where a basic Photoshop replacement leaves off. AI restoration is less face-specialized than GFPGAN-based tools — fine for casual cleanup, weaker on severely degraded portraits.",
+                },
+                "url": "https://fotor.com",
+              },
+              "position": 5,
+              "url": "https://fotor.com",
+            },
+          ],
+          "itemListOrder": "https://schema.org/ItemListOrderAscending",
+          "numberOfItems": 5,
+        },
+        "sha256": "da0b27b90e93dda030ef607fecc8cc99e56d6cacbd9d8b390b381bf1c49d30e5",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/alternatives",
+      },
+      "description": "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
+      "openGraph": {
+        "description": "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
+        "images": [
+          {
+            "alt": "AI Photo Restoration Alternatives Compared",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "AI Photo Restoration Alternatives Compared (2026)",
+        "url": "https://magic-memory.dev/alternatives",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Photo Restoration Alternatives Compared (2026)",
+    },
+  },
+  "/alternatives/myheritage": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MyHeritage's free tier is a watermarked preview only — you can run the enhancer on a small number of photos to see the result, but the unwatermarked, downloadable output is locked behind a paid plan. There is no recurring free monthly quota in 2026. To enhance and download a clean image, you need at least the Basic plan ($119/year as of 2026-05-19).",
+              },
+              "name": "What is the MyHeritage Photo Enhancer free tier limit in 2026?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MyHeritage Photo Enhancer is bundled into MyHeritage's genealogy plans, which cost $119/yr (Basic), $189/yr (Premium), and $259/yr (Complete) as of 2026. All three plans are annual and include the full genealogy platform alongside photo enhancement. There is no photo-only tier — even the cheapest plan includes family-tree, DNA-matching, and historical-record features.",
+              },
+              "name": "How much does MyHeritage Photo Enhancer cost in 2026?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. MyHeritage's photo enhancement, MyHeritage In Color, and Deep Nostalgia features are sold only as part of a genealogy plan. There is no standalone photo-enhancer subscription. If you only want photo restoration, you pay $119–$259/year for genealogy features you may not use.",
+              },
+              "name": "Do I need a genealogy subscription to use MyHeritage photo enhancement?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory is the cheapest standalone alternative — one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Restoring 100 photos on MyHeritage requires a $119/yr subscription. The same 100 photos on Magic Memory cost €25 in credits if you use the largest pack.",
+              },
+              "name": "What's the cheapest MyHeritage Photo Enhancer alternative in 2026?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Magic Memory is a standalone photo restoration tool. It does not include genealogy, DNA testing, or family tree features. This makes it significantly cheaper for users who only want photo restoration. Many genealogists use Magic Memory to restore ancestor photos and then attach those restored images to family trees in Ancestry, MyHeritage, or FamilySearch — you are not locked into one tool.",
+              },
+              "name": "Does Magic Memory offer genealogy features?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you want only photo restoration, Magic Memory is more cost-effective and easier to use. If you are actively doing genealogy research and want integrated photo enhancement inside a family tree platform, MyHeritage makes more sense. They serve different primary use cases — photo tool vs. genealogy suite.",
+              },
+              "name": "Which is better for restoring old family photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. MyHeritage uses its own proprietary photo enhancement and colorization models, including the DeepStory and Deep Nostalgia features built on technology MyHeritage acquired in 2020. Remini is a separate, mobile-first app from Bending Spoons that uses different proprietary models.",
+              },
+              "name": "Does MyHeritage Photo Enhancer use Remini technology?",
+            },
+          ],
+        },
+        "sha256": "9c77db223095c3b22cf276fea1530763e718ce856106c9ce6189d15658b75a24",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/alternatives",
+              "name": "Alternatives",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/alternatives/myheritage",
+              "name": "MyHeritage Alternative",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "621495b2e7dbb51cf02e06b7dfb0bfd85a47bb5791e65a2816b6a1349352b992",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/alternatives/myheritage",
+      },
+      "description": "MyHeritage Photo Enhancer pricing in 2026: $119 Basic, $189 Premium, $259 Complete — all annual, all bundled with genealogy. Free tier is a watermarked preview only. Magic Memory offers standalone AI restoration from €9.99 one-time. Full breakdown.",
+      "openGraph": {
+        "description": "MyHeritage costs $119–$259/yr bundled with genealogy. Free tier = watermarked preview. See the standalone alternative from €9.99.",
+        "images": [
+          {
+            "alt": "MyHeritage Alternative",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "MyHeritage Photo Enhancer Pricing 2026 — Free Limits & Alternative",
+        "url": "https://magic-memory.dev/alternatives/myheritage",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "MyHeritage Photo Enhancer Pricing 2026: Free Limits + Cheaper Alternative",
+    },
+  },
+  "/alternatives/remini": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on your needs. Magic Memory is better if you want web access (no app download required), prefer one-time payment over weekly subscription, and value privacy (no cloud photo storage). Remini is better if you want a mobile app with additional editing features and video enhancement capabilities.",
+              },
+              "name": "Is Magic Memory better than Remini?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Magic Memory is a web app that works in any mobile browser — no app download required. Open your browser on your phone, go to the site, and upload directly from your camera roll. It works on iOS and Android without any installation.",
+              },
+              "name": "Does Magic Memory work on mobile without an app?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Remini charges $9.99 per week as a subscription. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. For occasional users who restore a few photos per month, Magic Memory is significantly cheaper. For daily heavy use, compare the per-photo cost.",
+              },
+              "name": "What does Remini cost compared to Magic Memory?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Magic Memory does not store your photos after processing. Your original and restored photos are available in your account history but are not retained indefinitely. This is different from Remini, which stores photos in cloud accounts.",
+              },
+              "name": "Does Magic Memory store my photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Magic Memory has no free tier: sign in with Google, buy a one-time credit pack (from €9.99 for 20 restorations) and each restoration uses one credit. A failed restoration costs no credit. There is no subscription, no commitment, and no auto-renewal.",
+              },
+              "name": "Can I try Magic Memory before paying?",
+            },
+          ],
+        },
+        "sha256": "98547a980ecaddd3f779631ec6be77c93248f3f18b8ea496e939fec3a883d6a7",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/alternatives",
+              "name": "Alternatives",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/alternatives/remini",
+              "name": "Remini Alternative",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "c31d7ec1cd56a136c163c1f523b57e114eed589ecd3402c7df2c6efbbb919cd6",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/alternatives/remini",
+      },
+      "description": "Looking for a Remini alternative? Compare Magic Memory vs Remini: pricing, platform, privacy, and restoration quality. Magic Memory is web-based with one-time credits.",
+      "openGraph": {
+        "description": "Magic Memory vs Remini comparison. Web-based vs mobile-only, one-time vs subscription.",
+        "images": [
+          {
+            "alt": "Remini Alternative",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Remini Alternative — Magic Memory vs Remini",
+        "url": "https://magic-memory.dev/alternatives/remini",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Remini Alternative for Photo Restoration (No Subscription)",
+    },
+  },
+  "/alternatives/vanceai": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, significantly. Magic Memory is designed for one purpose — AI photo restoration — with a simple upload-and-download flow. VanceAI offers many tools (upscaling, background removal, denoising, restoration) which creates complexity. If you know exactly what you want (restore old portraits), Magic Memory is faster and simpler.",
+              },
+              "name": "Is Magic Memory easier to use than VanceAI?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "VanceAI has more tools in total — it includes upscaling, background removal, colorization, and more. Magic Memory focuses exclusively on photo restoration using GFPGAN. For users who need multiple AI image tools, VanceAI may be more versatile. For users who specifically want portrait restoration, Magic Memory is more focused and typically faster.",
+              },
+              "name": "Does VanceAI do more than Magic Memory?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "VanceAI offers subscription plans starting from $4.95/month and credit packs. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. Pricing depends on usage frequency — compare the per-photo cost for your expected usage.",
+              },
+              "name": "What does VanceAI cost compared to Magic Memory?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both use AI for face restoration. Magic Memory uses GFPGAN specifically, which was designed for face restoration research. VanceAI uses its own suite of models. For portrait photos, GFPGAN is one of the strongest publicly-available models for face-specific restoration.",
+              },
+              "name": "Which tool has better face restoration quality?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Professional photographers, genealogists, archivists, and restoration specialists all use Magic Memory. For batch processing large numbers of photos, VanceAI's batch tools may be faster. For individual portrait restoration where quality matters most, Magic Memory's GFPGAN results are excellent.",
+              },
+              "name": "Can professionals use Magic Memory?",
+            },
+          ],
+        },
+        "sha256": "5ff2245a6fc39377b7cc61431171ff70f1de1342484a0525c4aeafab966b318f",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/alternatives",
+              "name": "Alternatives",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/alternatives/vanceai",
+              "name": "VanceAI Alternative",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "1af9a4d8ce51d6186d5cc519901bc95f5b17cf52f9ad58d627b282ce71f292b4",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/alternatives/vanceai",
+      },
+      "description": "Looking for a simpler VanceAI alternative? Magic Memory offers one-click AI photo restoration without the complex interface. Compare features, pricing, and ease of use.",
+      "openGraph": {
+        "description": "One-click photo restoration vs VanceAI's complex tools. Compare Magic Memory vs VanceAI.",
+        "images": [
+          {
+            "alt": "VanceAI Alternative",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "VanceAI Alternative for Photo Restoration — Magic Memory",
+        "url": "https://magic-memory.dev/alternatives/vanceai",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "VanceAI Alternative for Photo Restoration (One-Click)",
+    },
+  },
+  "/blog": {
+    "jsonLd": [],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/blog",
+      },
+      "description": "Learn how to restore old photos, understand AI photo restoration technology, and compare tools. Guides, tips, and tutorials from the Magic Memory team.",
+      "openGraph": {
+        "description": "Guides and tutorials for AI photo restoration.",
+        "title": "Blog — AI Photo Restoration Tips and Guides | Magic Memory",
+        "url": "https://magic-memory.dev/blog",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Blog — AI Photo Restoration Tips and Guides",
+    },
+  },
+  "/blog/ai-photo-restoration-vs-photoshop": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "author": {
+            "@type": "Organization",
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+          "dateModified": "2026-05-19",
+          "datePublished": "2026-02-23",
+          "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+          "headline": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
+          "image": [
+            "https://magic-memory.dev/og-image-restore.png",
+          ],
+          "mainEntityOfPage": {
+            "@id": "https://magic-memory.dev/blog/ai-photo-restoration-vs-photoshop",
+            "@type": "WebPage",
+          },
+          "publisher": {
+            "@type": "Organization",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://magic-memory.dev/icon.svg",
+            },
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+        },
+        "sha256": "cc0c6e993747f555c1a8e6614a2fcf65c8a3bbde515c5b511d4ac3d9257cf776",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog",
+              "name": "Blog",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog/ai-photo-restoration-vs-photoshop",
+              "name": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "0956d47bf5e3d652dd784ab673e33c6f530d3afb6978a5c384997b0cd50dbbf0",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/blog/ai-photo-restoration-vs-photoshop",
+      },
+      "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+      "openGraph": {
+        "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+        "images": [
+          {
+            "alt": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "modifiedTime": "2026-05-19",
+        "publishedTime": "2026-02-23",
+        "title": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
+        "type": "article",
+        "url": "https://magic-memory.dev/blog/ai-photo-restoration-vs-photoshop",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
+      },
+    },
+  },
+  "/blog/best-ai-photo-restoration": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "author": {
+            "@type": "Organization",
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+          "dateModified": "2026-11-13",
+          "datePublished": "2026-02-23",
+          "description": "Remini, MyHeritage, VanceAI, Fotor and Magic Memory side by side: how each one charges, free options, platforms, and which to pick for a few old family photos.",
+          "headline": "Best AI Photo Restoration Tools 2026: 5 Compared",
+          "image": [
+            "https://magic-memory.dev/og-image-restore.png",
+          ],
+          "mainEntityOfPage": {
+            "@id": "https://magic-memory.dev/blog/best-ai-photo-restoration",
+            "@type": "WebPage",
+          },
+          "publisher": {
+            "@type": "Organization",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://magic-memory.dev/icon.svg",
+            },
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+        },
+        "sha256": "aa9b7a797d8e9a73eb58bc3b43c239744f405a21736dc77a72191d7d32187fe3",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog",
+              "name": "Blog",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog/best-ai-photo-restoration",
+              "name": "Best AI Photo Restoration Tools 2026: 5 Compared",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "f2cb29d3d53fa58b2e276f45667282ce799635804fd12366b26572040f85841b",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Web-based AI photo restoration using GFPGAN. One-time credit packs that never expire (€9.99–€29.99, €0.25/photo at the largest pack), no persistent photo storage.",
+                "name": "Magic Memory",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "9.99",
+                  "priceCurrency": "EUR",
+                },
+                "operatingSystem": "Web",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for web-based portrait restoration. GFPGAN face restoration at 2x resolution, no subscription, credits never expire, and photos are never stored on our servers.",
+                },
+                "url": "https://magic-memory.dev/",
+              },
+              "position": 1,
+              "url": "https://magic-memory.dev/",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
+                "name": "Remini",
+                "operatingSystem": "iOS, Web",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for phone users who want an app. Strong face enhancement. A recurring subscription is poor value for a few photos.",
+                },
+                "url": "https://remini.ai",
+              },
+              "position": 2,
+              "url": "https://remini.ai",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Photo enhancement inside a genealogy platform. Unlimited use comes with the Photo subscription or a plan that includes it.",
+                "name": "MyHeritage Photo Enhancer",
+                "operatingSystem": "Web",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for people already researching their family history on MyHeritage. Sign-up is free, but unlimited enhancement needs a recurring plan, which is a lot for a one-off job.",
+                },
+                "url": "https://myheritage.com",
+              },
+              "position": 3,
+              "url": "https://myheritage.com",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "Professional AI image suite including restoration, upscaling, denoising, and background removal. More controls, steeper learning curve.",
+                "name": "VanceAI",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "15",
+                  "priceCurrency": "USD",
+                },
+                "operatingSystem": "Web, Windows",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Best for pros who batch-process or also need upscaling, colorization, and background removal. Interface is overkill for users who just want one-click face restoration.",
+                },
+                "url": "https://vanceai.com",
+              },
+              "position": 4,
+              "url": "https://vanceai.com",
+            },
+            {
+              "@type": "ListItem",
+              "item": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "PhotographyApplication",
+                "description": "General-purpose photo editor with AI enhancement features. Good if you also need a full editor.",
+                "name": "Fotor",
+                "operatingSystem": "Web, Windows, macOS",
+                "review": {
+                  "@type": "Review",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Magic Memory",
+                  },
+                  "datePublished": "2026-11-13",
+                  "reviewBody": "Picks up where a basic Photoshop replacement leaves off. AI restoration is less face-specialized than GFPGAN-based tools — fine for casual cleanup, weaker on severely degraded portraits.",
+                },
+                "url": "https://fotor.com",
+              },
+              "position": 5,
+              "url": "https://fotor.com",
+            },
+          ],
+          "itemListOrder": "https://schema.org/ItemListOrderAscending",
+          "numberOfItems": 5,
+        },
+        "sha256": "da0b27b90e93dda030ef607fecc8cc99e56d6cacbd9d8b390b381bf1c49d30e5",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Five tools cover most needs in 2026: Remini (best known as a phone app), MyHeritage Photo Enhancer (part of a genealogy platform), VanceAI (professional multi-tool suite), Magic Memory (GFPGAN, web-first, one-time credits), and Fotor (general photo editor with AI enhancement). Together they span one-off family photos to batch professional jobs.",
+              },
+              "name": "What are the most popular AI photo restoration tools in 2026?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory has no free tier: restorations use one-time credits from €9.99 for 20, and a failed restoration costs no credit. Of the others, VanceAI gives 10 credits to try, Fotor has a free Basic plan with limited credits, and MyHeritage has free sign-up but does not publish a free-use limit.",
+              },
+              "name": "What is the best free AI photo restoration tool in 2026?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory's €29.99 / 120-credit pack works out to €0.25 per photo, and €9.99 buys 20 photos; credits never expire. Remini and MyHeritage sell recurring subscriptions, so their cost per photo depends on how many photos you restore before you cancel.",
+              },
+              "name": "What is the cheapest AI photo restoration for 20+ photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All five work in a web browser, so you can restore a photo without installing anything. Remini, MyHeritage, and Fotor also have mobile apps.",
+              },
+              "name": "Which tool works without downloading an app?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Across the top tools, the common features are face-specific restoration (sharper eyes, recovered skin texture, repaired teeth/hair detail), upscaling (output at 2x or 4x the input resolution), and damage repair (scratches, tears, fading). Higher-tier tools additionally offer colorization of black-and-white photos, batch processing, and integration with family-tree or social-media workflows. The single most important differentiator is whether the model is face-specialized (GFPGAN-based) or general-purpose.",
+              },
+              "name": "What are the features of popular AI photo restoration tools?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The restored photo you download is a permanent image file. It does not degrade or change after you download it. Save multiple copies in different locations for long-term preservation.",
+              },
+              "name": "Are AI photo restoration results permanent?",
+            },
+          ],
+        },
+        "sha256": "f100b100783fb4fae57a1391874db7554090932dd5a8e5ae7bf62d6bd8a9336a",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/blog/best-ai-photo-restoration",
+      },
+      "description": "Remini, MyHeritage, VanceAI, Fotor and Magic Memory side by side: how each one charges, free options, platforms, and which to pick for a few old family photos.",
+      "openGraph": {
+        "description": "Remini, MyHeritage, VanceAI, Fotor and Magic Memory side by side: how each one charges, free options, platforms, and which to pick for a few old family photos.",
+        "images": [
+          {
+            "alt": "Best AI Photo Restoration Tools 2026: 5 Compared",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "modifiedTime": "2026-11-13",
+        "publishedTime": "2026-02-23",
+        "title": "Best AI Photo Restoration Tools 2026: 5 Compared",
+        "type": "article",
+        "url": "https://magic-memory.dev/blog/best-ai-photo-restoration",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Best AI Photo Restoration Tools 2026: 5 Compared",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Remini, MyHeritage, VanceAI, Fotor and Magic Memory side by side: how each one charges, free options, platforms, and which to pick for a few old family photos.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Best AI Photo Restoration Tools 2026: 5 Compared",
+      },
+    },
+  },
+  "/blog/gfpgan-explained": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "author": {
+            "@type": "Organization",
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+          "dateModified": "2026-02-23",
+          "datePublished": "2026-02-23",
+          "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+          "headline": "What is GFPGAN? How AI Face Restoration Works",
+          "image": [
+            "https://magic-memory.dev/og-image-restore.png",
+          ],
+          "mainEntityOfPage": {
+            "@id": "https://magic-memory.dev/blog/gfpgan-explained",
+            "@type": "WebPage",
+          },
+          "publisher": {
+            "@type": "Organization",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://magic-memory.dev/icon.svg",
+            },
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+        },
+        "sha256": "0462558f4a835d22cd8c03f38766e2ed4a95d08a4179f1484f395d321f06972d",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog",
+              "name": "Blog",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog/gfpgan-explained",
+              "name": "What is GFPGAN? How AI Face Restoration Works",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "043197b3faceed4b2e35707526ba2174ec2b7e14ad784e5e169fee6578386a80",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/blog/gfpgan-explained",
+      },
+      "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+      "openGraph": {
+        "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+        "images": [
+          {
+            "alt": "What is GFPGAN? How AI Face Restoration Works",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "modifiedTime": "2026-02-23",
+        "publishedTime": "2026-02-23",
+        "title": "What is GFPGAN? How AI Face Restoration Works",
+        "type": "article",
+        "url": "https://magic-memory.dev/blog/gfpgan-explained",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "What is GFPGAN? How AI Face Restoration Works",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "What is GFPGAN? How AI Face Restoration Works",
+      },
+    },
+  },
+  "/blog/how-to-restore-old-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "author": {
+            "@type": "Organization",
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+          "dateModified": "2026-02-23",
+          "datePublished": "2026-02-23",
+          "description": "Learn how to restore old, damaged, and faded photos using AI tools. Covers scanning tips, AI restoration steps, and how to get the best results.",
+          "headline": "How to Restore Old Photos: A Complete Guide (2026)",
+          "image": [
+            "https://magic-memory.dev/og-image-restore.png",
+          ],
+          "mainEntityOfPage": {
+            "@id": "https://magic-memory.dev/blog/how-to-restore-old-photos",
+            "@type": "WebPage",
+          },
+          "publisher": {
+            "@type": "Organization",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://magic-memory.dev/icon.svg",
+            },
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+        },
+        "sha256": "37bbfcbb0fc63a900c030d13844520d2fc775bf7b699ee797c54395fac7bdea3",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog",
+              "name": "Blog",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog/how-to-restore-old-photos",
+              "name": "How to Restore Old Photos: A Complete Guide (2026)",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "1604c01f71063a64233ce459bfe1eb68e3bbc8e538cc6f6cc67433bb49730ba6",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/blog/how-to-restore-old-photos",
+      },
+      "description": "Learn how to restore old, damaged, and faded photos using AI tools. Covers scanning tips, AI restoration steps, and how to get the best results.",
+      "openGraph": {
+        "description": "Learn how to restore old, damaged, and faded photos using AI tools. Covers scanning tips, AI restoration steps, and how to get the best results.",
+        "images": [
+          {
+            "alt": "How to Restore Old Photos: A Complete Guide (2026)",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "modifiedTime": "2026-02-23",
+        "publishedTime": "2026-02-23",
+        "title": "How to Restore Old Photos: A Complete Guide (2026)",
+        "type": "article",
+        "url": "https://magic-memory.dev/blog/how-to-restore-old-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "How to Restore Old Photos: A Complete Guide (2026)",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Learn how to restore old, damaged, and faded photos using AI tools. Covers scanning tips, AI restoration steps, and how to get the best results.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "How to Restore Old Photos: A Complete Guide (2026)",
+      },
+    },
+  },
+  "/blog/photo-restoration-before-after": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "author": {
+            "@type": "Organization",
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+          "dateModified": "2026-02-23",
+          "datePublished": "2026-02-23",
+          "description": "See real before-and-after examples of AI photo restoration. Understand what changes, what to expect, and how to get the best results with Magic Memory.",
+          "headline": "Photo Restoration Before and After — Real AI Results",
+          "image": [
+            "https://magic-memory.dev/og-image-restore.png",
+          ],
+          "mainEntityOfPage": {
+            "@id": "https://magic-memory.dev/blog/photo-restoration-before-after",
+            "@type": "WebPage",
+          },
+          "publisher": {
+            "@type": "Organization",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://magic-memory.dev/icon.svg",
+            },
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+        },
+        "sha256": "d4a4473e80c4d3e9862f3dd20064526d924f022eae00054af2e66434234b41ea",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog",
+              "name": "Blog",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog/photo-restoration-before-after",
+              "name": "Photo Restoration Before and After — Real AI Results",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "67a1dc7d9d9f3990112e14b8ad018449fa8d09162e6926e4d3075ecb7bedd48f",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/blog/photo-restoration-before-after",
+      },
+      "description": "See real before-and-after examples of AI photo restoration. Understand what changes, what to expect, and how to get the best results with Magic Memory.",
+      "openGraph": {
+        "description": "See real before-and-after examples of AI photo restoration. Understand what changes, what to expect, and how to get the best results with Magic Memory.",
+        "images": [
+          {
+            "alt": "Photo Restoration Before and After — Real AI Results",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "modifiedTime": "2026-02-23",
+        "publishedTime": "2026-02-23",
+        "title": "Photo Restoration Before and After — Real AI Results",
+        "type": "article",
+        "url": "https://magic-memory.dev/blog/photo-restoration-before-after",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Photo Restoration Before and After — Real AI Results",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "See real before-and-after examples of AI photo restoration. Understand what changes, what to expect, and how to get the best results with Magic Memory.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Photo Restoration Before and After — Real AI Results",
+      },
+    },
+  },
+  "/blog/restore-old-family-photos-tips": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "author": {
+            "@type": "Organization",
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+          "dateModified": "2026-02-23",
+          "datePublished": "2026-02-23",
+          "description": "A practical guide to scanning, restoring, organizing, and preserving old family photos. Includes AI restoration tips and long-term storage advice.",
+          "headline": "How to Restore and Preserve Old Family Photos (Step-by-Step)",
+          "image": [
+            "https://magic-memory.dev/og-image-restore.png",
+          ],
+          "mainEntityOfPage": {
+            "@id": "https://magic-memory.dev/blog/restore-old-family-photos-tips",
+            "@type": "WebPage",
+          },
+          "publisher": {
+            "@type": "Organization",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://magic-memory.dev/icon.svg",
+            },
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+        },
+        "sha256": "53027d06933450491461ae3d6b1b6860254b3b936b9980938ec265b384c3f598",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog",
+              "name": "Blog",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/blog/restore-old-family-photos-tips",
+              "name": "How to Restore and Preserve Old Family Photos (Step-by-Step)",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "fe1196ef172f37caeab2eae7bd3d053c9008f2945f1da9762b3f7bf93e752811",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/blog/restore-old-family-photos-tips",
+      },
+      "description": "A practical guide to scanning, restoring, organizing, and preserving old family photos. Includes AI restoration tips and long-term storage advice.",
+      "openGraph": {
+        "description": "A practical guide to scanning, restoring, organizing, and preserving old family photos. Includes AI restoration tips and long-term storage advice.",
+        "images": [
+          {
+            "alt": "How to Restore and Preserve Old Family Photos (Step-by-Step)",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "modifiedTime": "2026-02-23",
+        "publishedTime": "2026-02-23",
+        "title": "How to Restore and Preserve Old Family Photos (Step-by-Step)",
+        "type": "article",
+        "url": "https://magic-memory.dev/blog/restore-old-family-photos-tips",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "How to Restore and Preserve Old Family Photos (Step-by-Step)",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "A practical guide to scanning, restoring, organizing, and preserving old family photos. Includes AI restoration tips and long-term storage advice.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "How to Restore and Preserve Old Family Photos (Step-by-Step)",
+      },
+    },
+  },
+  "/enhance-old-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Restoration implies bringing something back to its original state — fixing damage, recovering what was lost. Enhancement means improving quality beyond what the original captured — making a decent photo better, a good portrait sharper. In practice, GFPGAN does both simultaneously: it recovers lost detail (restoration) and improves the apparent resolution of faces (enhancement). Most people searching 'enhance old photos' want both.",
+              },
+              "name": "What is the difference between enhancement and restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN recovers detail that was present in the original scene but not captured well due to film limitations, poor focus, or degradation over time. It does not invent detail that was never there — it reconstructs plausible detail based on what the surrounding face structure implies. For most portrait photos, this results in a significantly more realistic and sharp-looking image.",
+              },
+              "name": "Does AI photo enhancement add detail that wasn't in the original?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory accepts photos up to 10MB in file size. There is no fixed pixel dimension limit. GFPGAN processes the photo at its input resolution and outputs an enhanced version. For very high-resolution inputs (above 4000x4000), the facial enhancement is applied to detected face regions and composited back.",
+              },
+              "name": "What maximum resolution does Magic Memory support?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Magic Memory is a web app — it works on any device with a browser, including phones. Take a photo of an old photo with your phone or share a photo from your camera roll. Upload directly from your phone's photo library for instant enhancement.",
+              },
+              "name": "Can I enhance a photo I already have on my phone?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. GFPGAN enhances all portrait photos, not just heavily damaged ones. A reasonably sharp portrait from the 1990s can still see improvement in fine facial detail. The improvement is less dramatic than with a severely degraded photo, but still visible — particularly in the finest facial features.",
+              },
+              "name": "Does AI enhancement work on good-quality photos too?",
+            },
+          ],
+        },
+        "sha256": "4f80878a3d10f20eb1fb790c9f70c7189e8970a8131edf09992faad986d673eb",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/enhance-old-photos",
+              "name": "Enhance Old Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "e81e8ed181479649f008258158043ed14b384fc96a6891e44df0040240cec1c6",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Improve clarity and detail of old photos with GFPGAN AI. Sharpens faces, recovers texture, and enhances quality in 5–15 seconds. No subscription.",
+          "name": "Magic Memory — Enhance Old Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/enhance-old-photos",
+        },
+        "sha256": "fe23e7b8210b4409450872ad74b478e05104fbdb4df61722dce1dc7aadc737d6",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/enhance-old-photos",
+      },
+      "description": "Enhance old photos with AI to improve clarity, sharpness, and facial detail. Magic Memory uses GFPGAN to upgrade photo quality in seconds. No subscription.",
+      "openGraph": {
+        "description": "Enhance old photos with AI. Improve clarity and detail in seconds. No subscription.",
+        "images": [
+          {
+            "alt": "Enhance Old Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Enhance Old Photos With AI | Magic Memory",
+        "url": "https://magic-memory.dev/enhance-old-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Enhance Old Photos With AI — Improve Clarity and Detail",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Improve clarity and detail in old photos. Results in seconds.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Enhance Old Photos With AI",
+      },
+    },
+  },
+  "/fix-blurry-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AI restoration can reduce the appearance of mild to moderate motion blur, particularly in facial areas. GFPGAN does not perform deconvolution (the mathematical reversal of motion blur) — instead, it reconstructs plausible facial detail based on learned priors. For severe motion blur where features are completely smeared, results are improved but not perfect.",
+              },
+              "name": "Can AI fix motion blur in photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN addresses multiple blur types with different effectiveness: focus blur (soft, out-of-focus faces) — excellent results; film grain and old photo blur — excellent; mild motion blur — good results; severe motion blur — moderate improvement. Compression blur from heavily-compressed JPEGs — good improvement.",
+              },
+              "name": "Does it work on all types of blur?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Standard sharpening (like Unsharp Mask in Photoshop) increases edge contrast without adding new information — it makes an image look sharper but introduces halos and artifacts. AI restoration using GFPGAN actually reconstructs missing facial detail by comparing your photo against millions of high-resolution face examples. The result is genuinely sharper detail rather than just contrast-enhanced edges.",
+              },
+              "name": "What is the difference between sharpening and AI restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Old scanned photos are blurry for several reasons: low scanner DPI (below 300 creates visible softness), scanner glass not cleaned (dust diffuses light), original film grain (especially ASA 400+ film), and photo paper degradation over time. For best results, rescan at 600 DPI minimum and clean the scanner glass before scanning.",
+              },
+              "name": "Why are old scanned photos blurry?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory processes photos in 5–15 seconds. The exact time depends on file size and current server load. You will see a progress indicator during processing. There is no quality difference between fast and slow processing — the AI always runs the full restoration model.",
+              },
+              "name": "How long does it take to fix a blurry photo with AI?",
+            },
+          ],
+        },
+        "sha256": "63c23d8974018c9b262567d5d7c0808ca71c4ecedde5b84d9f2c3fa505d78737",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/fix-blurry-photos",
+              "name": "Fix Blurry Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "cd74f04828b189a7732d2d27eb1029ca0a14918b433fde8a5b4d9b053b561b2a",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Fix blurry photos online with GFPGAN AI sharpening. Recovers focus blur, film grain, and compression artifacts in seconds. No subscription.",
+          "name": "Magic Memory — Fix Blurry Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/fix-blurry-photos",
+        },
+        "sha256": "d232d8072596c8970d406b4041775a7525caac8fa561cf031d7469af1bba2121",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/fix-blurry-photos",
+      },
+      "description": "Fix blurry photos with AI in seconds. Magic Memory sharpens faces using GFPGAN, recovering detail lost to motion blur, focus blur, and compression. No subscription.",
+      "openGraph": {
+        "description": "Fix blurry photos in seconds. AI sharpens faces and recovers lost detail. No subscription.",
+        "images": [
+          {
+            "alt": "Fix Blurry Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Fix Blurry Photos Online — AI Sharpening | Magic Memory",
+        "url": "https://magic-memory.dev/fix-blurry-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Fix Blurry Photos Online — AI Sharpening in Seconds",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Fix blurry photos with AI. Results in 5–15 seconds.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Fix Blurry Photos Online",
+      },
+    },
+  },
+  "/for/genealogists": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, GFPGAN can restore photos from any era as long as faces are somewhat visible. Photos from the 1800s-1900s often have fading, low contrast, and blur, all of which GFPGAN handles well. The model reconstructs facial detail that has been lost to time, producing clearer results than the original scan.",
+              },
+              "name": "Can AI restore very old photos from the 1800s?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Magic Memory does not store your photos on its servers. Photos are processed in memory and deleted immediately after restoration. Your family photos remain private. You download the restored version and the original is never retained.",
+              },
+              "name": "Does Magic Memory store my genealogy photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Scan your physical photos at 600 DPI or higher using a flatbed scanner. Save as JPEG at 90%+ quality or PNG for lossless. Make sure faces are visible and not cropped out. Even very small faces in group photos can be improved, but larger face areas produce the best results.",
+              },
+              "name": "How do I get the best results from ancestor photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory processes one photo at a time through the web interface. Credit packs start at €9.99 for 20 restorations — enough for an entire family photo collection. Credits never expire.",
+              },
+              "name": "Can I restore multiple ancestor photos at once?",
+            },
+          ],
+        },
+        "sha256": "d168db9fd46e03c00838b369e64929a8146cb628d7c06092926f63cc4c0736bc",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/for/genealogists",
+              "name": "For Genealogists",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "ac75a3e49570b870c7a470c461c8724b9a08e693915d6ca18c30449265826a78",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/for/genealogists",
+      },
+      "description": "Restore old ancestor photos for genealogy research. Magic Memory uses GFPGAN AI to sharpen faces in degraded historical photos. One-time credits, no subscription. Put clear faces to the names in your family tree.",
+      "openGraph": {
+        "description": "Restore old ancestor photos for family tree research. GFPGAN AI sharpens faces in degraded historical photos in seconds.",
+        "images": [
+          {
+            "alt": "Photo Restoration for Genealogists",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "AI Photo Restoration for Genealogists — Restore Ancestor Photos",
+        "url": "https://magic-memory.dev/for/genealogists",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Photo Restoration for Genealogists — Restore Ancestor Photos",
+    },
+  },
+  "/for/photographers": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. AI restoration is a useful tool for photographers when clients bring in old or damaged photos that need improvement. GFPGAN handles face restoration that would take hours of manual retouching. You can use it as a starting point and refine the result in Photoshop or Lightroom if needed.",
+              },
+              "name": "Can photographers use AI restoration on client photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN produces a clean, natural-looking face restoration. It does not apply color grading, film emulation, or stylistic effects. The output is a neutral restored face that you can then edit with your own presets, color grading, and style adjustments in your preferred editing software.",
+              },
+              "name": "Will AI restoration match my editing style?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory supports JPEG, PNG, and WebP files up to 10MB. For RAW files, export as JPEG or PNG from your editing software first, then upload for face restoration. This workflow gives you full control over exposure and color before the AI handles face detail.",
+              },
+              "name": "Does Magic Memory support RAW files?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Many photographers offer old photo restoration as an add-on service. Magic Memory credit packs (€9.99 for 20 restorations) make it affordable to process client photos at scale. The AI handles the time-consuming face restoration, and you can add your professional finishing touches.",
+              },
+              "name": "Can I offer photo restoration as a service to clients?",
+            },
+          ],
+        },
+        "sha256": "728682064ec7fa335bf1913b8eadff9d129de82c5360a1ca69f9d42bea10cc92",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/for/photographers",
+              "name": "For Photographers",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "264f2ccbc9eec67d3cd0db2548d07ef16e7773de6bf80e1124f5be3f35daca2b",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/for/photographers",
+      },
+      "description": "Restore old and degraded client photos with GFPGAN AI. Magic Memory helps photographers rescue blurry portraits, fix damaged prints, and deliver restored versions to clients. No subscription.",
+      "openGraph": {
+        "description": "Restore old client photos with GFPGAN AI. Fix blurry portraits and damaged prints in seconds.",
+        "images": [
+          {
+            "alt": "Photo Restoration for Photographers",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "AI Photo Restoration for Photographers — Fix Old Client Photos",
+        "url": "https://magic-memory.dev/for/photographers",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Photo Restoration for Photographers — Fix Old Client Photos",
+    },
+  },
+  "/for/real-estate": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory specializes in face restoration using GFPGAN, which is ideal for agent headshots, team photos, and portrait-style images on listing pages. For property photos specifically (interiors, exteriors), general image upscaling tools like Real-ESRGAN may be more appropriate, as GFPGAN targets faces.",
+              },
+              "name": "Can AI enhance real estate listing photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Real estate agents can use AI face restoration for professional headshots, team page photos, social media profile images, and marketing materials. If your headshot is outdated, low-resolution, or taken with a phone camera, GFPGAN can sharpen facial detail to make it look more professional.",
+              },
+              "name": "How can real estate agents use AI photo restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory uses GFPGAN, which specifically restores faces. It will not improve property photos that do not contain faces. For agent headshots, team photos, and client testimonial photos, it works very well. For property interiors and exteriors, a general image enhancement tool would be more suitable.",
+              },
+              "name": "Does Magic Memory work on property photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. A credit pack of 20 restorations (€9.99) is enough to enhance headshots for an entire real estate office. Credits never expire, so you can process new team member photos as they join. Each photo is processed in under 15 seconds with no technical skill required.",
+              },
+              "name": "Is this suitable for a real estate team?",
+            },
+          ],
+        },
+        "sha256": "b363339f57ec1c281e5af04cad3ad0ecf8e06c8210d6a466f034a156b0faef6c",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/for/real-estate",
+              "name": "For Real Estate",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "c50c3e64ef71966d0bc588c2ab435bc5f989a7f8efdc0928efcaaa4262696148",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/for/real-estate",
+      },
+      "description": "Enhance real estate listing photos with AI. Magic Memory uses GFPGAN to sharpen faces in agent headshots and team photos. Improve photo quality for property listings, agent profiles, and marketing materials.",
+      "openGraph": {
+        "description": "Enhance agent headshots and team photos for real estate listings with GFPGAN AI.",
+        "images": [
+          {
+            "alt": "Photo Enhancement for Real Estate",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "AI Photo Enhancement for Real Estate — Improve Listing Photos",
+        "url": "https://magic-memory.dev/for/real-estate",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Photo Enhancement for Real Estate — Improve Listing Photos",
+    },
+  },
+  "/glossary/ai-photo-enhancement": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AI photo enhancement is the use of neural networks to automatically improve the quality of photographs. It covers a range of tasks including denoising, deblurring, super-resolution (upscaling), color correction, and face restoration. Unlike manual editing in Photoshop, AI enhancement processes photos in seconds with no technical skill required.",
+              },
+              "name": "What is AI photo enhancement?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Filters apply fixed mathematical transformations (brightness, contrast, color shifts) that work the same way on every image. AI enhancement uses neural networks that analyze each photo individually and make content-aware adjustments. A filter cannot recover a blurry face; an AI model trained on faces can reconstruct the missing detail.",
+              },
+              "name": "How is AI photo enhancement different from filters?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For face restoration in old photos, GFPGAN is the most widely used model. It produces sharp, identity-preserving results in seconds. For general image upscaling, Real-ESRGAN is the standard. Magic Memory uses GFPGAN to offer one-click face restoration with one-time credits and no subscription.",
+              },
+              "name": "What is the best AI for enhancing old photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AI photo enhancement works best on photos that match its training data. Face restoration models like GFPGAN work on photos containing faces. General enhancement models like Real-ESRGAN work on any image type. Extremely damaged photos (torn, water-damaged, heavily scratched) may need manual restoration in combination with AI tools.",
+              },
+              "name": "Does AI photo enhancement work on all types of photos?",
+            },
+          ],
+        },
+        "sha256": "b19cfa8083f2a33206478cc135eecf4ef1dec94961191cb930a423c7ce8a8175",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/photo-restoration",
+              "name": "Glossary",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/ai-photo-enhancement",
+              "name": "AI Photo Enhancement",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "304255ed061054593a435f8a7cf96c0b4c210fa2f469dc1ff0adcaacf77e8535",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/glossary/ai-photo-enhancement",
+      },
+      "description": "AI photo enhancement uses neural networks to automatically improve photo quality — fixing blur, noise, low resolution, and color issues. Learn how it works, which models power it, and how it compares to manual editing.",
+      "openGraph": {
+        "description": "Learn how AI photo enhancement uses neural networks to fix blur, noise, and low resolution in photographs automatically.",
+        "images": [
+          {
+            "alt": "What Is AI Photo Enhancement",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "What Is AI Photo Enhancement? Tools, Models, and Use Cases",
+        "url": "https://magic-memory.dev/glossary/ai-photo-enhancement",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "What Is AI Photo Enhancement? Tools, Models, and Use Cases",
+    },
+  },
+  "/glossary/face-restoration": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Face restoration is a subset of photo restoration that focuses specifically on recovering facial detail in degraded photographs. AI face restoration uses neural networks trained on millions of high-quality face images to reconstruct sharp features from blurry, low-resolution, or damaged inputs. The most common models are GFPGAN and CodeFormer.",
+              },
+              "name": "What is face restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Photo enhancement broadly improves the overall quality of an image — brightness, contrast, color. Face restoration specifically targets facial features, using generative AI models trained on face data to reconstruct detail that generic enhancement tools cannot recover. Face restoration can turn an unrecognizable blur into a clear face.",
+              },
+              "name": "How is face restoration different from photo enhancement?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Good face restoration models preserve the identity of the person in the photo. GFPGAN uses identity-preserving loss during training to ensure restored faces match the original. However, extremely degraded inputs may result in slight differences because the model has to fill in missing information. The more detail preserved in the original, the more accurate the result.",
+              },
+              "name": "Does face restoration change how a person looks?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, face restoration models detect and process each face in a photo individually. In group photos, each face is detected, aligned, restored, and pasted back. Very small faces (less than roughly 50x50 pixels) may not be detected or may produce lower quality results because there is less information for the model to work with.",
+              },
+              "name": "Can face restoration work on group photos?",
+            },
+          ],
+        },
+        "sha256": "0bb4f36f2a154abc8a46aa9b99eb23338d3a0ec037f25fc105ef735243ac6ff7",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/photo-restoration",
+              "name": "Glossary",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/face-restoration",
+              "name": "Face Restoration",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "953c5f31df9ff46c956dd1d27d292e9adaa48a9c981d8e6d0ce7be7a0770711b",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/glossary/face-restoration",
+      },
+      "description": "Face restoration is the process of recovering facial detail in degraded photos using AI. Learn how models like GFPGAN detect, restore, and enhance faces in old and blurry photographs.",
+      "openGraph": {
+        "description": "Learn how AI face restoration recovers facial detail in old, blurry, and damaged photographs using models like GFPGAN.",
+        "images": [
+          {
+            "alt": "What Is Face Restoration",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "What Is Face Restoration? AI-Powered Face Enhancement Explained",
+        "url": "https://magic-memory.dev/glossary/face-restoration",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "What Is Face Restoration? AI-Powered Face Enhancement Explained",
+    },
+  },
+  "/glossary/gfpgan": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN stands for Generative Facial Prior Generative Adversarial Network. It is an AI model that uses pre-trained face generation models (facial priors) as a reference to restore degraded faces in photographs. It was developed by Tencent ARC and published at CVPR 2021.",
+              },
+              "name": "What does GFPGAN stand for?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN is open-source software released under a BSD-style license. You can run it yourself if you have the technical setup (Python, PyTorch, a compatible GPU). Alternatively, services like Magic Memory provide a hosted version where you can use GFPGAN through a web interface, paying per photo with one-time credits.",
+              },
+              "name": "Is GFPGAN free to use?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both GFPGAN and CodeFormer restore faces, but they use different approaches. GFPGAN uses channel-split spatial feature transforms with generative facial priors. CodeFormer uses a transformer-based codebook lookup approach. GFPGAN tends to produce sharper results, while CodeFormer offers a fidelity-quality slider for more control. Both are effective for portrait restoration.",
+              },
+              "name": "How is GFPGAN different from CodeFormer?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN is specifically designed for face restoration. It detects faces in a photo, restores them, and blends them back into the original image. The background and non-face elements remain as they were in the original. For full-image enhancement, you would need additional models for super-resolution or denoising.",
+              },
+              "name": "Can GFPGAN restore non-face parts of a photo?",
+            },
+          ],
+        },
+        "sha256": "16c2cdb3cf0698cd70e8a261edb99e22d156c13065bb6e2fb1d21af14a966de6",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/photo-restoration",
+              "name": "Glossary",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/gfpgan",
+              "name": "GFPGAN",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "58b0357ff253ea403144642a21f0cbbfad6c5f32522cb014986b203607031576",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/glossary/gfpgan",
+      },
+      "description": "GFPGAN is an AI model developed by Tencent ARC that restores faces in old and degraded photographs. Learn how GFPGAN works, how it compares to CodeFormer, and how Magic Memory uses it for one-click photo restoration.",
+      "openGraph": {
+        "description": "Learn how GFPGAN uses generative adversarial networks to restore faces in old, blurry, and damaged photos.",
+        "images": [
+          {
+            "alt": "What Is GFPGAN",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "What Is GFPGAN? How It Restores Old Photos With AI",
+        "url": "https://magic-memory.dev/glossary/gfpgan",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "What Is GFPGAN? How It Restores Old Photos With AI",
+    },
+  },
+  "/glossary/image-upscaling": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Image upscaling (also called super-resolution) is the process of increasing the resolution of an image — making it larger while maintaining or improving quality. Traditional upscaling (bicubic, bilinear) produces blurry results. AI upscaling uses neural networks to generate new detail that was not present in the original, producing sharper results at higher resolutions.",
+              },
+              "name": "What is image upscaling?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Image upscaling increases the resolution of the entire image. Face restoration specifically targets and reconstructs facial features using models trained on face data. For old portraits, face restoration (GFPGAN) typically produces better facial results than generic upscaling. The two can be combined: restore the face, then upscale the entire image.",
+              },
+              "name": "Is image upscaling the same as face restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most AI upscaling models support 2x to 4x resolution increase. Some support up to 8x or 16x, but quality degrades at higher scales because the model is inventing more detail. For best results, use the lowest scale factor that meets your needs — a 2x upscale of a 1000x1000 photo produces a clean 2000x2000 image.",
+              },
+              "name": "How much can you upscale a photo?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AI upscaling generates plausible detail based on patterns learned during training. It does not recover actual original detail that was lost — it creates new detail that looks realistic. For most practical purposes the results are indistinguishable from higher-resolution originals, but the added detail is technically synthetic.",
+              },
+              "name": "Does upscaling add real detail to a photo?",
+            },
+          ],
+        },
+        "sha256": "43bcece347603cdda2a8458d4cfd0b619f6e5424101c9d8079d21bf28a9a86e8",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/photo-restoration",
+              "name": "Glossary",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/image-upscaling",
+              "name": "Image Upscaling",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "4242600c3bbb15e1a473930edbdde1d29fa5800d604dfceadf6ed601136fafb8",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/glossary/image-upscaling",
+      },
+      "description": "Image upscaling increases the resolution of a photo by adding new pixels using AI. Learn how super-resolution models like Real-ESRGAN work, when to use upscaling vs face restoration, and which tools deliver the best results.",
+      "openGraph": {
+        "description": "Learn how AI image upscaling increases photo resolution by generating new detail using neural networks.",
+        "images": [
+          {
+            "alt": "What Is Image Upscaling",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "What Is Image Upscaling? AI Super-Resolution Explained",
+        "url": "https://magic-memory.dev/glossary/image-upscaling",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "What Is Image Upscaling? AI Super-Resolution Explained",
+    },
+  },
+  "/glossary/photo-restoration": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Photo restoration is the process of repairing and enhancing photographs that have been damaged, degraded, or lost quality over time. It includes fixing scratches, tears, fading, discoloration, blur, and missing detail. Traditional restoration is done manually in software like Photoshop. AI restoration uses neural networks to automate the process.",
+              },
+              "name": "What is photo restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Professional manual photo restoration typically costs $25-$150+ per photo depending on the damage level and turnaround time. AI-powered tools like Magic Memory offer the same face restoration for a fraction of the cost — with one-time credit packs from €9.99 for 20 restorations.",
+              },
+              "name": "How much does professional photo restoration cost?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For face restoration specifically, AI tools like GFPGAN produce results comparable to professional manual retouching in most cases. AI excels at recovering facial detail, sharpening features, and removing blur. Manual restoration is still better for complex damage like torn photos, missing sections, or non-face elements that require creative reconstruction.",
+              },
+              "name": "Is AI photo restoration as good as manual restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on the damage. AI restoration can recover faces from severely blurry, faded, or low-resolution photos. However, if facial features are completely obscured — for example, by a tear running through the face or heavy water damage — both AI and manual restoration have limits. The more recognizable the original face, the better the result.",
+              },
+              "name": "Can photo restoration fix completely destroyed photos?",
+            },
+          ],
+        },
+        "sha256": "a9ea6231af9ad11bef2b7a6f81ad88955c8cb1050361ec89ed9c458ef3ba4dc7",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/photo-restoration",
+              "name": "Glossary",
+              "position": 2,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/glossary/photo-restoration",
+              "name": "Photo Restoration",
+              "position": 3,
+            },
+          ],
+        },
+        "sha256": "89d8c8a8d03aab327fa22632bda36e2f7b099dcb84ad1f1b7166444b61e18499",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/glossary/photo-restoration",
+      },
+      "description": "Photo restoration is the process of repairing and enhancing old, damaged, or degraded photographs. Learn about manual retouching, AI-powered restoration with GFPGAN, and how to choose the right method for your photos.",
+      "openGraph": {
+        "description": "Learn what photo restoration is, how it works, and which methods produce the best results for old and damaged photographs.",
+        "images": [
+          {
+            "alt": "What Is Photo Restoration",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "What Is Photo Restoration? Definition, Methods, and Tools",
+        "url": "https://magic-memory.dev/glossary/photo-restoration",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "What Is Photo Restoration? Definition, Methods, and Tools",
+    },
+  },
+  "/pricing": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "OfferCatalog",
+          "description": "Photo restoration credit packages that never expire",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "description": "20 restoration credits that never expire",
+              "itemOffered": {
+                "@type": "Service",
+                "description": "20 restoration credits that never expire",
+                "name": "20 Photo Restoration Credits",
+              },
+              "name": "Starter Plan",
+              "price": 9.99,
+              "priceCurrency": "EUR",
+            },
+            {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "description": "60 restoration credits that never expire",
+              "itemOffered": {
+                "@type": "Service",
+                "description": "60 restoration credits that never expire",
+                "name": "60 Photo Restoration Credits",
+              },
+              "name": "Growth Plan",
+              "price": 19.99,
+              "priceCurrency": "EUR",
+            },
+            {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "description": "120 restoration credits that never expire",
+              "itemOffered": {
+                "@type": "Service",
+                "description": "120 restoration credits that never expire",
+                "name": "120 Photo Restoration Credits",
+              },
+              "name": "Premium Plan",
+              "price": 29.99,
+              "priceCurrency": "EUR",
+            },
+          ],
+          "name": "Magic Memory Pricing Plans",
+        },
+        "sha256": "23fc95008a96c9c4fae0e5c7bd6c4d8c2b316af7b495bc898cf8e42966c2a251",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "brand": {
+            "@type": "Brand",
+            "name": "Magic Memory",
+          },
+          "description": "One-time credit packs for AI photo restoration using GFPGAN. Credits never expire. Three pack sizes from €9.99 (€0.50/photo) to €29.99 (€0.25/photo).",
+          "image": [
+            "https://magic-memory.dev/og-image-restore.png",
+          ],
+          "name": "Magic Memory AI Photo Restoration Credits",
+          "offers": {
+            "@type": "AggregateOffer",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "offers": [
+              {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "description": "20 restoration credits that never expire",
+                "name": "Starter Plan",
+                "price": "9.99",
+                "priceCurrency": "EUR",
+                "priceValidUntil": "2026-12-31",
+                "url": "https://magic-memory.dev/pricing",
+              },
+              {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "description": "60 restoration credits that never expire",
+                "name": "Growth Plan",
+                "price": "19.99",
+                "priceCurrency": "EUR",
+                "priceValidUntil": "2026-12-31",
+                "url": "https://magic-memory.dev/pricing",
+              },
+              {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "description": "120 restoration credits that never expire",
+                "name": "Premium Plan",
+                "price": "29.99",
+                "priceCurrency": "EUR",
+                "priceValidUntil": "2026-12-31",
+                "url": "https://magic-memory.dev/pricing",
+              },
+            ],
+            "priceCurrency": "EUR",
+          },
+        },
+        "sha256": "81f1b43003fd0efc9f74ede4192df6563d9182c0bb26b3a0aebf68a198c361c9",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "areaServed": "Worldwide",
+          "description": "AI-powered photo restoration using the GFPGAN face restoration model. Restores old, blurry, faded, and damaged portrait photos in 5–15 seconds.",
+          "name": "AI Photo Restoration",
+          "offers": {
+            "@type": "Offer",
+            "description": "20 restoration credits for €9.99, paid once. Credits never expire.",
+            "price": "9.99",
+            "priceCurrency": "EUR",
+          },
+          "provider": {
+            "@type": "Organization",
+            "name": "Magic Memory",
+            "url": "https://magic-memory.dev",
+          },
+          "serviceType": "AI Photo Restoration",
+        },
+        "sha256": "b9068ee5b2a75c8524511e559eb911330c1dd5d304dacdb26e4aef477fc824e0",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge $9.99 per week; you can buy 20 Magic Memory credits for €9.99 and keep them forever.",
+              },
+              "name": "Is Magic Memory a subscription?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Paid credits never expire. Once you buy a Starter, Growth, or Premium pack, those restorations stay in your account until you use them — no monthly deadline, no forced renewal.",
+              },
+              "name": "Do my credits ever expire?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you have a few photos or a batch of up to 20 family photos to get through, Starter (20 credits for €9.99) is the cheapest per-photo option for small projects. Growth (60 credits for €19.99, €0.33 per restoration) covers a full album. Premium (120 credits for €29.99, €0.25 per restoration) is best for photographers, genealogists, or anyone digitizing decades of prints.",
+              },
+              "name": "Which plan is right for me?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The per-restoration cost drops as you buy larger packs. Starter: €0.50/photo. Growth: €0.33/photo. Premium: €0.25/photo. Compared to manual professional restoration ($25-$150 per photo) or Remini's $9.99/week subscription, even our smallest pack is significantly cheaper for most users.",
+              },
+              "name": "How much does each restoration cost?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory is based in the EU, so we price in Euros for transparency and tax purposes. Your bank will convert to your local currency at the time of purchase — for most users, the displayed EUR price is close to the USD equivalent (€9.99 ≈ $10.80).",
+              },
+              "name": "Why is pricing in Euros instead of USD?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. All sales are final and we do not issue refunds under any circumstances, whether credits are used or unused. Purchased credits never expire, so you can use them whenever you're ready. If a restoration fails on our end, the credit is not deducted from your balance.",
+              },
+              "name": "Can I get a refund on unused credits?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We don't deduct credits for failed restorations. If the result doesn't meet your expectations, you can try again on the same photo, try a different scan or version of the photo, or contact support. AI face restoration works best on portraits with clearly visible faces — heavily damaged or non-face photos may be limited.",
+              },
+              "name": "What if a restoration doesn't look good?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Credits are tied to the account that purchased them, but there's no limit on how many photos from different sources you can restore. A single Growth pack (60 credits) is enough for a whole family's photo archive.",
+              },
+              "name": "Can I share credits with family members?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Remini costs $9.99/week ($519/year if used continuously). MyHeritage bundles photo tools into a $119-$259/year genealogy subscription. Magic Memory's Premium pack is €29.99 for 120 never-expiring credits — roughly the same as 3 weeks of Remini, but with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.",
+              },
+              "name": "How does Magic Memory compare to Remini or MyHeritage on price?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Payments are processed by Stripe, which is PCI DSS Level 1 certified — the highest level of payment security. We never see or store your card details. Your photos are processed on secure servers and are not stored after your session ends.",
+              },
+              "name": "Is my payment information secure?",
+            },
+          ],
+        },
+        "sha256": "02c03306dfe46673c56e2bbee0b671a06421c5a35eb47e8739c652f9567c80bb",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/pricing",
+      },
+      "description": "Pay once, restore forever. Credits never expire — €9.99 for 20 restorations, down to €0.25/photo. No subscription.",
+      "openGraph": {
+        "description": "Pay once, restore forever. Credits never expire — €9.99 for 20 restorations. No subscription, no monthly fees.",
+        "images": [
+          {
+            "alt": "Magic Memory Pricing",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "AI Photo Restoration Pricing: €9.99–€29.99, No Subscription",
+        "type": "website",
+        "url": "https://magic-memory.dev/pricing",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Photo Restoration Pricing: €9.99–€29.99, No Subscription",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Pay once, restore forever. Credits never expire — €9.99 for 20 restorations. No subscription, no monthly fees.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "AI Photo Restoration Pricing: €9.99–€29.99, No Subscription",
+      },
+    },
+  },
+  "/restore": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore",
+              "name": "Restore Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "d62f1613ec2be2508bfe5ef143ee829a62830e332f4e8c1487976706238f365b",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore",
+      },
+      "description": "Upload and enhance your photos with Magic Memory AI.",
+      "openGraph": {
+        "description": "Upload and enhance your photos with Magic Memory AI.",
+        "images": [
+          {
+            "alt": "Magic Memory - Restore Tool",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Magic Memory — AI Photo Restoration",
+        "url": "https://magic-memory.dev/restore",
+      },
+      "robots": {
+        "follow": false,
+        "index": false,
+      },
+      "title": "Magic Memory — AI Photo Restoration",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Upload and enhance your photos with Magic Memory AI.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Magic Memory — AI Photo Restoration",
+      },
+    },
+  },
+  "/restore-black-and-white-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory restores black and white photos — it does not colorize them. Restoration improves sharpness, recovers facial detail, reduces grain, and enhances contrast. The output remains black and white, but with significantly better clarity. Colorization is a separate process that requires different AI tools.",
+              },
+              "name": "Does AI restore or colorize black and white photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN enhances the apparent sharpness and detail of faces in black and white photos, which can feel like a resolution increase even when the pixel count stays the same. The AI reconstructs fine facial detail — pores, eyelashes, hair strands — that were lost to film grain or poor scanning.",
+              },
+              "name": "Can AI make black and white photos higher resolution?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Scan your black and white photo at 600 DPI minimum. For photos smaller than 4x6 inches, 1200 DPI gives better input for the AI. Upload as PNG for lossless quality, or JPEG at 90% quality minimum. Higher-quality input consistently yields better restoration results.",
+              },
+              "name": "What is the best resolution to upload a black and white photo?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Film grain is one of the most common issues in black and white photos from the 1930s through 1970s. GFPGAN suppresses grain while preserving facial detail — it distinguishes between random grain noise and actual facial features, removing the former while enhancing the latter.",
+              },
+              "name": "Does GFPGAN handle film grain in black and white photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Restoration recovers detail, sharpness, and contrast that were in the original photo but degraded over time. Colorization adds color that was never in the original — it is an interpretive process based on AI guesses about what colors objects would have been. Magic Memory does the former; tools like MyHeritage InColor or DeOldify do the latter.",
+              },
+              "name": "What's the difference between restoration and colorization for B&W photos?",
+            },
+          ],
+        },
+        "sha256": "3992a611dd14eb9a5814a635af39a7d25ccdb211d9c656bd515b10f5d7850854",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-black-and-white-photos",
+              "name": "Restore Black and White Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "ecf41b302841f379f14413cf0097bc33e20b10e84770bd90b8e45590a3ed47ff",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Restore and sharpen black and white photos with GFPGAN AI. Recovers facial detail and reduces grain in seconds. Output stays B&W. No subscription.",
+          "name": "Magic Memory — Restore Black and White Photos",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-black-and-white-photos",
+        },
+        "sha256": "387e5415440e4000b1fdb87a36f4a637a875b9c30f9e6aabaf29fe95742ff390",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-black-and-white-photos",
+      },
+      "description": "Restore and sharpen old black and white photos with AI. GFPGAN recovers facial detail and reduces grain. One-time credits, no subscription.",
+      "openGraph": {
+        "description": "Restore black and white photos. AI sharpens faces and reduces grain in seconds.",
+        "images": [
+          {
+            "alt": "Restore Black and White Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Restore Black and White Photos With AI | Magic Memory",
+        "url": "https://magic-memory.dev/restore-black-and-white-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Restore Black and White Photos With AI",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Restore B&W photos. AI sharpens faces and recovers detail.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Restore Black and White Photos With AI",
+      },
+    },
+  },
+  "/restore-damaged-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AI can significantly improve water-damaged photos where the damage has caused blur, fading, or color loss in facial areas. Faces affected by water staining often see dramatic improvement. However, photos where water damage has physically destroyed the emulsion layer — leaving white patches or complete transparency — cannot be fully restored, as there is no original data for the AI to work with.",
+              },
+              "name": "Can AI fix water-damaged photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN improves the detail and clarity of the undamaged portions of torn photos. For tears that cross facial areas, the AI fills in detail based on surrounding facial structure, with results varying by severity. For complete tears through the center of a face, results are good but not perfect — the AI reconstructs plausible detail rather than exact original detail.",
+              },
+              "name": "Does AI fix torn photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AI restoration works best on: blur and loss of sharpness, film grain, fading and reduced contrast, mild color cast, and minor surface scratches. It works less effectively on: complete physical destruction of emulsion (holes, missing pieces), severe mold damage covering faces, and damage where the face is entirely obscured.",
+              },
+              "name": "What types of photo damage respond best to AI restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN suppresses some scratch artifacts, particularly in facial areas, as part of its general restoration process. For photos with heavy scratching across the entire frame, a dust-and-scratch removal step before AI restoration (using scanner software or Photoshop) improves results.",
+              },
+              "name": "Can AI remove scratches from scanned photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Complete emulsion destruction is the hardest for AI to address — this includes mold that has eaten through the photo, fire damage that has charred portions of the image, and physical holes. When the original image data no longer exists, even advanced AI cannot accurately reconstruct it. GFPGAN makes educated guesses based on surrounding pixels, but results are interpretive rather than accurate.",
+              },
+              "name": "What is the worst type of photo damage for AI restoration?",
+            },
+          ],
+        },
+        "sha256": "d7037282a88f3d62623cf104c57173ae93e95a576873d2a9607a677a0393bd98",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-damaged-photos",
+              "name": "Restore Damaged Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "4ba932d1928ff50b7f4f3d0bea637d153b643fa7c7e48823c5e3616a26d38ba2",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Restore water-damaged, torn, scratched, or faded photos with GFPGAN AI. Recovers facial detail even in severely damaged scans. No subscription.",
+          "name": "Magic Memory — Fix Damaged Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-damaged-photos",
+        },
+        "sha256": "567f82ce22cbeacfc796719f5d1e791d0da82d991d1c1a98af83c88d6fa0732d",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-damaged-photos",
+      },
+      "description": "Restore water-damaged, torn, scratched, or faded photos with AI. GFPGAN recovers facial detail even in severely damaged photos. No subscription.",
+      "openGraph": {
+        "description": "AI photo restoration for water-damaged, torn, and faded photos. No subscription.",
+        "images": [
+          {
+            "alt": "Fix Damaged Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Fix Damaged Photos With AI — Magic Memory",
+        "url": "https://magic-memory.dev/restore-damaged-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Fix Damaged Photos With AI — Scratches, Tears, and Fading",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Restore water-damaged, torn, and scratched photos with AI.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Fix Damaged Photos With AI",
+      },
+    },
+  },
+  "/restore-faded-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Photos fade due to UV light exposure (even through windows), humidity changes, heat fluctuations, and the natural chemical breakdown of dye layers in color photo paper. Dye-based color photos from the 1970s through 1990s are most susceptible — cyan dyes fade faster than magenta and yellow, causing the characteristic orange-red cast common in photos from this era.",
+              },
+              "name": "Why do photos fade over time?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN restores facial detail and contrast in faded photos. For photos with severe color cast (the orange-red shift common in 1980s photos), the AI improves sharpness and facial detail, though full color correction requires additional processing. The most significant improvement is in the recovery of sharp facial features that fading obscured.",
+              },
+              "name": "Can AI bring back faded colors?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Faded black and white photos — which lose contrast and detail over time — respond well to GFPGAN restoration. The AI recovers the tonal contrast and fine facial detail that fading reduced, resulting in a photo that looks closer to how it appeared when originally developed.",
+              },
+              "name": "Does restoration work on faded black and white photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "After restoration, store digital copies in multiple locations: external hard drive, cloud backup, and a secondary cloud service. For physical prints, use acid-free paper and archival inks, store in archival albums (not magnetic albums), keep away from direct sunlight, and maintain stable temperature and humidity. Photos stored in cool, dark, dry conditions last significantly longer.",
+              },
+              "name": "How do I prevent my restored photos from fading again?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Fading is a loss of overall image density — the photo gets lighter and loses contrast. Yellowing is a color shift where the photo paper or binder layer turns yellow or orange, which is most visible in white or light areas of the photo. GFPGAN addresses both, though color correction for yellowing is most effective in facial areas where the AI has the strongest reconstruction capability.",
+              },
+              "name": "Is there a difference between fading and yellowing?",
+            },
+          ],
+        },
+        "sha256": "0e2fdbdd4889c690b7e51b3db178d59fc23355ede96c93c0e695ebce68cc8866",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-faded-photos",
+              "name": "Restore Faded Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "d17fd8fb6633856ae320d9e10dc2af5518ee0994ac315cdf434d4e1a16c2e229",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Fix faded photos with GFPGAN AI. Restores facial detail and contrast lost to UV exposure, time, and poor storage. No subscription.",
+          "name": "Magic Memory — Restore Faded Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-faded-photos",
+        },
+        "sha256": "020a054019dc4aab55bb939f8149a9b069991a8a58aff227ed5f1f1ca7a17696",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-faded-photos",
+      },
+      "description": "Fix faded photos with AI. GFPGAN restores facial detail and contrast lost to UV exposure, time, and poor storage. One-time credits, no subscription.",
+      "openGraph": {
+        "description": "Fix faded photos with AI. Restore contrast and facial detail. No subscription.",
+        "images": [
+          {
+            "alt": "Restore Faded Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Restore Faded Photos — Bring Color and Contrast Back | Magic Memory",
+        "url": "https://magic-memory.dev/restore-faded-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Restore Faded Photos — Bring Color and Contrast Back",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Fix faded photos. Restore contrast and detail. No subscription.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Restore Faded Photos With AI",
+      },
+    },
+  },
+  "/restore-family-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. GFPGAN processes all faces in a photo simultaneously. Group family portraits with multiple people all benefit from restoration. For best results, ensure faces are not too small in the frame — faces should be at least 50 pixels wide in the source image.",
+              },
+              "name": "Can AI restore photos of multiple family members at once?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, and this is one of the most common and meaningful uses of Magic Memory. Restoring a photo of someone who has passed preserves their memory in the clearest possible form. The AI focuses on facial restoration, recovering the fine detail that makes portraits feel personal and real.",
+              },
+              "name": "I have a photo of a grandparent who has passed. Can I restore it?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely. Childhood photos from the 1950s through 1980s often suffer from the same degradation as other period photos: grain, fading, and loss of sharpness. GFPGAN restores these effectively. Portraits where the child's face is the main subject yield the best results.",
+              },
+              "name": "Can I restore childhood photos of family members?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sort photos by condition (most degraded first), then by importance (unique photos of people who have passed, rare group portraits). Scan in batches at 600 DPI, name files systematically (e.g., last name + year + description), and restore the highest-priority photos first.",
+              },
+              "name": "How do I organize a family photo restoration project?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Restored photos are valuable for genealogy — they make it easier to identify family members, and the increased clarity helps when comparing photos to confirm identities. Many genealogists use restored photos alongside family trees and historical records.",
+              },
+              "name": "Can restored family photos be used for genealogy research?",
+            },
+          ],
+        },
+        "sha256": "d304c97f9895264cf13bbd5f7c5d4d57f1cf66e12edd196b9ca61339d89870ec",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-family-photos",
+              "name": "Restore Family Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "745b1b6a1ce0c74fa6b1d8205323fee9adfaaf4aaa3f0a4404a99e8fad51ed68",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Restore old family photos with GFPGAN AI. Perfect for genealogy, family reunions, and preserving ancestor portraits. No subscription.",
+          "name": "Magic Memory — Restore Family Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-family-photos",
+        },
+        "sha256": "bae52957a397c843ad9855af75044fde800bdccbb95471878e55e7fbe0031bde",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-family-photos",
+      },
+      "description": "Restore old family photos with AI. Perfect for genealogy, family reunions, and passing restored memories to future generations. No subscription.",
+      "openGraph": {
+        "description": "Restore your old family photos with AI. One-time credits, no subscription.",
+        "images": [
+          {
+            "alt": "Restore Family Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "AI Family Photo Restoration — Bring Memories Back to Life",
+        "url": "https://magic-memory.dev/restore-family-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Family Photo Restoration — Bring Memories Back to Life",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Restore old family photos. Perfect for genealogy and family history.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "AI Family Photo Restoration",
+      },
+    },
+  },
+  "/restore-old-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "One restoration costs one credit. Credit packs are one-time payments from €9.99 for 20 photos to €29.99 for 120 photos (€0.25 each), and credits never expire. A failed restoration costs no credit.",
+              },
+              "name": "How much does it cost to restore an old photo?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Old photos become blurry due to several factors: film grain from lower-quality film stock, physical degradation of the photo paper over decades, poor scanning quality (low DPI), and digital compression when photos were digitized. GFPGAN addresses blurriness in faces specifically by reconstructing facial detail from high-resolution face priors.",
+              },
+              "name": "What makes old photos blurry?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. GFPGAN restores and sharpens black and white photos effectively, recovering facial detail and reducing grain. Note that restoration improves sharpness and detail — it does not colorize black and white photos. The restored photo remains black and white but with significantly better clarity.",
+              },
+              "name": "Does AI restoration work on black and white photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For best results: scan at 600 DPI or higher using a flatbed scanner, ensure faces are clearly visible and not cropped out, upload as JPEG or PNG at the highest resolution available, and avoid heavily compressed files. The AI works best on portrait-oriented photos where faces are the primary subject.",
+              },
+              "name": "How do I get the best results from old photo restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory supports JPEG, PNG, and WebP formats up to 10MB per file. For scanned photos, save as JPEG at 90%+ quality or PNG for lossless quality. Avoid heavily compressed JPEGs (below 80% quality) as compression artifacts reduce restoration quality.",
+              },
+              "name": "What file formats are supported for old photo restoration?",
+            },
+          ],
+        },
+        "sha256": "35c4b55e178f0ffe838a6620cd9340688937527a59e27aef4a3787bd7a684d4f",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-old-photos",
+              "name": "Restore Old Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "7035304ef4d3f3057f11f5fd744e4cf155dd77aa73c06743cd76f81fa9f29052",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Restore old, faded, blurry photos online with GFPGAN AI. One-time credit packs from €9.99, credits never expire.",
+          "name": "Magic Memory — Restore Old Photos Online",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-old-photos",
+        },
+        "sha256": "8007db8ce89addfac0c9bf01c9fd495d36315ea310cc67855fb9f1d13a9625fa",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to Restore Old Photos Online",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Upload Your Old Photo",
+              "text": "Upload a JPEG, PNG, or WebP photo up to 10MB. Scan at 600 DPI or higher for best results.",
+            },
+            {
+              "@type": "HowToStep",
+              "name": "AI Restores Faces and Detail",
+              "text": "GFPGAN analyzes and restores facial features in 5-15 seconds.",
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Download in Full Resolution",
+              "text": "Download your restored photo and compare before and after.",
+            },
+          ],
+        },
+        "sha256": "bb533bfd02d46fcf1d997511140ea02f676cb7d28f80fd8ef26e66d158e20e45",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-old-photos",
+      },
+      "description": "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
+      "openGraph": {
+        "description": "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
+        "images": [
+          {
+            "alt": "Restore Old Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Restore Old Photos Online — AI Photo Restoration | Magic Memory",
+        "url": "https://magic-memory.dev/restore-old-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Restore Old Photos Online — AI Photo Restoration",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Restore your old photos in seconds with AI. No subscription.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Restore Old Photos Online",
+      },
+    },
+  },
+  "/restore-portrait-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN was specifically designed for face restoration — it is not a general image enhancement tool. It was trained on millions of high-resolution portrait photos and learned the precise structure of human faces at a microscopic level. This specialization means it outperforms general tools significantly on portraits, while being less effective on landscapes or objects.",
+              },
+              "name": "Why is portrait restoration better than general photo restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. GFPGAN detects and restores faces at various angles, including three-quarter views and mild profile angles. Full side-profile shots (where only one ear is visible and the other eye is not visible) are harder — the model works best when both eyes are visible, but still improves single-eye profile shots.",
+              },
+              "name": "Does it work on profile shots and three-quarter portraits?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN handles partial faces by reconstructing visible facial regions. For faces obscured by hair, the AI improves the visible portions. If more than 50% of a face is obscured, the improvement is less dramatic than with a clear portrait, but still visible on the exposed facial areas.",
+              },
+              "name": "What about partial faces or faces obscured by hair?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. School photos and ID-style photos — direct frontal portraits against neutral backgrounds — are among the easiest for GFPGAN to process. The standard frontal pose and clear face visibility make these ideal inputs, even when the photos are old and degraded.",
+              },
+              "name": "Can I restore school photos and ID photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Professional studio portraits respond exceptionally well to GFPGAN restoration. The controlled lighting, neutral backgrounds, and frontal or near-frontal poses are ideal for AI face restoration. A degraded studio portrait from the 1960s or 1970s can be restored to near-modern quality.",
+              },
+              "name": "Does AI restoration work on professional studio portraits?",
+            },
+          ],
+        },
+        "sha256": "6e3582feb9d795b753b13bcde1871269ab5c0ad6d4db60133a2771fd78c3b7e3",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-portrait-photos",
+              "name": "Restore Portrait Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "b0bb4041bd8a17a2bce95571bda9dff0b59a077f6860d55247c4582c45b93910",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Restore old portrait photos with GFPGAN AI — purpose-built for faces. Professional portraits, school photos, and formal portraits all benefit. No subscription.",
+          "name": "Magic Memory — Restore Portrait Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-portrait-photos",
+        },
+        "sha256": "6b3566bb26cfc95da27dd9ebbb04da5ee11c8f740e7064472c4bd758c294a3e7",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-portrait-photos",
+      },
+      "description": "Restore old portrait photos with AI precision. GFPGAN was designed for faces — professional portraits, school photos, and formal portraits all benefit. No subscription.",
+      "openGraph": {
+        "description": "Restore old portrait photos with AI precision. GFPGAN designed for faces. No subscription.",
+        "images": [
+          {
+            "alt": "Restore Portrait Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "AI Portrait Photo Restoration | Magic Memory",
+        "url": "https://magic-memory.dev/restore-portrait-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "AI Portrait Photo Restoration — Restore Old Portraits",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Restore old portraits with AI precision. Results in 5–15 seconds.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "AI Portrait Photo Restoration",
+      },
+    },
+  },
+  "/restore-vintage-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Photos from the 1920s typically suffer from low resolution, heavy film grain, and significant fading. GFPGAN handles all three. The model was trained on faces across a wide range of degradation levels, so it can extract meaningful facial detail from even very early film photography.",
+              },
+              "name": "Does AI restoration work on photos from the 1920s?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Film grain suppression is one of GFPGAN's strengths. The model distinguishes between random grain noise and actual facial structure — it removes the former while preserving and enhancing the latter. Photos from high-speed film (ASA 400+), which produce visible grain even at smaller sizes, respond particularly well.",
+              },
+              "name": "Can GFPGAN handle heavy film grain from vintage photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN processes sepia-toned photos and restores facial detail within the sepia color space. The output retains the sepia tone while showing sharper, more detailed faces. If you want to convert sepia to black and white or color, that is a separate step handled by other tools.",
+              },
+              "name": "What about sepia-toned vintage photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Vintage photos (roughly 1920s–1970s) differ from modern photos in several ways: film stock had lower resolution and higher grain than modern sensors; lenses were less sharp, especially at the edges; printing processes introduced additional grain; and long-term storage caused fading, yellowing, and emulsion degradation. GFPGAN addresses all of these except the inherent lens characteristics.",
+              },
+              "name": "Why do vintage photos look so different from modern photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Vintage photo restoration is particularly valuable for genealogy — it makes it easier to identify family members in early photos, compare faces across generations, and put clear, detailed faces to names in family records. Many genealogists use Magic Memory as part of their documentation process.",
+              },
+              "name": "Can I use this for genealogy research with very old photos?",
+            },
+          ],
+        },
+        "sha256": "4025d5017840ef82bda6aa24aeef2e7314d8399f452b011f06367b10a9cd588d",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-vintage-photos",
+              "name": "Restore Vintage Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "8ef84d559834c74d2c7c5154fe630de0d00f4cc204266b15b456561d5940ff2d",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Restore vintage photos from the 1920s through 1970s with GFPGAN AI. Handles film grain, sepia tones, and period portrait conventions. No subscription.",
+          "name": "Magic Memory — Restore Vintage Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-vintage-photos",
+        },
+        "sha256": "dd5c8e88b1065b26fdabcded8010522f7dc429dd57c2d4f8a3ca2ed17263317d",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-vintage-photos",
+      },
+      "description": "Restore vintage photos from the 1920s through 1970s with AI. GFPGAN handles film grain, sepia tones, and period portrait conventions. No subscription.",
+      "openGraph": {
+        "description": "Restore vintage photos with AI. Film grain, sepia, 1920s–1970s portraits. No subscription.",
+        "images": [
+          {
+            "alt": "Restore Vintage Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Restore Vintage Photos — AI For Old Photography | Magic Memory",
+        "url": "https://magic-memory.dev/restore-vintage-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Restore Vintage Photos — AI That Understands Old Photography",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Restore 1920s–1970s vintage photos. Film grain and sepia handled well.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Restore Vintage Photos With AI",
+      },
+    },
+  },
+  "/restore-wedding-photos": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Formal wedding portraits — where the couple faces the camera — are ideal for GFPGAN restoration. The model excels at close-up and mid-range portraits where faces are clearly visible. Full-body shots still benefit, though the face restoration is most dramatic in closer crops.",
+              },
+              "name": "Can AI restore formal wedding portrait photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GFPGAN significantly improves yellowed and faded wedding photos by restoring clarity and sharpness to faces. Physical creases that obscure faces can be partially corrected. For severe physical damage like tears through the center of a face, results vary — the AI fills in detail based on surrounding facial structure.",
+              },
+              "name": "My parents' wedding photo is yellowed and creased. Can that be fixed?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Wedding photos from this era were typically printed on color photographic paper that used dye-based processes. Over decades, cyan dyes fade faster than magenta and yellow, causing the characteristic orange or red cast seen in old color photos. GFPGAN restores facial detail and clarity, though full color correction requires additional processing.",
+              },
+              "name": "What causes wedding photos from the 1960s-1980s to look faded?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Restored photos from Magic Memory can be reprinted at standard photo sizes (4x6, 5x7, 8x10). For very large prints (16x20 and above), the source photo resolution matters — start with the highest resolution scan available. We recommend scanning at 600 DPI or higher for photos you plan to reprint.",
+              },
+              "name": "Is restored wedding photo quality good enough to reprint?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, though results vary by photo. GFPGAN processes all faces in the frame, but works best when individual faces are at least 50–100 pixels in the source image. In large group shots where faces are small, the improvement may be less dramatic than in close portraits.",
+              },
+              "name": "Can I restore a group wedding photo with many people?",
+            },
+          ],
+        },
+        "sha256": "6ec0137fe7e2380fa3e4e59cbb53033ce30433fb64b0d7f4af6b41ab962e61f3",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/restore-wedding-photos",
+              "name": "Restore Wedding Photos",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "12039662100388eaa0e7e1a8b8bfe17475c839060e67ddbbd78152f478b98051",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "applicationCategory": "PhotographyApplication",
+          "applicationSubCategory": "PhotoRestoration",
+          "description": "Restore old wedding photos with AI. Perfect for anniversaries and digitizing albums. GFPGAN sharpens formal portraits. No subscription.",
+          "name": "Magic Memory — Restore Old Wedding Photos with AI",
+          "offers": {
+            "@type": "AggregateOffer",
+            "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
+            "highPrice": "29.99",
+            "lowPrice": "9.99",
+            "offerCount": 3,
+            "priceCurrency": "EUR",
+          },
+          "operatingSystem": "Web",
+          "url": "https://magic-memory.dev/restore-wedding-photos",
+        },
+        "sha256": "d08de1f585ef1614d0b0ebcb24bd69588efd544adc6fe1b905f60db4cce4cd3b",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/restore-wedding-photos",
+      },
+      "description": "Restore your parents' or grandparents' wedding photos with AI. Perfect for anniversaries, digitizing albums, and preserving formal portraits. No subscription.",
+      "openGraph": {
+        "description": "Restore wedding photos from any era. Perfect anniversary gift. No subscription.",
+        "images": [
+          {
+            "alt": "Restore Wedding Photos",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Restore Old Wedding Photos With AI — Magic Memory",
+        "url": "https://magic-memory.dev/restore-wedding-photos",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Restore Old Wedding Photos With AI",
+      "twitter": {
+        "card": "summary_large_image",
+        "description": "Restore wedding photos. Perfect anniversary gift.",
+        "images": [
+          "https://magic-memory.dev/og-image-restore.png",
+        ],
+        "title": "Restore Old Wedding Photos With AI",
+      },
+    },
+  },
+  "/vs/myheritage": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you only need photo restoration, Magic Memory is the better choice. It is a standalone tool built specifically for restoring old photos using GFPGAN AI. MyHeritage bundles photo enhancement into a full genealogy subscription, which is significantly more expensive if photo restoration is all you need.",
+              },
+              "name": "Is Magic Memory or MyHeritage better for photo restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory offers one-time credit packages starting at €9.99 for 20 restorations, and the credits never expire. MyHeritage requires a genealogy subscription that starts at around $13/month. If you only want photo restoration, Magic Memory is substantially cheaper.",
+              },
+              "name": "How much does MyHeritage photo restoration cost vs Magic Memory?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, MyHeritage stores photos in your account as part of its family tree features. Magic Memory does not persistently store any uploaded or restored photos — images are processed in memory and discarded after restoration.",
+              },
+              "name": "Does MyHeritage store my photos?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Technically yes, but the photo enhancement feature is locked behind a genealogy subscription. You would be paying for family tree tools, DNA matching, and historical records that you may not need. Magic Memory is purpose-built for photo restoration only.",
+              },
+              "name": "Can I use MyHeritage just for photo restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both produce good results for face restoration. Magic Memory uses GFPGAN, a research-grade model from CVPR 2021 specifically designed for face restoration. MyHeritage uses its own proprietary model. For most old family photos, both deliver noticeable improvement.",
+              },
+              "name": "Which has better restoration quality?",
+            },
+          ],
+        },
+        "sha256": "225bc621e68501569bfea1479d37643fa31f127b296f0f34888db9483c09ff39",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/vs/myheritage",
+              "name": "Magic Memory vs MyHeritage",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "319e20565bd3fecf76bc46f96097786116814bebc8ded666b732c6ccad6745d9",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/vs/myheritage",
+      },
+      "description": "Compare Magic Memory and MyHeritage Photo Enhancer for AI photo restoration. Magic Memory is a standalone tool from €9.99. MyHeritage bundles photo enhancement into a genealogy subscription. See which fits your needs.",
+      "openGraph": {
+        "description": "Standalone AI photo restoration vs genealogy-bundled enhancer. Compare pricing, features, and privacy.",
+        "images": [
+          {
+            "alt": "Magic Memory vs MyHeritage",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Magic Memory vs MyHeritage Photo Enhancer — Which Is Better?",
+        "url": "https://magic-memory.dev/vs/myheritage",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Magic Memory vs MyHeritage Photo Enhancer — Which Is Better?",
+    },
+  },
+  "/vs/remini": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a $9.99/week subscription. MyHeritage Photo Enhancer is better if you're already paying for MyHeritage genealogy ($119–$259/yr) and want photo enhancement bundled in. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at €9.99 one-time for 20 credits.",
+              },
+              "name": "Remini vs MyHeritage Photo Enhancer in 2026: which is better?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both deliver strong face restoration results. Magic Memory uses GFPGAN, a model published in peer-reviewed research (CVPR 2021) specifically designed for face restoration. Remini uses a proprietary model. For portrait and face restoration specifically, both produce high-quality results. The meaningful differences are pricing, platform, and privacy — not raw restoration quality.",
+              },
+              "name": "Remini vs Magic Memory: which has better photo restoration quality?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory is the cheapest by a wide margin. A user restoring 10–20 photos per month would pay roughly $43/month on Remini ($9.99/week × 4.3 weeks), $119+/year on MyHeritage (annual subscription required), or €9.99 once on Magic Memory (the 20-credit Starter pack, credits never expire); 50 photos fit in the €19.99 Growth pack.",
+              },
+              "name": "Which is cheaper for 10–20 photos: Remini, MyHeritage, or Magic Memory?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory works in Safari on iPhone — no app download required. Sign in with Google and upload photos directly from your camera roll. Remini requires the iOS or Android app. MyHeritage has a mobile app but the photo enhancer also works in the browser if you have a paid plan.",
+              },
+              "name": "Can you use Magic Memory or Remini on iPhone?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory has no free tier: each restoration uses one credit from a one-time pack (from €9.99 for 20), and a failed restoration costs no credit. Remini offers limited free trials (typically ~3 enhances before paywall).",
+              },
+              "name": "Do Remini or Magic Memory have a free tier?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes — Magic Memory is the leading non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is web (any device), Remini is mobile-only; Magic Memory is one-time credits that never expire, Remini is $9.99/week subscription; Magic Memory does not retain photos after processing, Remini stores them in your cloud account.",
+              },
+              "name": "Is Magic Memory a Remini alternative?",
+            },
+          ],
+        },
+        "sha256": "5d6f4fdb3490f69c5171b2152ac20a3fdaca5295c33842935c5cf1358d577855",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/vs/remini",
+              "name": "Magic Memory vs Remini",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "2b7b0855afb69fd6e88e7f10fae962f5952e705f05f3057713146d6c0e4e8888",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/vs/remini",
+      },
+      "description": "Remini $9.99/wk vs MyHeritage $119–$259/yr vs Magic Memory €9.99 one-time. A 2026 side-by-side on pricing, free-tier limits, platform, quality and privacy.",
+      "openGraph": {
+        "description": "Pricing, free tiers, and platform comparison for the three most-searched AI photo restoration tools in 2026.",
+        "images": [
+          {
+            "alt": "Magic Memory vs Remini vs MyHeritage",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Remini vs Magic Memory vs MyHeritage 2026 — Pricing & Quality",
+        "url": "https://magic-memory.dev/vs/remini",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Remini vs Magic Memory vs MyHeritage 2026: Pricing & Quality",
+    },
+  },
+  "/vs/vanceai": {
+    "jsonLd": [
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory is significantly easier. It is a one-click tool: upload a photo, AI restores it in 5-15 seconds, download the result. VanceAI offers a professional suite with multiple tools, settings, and options. If you just want to restore old photos quickly, Magic Memory has zero learning curve. If you need advanced controls like upscaling parameters or batch processing, VanceAI has more options.",
+              },
+              "name": "Is Magic Memory or VanceAI easier to use?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory is cheaper for occasional users. The smallest credit pack is €9.99 for 20 credits that never expire. VanceAI starts at $4.95/month with limited credits, and unused credits may expire depending on your plan.",
+              },
+              "name": "Which is cheaper for occasional use: Magic Memory or VanceAI?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, VanceAI supports batch processing of multiple images simultaneously. Magic Memory processes photos one at a time. If you need to restore hundreds of photos at once, VanceAI is better suited for that workflow.",
+              },
+              "name": "Does VanceAI offer batch processing?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For face restoration specifically, both produce strong results. Magic Memory uses GFPGAN, a peer-reviewed model (CVPR 2021) designed for face restoration. VanceAI uses a proprietary suite of models. VanceAI offers more types of enhancement (upscaling, denoising, background removal) while Magic Memory focuses specifically on face and photo restoration.",
+              },
+              "name": "Which has better photo restoration quality?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Magic Memory does not store any photos — images are processed in memory and discarded. VanceAI stores processed images temporarily on their servers. If photo privacy is a concern, Magic Memory has a stricter no-storage policy.",
+              },
+              "name": "Does Magic Memory or VanceAI store my photos?",
+            },
+          ],
+        },
+        "sha256": "b1311895a3bee0168be58df83f4ea49d03d842a4167c0cf7a218966025a6659b",
+      },
+      {
+        "data": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/",
+              "name": "Home",
+              "position": 1,
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://magic-memory.dev/vs/vanceai",
+              "name": "Magic Memory vs VanceAI",
+              "position": 2,
+            },
+          ],
+        },
+        "sha256": "e31e8f30df2ded369d3ca24907fb501e3f91896d6382f46815ae34cd1ea24c77",
+      },
+    ],
+    "metadata": {
+      "alternates": {
+        "canonical": "https://magic-memory.dev/vs/vanceai",
+      },
+      "description": "Compare Magic Memory and VanceAI for AI photo restoration. Magic Memory offers one-click restoration from €9.99. VanceAI is a professional suite with batch processing. See which tool fits your workflow.",
+      "openGraph": {
+        "description": "One-click AI photo restoration vs professional image suite. Compare pricing, ease of use, and features.",
+        "images": [
+          {
+            "alt": "Magic Memory vs VanceAI",
+            "height": 630,
+            "url": "https://magic-memory.dev/og-image-restore.png",
+            "width": 1200,
+          },
+        ],
+        "title": "Magic Memory vs VanceAI — Simple Restoration vs Pro Suite",
+        "url": "https://magic-memory.dev/vs/vanceai",
+      },
+      "robots": {
+        "follow": true,
+        "index": true,
+      },
+      "title": "Magic Memory vs VanceAI — Simple Restoration vs Pro Suite",
+    },
+  },
+}
+`;
