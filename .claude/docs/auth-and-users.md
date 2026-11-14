@@ -13,9 +13,9 @@
 ## Creating the `users` row
 
 - `user.created` in `app/api/clerk/webhook/route.ts` inserts the row and treats a duplicate key (`23505`) as success, because Clerk retries webhooks.
-- `GET /api/credits` calls `ensureUser` (`lib/supabase/ensure-user.ts`) when no row is found. This closes the race where a new signup loads the app before the webhook lands and sees 0 credits.
+- `GET /api/credits` calls `ensureUser` (`lib/supabase/ensure-user.ts`) when no row is found. This closes the race where a new signup loads the app before the webhook lands and sees 0 credits. A read error is not "no row": the route answers 500 and never calls Clerk or `ensureUser`.
 - When the email already exists under another Clerk id (user recreated, or a dev-to-prod instance switch), `ensureUser` re-links the row to the new id, keeping its credits and history. This is safe because other tables reference `users.id`.
-- Keep the `ensureUser` upsert away from existing rows: it must never change the balance of a user who already has a row.
+- Keep the `ensureUser` upsert away from existing rows: it must never change the balance of a user who already has a row. It inserts or does nothing on a `clerk_user_id` conflict (`ignoreDuplicates`), then returns the existing row untouched.
 
 ## Clerk webhook
 

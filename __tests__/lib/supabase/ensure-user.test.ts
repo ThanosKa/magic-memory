@@ -14,20 +14,23 @@ function chain(result: unknown) {
     select: vi.fn(() => c),
     eq: vi.fn(() => c),
     single: vi.fn().mockResolvedValue(result),
+    maybeSingle: vi.fn().mockResolvedValue(result),
   };
   return c;
 }
 
-function fakeClient(params: { upsert: unknown; update?: unknown }) {
+function fakeClient(params: { upsert: unknown; update?: unknown; read?: unknown }) {
   const upsertChain = chain(params.upsert);
   const updateChain = chain(params.update);
+  const readChain = chain(params.read);
   const table = {
     upsert: vi.fn(() => upsertChain),
     update: vi.fn(() => updateChain),
+    select: vi.fn(() => readChain),
   };
   const supabase = { from: vi.fn(() => table) };
   // Test double: only the used query-builder surface is implemented.
-  return { supabase: supabase as unknown as SupabaseClient, table, updateChain };
+  return { supabase: supabase as unknown as SupabaseClient, table, updateChain, readChain };
 }
 
 describe("ensureUser", () => {
@@ -49,6 +52,22 @@ describe("ensureUser", () => {
     expect(table.update).toHaveBeenCalledWith({ clerk_user_id: "new", name: "N" });
     expect(updateChain.eq).toHaveBeenCalledWith("email", "a@b.c");
     expect(r).toEqual({ ok: true, user: row, relinked: true });
+  });
+
+  it("returns an existing row untouched when the Clerk id already has one", async () => {
+    const existing = { ...row, paid_credits: 50 };
+    const { supabase, table, readChain } = fakeClient({
+      upsert: { data: null, error: null },
+      read: { data: existing, error: null },
+    });
+    const r = await ensureUser({ supabase, clerkUserId: "new", email: "a@b.c", name: null });
+    expect(r).toEqual({ ok: true, user: existing, relinked: false });
+    expect(table.upsert).toHaveBeenCalledWith(
+      { clerk_user_id: "new", email: "a@b.c", name: null, paid_credits: 1 },
+      { onConflict: "clerk_user_id", ignoreDuplicates: true }
+    );
+    expect(readChain.eq).toHaveBeenCalledWith("clerk_user_id", "new");
+    expect(table.update).not.toHaveBeenCalled();
   });
 
   it("fails on other errors", async () => {
