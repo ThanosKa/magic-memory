@@ -223,4 +223,32 @@ describe("POST /api/restore", () => {
         expect(data.data.restoredImageUrl).toBe(expectedUrl)
         expect(data.data).not.toHaveProperty("restorationId")
     })
+
+    it("returns 500 and never charges when Replicate fails", async () => {
+        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+
+        vi.mocked(checkUserCredits).mockResolvedValue({
+            has_credits: true,
+            has_free_daily: false,
+            paid_credits: 5,
+            should_use_free: false,
+        })
+
+        mockPredictionsCreate.mockResolvedValue({ id: "pred-123", status: "starting" })
+        mockPredictionsGet.mockResolvedValue({
+            id: "pred-123",
+            status: "failed",
+            error: "model crashed",
+        })
+
+        const validFile = createMockFile("test.jpg", "image/jpeg")
+        const request = createMockRequest(validFile)
+        const response = await POST(request)
+        const data = await response.json()
+
+        expect(response.status).toBe(500)
+        expect(data.success).toBe(false)
+        expect(data.error).toBe("Restoration failed: model crashed")
+        expect(vi.mocked(deductCreditAndRecordRestoration)).not.toHaveBeenCalled()
+    })
 })
