@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { ensureUser } from "@/lib/supabase/ensure-user";
+import { provisionUser } from "@/lib/users";
 
 const row = {
   id: "u1",
@@ -24,7 +24,7 @@ function fakeClient(params: { upsert: unknown; update?: unknown; read?: unknown 
   const updateChain = chain(params.update);
   const readChain = chain(params.read);
   const table = {
-    upsert: vi.fn(() => upsertChain),
+    upsert: vi.fn((_row: unknown, _options: unknown) => upsertChain),
     update: vi.fn(() => updateChain),
     select: vi.fn(() => readChain),
   };
@@ -33,11 +33,11 @@ function fakeClient(params: { upsert: unknown; update?: unknown; read?: unknown 
   return { supabase: supabase as unknown as SupabaseClient, table, updateChain, readChain };
 }
 
-describe("ensureUser", () => {
+describe("provisionUser", () => {
   it("returns created user", async () => {
     const { supabase } = fakeClient({ upsert: { data: row, error: null } });
-    const r = await ensureUser({ supabase, clerkUserId: "new", email: "a@b.c", name: null });
-    expect(r).toEqual({ ok: true, user: row, relinked: false });
+    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase });
+    expect(r).toEqual({ ok: true, user: row, outcome: "created" });
   });
 
   it("re-links existing row on email conflict", async () => {
@@ -48,10 +48,10 @@ describe("ensureUser", () => {
       },
       update: { data: row, error: null },
     });
-    const r = await ensureUser({ supabase, clerkUserId: "new", email: "a@b.c", name: "N" });
+    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: "N" }, { supabase });
     expect(table.update).toHaveBeenCalledWith({ clerk_user_id: "new", name: "N" });
     expect(updateChain.eq).toHaveBeenCalledWith("email", "a@b.c");
-    expect(r).toEqual({ ok: true, user: row, relinked: true });
+    expect(r).toEqual({ ok: true, user: row, outcome: "relinked" });
   });
 
   it("returns an existing row untouched when the Clerk id already has one", async () => {
@@ -60,8 +60,8 @@ describe("ensureUser", () => {
       upsert: { data: null, error: null },
       read: { data: existing, error: null },
     });
-    const r = await ensureUser({ supabase, clerkUserId: "new", email: "a@b.c", name: null });
-    expect(r).toEqual({ ok: true, user: existing, relinked: false });
+    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase });
+    expect(r).toEqual({ ok: true, user: existing, outcome: "already_existed" });
     expect(table.upsert).toHaveBeenCalledWith(
       { clerk_user_id: "new", email: "a@b.c", name: null, paid_credits: 1 },
       { onConflict: "clerk_user_id", ignoreDuplicates: true }
@@ -70,9 +70,20 @@ describe("ensureUser", () => {
     expect(table.update).not.toHaveBeenCalled();
   });
 
+  it("leaves profile_image out of the insert unless an image URL is given", async () => {
+    const { supabase, table } = fakeClient({ upsert: { data: row, error: null } });
+    await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase });
+    expect(table.upsert.mock.calls[0][0]).not.toHaveProperty("profile_image");
+    await provisionUser(
+      { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png" },
+      { supabase }
+    );
+    expect(table.upsert.mock.calls[1][0]).toHaveProperty("profile_image", "https://x.y/i.png");
+  });
+
   it("fails on other errors", async () => {
     const { supabase } = fakeClient({ upsert: { data: null, error: { code: "XX", message: "boom" } } });
-    const r = await ensureUser({ supabase, clerkUserId: "new", email: "a@b.c", name: null });
+    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase });
     expect(r).toEqual({ ok: false, message: "boom" });
   });
 });
