@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { grantPurchaseCredits } from "@/lib/supabase/transactions";
+import { asUserId, createCreditLedger } from "@/lib/credits/ledger";
 import {
   REJECTION_LOG_MESSAGE,
   verifyCheckoutSession,
@@ -80,8 +80,7 @@ export async function POST(request: NextRequest) {
         "Processing successful payment",
       );
 
-      const grant = await grantPurchaseCredits({
-        userId,
+      const grant = await createCreditLedger().grantPurchase(asUserId(userId), {
         stripePaymentId: paymentId,
         credits: creditsToAdd,
         amountPaid,
@@ -90,7 +89,7 @@ export async function POST(request: NextRequest) {
 
       if (!grant.ok) {
         logger.error(
-          { userId, paymentId, error: grant.error },
+          { userId, paymentId, error: grant.reason === "db_error" ? grant.message : grant.reason },
           "Failed to grant purchased credits",
         );
         return NextResponse.json(
