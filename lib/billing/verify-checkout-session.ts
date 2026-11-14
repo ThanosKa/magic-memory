@@ -18,6 +18,27 @@ const stripeMetadataSchema = z.object({
   priceId: z.string().min(1),
 });
 
+/**
+ * The metadata checkout creation puts on a Stripe session; the schema above
+ * reads it back in the webhook. `credits` is a string because Stripe metadata
+ * values are strings.
+ */
+export function checkoutMetadata(input: {
+  userId: string;
+  clerkUserId: string;
+  packageType: string;
+  credits: number;
+  priceId: string;
+}) {
+  return {
+    userId: input.userId,
+    clerkUserId: input.clerkUserId,
+    packageType: input.packageType,
+    credits: input.credits.toString(),
+    priceId: input.priceId,
+  };
+}
+
 export type RejectionReason =
   | "invalid_metadata"
   | "missing_payment_id"

@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import type Stripe from "stripe";
 import {
+  checkoutMetadata,
   REJECTION_LOG_MESSAGE,
   verifyCheckoutSession,
 } from "@/lib/billing/verify-checkout-session";
@@ -226,5 +227,39 @@ describe("verifyCheckoutSession", () => {
       amount_mismatch: "Amount mismatch for checkout session",
       wrong_currency: "Unexpected currency for checkout session",
     });
+  });
+});
+
+describe("checkoutMetadata", () => {
+  it("builds exactly the keys and string values checkout sessions carry", () => {
+    expect(
+      checkoutMetadata({
+        userId: "user-uuid",
+        clerkUserId: "user_clerk",
+        packageType: "starter",
+        credits: 25,
+        priceId: "price_starter",
+      }),
+    ).toEqual({
+      userId: "user-uuid",
+      clerkUserId: "user_clerk",
+      packageType: "starter",
+      credits: "25",
+      priceId: "price_starter",
+    });
+  });
+
+  it("produces metadata that verifyCheckoutSession reads back", () => {
+    const metadata = checkoutMetadata({
+      userId: "user-uuid",
+      clerkUserId: "user_clerk",
+      packageType: "starter",
+      credits: 20,
+      priceId: "price_starter",
+    });
+
+    const verdict = verifyCheckoutSession(session({ metadata }), PACKAGES);
+
+    expect(verdict.ok).toBe(true);
   });
 });
