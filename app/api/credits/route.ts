@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
-import { provisionUser } from "@/lib/users";
+import { findUser, provisionUser } from "@/lib/users";
 import logger from "@/lib/logger";
 import { z } from "zod";
 
@@ -29,18 +29,14 @@ export async function GET() {
 
     const supabase = getSupabaseAdminClient();
 
-    const { data: userData, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("clerk_user_id", userId)
-      .maybeSingle();
-    let user = userData;
+    const found = await findUser(userId, { supabase });
+    let user = found.status === "found" ? found.user : null;
 
     // A failed read says nothing about whether the User exists, so it must
     // never lead to Provisioning: that is how a paying User's Balance was reset.
-    if (error) {
+    if (found.status === "error") {
       logger.error(
-        { userId, error: error.message },
+        { userId, error: found.message },
         "Failed to read user from database"
       );
       return NextResponse.json(
