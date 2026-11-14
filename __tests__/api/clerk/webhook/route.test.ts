@@ -112,6 +112,7 @@ describe("POST /api/clerk/webhook", () => {
                 email: "kazakis.th@gmail.com",
                 name: "John Doe",
                 imageUrl: "https://example.com/photo.jpg",
+                emailVerified: false,
             },
             { supabase: fakeSupabase }
         )
@@ -199,7 +200,7 @@ describe("POST /api/clerk/webhook", () => {
         await POST(createMockRequest("{}"))
 
         expect(provisionUser).toHaveBeenCalledWith(
-            { clerkUserId: "clerk_user_123", email: "kazakis.th@gmail.com", name: null, imageUrl: null },
+            { clerkUserId: "clerk_user_123", email: "kazakis.th@gmail.com", name: null, imageUrl: null, emailVerified: false },
             { supabase: fakeSupabase }
         )
     })
@@ -239,7 +240,10 @@ describe("POST /api/clerk/webhook", () => {
         type: "user.created",
         data: {
             id: "clerk_user_123",
-            email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
+            email_addresses: [
+                { id: "e1", email_address: "kazakis.th@gmail.com", verification: { status: "verified" } },
+            ],
+            primary_email_address_id: "e1",
             first_name: "John",
             last_name: "Doe",
             image_url: null,
@@ -255,6 +259,38 @@ describe("POST /api/clerk/webhook", () => {
 
         expect(response.status).toBe(200)
         expect(sendWelcomeEmail).not.toHaveBeenCalled()
+    })
+
+    const addr = (id: string, email: string, status: string) => ({
+        id,
+        email_address: email,
+        verification: { status },
+    })
+
+    async function createdWith(email_addresses: unknown[], primary: string | null) {
+        vi.mocked(getSupabaseAdminClient).mockReturnValue(fakeSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>)
+        vi.mocked(provisionUser).mockResolvedValueOnce({ ok: true, user: userRow, outcome: "created" })
+        mockWebhookVerify.mockReturnValue({
+            type: "user.created",
+            data: { ...userCreatedEvent.data, email_addresses, primary_email_address_id: primary },
+        })
+        await POST(createMockRequest("{}"))
+    }
+
+    it("uses the primary address, not the first, and passes a verified one as verified", async () => {
+        await createdWith([addr("e1", "other@x.com", "unverified"), addr("e2", "main@x.com", "verified")], "e2")
+        expect(provisionUser).toHaveBeenCalledWith(
+            expect.objectContaining({ email: "main@x.com", emailVerified: true }),
+            expect.anything()
+        )
+    })
+
+    it("passes an unverified primary address as not verified", async () => {
+        await createdWith([addr("e1", "main@x.com", "unverified")], "e1")
+        expect(provisionUser).toHaveBeenCalledWith(
+            expect.objectContaining({ email: "main@x.com", emailVerified: false }),
+            expect.anything()
+        )
     })
 
     it("re-links the existing row to the new Clerk id on user.created", async () => {

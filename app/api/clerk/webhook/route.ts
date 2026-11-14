@@ -12,8 +12,13 @@ const clerkWebhookSchema = z.discriminatedUnion("type", [
         data: z.object({
             id: z.string(),
             email_addresses: z.array(
-                z.object({ email_address: z.string().email() })
+                z.object({
+                    id: z.string().optional(),
+                    email_address: z.string().email(),
+                    verification: z.object({ status: z.string() }).nullish(),
+                })
             ),
+            primary_email_address_id: z.string().nullish(),
             first_name: z.string().nullable(),
             last_name: z.string().nullable(),
             image_url: z.string().url().nullable(),
@@ -92,12 +97,16 @@ export async function POST(request: NextRequest) {
 
         switch (event.type) {
             case "user.created": {
-                const { id, email_addresses, first_name, last_name, image_url } = event.data;
-                const email = email_addresses[0]?.email_address || "";
+                const { id, email_addresses, primary_email_address_id, first_name, last_name, image_url } = event.data;
+                const primary = email_addresses.find(
+                    (address) => address.id !== undefined && address.id === primary_email_address_id
+                );
+                const email = (primary ?? email_addresses[0])?.email_address || "";
+                const emailVerified = primary?.verification?.status === "verified";
                 const name = [first_name, last_name].filter(Boolean).join(" ") || null;
 
                 const result = await provisionUser(
-                    { clerkUserId: id, email, name, imageUrl: image_url },
+                    { clerkUserId: id, email, name, imageUrl: image_url, emailVerified },
                     { supabase }
                 );
 

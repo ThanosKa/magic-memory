@@ -3,11 +3,16 @@ import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import logger from "@/lib/logger";
 import { GET } from "@/app/api/credits/route";
+import { provisionUser } from "@/lib/users";
 
 vi.mock("@clerk/nextjs/server");
 vi.mock("@/lib/supabase/server");
 vi.mock("@/lib/redis");
 vi.mock("@/lib/logger");
+vi.mock("@/lib/users", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/users")>();
+  return { ...actual, provisionUser: vi.fn(actual.provisionUser) };
+});
 
 function mockClerkUserWithoutEmail() {
   return vi.mocked(clerkClient).mockResolvedValue({
@@ -177,5 +182,54 @@ describe("GET /api/credits", () => {
     expect(data.data.paidCredits).toBe(0);
     expect(data.data.hasFreeDaily).toBe(false);
     expect(data.data.totalCredits).toBe(0);
+  });
+
+  describe("Provisioning from the Clerk user", () => {
+    function clerkWith(primaryStatus: string) {
+      vi.mocked(clerkClient).mockResolvedValue({
+        users: {
+          getUser: vi.fn().mockResolvedValue({
+            emailAddresses: [
+              { id: "e1", emailAddress: "other@b.c", verification: { status: "unverified" } },
+              { id: "e2", emailAddress: "a@b.c", verification: { status: primaryStatus } },
+            ],
+            primaryEmailAddressId: "e2",
+            firstName: null,
+            lastName: null,
+          }),
+        },
+      } as unknown as Awaited<ReturnType<typeof clerkClient>>);
+    }
+
+    async function load() {
+      vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>);
+      vi.mocked(getSupabaseAdminClient).mockReturnValue(
+        mockSupabaseWithUser(null) as unknown as ReturnType<typeof getSupabaseAdminClient>
+      );
+      vi.mocked(provisionUser).mockResolvedValueOnce({
+        ok: true,
+        user: { id: "u1", clerk_user_id: "clerk_user_123", email: "a@b.c", paid_credits: 1 },
+        outcome: "created",
+      });
+      await GET();
+    }
+
+    it("uses the primary address, not the first, and marks a verified one", async () => {
+      clerkWith("verified");
+      await load();
+      expect(provisionUser).toHaveBeenCalledWith(
+        expect.objectContaining({ email: "a@b.c", emailVerified: true }),
+        expect.anything()
+      );
+    });
+
+    it("marks an unverified primary address as not verified", async () => {
+      clerkWith("unverified");
+      await load();
+      expect(provisionUser).toHaveBeenCalledWith(
+        expect.objectContaining({ email: "a@b.c", emailVerified: false }),
+        expect.anything()
+      );
+    });
   });
 });

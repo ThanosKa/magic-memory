@@ -48,7 +48,7 @@ describe("provisionUser", () => {
       },
       update: { data: row, error: null },
     });
-    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: "N" }, { supabase });
+    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: "N", emailVerified: true }, { supabase });
     expect(table.update).toHaveBeenCalledWith({ clerk_user_id: "new", name: "N" });
     expect(updateChain.eq).toHaveBeenCalledWith("email", "a@b.c");
     expect(r).toEqual({ ok: true, user: row, outcome: "relinked" });
@@ -63,10 +63,28 @@ describe("provisionUser", () => {
       update: { data: row, error: null },
     });
     await provisionUser(
-      { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png" },
+      { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png", emailVerified: true },
       { supabase }
     );
     expect(table.update).toHaveBeenCalledWith({ clerk_user_id: "new", profile_image: "https://x.y/i.png" });
+  });
+
+  describe.each([
+    ["the email is not verified", { email: "a@b.c", emailVerified: false }],
+    ["verification is not stated", { email: "a@b.c" }],
+    ["the email is empty", { email: "", emailVerified: true }],
+  ])("never re-links when %s", (_label, extra) => {
+    it("fails and writes nothing", async () => {
+      const { supabase, table } = fakeClient({
+        upsert: {
+          data: null,
+          error: { code: "23505", message: 'duplicate key value violates unique constraint "users_email_key"' },
+        },
+      });
+      const r = await provisionUser({ clerkUserId: "new", name: "N", ...extra }, { supabase });
+      expect(r.ok).toBe(false);
+      expect(table.update).not.toHaveBeenCalled();
+    });
   });
 
   it("returns an existing row untouched when the Clerk id already has one", async () => {
