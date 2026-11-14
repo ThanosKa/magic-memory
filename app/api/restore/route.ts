@@ -136,7 +136,16 @@ export async function POST(request: NextRequest) {
     const clerkUserId = asClerkUserId(userId)
     const creditCheck = await ledger.balance(clerkUserId)
 
-    // Every Balance failure answers 403, as before the ledger.
+    // A database failure is not "no credits": answer 503 so the uploader says "try again".
+    // The text must not contain "No credits", which the uploader routes to the out-of-credits screen.
+    if (!creditCheck.ok && creditCheck.reason === "db_error") {
+      logger.error({ userId, error: creditCheck.message }, "Failed to check credits")
+      return NextResponse.json(
+        { success: false, error: "We couldn't check your credits. Please try again." },
+        { status: 503 },
+      )
+    }
+
     if (!creditCheck.ok || creditCheck.paidCredits <= 0) {
       logger.warn({ userId, creditCheck }, "No paid credits available")
       return NextResponse.json(
