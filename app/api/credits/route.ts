@@ -33,10 +33,23 @@ export async function GET() {
       .from("users")
       .select("*")
       .eq("clerk_user_id", userId)
-      .single();
+      .maybeSingle();
     let user = userData;
 
-    if (error || !user) {
+    // A failed read says nothing about whether the User exists, so it must
+    // never lead to Provisioning: that is how a paying User's Balance was reset.
+    if (error) {
+      logger.error(
+        { userId, error: error.message },
+        "Failed to read user from database"
+      );
+      return NextResponse.json(
+        { success: false, error: "Failed to load credits. Please try again." },
+        { status: 500 }
+      );
+    }
+
+    if (!user) {
       logger.warn(
         { userId },
         "User not found in database, attempting to create"

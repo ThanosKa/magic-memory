@@ -21,9 +21,11 @@ type EnsureUserResult =
   | { ok: false; message: string };
 
 /**
- * Creates the users row for a Clerk user. If a row with the same email already
- * exists under a different clerk_user_id (Clerk user deleted/recreated, or
- * dev->prod instance switch), re-link it to the new Clerk id instead of failing.
+ * Creates the users row for a Clerk user, or returns the row that Clerk id
+ * already has without changing any of its columns. If a row with the same
+ * email already exists under a different clerk_user_id (Clerk user
+ * deleted/recreated, or dev->prod instance switch), re-link it to the new
+ * Clerk id instead of failing.
  * Safe: other tables reference users.id (uuid), not clerk_user_id.
  */
 export async function ensureUser(
@@ -31,17 +33,35 @@ export async function ensureUser(
 ): Promise<EnsureUserResult> {
   const { supabase, clerkUserId, email, name } = params;
 
+  // Insert or do nothing: a conflict on clerk_user_id returns no row and
+  // leaves the existing row, and its Balance, as it was.
   const { data: created, error } = await supabase
     .from("users")
     .upsert(
       { clerk_user_id: clerkUserId, email, name, paid_credits: 1 },
-      { onConflict: "clerk_user_id" }
+      { onConflict: "clerk_user_id", ignoreDuplicates: true }
     )
     .select()
-    .single();
+    .maybeSingle();
 
   if (!error && created) {
     return { ok: true, user: created, relinked: false };
+  }
+
+  if (!error) {
+    const { data: existing, error: readError } = await supabase
+      .from("users")
+      .select("*")
+      .eq("clerk_user_id", clerkUserId)
+      .maybeSingle();
+
+    if (readError || !existing) {
+      return {
+        ok: false,
+        message: readError?.message ?? "User row not found after insert conflict",
+      };
+    }
+    return { ok: true, user: existing, relinked: false };
   }
 
   const isEmailConflict =
