@@ -26,19 +26,21 @@ export type RestorerDeps = {
 }
 
 /**
- * Restores a photo (given as a data URL) through Replicate (GFPGAN) and returns the restored image URL.
+ * Restores a photo through Replicate (GFPGAN) and returns the restored image URL.
  * Throws when the prediction fails, is canceled or times out.
  * Must be called inside a route handler that already called `noStore()`, so
  * Next.js does not cache the polling requests.
  */
-export async function runReplicateWithPolling(
-  imageBase64: string,
+export async function restorePhoto(
+  photo: { bytes: Buffer; mimeType: string },
   deps: RestorerDeps = {},
 ): Promise<string> {
   const replicate =
     deps.client ?? new Replicate({ auth: process.env.REPLICATE_API_TOKEN })
   const sleep = deps.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)))
   const maxAttempts = deps.maxAttempts ?? DEFAULT_MAX_ATTEMPTS
+
+  const imageBase64 = `data:${photo.mimeType};base64,${photo.bytes.toString("base64")}`
 
   const prediction = await replicate.predictions.create({
     version: MODEL_VERSION,

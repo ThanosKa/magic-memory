@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
 import { markFreeCreditUsed, getRedisClient } from "@/lib/redis";
 import logger from "@/lib/logger";
-import { runReplicateWithPolling } from "@/lib/restore/restorer";
+import { restorePhoto } from "@/lib/restore/restorer";
 import {
   checkUserCredits,
   deductCreditAndRecordRestoration,
@@ -149,11 +149,7 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
 
-    const base64 = buffer.toString("base64")
-    const mimeType = file.type
-    const dataUrl = `data:${mimeType};base64,${base64}`
-
-    const restoredImageUrl = await runReplicateWithPolling(dataUrl)
+    const restoredImageUrl = await restorePhoto({ bytes: buffer, mimeType: file.type })
 
     logger.info({ userId }, "AI restoration complete")
 
