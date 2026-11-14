@@ -23,8 +23,8 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 
 - The webhook reads the raw `request.text()` body and verifies it with `stripe.webhooks.constructEventAsync` before trusting anything. The sync `constructEvent` throws on Cloudflare Workers.
 - `metadata.userId` on the checkout session is `users.id` (UUID), not the Clerk id, which travels separately as `metadata.clerkUserId`.
-- Before granting credits the webhook checks metadata, package, price id, amount (discounts included) and currency `eur` against `CREDIT_PACKAGES`. A mismatch is logged and answered with 200, since a retry cannot fix it.
-- A 100% discount session has no `payment_intent`; the webhook uses `session.id` as the payment id.
+- Before granting credits the webhook calls `verifyCheckoutSession` in `lib/billing/verify-checkout-session.ts`, a pure function that checks metadata, payment id, package, price id, amount (discounts included) and currency `eur` against `CREDIT_PACKAGES`. The route logs a rejection with `REJECTION_LOG_MESSAGE` from the same file. A mismatch is logged and answered with 200, since a retry cannot fix it.
+- A 100% discount session has no `payment_intent`; `verifyCheckoutSession` uses `session.id` as the payment id.
 - Grant credits only through the `grant_purchase_credits` SQL function (`scripts/006_atomic_purchase_grant.sql`), via `grantPurchaseCredits` in `lib/supabase/transactions.ts`. It records the purchase and adds the credits in one transaction, and the unique index on `purchases.stripe_payment_id` makes a redelivered event change nothing.
 - A failed grant answers 500 so Stripe redelivers it. Answering 200 would leave a paid customer without credits.
 - The API version is pinned with `@ts-expect-error` in `app/api/stripe/webhook/route.ts` and `app/api/stripe/create-checkout/route.ts`; change the two together.
