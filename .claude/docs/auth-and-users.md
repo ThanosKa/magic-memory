@@ -8,7 +8,7 @@
 ## Two user ids
 
 - `auth()` returns the Clerk id, stored in `users.clerk_user_id`. Foreign keys and SQL functions use `users.id` (UUID).
-- Translate with a `clerk_user_id` lookup first, as `lib/supabase/transactions.ts` does.
+- Translate with a `clerk_user_id` lookup first, as the credit ledger in `lib/credits/ledger.ts` does for `balance` and `chargeRestoration`.
 
 ## Creating the `users` row
 

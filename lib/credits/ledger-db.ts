@@ -28,8 +28,7 @@ const userRowSchema = z.object({ id: z.string() })
 
 /**
  * The production adapter. It obtains the admin client once per ledger
- * operation, as the old functions in `lib/supabase/transactions.ts` do, so a
- * missing Supabase env var throws before the operation's try/catch.
+ * operation, so a missing Supabase env var throws before the operation's try/catch.
  */
 export function supabaseLedgerDb(): LedgerDb {
   const supabase = getSupabaseAdminClient()
