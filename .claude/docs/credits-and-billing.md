@@ -1,6 +1,8 @@
 # Credits and billing
 
-Money rules. Every section applies to any diff that touches `app/api/restore/`, `app/api/stripe/`, `app/api/credits/`, `lib/supabase/transactions.ts` or `lib/constants.ts`; those changes ship with tests in `__tests__/`.
+Money rules. Every section applies to any diff that touches `app/api/restore/`, `app/api/stripe/`, `app/api/credits/`, `lib/supabase/transactions.ts`, `lib/credits/` or `lib/constants.ts`; those changes ship with tests in `__tests__/`.
+
+`lib/credits/ledger.ts` (`createCreditLedger()`) makes the same SQL calls as the old functions in `lib/supabase/transactions.ts`, with one failure shape and branded `ClerkUserId` / `UserId` types. No route uses it yet: the routes move onto it one at a time, then the old functions go. Routes never import `lib/credits/ledger-db.ts`.
 
 ## The credit model
 
