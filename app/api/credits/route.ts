@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
-import { ensureUser } from "@/lib/supabase/ensure-user";
+import { provisionUser } from "@/lib/users";
 import logger from "@/lib/logger";
 import { z } from "zod";
 
@@ -79,12 +79,10 @@ export async function GET() {
             .filter(Boolean)
             .join(" ") || null;
 
-        const ensured = await ensureUser({
-          supabase,
-          clerkUserId: userId,
-          email,
-          name,
-        });
+        const ensured = await provisionUser(
+          { clerkUserId: userId, email, name },
+          { supabase }
+        );
 
         if (!ensured.ok) {
           logger.error(
@@ -100,7 +98,7 @@ export async function GET() {
           );
         }
 
-        if (ensured.relinked) {
+        if (ensured.outcome === "relinked") {
           logger.warn(
             { userId, email },
             "Existing user row re-linked to new Clerk id"
