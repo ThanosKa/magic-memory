@@ -182,7 +182,7 @@ function buildWelcomeHtml(name: string | null): string {
       ${step("02", "Our AI restores it in seconds")}
       ${step("03", "Download your restored memory")}
     </table>
-    ${paragraph("Pick a credit pack to restore your first photo. Credits never expire.")}
+    ${paragraph("Your first restoration is on us. Credits never expire.")}
     ${button("Restore your first photo", `${SITE_URL}/restore`)}
   `);
 }

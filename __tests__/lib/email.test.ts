@@ -29,6 +29,18 @@ describe("welcome email", () => {
   });
 });
 
+describe("welcome email first-restoration copy", () => {
+  it.each([["with a name", "Maria Papadopoulou"], ["without a name", null]])(
+    "says the first restoration is free %s",
+    (_label, name) => {
+      const html = buildWelcomeHtml(name);
+      expect(html).toContain("Your first restoration is on us");
+      expect(html).toContain("Credits never expire.");
+      expect(html).not.toContain("Pick a credit pack to restore your first photo");
+    },
+  );
+});
+
 describe("purchase email", () => {
   it("greets generically without a name", () => {
     expect(buildPurchaseHtml(null, "Starter", 20)).toContain("Hi there,");
