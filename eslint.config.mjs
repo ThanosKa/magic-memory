@@ -126,7 +126,6 @@ export default [
       'lib/logger.ts',
       'lib/redis.ts',
       'lib/supabase/server.ts',
-      'lib/supabase/transactions.ts',
       'lib/users/index.ts',
       'lib/validations/**/*.ts',
     ],

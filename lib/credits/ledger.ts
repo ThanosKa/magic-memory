@@ -5,12 +5,10 @@ import { supabaseLedgerDb, type LedgerDb } from "./ledger-db"
 /**
  * The credit ledger: the one path from application code to the credit SQL
  * functions, in product language. The money rules (row lock, never below
- * zero, one Grant per payment) stay in SQL. Each operation makes the same SQL
- * call, and writes the same log lines, as its old function in
- * `lib/supabase/transactions.ts`.
+ * zero, one Grant per payment) stay in SQL.
  */
 
-/** What a caught exception reports, as `deductCreditAndRecordRestoration` does today. */
+/** What a caught exception reports, as the ledger has always reported it. */
 const INTERNAL_ERROR = "Internal error"
 
 /** The Clerk id of the caller, as `auth()` returns it. */
