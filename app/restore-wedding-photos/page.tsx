@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import {
-  getCanonicalUrl,
-  getOgImageUrl,
   faqPageJsonLd,
   breadcrumbJsonLd,
   useCaseSoftwareJsonLd,
 } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
 import { UseCaseArticle } from "@/components/use-case/use-case-article";
 import { UseCaseRelated } from "@/components/use-case/use-case-related";
 import { FinalCta } from "@/components/layout/final-cta";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(
@@ -24,33 +24,22 @@ const Footer = dynamic(
   { ssr: true },
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/restore-wedding-photos",
   title: "Restore Old Wedding Photos With AI",
   description:
     "Restore your parents' or grandparents' wedding photos with AI. Perfect for anniversaries, digitizing albums, and preserving formal portraits. No subscription.",
-  alternates: { canonical: getCanonicalUrl("/restore-wedding-photos") },
-  openGraph: {
+  social: {
     title: "Restore Old Wedding Photos With AI — Magic Memory",
     description:
       "Restore wedding photos from any era. Perfect anniversary gift. No subscription.",
-    url: getCanonicalUrl("/restore-wedding-photos"),
-    images: [
-      {
-        url: getOgImageUrl(),
-        width: 1200,
-        height: 630,
-        alt: "Restore Wedding Photos",
-      },
-    ],
+    imageAlt: "Restore Wedding Photos",
   },
   twitter: {
-    card: "summary_large_image",
     title: "Restore Old Wedding Photos With AI",
     description: "Restore wedding photos. Perfect anniversary gift.",
-    images: [getOgImageUrl()],
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -96,18 +85,7 @@ export default function RestoreWeddingPhotosPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
-      />
+      <JsonLd data={[faqJsonLd, breadcrumb, softwareJsonLd]} />
       <Header />
       <main className="flex-1">
         <UseCaseHero
