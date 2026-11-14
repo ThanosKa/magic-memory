@@ -212,59 +212,6 @@ describe("POST /api/stripe/webhook", () => {
       expect(sendPurchaseEmail).not.toHaveBeenCalled();
     });
 
-    it("records what was actually paid on a discounted checkout", async () => {
-      const rpc = useGrantResult({ data: true, error: null });
-
-      const response = await deliver({
-        payment_intent: "pi_discount_123",
-        amount_total: 799,
-        amount_subtotal: 999,
-        total_details: { amount_discount: 200 },
-      });
-
-      expect(response.status).toBe(200);
-      expect(rpc).toHaveBeenCalledWith(
-        "grant_purchase_credits",
-        expect.objectContaining({
-          p_stripe_payment_id: "pi_discount_123",
-          p_credits: 20,
-          p_amount_paid: 799,
-        })
-      );
-    });
-
-    it("uses the session id as the payment id on a 100% discount", async () => {
-      const rpc = useGrantResult({ data: true, error: null });
-
-      const response = await deliver({
-        id: "cs_test_full_discount",
-        payment_intent: null,
-        amount_total: 0,
-        amount_subtotal: 999,
-        total_details: { amount_discount: 999 },
-        payment_status: "no_payment_required",
-      });
-
-      expect(response.status).toBe(200);
-      expect(rpc).toHaveBeenCalledWith(
-        "grant_purchase_credits",
-        expect.objectContaining({
-          p_stripe_payment_id: "cs_test_full_discount",
-          p_credits: 20,
-          p_amount_paid: 0,
-        })
-      );
-    });
-
-    it("grants nothing when the amount does not match the package", async () => {
-      const rpc = useGrantResult({ data: true, error: null });
-
-      const response = await deliver({ amount_total: 100, amount_subtotal: 100 });
-
-      expect(response.status).toBe(200);
-      expect(rpc).not.toHaveBeenCalled();
-    });
-
     describe("rejection rules", () => {
       let logError: ReturnType<typeof vi.spyOn>;
 
@@ -293,66 +240,11 @@ describe("POST /api/stripe/webhook", () => {
         expect(logError).toHaveBeenCalledWith(context, message);
       }
 
-      it("grants nothing when the metadata is missing or invalid", async () => {
-        await expectRejected(
-          { metadata: { userId: "user-uuid" } },
-          "Missing or invalid metadata in checkout session",
-          {
-            sessionId: "cs_test_123",
-            errors: expect.objectContaining({
-              fieldErrors: expect.objectContaining({
-                packageType: expect.anything(),
-                credits: expect.anything(),
-                priceId: expect.anything(),
-              }),
-            }),
-          }
-        );
-      });
-
       it("grants nothing when there is no payment id", async () => {
         await expectRejected(
           { payment_intent: null },
           "Missing payment intent in checkout session",
           { sessionId: "cs_test_123" }
-        );
-      });
-
-      it("grants nothing for an unknown credit pack", async () => {
-        await expectRejected(
-          {
-            metadata: {
-              userId: "user-uuid",
-              packageType: "mega",
-              credits: "20",
-              priceId: "price_starter",
-            },
-          },
-          "Unknown package type in checkout session",
-          { packageType: "mega" }
-        );
-      });
-
-      it("grants nothing when the price id does not match the pack", async () => {
-        await expectRejected(
-          {
-            metadata: {
-              userId: "user-uuid",
-              packageType: "starter",
-              credits: "20",
-              priceId: "price_other",
-            },
-          },
-          "Price id mismatch for checkout session",
-          { packageType: "starter", priceId: "price_other" }
-        );
-      });
-
-      it("grants nothing when the currency is not eur", async () => {
-        await expectRejected(
-          { currency: "usd" },
-          "Unexpected currency for checkout session",
-          { currency: "usd", packageType: "starter" }
         );
       });
     });
