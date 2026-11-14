@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto"
 import { describe, expect, it, vi } from "vitest"
+import { JsonLd } from "@/components/seo/json-ld"
 import { blogPosts } from "@/lib/blog/posts"
 
 // Pages read these at import time, and CI sets different values than a laptop,
@@ -87,6 +88,13 @@ function collectJsonLd(node: unknown, found: string[] = []): string[] {
     }
   }
   if (!element.props) return found
+  // <JsonLd> is a server component: expand it the way React would
+  if (element.type === JsonLd) {
+    return collectJsonLd(
+      JsonLd(element.props as unknown as Parameters<typeof JsonLd>[0]),
+      found
+    )
+  }
   if (
     element.type === "script" &&
     element.props.type === "application/ld+json"
