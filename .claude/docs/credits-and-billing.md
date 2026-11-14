@@ -2,7 +2,7 @@
 
 Money rules. Every section applies to any diff that touches `app/api/restore/`, `app/api/stripe/`, `app/api/credits/`, `lib/supabase/transactions.ts`, `lib/credits/` or `lib/constants.ts`; those changes ship with tests in `__tests__/`.
 
-`lib/credits/ledger.ts` (`createCreditLedger()`) makes the same SQL calls as the old functions in `lib/supabase/transactions.ts`, with one failure shape and branded `ClerkUserId` / `UserId` types. No route uses it yet: the routes move onto it one at a time, then the old functions go. Routes never import `lib/credits/ledger-db.ts`.
+`lib/credits/ledger.ts` (`createCreditLedger()`) makes the same SQL calls as the old functions in `lib/supabase/transactions.ts`, with one failure shape and branded `ClerkUserId` / `UserId` types. The Stripe webhook uses it; the other routes move onto it one at a time, then the old functions go. Routes never import `lib/credits/ledger-db.ts`.
 
 ## The credit model
 
@@ -27,7 +27,7 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 - `metadata.userId` on the checkout session is `users.id` (UUID), not the Clerk id, which travels separately as `metadata.clerkUserId`.
 - Before granting credits the webhook calls `verifyCheckoutSession` in `lib/billing/verify-checkout-session.ts`, a pure function that checks metadata, payment id, package, price id, amount (discounts included) and currency `eur` against `CREDIT_PACKAGES`. The route logs a rejection with `REJECTION_LOG_MESSAGE` from the same file. A mismatch is logged and answered with 200, since a retry cannot fix it.
 - A 100% discount session has no `payment_intent`; `verifyCheckoutSession` uses `session.id` as the payment id.
-- Grant credits only through the `grant_purchase_credits` SQL function (`scripts/006_atomic_purchase_grant.sql`), via `grantPurchaseCredits` in `lib/supabase/transactions.ts`. It records the purchase and adds the credits in one transaction, and the unique index on `purchases.stripe_payment_id` makes a redelivered event change nothing.
+- Grant credits only through the `grant_purchase_credits` SQL function (`scripts/006_atomic_purchase_grant.sql`), via `createCreditLedger().grantPurchase` in `lib/credits/ledger.ts`. It records the purchase and adds the credits in one transaction, and the unique index on `purchases.stripe_payment_id` makes a redelivered event change nothing.
 - A failed grant answers 500 so Stripe redelivers it. Answering 200 would leave a paid customer without credits.
 - The API version is pinned with `@ts-expect-error` in `app/api/stripe/webhook/route.ts` and `app/api/stripe/create-checkout/route.ts`; change the two together.
 
