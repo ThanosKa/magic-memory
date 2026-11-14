@@ -54,6 +54,21 @@ describe("provisionUser", () => {
     expect(r).toEqual({ ok: true, user: row, outcome: "relinked" });
   });
 
+  it("keeps the stored name when a re-link brings no name, and updates the image when given", async () => {
+    const { supabase, table } = fakeClient({
+      upsert: {
+        data: null,
+        error: { code: "23505", message: 'duplicate key value violates unique constraint "users_email_key"' },
+      },
+      update: { data: row, error: null },
+    });
+    await provisionUser(
+      { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png" },
+      { supabase }
+    );
+    expect(table.update).toHaveBeenCalledWith({ clerk_user_id: "new", profile_image: "https://x.y/i.png" });
+  });
+
   it("returns an existing row untouched when the Clerk id already has one", async () => {
     const existing = { ...row, paid_credits: 50 };
     const { supabase, table, readChain } = fakeClient({

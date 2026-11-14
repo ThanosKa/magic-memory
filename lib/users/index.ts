@@ -61,7 +61,8 @@ export async function findUser(
  * - If a row with the same email exists under another clerk_user_id (Clerk
  *   user deleted and recreated, or a dev-to-prod instance switch), it is
  *   re-linked to the new Clerk id ("relinked"), keeping its credits and
- *   history. Safe: other tables reference users.id, not clerk_user_id.
+ *   history. Only the Clerk id, and the name and image when Clerk sent them,
+ *   change. Safe: other tables reference users.id, not clerk_user_id.
  * - Two concurrent calls for one Clerk id give one "created" and one
  *   "already_existed", because the insert is insert-or-nothing.
  */
@@ -116,7 +117,12 @@ export async function provisionUser(
 
   const { data: relinked, error: relinkError } = await supabase
     .from("users")
-    .update({ clerk_user_id: clerkUserId, name })
+    .update({
+      clerk_user_id: clerkUserId,
+      // Keep the stored name and image when Clerk sends none.
+      ...(name !== null && { name }),
+      ...(imageUrl != null && { profile_image: imageUrl }),
+    })
     .eq("email", email)
     .select()
     .single();

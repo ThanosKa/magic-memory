@@ -12,9 +12,9 @@
 
 ## Creating the `users` row
 
-- `user.created` in `app/api/clerk/webhook/route.ts` inserts the row and treats a duplicate key (`23505`) as success, because Clerk retries webhooks.
+- `user.created` in `app/api/clerk/webhook/route.ts` calls `provisionUser` too, so both entry points follow one Provisioning rule. "created" sends the welcome email; "already_existed" (a retried webhook, or the fallback got there first) answers 200 and writes nothing; "relinked" answers 200, sends no welcome email and logs it; a failure answers 500 so Clerk retries.
 - `GET /api/credits` reads the row with `findUser` and calls `provisionUser` (both in `lib/users/index.ts`) when it answers `missing`. This closes the race where a new signup loads the app before the webhook lands and sees 0 credits. An `error` answer is not `missing`: the route answers 500 and never calls Clerk or `provisionUser`.
-- When the email already exists under another Clerk id (user recreated, or a dev-to-prod instance switch), `provisionUser` re-links the row to the new id, keeping its credits and history. This is safe because other tables reference `users.id`.
+- When the email already exists under another Clerk id (user recreated, or a dev-to-prod instance switch), `provisionUser` re-links the row to the new id at once, from whichever entry point comes first, keeping its credits and history. The re-link also sets the name and image when Clerk sent them, and keeps the stored ones when not. This is safe because other tables reference `users.id`.
 - Keep the `provisionUser` upsert away from existing rows: it must never change the balance of a user who already has a row. It inserts or does nothing on a `clerk_user_id` conflict (`ignoreDuplicates`), then returns the existing row untouched.
 
 ## Clerk webhook

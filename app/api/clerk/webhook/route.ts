@@ -4,7 +4,7 @@ import { z } from "zod";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { sendWelcomeEmail } from "@/lib/email";
 import logger from "@/lib/logger";
-import { SIGNUP_CREDITS } from "@/lib/users";
+import { provisionUser } from "@/lib/users";
 
 const clerkWebhookSchema = z.discriminatedUnion("type", [
     z.object({
@@ -96,28 +96,29 @@ export async function POST(request: NextRequest) {
                 const email = email_addresses[0]?.email_address || "";
                 const name = [first_name, last_name].filter(Boolean).join(" ") || null;
 
-                const { error } = await supabase.from("users").insert({
-                    clerk_user_id: id,
-                    email,
-                    name,
-                    profile_image: image_url,
-                    paid_credits: SIGNUP_CREDITS,
-                });
+                const result = await provisionUser(
+                    { clerkUserId: id, email, name, imageUrl: image_url },
+                    { supabase }
+                );
 
-                if (error) {
-                    // Duplicate key errors are expected when webhooks are retried
-                    // This is idempotent behavior - the user already exists, so we treat it as success
-                    if (error.code === '23505' || error.message.includes('duplicate key')) {
-                        logger.info({ userId: id, email }, "User already exists in database (duplicate webhook)");
-                        break;
-                    }
-
-                    // For other errors, return 500 so Clerk retries
-                    logger.error({ error: error.message, userId: id }, "Failed to create user in database");
+                if (!result.ok) {
+                    // Return 500 so Clerk retries
+                    logger.error({ error: result.message, userId: id }, "Failed to create user in database");
                     return NextResponse.json(
                         { success: false, error: "Failed to create user" },
                         { status: 500 }
                     );
+                }
+
+                if (result.outcome === "already_existed") {
+                    // Retried webhook, or GET /api/credits created the row first
+                    logger.info({ userId: id, email }, "User already exists in database (duplicate webhook)");
+                    break;
+                }
+
+                if (result.outcome === "relinked") {
+                    logger.warn({ userId: id, email }, "Existing user row re-linked to new Clerk id");
+                    break;
                 }
 
                 logger.info({ userId: id, email }, "User created in database");
