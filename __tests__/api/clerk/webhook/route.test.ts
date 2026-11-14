@@ -3,6 +3,7 @@ import { NextRequest } from "next/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/server"
 import { POST } from "@/app/api/clerk/webhook/route"
 import { sendWelcomeEmail } from "@/lib/email"
+import logger from "@/lib/logger"
 
 vi.mock("@/lib/supabase/server")
 vi.mock("@/lib/logger")
@@ -264,25 +265,44 @@ describe("POST /api/clerk/webhook", () => {
         expect(sendWelcomeEmail).not.toHaveBeenCalled()
     })
 
-    it("today: no re-link in the webhook", async () => {
-        const mockInsert = vi.fn().mockResolvedValue({
+    it("re-links the existing row to the new Clerk id on user.created", async () => {
+        const relinkedRow = { id: "u1", clerk_user_id: "clerk_user_123", email: "kazakis.th@gmail.com", paid_credits: 5 }
+        const chain = (result: unknown) => {
+            const c = {
+                select: vi.fn(() => c),
+                eq: vi.fn(() => c),
+                single: vi.fn().mockResolvedValue(result),
+                maybeSingle: vi.fn().mockResolvedValue(result),
+            }
+            return c
+        }
+        const upsertChain = chain({
+            data: null,
             error: {
                 code: "23505",
                 message: 'duplicate key value violates unique constraint "users_email_key"',
             },
         })
-        const mockUpdate = vi.fn()
-        const mockSupabase = {
-            from: vi.fn().mockReturnValue({ insert: mockInsert, update: mockUpdate }),
-        }
+        const updateChain = chain({ data: relinkedRow, error: null })
+        const table = { upsert: vi.fn(() => upsertChain), update: vi.fn(() => updateChain) }
+        const mockSupabase = { from: vi.fn().mockReturnValue(table) }
         vi.mocked(getSupabaseAdminClient).mockReturnValue(mockSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>)
         mockWebhookVerify.mockReturnValue(userCreatedEvent)
 
         const response = await POST(createMockRequest("{}"))
 
         expect(response.status).toBe(200)
-        expect(mockUpdate).not.toHaveBeenCalled()
-        expect(mockSupabase.from).toHaveBeenCalledTimes(1)
+        expect(table.update).toHaveBeenCalledWith(
+            expect.objectContaining({ clerk_user_id: "clerk_user_123" })
+        )
+        expect(table.update).toHaveBeenCalledWith(
+            expect.not.objectContaining({ paid_credits: expect.anything() })
+        )
+        expect(updateChain.eq).toHaveBeenCalledWith("email", "kazakis.th@gmail.com")
         expect(sendWelcomeEmail).not.toHaveBeenCalled()
+        expect(logger.warn).toHaveBeenCalledWith(
+            { userId: "clerk_user_123", email: "kazakis.th@gmail.com" },
+            "Existing user row re-linked to new Clerk id"
+        )
     })
 })
