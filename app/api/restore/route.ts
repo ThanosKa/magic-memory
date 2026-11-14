@@ -3,7 +3,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
-import { markFreeCreditUsed, getRedisClient } from "@/lib/redis";
+import { getRedisClient } from "@/lib/redis";
 import logger from "@/lib/logger";
 import { restorePhoto } from "@/lib/restore/restorer";
 import { asClerkUserId, createCreditLedger } from "@/lib/credits/ledger";
@@ -49,7 +49,6 @@ export async function POST(request: NextRequest) {
   noStore()
 
   let restorationId: string | null = null
-  let usedFreeCredit = false
   let userId: string | null = null
 
   try {
@@ -154,9 +153,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    usedFreeCredit = false
-
-    logger.info({ userId, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
+    logger.info({ userId }, "Starting AI restoration")
 
     const restoredImageUrl = await restorePhoto({ bytes: buffer, mimeType: file.type })
 
@@ -165,7 +162,6 @@ export async function POST(request: NextRequest) {
     const charge = await ledger.chargeRestoration(clerkUserId, {
       originalUrl: `ephemeral:${originalFilename}`,
       restoredUrl: restoredImageUrl,
-      useFreeCredit: usedFreeCredit,
     })
 
     if (!charge.ok) {
@@ -176,21 +172,12 @@ export async function POST(request: NextRequest) {
 
     restorationId = charge.restorationId
 
-    if (usedFreeCredit && getRedisClient()) {
-      await markFreeCreditUsed(userId)
-      logger.info({ userId }, "Free credit marked as used in Redis")
-    }
-
-    logger.info(
-      { userId, restorationId, usedFreeCredit },
-      "Restoration completed successfully",
-    )
+    logger.info({ userId, restorationId }, "Restoration completed successfully")
 
     return NextResponse.json({
       success: true,
       data: {
         restoredImageUrl,
-        usedFreeCredit,
         remainingPaidCredits: charge.remainingCredits,
       },
     })

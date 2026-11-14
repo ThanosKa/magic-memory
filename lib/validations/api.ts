@@ -43,7 +43,6 @@ export type UploadResponse = z.infer<typeof uploadResponseSchema>;
 export const restoreResponseSchema = z.object({
   restoredImageUrl: z.string().url(),
   restoredImagePath: z.string().optional(),
-  usedFreeCredit: z.boolean(),
   remainingPaidCredits: z.number().int().nonnegative().optional(),
 });
 

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { NextRequest } from "next/server"
 import { auth } from "@clerk/nextjs/server"
 import { POST } from "@/app/api/restore/route"
-import { getRedisClient, markFreeCreditUsed } from "@/lib/redis"
+import { getRedisClient } from "@/lib/redis"
 import logger from "@/lib/logger"
 import type { CreditLedger } from "@/lib/credits/ledger"
 
@@ -152,7 +152,6 @@ describe("POST /api/restore", () => {
         expect(data.success).toBe(false)
         expect(data.error).toContain("No credits available")
         expect(ledger.chargeRestoration).not.toHaveBeenCalled()
-        expect(vi.mocked(markFreeCreditUsed)).not.toHaveBeenCalled()
     })
 
     it("uses paid credit when no free available", async () => {
@@ -180,7 +179,7 @@ describe("POST /api/restore", () => {
 
         expect(response.status).toBe(200)
         expect(data.success).toBe(true)
-        expect(data.data.usedFreeCredit).toBe(false)
+        expect(data.data).not.toHaveProperty("usedFreeCredit")
         expect(data.data.remainingPaidCredits).toBe(49)
     })
 
@@ -322,7 +321,6 @@ describe("POST /api/restore", () => {
                 success: true,
                 data: {
                     restoredImageUrl: "https://replicate.delivery/out.png",
-                    usedFreeCredit: false,
                     remainingPaidCredits: 2,
                 },
             })
@@ -331,7 +329,6 @@ describe("POST /api/restore", () => {
             expect(ledger.chargeRestoration).toHaveBeenCalledWith("clerk_user_123", {
                 originalUrl: "ephemeral:grandma.jpg",
                 restoredUrl: "https://replicate.delivery/out.png",
-                useFreeCredit: false,
             })
             expect(ledger.reverseRestoration).not.toHaveBeenCalled()
         })
