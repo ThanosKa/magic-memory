@@ -2,6 +2,15 @@ import { createHash } from "node:crypto"
 import { describe, expect, it, vi } from "vitest"
 import { blogPosts } from "@/lib/blog/posts"
 
+// Pages read these at import time, and CI sets different values than a laptop,
+// so pin them before any page is imported (vi.hoisted runs first).
+vi.hoisted(() => {
+  process.env.NEXT_PUBLIC_APP_URL = "https://magic-memory.dev"
+  process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER = "price_snapshot_starter"
+  process.env.NEXT_PUBLIC_STRIPE_PRICE_GROWTH = "price_snapshot_growth"
+  process.env.NEXT_PUBLIC_STRIPE_PRICE_PREMIUM = "price_snapshot_premium"
+})
+
 // /restore redirects signed-out visitors, so the tests call it as a signed-in user.
 vi.mock("@clerk/nextjs/server", () => ({
   auth: vi.fn(() => Promise.resolve({ userId: "user_snapshot" })),
