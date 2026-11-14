@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { asUserId, createCreditLedger } from "@/lib/credits/ledger";
 import {
+  CREDITS_MISMATCH_LOG_MESSAGE,
   REJECTION_LOG_MESSAGE,
   verifyCheckoutSession,
 } from "@/lib/billing/verify-checkout-session";
@@ -67,6 +68,13 @@ export async function POST(request: NextRequest) {
 
       const { userId, stripePaymentId, credits, amountPaid, packageType } =
         verdict.grant;
+      if (verdict.creditsMismatch) {
+        logger.warn(
+          { userId, packageType, stripePaymentId, ...verdict.creditsMismatch },
+          CREDITS_MISMATCH_LOG_MESSAGE,
+        );
+      }
+
       const paymentId = stripePaymentId;
       const creditsToAdd = credits;
 

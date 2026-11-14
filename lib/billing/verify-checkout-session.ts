@@ -47,6 +47,10 @@ export type RejectionReason =
   | "amount_mismatch"
   | "wrong_currency";
 
+/** Log text for a Purchase whose metadata credits differ from its Credit pack; log filters depend on it. */
+export const CREDITS_MISMATCH_LOG_MESSAGE =
+  "Purchased credits differ from Credit pack";
+
 /** The exact log text per rejection reason; log filters depend on it. */
 export const REJECTION_LOG_MESSAGE: Record<RejectionReason, string> = {
   invalid_metadata: "Missing or invalid metadata in checkout session",
@@ -71,6 +75,11 @@ export type PurchaseVerdict =
         packageType: PackageType;
         packageName: string;
       };
+      /**
+       * Present only when `metadata.credits` differs from the Credit pack's
+       * credits. The grant still uses the metadata; the route logs a warning.
+       */
+      creditsMismatch?: { metadataCredits: number; packCredits: number };
     }
   | {
       ok: false;
@@ -80,7 +89,7 @@ export type PurchaseVerdict =
 
 type PackageTable = Record<
   string,
-  { name: string; price: number; priceId: string } | undefined
+  { name: string; credits: number; price: number; priceId: string } | undefined
 >;
 
 /**
@@ -177,15 +186,20 @@ export function verifyCheckoutSession(
     };
   }
 
+  const metadataCredits = Number.parseInt(credits, 10);
+
   return {
     ok: true,
     grant: {
       userId,
       stripePaymentId: paymentId,
-      credits: Number.parseInt(credits, 10),
+      credits: metadataCredits,
       amountPaid: amountTotal,
       packageType: packageType as PackageType,
       packageName: pkg.name,
     },
+    ...(metadataCredits !== pkg.credits && {
+      creditsMismatch: { metadataCredits, packCredits: pkg.credits },
+    }),
   };
 }
