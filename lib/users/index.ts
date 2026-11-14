@@ -27,6 +27,31 @@ export type ProvisionResult =
   | { ok: true; user: UserRow; outcome: ProvisionOutcome }
   | { ok: false; message: string };
 
+export type FindUserResult =
+  | { status: "found"; user: UserRow }
+  | { status: "missing" }
+  | { status: "error"; message: string };
+
+/**
+ * Reads the users row for a Clerk id. A failed read answers "error", never
+ * "missing", so callers cannot mistake a database error for a new User and
+ * provision over an existing Balance.
+ */
+export async function findUser(
+  clerkUserId: string,
+  { supabase }: { supabase: SupabaseClient }
+): Promise<FindUserResult> {
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("clerk_user_id", clerkUserId)
+    .maybeSingle();
+
+  if (error) return { status: "error", message: error.message };
+  if (!data) return { status: "missing" };
+  return { status: "found", user: data };
+}
+
 /**
  * Provisions the users row for a Clerk user. Sends no email.
  *
