@@ -15,7 +15,7 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 
 ## `POST /api/restore`
 
-- Keep the order: auth, rate limit, input validation, credit check (`ledger.balance`), Replicate, then charge. A failed run costs nothing because the charge comes after Replicate succeeds. Every `balance` failure answers 403 "No credits available..." and a failed Charge answers 500 "Failed to record restoration".
+- Keep the order: auth, rate limit, input validation, credit check (`ledger.balance`), Replicate, then charge. A failed run costs nothing because the charge comes after Replicate succeeds. A `balance` failure of `db_error` answers 503 "We couldn't check your credits. Please try again." (the text must not contain "No credits", which the uploader sends to the out-of-credits screen); `user_not_found` and an empty Balance answer 403 "No credits available..."; a failed Charge answers 500 "Failed to record restoration".
 - Charge only through the `deduct_credit_and_record_restoration` SQL function, via the ledger's `chargeRestoration`, with the caller's Clerk id as a `ClerkUserId`. It locks the user row, rejects an empty balance and inserts the `restorations` row in one transaction.
 - Keep `noStore()` at the top of the handler: without it Next caches the Replicate polling requests.
 - `restorations.original_image_url` holds the placeholder `ephemeral:<filename>`, because the original is never stored.
