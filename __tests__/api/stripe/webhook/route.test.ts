@@ -127,6 +127,8 @@ describe("POST /api/stripe/webhook", () => {
     beforeEach(() => {
       vi.mocked(sendPurchaseEmail).mockClear();
       setStarterPriceId("price_starter");
+      // pino's level methods are not spies after automock, so spy on warn here.
+      vi.spyOn(logger, "warn").mockImplementation(() => {});
     });
 
     afterAll(() => {
@@ -149,6 +151,45 @@ describe("POST /api/stripe/webhook", () => {
         p_package_type: "starter",
       });
       expect(sendPurchaseEmail).toHaveBeenCalledTimes(1);
+    });
+
+    it("still grants metadata credits and warns once when they differ from the Credit pack", async () => {
+      const rpc = useGrantResult({ data: true, error: null });
+
+      const response = await deliver({
+        metadata: {
+          userId: "user-uuid",
+          packageType: "starter",
+          credits: "25",
+          priceId: "price_starter",
+        },
+      });
+
+      expect(response.status).toBe(200);
+      expect(rpc).toHaveBeenCalledWith(
+        "grant_purchase_credits",
+        expect.objectContaining({ p_credits: 25 })
+      );
+      expect(logger.warn).toHaveBeenCalledTimes(1);
+      expect(logger.warn).toHaveBeenCalledWith(
+        {
+          userId: "user-uuid",
+          packageType: "starter",
+          stripePaymentId: "pi_new_123",
+          metadataCredits: 25,
+          packCredits: CREDIT_PACKAGES.starter.credits,
+        },
+        "Purchased credits differ from Credit pack"
+      );
+      expect(sendPurchaseEmail).toHaveBeenCalledTimes(1);
+    });
+
+    it("writes no mismatch warning when credits match the Credit pack", async () => {
+      useGrantResult({ data: true, error: null });
+
+      await deliver();
+
+      expect(logger.warn).not.toHaveBeenCalled();
     });
 
     it("answers 500 when the grant fails, so Stripe redelivers", async () => {
