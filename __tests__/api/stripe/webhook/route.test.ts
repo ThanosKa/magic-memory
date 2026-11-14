@@ -4,6 +4,7 @@ import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { POST } from "@/app/api/stripe/webhook/route";
 import { CREDIT_PACKAGES } from "@/lib/constants";
 import { sendPurchaseEmail } from "@/lib/email";
+import logger from "@/lib/logger";
 
 vi.mock("@/lib/supabase/server");
 vi.mock("@/lib/logger");
@@ -221,6 +222,98 @@ describe("POST /api/stripe/webhook", () => {
 
       expect(response.status).toBe(200);
       expect(rpc).not.toHaveBeenCalled();
+    });
+
+    describe("rejection rules", () => {
+      let logError: ReturnType<typeof vi.spyOn>;
+
+      beforeEach(() => {
+        // The automocked pino logger has no spies, so watch error() here.
+        logError = vi.spyOn(logger, "error").mockImplementation(() => undefined);
+        rpc = useGrantResult({ data: true, error: null });
+      });
+
+      let rpc: ReturnType<typeof vi.fn>;
+
+      async function expectRejected(
+        overrides: Record<string, unknown>,
+        message: string,
+        context: unknown
+      ) {
+
+        const response = await deliver(overrides);
+        const data = await response.json();
+
+        expect(response.status).toBe(200);
+        expect(data).toEqual({ success: true, data: { received: true } });
+        expect(rpc).not.toHaveBeenCalled();
+        expect(sendPurchaseEmail).not.toHaveBeenCalled();
+        expect(logError).toHaveBeenCalledTimes(1);
+        expect(logError).toHaveBeenCalledWith(context, message);
+      }
+
+      it("grants nothing when the metadata is missing or invalid", async () => {
+        await expectRejected(
+          { metadata: { userId: "user-uuid" } },
+          "Missing or invalid metadata in checkout session",
+          {
+            sessionId: "cs_test_123",
+            errors: expect.objectContaining({
+              fieldErrors: expect.objectContaining({
+                packageType: expect.anything(),
+                credits: expect.anything(),
+                priceId: expect.anything(),
+              }),
+            }),
+          }
+        );
+      });
+
+      it("grants nothing when there is no payment id", async () => {
+        await expectRejected(
+          { payment_intent: null },
+          "Missing payment intent in checkout session",
+          { sessionId: "cs_test_123" }
+        );
+      });
+
+      it("grants nothing for an unknown credit pack", async () => {
+        await expectRejected(
+          {
+            metadata: {
+              userId: "user-uuid",
+              packageType: "mega",
+              credits: "20",
+              priceId: "price_starter",
+            },
+          },
+          "Unknown package type in checkout session",
+          { packageType: "mega" }
+        );
+      });
+
+      it("grants nothing when the price id does not match the pack", async () => {
+        await expectRejected(
+          {
+            metadata: {
+              userId: "user-uuid",
+              packageType: "starter",
+              credits: "20",
+              priceId: "price_other",
+            },
+          },
+          "Price id mismatch for checkout session",
+          { packageType: "starter", priceId: "price_other" }
+        );
+      });
+
+      it("grants nothing when the currency is not eur", async () => {
+        await expectRejected(
+          { currency: "usd" },
+          "Unexpected currency for checkout session",
+          { currency: "usd", packageType: "starter" }
+        );
+      });
     });
   });
 });
