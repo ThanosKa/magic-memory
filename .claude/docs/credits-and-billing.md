@@ -2,7 +2,7 @@
 
 Money rules. Every section applies to any diff that touches `app/api/restore/`, `app/api/stripe/`, `app/api/credits/`, `lib/supabase/transactions.ts`, `lib/credits/` or `lib/constants.ts`; those changes ship with tests in `__tests__/`.
 
-`lib/credits/ledger.ts` (`createCreditLedger()`) makes the same SQL calls as the old functions in `lib/supabase/transactions.ts`, with one failure shape and branded `ClerkUserId` / `UserId` types. No route uses it yet: the routes move onto it one at a time, then the old functions go. Routes never import `lib/credits/ledger-db.ts`.
+`lib/credits/ledger.ts` (`createCreditLedger()`) makes the same SQL calls as the old functions in `lib/supabase/transactions.ts`, with one failure shape and branded `ClerkUserId` / `UserId` types. `POST /api/restore` uses it; the other routes move onto it one at a time, then the old functions go. Routes never import `lib/credits/ledger-db.ts`.
 
 ## The credit model
 
@@ -15,8 +15,8 @@ Money rules. Every section applies to any diff that touches `app/api/restore/`, 
 
 ## `POST /api/restore`
 
-- Keep the order: auth, rate limit, input validation, credit check, Replicate, then charge. A failed run costs nothing because the charge comes after Replicate succeeds.
-- Charge only through the `deduct_credit_and_record_restoration` SQL function, via `deductCreditAndRecordRestoration` in `lib/supabase/transactions.ts`. It locks the user row, rejects an empty balance and inserts the `restorations` row in one transaction.
+- Keep the order: auth, rate limit, input validation, credit check (`ledger.balance`), Replicate, then charge. A failed run costs nothing because the charge comes after Replicate succeeds. Every `balance` failure answers 403 "No credits available..." and a failed Charge answers 500 "Failed to record restoration".
+- Charge only through the `deduct_credit_and_record_restoration` SQL function, via the ledger's `chargeRestoration`, with the caller's Clerk id as a `ClerkUserId`. It locks the user row, rejects an empty balance and inserts the `restorations` row in one transaction.
 - Keep `noStore()` at the top of the handler: without it Next caches the Replicate polling requests.
 - `restorations.original_image_url` holds the placeholder `ephemeral:<filename>`, because the original is never stored.
 - The rate limit (10 per minute per user) fails open when Redis is unavailable, deliberately: a Redis outage must not block paying users.
