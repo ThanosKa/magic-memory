@@ -259,7 +259,6 @@ describe("POST /api/restore", () => {
 
         it.each([
             { reason: "user_not_found", failure: { ok: false, reason: "user_not_found" } as const },
-            { reason: "db_error", failure: { ok: false, reason: "db_error", message: "connection refused" } as const },
             { reason: "no_credits", failure: { ok: false, reason: "no_credits" } as const },
         ])("answers 403 when the Balance read gives $reason, before the Restorer runs", async ({ failure }) => {
             ledger.balance.mockResolvedValue(failure)
@@ -274,6 +273,24 @@ describe("POST /api/restore", () => {
             expect(logger.warn).toHaveBeenCalledWith(
                 { userId: "clerk_user_123", creditCheck: failure },
                 "No paid credits available",
+            )
+        })
+
+        it("answers 503 when the Balance cannot be read, before the Restorer runs", async () => {
+            ledger.balance.mockResolvedValue({ ok: false, reason: "db_error", message: "connection refused" })
+
+            const response = await POST(createMockRequest(createMockFile("test.jpg", "image/jpeg")))
+            const data = await response.json()
+
+            expect(response.status).toBe(503)
+            expect(data).toEqual({ success: false, error: "We couldn't check your credits. Please try again." })
+            // The uploader sends any error containing "No credits" to the out-of-credits screen.
+            expect(data.error).not.toContain("No credits")
+            expect(mockPredictionsCreate).not.toHaveBeenCalled()
+            expect(ledger.chargeRestoration).not.toHaveBeenCalled()
+            expect(logger.error).toHaveBeenCalledWith(
+                { userId: "clerk_user_123", error: "connection refused" },
+                "Failed to check credits",
             )
         })
 
