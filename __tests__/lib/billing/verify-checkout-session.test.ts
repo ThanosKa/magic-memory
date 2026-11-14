@@ -7,8 +7,8 @@ import {
 } from "@/lib/billing/verify-checkout-session";
 
 const PACKAGES = {
-  starter: { name: "Starter", price: 1000, priceId: "price_starter" },
-  empty: { name: "Empty", price: 500, priceId: "" },
+  starter: { name: "Starter", credits: 20, price: 1000, priceId: "price_starter" },
+  empty: { name: "Empty", credits: 5, price: 500, priceId: "" },
 };
 
 function session(overrides: Record<string, unknown> = {}) {
@@ -54,7 +54,15 @@ describe("verifyCheckoutSession", () => {
         packageType: "starter",
         packageName: "Starter",
       },
+      creditsMismatch: { metadataCredits: 25, packCredits: 20 },
     });
+  });
+
+  it("reports no credits mismatch when metadata matches the Credit pack", () => {
+    const verdict = verifyCheckoutSession(session(), PACKAGES);
+
+    expect(verdict.ok).toBe(true);
+    expect(verdict.ok && verdict.creditsMismatch).toBeUndefined();
   });
 
   it("grants a discounted Purchase and records the amount after discount", () => {
