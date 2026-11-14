@@ -6,11 +6,9 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { markFreeCreditUsed, getRedisClient } from "@/lib/redis";
 import logger from "@/lib/logger";
 import { restorePhoto } from "@/lib/restore/restorer";
-import {
-  checkUserCredits,
-  deductCreditAndRecordRestoration,
-  rollbackRestoration,
-} from "@/lib/supabase/transactions";
+import { asClerkUserId, createCreditLedger } from "@/lib/credits/ledger";
+
+const ledger = createCreditLedger()
 
 function getRateLimiter() {
   const redis = getRedisClient()
@@ -135,9 +133,11 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId, fileSize: file.size, fileType: file.type }, "Restoration request received")
 
-    const creditCheck = await checkUserCredits(userId)
+    const clerkUserId = asClerkUserId(userId)
+    const creditCheck = await ledger.balance(clerkUserId)
 
-    if (!creditCheck || creditCheck.paid_credits <= 0) {
+    // Every Balance failure answers 403, as before the ledger.
+    if (!creditCheck.ok || creditCheck.paidCredits <= 0) {
       logger.warn({ userId, creditCheck }, "No paid credits available")
       return NextResponse.json(
         { success: false, error: "No credits available. Purchase more credits to continue." },
@@ -153,19 +153,19 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId }, "AI restoration complete")
 
-    const deductResult = await deductCreditAndRecordRestoration(
-      userId,
-      `ephemeral:${originalFilename}`,
-      restoredImageUrl,
-      usedFreeCredit
-    )
+    const charge = await ledger.chargeRestoration(clerkUserId, {
+      originalUrl: `ephemeral:${originalFilename}`,
+      restoredUrl: restoredImageUrl,
+      useFreeCredit: usedFreeCredit,
+    })
 
-    if (!deductResult.success) {
-      logger.error({ userId, error: deductResult.error_message }, "Failed to deduct credit")
+    if (!charge.ok) {
+      const chargeError = charge.reason === "db_error" ? charge.message : charge.reason
+      logger.error({ userId, error: chargeError }, "Failed to deduct credit")
       return NextResponse.json({ success: false, error: "Failed to record restoration" }, { status: 500 })
     }
 
-    restorationId = deductResult.restoration_id
+    restorationId = charge.restorationId
 
     if (usedFreeCredit && getRedisClient()) {
       await markFreeCreditUsed(userId)
@@ -182,7 +182,7 @@ export async function POST(request: NextRequest) {
       data: {
         restoredImageUrl,
         usedFreeCredit,
-        remainingPaidCredits: deductResult.remaining_paid_credits,
+        remainingPaidCredits: charge.remainingCredits,
       },
     })
   } catch (error) {
@@ -191,7 +191,7 @@ export async function POST(request: NextRequest) {
     logger.error({ userId, error: errorMessage, cause: errorCause }, "Restoration error")
 
     if (restorationId) {
-      await rollbackRestoration(restorationId)
+      await ledger.reverseRestoration(restorationId)
       logger.info({ userId, restorationId }, "Rolled back failed restoration")
     }
 

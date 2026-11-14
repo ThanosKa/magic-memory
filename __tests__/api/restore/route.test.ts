@@ -1,13 +1,24 @@
-import { describe, it, expect, vi, beforeEach } from "vitest"
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { NextRequest } from "next/server"
 import { auth } from "@clerk/nextjs/server"
 import { POST } from "@/app/api/restore/route"
-import { checkUserCredits, deductCreditAndRecordRestoration } from "@/lib/supabase/transactions"
 import { getRedisClient, markFreeCreditUsed } from "@/lib/redis"
+import logger from "@/lib/logger"
+import type { CreditLedger } from "@/lib/credits/ledger"
+
+const ledger = vi.hoisted(() => ({
+    balance: vi.fn<CreditLedger["balance"]>(),
+    chargeRestoration: vi.fn<CreditLedger["chargeRestoration"]>(),
+    grantPurchase: vi.fn<CreditLedger["grantPurchase"]>(),
+    reverseRestoration: vi.fn<CreditLedger["reverseRestoration"]>(),
+}))
 
 vi.mock("@clerk/nextjs/server")
 vi.mock("@/lib/supabase/server")
-vi.mock("@/lib/supabase/transactions")
+vi.mock("@/lib/credits/ledger", async (importOriginal) => ({
+    ...(await importOriginal<typeof import("@/lib/credits/ledger")>()),
+    createCreditLedger: () => ledger,
+}))
 vi.mock("@/lib/redis")
 vi.mock("@/lib/logger")
 
@@ -115,12 +126,7 @@ describe("POST /api/restore", () => {
     it("returns 403 when no credits available", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        vi.mocked(checkUserCredits).mockResolvedValue({
-            has_credits: false,
-            has_free_daily: false,
-            paid_credits: 0,
-            should_use_free: false,
-        })
+        ledger.balance.mockResolvedValue({ ok: true, paidCredits: 0 })
 
         const validFile = createMockFile("test.jpg", "image/jpeg")
         const request = createMockRequest(validFile)
@@ -135,12 +141,7 @@ describe("POST /api/restore", () => {
     it("returns 403 even when SQL function reports free daily credit available", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        vi.mocked(checkUserCredits).mockResolvedValue({
-            has_credits: true,
-            has_free_daily: true,
-            paid_credits: 0,
-            should_use_free: true,
-        })
+        ledger.balance.mockResolvedValue({ ok: true, paidCredits: 0 })
 
         const validFile = createMockFile("test.jpg", "image/jpeg")
         const request = createMockRequest(validFile, "my-photo.jpg")
@@ -150,25 +151,19 @@ describe("POST /api/restore", () => {
         expect(response.status).toBe(403)
         expect(data.success).toBe(false)
         expect(data.error).toContain("No credits available")
-        expect(vi.mocked(deductCreditAndRecordRestoration)).not.toHaveBeenCalled()
+        expect(ledger.chargeRestoration).not.toHaveBeenCalled()
         expect(vi.mocked(markFreeCreditUsed)).not.toHaveBeenCalled()
     })
 
     it("uses paid credit when no free available", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        vi.mocked(checkUserCredits).mockResolvedValue({
-            has_credits: true,
-            has_free_daily: false,
-            paid_credits: 50,
-            should_use_free: false,
-        })
+        ledger.balance.mockResolvedValue({ ok: true, paidCredits: 50 })
 
-        vi.mocked(deductCreditAndRecordRestoration).mockResolvedValue({
-            success: true,
-            restoration_id: "restoration-uuid",
-            remaining_paid_credits: 49,
-            error_message: null,
+        ledger.chargeRestoration.mockResolvedValue({
+            ok: true,
+            restorationId: "restoration-uuid",
+            remainingCredits: 49,
         })
 
         mockPredictionsCreate.mockResolvedValue({ id: "pred-123", status: "starting" })
@@ -192,18 +187,12 @@ describe("POST /api/restore", () => {
     it("returns restored image URL on success", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        vi.mocked(checkUserCredits).mockResolvedValue({
-            has_credits: true,
-            has_free_daily: false,
-            paid_credits: 5,
-            should_use_free: false,
-        })
+        ledger.balance.mockResolvedValue({ ok: true, paidCredits: 5 })
 
-        vi.mocked(deductCreditAndRecordRestoration).mockResolvedValue({
-            success: true,
-            restoration_id: "restoration-uuid",
-            remaining_paid_credits: 4,
-            error_message: null,
+        ledger.chargeRestoration.mockResolvedValue({
+            ok: true,
+            restorationId: "restoration-uuid",
+            remainingCredits: 4,
         })
 
         const expectedUrl = "https://replicate.delivery/test-restored.png"
@@ -227,12 +216,7 @@ describe("POST /api/restore", () => {
     it("returns 500 and never charges when Replicate fails", async () => {
         vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
 
-        vi.mocked(checkUserCredits).mockResolvedValue({
-            has_credits: true,
-            has_free_daily: false,
-            paid_credits: 5,
-            should_use_free: false,
-        })
+        ledger.balance.mockResolvedValue({ ok: true, paidCredits: 5 })
 
         mockPredictionsCreate.mockResolvedValue({ id: "pred-123", status: "starting" })
         mockPredictionsGet.mockResolvedValue({
@@ -249,6 +233,111 @@ describe("POST /api/restore", () => {
         expect(response.status).toBe(500)
         expect(data.success).toBe(false)
         expect(data.error).toBe("Restoration failed: model crashed")
-        expect(vi.mocked(deductCreditAndRecordRestoration)).not.toHaveBeenCalled()
+        expect(ledger.chargeRestoration).not.toHaveBeenCalled()
+    })
+
+    describe("through the credit ledger", () => {
+        const NO_CREDITS = "No credits available. Purchase more credits to continue."
+
+        function succeedRestorer(output = "https://replicate.delivery/restored.png") {
+            mockPredictionsCreate.mockResolvedValue({ id: "pred-123", status: "starting" })
+            mockPredictionsGet.mockResolvedValue({ id: "pred-123", status: "succeeded", output })
+        }
+
+        beforeEach(() => {
+            vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+            ledger.balance.mockReset()
+            ledger.chargeRestoration.mockReset()
+            ledger.reverseRestoration.mockReset()
+            vi.spyOn(logger, "warn").mockImplementation(() => {})
+            vi.spyOn(logger, "error").mockImplementation(() => {})
+        })
+
+        afterEach(() => {
+            vi.restoreAllMocks()
+        })
+
+        it.each([
+            { reason: "user_not_found", failure: { ok: false, reason: "user_not_found" } as const },
+            { reason: "db_error", failure: { ok: false, reason: "db_error", message: "connection refused" } as const },
+            { reason: "no_credits", failure: { ok: false, reason: "no_credits" } as const },
+        ])("answers 403 when the Balance read gives $reason, before the Restorer runs", async ({ failure }) => {
+            ledger.balance.mockResolvedValue(failure)
+
+            const response = await POST(createMockRequest(createMockFile("test.jpg", "image/jpeg")))
+            const data = await response.json()
+
+            expect(response.status).toBe(403)
+            expect(data).toEqual({ success: false, error: NO_CREDITS })
+            expect(mockPredictionsCreate).not.toHaveBeenCalled()
+            expect(ledger.chargeRestoration).not.toHaveBeenCalled()
+            expect(logger.warn).toHaveBeenCalledWith(
+                { userId: "clerk_user_123", creditCheck: failure },
+                "No paid credits available",
+            )
+        })
+
+        it("answers 403 when the Balance is below zero", async () => {
+            ledger.balance.mockResolvedValue({ ok: true, paidCredits: -1 })
+
+            const response = await POST(createMockRequest(createMockFile("test.jpg", "image/jpeg")))
+
+            expect(response.status).toBe(403)
+            expect(mockPredictionsCreate).not.toHaveBeenCalled()
+        })
+
+        it("reads the Balance and Charges by the caller's Clerk id after the Restorer succeeds", async () => {
+            ledger.balance.mockResolvedValue({ ok: true, paidCredits: 3 })
+            ledger.chargeRestoration.mockResolvedValue({
+                ok: true,
+                restorationId: "restoration-uuid",
+                remainingCredits: 2,
+            })
+            succeedRestorer("https://replicate.delivery/out.png")
+
+            const response = await POST(
+                createMockRequest(createMockFile("test.jpg", "image/jpeg"), "grandma.jpg"),
+            )
+            const data = await response.json()
+
+            expect(response.status).toBe(200)
+            expect(data).toEqual({
+                success: true,
+                data: {
+                    restoredImageUrl: "https://replicate.delivery/out.png",
+                    usedFreeCredit: false,
+                    remainingPaidCredits: 2,
+                },
+            })
+            expect(ledger.balance).toHaveBeenCalledWith("clerk_user_123")
+            expect(ledger.chargeRestoration).toHaveBeenCalledTimes(1)
+            expect(ledger.chargeRestoration).toHaveBeenCalledWith("clerk_user_123", {
+                originalUrl: "ephemeral:grandma.jpg",
+                restoredUrl: "https://replicate.delivery/out.png",
+                useFreeCredit: false,
+            })
+            expect(ledger.reverseRestoration).not.toHaveBeenCalled()
+        })
+
+        it.each([
+            { failure: { ok: false, reason: "no_credits" } as const, logged: "no_credits" },
+            { failure: { ok: false, reason: "user_not_found" } as const, logged: "user_not_found" },
+            { failure: { ok: false, reason: "db_error", message: "Internal error" } as const, logged: "Internal error" },
+        ])("answers 500 when the Charge gives $failure.reason, and reverses nothing", async ({ failure, logged }) => {
+            ledger.balance.mockResolvedValue({ ok: true, paidCredits: 1 })
+            ledger.chargeRestoration.mockResolvedValue(failure)
+            succeedRestorer()
+
+            const response = await POST(createMockRequest(createMockFile("test.jpg", "image/jpeg")))
+            const data = await response.json()
+
+            expect(response.status).toBe(500)
+            expect(data).toEqual({ success: false, error: "Failed to record restoration" })
+            expect(logger.error).toHaveBeenCalledWith(
+                { userId: "clerk_user_123", error: logged },
+                "Failed to deduct credit",
+            )
+            expect(ledger.reverseRestoration).not.toHaveBeenCalled()
+        })
     })
 })
