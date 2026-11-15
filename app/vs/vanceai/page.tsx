@@ -3,7 +3,9 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { FinalCta } from "@/components/layout/final-cta";
 import { PageContainer } from "@/components/layout/page-container";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { ComparisonTable } from "@/components/competitor/comparison-table";
 import { competitors } from "@/lib/competitors/data";
 import type { FAQItem } from "@/lib/seo/faq-data";
@@ -11,19 +13,17 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/vs/vanceai",
   title: "Magic Memory vs VanceAI — Simple Restoration vs Pro Suite",
   description:
     "Compare Magic Memory and VanceAI for AI photo restoration. Magic Memory offers one-click restoration from €9.99. VanceAI is a professional suite with batch processing. See which tool fits your workflow.",
-  alternates: { canonical: getCanonicalUrl("/vs/vanceai") },
-  openGraph: {
+  social: {
     title: "Magic Memory vs VanceAI — Simple Restoration vs Pro Suite",
     description: "One-click AI photo restoration vs professional image suite. Compare pricing, ease of use, and features.",
-    url: getCanonicalUrl("/vs/vanceai"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Magic Memory vs VanceAI" }],
+    imageAlt: "Magic Memory vs VanceAI",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const vanceai = competitors.vanceai;
 
@@ -102,8 +102,7 @@ export default function VsVanceAIPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section className="pb-24 pt-10 md:pb-32 md:pt-14">
