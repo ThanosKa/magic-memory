@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/glossary/face-restoration",
   title: "What Is Face Restoration? AI-Powered Face Enhancement Explained",
   description:
     "Face restoration is the process of recovering facial detail in degraded photos using AI. Learn how models like GFPGAN detect, restore, and enhance faces in old and blurry photographs.",
-  alternates: { canonical: getCanonicalUrl("/glossary/face-restoration") },
-  openGraph: {
+  social: {
     title: "What Is Face Restoration? AI-Powered Face Enhancement Explained",
     description: "Learn how AI face restoration recovers facial detail in old, blurry, and damaged photographs using models like GFPGAN.",
-    url: getCanonicalUrl("/glossary/face-restoration"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "What Is Face Restoration" }],
+    imageAlt: "What Is Face Restoration",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -58,8 +58,7 @@ export default function GlossaryFaceRestorationPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>
