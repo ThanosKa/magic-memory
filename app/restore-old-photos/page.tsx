@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import {
-  getCanonicalUrl,
-  getOgImageUrl,
   faqPageJsonLd,
   breadcrumbJsonLd,
   useCaseSoftwareJsonLd,
 } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
 import { UseCaseArticle } from "@/components/use-case/use-case-article";
 import { UseCaseRelated } from "@/components/use-case/use-case-related";
 import { FinalCta } from "@/components/layout/final-cta";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(
@@ -24,35 +24,22 @@ const Footer = dynamic(
   { ssr: true },
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/restore-old-photos",
   title: "Restore Old Photos Online — AI Photo Restoration",
   description:
     "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
-  alternates: { canonical: getCanonicalUrl("/restore-old-photos") },
-  openGraph: {
-    title:
-      "Restore Old Photos Online — AI Photo Restoration | Magic Memory",
+  social: {
+    title: "Restore Old Photos Online — AI Photo Restoration | Magic Memory",
     description:
       "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
-    url: getCanonicalUrl("/restore-old-photos"),
-    images: [
-      {
-        url: getOgImageUrl(),
-        width: 1200,
-        height: 630,
-        alt: "Restore Old Photos",
-      },
-    ],
+    imageAlt: "Restore Old Photos",
   },
   twitter: {
-    card: "summary_large_image",
     title: "Restore Old Photos Online",
-    description:
-      "Restore your old photos in seconds with AI. No subscription.",
-    images: [getOgImageUrl()],
+    description: "Restore your old photos in seconds with AI. No subscription.",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -120,22 +107,7 @@ export default function RestoreOldPhotosPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
-      />
+      <JsonLd data={[faqJsonLd, breadcrumb, softwareJsonLd, howToJsonLd]} />
       <Header />
       <main className="flex-1">
         <UseCaseHero

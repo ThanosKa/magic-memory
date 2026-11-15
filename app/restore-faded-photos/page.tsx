@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import {
-  getCanonicalUrl,
-  getOgImageUrl,
   faqPageJsonLd,
   breadcrumbJsonLd,
   useCaseSoftwareJsonLd,
 } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
 import { UseCaseArticle } from "@/components/use-case/use-case-article";
 import { UseCaseRelated } from "@/components/use-case/use-case-related";
 import { FinalCta } from "@/components/layout/final-cta";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(
@@ -24,35 +24,22 @@ const Footer = dynamic(
   { ssr: true },
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/restore-faded-photos",
   title: "Restore Faded Photos — Bring Color and Contrast Back",
   description:
     "Fix faded photos with AI. GFPGAN restores facial detail and contrast lost to UV exposure, time, and poor storage. One-time credits, no subscription.",
-  alternates: { canonical: getCanonicalUrl("/restore-faded-photos") },
-  openGraph: {
-    title:
-      "Restore Faded Photos — Bring Color and Contrast Back | Magic Memory",
+  social: {
+    title: "Restore Faded Photos — Bring Color and Contrast Back | Magic Memory",
     description:
       "Fix faded photos with AI. Restore contrast and facial detail. No subscription.",
-    url: getCanonicalUrl("/restore-faded-photos"),
-    images: [
-      {
-        url: getOgImageUrl(),
-        width: 1200,
-        height: 630,
-        alt: "Restore Faded Photos",
-      },
-    ],
+    imageAlt: "Restore Faded Photos",
   },
   twitter: {
-    card: "summary_large_image",
     title: "Restore Faded Photos With AI",
-    description:
-      "Fix faded photos. Restore contrast and detail. No subscription.",
-    images: [getOgImageUrl()],
+    description: "Fix faded photos. Restore contrast and detail. No subscription.",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -97,18 +84,7 @@ export default function RestoreFadedPhotosPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
-      />
+      <JsonLd data={[faqJsonLd, breadcrumb, softwareJsonLd]} />
       <Header />
       <main className="flex-1">
         <UseCaseHero
