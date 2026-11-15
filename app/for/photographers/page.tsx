@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/for/photographers",
   title: "AI Photo Restoration for Photographers — Fix Old Client Photos",
   description:
     "Restore old and degraded client photos with GFPGAN AI. Magic Memory helps photographers rescue blurry portraits, fix damaged prints, and deliver restored versions to clients. No subscription.",
-  alternates: { canonical: getCanonicalUrl("/for/photographers") },
-  openGraph: {
+  social: {
     title: "AI Photo Restoration for Photographers — Fix Old Client Photos",
     description: "Restore old client photos with GFPGAN AI. Fix blurry portraits and damaged prints in seconds.",
-    url: getCanonicalUrl("/for/photographers"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Photo Restoration for Photographers" }],
+    imageAlt: "Photo Restoration for Photographers",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -57,8 +57,7 @@ export default function ForPhotographersPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>
