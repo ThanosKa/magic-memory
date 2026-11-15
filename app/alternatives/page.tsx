@@ -3,27 +3,25 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { FinalCta } from "@/components/layout/final-cta";
 import { PageContainer } from "@/components/layout/page-container";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { listicleItemListJsonLd } from "@/lib/seo/listicle-schema";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/alternatives",
   title: "AI Photo Restoration Alternatives Compared (2026)",
-  description:
-    "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
-  alternates: { canonical: getCanonicalUrl("/alternatives") },
-  openGraph: {
+  description: "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
+  social: {
     title: "AI Photo Restoration Alternatives Compared (2026)",
-    description:
-      "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
-    url: getCanonicalUrl("/alternatives"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "AI Photo Restoration Alternatives Compared" }],
+    description: "Alternatives to Remini, MyHeritage Photo Enhancer and VanceAI: 5 AI photo restoration tools compared by pricing model, platform, strengths and limits.",
+    imageAlt: "AI Photo Restoration Alternatives Compared",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const tools = [
   {
@@ -111,11 +109,7 @@ export default function AlternativesPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      {itemList && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
-      )}
+      <JsonLd data={[faqJsonLd, breadcrumb, ...(itemList ? [itemList] : [])]} />
       <Header />
       <main className="flex-1">
         <section className="pb-24 pt-10 md:pb-32 md:pt-14">
