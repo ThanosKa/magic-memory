@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/glossary/photo-restoration",
   title: "What Is Photo Restoration? Definition, Methods, and Tools",
   description:
     "Photo restoration is the process of repairing and enhancing old, damaged, or degraded photographs. Learn about manual retouching, AI-powered restoration with GFPGAN, and how to choose the right method for your photos.",
-  alternates: { canonical: getCanonicalUrl("/glossary/photo-restoration") },
-  openGraph: {
+  social: {
     title: "What Is Photo Restoration? Definition, Methods, and Tools",
     description: "Learn what photo restoration is, how it works, and which methods produce the best results for old and damaged photographs.",
-    url: getCanonicalUrl("/glossary/photo-restoration"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "What Is Photo Restoration" }],
+    imageAlt: "What Is Photo Restoration",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -58,8 +58,7 @@ export default function GlossaryPhotoRestorationPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>
