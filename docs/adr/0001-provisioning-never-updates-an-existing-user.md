@@ -8,7 +8,7 @@ Provisioning creates a User's `users` row the first time they appear, from the C
 
 Provisioning is insert or nothing. On a conflict on `clerk_user_id` it changes no column of the existing row, returns the row as it was, and reports `already_existed`. It never uses an upsert that updates on conflict.
 
-The one allowed change to an existing row is a Re-link: a row with the same email under another Clerk id gets the new Clerk id and keeps its Credits and history.
+The one allowed change to an existing row is a Re-link: a row with the same email under another Clerk id gets the new Clerk id and keeps its Credits and history. A Re-link also needs a verified, non-empty primary email; without one Provisioning fails and writes nothing. It also sets `name` and `profile_image` when Clerk sends them, and keeps the stored values when it does not.
 
 `findUser` answers `error`, never `missing`, when the read fails, so a database error is not mistaken for a new User.
 
