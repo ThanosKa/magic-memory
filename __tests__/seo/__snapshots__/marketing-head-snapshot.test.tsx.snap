@@ -103,7 +103,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "item": {
                 "@type": "SoftwareApplication",
                 "applicationCategory": "PhotographyApplication",
-                "description": "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
+                "description": "Photo enhancement app with face restoration. In-app subscription with weekly, monthly and yearly options; iOS and web.",
                 "name": "Remini",
                 "operatingSystem": "iOS, Web",
                 "review": {
@@ -195,7 +195,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "numberOfItems": 5,
         },
-        "sha256": "da0b27b90e93dda030ef607fecc8cc99e56d6cacbd9d8b390b381bf1c49d30e5",
+        "sha256": "cac84fe977a091c9d65fa02608430a4adb0c0e7af36a4dc726917046755cb5e0",
       },
     ],
     "metadata": {
@@ -234,7 +234,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "You can sign up to MyHeritage for free, but MyHeritage does not publish a free-use limit for the Photo Enhancer. Unlimited use comes with the MyHeritage Photo subscription, or with a plan that includes the photo features, such as the Complete or Omni plan (MyHeritage help center, checked 2026-11-16).",
+                "text": "Only in a limited way: a free MyHeritage account gets limited use of the Photo Enhancer, and MyHeritage does not state the number. Unlimited use comes with the MyHeritage Photo subscription or the Omni plan, and the Complete plan also includes the Photo Enhancer (MyHeritage help center, checked 2026-11-16).",
               },
               "name": "Can I use MyHeritage Photo Enhancer for free?",
             },
@@ -288,7 +288,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "3345e4f942079ba440b8a58be8afe14a10dfab6d914d5a044abc36cd603764d5",
+        "sha256": "bc3f0665579410c47e9bc4935948008763909ec6c333f570ba2c874ef529ae39",
       },
       {
         "data": {
@@ -354,7 +354,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "It depends on your needs. Magic Memory is better if you want web access (no app download required), prefer one-time payment over weekly subscription, and value privacy (no cloud photo storage). Remini is better if you want a mobile app with additional editing features and video enhancement capabilities.",
+                "text": "It depends on your needs. Magic Memory is better if you want web access (no app download required), prefer one-time payment over a subscription, and want your photos not kept after processing. Remini is better if you want a phone app with additional editing features.",
               },
               "name": "Is Magic Memory better than Remini?",
             },
@@ -370,7 +370,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Remini is a recurring in-app subscription with weekly and monthly options. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. For occasional users who restore a few photos per month, Magic Memory is significantly cheaper. For daily heavy use, compare the per-photo cost.",
+                "text": "Remini is a recurring in-app subscription with weekly, monthly and yearly options. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. For occasional users who restore a few photos per month, Magic Memory is significantly cheaper. For daily heavy use, compare the per-photo cost.",
               },
               "name": "What does Remini cost compared to Magic Memory?",
             },
@@ -392,7 +392,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "096bda973a2a9b5d65e54e92553b7c4dbd9f105cf76f614b4617edda0e7a4517",
+        "sha256": "091f51145094c44e5be8307c0edd6c2fd36600c7d634f777e54bed0a2c256b0b",
       },
       {
         "data": {
@@ -766,7 +766,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "item": {
                 "@type": "SoftwareApplication",
                 "applicationCategory": "PhotographyApplication",
-                "description": "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
+                "description": "Photo enhancement app with face restoration. In-app subscription with weekly, monthly and yearly options; iOS and web.",
                 "name": "Remini",
                 "operatingSystem": "iOS, Web",
                 "review": {
@@ -858,7 +858,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "numberOfItems": 5,
         },
-        "sha256": "da0b27b90e93dda030ef607fecc8cc99e56d6cacbd9d8b390b381bf1c49d30e5",
+        "sha256": "cac84fe977a091c9d65fa02608430a4adb0c0e7af36a4dc726917046755cb5e0",
       },
       {
         "data": {
@@ -2488,7 +2488,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge a weekly or monthly subscription; you can buy 20 Magic Memory credits for €9.99 and keep them forever.",
+                "text": "No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge a weekly, monthly or yearly subscription; you can buy 20 Magic Memory credits for €9.99 and keep them forever.",
               },
               "name": "Is Magic Memory a subscription?",
             },
@@ -2552,7 +2552,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Remini sells an in-app subscription with weekly and monthly options. MyHeritage Photo Enhancer comes with its Photo subscription or a plan that includes it. Magic Memory's Premium pack is €29.99 for 120 never-expiring credits, with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.",
+                "text": "Remini sells an in-app subscription with weekly, monthly and yearly options. MyHeritage Photo Enhancer comes with its Photo subscription or a plan that includes it. Magic Memory's Premium pack is €29.99 for 120 never-expiring credits, with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.",
               },
               "name": "How does Magic Memory compare to Remini or MyHeritage on price?",
             },
@@ -2566,7 +2566,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "7b13c143cdb01183252065a50ac2961046a10b42cf0cba4115839ce223ffb215",
+        "sha256": "5d6d7e24bf0ea6ab410986ed67e768cb4934c3be371849e9916de1d7a42fd1b3",
       },
     ],
     "metadata": {
@@ -3850,13 +3850,13 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes — Magic Memory is a non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is built for the browser, Remini is best known as a phone app; Magic Memory is one-time credits that never expire, Remini is a recurring in-app subscription; Magic Memory does not retain photos after processing, Remini stores them in your cloud account.",
+                "text": "Yes — Magic Memory is a non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is built for the browser, Remini is best known as a phone app; Magic Memory is one-time credits that never expire, Remini is a recurring in-app subscription; Magic Memory does not keep your photos after processing.",
               },
               "name": "Is Magic Memory a Remini alternative?",
             },
           ],
         },
-        "sha256": "2e48a23e912ba2a66c4c849745b312faf04157ff03718315bb1f941bb63a7083",
+        "sha256": "0d0e45d66e82d858cceb2a5b13893d552f4df4d93d8209caa72699d71a4a77bb",
       },
       {
         "data": {

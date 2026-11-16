@@ -40,7 +40,7 @@ Free tier: none. Every restoration uses one credit from a pack below.
 
 ## Comparison to competitors
 
-- Remini: in-app subscription with weekly and monthly options
+- Remini: in-app subscription with weekly, monthly and yearly options
 - MyHeritage Photo Enhancer: Photo subscription, or the Complete or Omni plan
 - VanceAI: monthly credit plans from $15 per month billed yearly (as of 2026-11-16)
 - Magic Memory Premium: €29.99 one-time, no recurring charge

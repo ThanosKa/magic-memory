@@ -37,11 +37,11 @@ const tools = [
   {
     name: "Remini",
     url: "https://remini.ai",
-    pricing: "In-app subscription (weekly and monthly options)",
+    pricing: "In-app subscription (weekly, monthly and yearly options)",
     platform: "Phone app and web (app.remini.ai)",
     bestFor: "Mobile users who want an app with editing features",
     strengths: ["Large user base", "Phone app and web version", "Editing tools"],
-    weaknesses: ["Recurring subscription", "Poor value for a few photos", "Cloud photo storage"],
+    weaknesses: ["Recurring subscription", "Poor value for a few photos"],
     highlight: false,
   },
   {

@@ -48,7 +48,7 @@ export function BestAIPhotoRestorationContent() {
             </tr>
             <tr className="border-b border-border bg-muted/20">
               <td className="px-4 py-3 font-medium">Remini</td>
-              <td className="px-4 py-3 text-muted-foreground">In-app subscription (weekly and monthly options)</td>
+              <td className="px-4 py-3 text-muted-foreground">In-app subscription (weekly, monthly and yearly options)</td>
               <td className="px-4 py-3 text-muted-foreground">Check in the app</td>
               <td className="px-4 py-3 text-muted-foreground">iOS app, web</td>
               <td className="px-4 py-3 text-muted-foreground">Phone users</td>
@@ -56,7 +56,7 @@ export function BestAIPhotoRestorationContent() {
             <tr className="border-b border-border">
               <td className="px-4 py-3 font-medium">MyHeritage Photo Enhancer</td>
               <td className="px-4 py-3 text-muted-foreground">Photo subscription (all AI photo tools) or a genealogy plan that includes it</td>
-              <td className="px-4 py-3 text-muted-foreground">Free sign-up; no published free limit</td>
+              <td className="px-4 py-3 text-muted-foreground">Limited free use; number not stated</td>
               <td className="px-4 py-3 text-muted-foreground">Web, mobile app</td>
               <td className="px-4 py-3 text-muted-foreground">Genealogy researchers</td>
             </tr>
@@ -77,7 +77,7 @@ export function BestAIPhotoRestorationContent() {
           </tbody>
         </table>
         <p className="text-xs text-muted-foreground mt-3">
-          As of 2026-11-13. Magic Memory: our own price list. VanceAI: vanceai.com/pricing. MyHeritage: its help article on the Photo subscription, which gives unlimited Photo Enhancer use and points to the plans page for the price. Fotor: fotor.com/pricing, which showed the plans but no prices when we checked. Remini: no public price page; its App Store listing shows weekly and monthly subscriptions, and it also runs at app.remini.ai. Prices change, so confirm on each vendor&apos;s site before you buy.
+          As of 2026-11-13. Magic Memory: our own price list. VanceAI: vanceai.com/pricing. MyHeritage: its help article on the Photo subscription, which gives unlimited Photo Enhancer use and points to the plans page for the price. Fotor: fotor.com/pricing, which showed the plans but no prices when we checked. Remini: no public price page; its App Store listing shows weekly, monthly and yearly subscriptions, and it also runs at app.remini.ai. Prices change, so confirm on each vendor&apos;s site before you buy.
         </p>
       </div>
 
@@ -115,7 +115,7 @@ export function BestAIPhotoRestorationContent() {
       </p>
       <ul>
         <li><strong>Best for:</strong> Phone users who want an app</li>
-        <li><strong>Pricing:</strong> In-app subscription with weekly and monthly options; check the current price in the app</li>
+        <li><strong>Pricing:</strong> In-app subscription with weekly, monthly and yearly options; check the current price in the app</li>
         <li><strong>Platform:</strong> iOS app and a web version (app.remini.ai)</li>
         <li><strong>Limitation:</strong> A recurring subscription is poor value if you only have a few photos</li>
       </ul>

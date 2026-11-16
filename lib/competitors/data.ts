@@ -33,17 +33,16 @@ export const competitors: Record<string, Competitor> = {
       "Web version as well as the app",
     ],
     weaknesses: [
-      "Recurring in-app subscription (weekly and monthly options)",
+      "Recurring in-app subscription (weekly, monthly and yearly options)",
       "Poor value if you only have a few photos",
-      "Photos stored in cloud without clear retention policy",
     ],
-    pricing: "In-app subscription (weekly and monthly options)",
+    pricing: "In-app subscription (weekly, monthly and yearly options)",
     platform: "Phone app and web (app.remini.ai)",
     features: [
       {
         label: "Price",
         magicMemory: "One-time credits (€9.99–€29.99)",
-        competitor: "In-app subscription, weekly or monthly",
+        competitor: "In-app subscription, weekly, monthly or yearly",
       },
       {
         label: "Free tier",
@@ -58,7 +57,7 @@ export const competitors: Record<string, Competitor> = {
       {
         label: "Photo storage",
         magicMemory: "None (privacy-first)",
-        competitor: "Cloud stored",
+        competitor: "See Remini's privacy policy",
       },
       {
         label: "Processing time",
@@ -82,7 +81,7 @@ export const competitors: Record<string, Competitor> = {
     name: "MyHeritage Photo Enhancer",
     slug: "myheritage",
     url: "https://myheritage.com",
-    tagline: "Photo enhancement bundled with genealogy",
+    tagline: "Photo enhancement from a genealogy platform",
     description:
       "MyHeritage is primarily a genealogy platform that includes a photo enhancer tool. Unlimited use of its Photo Enhancer comes with the MyHeritage Photo subscription or a plan that includes it, so you pay a recurring subscription even if you only have a few photos.",
     strengths: [
@@ -106,7 +105,7 @@ export const competitors: Record<string, Competitor> = {
       {
         label: "Free tier",
         magicMemory: "None (a failed restoration costs no credit)",
-        competitor: "Free sign-up; no published free limit",
+        competitor: "Limited free use; number not stated",
       },
       {
         label: "Platform",

@@ -56,7 +56,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is Magic Memory a Remini alternative?",
     answer:
-      "Yes — Magic Memory is a non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is built for the browser, Remini is best known as a phone app; Magic Memory is one-time credits that never expire, Remini is a recurring in-app subscription; Magic Memory does not retain photos after processing, Remini stores them in your cloud account.",
+      "Yes — Magic Memory is a non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is built for the browser, Remini is best known as a phone app; Magic Memory is one-time credits that never expire, Remini is a recurring in-app subscription; Magic Memory does not keep your photos after processing.",
   },
 ];
 
@@ -71,7 +71,7 @@ export default function VsReminiPage() {
     {
       category: "Pricing model",
       magicMemory: "One-time credits (€9.99–€29.99), credits never expire",
-      remini: "In-app subscription with weekly and monthly options",
+      remini: "In-app subscription with weekly, monthly and yearly options",
     },
     {
       category: "Platform",
@@ -81,7 +81,7 @@ export default function VsReminiPage() {
     {
       category: "Privacy",
       magicMemory: "No persistent photo storage after processing",
-      remini: "Photos stored in cloud account",
+      remini: "See Remini's privacy policy",
     },
     {
       category: "Free tier",
@@ -143,7 +143,7 @@ export default function VsReminiPage() {
                   <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">None</td><td className="py-2">Check in the app</td><td className="py-2">No published limit</td></tr>
                   <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Platform</td><td className="py-2">Web (any device)</td><td className="py-2">Phone app, web</td><td className="py-2">Web, mobile app</td></tr>
                   <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Bundled with…</td><td className="py-2">Nothing</td><td className="py-2">Editing tools</td><td className="py-2">Genealogy tools</td></tr>
-                  <tr><td className="py-2 font-medium text-paper">Photos stored?</td><td className="py-2">No</td><td className="py-2">Yes — cloud</td><td className="py-2">Yes — account</td></tr>
+                  <tr><td className="py-2 font-medium text-paper">Photos stored?</td><td className="py-2">No</td><td className="py-2">See its privacy policy</td><td className="py-2">See its privacy policy</td></tr>
                 </tbody>
               </table>
             </div>

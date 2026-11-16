@@ -30,7 +30,7 @@ const faqs: FAQItem[] = [
   {
     question: "Can I use MyHeritage Photo Enhancer for free?",
     answer:
-      "You can sign up to MyHeritage for free, but MyHeritage does not publish a free-use limit for the Photo Enhancer. Unlimited use comes with the MyHeritage Photo subscription, or with a plan that includes the photo features, such as the Complete or Omni plan (MyHeritage help center, checked 2026-11-16).",
+      "Only in a limited way: a free MyHeritage account gets limited use of the Photo Enhancer, and MyHeritage does not state the number. Unlimited use comes with the MyHeritage Photo subscription or the Omni plan, and the Complete plan also includes the Photo Enhancer (MyHeritage help center, checked 2026-11-16).",
   },
   {
     question: "How much does MyHeritage Photo Enhancer cost?",
@@ -93,7 +93,7 @@ export default function MyHeritageAlternativePage() {
             </h1>
 
             <p className="text-lg leading-[1.6] text-paper/70 mb-4">
-              Unlimited use of MyHeritage Photo Enhancer comes with the MyHeritage Photo subscription, or with a genealogy plan that includes the photo features (Complete or Omni). Both renew until you cancel. If you only have a few old photos to fix, Magic Memory restores faces with one-time credit packs: €9.99 for 20 photos, and the credits never expire.
+              Unlimited use of MyHeritage Photo Enhancer comes with the MyHeritage Photo subscription or the Omni plan, and the Complete genealogy plan also includes it. All of them renew until you cancel. If you only have a few old photos to fix, Magic Memory restores faces with one-time credit packs: €9.99 for 20 photos, and the credits never expire.
             </p>
             <p className="text-sm text-paper/70 mb-10">
               <em>As of 2026-11-16. MyHeritage: its help center articles on the Photo subscription and the Complete plan; prices are on MyHeritage&apos;s plans page. Magic Memory: our own price list.</em>
@@ -111,7 +111,7 @@ export default function MyHeritageAlternativePage() {
                     </tr>
                   </thead>
                   <tbody className="text-paper/70">
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free account</td><td className="py-2">No published free limit</td><td className="py-2">Limited</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free account</td><td className="py-2">Limited free use; number not stated</td><td className="py-2">Limited</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo subscription</td><td className="py-2">Unlimited, with the other AI photo tools</td><td className="py-2">No</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Complete plan</td><td className="py-2">Included (Photo Scanner not included)</td><td className="py-2">Yes</td></tr>
                     <tr><td className="py-2 font-medium text-paper">Omni plan</td><td className="py-2">Included, with everything in the Photo subscription</td><td className="py-2">Yes</td></tr>
@@ -132,7 +132,7 @@ export default function MyHeritageAlternativePage() {
                   <tbody className="text-paper/70">
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Pricing model</td><td className="py-2">Recurring subscription</td><td className="py-2">One-time credits, never expire</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Price</td><td className="py-2">On MyHeritage&apos;s plans page</td><td className="py-2">€9.99 (20 credits) to €29.99 (120 credits)</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Free sign-up; no published limit</td><td className="py-2">None</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Limited free use; number not stated</td><td className="py-2">None</td></tr>
                     <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo-only purchase?</td><td className="py-2">Yes — Photo subscription</td><td className="py-2">Yes — one-time packs</td></tr>
                     <tr><td className="py-2 font-medium text-paper">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.25</td></tr>
                   </tbody>

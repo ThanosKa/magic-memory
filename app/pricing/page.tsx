@@ -55,7 +55,7 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Is Magic Memory a subscription?",
     answer:
-      `No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge a weekly or monthly subscription; you can buy ${starter.credits} Magic Memory credits for ${starter.priceDisplay} and keep them forever.`,
+      `No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge a weekly, monthly or yearly subscription; you can buy ${starter.credits} Magic Memory credits for ${starter.priceDisplay} and keep them forever.`,
   },
   {
     question: "Do my credits ever expire?",
@@ -95,7 +95,7 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "How does Magic Memory compare to Remini or MyHeritage on price?",
     answer:
-      `Remini sells an in-app subscription with weekly and monthly options. MyHeritage Photo Enhancer comes with its Photo subscription or a plan that includes it. Magic Memory's Premium pack is ${premium.priceDisplay} for ${premium.credits} never-expiring credits, with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.`,
+      `Remini sells an in-app subscription with weekly, monthly and yearly options. MyHeritage Photo Enhancer comes with its Photo subscription or a plan that includes it. Magic Memory's Premium pack is ${premium.priceDisplay} for ${premium.credits} never-expiring credits, with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.`,
   },
   {
     question: "Is my payment information secure?",
