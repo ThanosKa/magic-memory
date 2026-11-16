@@ -4,7 +4,7 @@ import { z } from "zod";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { sendWelcomeEmail } from "@/lib/email";
 import logger from "@/lib/logger";
-import { SIGNUP_CREDITS } from "@/lib/users";
+import { provisionUser } from "@/lib/users";
 
 const clerkWebhookSchema = z.discriminatedUnion("type", [
     z.object({
@@ -12,8 +12,13 @@ const clerkWebhookSchema = z.discriminatedUnion("type", [
         data: z.object({
             id: z.string(),
             email_addresses: z.array(
-                z.object({ email_address: z.string().email() })
+                z.object({
+                    id: z.string().optional(),
+                    email_address: z.string().email(),
+                    verification: z.object({ status: z.string() }).nullish(),
+                })
             ),
+            primary_email_address_id: z.string().nullish(),
             first_name: z.string().nullable(),
             last_name: z.string().nullable(),
             image_url: z.string().url().nullable(),
@@ -92,32 +97,37 @@ export async function POST(request: NextRequest) {
 
         switch (event.type) {
             case "user.created": {
-                const { id, email_addresses, first_name, last_name, image_url } = event.data;
-                const email = email_addresses[0]?.email_address || "";
+                const { id, email_addresses, primary_email_address_id, first_name, last_name, image_url } = event.data;
+                const primary = email_addresses.find(
+                    (address) => address.id !== undefined && address.id === primary_email_address_id
+                );
+                const email = (primary ?? email_addresses[0])?.email_address || "";
+                const emailVerified = primary?.verification?.status === "verified";
                 const name = [first_name, last_name].filter(Boolean).join(" ") || null;
 
-                const { error } = await supabase.from("users").insert({
-                    clerk_user_id: id,
-                    email,
-                    name,
-                    profile_image: image_url,
-                    paid_credits: SIGNUP_CREDITS,
-                });
+                const result = await provisionUser(
+                    { clerkUserId: id, email, name, imageUrl: image_url, emailVerified },
+                    { supabase }
+                );
 
-                if (error) {
-                    // Duplicate key errors are expected when webhooks are retried
-                    // This is idempotent behavior - the user already exists, so we treat it as success
-                    if (error.code === '23505' || error.message.includes('duplicate key')) {
-                        logger.info({ userId: id, email }, "User already exists in database (duplicate webhook)");
-                        break;
-                    }
-
-                    // For other errors, return 500 so Clerk retries
-                    logger.error({ error: error.message, userId: id }, "Failed to create user in database");
+                if (!result.ok) {
+                    // Return 500 so Clerk retries
+                    logger.error({ error: result.message, userId: id }, "Failed to create user in database");
                     return NextResponse.json(
                         { success: false, error: "Failed to create user" },
                         { status: 500 }
                     );
+                }
+
+                if (result.outcome === "already_existed") {
+                    // Retried webhook, or GET /api/credits created the row first
+                    logger.info({ userId: id, email }, "User already exists in database (duplicate webhook)");
+                    break;
+                }
+
+                if (result.outcome === "relinked") {
+                    logger.warn({ userId: id, email }, "Existing user row re-linked to new Clerk id");
+                    break;
                 }
 
                 logger.info({ userId: id, email }, "User created in database");

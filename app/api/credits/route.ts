@@ -54,7 +54,11 @@ export async function GET() {
       try {
         const client = await clerkClient();
         const clerkUser = await client.users.getUser(userId);
-        const email = clerkUser.emailAddresses[0]?.emailAddress;
+        const primary = clerkUser.emailAddresses.find(
+          (address) => address.id === clerkUser.primaryEmailAddressId
+        );
+        const email = (primary ?? clerkUser.emailAddresses[0])?.emailAddress;
+        const emailVerified = primary?.verification?.status === "verified";
 
         if (!email) {
           logger.error(
@@ -76,7 +80,7 @@ export async function GET() {
             .join(" ") || null;
 
         const ensured = await provisionUser(
-          { clerkUserId: userId, email, name },
+          { clerkUserId: userId, email, name, emailVerified },
           { supabase }
         );
 

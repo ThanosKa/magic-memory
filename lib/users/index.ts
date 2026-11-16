@@ -12,6 +12,11 @@ export type NewUserProfile = {
   name: string | null;
   /** Stored in `profile_image` when given; the column is left out otherwise. */
   imageUrl?: string | null;
+  /**
+   * True only when `email` is the Clerk user's primary address and Clerk has
+   * verified it. A row is re-linked by email, so anything else never re-links.
+   */
+  emailVerified?: boolean;
 };
 
 export type UserRow = {
@@ -58,10 +63,11 @@ export async function findUser(
  * Invariants:
  * - Never changes any column of an existing row for that Clerk id; the
  *   outcome is "already_existed" and the row comes back as it was.
- * - If a row with the same email exists under another clerk_user_id (Clerk
+ * - If a row with the same non-empty, verified primary email exists under another clerk_user_id (Clerk
  *   user deleted and recreated, or a dev-to-prod instance switch), it is
  *   re-linked to the new Clerk id ("relinked"), keeping its credits and
- *   history. Safe: other tables reference users.id, not clerk_user_id.
+ *   history. Only the Clerk id, and the name and image when Clerk sent them,
+ *   change. Safe: other tables reference users.id, not clerk_user_id.
  * - Two concurrent calls for one Clerk id give one "created" and one
  *   "already_existed", because the insert is insert-or-nothing.
  */
@@ -69,7 +75,7 @@ export async function provisionUser(
   profile: NewUserProfile,
   { supabase }: { supabase: SupabaseClient }
 ): Promise<ProvisionResult> {
-  const { clerkUserId, email, name, imageUrl } = profile;
+  const { clerkUserId, email, name, imageUrl, emailVerified } = profile;
 
   // Insert or do nothing: a conflict on clerk_user_id returns no row and
   // leaves the existing row, and its Balance, as it was.
@@ -114,9 +120,20 @@ export async function provisionUser(
     return { ok: false, message: error?.message ?? "Unknown error" };
   }
 
+  // Re-linking moves a row's credits and history to a new Clerk id, so it
+  // needs an email Clerk has verified as the primary one, and never an empty one.
+  if (emailVerified !== true || email === "") {
+    return { ok: false, message: "Email belongs to another user and is not verified for re-linking" };
+  }
+
   const { data: relinked, error: relinkError } = await supabase
     .from("users")
-    .update({ clerk_user_id: clerkUserId, name })
+    .update({
+      clerk_user_id: clerkUserId,
+      // Keep the stored name and image when Clerk sends none.
+      ...(name !== null && { name }),
+      ...(imageUrl != null && { profile_image: imageUrl }),
+    })
     .eq("email", email)
     .select()
     .single();
