@@ -31,7 +31,7 @@ const bestAiPhotoRestoration: ListicleEntry[] = [
     name: "Remini",
     url: "https://remini.ai",
     description:
-      "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
+      "Photo enhancement app with face restoration. In-app subscription with weekly, monthly and yearly options; iOS and web.",
     applicationCategory: "PhotographyApplication",
     operatingSystem: "iOS, Web",
     reviewBody:

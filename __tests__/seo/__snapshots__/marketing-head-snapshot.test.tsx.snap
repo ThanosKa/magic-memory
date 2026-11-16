@@ -103,7 +103,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "item": {
                 "@type": "SoftwareApplication",
                 "applicationCategory": "PhotographyApplication",
-                "description": "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
+                "description": "Photo enhancement app with face restoration. In-app subscription with weekly, monthly and yearly options; iOS and web.",
                 "name": "Remini",
                 "operatingSystem": "iOS, Web",
                 "review": {
@@ -195,7 +195,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "numberOfItems": 5,
         },
-        "sha256": "da0b27b90e93dda030ef607fecc8cc99e56d6cacbd9d8b390b381bf1c49d30e5",
+        "sha256": "cac84fe977a091c9d65fa02608430a4adb0c0e7af36a4dc726917046755cb5e0",
       },
     ],
     "metadata": {
@@ -234,23 +234,23 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "MyHeritage's free tier is a watermarked preview only — you can run the enhancer on a small number of photos to see the result, but the unwatermarked, downloadable output is locked behind a paid plan. There is no recurring free monthly quota in 2026. To enhance and download a clean image, you need at least the Basic plan ($119/year as of 2026-05-19).",
+                "text": "Only in a limited way: a free MyHeritage account gets limited use of the Photo Enhancer, and MyHeritage does not state the number. Unlimited use comes with the MyHeritage Photo subscription or the Omni plan, and the Complete plan also includes the Photo Enhancer (MyHeritage help center, checked 2026-11-16).",
               },
-              "name": "What is the MyHeritage Photo Enhancer free tier limit in 2026?",
+              "name": "Can I use MyHeritage Photo Enhancer for free?",
             },
             {
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "MyHeritage Photo Enhancer is bundled into MyHeritage's genealogy plans, which cost $119/yr (Basic), $189/yr (Premium), and $259/yr (Complete) as of 2026. All three plans are annual and include the full genealogy platform alongside photo enhancement. There is no photo-only tier — even the cheapest plan includes family-tree, DNA-matching, and historical-record features.",
+                "text": "MyHeritage sells a Photo subscription that gives unlimited use of its AI photo tools, the Photo Enhancer included. The Complete and Omni plans also include the photo features. MyHeritage shows the price on its plans page rather than in its help articles, so check it there before you buy. Either way it is a recurring subscription.",
               },
-              "name": "How much does MyHeritage Photo Enhancer cost in 2026?",
+              "name": "How much does MyHeritage Photo Enhancer cost?",
             },
             {
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. MyHeritage's photo enhancement, MyHeritage In Color, and Deep Nostalgia features are sold only as part of a genealogy plan. There is no standalone photo-enhancer subscription. If you only want photo restoration, you pay $119–$259/year for genealogy features you may not use.",
+                "text": "No. MyHeritage now sells a Photo subscription on its own, which covers the Photo Enhancer and its other AI photo tools. The Complete and Omni genealogy plans include the photo features too. Both are recurring subscriptions, so if you only have a few photos to restore you keep paying after you are done.",
               },
               "name": "Do I need a genealogy subscription to use MyHeritage photo enhancement?",
             },
@@ -258,9 +258,9 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Magic Memory is the cheapest standalone alternative — one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Restoring 100 photos on MyHeritage requires a $119/yr subscription. The same 100 photos on Magic Memory cost €25 in credits if you use the largest pack.",
+                "text": "Magic Memory is a standalone alternative with no subscription — one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Unlimited use on MyHeritage needs a recurring subscription. 100 photos on Magic Memory cost €25 in credits if you use the largest pack, with nothing to cancel afterwards.",
               },
-              "name": "What's the cheapest MyHeritage Photo Enhancer alternative in 2026?",
+              "name": "What's a MyHeritage Photo Enhancer alternative without a subscription?",
             },
             {
               "@type": "Question",
@@ -288,7 +288,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "9c77db223095c3b22cf276fea1530763e718ce856106c9ce6189d15658b75a24",
+        "sha256": "bc3f0665579410c47e9bc4935948008763909ec6c333f570ba2c874ef529ae39",
       },
       {
         "data": {
@@ -322,9 +322,9 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "alternates": {
         "canonical": "https://magic-memory.dev/alternatives/myheritage",
       },
-      "description": "MyHeritage Photo Enhancer pricing in 2026: $119 Basic, $189 Premium, $259 Complete — all annual, all bundled with genealogy. Free tier is a watermarked preview only. Magic Memory offers standalone AI restoration from €9.99 one-time. Full breakdown.",
+      "description": "MyHeritage Photo Enhancer needs a Photo subscription for unlimited use. Magic Memory restores faces in old photos with one-time packs from €9.99 that never expire.",
       "openGraph": {
-        "description": "MyHeritage costs $119–$259/yr bundled with genealogy. Free tier = watermarked preview. See the standalone alternative from €9.99.",
+        "description": "MyHeritage Photo Enhancer needs a Photo subscription for unlimited use. Magic Memory: one-time packs from €9.99.",
         "images": [
           {
             "alt": "MyHeritage Alternative",
@@ -333,14 +333,14 @@ exports[`marketing page head snapshot > records metadata and structured data for
             "width": 1200,
           },
         ],
-        "title": "MyHeritage Photo Enhancer Pricing 2026 — Free Limits & Alternative",
+        "title": "MyHeritage Photo Enhancer Alternative: No Subscription",
         "url": "https://magic-memory.dev/alternatives/myheritage",
       },
       "robots": {
         "follow": true,
         "index": true,
       },
-      "title": "MyHeritage Photo Enhancer Pricing 2026: Free Limits + Cheaper Alternative",
+      "title": "MyHeritage Photo Enhancer Alternative: No Subscription",
     },
   },
   "/alternatives/remini": {
@@ -354,7 +354,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "It depends on your needs. Magic Memory is better if you want web access (no app download required), prefer one-time payment over weekly subscription, and value privacy (no cloud photo storage). Remini is better if you want a mobile app with additional editing features and video enhancement capabilities.",
+                "text": "It depends on your needs. Magic Memory is better if you want web access (no app download required), prefer one-time payment over a subscription, and want your photos not kept after processing. Remini is better if you want a phone app with additional editing features.",
               },
               "name": "Is Magic Memory better than Remini?",
             },
@@ -370,7 +370,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Remini charges $9.99 per week as a subscription. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. For occasional users who restore a few photos per month, Magic Memory is significantly cheaper. For daily heavy use, compare the per-photo cost.",
+                "text": "Remini is a recurring in-app subscription with weekly, monthly and yearly options. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. For occasional users who restore a few photos per month, Magic Memory is significantly cheaper. For daily heavy use, compare the per-photo cost.",
               },
               "name": "What does Remini cost compared to Magic Memory?",
             },
@@ -392,7 +392,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "98547a980ecaddd3f779631ec6be77c93248f3f18b8ea496e939fec3a883d6a7",
+        "sha256": "091f51145094c44e5be8307c0edd6c2fd36600c7d634f777e54bed0a2c256b0b",
       },
       {
         "data": {
@@ -428,7 +428,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       },
       "description": "Looking for a Remini alternative? Compare Magic Memory vs Remini: pricing, platform, privacy, and restoration quality. Magic Memory is web-based with one-time credits.",
       "openGraph": {
-        "description": "Magic Memory vs Remini comparison. Web-based vs mobile-only, one-time vs subscription.",
+        "description": "Magic Memory vs Remini comparison. One-time credits vs a recurring subscription.",
         "images": [
           {
             "alt": "Remini Alternative",
@@ -474,7 +474,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "VanceAI offers subscription plans starting from $4.95/month and credit packs. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. Pricing depends on usage frequency — compare the per-photo cost for your expected usage.",
+                "text": "VanceAI offers monthly credit plans from $15/month billed yearly (260 credits a month) and pay-as-you-go packs, as of 2026-11-16. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. Pricing depends on usage frequency — compare the per-photo cost for your expected usage.",
               },
               "name": "What does VanceAI cost compared to Magic Memory?",
             },
@@ -496,7 +496,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "5ff2245a6fc39377b7cc61431171ff70f1de1342484a0525c4aeafab966b318f",
+        "sha256": "143a1207b7d04c7fc38ccfbf5a04eaabed65816c0384068de37bc0816faa6e94",
       },
       {
         "data": {
@@ -766,7 +766,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "item": {
                 "@type": "SoftwareApplication",
                 "applicationCategory": "PhotographyApplication",
-                "description": "Photo enhancement app with face restoration. In-app subscription with weekly and monthly options; iOS and web.",
+                "description": "Photo enhancement app with face restoration. In-app subscription with weekly, monthly and yearly options; iOS and web.",
                 "name": "Remini",
                 "operatingSystem": "iOS, Web",
                 "review": {
@@ -858,7 +858,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "numberOfItems": 5,
         },
-        "sha256": "da0b27b90e93dda030ef607fecc8cc99e56d6cacbd9d8b390b381bf1c49d30e5",
+        "sha256": "cac84fe977a091c9d65fa02608430a4adb0c0e7af36a4dc726917046755cb5e0",
       },
       {
         "data": {
@@ -2488,7 +2488,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge $9.99 per week; you can buy 20 Magic Memory credits for €9.99 and keep them forever.",
+                "text": "No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge a weekly, monthly or yearly subscription; you can buy 20 Magic Memory credits for €9.99 and keep them forever.",
               },
               "name": "Is Magic Memory a subscription?",
             },
@@ -2512,7 +2512,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The per-restoration cost drops as you buy larger packs. Starter: €0.50/photo. Growth: €0.33/photo. Premium: €0.25/photo. Compared to manual professional restoration ($25-$150 per photo) or Remini's $9.99/week subscription, even our smallest pack is significantly cheaper for most users.",
+                "text": "The per-restoration cost drops as you buy larger packs. Starter: €0.50/photo. Growth: €0.33/photo. Premium: €0.25/photo. You pay once, there is no subscription to cancel, and credits never expire.",
               },
               "name": "How much does each restoration cost?",
             },
@@ -2552,7 +2552,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Remini costs $9.99/week ($519/year if used continuously). MyHeritage bundles photo tools into a $119-$259/year genealogy subscription. Magic Memory's Premium pack is €29.99 for 120 never-expiring credits — roughly the same as 3 weeks of Remini, but with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.",
+                "text": "Remini sells an in-app subscription with weekly, monthly and yearly options. MyHeritage Photo Enhancer comes with its Photo subscription or a plan that includes it. Magic Memory's Premium pack is €29.99 for 120 never-expiring credits, with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.",
               },
               "name": "How does Magic Memory compare to Remini or MyHeritage on price?",
             },
@@ -2566,7 +2566,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "02c03306dfe46673c56e2bbee0b671a06421c5a35eb47e8739c652f9567c80bb",
+        "sha256": "5d6d7e24bf0ea6ab410986ed67e768cb4934c3be371849e9916de1d7a42fd1b3",
       },
     ],
     "metadata": {
@@ -3720,7 +3720,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Magic Memory offers one-time credit packages starting at €9.99 for 20 restorations, and the credits never expire. MyHeritage requires a genealogy subscription that starts at around $13/month. If you only want photo restoration, Magic Memory is substantially cheaper.",
+                "text": "Magic Memory offers one-time credit packages starting at €9.99 for 20 restorations, and the credits never expire. Unlimited use of MyHeritage Photo Enhancer comes with the MyHeritage Photo subscription, or a plan that includes it, and renews until you cancel. If you only have a few photos to restore, one-time credits usually cost less.",
               },
               "name": "How much does MyHeritage photo restoration cost vs Magic Memory?",
             },
@@ -3750,7 +3750,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "225bc621e68501569bfea1479d37643fa31f127b296f0f34888db9483c09ff39",
+        "sha256": "9b3e6a23066023f971b510ef5f391a9fd01e666814c693ee941aeadd4b3bc2f5",
       },
       {
         "data": {
@@ -3778,7 +3778,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "alternates": {
         "canonical": "https://magic-memory.dev/vs/myheritage",
       },
-      "description": "Compare Magic Memory and MyHeritage Photo Enhancer for AI photo restoration. Magic Memory is a standalone tool from €9.99. MyHeritage bundles photo enhancement into a genealogy subscription. See which fits your needs.",
+      "description": "Compare Magic Memory and MyHeritage Photo Enhancer for AI photo restoration. Magic Memory is a standalone tool from €9.99. MyHeritage Photo Enhancer comes with a recurring Photo subscription. See which fits your needs.",
       "openGraph": {
         "description": "Standalone AI photo restoration vs genealogy-bundled enhancer. Compare pricing, features, and privacy.",
         "images": [
@@ -3810,7 +3810,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a $9.99/week subscription. MyHeritage Photo Enhancer is better if you're already paying for MyHeritage genealogy ($119–$259/yr) and want photo enhancement bundled in. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at €9.99 one-time for 20 credits.",
+                "text": "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a recurring subscription. MyHeritage Photo Enhancer is better if you already use MyHeritage for genealogy or want its Photo subscription for all its AI photo tools. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at €9.99 one-time for 20 credits.",
               },
               "name": "Remini vs MyHeritage Photo Enhancer in 2026: which is better?",
             },
@@ -3826,7 +3826,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Magic Memory is the cheapest by a wide margin. A user restoring 10–20 photos per month would pay roughly $43/month on Remini ($9.99/week × 4.3 weeks), $119+/year on MyHeritage (annual subscription required), or €9.99 once on Magic Memory (the 20-credit Starter pack, credits never expire); 50 photos fit in the €19.99 Growth pack.",
+                "text": "For a handful of photos, Magic Memory usually costs least. Remini and MyHeritage both charge a recurring subscription for as long as you keep it. A user restoring 10–20 photos pays €9.99 once on Magic Memory (the 20-credit Starter pack, credits never expire); 50 photos fit in the €19.99 Growth pack.",
               },
               "name": "Which is cheaper for 10–20 photos: Remini, MyHeritage, or Magic Memory?",
             },
@@ -3850,13 +3850,13 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes — Magic Memory is the leading non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is web (any device), Remini is mobile-only; Magic Memory is one-time credits that never expire, Remini is $9.99/week subscription; Magic Memory does not retain photos after processing, Remini stores them in your cloud account.",
+                "text": "Yes — Magic Memory is a non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is built for the browser, Remini is best known as a phone app; Magic Memory is one-time credits that never expire, Remini is a recurring in-app subscription; Magic Memory does not keep your photos after processing.",
               },
               "name": "Is Magic Memory a Remini alternative?",
             },
           ],
         },
-        "sha256": "5d6f4fdb3490f69c5171b2152ac20a3fdaca5295c33842935c5cf1358d577855",
+        "sha256": "0d0e45d66e82d858cceb2a5b13893d552f4df4d93d8209caa72699d71a4a77bb",
       },
       {
         "data": {
@@ -3884,7 +3884,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "alternates": {
         "canonical": "https://magic-memory.dev/vs/remini",
       },
-      "description": "Remini $9.99/wk vs MyHeritage $119–$259/yr vs Magic Memory €9.99 one-time. A 2026 side-by-side on pricing, free-tier limits, platform, quality and privacy.",
+      "description": "Remini and MyHeritage sell subscriptions; Magic Memory sells one-time packs from €9.99. A 2026 side-by-side on pricing, free tiers, platform and privacy.",
       "openGraph": {
         "description": "Pricing, free tiers, and platform comparison for the three most-searched AI photo restoration tools in 2026.",
         "images": [
@@ -3924,7 +3924,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Magic Memory is cheaper for occasional users. The smallest credit pack is €9.99 for 20 credits that never expire. VanceAI starts at $4.95/month with limited credits, and unused credits may expire depending on your plan.",
+                "text": "Magic Memory is cheaper for occasional users. The smallest credit pack is €9.99 for 20 credits that never expire. VanceAI's monthly plans start at $15/month billed yearly for 260 credits a month (vanceai.com/pricing, 2026-11-16), and it gives 10 credits to try.",
               },
               "name": "Which is cheaper for occasional use: Magic Memory or VanceAI?",
             },
@@ -3954,7 +3954,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "b1311895a3bee0168be58df83f4ea49d03d842a4167c0cf7a218966025a6659b",
+        "sha256": "8d4c0835a35449fd450b52af1f07e3984ec0ae6bfd5844b5e52116a78b5db448",
       },
       {
         "data": {

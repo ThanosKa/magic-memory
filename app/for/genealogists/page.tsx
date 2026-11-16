@@ -108,7 +108,7 @@ export default function ForGenealogistsPage() {
                   </div>
                   <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6">
                     <h3 className="font-semibold text-paper mb-2">No subscription required</h3>
-                    <p className="text-sm text-paper/70">Unlike MyHeritage (which requires a genealogy subscription) or Remini (which charges $9.99/week), Magic Memory sells one-time credit packs from {"\u20ac"}9.99 for 20 restorations that never expire.</p>
+                    <p className="text-sm text-paper/70">Unlike MyHeritage or Remini, which charge a recurring subscription, Magic Memory sells one-time credit packs from {"\u20ac"}9.99 for 20 restorations that never expire.</p>
                   </div>
                 </div>
               </div>
