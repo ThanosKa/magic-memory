@@ -87,7 +87,7 @@ describe("POST /api/clerk/webhook", () => {
         expect(data.error).toBe("Webhook processing failed")
     })
 
-    it("provisions a new user on user.created and sends the welcome email", async () => {
+    it("provisions a new user on user.created, handing provisionUser the welcome-email sender", async () => {
         vi.mocked(getSupabaseAdminClient).mockReturnValue(fakeSupabase as unknown as ReturnType<typeof getSupabaseAdminClient>)
         vi.mocked(provisionUser).mockResolvedValueOnce({ ok: true, user: userRow, outcome: "created" })
         mockWebhookVerify.mockReturnValue({
@@ -114,9 +114,8 @@ describe("POST /api/clerk/webhook", () => {
                 imageUrl: "https://example.com/photo.jpg",
                 emailVerified: false,
             },
-            { supabase: fakeSupabase }
+            { supabase: fakeSupabase, sendWelcomeEmail }
         )
-        expect(sendWelcomeEmail).toHaveBeenCalledWith("kazakis.th@gmail.com", "John Doe")
     })
 
     it("updates user on user.updated event", async () => {
@@ -201,7 +200,7 @@ describe("POST /api/clerk/webhook", () => {
 
         expect(provisionUser).toHaveBeenCalledWith(
             { clerkUserId: "clerk_user_123", email: "kazakis.th@gmail.com", name: null, imageUrl: null, emailVerified: false },
-            { supabase: fakeSupabase }
+            { supabase: fakeSupabase, sendWelcomeEmail }
         )
     })
 

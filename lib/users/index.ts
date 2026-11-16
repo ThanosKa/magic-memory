@@ -1,3 +1,4 @@
+import logger from "@/lib/logger";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 /** Credits a new user starts with. The only place this value is defined. */
@@ -25,6 +26,9 @@ export type UserRow = {
   email: string;
   paid_credits: number | null;
 };
+
+/** Sends the welcome email. The real one is `sendWelcomeEmail` from `@/lib/email`. */
+export type WelcomeEmailSender = (to: string, name: string | null) => Promise<unknown>;
 
 export type ProvisionOutcome = "created" | "already_existed" | "relinked";
 
@@ -58,9 +62,14 @@ export async function findUser(
 }
 
 /**
- * Provisions the users row for a Clerk user. Sends no email.
+ * Provisions the users row for a Clerk user and, when it created the row,
+ * sends the welcome email, so every new User gets one email whichever entry
+ * point wins the race.
  *
  * Invariants:
+ * - The welcome email is sent only on "created", once, and awaited before this
+ *   returns (the Worker can cancel work left running after the response). A
+ *   failed send never fails Provisioning or changes the result.
  * - Never changes any column of an existing row for that Clerk id; the
  *   outcome is "already_existed" and the row comes back as it was.
  * - If a row with the same non-empty, verified primary email exists under another clerk_user_id (Clerk
@@ -73,7 +82,7 @@ export async function findUser(
  */
 export async function provisionUser(
   profile: NewUserProfile,
-  { supabase }: { supabase: SupabaseClient }
+  { supabase, sendWelcomeEmail }: { supabase: SupabaseClient; sendWelcomeEmail: WelcomeEmailSender }
 ): Promise<ProvisionResult> {
   const { clerkUserId, email, name, imageUrl, emailVerified } = profile;
 
@@ -95,6 +104,14 @@ export async function provisionUser(
     .maybeSingle();
 
   if (!error && created) {
+    try {
+      await sendWelcomeEmail(email, name);
+    } catch (err) {
+      logger.error(
+        { error: err instanceof Error ? err.message : String(err), to: email },
+        "Welcome email sender threw"
+      );
+    }
     return { ok: true, user: created, outcome: "created" };
   }
 
