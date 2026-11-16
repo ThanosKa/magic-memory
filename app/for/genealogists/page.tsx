@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/for/genealogists",
   title: "AI Photo Restoration for Genealogists — Restore Ancestor Photos",
   description:
     "Restore old ancestor photos for genealogy research. Magic Memory uses GFPGAN AI to sharpen faces in degraded historical photos. One-time credits, no subscription. Put clear faces to the names in your family tree.",
-  alternates: { canonical: getCanonicalUrl("/for/genealogists") },
-  openGraph: {
+  social: {
     title: "AI Photo Restoration for Genealogists — Restore Ancestor Photos",
     description: "Restore old ancestor photos for family tree research. GFPGAN AI sharpens faces in degraded historical photos in seconds.",
-    url: getCanonicalUrl("/for/genealogists"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Photo Restoration for Genealogists" }],
+    imageAlt: "Photo Restoration for Genealogists",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -57,8 +57,7 @@ export default function ForGenealogistsPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>

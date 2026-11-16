@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/for/real-estate",
   title: "AI Photo Enhancement for Real Estate — Improve Listing Photos",
   description:
     "Enhance real estate listing photos with AI. Magic Memory uses GFPGAN to sharpen faces in agent headshots and team photos. Improve photo quality for property listings, agent profiles, and marketing materials.",
-  alternates: { canonical: getCanonicalUrl("/for/real-estate") },
-  openGraph: {
+  social: {
     title: "AI Photo Enhancement for Real Estate — Improve Listing Photos",
     description: "Enhance agent headshots and team photos for real estate listings with GFPGAN AI.",
-    url: getCanonicalUrl("/for/real-estate"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Photo Enhancement for Real Estate" }],
+    imageAlt: "Photo Enhancement for Real Estate",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -57,8 +57,7 @@ export default function ForRealEstatePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>

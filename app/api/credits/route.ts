@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
-import { ensureUser } from "@/lib/supabase/ensure-user";
+import { sendWelcomeEmail } from "@/lib/email";
+import { findUser, provisionUser } from "@/lib/users";
 import logger from "@/lib/logger";
 import { z } from "zod";
 
@@ -29,14 +30,23 @@ export async function GET() {
 
     const supabase = getSupabaseAdminClient();
 
-    const { data: userData, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("clerk_user_id", userId)
-      .single();
-    let user = userData;
+    const found = await findUser(userId, { supabase });
+    let user = found.status === "found" ? found.user : null;
 
-    if (error || !user) {
+    // A failed read says nothing about whether the User exists, so it must
+    // never lead to Provisioning: that is how a paying User's Balance was reset.
+    if (found.status === "error") {
+      logger.error(
+        { userId, error: found.message },
+        "Failed to read user from database"
+      );
+      return NextResponse.json(
+        { success: false, error: "Failed to load credits. Please try again." },
+        { status: 500 }
+      );
+    }
+
+    if (!user) {
       logger.warn(
         { userId },
         "User not found in database, attempting to create"
@@ -45,7 +55,11 @@ export async function GET() {
       try {
         const client = await clerkClient();
         const clerkUser = await client.users.getUser(userId);
-        const email = clerkUser.emailAddresses[0]?.emailAddress;
+        const primary = clerkUser.emailAddresses.find(
+          (address) => address.id === clerkUser.primaryEmailAddressId
+        );
+        const email = (primary ?? clerkUser.emailAddresses[0])?.emailAddress;
+        const emailVerified = primary?.verification?.status === "verified";
 
         if (!email) {
           logger.error(
@@ -66,12 +80,10 @@ export async function GET() {
             .filter(Boolean)
             .join(" ") || null;
 
-        const ensured = await ensureUser({
-          supabase,
-          clerkUserId: userId,
-          email,
-          name,
-        });
+        const ensured = await provisionUser(
+          { clerkUserId: userId, email, name, emailVerified },
+          { supabase, sendWelcomeEmail }
+        );
 
         if (!ensured.ok) {
           logger.error(
@@ -87,7 +99,7 @@ export async function GET() {
           );
         }
 
-        if (ensured.relinked) {
+        if (ensured.outcome === "relinked") {
           logger.warn(
             { userId, email },
             "Existing user row re-linked to new Clerk id"

@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/glossary/image-upscaling",
   title: "What Is Image Upscaling? AI Super-Resolution Explained",
   description:
     "Image upscaling increases the resolution of a photo by adding new pixels using AI. Learn how super-resolution models like Real-ESRGAN work, when to use upscaling vs face restoration, and which tools deliver the best results.",
-  alternates: { canonical: getCanonicalUrl("/glossary/image-upscaling") },
-  openGraph: {
+  social: {
     title: "What Is Image Upscaling? AI Super-Resolution Explained",
     description: "Learn how AI image upscaling increases photo resolution by generating new detail using neural networks.",
-    url: getCanonicalUrl("/glossary/image-upscaling"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "What Is Image Upscaling" }],
+    imageAlt: "What Is Image Upscaling",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -58,8 +58,7 @@ export default function GlossaryImageUpscalingPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>

@@ -3,14 +3,12 @@ import { unstable_noStore as noStore } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
-import Replicate from "replicate";
-import { markFreeCreditUsed, getRedisClient } from "@/lib/redis";
+import { getRedisClient } from "@/lib/redis";
 import logger from "@/lib/logger";
-import {
-  checkUserCredits,
-  deductCreditAndRecordRestoration,
-  rollbackRestoration,
-} from "@/lib/supabase/transactions";
+import { restorePhoto } from "@/lib/restore/restorer";
+import { asClerkUserId, createCreditLedger } from "@/lib/credits/ledger";
+
+const ledger = createCreditLedger()
 
 function getRateLimiter() {
   const redis = getRedisClient()
@@ -46,54 +44,11 @@ async function validateImageDimensions(buffer: Buffer): Promise<{ valid: boolean
   return { valid: true }
 }
 
-async function runReplicateWithPolling(imageBase64: string): Promise<string> {
-  const replicate = new Replicate({
-    auth: process.env.REPLICATE_API_TOKEN,
-  })
-
-  const prediction = await replicate.predictions.create({
-    version: "0fbacf7afc6c144e5be9767cff80f25aff23e52b0708f17e20f9879b2f21516c",
-    input: {
-      img: imageBase64,
-      version: "v1.4",
-      scale: 2,
-    },
-  })
-
-  logger.info({ predictionId: prediction.id }, "Replicate prediction created")
-
-  const maxAttempts = 60
-  let attempts = 0
-
-  while (attempts < maxAttempts) {
-    const status = await replicate.predictions.get(prediction.id)
-
-    if (status.status === "succeeded") {
-      logger.info({ predictionId: prediction.id }, "Replicate prediction succeeded")
-      return status.output as string
-    }
-
-    if (status.status === "failed" || status.status === "canceled") {
-      logger.error(
-        { predictionId: prediction.id, status: status.status, error: status.error },
-        "Replicate prediction failed",
-      )
-      throw new Error(`Restoration failed: ${status.error || status.status}`)
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    attempts++
-  }
-
-  throw new Error("Restoration timed out after 60 seconds")
-}
-
 export async function POST(request: NextRequest) {
   // Prevent Next.js from caching any fetch calls (predictions polling GET requests)
   noStore()
 
   let restorationId: string | null = null
-  let usedFreeCredit = false
   let userId: string | null = null
 
   try {
@@ -177,9 +132,20 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId, fileSize: file.size, fileType: file.type }, "Restoration request received")
 
-    const creditCheck = await checkUserCredits(userId)
+    const clerkUserId = asClerkUserId(userId)
+    const creditCheck = await ledger.balance(clerkUserId)
 
-    if (!creditCheck || creditCheck.paid_credits <= 0) {
+    // A database failure is not "no credits": answer 503 so the uploader says "try again".
+    // The text must not contain "No credits", which the uploader routes to the out-of-credits screen.
+    if (!creditCheck.ok && creditCheck.reason === "db_error") {
+      logger.error({ userId, error: creditCheck.message }, "Failed to check credits")
+      return NextResponse.json(
+        { success: false, error: "We couldn't check your credits. Please try again." },
+        { status: 503 },
+      )
+    }
+
+    if (!creditCheck.ok || creditCheck.paidCredits <= 0) {
       logger.warn({ userId, creditCheck }, "No paid credits available")
       return NextResponse.json(
         { success: false, error: "No credits available. Purchase more credits to continue." },
@@ -187,48 +153,32 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    usedFreeCredit = false
+    logger.info({ userId }, "Starting AI restoration")
 
-    logger.info({ userId, useFreeCredit: usedFreeCredit }, "Starting AI restoration")
-
-    const base64 = buffer.toString("base64")
-    const mimeType = file.type
-    const dataUrl = `data:${mimeType};base64,${base64}`
-
-    const restoredImageUrl = await runReplicateWithPolling(dataUrl)
+    const restoredImageUrl = await restorePhoto({ bytes: buffer, mimeType: file.type })
 
     logger.info({ userId }, "AI restoration complete")
 
-    const deductResult = await deductCreditAndRecordRestoration(
-      userId,
-      `ephemeral:${originalFilename}`,
-      restoredImageUrl,
-      usedFreeCredit
-    )
+    const charge = await ledger.chargeRestoration(clerkUserId, {
+      originalUrl: `ephemeral:${originalFilename}`,
+      restoredUrl: restoredImageUrl,
+    })
 
-    if (!deductResult.success) {
-      logger.error({ userId, error: deductResult.error_message }, "Failed to deduct credit")
+    if (!charge.ok) {
+      const chargeError = charge.reason === "db_error" ? charge.message : charge.reason
+      logger.error({ userId, error: chargeError }, "Failed to deduct credit")
       return NextResponse.json({ success: false, error: "Failed to record restoration" }, { status: 500 })
     }
 
-    restorationId = deductResult.restoration_id
+    restorationId = charge.restorationId
 
-    if (usedFreeCredit && getRedisClient()) {
-      await markFreeCreditUsed(userId)
-      logger.info({ userId }, "Free credit marked as used in Redis")
-    }
-
-    logger.info(
-      { userId, restorationId, usedFreeCredit },
-      "Restoration completed successfully",
-    )
+    logger.info({ userId, restorationId }, "Restoration completed successfully")
 
     return NextResponse.json({
       success: true,
       data: {
         restoredImageUrl,
-        usedFreeCredit,
-        remainingPaidCredits: deductResult.remaining_paid_credits,
+        remainingPaidCredits: charge.remainingCredits,
       },
     })
   } catch (error) {
@@ -237,7 +187,7 @@ export async function POST(request: NextRequest) {
     logger.error({ userId, error: errorMessage, cause: errorCause }, "Restoration error")
 
     if (restorationId) {
-      await rollbackRestoration(restorationId)
+      await ledger.reverseRestoration(restorationId)
       logger.info({ userId, restorationId }, "Rolled back failed restoration")
     }
 

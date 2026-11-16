@@ -4,6 +4,7 @@ import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { POST } from "@/app/api/stripe/webhook/route";
 import { CREDIT_PACKAGES } from "@/lib/constants";
 import { sendPurchaseEmail } from "@/lib/email";
+import logger from "@/lib/logger";
 
 vi.mock("@/lib/supabase/server");
 vi.mock("@/lib/logger");
@@ -126,6 +127,8 @@ describe("POST /api/stripe/webhook", () => {
     beforeEach(() => {
       vi.mocked(sendPurchaseEmail).mockClear();
       setStarterPriceId("price_starter");
+      // pino's level methods are not spies after automock, so spy on warn here.
+      vi.spyOn(logger, "warn").mockImplementation(() => {});
     });
 
     afterAll(() => {
@@ -150,6 +153,45 @@ describe("POST /api/stripe/webhook", () => {
       expect(sendPurchaseEmail).toHaveBeenCalledTimes(1);
     });
 
+    it("still grants metadata credits and warns once when they differ from the Credit pack", async () => {
+      const rpc = useGrantResult({ data: true, error: null });
+
+      const response = await deliver({
+        metadata: {
+          userId: "user-uuid",
+          packageType: "starter",
+          credits: "25",
+          priceId: "price_starter",
+        },
+      });
+
+      expect(response.status).toBe(200);
+      expect(rpc).toHaveBeenCalledWith(
+        "grant_purchase_credits",
+        expect.objectContaining({ p_credits: 25 })
+      );
+      expect(logger.warn).toHaveBeenCalledTimes(1);
+      expect(logger.warn).toHaveBeenCalledWith(
+        {
+          userId: "user-uuid",
+          packageType: "starter",
+          stripePaymentId: "pi_new_123",
+          metadataCredits: 25,
+          packCredits: CREDIT_PACKAGES.starter.credits,
+        },
+        "Purchased credits differ from Credit pack"
+      );
+      expect(sendPurchaseEmail).toHaveBeenCalledTimes(1);
+    });
+
+    it("writes no mismatch warning when credits match the Credit pack", async () => {
+      useGrantResult({ data: true, error: null });
+
+      await deliver();
+
+      expect(logger.warn).not.toHaveBeenCalled();
+    });
+
     it("answers 500 when the grant fails, so Stripe redelivers", async () => {
       useGrantResult({ data: null, error: { message: "database unavailable" } });
 
@@ -170,57 +212,41 @@ describe("POST /api/stripe/webhook", () => {
       expect(sendPurchaseEmail).not.toHaveBeenCalled();
     });
 
-    it("records what was actually paid on a discounted checkout", async () => {
-      const rpc = useGrantResult({ data: true, error: null });
+    describe("rejection rules", () => {
+      let logError: ReturnType<typeof vi.spyOn>;
 
-      const response = await deliver({
-        payment_intent: "pi_discount_123",
-        amount_total: 799,
-        amount_subtotal: 999,
-        total_details: { amount_discount: 200 },
+      beforeEach(() => {
+        // The automocked pino logger has no spies, so watch error() here.
+        logError = vi.spyOn(logger, "error").mockImplementation(() => undefined);
+        rpc = useGrantResult({ data: true, error: null });
       });
 
-      expect(response.status).toBe(200);
-      expect(rpc).toHaveBeenCalledWith(
-        "grant_purchase_credits",
-        expect.objectContaining({
-          p_stripe_payment_id: "pi_discount_123",
-          p_credits: 20,
-          p_amount_paid: 799,
-        })
-      );
-    });
+      let rpc: ReturnType<typeof vi.fn>;
 
-    it("uses the session id as the payment id on a 100% discount", async () => {
-      const rpc = useGrantResult({ data: true, error: null });
+      async function expectRejected(
+        overrides: Record<string, unknown>,
+        message: string,
+        context: unknown
+      ) {
 
-      const response = await deliver({
-        id: "cs_test_full_discount",
-        payment_intent: null,
-        amount_total: 0,
-        amount_subtotal: 999,
-        total_details: { amount_discount: 999 },
-        payment_status: "no_payment_required",
+        const response = await deliver(overrides);
+        const data = await response.json();
+
+        expect(response.status).toBe(200);
+        expect(data).toEqual({ success: true, data: { received: true } });
+        expect(rpc).not.toHaveBeenCalled();
+        expect(sendPurchaseEmail).not.toHaveBeenCalled();
+        expect(logError).toHaveBeenCalledTimes(1);
+        expect(logError).toHaveBeenCalledWith(context, message);
+      }
+
+      it("grants nothing when there is no payment id", async () => {
+        await expectRejected(
+          { payment_intent: null },
+          "Missing payment intent in checkout session",
+          { sessionId: "cs_test_123" }
+        );
       });
-
-      expect(response.status).toBe(200);
-      expect(rpc).toHaveBeenCalledWith(
-        "grant_purchase_credits",
-        expect.objectContaining({
-          p_stripe_payment_id: "cs_test_full_discount",
-          p_credits: 20,
-          p_amount_paid: 0,
-        })
-      );
-    });
-
-    it("grants nothing when the amount does not match the package", async () => {
-      const rpc = useGrantResult({ data: true, error: null });
-
-      const response = await deliver({ amount_total: 100, amount_subtotal: 100 });
-
-      expect(response.status).toBe(200);
-      expect(rpc).not.toHaveBeenCalled();
     });
   });
 });

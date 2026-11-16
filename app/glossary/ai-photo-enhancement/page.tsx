@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/glossary/ai-photo-enhancement",
   title: "What Is AI Photo Enhancement? Tools, Models, and Use Cases",
   description:
     "AI photo enhancement uses neural networks to automatically improve photo quality — fixing blur, noise, low resolution, and color issues. Learn how it works, which models power it, and how it compares to manual editing.",
-  alternates: { canonical: getCanonicalUrl("/glossary/ai-photo-enhancement") },
-  openGraph: {
+  social: {
     title: "What Is AI Photo Enhancement? Tools, Models, and Use Cases",
     description: "Learn how AI photo enhancement uses neural networks to fix blur, noise, and low resolution in photographs automatically.",
-    url: getCanonicalUrl("/glossary/ai-photo-enhancement"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "What Is AI Photo Enhancement" }],
+    imageAlt: "What Is AI Photo Enhancement",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -58,8 +58,7 @@ export default function GlossaryAIPhotoEnhancementPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>

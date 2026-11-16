@@ -3,7 +3,9 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { FinalCta } from "@/components/layout/final-cta";
 import { PageContainer } from "@/components/layout/page-container";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { ComparisonTable } from "@/components/competitor/comparison-table";
 import { competitors } from "@/lib/competitors/data";
 import type { FAQItem } from "@/lib/seo/faq-data";
@@ -11,19 +13,16 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/alternatives/remini",
   title: "Remini Alternative for Photo Restoration (No Subscription)",
-  description:
-    "Looking for a Remini alternative? Compare Magic Memory vs Remini: pricing, platform, privacy, and restoration quality. Magic Memory is web-based with one-time credits.",
-  alternates: { canonical: getCanonicalUrl("/alternatives/remini") },
-  openGraph: {
+  description: "Looking for a Remini alternative? Compare Magic Memory vs Remini: pricing, platform, privacy, and restoration quality. Magic Memory is web-based with one-time credits.",
+  social: {
     title: "Remini Alternative — Magic Memory vs Remini",
     description: "Magic Memory vs Remini comparison. Web-based vs mobile-only, one-time vs subscription.",
-    url: getCanonicalUrl("/alternatives/remini"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Remini Alternative" }],
+    imageAlt: "Remini Alternative",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const remini = competitors.remini;
 
@@ -65,8 +64,7 @@ export default function ReminiAlternativePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section className="pb-24 pt-10 md:pb-32 md:pt-14">

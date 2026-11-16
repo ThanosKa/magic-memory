@@ -15,6 +15,22 @@ interface AuditResult {
   warnings: string[];
 }
 
+/** Text of the first `pageMetadata(...)` call, or null when the page has none. */
+function pageMetadataCall(content: string): string | null {
+  const start = content.indexOf("pageMetadata(");
+  if (start === -1) return null;
+  let depth = 0;
+  for (let i = start + "pageMetadata".length; i < content.length; i++) {
+    if (content[i] === "(") depth++;
+    if (content[i] === ")" && --depth === 0) return content.slice(start, i + 1);
+  }
+  return content.slice(start);
+}
+
+function usesPageMetadata(content: string): boolean {
+  return pageMetadataCall(content) !== null;
+}
+
 const seoChecks: SEOCheck[] = [
   {
     name: "Has metadata export",
@@ -29,7 +45,7 @@ const seoChecks: SEOCheck[] = [
     description: "Metadata should include a title",
     check: (content) => {
       if (!content.includes("metadata")) return true;
-      return content.includes("title:");
+      return content.includes("title:") || usesPageMetadata(content);
     },
     severity: "error",
   },
@@ -38,7 +54,7 @@ const seoChecks: SEOCheck[] = [
     description: "Metadata should include a description",
     check: (content) => {
       if (!content.includes("metadata")) return true;
-      return content.includes("description:");
+      return content.includes("description:") || usesPageMetadata(content);
     },
     severity: "error",
   },
@@ -47,7 +63,11 @@ const seoChecks: SEOCheck[] = [
     description: "Metadata should include OpenGraph tags for social sharing",
     check: (content) => {
       if (!content.includes("metadata")) return true;
-      return content.includes("openGraph") || content.includes("og:");
+      return (
+        content.includes("openGraph") ||
+        content.includes("og:") ||
+        usesPageMetadata(content)
+      );
     },
     severity: "warning",
   },
@@ -56,7 +76,10 @@ const seoChecks: SEOCheck[] = [
     description: "Metadata should include Twitter card tags",
     check: (content) => {
       if (!content.includes("metadata")) return true;
-      return content.includes("twitter");
+      return (
+        content.includes("twitter") ||
+        (pageMetadataCall(content)?.includes("twitter") ?? false)
+      );
     },
     severity: "warning",
   },
@@ -65,7 +88,11 @@ const seoChecks: SEOCheck[] = [
     description: "Metadata should include canonical URL",
     check: (content) => {
       if (!content.includes("metadata")) return true;
-      return content.includes("canonical") || content.includes("alternates");
+      return (
+        content.includes("canonical") ||
+        content.includes("alternates") ||
+        usesPageMetadata(content)
+      );
     },
     severity: "warning",
   },
@@ -146,7 +173,9 @@ const seoChecks: SEOCheck[] = [
     description: "Page should include JSON-LD structured data for rich results",
     check: (content) => {
       return (
-        content.includes("application/ld+json") || content.includes("@context")
+        content.includes("application/ld+json") ||
+        content.includes("@context") ||
+        content.includes("<JsonLd")
       );
     },
     severity: "warning",
@@ -156,7 +185,7 @@ const seoChecks: SEOCheck[] = [
     description: "Page should explicitly set robots meta tag (index/noindex)",
     check: (content) => {
       if (!content.includes("metadata")) return true;
-      return content.includes("robots:");
+      return content.includes("robots:") || usesPageMetadata(content);
     },
     severity: "warning",
   },

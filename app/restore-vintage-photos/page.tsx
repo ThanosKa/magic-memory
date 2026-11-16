@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import {
-  getCanonicalUrl,
-  getOgImageUrl,
   faqPageJsonLd,
   breadcrumbJsonLd,
   useCaseSoftwareJsonLd,
 } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
 import { UseCaseArticle } from "@/components/use-case/use-case-article";
 import { UseCaseRelated } from "@/components/use-case/use-case-related";
 import { FinalCta } from "@/components/layout/final-cta";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(
@@ -24,34 +24,22 @@ const Footer = dynamic(
   { ssr: true },
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/restore-vintage-photos",
   title: "Restore Vintage Photos — AI That Understands Old Photography",
   description:
     "Restore vintage photos from the 1920s through 1970s with AI. GFPGAN handles film grain, sepia tones, and period portrait conventions. No subscription.",
-  alternates: { canonical: getCanonicalUrl("/restore-vintage-photos") },
-  openGraph: {
+  social: {
     title: "Restore Vintage Photos — AI For Old Photography | Magic Memory",
     description:
       "Restore vintage photos with AI. Film grain, sepia, 1920s–1970s portraits. No subscription.",
-    url: getCanonicalUrl("/restore-vintage-photos"),
-    images: [
-      {
-        url: getOgImageUrl(),
-        width: 1200,
-        height: 630,
-        alt: "Restore Vintage Photos",
-      },
-    ],
+    imageAlt: "Restore Vintage Photos",
   },
   twitter: {
-    card: "summary_large_image",
     title: "Restore Vintage Photos With AI",
-    description:
-      "Restore 1920s–1970s vintage photos. Film grain and sepia handled well.",
-    images: [getOgImageUrl()],
+    description: "Restore 1920s–1970s vintage photos. Film grain and sepia handled well.",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -96,18 +84,7 @@ export default function RestoreVintagePhotosPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
-      />
+      <JsonLd data={[faqJsonLd, breadcrumb, softwareJsonLd]} />
       <Header />
       <main className="flex-1">
         <UseCaseHero

@@ -3,7 +3,9 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { FinalCta } from "@/components/layout/final-cta";
 import { PageContainer } from "@/components/layout/page-container";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { ComparisonTable } from "@/components/competitor/comparison-table";
 import { competitors } from "@/lib/competitors/data";
 import type { FAQItem } from "@/lib/seo/faq-data";
@@ -11,19 +13,16 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/alternatives/myheritage",
   title: "MyHeritage Photo Enhancer Pricing 2026: Free Limits + Cheaper Alternative",
-  description:
-    "MyHeritage Photo Enhancer pricing in 2026: $119 Basic, $189 Premium, $259 Complete — all annual, all bundled with genealogy. Free tier is a watermarked preview only. Magic Memory offers standalone AI restoration from €9.99 one-time. Full breakdown.",
-  alternates: { canonical: getCanonicalUrl("/alternatives/myheritage") },
-  openGraph: {
+  description: "MyHeritage Photo Enhancer pricing in 2026: $119 Basic, $189 Premium, $259 Complete — all annual, all bundled with genealogy. Free tier is a watermarked preview only. Magic Memory offers standalone AI restoration from €9.99 one-time. Full breakdown.",
+  social: {
     title: "MyHeritage Photo Enhancer Pricing 2026 — Free Limits & Alternative",
     description: "MyHeritage costs $119–$259/yr bundled with genealogy. Free tier = watermarked preview. See the standalone alternative from €9.99.",
-    url: getCanonicalUrl("/alternatives/myheritage"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "MyHeritage Alternative" }],
+    imageAlt: "MyHeritage Alternative",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const myheritage = competitors.myheritage;
 
@@ -75,8 +74,7 @@ export default function MyHeritageAlternativePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section className="pb-24 pt-10 md:pb-32 md:pt-14">

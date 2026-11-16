@@ -24,6 +24,8 @@ type ImageDimensions = { width: number; height: number };
 const FRIENDLY_RESTORE_ERROR =
   "We couldn't restore your photo this time. Please try again shortly.";
 
+const CREDITS_LOAD_ERROR = "We couldn't load your credits.";
+
 const MAX_UPLOAD_SIZE = 3.5 * 1024 * 1024;
 const RESIZE_MAX_DIMENSION = 1536;
 
@@ -112,10 +114,20 @@ export function RestoreUploader() {
     useState<ImageDimensions | null>(null);
   const [isPreparing, setIsPreparing] = useState(false);
 
-  const { data: creditsData } = useSWR("/api/credits", fetcher);
-  const totalCredits = creditsData?.data?.totalCredits ?? 0;
+  const {
+    data: creditsData,
+    error: creditsFetchError,
+    mutate: reloadCredits,
+  } = useSWR("/api/credits", fetcher);
+  const totalCredits = creditsData?.data?.totalCredits;
   const freeResetTime = creditsData?.data?.freeResetTime;
-  const hasCredits = totalCredits > 0;
+  // Three states: a Balance we know, a request that failed, and one still loading.
+  const balanceKnown =
+    creditsData?.success === true && typeof totalCredits === "number";
+  const balanceFailed =
+    !balanceKnown && (Boolean(creditsFetchError) || creditsData !== undefined);
+  const hasCredits = balanceKnown && totalCredits > 0;
+  const isOutOfCredits = balanceKnown && totalCredits <= 0;
   const creditsError =
     creditsData?.success === false && typeof creditsData.error === "string"
       ? creditsData.error
@@ -219,6 +231,8 @@ export function RestoreUploader() {
 
   const handleRestore = async () => {
     if (!file) return;
+
+    if (!balanceKnown) return;
 
     if (!hasCredits) {
       setError({ type: "out_of_credits" });
@@ -403,7 +417,15 @@ export function RestoreUploader() {
 
       {preview && (
         <div className="flex max-w-xl flex-col gap-6 lg:col-start-1 lg:row-start-2 lg:self-start">
-          {!hasCredits && <OutOfCreditsNote />}
+          {isOutOfCredits && <OutOfCreditsNote />}
+
+          {balanceFailed && !restoredImage && (
+            <ErrorAlert
+              type="generic"
+              message={CREDITS_LOAD_ERROR}
+              onRetry={() => void reloadCredits()}
+            />
+          )}
 
           {!isProcessing && (restoredImage || hasCredits) && (
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">

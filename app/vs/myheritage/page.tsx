@@ -3,7 +3,9 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { FinalCta } from "@/components/layout/final-cta";
 import { PageContainer } from "@/components/layout/page-container";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { ComparisonTable } from "@/components/competitor/comparison-table";
 import { competitors } from "@/lib/competitors/data";
 import type { FAQItem } from "@/lib/seo/faq-data";
@@ -11,19 +13,17 @@ import type { FAQItem } from "@/lib/seo/faq-data";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/vs/myheritage",
   title: "Magic Memory vs MyHeritage Photo Enhancer — Which Is Better?",
   description:
     "Compare Magic Memory and MyHeritage Photo Enhancer for AI photo restoration. Magic Memory is a standalone tool from €9.99. MyHeritage bundles photo enhancement into a genealogy subscription. See which fits your needs.",
-  alternates: { canonical: getCanonicalUrl("/vs/myheritage") },
-  openGraph: {
+  social: {
     title: "Magic Memory vs MyHeritage Photo Enhancer — Which Is Better?",
     description: "Standalone AI photo restoration vs genealogy-bundled enhancer. Compare pricing, features, and privacy.",
-    url: getCanonicalUrl("/vs/myheritage"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "Magic Memory vs MyHeritage" }],
+    imageAlt: "Magic Memory vs MyHeritage",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const myheritage = competitors.myheritage;
 
@@ -102,8 +102,7 @@ export default function VsMyHeritagePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section className="pb-24 pt-10 md:pb-32 md:pt-14">

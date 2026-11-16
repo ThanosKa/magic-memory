@@ -5,6 +5,7 @@ import logger from "@/lib/logger";
 import { parseRequestBody } from "@/lib/validations/utils";
 import { createCheckoutRequestSchema } from "@/lib/validations/api";
 import { CREDIT_PACKAGES } from "@/lib/constants";
+import { checkoutMetadata } from "@/lib/billing/verify-checkout-session";
 import Stripe from "stripe";
 
 function getStripeClient() {
@@ -101,13 +102,13 @@ export async function POST(request: NextRequest) {
         process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev"
       }/pricing?canceled=true`,
       customer_email: user.email,
-      metadata: {
+      metadata: checkoutMetadata({
         userId: user.id,
         clerkUserId: userId,
         packageType,
-        credits: pkg.credits.toString(),
+        credits: pkg.credits,
         priceId: pkg.priceId,
-      },
+      }),
     });
 
     logger.info(

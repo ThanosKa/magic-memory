@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import {
-  getCanonicalUrl,
-  getOgImageUrl,
   faqPageJsonLd,
   breadcrumbJsonLd,
   useCaseSoftwareJsonLd,
 } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
 import { UseCaseArticle } from "@/components/use-case/use-case-article";
 import { UseCaseRelated } from "@/components/use-case/use-case-related";
 import { FinalCta } from "@/components/layout/final-cta";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(
@@ -24,34 +24,22 @@ const Footer = dynamic(
   { ssr: true },
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/restore-family-photos",
   title: "AI Family Photo Restoration — Bring Memories Back to Life",
   description:
     "Restore old family photos with AI. Perfect for genealogy, family reunions, and passing restored memories to future generations. No subscription.",
-  alternates: { canonical: getCanonicalUrl("/restore-family-photos") },
-  openGraph: {
+  social: {
     title: "AI Family Photo Restoration — Bring Memories Back to Life",
     description:
       "Restore your old family photos with AI. One-time credits, no subscription.",
-    url: getCanonicalUrl("/restore-family-photos"),
-    images: [
-      {
-        url: getOgImageUrl(),
-        width: 1200,
-        height: 630,
-        alt: "Restore Family Photos",
-      },
-    ],
+    imageAlt: "Restore Family Photos",
   },
   twitter: {
-    card: "summary_large_image",
     title: "AI Family Photo Restoration",
-    description:
-      "Restore old family photos. Perfect for genealogy and family history.",
-    images: [getOgImageUrl()],
+    description: "Restore old family photos. Perfect for genealogy and family history.",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -97,18 +85,7 @@ export default function RestoreFamilyPhotosPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
-      />
+      <JsonLd data={[faqJsonLd, breadcrumb, softwareJsonLd]} />
       <Header />
       <main className="flex-1">
         <UseCaseHero

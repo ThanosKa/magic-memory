@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getCanonicalUrl, getOgImageUrl, faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { faqPageJsonLd, breadcrumbJsonLd } from "@/lib/seo/metadata-helpers";
+import { pageMetadata } from "@/lib/seo/page-metadata";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { FAQItem } from "@/lib/seo/faq-data";
 import { ArticleHeading } from "@/components/layout/article-heading";
 import { PageContainer } from "@/components/layout/page-container";
@@ -11,19 +13,17 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 const Header = dynamic(() => import("@/components/header").then((m) => m.Header), { ssr: true });
 const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer), { ssr: true });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/glossary/gfpgan",
   title: "What Is GFPGAN? How It Restores Old Photos With AI",
   description:
     "GFPGAN is an AI model developed by Tencent ARC that restores faces in old and degraded photographs. Learn how GFPGAN works, how it compares to CodeFormer, and how Magic Memory uses it for one-click photo restoration.",
-  alternates: { canonical: getCanonicalUrl("/glossary/gfpgan") },
-  openGraph: {
+  social: {
     title: "What Is GFPGAN? How It Restores Old Photos With AI",
     description: "Learn how GFPGAN uses generative adversarial networks to restore faces in old, blurry, and damaged photos.",
-    url: getCanonicalUrl("/glossary/gfpgan"),
-    images: [{ url: getOgImageUrl(), width: 1200, height: 630, alt: "What Is GFPGAN" }],
+    imageAlt: "What Is GFPGAN",
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -58,8 +58,7 @@ export default function GlossaryGFPGANPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd data={[faqJsonLd, breadcrumb]} />
       <Header />
       <main className="flex-1">
         <section>

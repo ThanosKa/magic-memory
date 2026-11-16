@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import {
-  getCanonicalUrl,
-  getOgImageUrl,
   faqPageJsonLd,
   breadcrumbJsonLd,
   useCaseSoftwareJsonLd,
 } from "@/lib/seo/metadata-helpers";
+import { JsonLd } from "@/components/seo/json-ld";
 import { UseCaseHero } from "@/components/use-case/use-case-hero";
 import { UseCaseHowItWorks } from "@/components/use-case/use-case-how-it-works";
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq";
 import { UseCaseArticle } from "@/components/use-case/use-case-article";
 import { UseCaseRelated } from "@/components/use-case/use-case-related";
 import { FinalCta } from "@/components/layout/final-cta";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import type { FAQItem } from "@/lib/seo/faq-data";
 
 const Header = dynamic(
@@ -24,33 +24,22 @@ const Footer = dynamic(
   { ssr: true },
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/fix-blurry-photos",
   title: "Fix Blurry Photos Online — AI Sharpening in Seconds",
   description:
     "Fix blurry photos with AI in seconds. Magic Memory sharpens faces using GFPGAN, recovering detail lost to motion blur, focus blur, and compression. No subscription.",
-  alternates: { canonical: getCanonicalUrl("/fix-blurry-photos") },
-  openGraph: {
+  social: {
     title: "Fix Blurry Photos Online — AI Sharpening | Magic Memory",
     description:
       "Fix blurry photos in seconds. AI sharpens faces and recovers lost detail. No subscription.",
-    url: getCanonicalUrl("/fix-blurry-photos"),
-    images: [
-      {
-        url: getOgImageUrl(),
-        width: 1200,
-        height: 630,
-        alt: "Fix Blurry Photos",
-      },
-    ],
+    imageAlt: "Fix Blurry Photos",
   },
   twitter: {
-    card: "summary_large_image",
     title: "Fix Blurry Photos Online",
     description: "Fix blurry photos with AI. Results in 5–15 seconds.",
-    images: [getOgImageUrl()],
   },
-  robots: { index: true, follow: true },
-};
+});
 
 const faqs: FAQItem[] = [
   {
@@ -95,18 +84,7 @@ export default function FixBlurryPhotosPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
-      />
+      <JsonLd data={[faqJsonLd, breadcrumb, softwareJsonLd]} />
       <Header />
       <main className="flex-1">
         <UseCaseHero

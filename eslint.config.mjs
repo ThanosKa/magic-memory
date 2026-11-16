@@ -125,9 +125,8 @@ export default [
       'lib/email.ts',
       'lib/logger.ts',
       'lib/redis.ts',
-      'lib/supabase/ensure-user.ts',
       'lib/supabase/server.ts',
-      'lib/supabase/transactions.ts',
+      'lib/users/index.ts',
       'lib/validations/**/*.ts',
     ],
     rules: {
