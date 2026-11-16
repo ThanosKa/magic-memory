@@ -1,5 +1,5 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
 import logger from "@/lib/logger";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 /** Credits a new user starts with. The only place this value is defined. */
 export const SIGNUP_CREDITS = 1;

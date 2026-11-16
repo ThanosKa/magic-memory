@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterAll } from "vitest";
-import type { NextRequest } from "next/server";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
 import { sendWelcomeEmail } from "@/lib/email";
 import { GET } from "@/app/api/credits/route";
 import { POST } from "@/app/api/clerk/webhook/route";
+import type { NextRequest } from "next/server";
 
 vi.mock("@clerk/nextjs/server");
 vi.mock("@/lib/supabase/server");
