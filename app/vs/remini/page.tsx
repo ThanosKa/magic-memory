@@ -140,7 +140,7 @@ export default function VsReminiPage() {
                 </thead>
                 <tbody className="text-paper/70">
                   <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Cheapest paid</td><td className="py-2">€9.99 one-time</td><td className="py-2">In-app subscription</td><td className="py-2">Photo subscription</td></tr>
-                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">None</td><td className="py-2">Check in the app</td><td className="py-2">No published limit</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">None</td><td className="py-2">Check in the app</td><td className="py-2">Limited; number not stated</td></tr>
                   <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Platform</td><td className="py-2">Web (any device)</td><td className="py-2">Phone app, web</td><td className="py-2">Web, mobile app</td></tr>
                   <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Bundled with…</td><td className="py-2">Nothing</td><td className="py-2">Editing tools</td><td className="py-2">Genealogy tools</td></tr>
                   <tr><td className="py-2 font-medium text-paper">Photos stored?</td><td className="py-2">No</td><td className="py-2">See its privacy policy</td><td className="py-2">See its privacy policy</td></tr>
