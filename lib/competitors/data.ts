@@ -24,26 +24,26 @@ export const competitors: Record<string, Competitor> = {
     name: "Remini",
     slug: "remini",
     url: "https://remini.ai",
-    tagline: "Mobile-first AI photo enhancer",
+    tagline: "AI photo enhancer app, best known on phones",
     description:
-      "Remini is a popular mobile app for enhancing and restoring photos using AI. It is widely used for portrait enhancement and is known for its ease of use on smartphones.",
+      "Remini is a popular AI photo enhancer, best known as a phone app, with a web version at app.remini.ai. It is widely used for portrait enhancement.",
     strengths: [
       "Strong mobile app with editing features",
       "Large user base and brand recognition",
-      "Video enhancement capabilities",
+      "Web version as well as the app",
     ],
     weaknesses: [
-      "Weekly subscription required ($9.99/week)",
-      "Mobile-only — no web access",
+      "Recurring in-app subscription (weekly and monthly options)",
+      "Poor value if you only have a few photos",
       "Photos stored in cloud without clear retention policy",
     ],
-    pricing: "$9.99/week subscription",
-    platform: "iOS and Android (mobile only)",
+    pricing: "In-app subscription (weekly and monthly options)",
+    platform: "Phone app and web (app.remini.ai)",
     features: [
       {
         label: "Price",
         magicMemory: "One-time credits (€9.99–€29.99)",
-        competitor: "$9.99/week subscription",
+        competitor: "In-app subscription, weekly or monthly",
       },
       {
         label: "Free tier",
@@ -53,7 +53,7 @@ export const competitors: Record<string, Competitor> = {
       {
         label: "Platform",
         magicMemory: "Web (any device)",
-        competitor: "Mobile app only",
+        competitor: "Phone app and web",
       },
       {
         label: "Photo storage",
@@ -84,29 +84,29 @@ export const competitors: Record<string, Competitor> = {
     url: "https://myheritage.com",
     tagline: "Photo enhancement bundled with genealogy",
     description:
-      "MyHeritage is primarily a genealogy platform that includes a photo enhancer tool. The photo restoration feature is bundled into a genealogy subscription, making it expensive if you only want photo restoration.",
+      "MyHeritage is primarily a genealogy platform that includes a photo enhancer tool. Unlimited use of its Photo Enhancer comes with the MyHeritage Photo subscription or a plan that includes it, so you pay a recurring subscription even if you only have a few photos.",
     strengths: [
       "Excellent genealogy research tools",
       "Family tree building",
       "Deep roots in heritage and ancestry community",
     ],
     weaknesses: [
-      "Photo restoration locked behind full genealogy subscription",
-      "Expensive for users who only want photo restoration",
+      "Unlimited enhancing needs a recurring subscription",
+      "Poor value if you only have a few photos",
       "Interface designed for genealogy, not photo editing",
     ],
-    pricing: "Bundled with genealogy subscription",
+    pricing: "Photo subscription, or a plan that includes it",
     platform: "Web",
     features: [
       {
         label: "Price",
         magicMemory: "One-time credits (€9.99–€29.99)",
-        competitor: "Genealogy subscription bundle",
+        competitor: "Photo subscription or a plan that includes it",
       },
       {
         label: "Free tier",
         magicMemory: "None (a failed restoration costs no credit)",
-        competitor: "Very limited",
+        competitor: "Free sign-up; no published free limit",
       },
       {
         label: "Platform",
@@ -116,7 +116,7 @@ export const competitors: Record<string, Competitor> = {
       {
         label: "Standalone photo tool",
         magicMemory: "Yes",
-        competitor: "No — bundled with genealogy",
+        competitor: "Yes — Photo subscription (recurring)",
       },
       {
         label: "Processing time",
@@ -159,12 +159,12 @@ export const competitors: Record<string, Competitor> = {
       {
         label: "Price",
         magicMemory: "One-time credits (€9.99–€29.99)",
-        competitor: "Credits from $4.95/month",
+        competitor: "Monthly credits from $15/month billed yearly",
       },
       {
         label: "Free tier",
         magicMemory: "None (a failed restoration costs no credit)",
-        competitor: "3 free images/month",
+        competitor: "10 credits to try",
       },
       {
         label: "Platform",

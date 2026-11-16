@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMetadata({
   description: "Looking for a Remini alternative? Compare Magic Memory vs Remini: pricing, platform, privacy, and restoration quality. Magic Memory is web-based with one-time credits.",
   social: {
     title: "Remini Alternative — Magic Memory vs Remini",
-    description: "Magic Memory vs Remini comparison. Web-based vs mobile-only, one-time vs subscription.",
+    description: "Magic Memory vs Remini comparison. One-time credits vs a recurring subscription.",
     imageAlt: "Remini Alternative",
   },
 });
@@ -40,7 +40,7 @@ const faqs: FAQItem[] = [
   {
     question: "What does Remini cost compared to Magic Memory?",
     answer:
-      "Remini charges $9.99 per week as a subscription. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. For occasional users who restore a few photos per month, Magic Memory is significantly cheaper. For daily heavy use, compare the per-photo cost.",
+      "Remini is a recurring in-app subscription with weekly and monthly options. Magic Memory charges €9.99–€29.99 for one-time credit packages that never expire. For occasional users who restore a few photos per month, Magic Memory is significantly cheaper. For daily heavy use, compare the per-photo cost.",
   },
   {
     question: "Does Magic Memory store my photos?",
@@ -83,21 +83,20 @@ export default function ReminiAlternativePage() {
             </h1>
 
             <p className="text-lg leading-[1.6] text-paper/70 mb-12">
-              Remini is a popular AI photo enhancer, but it has real limitations: a weekly subscription, mobile-only access, and cloud photo storage. Here is what Magic Memory offers as an alternative.
+              Remini is a popular AI photo enhancer, but it has real limitations: a recurring subscription and cloud photo storage. Here is what Magic Memory offers as an alternative.
             </p>
 
             <div className="rounded-2xl border border-border bg-card p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-2">TL;DR</h2>
               <ul className="space-y-2 text-paper/70">
                 <li><strong className="text-paper">Magic Memory:</strong> Web app, one-time credits (€9.99–€29.99), no photo storage, credits never expire</li>
-                <li><strong className="text-paper">Remini:</strong> Mobile app only, $9.99/week subscription, cloud photo storage, more editing features</li>
+                <li><strong className="text-paper">Remini:</strong> Phone app and web version, recurring subscription, cloud photo storage, more editing features</li>
               </ul>
             </div>
 
             <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Why People Look for Remini Alternatives</h2>
             <div className="space-y-4 text-paper/70 mb-12">
-              <p><strong className="text-paper">Subscription pricing:</strong> Remini charges $9.99/week. For someone who restores photos occasionally, this is expensive relative to usage.</p>
-              <p><strong className="text-paper">Mobile-only:</strong> Remini requires the mobile app. Users who want to work on a desktop, laptop, or tablet without installing an app cannot use it.</p>
+              <p><strong className="text-paper">Subscription pricing:</strong> Remini is a weekly or monthly subscription. For someone who restores photos occasionally, this is expensive relative to usage.</p>
               <p><strong className="text-paper">Cloud photo storage:</strong> Remini stores photos in cloud accounts. Privacy-conscious users are uncomfortable with a third-party service holding their personal family photos.</p>
             </div>
 

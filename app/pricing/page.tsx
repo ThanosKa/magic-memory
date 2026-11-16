@@ -55,7 +55,7 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "Is Magic Memory a subscription?",
     answer:
-      `No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge $9.99 per week; you can buy ${starter.credits} Magic Memory credits for ${starter.priceDisplay} and keep them forever.`,
+      `No. Magic Memory uses one-time credit packages — not a subscription. You pay once, use the credits whenever you want, and they never expire. Competitors like Remini charge a weekly or monthly subscription; you can buy ${starter.credits} Magic Memory credits for ${starter.priceDisplay} and keep them forever.`,
   },
   {
     question: "Do my credits ever expire?",
@@ -70,7 +70,7 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "How much does each restoration cost?",
     answer:
-      `The per-restoration cost drops as you buy larger packs. Starter: ${perPhotoPrice(starter)}/photo. Growth: ${perPhotoPrice(growth)}/photo. Premium: ${perPhotoPrice(premium)}/photo. Compared to manual professional restoration ($25-$150 per photo) or Remini's $9.99/week subscription, even our smallest pack is significantly cheaper for most users.`,
+      `The per-restoration cost drops as you buy larger packs. Starter: ${perPhotoPrice(starter)}/photo. Growth: ${perPhotoPrice(growth)}/photo. Premium: ${perPhotoPrice(premium)}/photo. You pay once, there is no subscription to cancel, and credits never expire.`,
   },
   {
     question: "Why is pricing in Euros instead of USD?",
@@ -95,7 +95,7 @@ const pricingFaqs: FAQItem[] = [
   {
     question: "How does Magic Memory compare to Remini or MyHeritage on price?",
     answer:
-      `Remini costs $9.99/week ($519/year if used continuously). MyHeritage bundles photo tools into a $119-$259/year genealogy subscription. Magic Memory's Premium pack is ${premium.priceDisplay} for ${premium.credits} never-expiring credits — roughly the same as 3 weeks of Remini, but with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.`,
+      `Remini sells an in-app subscription with weekly and monthly options. MyHeritage Photo Enhancer comes with its Photo subscription or a plan that includes it. Magic Memory's Premium pack is ${premium.priceDisplay} for ${premium.credits} never-expiring credits, with no recurring charge. See our full comparison against Remini, MyHeritage, and VanceAI on the alternatives page.`,
   },
   {
     question: "Is my payment information secure?",

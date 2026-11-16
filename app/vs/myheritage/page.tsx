@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/vs/myheritage",
   title: "Magic Memory vs MyHeritage Photo Enhancer — Which Is Better?",
   description:
-    "Compare Magic Memory and MyHeritage Photo Enhancer for AI photo restoration. Magic Memory is a standalone tool from €9.99. MyHeritage bundles photo enhancement into a genealogy subscription. See which fits your needs.",
+    "Compare Magic Memory and MyHeritage Photo Enhancer for AI photo restoration. Magic Memory is a standalone tool from €9.99. MyHeritage Photo Enhancer comes with a recurring Photo subscription. See which fits your needs.",
   social: {
     title: "Magic Memory vs MyHeritage Photo Enhancer — Which Is Better?",
     description: "Standalone AI photo restoration vs genealogy-bundled enhancer. Compare pricing, features, and privacy.",
@@ -36,7 +36,7 @@ const faqs: FAQItem[] = [
   {
     question: "How much does MyHeritage photo restoration cost vs Magic Memory?",
     answer:
-      "Magic Memory offers one-time credit packages starting at €9.99 for 20 restorations, and the credits never expire. MyHeritage requires a genealogy subscription that starts at around $13/month. If you only want photo restoration, Magic Memory is substantially cheaper.",
+      "Magic Memory offers one-time credit packages starting at €9.99 for 20 restorations, and the credits never expire. Unlimited use of MyHeritage Photo Enhancer comes with the MyHeritage Photo subscription, or a plan that includes it, and renews until you cancel. If you only have a few photos to restore, one-time credits usually cost less.",
   },
   {
     question: "Does MyHeritage store my photos?",
@@ -66,7 +66,7 @@ export default function VsMyHeritagePage() {
     {
       category: "Pricing model",
       magicMemory: "One-time credits (€9.99–€29.99), credits never expire",
-      competitor: "Monthly genealogy subscription (~$13/month)",
+      competitor: "Photo subscription, or a plan that includes it (recurring)",
     },
     {
       category: "Platform",

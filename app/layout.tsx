@@ -164,7 +164,7 @@ export default function RootLayout({
                       "Instant results in 5–15 seconds",
                       "Web-based — works on any device, no app required",
                       "No persistent photo storage after processing",
-                      "Cheaper than Remini ($9.99/wk) and MyHeritage ($119/yr)",
+                      "One-time packs instead of a Remini or MyHeritage subscription",
                     ],
                   },
                   {

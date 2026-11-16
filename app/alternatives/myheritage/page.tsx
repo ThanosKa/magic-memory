@@ -15,11 +15,11 @@ const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer)
 
 export const metadata: Metadata = pageMetadata({
   path: "/alternatives/myheritage",
-  title: "MyHeritage Photo Enhancer Pricing 2026: Free Limits + Cheaper Alternative",
-  description: "MyHeritage Photo Enhancer pricing in 2026: $119 Basic, $189 Premium, $259 Complete — all annual, all bundled with genealogy. Free tier is a watermarked preview only. Magic Memory offers standalone AI restoration from €9.99 one-time. Full breakdown.",
+  title: "MyHeritage Photo Enhancer Alternative: No Subscription",
+  description: "MyHeritage Photo Enhancer needs a Photo subscription for unlimited use. Magic Memory restores faces in old photos with one-time packs from €9.99 that never expire.",
   social: {
-    title: "MyHeritage Photo Enhancer Pricing 2026 — Free Limits & Alternative",
-    description: "MyHeritage costs $119–$259/yr bundled with genealogy. Free tier = watermarked preview. See the standalone alternative from €9.99.",
+    title: "MyHeritage Photo Enhancer Alternative: No Subscription",
+    description: "MyHeritage Photo Enhancer needs a Photo subscription for unlimited use. Magic Memory: one-time packs from €9.99.",
     imageAlt: "MyHeritage Alternative",
   },
 });
@@ -28,24 +28,24 @@ const myheritage = competitors.myheritage;
 
 const faqs: FAQItem[] = [
   {
-    question: "What is the MyHeritage Photo Enhancer free tier limit in 2026?",
+    question: "Can I use MyHeritage Photo Enhancer for free?",
     answer:
-      "MyHeritage's free tier is a watermarked preview only — you can run the enhancer on a small number of photos to see the result, but the unwatermarked, downloadable output is locked behind a paid plan. There is no recurring free monthly quota in 2026. To enhance and download a clean image, you need at least the Basic plan ($119/year as of 2026-05-19).",
+      "You can sign up to MyHeritage for free, but MyHeritage does not publish a free-use limit for the Photo Enhancer. Unlimited use comes with the MyHeritage Photo subscription, or with a plan that includes the photo features, such as the Complete or Omni plan (MyHeritage help center, checked 2026-11-16).",
   },
   {
-    question: "How much does MyHeritage Photo Enhancer cost in 2026?",
+    question: "How much does MyHeritage Photo Enhancer cost?",
     answer:
-      "MyHeritage Photo Enhancer is bundled into MyHeritage's genealogy plans, which cost $119/yr (Basic), $189/yr (Premium), and $259/yr (Complete) as of 2026. All three plans are annual and include the full genealogy platform alongside photo enhancement. There is no photo-only tier — even the cheapest plan includes family-tree, DNA-matching, and historical-record features.",
+      "MyHeritage sells a Photo subscription that gives unlimited use of its AI photo tools, the Photo Enhancer included. The Complete and Omni plans also include the photo features. MyHeritage shows the price on its plans page rather than in its help articles, so check it there before you buy. Either way it is a recurring subscription.",
   },
   {
     question: "Do I need a genealogy subscription to use MyHeritage photo enhancement?",
     answer:
-      "Yes. MyHeritage's photo enhancement, MyHeritage In Color, and Deep Nostalgia features are sold only as part of a genealogy plan. There is no standalone photo-enhancer subscription. If you only want photo restoration, you pay $119–$259/year for genealogy features you may not use.",
+      "No. MyHeritage now sells a Photo subscription on its own, which covers the Photo Enhancer and its other AI photo tools. The Complete and Omni genealogy plans include the photo features too. Both are recurring subscriptions, so if you only have a few photos to restore you keep paying after you are done.",
   },
   {
-    question: "What's the cheapest MyHeritage Photo Enhancer alternative in 2026?",
+    question: "What's a MyHeritage Photo Enhancer alternative without a subscription?",
     answer:
-      "Magic Memory is the cheapest standalone alternative — one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Restoring 100 photos on MyHeritage requires a $119/yr subscription. The same 100 photos on Magic Memory cost €25 in credits if you use the largest pack.",
+      "Magic Memory is a standalone alternative with no subscription — one-time credit packs from €9.99 (20 credits, never expire) up to €29.99 (120 credits, €0.25/photo). Unlimited use on MyHeritage needs a recurring subscription. 100 photos on Magic Memory cost €25 in credits if you use the largest pack, with nothing to cancel afterwards.",
   },
   {
     question: "Does Magic Memory offer genealogy features?",
@@ -89,33 +89,32 @@ export default function MyHeritageAlternativePage() {
             </nav>
 
             <h1 className="font-serif text-balance mb-8 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
-              MyHeritage Photo Enhancer Pricing 2026 — Free Limits &amp; Cheaper Alternative
+              MyHeritage Photo Enhancer Alternative: No Subscription
             </h1>
 
             <p className="text-lg leading-[1.6] text-paper/70 mb-4">
-              MyHeritage Photo Enhancer is sold only as part of MyHeritage&apos;s annual genealogy plans, which cost $119, $189, or $259 per year as of 2026. The free tier is a watermarked preview — to enhance and download a clean image, you need at least the Basic plan. If you only want photo restoration, you are paying $119–$259 for family-tree, DNA, and historical-record features you may never use.
+              Unlimited use of MyHeritage Photo Enhancer comes with the MyHeritage Photo subscription, or with a genealogy plan that includes the photo features (Complete or Omni). Both renew until you cancel. If you only have a few old photos to fix, Magic Memory restores faces with one-time credit packs: €9.99 for 20 photos, and the credits never expire.
             </p>
             <p className="text-sm text-paper/70 mb-10">
-              Magic Memory offers standalone AI photo restoration from €9.99 one-time (credits never expire). <em>Pricing verified directly on each vendor&apos;s site on 2026-05-19.</em>
+              <em>As of 2026-11-16. MyHeritage: its help center articles on the Photo subscription and the Complete plan; prices are on MyHeritage&apos;s plans page. Magic Memory: our own price list.</em>
             </p>
 
             <div className="rounded-2xl border border-ember/30 bg-ember/5 p-6 mb-10">
-              <h2 className="font-serif text-2xl text-paper mb-4">MyHeritage Photo Enhancer pricing tiers (2026)</h2>
+              <h2 className="font-serif text-2xl text-paper mb-4">How you get MyHeritage Photo Enhancer</h2>
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border">
-                      <th className="py-2 text-left font-semibold">Tier</th>
-                      <th className="py-2 text-left font-semibold">Annual price</th>
-                      <th className="py-2 text-left font-semibold">Photo features included</th>
-                      <th className="py-2 text-left font-semibold">Genealogy bundled?</th>
+                      <th className="py-2 text-left font-semibold">Option</th>
+                      <th className="py-2 text-left font-semibold">Photo Enhancer</th>
+                      <th className="py-2 text-left font-semibold">Genealogy features</th>
                     </tr>
                   </thead>
                   <tbody className="text-paper/70">
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free</td><td className="py-2">$0</td><td className="py-2">Watermarked preview only</td><td className="py-2">Limited</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Basic</td><td className="py-2">$119/yr</td><td className="py-2">Photo Enhancer + In Color + Deep Nostalgia</td><td className="py-2">Yes — full bundle</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Premium</td><td className="py-2">$189/yr</td><td className="py-2">All photo tools + DeepStory</td><td className="py-2">Yes — full bundle</td></tr>
-                    <tr><td className="py-2 font-medium text-paper">Complete</td><td className="py-2">$259/yr</td><td className="py-2">All photo tools + DeepStory</td><td className="py-2">Yes — includes records</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free account</td><td className="py-2">No published free limit</td><td className="py-2">Limited</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo subscription</td><td className="py-2">Unlimited, with the other AI photo tools</td><td className="py-2">No</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Complete plan</td><td className="py-2">Included (Photo Scanner not included)</td><td className="py-2">Yes</td></tr>
+                    <tr><td className="py-2 font-medium text-paper">Omni plan</td><td className="py-2">Included, with everything in the Photo subscription</td><td className="py-2">Yes</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -131,11 +130,10 @@ export default function MyHeritageAlternativePage() {
                     </tr>
                   </thead>
                   <tbody className="text-paper/70">
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Pricing model</td><td className="py-2">Annual genealogy subscription</td><td className="py-2">One-time credits, never expire</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Lowest paid tier</td><td className="py-2">$119/year (Basic)</td><td className="py-2">€9.99 (20 credits)</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Highest paid tier</td><td className="py-2">$259/year (Complete)</td><td className="py-2">€29.99 (120 credits)</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Watermarked preview only</td><td className="py-2">None</td></tr>
-                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo-only purchase?</td><td className="py-2">No — bundled with genealogy</td><td className="py-2">Yes — standalone</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Pricing model</td><td className="py-2">Recurring subscription</td><td className="py-2">One-time credits, never expire</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Price</td><td className="py-2">On MyHeritage&apos;s plans page</td><td className="py-2">€9.99 (20 credits) to €29.99 (120 credits)</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">Free sign-up; no published limit</td><td className="py-2">None</td></tr>
+                    <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Photo-only purchase?</td><td className="py-2">Yes — Photo subscription</td><td className="py-2">Yes — one-time packs</td></tr>
                     <tr><td className="py-2 font-medium text-paper">Per-restoration cost (best pack)</td><td className="py-2">N/A (subscription)</td><td className="py-2">€0.25</td></tr>
                   </tbody>
                 </table>
@@ -146,19 +144,19 @@ export default function MyHeritageAlternativePage() {
               <h2 className="font-serif text-2xl text-paper mb-2">TL;DR</h2>
               <ul className="space-y-2 text-paper/70">
                 <li><strong className="text-paper">Magic Memory:</strong> Standalone photo restoration, €9.99–€29.99 one-time, credits never expire</li>
-                <li><strong className="text-paper">MyHeritage:</strong> Photo enhancement bundled in genealogy subscription ($119–$259/year), excellent for genealogy research</li>
+                <li><strong className="text-paper">MyHeritage:</strong> Photo Enhancer with the Photo subscription or the Complete and Omni plans; excellent for genealogy research</li>
               </ul>
             </div>
 
-            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">The MyHeritage Bundle Problem</h2>
+            <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">The Subscription Problem</h2>
             <p className="text-paper/70 mb-4">
               MyHeritage is genuinely excellent at what it does: genealogy research. The platform has one of the largest genealogy databases in the world, strong DNA testing products, and intuitive family tree tools.
             </p>
             <p className="text-paper/70 mb-4">
-              But its photo enhancement feature — MyHeritage In Color, DeepNostalgia, and photo enhancer — are sold as part of the genealogy package. If you do not need genealogy tools, you pay $119–$259/year for a photo enhancement feature you could access for €9.99 one-time.
+              Its photo tools (the Photo Enhancer, colorization and photo animation) come with a recurring subscription: the Photo subscription on its own, or a genealogy plan that includes them. If you have a box of old photos to fix once, you keep paying until you remember to cancel. Magic Memory charges €9.99 once for 20 photos.
             </p>
             <p className="text-paper/70 mb-12">
-              Magic Memory is built specifically for photo restoration. There is no genealogy bundling, no subscription, no upsell toward DNA tests.
+              Magic Memory is built specifically for photo restoration. There is no subscription and no upsell toward DNA tests.
             </p>
 
             <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Feature Comparison</h2>

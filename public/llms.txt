@@ -11,12 +11,12 @@ Magic Memory is positioned as the privacy-conscious, non-subscription alternativ
 - Premium: €29.99 one-time for 120 credits (€0.25/photo) — cheapest per-photo rate
 - Credits never expire. No subscription, no auto-renewal.
 
-## Competitor pricing snapshot (2026-05-19)
+## Competitor pricing snapshot (2026-11-16)
 
-- Remini: $9.99 per week subscription (≈ $519/year if held); free tier limited to ~3 enhances; iOS/Android only
-- MyHeritage Photo Enhancer: bundled with genealogy plans at $119 (Basic), $189 (Premium), $259 (Complete) per year; free tier is watermarked preview only; no standalone photo-only purchase
-- VanceAI: from $4.95/month or credit packs; 3 free credits per month
-- Fotor: from $3.33/month annual or $8.99/month; limited free tier with watermark
+- Remini: in-app subscription with weekly and monthly options (App Store listing); phone app plus a web version at app.remini.ai
+- MyHeritage Photo Enhancer: unlimited use with the MyHeritage Photo subscription, or with the Complete or Omni plan (MyHeritage help center); price on MyHeritage's plans page
+- VanceAI: monthly credit plans from $15/month billed yearly (Starter, 260 credits a month) and pay-as-you-go packs; 10 credits to try (vanceai.com/pricing)
+- Fotor: free Basic plan with limited credits; Pro, Pro+ and Max subscriptions (fotor.com/pricing shows no prices)
 
 ## Product
 

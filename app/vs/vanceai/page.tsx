@@ -36,7 +36,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which is cheaper for occasional use: Magic Memory or VanceAI?",
     answer:
-      "Magic Memory is cheaper for occasional users. The smallest credit pack is €9.99 for 20 credits that never expire. VanceAI starts at $4.95/month with limited credits, and unused credits may expire depending on your plan.",
+      "Magic Memory is cheaper for occasional users. The smallest credit pack is €9.99 for 20 credits that never expire. VanceAI's monthly plans start at $15/month billed yearly for 260 credits a month (vanceai.com/pricing, 2026-11-16), and it gives 10 credits to try.",
   },
   {
     question: "Does VanceAI offer batch processing?",
@@ -66,7 +66,7 @@ export default function VsVanceAIPage() {
     {
       category: "Pricing model",
       magicMemory: "One-time credits (€9.99–€29.99), credits never expire",
-      competitor: "Monthly subscription from $4.95/month with credit limits",
+      competitor: "Monthly credits from $15/month billed yearly, or pay-as-you-go packs",
     },
     {
       category: "Ease of use",

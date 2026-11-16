@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/vs/remini",
   title: "Remini vs Magic Memory vs MyHeritage 2026: Pricing & Quality",
   description:
-    "Remini $9.99/wk vs MyHeritage $119–$259/yr vs Magic Memory €9.99 one-time. A 2026 side-by-side on pricing, free-tier limits, platform, quality and privacy.",
+    "Remini and MyHeritage sell subscriptions; Magic Memory sells one-time packs from €9.99. A 2026 side-by-side on pricing, free tiers, platform and privacy.",
   social: {
     title: "Remini vs Magic Memory vs MyHeritage 2026 — Pricing & Quality",
     description: "Pricing, free tiers, and platform comparison for the three most-searched AI photo restoration tools in 2026.",
@@ -31,7 +31,7 @@ const faqs: FAQItem[] = [
   {
     question: "Remini vs MyHeritage Photo Enhancer in 2026: which is better?",
     answer:
-      "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a $9.99/week subscription. MyHeritage Photo Enhancer is better if you're already paying for MyHeritage genealogy ($119–$259/yr) and want photo enhancement bundled in. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at €9.99 one-time for 20 credits.",
+      "Remini is the better pick if you want a mobile app with strong daily-use enhancement features and don't mind a recurring subscription. MyHeritage Photo Enhancer is better if you already use MyHeritage for genealogy or want its Photo subscription for all its AI photo tools. Neither is the cheapest option for users who only want photo restoration — that's typically Magic Memory at €9.99 one-time for 20 credits.",
   },
   {
     question: "Remini vs Magic Memory: which has better photo restoration quality?",
@@ -41,7 +41,7 @@ const faqs: FAQItem[] = [
   {
     question: "Which is cheaper for 10–20 photos: Remini, MyHeritage, or Magic Memory?",
     answer:
-      "Magic Memory is the cheapest by a wide margin. A user restoring 10–20 photos per month would pay roughly $43/month on Remini ($9.99/week × 4.3 weeks), $119+/year on MyHeritage (annual subscription required), or €9.99 once on Magic Memory (the 20-credit Starter pack, credits never expire); 50 photos fit in the €19.99 Growth pack.",
+      "For a handful of photos, Magic Memory usually costs least. Remini and MyHeritage both charge a recurring subscription for as long as you keep it. A user restoring 10–20 photos pays €9.99 once on Magic Memory (the 20-credit Starter pack, credits never expire); 50 photos fit in the €19.99 Growth pack.",
   },
   {
     question: "Can you use Magic Memory or Remini on iPhone?",
@@ -56,7 +56,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is Magic Memory a Remini alternative?",
     answer:
-      "Yes — Magic Memory is the leading non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is web (any device), Remini is mobile-only; Magic Memory is one-time credits that never expire, Remini is $9.99/week subscription; Magic Memory does not retain photos after processing, Remini stores them in your cloud account.",
+      "Yes — Magic Memory is a non-subscription, web-based alternative to Remini for AI face restoration. The differences: Magic Memory is built for the browser, Remini is best known as a phone app; Magic Memory is one-time credits that never expire, Remini is a recurring in-app subscription; Magic Memory does not retain photos after processing, Remini stores them in your cloud account.",
   },
 ];
 
@@ -71,12 +71,12 @@ export default function VsReminiPage() {
     {
       category: "Pricing model",
       magicMemory: "One-time credits (€9.99–€29.99), credits never expire",
-      remini: "$9.99/week recurring subscription",
+      remini: "In-app subscription with weekly and monthly options",
     },
     {
       category: "Platform",
       magicMemory: "Web app — any device, any browser, no download",
-      remini: "iOS and Android app — mobile only",
+      remini: "Phone app, plus a web version at app.remini.ai",
     },
     {
       category: "Privacy",
@@ -139,10 +139,10 @@ export default function VsReminiPage() {
                   </tr>
                 </thead>
                 <tbody className="text-paper/70">
-                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Cheapest paid</td><td className="py-2">€9.99 one-time</td><td className="py-2">$9.99/week</td><td className="py-2">$119/year</td></tr>
-                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">None</td><td className="py-2">~3 enhances</td><td className="py-2">Watermarked preview</td></tr>
-                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Platform</td><td className="py-2">Web (any device)</td><td className="py-2">iOS/Android only</td><td className="py-2">Web</td></tr>
-                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Bundled with…</td><td className="py-2">Nothing</td><td className="py-2">Video enhancer</td><td className="py-2">Genealogy plan</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Cheapest paid</td><td className="py-2">€9.99 one-time</td><td className="py-2">In-app subscription</td><td className="py-2">Photo subscription</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Free tier</td><td className="py-2">None</td><td className="py-2">Check in the app</td><td className="py-2">No published limit</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Platform</td><td className="py-2">Web (any device)</td><td className="py-2">Phone app, web</td><td className="py-2">Web, mobile app</td></tr>
+                  <tr className="border-b border-border"><td className="py-2 font-medium text-paper">Bundled with…</td><td className="py-2">Nothing</td><td className="py-2">Editing tools</td><td className="py-2">Genealogy tools</td></tr>
                   <tr><td className="py-2 font-medium text-paper">Photos stored?</td><td className="py-2">No</td><td className="py-2">Yes — cloud</td><td className="py-2">Yes — account</td></tr>
                 </tbody>
               </table>
