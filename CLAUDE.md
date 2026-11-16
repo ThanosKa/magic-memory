@@ -22,7 +22,7 @@ AI photo restoration SaaS on the Next.js 16 App Router. A signed-in user uploads
 
 pnpm only. Run tests once with `pnpm test:run` (`pnpm test` is watch mode). Before committing run `pnpm lint`, `pnpm type-check` and `pnpm test:run`, the three checks CI runs before its build step. CI also runs `pnpm build` on pull requests, with placeholder env values (see `.github/workflows/ci.yml`). `pnpm build` ignores type errors (`ignoreBuildErrors` in `next.config.mjs`), so it never replaces `pnpm type-check`. `pnpm test:coverage` prints line coverage (provider `@vitest/coverage-v8`).
 
-Production is the Cloudflare Worker `magic-memory`. Merging to `main` does not update it: a change reaches production only when someone runs `pnpm build:vinext`, then `pnpm exec cf deploy --prebuilt`, on Node ^22.23 or ^24.22 (see README). After a merge that should go live, say so and offer to deploy; never deploy without the developer's yes.
+Production is the Cloudflare Worker `magic-memory`. Every merge to `main` deploys it automatically once CI passes (`.github/workflows/deploy.yml`), so the merge is the developer's yes and every PR must be safe to ship on its own. Never deploy by hand. Migrations stay manual: the developer runs a migration on production before merging code that needs it. The deploy stops when a `scripts/*.sql` file changed, and the developer then uses the manual run (Run workflow in the Actions tab; see README, Deployment).
 
 ## Before working on
 
