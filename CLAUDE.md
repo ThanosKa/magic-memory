@@ -16,11 +16,13 @@ AI photo restoration SaaS on the Next.js 16 App Router. A signed-in user uploads
 - `scripts/` holds the numbered SQL migrations, applied by hand, plus the file-based `seo-audit.ts`
 - Redis (Upstash) only rate-limits `/api/restore`, and the route keeps working when Redis is down
 - Tests live in `__tests__/`, mirroring the source tree
-- Env vars are listed in `.env.example` and read straight from `process.env`; there is no validation module
+- Env vars are listed in `.env.example` and read from `process.env`; there is no validation module. On the Worker a server-only name reaches `process.env` only when `cloudflare.config.ts` declares it (`bindings.secret()`), so a new name goes there too
 
 ## Commands
 
 pnpm only. Run tests once with `pnpm test:run` (`pnpm test` is watch mode). Before committing run `pnpm lint`, `pnpm type-check` and `pnpm test:run`, the three checks CI runs before its build step. CI also runs `pnpm build` on pull requests, with placeholder env values (see `.github/workflows/ci.yml`). `pnpm build` ignores type errors (`ignoreBuildErrors` in `next.config.mjs`), so it never replaces `pnpm type-check`. `pnpm test:coverage` prints line coverage (provider `@vitest/coverage-v8`).
+
+Production is the Cloudflare Worker `magic-memory`. Every merge to `main` deploys it automatically once CI passes (`.github/workflows/deploy.yml`), so the merge is the developer's yes and every PR must be safe to ship on its own. Never deploy by hand. Migrations stay manual: the developer runs a migration on production before merging code that needs it. The deploy stops when a `scripts/*.sql` file changed, and the developer then uses the manual run (Run workflow in the Actions tab; see README, Deployment).
 
 ## Before working on
 
@@ -43,3 +45,17 @@ pnpm only. Run tests once with `pnpm test:run` (`pnpm test` is watch mode). Befo
 - Keep image bytes in memory: the privacy page promises we never store photos, so uploads and results stay out of Supabase Storage and every other store we own; the database holds metadata and the Replicate URL
 - Keep secrets server-side (`SUPABASE_SERVICE_ROLE_KEY`, `STRIPE_SECRET_KEY`, `REPLICATE_API_TOKEN`, `CLERK_SECRET_KEY`, webhook secrets); client code reads only `NEXT_PUBLIC_*`
 - Change a credit balance only through the paths in `.claude/docs/credits-and-billing.md`
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs are local markdown files under `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default labels, recorded as a `Status:` line in each issue. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context. See `docs/agents/domain.md`.
