@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
 
                 const result = await provisionUser(
                     { clerkUserId: id, email, name, imageUrl: image_url, emailVerified },
-                    { supabase }
+                    { supabase, sendWelcomeEmail }
                 );
 
                 if (!result.ok) {
@@ -130,9 +130,8 @@ export async function POST(request: NextRequest) {
                     break;
                 }
 
+                // provisionUser has already sent the welcome email.
                 logger.info({ userId: id, email }, "User created in database");
-                // Awaited: Workers can cancel work still running after the response.
-                await sendWelcomeEmail(email, name);
                 break;
             }
 

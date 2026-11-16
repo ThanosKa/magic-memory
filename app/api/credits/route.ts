@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getSupabaseAdminClient } from "@/lib/supabase/server";
+import { sendWelcomeEmail } from "@/lib/email";
 import { findUser, provisionUser } from "@/lib/users";
 import logger from "@/lib/logger";
 import { z } from "zod";
@@ -81,7 +82,7 @@ export async function GET() {
 
         const ensured = await provisionUser(
           { clerkUserId: userId, email, name, emailVerified },
-          { supabase }
+          { supabase, sendWelcomeEmail }
         );
 
         if (!ensured.ok) {
