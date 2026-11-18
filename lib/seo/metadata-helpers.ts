@@ -39,7 +39,7 @@ export const webApplicationJsonLd = (): Thing => ({
   featureList: [
     "AI-powered face restoration using GFPGAN",
     "One-time credit packs that never expire",
-    "Instant results in 5-15 seconds",
+    "Results usually in under a minute",
     "Interactive before/after comparison",
     "No persistent image storage",
     "Secure authentication with Google",

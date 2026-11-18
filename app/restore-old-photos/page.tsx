@@ -82,7 +82,7 @@ const howToJsonLd = {
     {
       "@type": "HowToStep",
       name: "AI Restores Faces and Detail",
-      text: "GFPGAN analyzes and restores facial features in 5-15 seconds.",
+      text: "GFPGAN analyzes and restores facial features, usually in under a minute.",
     },
     {
       "@type": "HowToStep",
@@ -112,7 +112,7 @@ export default function RestoreOldPhotosPage() {
       <main className="flex-1">
         <UseCaseHero
           headline="Restore Old Photos Online With AI"
-          subheadline="Find an old photo box and see blurry grandparent photos that deserve better? Magic Memory uses GFPGAN AI to restore faces, recover lost detail, and bring your most important memories back to life in 5–15 seconds. Pay once per photo, with credits that never expire."
+          subheadline="Find an old photo box and see blurry grandparent photos that deserve better? Magic Memory uses GFPGAN AI to restore faces, recover lost detail, and bring your most important memories back to life, usually in under a minute. Pay once per photo, with credits that never expire."
           keyword="restore old photos"
         />
 
@@ -132,7 +132,7 @@ export default function RestoreOldPhotosPage() {
             photo is severely degraded.
           </p>
           <p>
-            The model processes your photo in 5–15 seconds, comparing the
+            The model processes your photo, usually in under a minute, comparing the
             degraded input against its learned model of how faces should look,
             then reconstructing sharp edges, fine texture, and clear features
             that were lost to time.

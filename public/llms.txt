@@ -2,7 +2,7 @@
 
 > AI photo restoration service. Restores old, blurry, faded, and damaged photos using GFPGAN — a face restoration AI model published at CVPR 2021 by Tencent ARC. Web-based, no app required. One-time credit packs (not a subscription) that never expire. There is no free tier: every restoration uses one credit, and a failed restoration costs none. Last verified 2026-11-06.
 
-Magic Memory is positioned as the privacy-conscious, non-subscription alternative to Remini, MyHeritage Photo Enhancer, VanceAI, and Fotor. Processing completes in 5–15 seconds per photo. Photos are not retained after the session.
+Magic Memory is positioned as the privacy-conscious, non-subscription alternative to Remini, MyHeritage Photo Enhancer, VanceAI, and Fotor. Processing usually completes in under a minute per photo. Photos are not retained after the session.
 
 ## Pricing snapshot (2026-11-06)
 

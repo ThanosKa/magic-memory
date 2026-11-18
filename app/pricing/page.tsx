@@ -214,7 +214,7 @@ export default async function PricingPage() {
     },
     areaServed: "Worldwide",
     description:
-      "AI-powered photo restoration using the GFPGAN face restoration model. Restores old, blurry, faded, and damaged portrait photos in 5–15 seconds.",
+      "AI-powered photo restoration using the GFPGAN face restoration model. Restores old, blurry, faded, and damaged portrait photos, usually in under a minute.",
     offers: {
       "@type": "Offer",
       price: (starter.price / 100).toFixed(2),

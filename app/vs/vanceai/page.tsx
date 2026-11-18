@@ -31,7 +31,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is Magic Memory or VanceAI easier to use?",
     answer:
-      "Magic Memory is significantly easier. It is a one-click tool: upload a photo, AI restores it in 5-15 seconds, download the result. VanceAI offers a professional suite with multiple tools, settings, and options. If you just want to restore old photos quickly, Magic Memory has zero learning curve. If you need advanced controls like upscaling parameters or batch processing, VanceAI has more options.",
+      "Magic Memory is significantly easier. It is a one-click tool: upload a photo, AI restores it, usually in under a minute, download the result. VanceAI offers a professional suite with multiple tools, settings, and options. If you just want to restore old photos quickly, Magic Memory has zero learning curve. If you need advanced controls like upscaling parameters or batch processing, VanceAI has more options.",
   },
   {
     question: "Which is cheaper for occasional use: Magic Memory or VanceAI?",

@@ -63,7 +63,7 @@ export const blogPosts: BlogPost[] = [
     slug: "ai-photo-restoration-vs-photoshop",
     title: "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
     description:
-      "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+      "AI restores a face in under a minute at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
     date: "May 19, 2026",
     datePublished: "2026-02-23",
     dateModified: "2026-05-19",

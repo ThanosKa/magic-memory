@@ -44,7 +44,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is this suitable for a real estate team?",
     answer:
-      "Yes. A credit pack of 20 restorations (\u20ac9.99) is enough to enhance headshots for an entire real estate office. Credits never expire, so you can process new team member photos as they join. Each photo is processed in under 15 seconds with no technical skill required.",
+      "Yes. A credit pack of 20 restorations (\u20ac9.99) is enough to enhance headshots for an entire real estate office. Credits never expire, so you can process new team member photos as they join. Each photo is usually processed in under a minute with no technical skill required.",
   },
 ];
 
@@ -74,7 +74,7 @@ export default function ForRealEstatePage() {
             </h1>
 
             <p className="text-lg text-paper/70 mb-8">
-              Your headshot is on every listing, every business card, and every email signature. If it was taken with a phone camera three years ago, it is costing you credibility. Magic Memory uses GFPGAN AI to sharpen faces in photos — turning a mediocre headshot into a crisp, professional portrait in under 15 seconds.
+              Your headshot is on every listing, every business card, and every email signature. If it was taken with a phone camera three years ago, it is costing you credibility. Magic Memory uses GFPGAN AI to sharpen faces in photos — turning a mediocre headshot into a crisp, professional portrait, usually in under a minute.
             </p>
 
             <div className="space-y-8 mb-12">
@@ -104,7 +104,7 @@ export default function ForRealEstatePage() {
                 <ArticleHeading>How It Works</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">1.</span> <strong className="text-paper">Upload your headshot or team photo</strong> — JPEG, PNG, or WebP up to 10MB. Works from any device.</li>
-                  <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">AI enhances the face</strong> — GFPGAN sharpens facial features, reduces noise, and improves detail in 5-15 seconds.</li>
+                  <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">AI enhances the face</strong> — GFPGAN sharpens facial features, reduces noise, and improves detail, usually in under a minute.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">3.</span> <strong className="text-paper">Download and use</strong> — Get the enhanced version in full resolution. Use it on listings, business cards, and marketing materials.</li>
                 </ul>
               </div>
@@ -140,7 +140,7 @@ export default function ForRealEstatePage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Enhance Your Agent Headshot</h2>
               <p className="text-paper/70 mb-4">
-                Upload your current headshot and see what AI face restoration can do. One-time credits that never expire, no subscription. Results in under 15 seconds.
+                Upload your current headshot and see what AI face restoration can do. One-time credits that never expire, no subscription. Results usually in under a minute.
               </p>
               <Button asChild>
                 <Link href="/restore">

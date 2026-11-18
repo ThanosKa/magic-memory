@@ -135,7 +135,7 @@ export default function GlossaryFaceRestorationPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Try Face Restoration</h2>
               <p className="text-paper/70 mb-4">
-                Magic Memory uses GFPGAN to restore faces in any photo. Upload a portrait, get a restored version in under 15 seconds. One-time credits that never expire, no subscription.
+                Magic Memory uses GFPGAN to restore faces in any photo. Upload a portrait, get a restored version in under a minute. One-time credits that never expire, no subscription.
               </p>
               <Button asChild>
                 <Link href="/restore">

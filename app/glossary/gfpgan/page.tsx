@@ -152,7 +152,7 @@ export default function GlossaryGFPGANPage() {
                   Running GFPGAN locally requires Python 3.7+, PyTorch 1.7+, and a CUDA-compatible GPU with at least 4GB VRAM. The model weights are approximately 330MB. For users without the technical setup, hosted services provide the same restoration through a web interface.
                 </p>
                 <p className="text-paper/70">
-                  Magic Memory hosts GFPGAN as a cloud service, so you can restore photos from any device with a browser — no installation, GPU, or Python knowledge required. Processing takes 5-15 seconds per photo.
+                  Magic Memory hosts GFPGAN as a cloud service, so you can restore photos from any device with a browser — no installation, GPU, or Python knowledge required. Processing usually takes under a minute per photo.
                 </p>
               </div>
             </div>
@@ -160,7 +160,7 @@ export default function GlossaryGFPGANPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Try GFPGAN Without Setup</h2>
               <p className="text-paper/70 mb-4">
-                Magic Memory runs GFPGAN in the cloud so you can restore photos from any device. Upload a photo, get a restored version in under 15 seconds. One-time credits that never expire, no subscription.
+                Magic Memory runs GFPGAN in the cloud so you can restore photos from any device. Upload a photo, get a restored version in under a minute. One-time credits that never expire, no subscription.
               </p>
               <Button asChild>
                 <Link href="/restore">

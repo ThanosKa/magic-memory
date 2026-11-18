@@ -75,7 +75,7 @@ const STEPS = [
   {
     frame: "02A",
     title: "AI restores the faces",
-    body: "GFPGAN, a face-restoration model from Tencent ARC research, sharpens eyes, skin and hair. Usually 5 to 15 seconds.",
+    body: "GFPGAN, a face-restoration model from Tencent ARC research, sharpens eyes, skin and hair. Usually under a minute.",
     Visual: RestoreVisual,
   },
   {

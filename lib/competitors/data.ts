@@ -60,11 +60,6 @@ export const competitors: Record<string, Competitor> = {
         competitor: "See Remini's privacy policy",
       },
       {
-        label: "Processing time",
-        magicMemory: "5–15 seconds",
-        competitor: "5–30 seconds",
-      },
-      {
         label: "AI model",
         magicMemory: "GFPGAN",
         competitor: "Proprietary",
@@ -118,11 +113,6 @@ export const competitors: Record<string, Competitor> = {
         competitor: "Yes — Photo subscription (recurring)",
       },
       {
-        label: "Processing time",
-        magicMemory: "5–15 seconds",
-        competitor: "Variable",
-      },
-      {
         label: "Privacy",
         magicMemory: "No persistent storage",
         competitor: "Photos stored in account",
@@ -174,11 +164,6 @@ export const competitors: Record<string, Competitor> = {
         label: "Ease of use",
         magicMemory: "One-click restoration",
         competitor: "Multiple tools and options",
-      },
-      {
-        label: "Processing time",
-        magicMemory: "5–15 seconds",
-        competitor: "5–60 seconds",
       },
       {
         label: "AI model",

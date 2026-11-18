@@ -99,7 +99,7 @@ export default function VanceAIAlternativePage() {
               VanceAI is built for power users — photographers, designers, and professionals who want control over multiple AI image operations. It offers upscaling, denoising, sharpening, background removal, colorization, and more, each with adjustable parameters.
             </p>
             <p className="text-paper/70 mb-12">
-              Magic Memory is built for everyone else: people who have an old family photo that needs restoration, want it done in 15 seconds, and do not want to navigate a complex interface with dozens of settings. Upload, wait 15 seconds, download.
+              Magic Memory is built for everyone else: people who have an old family photo that needs restoration, want it done in about a minute, and do not want to navigate a complex interface with dozens of settings. Upload, wait, download.
             </p>
 
             <h2 className="font-serif mb-6 text-3xl leading-[1.05] tracking-[-0.01em] text-paper md:text-4xl">Feature Comparison</h2>
