@@ -119,7 +119,7 @@ export default function RestoreWeddingPhotosPage() {
             own — creates a tangible piece of family history.
           </p>
           <p>
-            Magic Memory processes your photo in under 15 seconds. Download,
+            Magic Memory usually processes your photo in under a minute. Download,
             print at your local photo shop, and frame. Total time investment:
             under an hour, including the scan.
           </p>

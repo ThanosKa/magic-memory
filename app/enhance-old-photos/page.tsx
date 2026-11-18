@@ -68,7 +68,7 @@ export default function EnhanceOldPhotosPage() {
   const softwareJsonLd = useCaseSoftwareJsonLd({
     name: "Magic Memory — Enhance Old Photos with AI",
     description:
-      "Improve clarity and detail of old photos with GFPGAN AI. Sharpens faces, recovers texture, and enhances quality in 5–15 seconds. No subscription.",
+      "Improve clarity and detail of old photos with GFPGAN AI. Sharpens faces, recovers texture, and enhances quality in under a minute. No subscription.",
     url: "/enhance-old-photos",
   });
 
@@ -79,7 +79,7 @@ export default function EnhanceOldPhotosPage() {
       <main className="flex-1">
         <UseCaseHero
           headline="Enhance Old Photos With AI — Improve Clarity and Detail"
-          subheadline="Not every old photo is damaged — some are just not as good as they could be. Magic Memory uses GFPGAN AI to improve the clarity, sharpness, and detail in your portraits, taking photos from acceptable to excellent in under 15 seconds."
+          subheadline="Not every old photo is damaged — some are just not as good as they could be. Magic Memory uses GFPGAN AI to improve the clarity, sharpness, and detail in your portraits, taking photos from acceptable to excellent, usually in under a minute."
           keyword="enhance old photos"
         />
 

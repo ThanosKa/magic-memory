@@ -143,7 +143,7 @@ export default function GlossaryImageUpscalingPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Restore Faces in Old Photos</h2>
               <p className="text-paper/70 mb-4">
-                While Magic Memory focuses on face restoration rather than general upscaling, it produces dramatically better facial results than any upscaler alone. Upload a portrait, get a restored version in under 15 seconds. One-time credits that never expire, no subscription.
+                While Magic Memory focuses on face restoration rather than general upscaling, it produces dramatically better facial results than any upscaler alone. Upload a portrait, get a restored version in under a minute. One-time credits that never expire, no subscription.
               </p>
               <Button asChild>
                 <Link href="/restore">

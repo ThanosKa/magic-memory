@@ -161,7 +161,7 @@ export default function RootLayout({
                     featureList: [
                       "AI-powered face restoration with GFPGAN (CVPR 2021)",
                       "One-time credit packs that never expire (€9.99–€29.99)",
-                      "Instant results in 5–15 seconds",
+                      "Results usually in under a minute",
                       "Web-based — works on any device, no app required",
                       "No persistent photo storage after processing",
                       "One-time packs instead of a Remini or MyHeritage subscription",

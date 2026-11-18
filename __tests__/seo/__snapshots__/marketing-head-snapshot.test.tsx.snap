@@ -583,7 +583,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           },
           "dateModified": "2026-05-19",
           "datePublished": "2026-02-23",
-          "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+          "description": "AI restores a face in under a minute at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
           "headline": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
           "image": [
             "https://magic-memory.dev/og-image-restore.png",
@@ -602,7 +602,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             "url": "https://magic-memory.dev",
           },
         },
-        "sha256": "cc0c6e993747f555c1a8e6614a2fcf65c8a3bbde515c5b511d4ac3d9257cf776",
+        "sha256": "2925475dfe82e9efe9649d017a9d34595a23aa1ed3e1357f4ecfad603beef076",
       },
       {
         "data": {
@@ -636,9 +636,9 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "alternates": {
         "canonical": "https://magic-memory.dev/blog/ai-photo-restoration-vs-photoshop",
       },
-      "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+      "description": "AI restores a face in under a minute at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
       "openGraph": {
-        "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+        "description": "AI restores a face in under a minute at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
         "images": [
           {
             "alt": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
@@ -660,7 +660,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "title": "AI Photo Restoration vs Photoshop — Which Is Better for Old Photos?",
       "twitter": {
         "card": "summary_large_image",
-        "description": "AI restores a face in 15 seconds at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
+        "description": "AI restores a face in under a minute at €0.33/photo. Photoshop takes 1–4 hours plus a $20.99/month subscription. See which wins for old portraits, damage, and family photos.",
         "images": [
           "https://magic-memory.dev/og-image-restore.png",
         ],
@@ -1424,7 +1424,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "@type": "SoftwareApplication",
           "applicationCategory": "PhotographyApplication",
           "applicationSubCategory": "PhotoRestoration",
-          "description": "Improve clarity and detail of old photos with GFPGAN AI. Sharpens faces, recovers texture, and enhances quality in 5–15 seconds. No subscription.",
+          "description": "Improve clarity and detail of old photos with GFPGAN AI. Sharpens faces, recovers texture, and enhances quality in under a minute. No subscription.",
           "name": "Magic Memory — Enhance Old Photos with AI",
           "offers": {
             "@type": "AggregateOffer",
@@ -1437,7 +1437,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "operatingSystem": "Web",
           "url": "https://magic-memory.dev/enhance-old-photos",
         },
-        "sha256": "fe23e7b8210b4409450872ad74b478e05104fbdb4df61722dce1dc7aadc737d6",
+        "sha256": "86573ae364352bb044ea06afbb122ff3b18174e3ba3b38b5246faa7beeeccc98",
       },
     ],
     "metadata": {
@@ -1516,13 +1516,13 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Magic Memory processes photos in 5–15 seconds. The exact time depends on file size and current server load. You will see a progress indicator during processing. There is no quality difference between fast and slow processing — the AI always runs the full restoration model.",
+                "text": "Magic Memory usually processes a photo in under a minute. The exact time depends on file size and current server load. You will see a progress indicator during processing. There is no quality difference between fast and slow processing — the AI always runs the full restoration model.",
               },
               "name": "How long does it take to fix a blurry photo with AI?",
             },
           ],
         },
-        "sha256": "63c23d8974018c9b262567d5d7c0808ca71c4ecedde5b84d9f2c3fa505d78737",
+        "sha256": "6209ece319a6a3d3fe6bfcd4496de7453250e7a1929eff2b2460b4768266635c",
       },
       {
         "data": {
@@ -1592,7 +1592,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "title": "Fix Blurry Photos Online — AI Sharpening in Seconds",
       "twitter": {
         "card": "summary_large_image",
-        "description": "Fix blurry photos with AI. Results in 5–15 seconds.",
+        "description": "Fix blurry photos with AI. Results usually in under a minute.",
         "images": [
           "https://magic-memory.dev/og-image-restore.png",
         ],
@@ -1815,13 +1815,13 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. A credit pack of 20 restorations (€9.99) is enough to enhance headshots for an entire real estate office. Credits never expire, so you can process new team member photos as they join. Each photo is processed in under 15 seconds with no technical skill required.",
+                "text": "Yes. A credit pack of 20 restorations (€9.99) is enough to enhance headshots for an entire real estate office. Credits never expire, so you can process new team member photos as they join. Each photo is usually processed in under a minute with no technical skill required.",
               },
               "name": "Is this suitable for a real estate team?",
             },
           ],
         },
-        "sha256": "b363339f57ec1c281e5af04cad3ad0ecf8e06c8210d6a466f034a156b0faef6c",
+        "sha256": "ed331d367035eb7aacdaeca129f9e058fec28a343706d4a4879a36e029c95ab4",
       },
       {
         "data": {
@@ -2462,7 +2462,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "@context": "https://schema.org",
           "@type": "Service",
           "areaServed": "Worldwide",
-          "description": "AI-powered photo restoration using the GFPGAN face restoration model. Restores old, blurry, faded, and damaged portrait photos in 5–15 seconds.",
+          "description": "AI-powered photo restoration using the GFPGAN face restoration model. Restores old, blurry, faded, and damaged portrait photos, usually in under a minute.",
           "name": "AI Photo Restoration",
           "offers": {
             "@type": "Offer",
@@ -2477,7 +2477,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
           },
           "serviceType": "AI Photo Restoration",
         },
-        "sha256": "b9068ee5b2a75c8524511e559eb911330c1dd5d304dacdb26e4aef477fc824e0",
+        "sha256": "9f3e0914e18bb1fe5381e0d199ebb1f7de60112ee4a385f3679503c46815c81e",
       },
       {
         "data": {
@@ -3275,7 +3275,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             {
               "@type": "HowToStep",
               "name": "AI Restores Faces and Detail",
-              "text": "GFPGAN analyzes and restores facial features in 5-15 seconds.",
+              "text": "GFPGAN analyzes and restores facial features, usually in under a minute.",
             },
             {
               "@type": "HowToStep",
@@ -3284,7 +3284,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "bb533bfd02d46fcf1d997511140ea02f676cb7d28f80fd8ef26e66d158e20e45",
+        "sha256": "2f8cc99395668aecf4cddffe914db265a63398a54450210fdb144ea805a02673",
       },
     ],
     "metadata": {
@@ -3439,7 +3439,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "title": "AI Portrait Photo Restoration — Restore Old Portraits",
       "twitter": {
         "card": "summary_large_image",
-        "description": "Restore old portraits with AI precision. Results in 5–15 seconds.",
+        "description": "Restore old portraits with AI precision. Results usually in under a minute.",
         "images": [
           "https://magic-memory.dev/og-image-restore.png",
         ],
@@ -3916,7 +3916,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Magic Memory is significantly easier. It is a one-click tool: upload a photo, AI restores it in 5-15 seconds, download the result. VanceAI offers a professional suite with multiple tools, settings, and options. If you just want to restore old photos quickly, Magic Memory has zero learning curve. If you need advanced controls like upscaling parameters or batch processing, VanceAI has more options.",
+                "text": "Magic Memory is significantly easier. It is a one-click tool: upload a photo, AI restores it, usually in under a minute, download the result. VanceAI offers a professional suite with multiple tools, settings, and options. If you just want to restore old photos quickly, Magic Memory has zero learning curve. If you need advanced controls like upscaling parameters or batch processing, VanceAI has more options.",
               },
               "name": "Is Magic Memory or VanceAI easier to use?",
             },
@@ -3954,7 +3954,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "8d4c0835a35449fd450b52af1f07e3984ec0ae6bfd5844b5e52116a78b5db448",
+        "sha256": "117fb6a332fe61b6367b9190a54bf1322a353a69218bdd9539493c01d06af42c",
       },
       {
         "data": {

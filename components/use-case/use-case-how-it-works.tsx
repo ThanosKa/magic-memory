@@ -13,7 +13,7 @@ const steps = [
     icon: Sparkles,
     step: "2",
     title: "AI Restores It",
-    description: "GFPGAN AI restores faces and enhances photo quality in 5–15 seconds.",
+    description: "GFPGAN AI restores faces and enhances photo quality, usually in under a minute.",
   },
   {
     icon: Download,

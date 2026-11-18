@@ -37,7 +37,7 @@ export const metadata: Metadata = pageMetadata({
   },
   twitter: {
     title: "Fix Blurry Photos Online",
-    description: "Fix blurry photos with AI. Results in 5–15 seconds.",
+    description: "Fix blurry photos with AI. Results usually in under a minute.",
   },
 });
 
@@ -65,7 +65,7 @@ const faqs: FAQItem[] = [
   {
     question: "How long does it take to fix a blurry photo with AI?",
     answer:
-      "Magic Memory processes photos in 5–15 seconds. The exact time depends on file size and current server load. You will see a progress indicator during processing. There is no quality difference between fast and slow processing — the AI always runs the full restoration model.",
+      "Magic Memory usually processes a photo in under a minute. The exact time depends on file size and current server load. You will see a progress indicator during processing. There is no quality difference between fast and slow processing — the AI always runs the full restoration model.",
   },
 ];
 
@@ -89,7 +89,7 @@ export default function FixBlurryPhotosPage() {
       <main className="flex-1">
         <UseCaseHero
           headline="Fix Blurry Photos Online — AI Sharpening in Seconds"
-          subheadline="Blurry portrait photos lose the expressions, details, and personality that make them worth keeping. Magic Memory uses GFPGAN AI to reconstruct sharp facial detail from blurry photos — not just edge sharpening, but genuine detail recovery. Results in 5–15 seconds."
+          subheadline="Blurry portrait photos lose the expressions, details, and personality that make them worth keeping. Magic Memory uses GFPGAN AI to reconstruct sharp facial detail from blurry photos — not just edge sharpening, but genuine detail recovery. Results usually in under a minute."
           keyword="fix blurry photos"
         />
 

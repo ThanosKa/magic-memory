@@ -58,7 +58,7 @@ export function RestoreOldFamilyPhotosTipsContent() {
         <li>Scan your photo at 600+ DPI and save as JPEG (90%+) or PNG</li>
         <li>Sign in to Magic Memory with Google and buy a one-time credit pack (from €9.99 for 20 photos)</li>
         <li>Upload your scanned photo</li>
-        <li>Wait 5–15 seconds for the AI to process</li>
+        <li>Wait up to a minute for the AI to process</li>
         <li>Compare before and after, download the restored version</li>
         <li>Save both the original scan and the restored version</li>
       </ol>

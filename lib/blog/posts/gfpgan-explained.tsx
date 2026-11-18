@@ -44,7 +44,7 @@ export function GFPGANExplainedContent() {
         <li><strong>Face restoration:</strong> Recovering sharp, detailed faces from blurry or low-resolution inputs — its primary strength</li>
         <li><strong>Film grain removal:</strong> Distinguishing grain from actual facial detail and removing the former</li>
         <li><strong>Old photo degradation:</strong> Handling the specific types of blur and noise common in vintage and old photos</li>
-        <li><strong>Speed:</strong> Processes a photo in 5–15 seconds — suitable for consumer applications</li>
+        <li><strong>Speed:</strong> Processes a photo in seconds on a cloud GPU — suitable for consumer applications</li>
         <li><strong>Blind restoration:</strong> Works without knowing the specific type of degradation — it handles multiple degradation types simultaneously</li>
       </ul>
 
@@ -67,7 +67,7 @@ export function GFPGANExplainedContent() {
         <li>Your photo is sent securely to the processing server</li>
         <li>GFPGAN detects faces in the image and applies facial restoration to detected face regions</li>
         <li>The restored face regions are composited back into the full image</li>
-        <li>The output is returned to you in 5–15 seconds</li>
+        <li>The output is returned to you, usually in under a minute</li>
         <li>Your original photo is not retained after processing</li>
       </ol>
 

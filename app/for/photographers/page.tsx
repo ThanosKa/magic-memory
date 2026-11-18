@@ -74,7 +74,7 @@ export default function ForPhotographersPage() {
             </h1>
 
             <p className="text-lg text-paper/70 mb-8">
-              Clients bring you old photos and ask if they can be saved. Maybe it is a wedding portrait from the 1960s, a baby photo with water damage, or the only surviving picture of a grandparent. GFPGAN AI handles the face restoration that would take hours of manual clone-stamping and frequency separation — in under 15 seconds.
+              Clients bring you old photos and ask if they can be saved. Maybe it is a wedding portrait from the 1960s, a baby photo with water damage, or the only surviving picture of a grandparent. GFPGAN AI handles the face restoration that would take hours of manual clone-stamping and frequency separation — usually in under a minute.
             </p>
 
             <div className="space-y-8 mb-12">
@@ -104,7 +104,7 @@ export default function ForPhotographersPage() {
                 <ArticleHeading>Photographer Workflow</ArticleHeading>
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">1.</span> <strong className="text-paper">Receive client photo</strong> — Scan the physical print at 600+ DPI, or ask the client for the highest resolution digital version available.</li>
-                  <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">Run AI face restoration</strong> — Upload to Magic Memory. GFPGAN restores facial detail in 5-15 seconds.</li>
+                  <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">Run AI face restoration</strong> — Upload to Magic Memory. GFPGAN restores facial detail, usually in under a minute.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">3.</span> <strong className="text-paper">Refine in editing software</strong> — Open the restored image in Photoshop or Lightroom. Adjust color, contrast, remove background damage, apply your style.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">4.</span> <strong className="text-paper">Deliver to client</strong> — Export in the format and resolution the client needs. Print-ready or digital.</li>
                 </ul>
@@ -122,7 +122,7 @@ export default function ForPhotographersPage() {
                       </tr>
                     </thead>
                     <tbody className="text-paper/70">
-                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Face restoration</td><td className="py-2">15 seconds, automated</td><td className="py-2">1-4 hours, skilled work</td></tr>
+                      <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Face restoration</td><td className="py-2">Under a minute, automated</td><td className="py-2">1-4 hours, skilled work</td></tr>
                       <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Background repair</td><td className="py-2">Not handled</td><td className="py-2">Full control</td></tr>
                       <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Color grading</td><td className="py-2">Not handled</td><td className="py-2">Full control</td></tr>
                       <tr className="border-b border-paper/10"><td className="py-2 font-medium text-paper">Cost per photo</td><td className="py-2">~{"\u20ac"}0.50</td><td className="py-2">$25-$150+</td></tr>
@@ -149,7 +149,7 @@ export default function ForPhotographersPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Try It On a Client Photo</h2>
               <p className="text-paper/70 mb-4">
-                Upload a client&apos;s old photo and see the AI restoration in under 15 seconds. One-time credit packs from {"\u20ac"}9.99 for 20 restorations, and credits never expire.
+                Upload a client&apos;s old photo and see the AI restoration, usually in under a minute. One-time credit packs from {"\u20ac"}9.99 for 20 restorations, and credits never expire.
               </p>
               <Button asChild>
                 <Link href="/restore">

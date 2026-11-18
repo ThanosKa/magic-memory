@@ -39,8 +39,8 @@ export function HomeHero() {
 
           <p className="mt-7 max-w-[30rem] text-[17px] leading-[1.6] text-paper/70 sm:text-lg">
             Magic Memory is a web app that repairs blurry, faded and damaged
-            photos of people. Upload a scan and AI rebuilds the faces in about
-            15&nbsp;seconds, ready to download.
+            photos of people. Upload a scan and AI rebuilds the faces, usually in
+            under a minute, ready to download.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">

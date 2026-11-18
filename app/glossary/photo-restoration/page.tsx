@@ -112,7 +112,7 @@ export default function GlossaryPhotoRestorationPage() {
                       <ul className="space-y-2 text-sm text-paper/70">
                         <li>- Uses neural networks (GFPGAN, CodeFormer)</li>
                         <li>- Excels at face detail and sharpness</li>
-                        <li>- Processes in 5-15 seconds</li>
+                        <li>- Processes in under a minute</li>
                         <li>- Costs a fraction of manual work</li>
                         <li>- Consistent quality across all photos</li>
                       </ul>
@@ -147,7 +147,7 @@ export default function GlossaryPhotoRestorationPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Try AI Photo Restoration</h2>
               <p className="text-paper/70 mb-4">
-                Magic Memory uses GFPGAN to restore faces in old and damaged photos. Upload a photo, get a restored version in under 15 seconds. One-time credit packs from {"\u20ac"}9.99 for 20 restorations.
+                Magic Memory uses GFPGAN to restore faces in old and damaged photos. Upload a photo, get a restored version in under a minute. One-time credit packs from {"\u20ac"}9.99 for 20 restorations.
               </p>
               <Button asChild>
                 <Link href="/restore">

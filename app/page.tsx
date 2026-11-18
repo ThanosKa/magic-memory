@@ -60,7 +60,7 @@ const howToJsonLd = {
     {
       "@type": "HowToStep",
       name: "AI Restores It",
-      text: "GFPGAN AI restores faces and enhances photo quality in 5-15 seconds.",
+      text: "GFPGAN AI restores faces and enhances photo quality, usually in under a minute.",
     },
     {
       "@type": "HowToStep",

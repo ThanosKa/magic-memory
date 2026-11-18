@@ -27,13 +27,13 @@ export function AIPhotoRestorationVsPhotoshopContent() {
 
       <h2>The AI Approach</h2>
       <p>
-        AI restoration tools like Magic Memory use trained neural networks to automatically restore photos. The process: upload a photo, the AI processes it in 5–15 seconds, you download the result.
+        AI restoration tools like Magic Memory use trained neural networks to automatically restore photos. The process: upload a photo, the AI processes it, usually in under a minute, you download the result.
       </p>
       <p>
         Magic Memory uses GFPGAN — a model trained on millions of high-resolution face images to specifically restore portrait photos. According to the research paper (Wang et al., CVPR 2021, Tencent ARC), GFPGAN outperforms earlier methods significantly on face restoration metrics.
       </p>
       <p>
-        The AI approach requires no Photoshop subscription ($20.99/month), no Photoshop skills (years to develop), and no time (5–15 seconds vs. hours).
+        The AI approach requires no Photoshop subscription ($20.99/month), no Photoshop skills (years to develop), and no time (under a minute vs. hours).
       </p>
 
       <h2>When AI Wins</h2>
@@ -45,7 +45,7 @@ export function AIPhotoRestorationVsPhotoshopContent() {
 
       <h3>Speed and cost</h3>
       <p>
-        AI restoration takes 5–15 seconds and costs €0.25–€0.50 per photo with one-time credits. Photoshop retouching takes 30 minutes to several hours and costs $20.99/month for the software, plus significant time investment per photo.
+        AI restoration usually takes under a minute and costs €0.25–€0.50 per photo with one-time credits. Photoshop retouching takes 30 minutes to several hours and costs $20.99/month for the software, plus significant time investment per photo.
       </p>
 
       <h3>No skill required</h3>
@@ -101,7 +101,7 @@ export function AIPhotoRestorationVsPhotoshopContent() {
             </tr>
             <tr className="border-b border-border bg-muted/20">
               <td className="px-4 py-3 font-medium">Time per photo</td>
-              <td className="px-4 py-3 text-muted-foreground">5–15 seconds</td>
+              <td className="px-4 py-3 text-muted-foreground">Under a minute</td>
               <td className="px-4 py-3 text-muted-foreground">30 min–3 hours</td>
               <td className="px-4 py-3 text-muted-foreground">N/A</td>
             </tr>
@@ -129,7 +129,7 @@ export function AIPhotoRestorationVsPhotoshopContent() {
 
       <h2>The Practical Recommendation</h2>
       <p>
-        For most people restoring old family photos: <strong>use AI first</strong>. Try Magic Memory on your most important photo. For most portrait photos, the result will be excellent and takes 15 seconds.
+        For most people restoring old family photos: <strong>use AI first</strong>. Try Magic Memory on your most important photo. For most portrait photos, the result will be excellent and takes under a minute.
       </p>
       <p>
         If you have a photo with severe physical damage that the AI does not handle well, that is when to consider manual retouching — either learning Photoshop (if you have many such photos) or hiring a professional retoucher (for one or two very important photos).

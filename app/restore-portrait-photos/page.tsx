@@ -37,7 +37,7 @@ export const metadata: Metadata = pageMetadata({
   },
   twitter: {
     title: "AI Portrait Photo Restoration",
-    description: "Restore old portraits with AI precision. Results in 5–15 seconds.",
+    description: "Restore old portraits with AI precision. Results usually in under a minute.",
   },
 });
 

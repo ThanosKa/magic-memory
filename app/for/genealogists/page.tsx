@@ -74,7 +74,7 @@ export default function ForGenealogistsPage() {
             </h1>
 
             <p className="text-lg text-paper/70 mb-8">
-              You have names, dates, and a family tree. Now put clear faces to them. Magic Memory uses GFPGAN AI to restore faces in old, faded, and degraded ancestor photos — turning blurry historical portraits into sharp, printable images in under 15 seconds.
+              You have names, dates, and a family tree. Now put clear faces to them. Magic Memory uses GFPGAN AI to restore faces in old, faded, and degraded ancestor photos — turning blurry historical portraits into sharp, printable images, usually in under a minute.
             </p>
 
             <div className="space-y-8 mb-12">
@@ -118,7 +118,7 @@ export default function ForGenealogistsPage() {
                 <ul className="space-y-3 text-paper/70">
                   <li className="flex gap-3"><span className="text-ember font-bold">1.</span> <strong className="text-paper">Scan at high resolution</strong> — Use a flatbed scanner at 600 DPI or higher. Save as JPEG (90%+ quality) or PNG.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">2.</span> <strong className="text-paper">Upload to Magic Memory</strong> — Supports JPEG, PNG, and WebP up to 10MB. No app to install.</li>
-                  <li className="flex gap-3"><span className="text-ember font-bold">3.</span> <strong className="text-paper">Download restored photo</strong> — Get the result in under 15 seconds. Compare before and after.</li>
+                  <li className="flex gap-3"><span className="text-ember font-bold">3.</span> <strong className="text-paper">Download restored photo</strong> — Get the result, usually in under a minute. Compare before and after.</li>
                   <li className="flex gap-3"><span className="text-ember font-bold">4.</span> <strong className="text-paper">Add to your family tree</strong> — Use the restored photo in your genealogy software, family tree, or memorial display.</li>
                 </ul>
               </div>
@@ -151,7 +151,7 @@ export default function ForGenealogistsPage() {
             <div className="rounded-2xl border border-paper/15 bg-paper/[0.04] p-6 mb-12">
               <h2 className="font-serif text-2xl text-paper mb-3">Restore Your Ancestor Photos</h2>
               <p className="text-paper/70 mb-4">
-                Upload an old family photo and see the restoration in under 15 seconds. One-time credits that never expire, no subscription. Credit packs from {"\u20ac"}9.99 for 20 restorations — enough for an entire family photo collection.
+                Upload an old family photo and see the restoration, usually in under a minute. One-time credits that never expire, no subscription. Credit packs from {"\u20ac"}9.99 for 20 restorations — enough for an entire family photo collection.
               </p>
               <Button asChild>
                 <Link href="/restore">

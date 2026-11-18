@@ -17,7 +17,7 @@ export const homepageFaqs: FAQItem[] = [
   {
     question: "How long does the restoration process take?",
     answer:
-      "Most restorations complete within 5-15 seconds. The exact time depends on the image size and current server load. You'll see a progress indicator while your photo is being processed.",
+      "Most restorations complete in under a minute. The exact time depends on the image size and current server load. You'll see a progress indicator while your photo is being processed.",
   },
   {
     question: "Do my credits expire?",
