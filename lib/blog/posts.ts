@@ -31,12 +31,12 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "gfpgan-explained",
-    title: "What is GFPGAN? How AI Face Restoration Works",
+    title: "GFPGAN Explained: How It Works and How to Use It",
     description:
-      "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+      "GFPGAN is Tencent ARC's open-source face restoration model. How it works in plain English, its versions, how to run it yourself, and the settings we use.",
     date: "February 23, 2026",
     datePublished: "2026-02-23",
-    dateModified: "2026-02-23",
+    dateModified: "2026-11-20",
     readingTime: 7,
   },
   {

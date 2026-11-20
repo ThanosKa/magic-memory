@@ -60,7 +60,7 @@ const faqs: FAQItem[] = [
   {
     question: "Does MyHeritage Photo Enhancer use Remini technology?",
     answer:
-      "No. MyHeritage uses its own proprietary photo enhancement and colorization models, including the DeepStory and Deep Nostalgia features built on technology MyHeritage acquired in 2020. Remini is a separate, mobile-first app from Bending Spoons that uses different proprietary models.",
+      "No. MyHeritage says its Photo Enhancer runs on deep learning technology it licensed (MyHeritage blog, June 2020), and its Deep Nostalgia animation uses technology licensed from D-ID (MyHeritage help center). Remini is a separate app, made by Bending Spoons.",
   },
 ];
 
