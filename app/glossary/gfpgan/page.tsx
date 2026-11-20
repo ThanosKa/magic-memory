@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/glossary/gfpgan",
   title: "What Is GFPGAN? How It Restores Old Photos With AI",
   description:
-    "GFPGAN is an AI model developed by Tencent ARC that restores faces in old and degraded photographs. Learn how GFPGAN works, how it compares to CodeFormer, and how Magic Memory uses it for one-click photo restoration.",
+    "GFPGAN is Tencent ARC's open-source AI model for restoring faces in old, blurry photos. How it works, how it compares to CodeFormer, and where to use it.",
   social: {
     title: "What Is GFPGAN? How It Restores Old Photos With AI",
     description: "Learn how GFPGAN uses generative adversarial networks to restore faces in old, blurry, and damaged photos.",
@@ -34,7 +34,7 @@ const faqs: FAQItem[] = [
   {
     question: "Is GFPGAN free to use?",
     answer:
-      "GFPGAN is open-source software released under a BSD-style license. You can run it yourself if you have the technical setup (Python, PyTorch, a compatible GPU). Alternatively, services like Magic Memory provide a hosted version where you can use GFPGAN through a web interface, paying per photo with one-time credits.",
+      "GFPGAN is open-source software released under the Apache License 2.0. You can run it yourself if you have the technical setup (Python, PyTorch, a compatible GPU). Alternatively, services like Magic Memory provide a hosted version where you can use GFPGAN through a web interface, paying per photo with one-time credits.",
   },
   {
     question: "How is GFPGAN different from CodeFormer?",
@@ -75,7 +75,8 @@ export default function GlossaryGFPGANPage() {
             </h1>
 
             <p className="text-lg text-paper/70 mb-8">
-              GFPGAN (Generative Facial Prior GAN) is an open-source AI model developed by Tencent ARC that restores faces in old, blurry, and damaged photographs. Published at CVPR 2021, it has become one of the most widely used face restoration models, powering tools like Magic Memory.
+              GFPGAN (Generative Facial Prior GAN) is an open-source AI model developed by Tencent ARC that restores faces in old, blurry, and damaged photographs. Published at CVPR 2021, it has become one of the most widely used face restoration models, powering tools like Magic Memory. For a longer walkthrough, including how to run it yourself, read our{" "}
+              <Link href="/blog/gfpgan-explained" className="text-paper underline underline-offset-4 hover:text-ember">GFPGAN guide: how it works and how to use it</Link>.
             </p>
 
             <div className="space-y-8 mb-12">

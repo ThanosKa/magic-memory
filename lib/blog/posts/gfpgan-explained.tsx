@@ -71,6 +71,30 @@ export function GFPGANExplainedContent() {
         <li>Your original photo is not retained after processing</li>
       </ol>
 
+      <h2>How to Use GFPGAN</h2>
+      <p>
+        There are three ways to run GFPGAN on your own photos:
+      </p>
+      <ul>
+        <li><strong>Run it yourself.</strong> Clone the <a href="https://github.com/TencentARC/GFPGAN" rel="noopener noreferrer" target="_blank">TencentARC/GFPGAN</a> repository. The README asks for Python 3.7 or newer and PyTorch 1.7 or newer; an NVIDIA GPU with CUDA is optional. A typical command is <code>python inference_gfpgan.py -i inputs/whole_imgs -o results -v 1.3 -s 2</code>, where <code>-v</code> picks the model version and <code>-s</code> the upscaling factor.</li>
+        <li><strong>Call a hosted model.</strong> The README links online demos on Replicate and Hugging Face, so you can try it in a browser or through an API without installing anything.</li>
+        <li><strong>Use an app built on it.</strong> Magic Memory runs GFPGAN for you: upload a photo, get the restored version back, no setup.</li>
+      </ul>
+
+      <h2>GFPGAN Versions: 1.2, 1.3 and 1.4</h2>
+      <p>
+        The repository ships several model versions. According to its README:
+      </p>
+      <ul>
+        <li><strong>V1</strong> is the model from the paper, with colorization.</li>
+        <li><strong>V1.2</strong> has no colorization and needs no CUDA extensions.</li>
+        <li><strong>V1.3</strong> builds on V1.2 with more natural results, and handles very low-quality and high-quality inputs better. The README notes it is not always better than V1.2.</li>
+        <li><strong>V1.4</strong> produces slightly more detail and better identity than V1.3.</li>
+      </ul>
+      <p>
+        Magic Memory runs <strong>GFPGAN v1.4 with a 2x upscale</strong> on every photo.
+      </p>
+
       <h2>GFPGAN vs. Earlier Approaches</h2>
       <p>
         Before GFPGAN, face restoration used simpler approaches:
@@ -88,7 +112,7 @@ export function GFPGANExplainedContent() {
 
       <h3>Is GFPGAN open source?</h3>
       <p>
-        Yes. The original GFPGAN implementation is open source and available on GitHub under the Tencent organization. The research paper is publicly accessible. Magic Memory uses a hosted version of the model via Replicate.
+        Yes. The original GFPGAN implementation is open source under the Apache License 2.0 and available on GitHub under the TencentARC organization. The research paper is publicly accessible. Magic Memory uses a hosted version of the model via Replicate.
       </p>
 
       <h3>What is the difference between GFPGAN and CodeFormer?</h3>

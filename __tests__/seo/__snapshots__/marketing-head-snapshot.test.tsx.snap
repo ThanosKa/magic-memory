@@ -282,13 +282,13 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. MyHeritage uses its own proprietary photo enhancement and colorization models, including the DeepStory and Deep Nostalgia features built on technology MyHeritage acquired in 2020. Remini is a separate, mobile-first app from Bending Spoons that uses different proprietary models.",
+                "text": "No. MyHeritage says its Photo Enhancer runs on deep learning technology it licensed (MyHeritage blog, June 2020), and its Deep Nostalgia animation uses technology licensed from D-ID (MyHeritage help center). Remini is a separate app, made by Bending Spoons.",
               },
               "name": "Does MyHeritage Photo Enhancer use Remini technology?",
             },
           ],
         },
-        "sha256": "bc3f0665579410c47e9bc4935948008763909ec6c333f570ba2c874ef529ae39",
+        "sha256": "51cd6bb0f2f454c7a05b83479b61231c00f72b146e1e81deff17e471df23b224",
       },
       {
         "data": {
@@ -965,10 +965,10 @@ exports[`marketing page head snapshot > records metadata and structured data for
             "name": "Magic Memory",
             "url": "https://magic-memory.dev",
           },
-          "dateModified": "2026-02-23",
+          "dateModified": "2026-11-20",
           "datePublished": "2026-02-23",
-          "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
-          "headline": "What is GFPGAN? How AI Face Restoration Works",
+          "description": "GFPGAN is Tencent ARC's open-source face restoration model. How it works in plain English, its versions, how to run it yourself, and the settings we use.",
+          "headline": "GFPGAN Explained: How It Works and How to Use It",
           "image": [
             "https://magic-memory.dev/og-image-restore.png",
           ],
@@ -986,7 +986,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             "url": "https://magic-memory.dev",
           },
         },
-        "sha256": "0462558f4a835d22cd8c03f38766e2ed4a95d08a4179f1484f395d321f06972d",
+        "sha256": "b75df3f0bcfb35ee40e4a2ed77c0a803e149670e44d52cb7eff932217d34f6a5",
       },
       {
         "data": {
@@ -1008,32 +1008,32 @@ exports[`marketing page head snapshot > records metadata and structured data for
             {
               "@type": "ListItem",
               "item": "https://magic-memory.dev/blog/gfpgan-explained",
-              "name": "What is GFPGAN? How AI Face Restoration Works",
+              "name": "GFPGAN Explained: How It Works and How to Use It",
               "position": 3,
             },
           ],
         },
-        "sha256": "043197b3faceed4b2e35707526ba2174ec2b7e14ad784e5e169fee6578386a80",
+        "sha256": "89a19f7a3e3dba053f2b57aec1f017615d89d956a5bf7cfde7f4f3dbbe59bc85",
       },
     ],
     "metadata": {
       "alternates": {
         "canonical": "https://magic-memory.dev/blog/gfpgan-explained",
       },
-      "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+      "description": "GFPGAN is Tencent ARC's open-source face restoration model. How it works in plain English, its versions, how to run it yourself, and the settings we use.",
       "openGraph": {
-        "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+        "description": "GFPGAN is Tencent ARC's open-source face restoration model. How it works in plain English, its versions, how to run it yourself, and the settings we use.",
         "images": [
           {
-            "alt": "What is GFPGAN? How AI Face Restoration Works",
+            "alt": "GFPGAN Explained: How It Works and How to Use It",
             "height": 630,
             "url": "https://magic-memory.dev/og-image-restore.png",
             "width": 1200,
           },
         ],
-        "modifiedTime": "2026-02-23",
+        "modifiedTime": "2026-11-20",
         "publishedTime": "2026-02-23",
-        "title": "What is GFPGAN? How AI Face Restoration Works",
+        "title": "GFPGAN Explained: How It Works and How to Use It",
         "type": "article",
         "url": "https://magic-memory.dev/blog/gfpgan-explained",
       },
@@ -1041,14 +1041,14 @@ exports[`marketing page head snapshot > records metadata and structured data for
         "follow": true,
         "index": true,
       },
-      "title": "What is GFPGAN? How AI Face Restoration Works",
+      "title": "GFPGAN Explained: How It Works and How to Use It",
       "twitter": {
         "card": "summary_large_image",
-        "description": "A plain-English explanation of GFPGAN — the AI model behind photo face restoration. Learn what it does, how it works, and what it excels at.",
+        "description": "GFPGAN is Tencent ARC's open-source face restoration model. How it works in plain English, its versions, how to run it yourself, and the settings we use.",
         "images": [
           "https://magic-memory.dev/og-image-restore.png",
         ],
-        "title": "What is GFPGAN? How AI Face Restoration Works",
+        "title": "GFPGAN Explained: How It Works and How to Use It",
       },
     },
   },
@@ -2081,7 +2081,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "GFPGAN is open-source software released under a BSD-style license. You can run it yourself if you have the technical setup (Python, PyTorch, a compatible GPU). Alternatively, services like Magic Memory provide a hosted version where you can use GFPGAN through a web interface, paying per photo with one-time credits.",
+                "text": "GFPGAN is open-source software released under the Apache License 2.0. You can run it yourself if you have the technical setup (Python, PyTorch, a compatible GPU). Alternatively, services like Magic Memory provide a hosted version where you can use GFPGAN through a web interface, paying per photo with one-time credits.",
               },
               "name": "Is GFPGAN free to use?",
             },
@@ -2103,7 +2103,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "16c2cdb3cf0698cd70e8a261edb99e22d156c13065bb6e2fb1d21af14a966de6",
+        "sha256": "2fca1c9a221d5c9fc865c090c0b6b7989dd4e4070224ecc873a6b64ebe415ab0",
       },
       {
         "data": {
@@ -2137,7 +2137,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "alternates": {
         "canonical": "https://magic-memory.dev/glossary/gfpgan",
       },
-      "description": "GFPGAN is an AI model developed by Tencent ARC that restores faces in old and degraded photographs. Learn how GFPGAN works, how it compares to CodeFormer, and how Magic Memory uses it for one-click photo restoration.",
+      "description": "GFPGAN is Tencent ARC's open-source AI model for restoring faces in old, blurry photos. How it works, how it compares to CodeFormer, and where to use it.",
       "openGraph": {
         "description": "Learn how GFPGAN uses generative adversarial networks to restore faces in old, blurry, and damaged photos.",
         "images": [
