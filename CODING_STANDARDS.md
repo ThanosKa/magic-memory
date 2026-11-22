@@ -1,6 +1,6 @@
 # Coding Standards
 
-The rules every diff in this repo is checked against, one per line. Writing code: every rule that touches the files you change holds before you finish. Reviewing: check the diff against every rule in turn.
+The rules every diff in this repo is checked against, one per line. Writing code: every rule that touches the files you change holds before you finish. Reviewing: check the diff against every rule in turn. Lint enforces `any`, type assertions (`as const` aside), non-null `!`, `console`, exhaustive `switch` and positional parameters: resolve each lint error in the code itself.
 
 ## API routes
 
@@ -14,10 +14,24 @@ The rules every diff in this repo is checked against, one per line. Writing code
 
 ## TypeScript
 
-- Type values of unknown shape as `unknown` and narrow them with a type guard, in place of `any`.
+- External data (requests, storage, third-party responses) enters as `unknown`, is parsed once with Zod into a named domain type, and is trusted from there on. Hand-write a type guard only where no schema fits.
+- A type guard, named `isX` or `hasX`, checks every property its return type claims.
+- Narrow in this order: discriminant `switch`, then `in`, then `typeof` or `instanceof`, then a type guard.
+- Model variants as a union on one literal discriminant field, so each state carries only its own fields: `{ kind: "loading" } | { kind: "success"; data: User } | { kind: "error"; error: string }`.
+- Shape the type so the illegal value cannot be built: `[T, ...T[]]` for a non-empty list, `start` plus `duration` for a range. Keep `T[]` while every operation on it stays total; strengthen it only where the loose type would force `!`, a cast, or a "should never happen" throw.
+- Brand primitives that must stay apart, such as IDs: `string & { readonly __brand: "UserId" }`. A brand comes from a verifying type guard (`input is UserId`).
+- Validate at runtime with Zod and derive the type: `type User = z.infer<typeof userSchema>`. Build a new type from existing ones (`Pick`, `Omit`, `Parameters`, `ReturnType`, `Awaited`, `typeof`, `z.infer`) before declaring a new one.
 - Use `type` for object shapes in place of `interface`.
-- Validate at runtime with Zod and derive the type: `type User = z.infer<typeof userSchema>`.
+- Check a literal against a type with `satisfies`, which keeps its literal types.
 - Use `?.` and `??`; use `||` only where an empty string or 0 should also fall through.
+
+## Functions
+
+- A function you write with more than one parameter takes one object argument, so each call site names its values. Inline callbacks, framework signatures (route handlers, page and layout props) and hot paths (per-frame render, parsers) keep positional parameters.
+
+## Tests
+
+- Run the real thing: the framework's test primitives, a real or in-memory implementation, a running build for UI. Mock only what cannot run locally.
 
 ## React
 

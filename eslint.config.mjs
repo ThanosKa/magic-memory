@@ -94,7 +94,7 @@ export default [
       ],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'warn',
+      '@typescript-eslint/no-non-null-assertion': 'error',
 
       // React specific
       'react/react-in-jsx-scope': 'off', // Not needed in Next.js
@@ -104,7 +104,7 @@ export default [
       'react/no-unescaped-entities': 'warn',
 
       // General best practices
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-console': ['error', { allow: ['warn', 'error'] }],
       'no-unused-vars': 'off', // Handled by TypeScript
       'prefer-const': 'warn',
       'no-var': 'error',
@@ -116,6 +116,31 @@ export default [
       next: {
         rootDir: '.',
       },
+    },
+  },
+  // TypeScript only: type-aware lint and the CODING_STANDARDS.md rules the linter can check.
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'FunctionDeclaration[params.length>1]:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy)$/])',
+          message: 'Take one object argument instead of positional params.',
+        },
+        {
+          selector: 'VariableDeclarator:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy)$/]) > ArrowFunctionExpression[params.length>1]',
+          message: 'Take one object argument instead of positional params.',
+        },
+      ],
     },
   },
   // Server code logs through lib/logger.ts. Client code and scripts/ keep the rule above.
@@ -132,6 +157,21 @@ export default [
     rules: {
       // The empty options object drops the allow list; a bare severity would inherit it.
       'no-console': ['error', {}],
+    },
+  },
+  // Tests may use any, type assertions, non-null assertions and positional params.
+  {
+    files: [
+      '**/*.test.{ts,tsx}',
+      '**/*.spec.{ts,tsx}',
+      'tests/**',
+      '__tests__/**',
+    ],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/consistent-type-assertions': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      'no-restricted-syntax': 'off',
     },
   },
 ];
