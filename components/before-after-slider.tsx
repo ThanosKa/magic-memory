@@ -7,6 +7,12 @@ import { ChevronsLeftRight } from "lucide-react";
 import { PRINT_FRAME_CLASS } from "@/components/layout/film";
 import { cn } from "@/lib/utils";
 
+declare module "react" {
+  interface CSSProperties {
+    "--split"?: string;
+  }
+}
+
 type SliderImage = {
   src: string;
   alt: string;
@@ -93,7 +99,7 @@ export function BeforeAfterSlider({
         <div
           ref={frameRef}
           className="relative w-full cursor-ew-resize touch-pan-y select-none overflow-hidden bg-scrim"
-          style={{ aspectRatio, ...{ "--split": `${START}%` } }}
+          style={{ aspectRatio, "--split": `${START}%` }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={stopDragging}

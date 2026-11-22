@@ -1,4 +1,4 @@
-// @vitest-environment node https://vitest.dev/guide/environment
+// @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest"
 
 vi.unmock("@/lib/logger")

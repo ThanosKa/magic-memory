@@ -1,4 +1,4 @@
-// @vitest-environment node https://vitest.dev/guide/environment
+// @vitest-environment node
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest"
 import { asClerkUserId, asUserId, createCreditLedger } from "@/lib/credits/ledger"
 import { createPgliteLedger, type PgliteLedger } from "./pglite-ledger-db"
@@ -7,7 +7,7 @@ vi.mock("@/lib/logger", () => ({
   default: { error: vi.fn(), warn: vi.fn(), info: vi.fn() },
 }))
 
-const CLERK_ID = asClerkUserId("clerk_user_sql")
+const CLERK_ID = asClerkUserId("user_sql")
 const PURCHASE = {
   stripePaymentId: "pi_sql_1",
   credits: 5,

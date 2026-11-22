@@ -1,5 +1,4 @@
 import Replicate from "replicate"
-import { unstable_noStore as noStore } from "next/cache"
 import logger from "@/lib/logger"
 
 const MODEL_VERSION = "0fbacf7afc6c144e5be9767cff80f25aff23e52b0708f17e20f9879b2f21516c"
@@ -39,7 +38,6 @@ export async function restorePhoto({
   photo: { bytes: Buffer; mimeType: string }
   deps?: RestorerDeps
 }): Promise<string> {
-  noStore()
   const replicate =
     deps.client ?? new Replicate({ auth: process.env.REPLICATE_API_TOKEN })
   const sleep = deps.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)))

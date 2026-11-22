@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { getStripeClient } from "@/lib/billing/stripe-client";
+import Stripe from "stripe";
 import { asUserId, createCreditLedger } from "@/lib/credits/ledger";
 import {
   CREDITS_MISMATCH_LOG_MESSAGE,
@@ -8,6 +8,19 @@ import {
 } from "@/lib/billing/verify-checkout-session";
 import { sendPurchaseEmail } from "@/lib/email";
 import logger from "@/lib/logger";
+
+function getStripeClient() {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+
+  if (!secretKey) {
+    throw new Error("STRIPE_SECRET_KEY is not configured");
+  }
+
+  return new Stripe(secretKey, {
+    // @ts-expect-error stripe-node types accept only the latest API version, see https://github.com/stripe/stripe-node#using-old-api-versions-with-typescript
+    apiVersion: "2025-11-17.clover",
+  });
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.text();

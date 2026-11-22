@@ -7,21 +7,23 @@ const INTERNAL_ERROR = "Internal error"
 export type ClerkUserId = string & { readonly __brand: "ClerkUserId" }
 export type UserId = string & { readonly __brand: "UserId" }
 
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
 export function isClerkUserId(id: string): id is ClerkUserId {
-  return id.length > 0
+  return id.startsWith("user_") && id.length > "user_".length
 }
 
 export function isUserId(id: string): id is UserId {
-  return id.length > 0
+  return UUID_PATTERN.test(id)
 }
 
 export function asClerkUserId(id: string): ClerkUserId {
-  if (!isClerkUserId(id)) throw new Error("Clerk user id is empty")
+  if (!isClerkUserId(id)) throw new Error("Clerk user id is not a Clerk user id")
   return id
 }
 
 export function asUserId(id: string): UserId {
-  if (!isUserId(id)) throw new Error("User id is empty")
+  if (!isUserId(id)) throw new Error("User id is not a UUID")
   return id
 }
 

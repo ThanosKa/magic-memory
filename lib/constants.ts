@@ -51,7 +51,7 @@ export const CREDIT_PACKAGES = {
 export type PackageType = keyof typeof CREDIT_PACKAGES;
 
 export function isPackageType(value: string): value is PackageType {
-  return value in CREDIT_PACKAGES;
+  return Object.hasOwn(CREDIT_PACKAGES, value);
 }
 
 export function perPhotoPrice(pkg: { price: number; credits: number }): string {

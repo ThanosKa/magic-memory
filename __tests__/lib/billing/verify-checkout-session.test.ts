@@ -8,7 +8,7 @@ import {
 
 const PACKAGES = {
   starter: { name: "Starter", credits: 20, price: 1000, priceId: "price_starter" },
-  empty: { name: "Empty", credits: 5, price: 500, priceId: "" },
+  premium: { name: "Premium", credits: 5, price: 500, priceId: "" },
 };
 
 function session(overrides: Record<string, unknown> = {}) {
@@ -21,7 +21,7 @@ function session(overrides: Record<string, unknown> = {}) {
     total_details: { amount_discount: 0 },
     currency: "eur",
     metadata: {
-      userId: "user-uuid",
+      userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
       packageType: "starter",
       credits: "20",
       priceId: "price_starter",
@@ -34,7 +34,7 @@ describe("verifyCheckoutSession", () => {
   it("grants a normal Purchase, taking credits from metadata", () => {
     const verdict = verifyCheckoutSession({ session: session({
         metadata: {
-          userId: "user-uuid",
+          userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
           packageType: "starter",
           credits: "25",
           priceId: "price_starter",
@@ -44,7 +44,7 @@ describe("verifyCheckoutSession", () => {
     expect(verdict).toEqual({
       ok: true,
       grant: {
-        userId: "user-uuid",
+        userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
         stripePaymentId: "pi_1",
         credits: 25,
         amountPaid: 1000,
@@ -147,7 +147,7 @@ describe("verifyCheckoutSession", () => {
     const unset = verifyCheckoutSession({ session: session({
         metadata: {
           userId: "u",
-          packageType: "empty",
+          packageType: "premium",
           credits: "1",
           priceId: "x",
         },
@@ -209,14 +209,14 @@ describe("checkoutMetadata", () => {
   it("builds exactly the keys and string values checkout sessions carry", () => {
     expect(
       checkoutMetadata({
-        userId: "user-uuid",
+        userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
         clerkUserId: "user_clerk",
         packageType: "starter",
         credits: 25,
         priceId: "price_starter",
       }),
     ).toEqual({
-      userId: "user-uuid",
+      userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
       clerkUserId: "user_clerk",
       packageType: "starter",
       credits: "25",
@@ -226,7 +226,7 @@ describe("checkoutMetadata", () => {
 
   it("produces metadata that verifyCheckoutSession reads back", () => {
     const metadata = checkoutMetadata({
-      userId: "user-uuid",
+      userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
       clerkUserId: "user_clerk",
       packageType: "starter",
       credits: 20,

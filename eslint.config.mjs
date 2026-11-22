@@ -8,6 +8,7 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks';
 const ALLOWED_COMMENTS = [
   /^\s*prettier-ignore\s*$/,
   /^\s*eslint-(disable|enable)/,
+  /^\s*@(vitest|jest)-environment\s/,
   /^\/\s*<reference\s/,
   /https?:\/\/\S+/,
   /\b(copyright|license|SPDX-License-Identifier)\b/i,

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type Stripe from "stripe";
-import { CREDIT_PACKAGES } from "@/lib/constants";
+import { CREDIT_PACKAGES, isPackageType, type PackageType } from "@/lib/constants";
 
 const stripeMetadataSchema = z.object({
   userId: z.string().min(1),
@@ -53,7 +53,7 @@ export type PurchaseVerdict =
         stripePaymentId: string;
         credits: number;
         amountPaid: number;
-        packageType: string;
+        packageType: PackageType;
         packageName: string;
       };
       creditsMismatch?: { metadataCredits: number; packCredits: number };
@@ -115,7 +115,7 @@ export function verifyCheckoutSession({
 
   const pkg = packages[packageType];
 
-  if (!pkg) {
+  if (!pkg || !isPackageType(packageType)) {
     return {
       ok: false,
       reason: "unknown_package",

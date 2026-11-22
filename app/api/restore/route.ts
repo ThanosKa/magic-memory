@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { unstable_noStore as noStore } from "next/cache";
-import { OUT_OF_CREDITS_CODE } from "@/lib/restore/error-codes";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -144,7 +143,7 @@ export async function POST(request: NextRequest) {
     if (!creditCheck.ok || creditCheck.paidCredits <= 0) {
       logger.warn({ userId, creditCheck }, "No paid credits available")
       return NextResponse.json(
-        { success: false, code: OUT_OF_CREDITS_CODE, error: "No credits available. Purchase more credits to continue." },
+        { success: false, error: "No credits available. Purchase more credits to continue." },
         { status: 403 },
       )
     }

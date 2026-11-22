@@ -42,8 +42,8 @@ function fakeLedgerDb({
   return { db, calls }
 }
 
-const CLERK_ID = asClerkUserId("clerk_user_123")
-const USER_ID = asUserId("user-uuid")
+const CLERK_ID = asClerkUserId("user_123")
+const USER_ID = asUserId("3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c")
 
 describe("createCreditLedger", () => {
   beforeEach(() => {
@@ -53,7 +53,7 @@ describe("createCreditLedger", () => {
   describe("balance", () => {
     it("returns the paid credits of the user's row", async () => {
       const { db, calls } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: {
           check_user_credits: {
             data: [{ has_credits: true, has_free_daily: false, paid_credits: 7, should_use_free: false }],
@@ -65,7 +65,7 @@ describe("createCreditLedger", () => {
       const result = await createCreditLedger(() => db).balance(CLERK_ID)
 
       expect(result).toEqual({ ok: true, paidCredits: 7 })
-      expect(calls).toEqual([{ fn: "check_user_credits", args: { p_user_id: "user-uuid" } }])
+      expect(calls).toEqual([{ fn: "check_user_credits", args: { p_user_id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" } }])
     })
 
     it("gives user_not_found when no row has the Clerk id", async () => {
@@ -76,7 +76,7 @@ describe("createCreditLedger", () => {
       expect(result).toEqual({ ok: false, reason: "user_not_found" })
       expect(calls).toEqual([])
       expect(logger.error).toHaveBeenCalledWith(
-        { error: null, userId: "clerk_user_123" },
+        { error: null, userId: "user_123" },
         "User not found for credit check",
       )
     })
@@ -88,14 +88,14 @@ describe("createCreditLedger", () => {
 
       expect(result).toEqual({ ok: false, reason: "db_error", message: "connection reset" })
       expect(logger.error).toHaveBeenCalledWith(
-        { error: "connection reset", userId: "clerk_user_123" },
+        { error: "connection reset", userId: "user_123" },
         "User not found for credit check",
       )
     })
 
     it("gives db_error when check_user_credits fails", async () => {
       const { db } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: { check_user_credits: { data: null, error: "RPC error" } },
       })
 
@@ -103,14 +103,14 @@ describe("createCreditLedger", () => {
 
       expect(result).toEqual({ ok: false, reason: "db_error", message: "RPC error" })
       expect(logger.error).toHaveBeenCalledWith(
-        { error: "RPC error", userId: "clerk_user_123" },
+        { error: "RPC error", userId: "user_123" },
         "Error checking user credits",
       )
     })
 
     it("gives db_error when check_user_credits answers no row", async () => {
       const { db } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: { check_user_credits: { data: [], error: null } },
       })
 
@@ -126,7 +126,7 @@ describe("createCreditLedger", () => {
 
       expect(result).toEqual({ ok: false, reason: "db_error", message: "Internal error" })
       expect(logger.error).toHaveBeenCalledWith(
-        { error: "socket closed", userId: "clerk_user_123" },
+        { error: "socket closed", userId: "user_123" },
         "Exception checking user credits",
       )
     })
@@ -151,7 +151,7 @@ describe("createCreditLedger", () => {
 
     it("charges one credit and returns the restoration and remaining credits", async () => {
       const { db, calls } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: {
           deduct_credit_and_record_restoration: deductAnswer({
             success: true,
@@ -169,7 +169,7 @@ describe("createCreditLedger", () => {
         {
           fn: "deduct_credit_and_record_restoration",
           args: {
-            p_user_id: "user-uuid",
+            p_user_id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
             p_original_url: "ephemeral:photo.jpg",
             p_restored_url: "https://r/1.png",
             p_use_free_credit: false,
@@ -180,7 +180,7 @@ describe("createCreditLedger", () => {
 
     it("gives no_credits when SQL answers No paid credits available", async () => {
       const { db } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: {
           deduct_credit_and_record_restoration: deductAnswer({
             success: false,
@@ -198,7 +198,7 @@ describe("createCreditLedger", () => {
 
     it("gives user_not_found when SQL answers User not found", async () => {
       const { db } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: {
           deduct_credit_and_record_restoration: deductAnswer({
             success: false,
@@ -235,7 +235,7 @@ describe("createCreditLedger", () => {
 
     it("gives db_error when deduct_credit_and_record_restoration fails", async () => {
       const { db } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: { deduct_credit_and_record_restoration: { data: null, error: "Transaction failed" } },
       })
 
@@ -243,14 +243,14 @@ describe("createCreditLedger", () => {
 
       expect(result).toEqual({ ok: false, reason: "db_error", message: "Transaction failed" })
       expect(logger.error).toHaveBeenCalledWith(
-        { error: "Transaction failed", userId: "clerk_user_123" },
+        { error: "Transaction failed", userId: "user_123" },
         "Error deducting credit",
       )
     })
 
     it("catches an exception as db_error", async () => {
       const { db } = fakeLedgerDb({
-        users: { clerk_user_123: "user-uuid" },
+        users: { user_123: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" },
         answers: { deduct_credit_and_record_restoration: new Error("socket closed") },
       })
 
@@ -258,7 +258,7 @@ describe("createCreditLedger", () => {
 
       expect(result).toEqual({ ok: false, reason: "db_error", message: "Internal error" })
       expect(logger.error).toHaveBeenCalledWith(
-        { error: "socket closed", userId: "clerk_user_123" },
+        { error: "socket closed", userId: "user_123" },
         "Exception deducting credit",
       )
     })
@@ -285,7 +285,7 @@ describe("createCreditLedger", () => {
         {
           fn: "grant_purchase_credits",
           args: {
-            p_user_id: "user-uuid",
+            p_user_id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
             p_stripe_payment_id: "pi_123",
             p_credits: 20,
             p_amount_paid: 999,

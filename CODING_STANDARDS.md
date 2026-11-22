@@ -54,5 +54,5 @@ The rules every diff in this repo is checked against, one per line. Writing code
 
 ## Comments
 
-- Write no comments; let names, types and structure carry the meaning. Delete a comment you would add and fix the code instead. Allowed: a license header, `prettier-ignore`, an ESLint directive, a `/** */` doc comment on an export that defines a public API contract, and a comment with a link to the doc or issue that proves a behaviour forced by a dependency, platform or vendor.
+- Write no comments; let names, types and structure carry the meaning. Delete a comment you would add and fix the code instead. Allowed: a license header, `prettier-ignore`, an ESLint directive, a test-runner directive such as `@vitest-environment`, a `/** */` doc comment on an export that defines a public API contract, and a comment with a link to the doc or issue that proves a behaviour forced by a dependency, platform or vendor.
 - Keep emojis out of code and comments.
