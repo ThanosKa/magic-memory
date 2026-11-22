@@ -17,8 +17,7 @@ function getRateLimiter() {
   return new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(10, "1 m"),
-    // Analytics writes run after the response; Workers would cancel them
-    // without ctx.waitUntil, which this route does not have.
+    // Analytics writes run after the response and Workers cancel them without ctx.waitUntil: https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil
     analytics: false,
     prefix: "ratelimit:restore",
   })
@@ -45,7 +44,6 @@ async function validateImageDimensions(buffer: Buffer): Promise<{ valid: boolean
 }
 
 export async function POST(request: NextRequest) {
-  // Prevent Next.js from caching any fetch calls (predictions polling GET requests)
   noStore()
 
   let restorationId: string | null = null
@@ -72,7 +70,6 @@ export async function POST(request: NextRequest) {
           )
         }
       } catch (redisErr) {
-        // Redis unavailable — log and continue rather than blocking restoration
         logger.warn({ userId, error: redisErr instanceof Error ? redisErr.message : String(redisErr) }, "Rate limiter unavailable, skipping")
       }
     }
@@ -135,8 +132,6 @@ export async function POST(request: NextRequest) {
     const clerkUserId = asClerkUserId(userId)
     const creditCheck = await ledger.balance(clerkUserId)
 
-    // A database failure is not "no credits": answer 503 so the uploader says "try again".
-    // The text must not contain "No credits", which the uploader routes to the out-of-credits screen.
     if (!creditCheck.ok && creditCheck.reason === "db_error") {
       logger.error({ userId, error: creditCheck.message }, "Failed to check credits")
       return NextResponse.json(
@@ -155,7 +150,7 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId }, "Starting AI restoration")
 
-    const restoredImageUrl = await restorePhoto({ bytes: buffer, mimeType: file.type })
+    const restoredImageUrl = await restorePhoto({ photo: { bytes: buffer, mimeType: file.type } })
 
     logger.info({ userId }, "AI restoration complete")
 

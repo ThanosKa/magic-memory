@@ -65,7 +65,7 @@ describe("POST /api/stripe/create-checkout", () => {
   });
 
   it("returns 400 for invalid package type", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
@@ -78,7 +78,7 @@ describe("POST /api/stripe/create-checkout", () => {
   });
 
   it("returns error when user not found in database", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
@@ -121,12 +121,12 @@ describe("POST /api/stripe/create-checkout", () => {
   });
 
   it("returns checkout URL on success", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
     const mockUser = {
-      id: "user-uuid",
+      id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
       email: "kazakis.th@gmail.com",
     };
 
@@ -166,11 +166,11 @@ describe("POST /api/stripe/create-checkout", () => {
   });
 
   it("includes correct metadata in checkout session", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
-    const mockUser = { id: "user-uuid", email: "kazakis.th@gmail.com" };
+    const mockUser = { id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c", email: "kazakis.th@gmail.com" };
 
     const mockSupabase = {
       from: vi.fn().mockReturnValue({
@@ -198,8 +198,8 @@ describe("POST /api/stripe/create-checkout", () => {
     expect(mockStripeCheckoutCreate).toHaveBeenCalledWith(
       expect.objectContaining({
         metadata: expect.objectContaining({
-          userId: "user-uuid",
-          clerkUserId: "clerk_user_123",
+          userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
+          clerkUserId: "user_123",
           packageType: "growth",
           credits: "60",
         }),

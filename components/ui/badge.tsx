@@ -4,7 +4,6 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-/** Small mono uppercase pill. Use `ember` for the one highlight on a screen. */
 const badgeVariants = cva(
   'font-mono inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] transition-colors focus-ring [&>svg]:pointer-events-none [&>svg]:size-3',
   {

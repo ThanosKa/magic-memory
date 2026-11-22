@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils"
 
 type LoadingSpinnerProps = {
   size?: "sm" | "md" | "lg"
-  /** `ember` (default) for standalone loaders, `paper` inside a dark control. */
   tone?: "ember" | "paper"
   className?: string
 }

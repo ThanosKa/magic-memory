@@ -9,7 +9,6 @@ import type { NextRequest } from "next/server";
 vi.mock("@clerk/nextjs/server");
 vi.mock("@/lib/supabase/server");
 vi.mock("@/lib/logger");
-// No test sends a real email: the sender is a double.
 vi.mock("@/lib/email", () => ({ sendWelcomeEmail: vi.fn() }));
 
 const mockWebhookVerify = vi.fn();
@@ -21,7 +20,6 @@ vi.mock("svix", () => ({
 
 type Row = { id: string; clerk_user_id: string; email: string; name: string | null; paid_credits: number };
 
-/** An in-memory users table that answers like Supabase for the calls Provisioning makes. */
 function fakeUsersTable() {
   const rows = new Map<string, Row>();
   const table = {
@@ -97,7 +95,7 @@ describe("the welcome email goes out from whichever path created the User", () =
     expect(credits.status).toBe(200);
     expect(rows.size).toBe(1);
     expect(sendWelcomeEmail).toHaveBeenCalledTimes(1);
-    expect(sendWelcomeEmail).toHaveBeenCalledWith("ada@example.com", "Ada Lovelace");
+    expect(sendWelcomeEmail).toHaveBeenCalledWith({ to: "ada@example.com", name: "Ada Lovelace" });
 
     mockWebhookVerify.mockReturnValue(userCreated);
     const webhook = await POST(webhookRequest());
@@ -115,6 +113,6 @@ describe("the welcome email goes out from whichever path created the User", () =
     await GET();
 
     expect(sendWelcomeEmail).toHaveBeenCalledTimes(1);
-    expect(sendWelcomeEmail).toHaveBeenCalledWith("ada@example.com", "Ada Lovelace");
+    expect(sendWelcomeEmail).toHaveBeenCalledWith({ to: "ada@example.com", name: "Ada Lovelace" });
   });
 });

@@ -3,15 +3,8 @@ import path from "node:path"
 import { PGlite } from "@electric-sql/pglite"
 import type { LedgerDb, LedgerFunction } from "@/lib/credits/ledger-db"
 
-/**
- * The PGlite adapter for the ledger's `LedgerDb` seam: an in-process Postgres
- * loaded with the repo's numbered SQL scripts. Test-only; nothing in `lib/` or
- * `app/` imports it, so PGlite never reaches the Worker bundle.
- */
-
 const SCRIPTS_DIR = path.resolve(__dirname, "../../../scripts")
 
-/** What Supabase provides and the scripts assume: the roles and the `auth` helpers. */
 const SUPABASE_STUBS = `
   CREATE ROLE anon NOLOGIN;
   CREATE ROLE authenticated NOLOGIN;
@@ -21,7 +14,6 @@ const SUPABASE_STUBS = `
   CREATE FUNCTION auth.role() RETURNS text LANGUAGE sql STABLE AS $$ SELECT 'service_role'::text $$;
 `
 
-/** These functions return one value; the others return a table of rows. */
 const SCALAR_FUNCTIONS: ReadonlySet<LedgerFunction> = new Set([
   "grant_purchase_credits",
   "rollback_restoration",
@@ -29,12 +21,10 @@ const SCALAR_FUNCTIONS: ReadonlySet<LedgerFunction> = new Set([
 
 export type PgliteLedger = {
   db: LedgerDb
-  /** Runs SQL directly, for setting up and inspecting rows. */
   query<T = Record<string, unknown>>(sql: string, params?: unknown[]): Promise<T[]>
   close(): Promise<void>
 }
 
-/** Loads every `scripts/NNN_*.sql`, in order, into a fresh in-memory database. */
 export async function createPgliteLedger(): Promise<PgliteLedger> {
   const pg = new PGlite()
   await pg.exec(SUPABASE_STUBS)

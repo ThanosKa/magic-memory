@@ -5,7 +5,6 @@ type ComparisonTableProps = {
   features: CompetitorFeature[];
 };
 
-/** Feature table on ink. The Magic Memory column is tinted ember; scrolls sideways on narrow screens. */
 export function ComparisonTable({ competitorName, features }: ComparisonTableProps) {
   return (
     <div className="overflow-x-auto rounded-2xl border border-border bg-card">

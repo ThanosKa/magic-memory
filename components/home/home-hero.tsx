@@ -11,11 +11,6 @@ const HEADLINE: { text: string; italic?: boolean; br?: boolean }[] = [
   { text: "focus.", italic: true },
 ];
 
-/**
- * Home hero. The entrance is a CSS animation (`mm-rise`, see globals.css) so
- * it plays on first paint instead of waiting for hydration, and it is off
- * when the visitor prefers reduced motion.
- */
 export function HomeHero() {
   return (
     <section className="relative overflow-hidden">

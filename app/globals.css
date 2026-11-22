@@ -1,16 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* ------------------------------------------------------------------ */
-/* "Darkroom" theme. Dark is the default; light is a palette swap set  */
-/* by next-themes as <html data-theme="light">. Raw palette first,     */
-/* then the shadcn semantic tokens built from it.                      */
-/* ------------------------------------------------------------------ */
-
 :root, :root[data-theme="dark"] {
-  /* Palette (dark, the default). `ink` is the page, `paper` is the text and
-     the contrast sections; light swaps them, so components never need a
-     theme variant. */
   --ink: #0d0b09;
   --surface: #14110e;
   --surface-2: #16130f;
@@ -18,17 +9,13 @@
   --paper: #f1eadf;
   --paper-deep: #ebe2d2;
   --ember: #ff5a36;
-  /* Ember for small text on the `paper` contrast sections (AA on cream). */
   --ember-on-paper: #b0341a;
 
-  /* Semantic colours that are not plain palette references */
   --muted-foreground: #a69d90;
   --destructive: #f2555a;
   --success: #7fc99a;
 }
 
-/* Light darkroom: paper page, ink text, darker ember (AA on paper).
-   The cream contrast sections (bg-paper text-ink) become ink sections. */
 :root[data-theme="light"] {
   color-scheme: light;
   --ink: #f7f3eb;
@@ -38,7 +25,6 @@
   --paper: #050403;
   --paper-deep: #26211c;
   --ember: #ad3418;
-  /* In light the paper sections are ink, so the bright ember reads again. */
   --ember-on-paper: #ff5a36;
 
   --muted-foreground: #5c544a;
@@ -47,13 +33,9 @@
 }
 
 :root {
-  /* Pinned: the same in both themes, for things that sit on a photo or are
-     a physical print, which do not change with the page. */
-  --print: #ebe2d2; /* print frame around a photo */
-  --scrim: #0d0b09; /* dark veil and chips over a photo */
-  --scrim-foreground: #f1eadf; /* text on a scrim */
-
-  /* Semantic tokens (used by components/ui), built from the palette */
+  --print: #ebe2d2;
+  --scrim: #0d0b09;
+  --scrim-foreground: #f1eadf;
   --background: var(--ink);
   --foreground: var(--paper);
   --card: var(--surface);
@@ -73,10 +55,9 @@
   --ring: var(--ember);
   --radius: 0.75rem;
 
-  /* Motion. Strong curves: built-in CSS easings are too weak for UI. */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entering, exiting, UI response */
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* moving on screen */
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* sheets sliding in from an edge */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @theme inline {
@@ -140,7 +121,6 @@
   }
 }
 
-/* Article body typography for blog posts */
 .article-body {
   font-size: 1.0625rem;
   max-width: 68ch;
@@ -233,12 +213,6 @@
   line-height: 1.5;
 }
 
-/* ------------------------------------------------------------------ */
-/* Signature details shared across pages                                */
-/* ------------------------------------------------------------------ */
-
-/* Ember keyboard focus ring. An outline (not a box-shadow ring) so the gap
-   is transparent and it reads the same on ink and on paper. */
 @utility focus-ring {
   &:focus-visible {
     outline: 2px solid var(--ember);
@@ -246,7 +220,6 @@
   }
 }
 
-/* Link underline that grows from the left on hover. */
 .mm-underline {
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1px;
@@ -260,8 +233,6 @@
   background-size: 100% 1px;
 }
 
-/* Home hero entrance. CSS, not JS, so it runs on first paint. The copy
-   rises first; the photo frame follows a beat later. */
 .mm-rise {
   animation: mm-rise 0.7s var(--ease-out) both;
 }
@@ -283,7 +254,6 @@
   }
 }
 
-/* Film-strip sprocket holes. */
 .mm-sprockets {
   background-image: repeating-linear-gradient(
     90deg,

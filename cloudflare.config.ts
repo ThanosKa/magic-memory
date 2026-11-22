@@ -8,8 +8,6 @@ export default defineConfig({
     compatibilityFlags: ["nodejs_compat"],
     observability: { enabled: true },
     domains: ["magic-memory.dev"],
-    // magic-memory.dev is the only public address. workers.dev would skip the
-    // zone's rules and serve a duplicate site where Clerk sign-in fails.
     workersDev: false,
     assets: {
       htmlHandling: "none",
@@ -19,12 +17,8 @@ export default defineConfig({
     env: {
       ASSETS: bindings.assets(),
       IMAGES: bindings.images(),
-      // Only declared names reach the Worker's process.env. Values come from
-      // .env.<mode>.local locally and from Worker secrets once deployed.
       CLERK_SECRET_KEY: bindings.secret(),
       CLERK_WEBHOOK_SECRET: bindings.secret(),
-      // Not really secret. To make it bindings.text("info"), first delete the
-      // remote LOG_LEVEL secret, or cf deploy aborts on the name clash.
       LOG_LEVEL: bindings.secret(),
       REPLICATE_API_TOKEN: bindings.secret(),
       RESEND_API_KEY: bindings.secret(),

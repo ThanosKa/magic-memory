@@ -9,11 +9,6 @@ import { LoadingSpinner } from "@/components/ui/loading-states";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 
-/**
- * Caps a photo's width so a tall portrait still fits the viewport.
- * Used for both the preview and the slider so the frame does not jump
- * when the result arrives.
- */
 export function photoWidthStyle(aspectRatio: number): React.CSSProperties {
   return { maxWidth: `min(100%, calc(72svh * ${aspectRatio}))` };
 }
@@ -25,7 +20,6 @@ type UploadFrameProps = {
   isPreparing: boolean;
 };
 
-/** The drop zone, drawn as the film-strip upload frame from the home page. */
 export function UploadFrame({ rootProps, inputProps, isDragActive, isPreparing }: UploadFrameProps) {
   return (
     <div className="rounded-[6px] bg-surface px-3 py-2 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)] sm:px-4">
@@ -80,11 +74,9 @@ type PhotoFrameProps = {
   src: string;
   alt: string;
   aspectRatio: number;
-  /** 0-100 while a restoration is running; omit when idle. */
   progress?: number;
 };
 
-/** The uploaded photo as a print, with the restoring state laid over it. */
 export function PhotoFrame({ src, alt, aspectRatio, progress }: PhotoFrameProps) {
   const isRestoring = progress !== undefined;
 
@@ -125,7 +117,6 @@ export function PhotoFrame({ src, alt, aspectRatio, progress }: PhotoFrameProps)
   );
 }
 
-/** Shown under the photo when the user has no generations left. */
 export function OutOfCreditsNote() {
   return (
     <div className="rounded-[20px] border border-paper/12 bg-surface p-5 sm:p-6">

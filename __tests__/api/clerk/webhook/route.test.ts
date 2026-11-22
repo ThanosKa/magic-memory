@@ -9,14 +9,12 @@ import { provisionUser } from "@/lib/users"
 vi.mock("@/lib/supabase/server")
 vi.mock("@/lib/logger")
 vi.mock("@/lib/email", () => ({ sendWelcomeEmail: vi.fn() }))
-// Wraps the real provisionUser so one test can run it against a fake client;
-// the rest stub its answer.
 vi.mock("@/lib/users", async (importOriginal) => {
     const actual = await importOriginal<typeof import("@/lib/users")>()
     return { ...actual, provisionUser: vi.fn(actual.provisionUser) }
 })
 
-const userRow = { id: "u1", clerk_user_id: "clerk_user_123", email: "kazakis.th@gmail.com", paid_credits: 1 }
+const userRow = { id: "u1", clerk_user_id: "user_123", email: "kazakis.th@gmail.com", paid_credits: 1 }
 const fakeSupabase = { from: vi.fn() }
 
 const mockWebhookVerify = vi.fn()
@@ -93,7 +91,7 @@ describe("POST /api/clerk/webhook", () => {
         mockWebhookVerify.mockReturnValue({
             type: "user.created",
             data: {
-                id: "clerk_user_123",
+                id: "user_123",
                 email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: "John",
                 last_name: "Doe",
@@ -106,16 +104,17 @@ describe("POST /api/clerk/webhook", () => {
 
         expect(response.status).toBe(200)
         expect(data.data?.received).toBe(true)
-        expect(provisionUser).toHaveBeenCalledWith(
-            {
-                clerkUserId: "clerk_user_123",
+        expect(provisionUser).toHaveBeenCalledWith({
+            profile: {
+                clerkUserId: "user_123",
                 email: "kazakis.th@gmail.com",
                 name: "John Doe",
                 imageUrl: "https://example.com/photo.jpg",
                 emailVerified: false,
             },
-            { supabase: fakeSupabase, sendWelcomeEmail }
-        )
+            supabase: fakeSupabase,
+            sendWelcomeEmail,
+        })
     })
 
     it("updates user on user.updated event", async () => {
@@ -133,7 +132,7 @@ describe("POST /api/clerk/webhook", () => {
         mockWebhookVerify.mockReturnValue({
             type: "user.updated",
             data: {
-                id: "clerk_user_123",
+                id: "user_123",
                 email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: "Jane",
                 last_name: "Smith",
@@ -169,7 +168,7 @@ describe("POST /api/clerk/webhook", () => {
         mockWebhookVerify.mockReturnValue({
             type: "user.deleted",
             data: {
-                id: "clerk_user_123",
+                id: "user_123",
             },
         })
 
@@ -188,7 +187,7 @@ describe("POST /api/clerk/webhook", () => {
         mockWebhookVerify.mockReturnValue({
             type: "user.created",
             data: {
-                id: "clerk_user_123",
+                id: "user_123",
                 email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: null,
                 last_name: null,
@@ -198,10 +197,11 @@ describe("POST /api/clerk/webhook", () => {
 
         await POST(createMockRequest("{}"))
 
-        expect(provisionUser).toHaveBeenCalledWith(
-            { clerkUserId: "clerk_user_123", email: "kazakis.th@gmail.com", name: null, imageUrl: null, emailVerified: false },
-            { supabase: fakeSupabase, sendWelcomeEmail }
-        )
+        expect(provisionUser).toHaveBeenCalledWith({
+            profile: { clerkUserId: "user_123", email: "kazakis.th@gmail.com", name: null, imageUrl: null, emailVerified: false },
+            supabase: fakeSupabase,
+            sendWelcomeEmail,
+        })
     })
 
     it("returns 500 when database insert fails", async () => {
@@ -219,7 +219,7 @@ describe("POST /api/clerk/webhook", () => {
         mockWebhookVerify.mockReturnValue({
             type: "user.created",
             data: {
-                id: "clerk_user_123",
+                id: "user_123",
                 email_addresses: [{ email_address: "kazakis.th@gmail.com" }],
                 first_name: "John",
                 last_name: "Doe",
@@ -238,7 +238,7 @@ describe("POST /api/clerk/webhook", () => {
     const userCreatedEvent = {
         type: "user.created",
         data: {
-            id: "clerk_user_123",
+            id: "user_123",
             email_addresses: [
                 { id: "e1", email_address: "kazakis.th@gmail.com", verification: { status: "verified" } },
             ],
@@ -279,21 +279,19 @@ describe("POST /api/clerk/webhook", () => {
     it("uses the primary address, not the first, and passes a verified one as verified", async () => {
         await createdWith([addr("e1", "other@x.com", "unverified"), addr("e2", "main@x.com", "verified")], "e2")
         expect(provisionUser).toHaveBeenCalledWith(
-            expect.objectContaining({ email: "main@x.com", emailVerified: true }),
-            expect.anything()
+            expect.objectContaining({ profile: expect.objectContaining({ email: "main@x.com", emailVerified: true }) })
         )
     })
 
     it("passes an unverified primary address as not verified", async () => {
         await createdWith([addr("e1", "main@x.com", "unverified")], "e1")
         expect(provisionUser).toHaveBeenCalledWith(
-            expect.objectContaining({ email: "main@x.com", emailVerified: false }),
-            expect.anything()
+            expect.objectContaining({ profile: expect.objectContaining({ email: "main@x.com", emailVerified: false }) })
         )
     })
 
     it("re-links the existing row to the new Clerk id on user.created", async () => {
-        const relinkedRow = { id: "u1", clerk_user_id: "clerk_user_123", email: "kazakis.th@gmail.com", paid_credits: 5 }
+        const relinkedRow = { id: "u1", clerk_user_id: "user_123", email: "kazakis.th@gmail.com", paid_credits: 5 }
         const chain = (result: unknown) => {
             const c = {
                 select: vi.fn(() => c),
@@ -321,7 +319,7 @@ describe("POST /api/clerk/webhook", () => {
 
         expect(response.status).toBe(200)
         expect(table.update).toHaveBeenCalledWith(
-            expect.objectContaining({ clerk_user_id: "clerk_user_123" })
+            expect.objectContaining({ clerk_user_id: "user_123" })
         )
         expect(table.update).toHaveBeenCalledWith(
             expect.not.objectContaining({ paid_credits: expect.anything() })
@@ -329,7 +327,7 @@ describe("POST /api/clerk/webhook", () => {
         expect(updateChain.eq).toHaveBeenCalledWith("email", "kazakis.th@gmail.com")
         expect(sendWelcomeEmail).not.toHaveBeenCalled()
         expect(logWarn).toHaveBeenCalledWith(
-            { userId: "clerk_user_123", email: "kazakis.th@gmail.com" },
+            { userId: "user_123", email: "kazakis.th@gmail.com" },
             "Existing user row re-linked to new Clerk id"
         )
     })

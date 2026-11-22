@@ -3,15 +3,11 @@ import { PageContainer } from "@/components/layout/page-container";
 import { StartButton } from "@/components/layout/start-button";
 
 type FinalCtaProps = {
-  /** Serif headline; wrap the emphasis in `<span className="italic text-paper/55">`. */
   title: ReactNode;
-  /** Small mono line under the action. */
   note?: ReactNode;
-  /** Defaults to the start button. */
   action?: ReactNode;
 };
 
-/** Closing call to action used at the bottom of pages. */
 export function FinalCta({ title, note, action = <StartButton /> }: FinalCtaProps) {
   return (
     <section className="border-t border-paper/10">

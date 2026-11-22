@@ -51,7 +51,6 @@ function StartButtonWithClerk({
   );
 }
 
-/** The primary pill: opens sign-up for visitors, links to /restore when signed in. */
 export function StartButton({
   label = DEFAULT_LABEL,
   signedInLabel = DEFAULT_SIGNED_IN_LABEL,

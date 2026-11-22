@@ -105,13 +105,13 @@ export async function POST(request: NextRequest) {
                 const emailVerified = primary?.verification?.status === "verified";
                 const name = [first_name, last_name].filter(Boolean).join(" ") || null;
 
-                const result = await provisionUser(
-                    { clerkUserId: id, email, name, imageUrl: image_url, emailVerified },
-                    { supabase, sendWelcomeEmail }
-                );
+                const result = await provisionUser({
+                    profile: { clerkUserId: id, email, name, imageUrl: image_url, emailVerified },
+                    supabase,
+                    sendWelcomeEmail,
+                });
 
                 if (!result.ok) {
-                    // Return 500 so Clerk retries
                     logger.error({ error: result.message, userId: id }, "Failed to create user in database");
                     return NextResponse.json(
                         { success: false, error: "Failed to create user" },
@@ -120,7 +120,6 @@ export async function POST(request: NextRequest) {
                 }
 
                 if (result.outcome === "already_existed") {
-                    // Retried webhook, or GET /api/credits created the row first
                     logger.info({ userId: id, email }, "User already exists in database (duplicate webhook)");
                     break;
                 }
@@ -130,7 +129,6 @@ export async function POST(request: NextRequest) {
                     break;
                 }
 
-                // provisionUser has already sent the welcome email.
                 logger.info({ userId: id, email }, "User created in database");
                 break;
             }
@@ -177,9 +175,6 @@ export async function POST(request: NextRequest) {
                 logger.info({ userId: id }, "User deleted from database (cascade will remove restorations)");
                 break;
             }
-
-            default:
-                logger.warn({ eventType: (event as { type: string }).type }, "Unhandled webhook event type");
         }
 
         return NextResponse.json({ success: true, data: { received: true } });

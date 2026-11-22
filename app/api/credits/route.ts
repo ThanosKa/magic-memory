@@ -30,11 +30,9 @@ export async function GET() {
 
     const supabase = getSupabaseAdminClient();
 
-    const found = await findUser(userId, { supabase });
+    const found = await findUser({ clerkUserId: userId, supabase });
     let user = found.status === "found" ? found.user : null;
 
-    // A failed read says nothing about whether the User exists, so it must
-    // never lead to Provisioning: that is how a paying User's Balance was reset.
     if (found.status === "error") {
       logger.error(
         { userId, error: found.message },
@@ -80,10 +78,11 @@ export async function GET() {
             .filter(Boolean)
             .join(" ") || null;
 
-        const ensured = await provisionUser(
-          { clerkUserId: userId, email, name, emailVerified },
-          { supabase, sendWelcomeEmail }
-        );
+        const ensured = await provisionUser({
+          profile: { clerkUserId: userId, email, name, emailVerified },
+          supabase,
+          sendWelcomeEmail,
+        });
 
         if (!ensured.ok) {
           logger.error(

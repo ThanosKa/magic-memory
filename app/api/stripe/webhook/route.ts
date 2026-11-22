@@ -17,7 +17,7 @@ function getStripeClient() {
   }
 
   return new Stripe(secretKey, {
-    // @ts-expect-error — pinned to clover until we migrate to dahlia
+    // @ts-expect-error stripe-node types accept only the latest API version, see https://github.com/stripe/stripe-node#using-old-api-versions-with-typescript
     apiVersion: "2025-11-17.clover",
   });
 }
@@ -46,7 +46,6 @@ export async function POST(request: NextRequest) {
 
   try {
     const stripe = getStripeClient();
-    // Workers only offer async crypto: the sync constructEvent throws there.
     const event = await stripe.webhooks.constructEventAsync(
       body,
       signature,
@@ -58,8 +57,8 @@ export async function POST(request: NextRequest) {
     );
 
     if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session;
-      const verdict = verifyCheckoutSession(session);
+      const session = event.data.object;
+      const verdict = verifyCheckoutSession({ session });
 
       if (!verdict.ok) {
         logger.error(verdict.logContext, REJECTION_LOG_MESSAGE[verdict.reason]);
@@ -83,7 +82,8 @@ export async function POST(request: NextRequest) {
           userId,
           packageType,
           credits: creditsToAdd,
-          paymentIntent: session.payment_intent as string | null,
+          paymentIntent:
+            typeof session.payment_intent === "string" ? session.payment_intent : null,
         },
         "Processing successful payment",
       );
@@ -122,13 +122,13 @@ export async function POST(request: NextRequest) {
       const customerEmail = session.customer_details?.email;
       if (customerEmail) {
         const customerName = session.customer_details?.name || null;
-        // Awaited: Workers can cancel work still running after the response.
-        await sendPurchaseEmail(
-          customerEmail,
-          customerName,
-          verdict.grant.packageName,
-          creditsToAdd,
-        );
+        // Awaited because Workers can cancel work still running after the response: https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil
+        await sendPurchaseEmail({
+          to: customerEmail,
+          name: customerName,
+          packageName: verdict.grant.packageName,
+          credits: creditsToAdd,
+        });
       }
     }
 

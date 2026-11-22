@@ -52,11 +52,6 @@ function mockSupabaseWithUser(user: { paid_credits: number } | null) {
   };
 }
 
-/**
- * The User read fails, while a Provisioning write would succeed with a fresh
- * 1-credit row. `single` answers like `maybeSingle` so code that still asks
- * for exactly one row reaches the write instead of throwing.
- */
 function mockSupabaseWithReadError(message: string) {
   const readResult = { data: null, error: { message } };
   const writeChain = {
@@ -98,7 +93,7 @@ describe("GET /api/credits", () => {
   });
 
   it("returns 404 when user not found in database and Clerk has no email", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
@@ -117,7 +112,7 @@ describe("GET /api/credits", () => {
   });
 
   it("returns 500 and writes nothing when the User read fails", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
@@ -142,13 +137,13 @@ describe("GET /api/credits", () => {
     expect(table.upsert).not.toHaveBeenCalled();
     expect(table.update).not.toHaveBeenCalled();
     expect(logError).toHaveBeenCalledWith(
-      { userId: "clerk_user_123", error: "fetch failed" },
+      { userId: "user_123", error: "fetch failed" },
       "Failed to read user from database"
     );
   });
 
   it("returns paid credits only — hasFreeDaily is always false", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
@@ -167,7 +162,7 @@ describe("GET /api/credits", () => {
   });
 
   it("returns 0 credits for a user with paid_credits = 0", async () => {
-    vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<
+    vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<
       ReturnType<typeof auth>
     >);
 
@@ -202,13 +197,13 @@ describe("GET /api/credits", () => {
     }
 
     async function load() {
-      vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>);
+      vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>);
       vi.mocked(getSupabaseAdminClient).mockReturnValue(
         mockSupabaseWithUser(null) as unknown as ReturnType<typeof getSupabaseAdminClient>
       );
       vi.mocked(provisionUser).mockResolvedValueOnce({
         ok: true,
-        user: { id: "u1", clerk_user_id: "clerk_user_123", email: "a@b.c", paid_credits: 1 },
+        user: { id: "u1", clerk_user_id: "user_123", email: "a@b.c", paid_credits: 1 },
         outcome: "created",
       });
       await GET();
@@ -218,18 +213,16 @@ describe("GET /api/credits", () => {
       clerkWith("verified");
       await load();
       expect(provisionUser).toHaveBeenCalledWith(
-        expect.objectContaining({ email: "a@b.c", emailVerified: true }),
-        expect.anything()
-      );
+            expect.objectContaining({ profile: expect.objectContaining({ email: "a@b.c", emailVerified: true }) })
+        );
     });
 
     it("marks an unverified primary address as not verified", async () => {
       clerkWith("unverified");
       await load();
       expect(provisionUser).toHaveBeenCalledWith(
-        expect.objectContaining({ email: "a@b.c", emailVerified: false }),
-        expect.anything()
-      );
+            expect.objectContaining({ profile: expect.objectContaining({ email: "a@b.c", emailVerified: false }) })
+        );
     });
   });
 });

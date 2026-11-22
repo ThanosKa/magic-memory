@@ -11,12 +11,6 @@ const SCRIPT = `(function () {
   } catch (e) {}
 })();`;
 
-/**
- * Keeps <meta name="theme-color"> (browser chrome on phones) in step with the
- * page colour. It runs before first paint, right after the next-themes script
- * has set <html data-theme> (so render it inside ThemeProvider), then again on
- * every theme switch. It reads --ink from app/globals.css, so no colour lives here.
- */
 export function ThemeColorScript() {
   return <script dangerouslySetInnerHTML={{ __html: SCRIPT }} />;
 }

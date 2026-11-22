@@ -5,6 +5,47 @@ import tsParser from '@typescript-eslint/parser';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
+const ALLOWED_COMMENTS = [
+  /^\s*prettier-ignore\s*$/,
+  /^\s*eslint-(disable|enable)/,
+  /^\s*@(vitest|jest)-environment\s/,
+  /^\/\s*<reference\s/,
+  /https?:\/\/\S+/,
+  /\b(copyright|license|SPDX-License-Identifier)\b/i,
+];
+
+function isDocOnExport(comment, source) {
+  if (comment.type !== 'Block' || !comment.value.startsWith('*')) return false;
+  return source.getTokenAfter(comment, { includeComments: false })?.value === 'export';
+}
+
+const noCommentsPlugin = {
+  rules: {
+    'no-comments': {
+      meta: {
+        type: 'suggestion',
+        messages: {
+          banned:
+            'Delete this comment and let the code say it. Allowed: a license header, prettier-ignore, /** */ on an export, or a link to the issue, RFC or vendor doc that forces the behaviour.',
+        },
+      },
+      create(context) {
+        const source = context.sourceCode;
+        return {
+          Program() {
+            for (const comment of source.getAllComments()) {
+              if (comment.type === 'Shebang') continue;
+              if (isDocOnExport(comment, source)) continue;
+              if (ALLOWED_COMMENTS.some((pattern) => pattern.test(comment.value))) continue;
+              context.report({ loc: comment.loc, messageId: 'banned' });
+            }
+          },
+        };
+      },
+    },
+  },
+};
+
 export default [
   {
     ignores: [
@@ -34,10 +75,8 @@ export default [
         },
       },
       globals: {
-        // React
         React: 'readonly',
         JSX: 'readonly',
-        // Node.js
         NodeJS: 'readonly',
         console: 'readonly',
         process: 'readonly',
@@ -51,13 +90,11 @@ export default [
         clearTimeout: 'readonly',
         setInterval: 'readonly',
         clearInterval: 'readonly',
-        // Browser
         window: 'readonly',
         document: 'readonly',
         navigator: 'readonly',
         localStorage: 'readonly',
         sessionStorage: 'readonly',
-        // Web APIs
         fetch: 'readonly',
         FormData: 'readonly',
         Headers: 'readonly',
@@ -87,25 +124,22 @@ export default [
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
 
-      // TypeScript specific
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'warn',
+      '@typescript-eslint/no-non-null-assertion': 'error',
 
-      // React specific
-      'react/react-in-jsx-scope': 'off', // Not needed in Next.js
-      'react/prop-types': 'off', // Using TypeScript
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
       'react/jsx-uses-react': 'off',
       'react/jsx-no-target-blank': 'warn',
       'react/no-unescaped-entities': 'warn',
 
-      // General best practices
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'no-unused-vars': 'off', // Handled by TypeScript
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+      'no-unused-vars': 'off',
       'prefer-const': 'warn',
       'no-var': 'error',
     },
@@ -118,7 +152,30 @@ export default [
       },
     },
   },
-  // Server code logs through lib/logger.ts. Client code and scripts/ keep the rule above.
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'FunctionDeclaration[params.length>1]:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy)$/])',
+          message: 'Take one object argument instead of positional params.',
+        },
+        {
+          selector: 'VariableDeclarator:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy)$/]) > ArrowFunctionExpression[params.length>1]',
+          message: 'Take one object argument instead of positional params.',
+        },
+      ],
+    },
+  },
   {
     files: [
       'app/api/**/*.{ts,tsx}',
@@ -133,5 +190,25 @@ export default [
       // The empty options object drops the allow list; a bare severity would inherit it.
       'no-console': ['error', {}],
     },
+  },
+  {
+    files: [
+      '**/*.test.{ts,tsx}',
+      '**/*.spec.{ts,tsx}',
+      'tests/**',
+      '__tests__/**',
+    ],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/consistent-type-assertions': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      'no-restricted-syntax': 'off',
+    },
+  },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    ignores: ['next-env.d.ts'],
+    plugins: { local: noCommentsPlugin },
+    rules: { 'local/no-comments': 'error' },
   },
 ];

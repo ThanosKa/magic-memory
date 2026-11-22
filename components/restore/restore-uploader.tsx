@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, type FileRejection } from "react-dropzone";
 import useSWR, { mutate } from "swr";
 import { Download, ImageIcon, RefreshCw } from "lucide-react";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
@@ -72,7 +72,8 @@ async function compressImage(
   const canvas = document.createElement("canvas");
   canvas.width = targetWidth;
   canvas.height = targetHeight;
-  const ctx = canvas.getContext("2d")!;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas 2D context unavailable");
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, targetWidth, targetHeight);
   ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
@@ -121,7 +122,6 @@ export function RestoreUploader() {
   } = useSWR("/api/credits", fetcher);
   const totalCredits = creditsData?.data?.totalCredits;
   const freeResetTime = creditsData?.data?.freeResetTime;
-  // Three states: a Balance we know, a request that failed, and one still loading.
   const balanceKnown =
     creditsData?.success === true && typeof totalCredits === "number";
   const balanceFailed =
@@ -173,12 +173,12 @@ export function RestoreUploader() {
   }, [clearProgressInterval]);
 
   const onDrop = useCallback(
-    async (acceptedFiles: File[], rejectedFiles: unknown[]) => {
+    async (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       if (rejectedFiles.length > 0) {
-        const rejection = rejectedFiles[0] as { errors: { code: string }[] };
-        if (rejection.errors[0]?.code === "file-too-large") {
+        const rejection = rejectedFiles[0];
+        if (rejection?.errors[0]?.code === "file-too-large") {
           setError({ type: "file_too_large" });
-        } else if (rejection.errors[0]?.code === "file-invalid-type") {
+        } else if (rejection?.errors[0]?.code === "file-invalid-type") {
           setError({
             type: "generic",
             message: "Please upload a valid image file (JPG, PNG, or WebP).",

@@ -34,13 +34,13 @@ export function getSecondsUntilMidnightUTC(): number {
 }
 
 export function getFreeCreditKey(userId: string): string {
-  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0];
   return `free_credit:${userId}:${today}`;
 }
 
 export async function hasUsedFreeCredit(userId: string): Promise<boolean> {
   const redis = getRedisClient();
-  if (!redis) return false; // Fallback to DB check if Redis not available
+  if (!redis) return false;
 
   try {
     const key = getFreeCreditKey(userId);

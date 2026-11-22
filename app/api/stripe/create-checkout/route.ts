@@ -16,7 +16,7 @@ function getStripeClient() {
   }
 
   return new Stripe(secretKey, {
-    // @ts-expect-error — pinned to clover until we migrate to dahlia
+    // @ts-expect-error stripe-node types accept only the latest API version, see https://github.com/stripe/stripe-node#using-old-api-versions-with-typescript
     apiVersion: "2025-11-17.clover",
   });
 }
@@ -33,10 +33,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const parseResult = await parseRequestBody(
+    const parseResult = await parseRequestBody({
       request,
-      createCheckoutRequestSchema
-    );
+      schema: createCheckoutRequestSchema,
+    });
     if (!parseResult.success) {
       logger.warn(
         { userId, error: "Invalid request body" },

@@ -6,17 +6,13 @@ import { useMounted } from "@/components/theme/use-mounted";
 import { cn } from "@/lib/utils";
 
 type ThemeToggleProps = {
-  /** `icon` for the header bar, `row` for the mobile menu sheet. */
   variant?: "icon" | "row";
   className?: string;
 };
 
-/** Switches between the dark (default) and light darkroom themes. */
 export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const mounted = useMounted();
-  // The page is themed before paint by next-themes' script; only this
-  // button waits for hydration to know the stored choice.
   const isLight = mounted && resolvedTheme === "light";
   const label = isLight ? "Switch to dark theme" : "Switch to light theme";
   const Icon = isLight ? Moon : Sun;

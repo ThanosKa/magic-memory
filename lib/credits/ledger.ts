@@ -2,28 +2,29 @@ import { z } from "zod"
 import logger from "@/lib/logger"
 import { supabaseLedgerDb, type LedgerDb } from "./ledger-db"
 
-/**
- * The credit ledger: the one path from application code to the credit SQL
- * functions, in product language. The money rules (row lock, never below
- * zero, one Grant per payment) stay in SQL.
- */
-
-/** What a caught exception reports, as the ledger has always reported it. */
 const INTERNAL_ERROR = "Internal error"
 
-/** The Clerk id of the caller, as `auth()` returns it. */
 export type ClerkUserId = string & { readonly __brand: "ClerkUserId" }
-/** `users.id` (UUID), as Stripe checkout metadata carries it. */
 export type UserId = string & { readonly __brand: "UserId" }
 
-/** Marks a Clerk id from `auth()`. Types only: the string is unchanged. */
-export function asClerkUserId(id: string): ClerkUserId {
-  return id as ClerkUserId
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export function isClerkUserId(id: string): id is ClerkUserId {
+  return id.startsWith("user_") && id.length > "user_".length
 }
 
-/** Marks a `users.id`, such as verified checkout metadata. Types only: the string is unchanged. */
+export function isUserId(id: string): id is UserId {
+  return UUID_PATTERN.test(id)
+}
+
+export function asClerkUserId(id: string): ClerkUserId {
+  if (!isClerkUserId(id)) throw new Error("Clerk user id is not a Clerk user id")
+  return id
+}
+
 export function asUserId(id: string): UserId {
-  return id as UserId
+  if (!isUserId(id)) throw new Error("User id is not a UUID")
+  return id
 }
 
 export type LedgerFailure =
@@ -37,15 +38,10 @@ export type CreditLedger = {
     user: ClerkUserId,
     restoration: RestorationToCharge,
   ): Promise<{ ok: true; restorationId: string; remainingCredits: number } | LedgerFailure>
-  /** `granted: false` means this payment was already granted, so nothing changed. */
   grantPurchase(
     user: UserId,
     purchase: PurchaseToGrant,
   ): Promise<{ ok: true; granted: boolean } | LedgerFailure>
-  /**
-   * Undoes a Charge after a technical failure later in the same request. It is
-   * never a Refund: all sales are final.
-   */
   reverseRestoration(restorationId: string): Promise<boolean>
 }
 
@@ -70,7 +66,6 @@ const deductRowSchema = z.object({
   error_message: z.string().nullable(),
 })
 
-/** The refusals `deduct_credit_and_record_restoration` answers with, in its own words. */
 const CHARGE_REFUSALS: Record<string, LedgerFailure> = {
   "No paid credits available": { ok: false, reason: "no_credits" },
   "Free credit already used today": { ok: false, reason: "no_credits" },
@@ -87,15 +82,10 @@ function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : String(error)
 }
 
-/** `RETURNS TABLE` functions answer with an array of rows. */
 function firstRow(data: unknown): unknown {
   return Array.isArray(data) ? data[0] : data
 }
 
-/**
- * Builds the ledger. `openDb` runs once per operation, before its try/catch,
- * as `getSupabaseAdminClient()` does in the old functions. Default: Supabase.
- */
 export function createCreditLedger(openDb: () => LedgerDb = supabaseLedgerDb): CreditLedger {
   return {
     async balance(user) {
@@ -161,8 +151,6 @@ export function createCreditLedger(openDb: () => LedgerDb = supabaseLedgerDb): C
     async grantPurchase(user, { stripePaymentId, credits, amountPaid, packageType }) {
       const db = openDb()
 
-      // No try/catch: an exception reaches the Stripe webhook's outer handler,
-      // which answers 400, as it does today.
       const { data, error } = await db.call("grant_purchase_credits", {
         p_user_id: user,
         p_stripe_payment_id: stripePaymentId,

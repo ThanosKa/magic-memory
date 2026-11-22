@@ -29,8 +29,6 @@ export async function POST(request: NextRequest) {
 
     const payload = parsed.data;
 
-    // Every visit posts several metrics and Cloudflare Web Analytics already
-    // measures Core Web Vitals, so only poor ones earn a log line.
     if (payload.rating !== "poor") {
       return NextResponse.json({ success: true }, { status: 200 });
     }

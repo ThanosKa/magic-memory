@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { PlanCell, PlanGrid } from "@/components/pricing/plan-grid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
+import { CREDIT_PACKAGES, isPackageType, type PackageType } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 type PricingCardsProps = {
@@ -80,10 +80,9 @@ export function PricingCards({ isSignedIn }: PricingCardsProps) {
     }
   };
 
-  const packages = Object.entries(CREDIT_PACKAGES) as [
-    PackageType,
-    (typeof CREDIT_PACKAGES)[PackageType]
-  ][];
+  const packages = Object.keys(CREDIT_PACKAGES)
+    .filter(isPackageType)
+    .map((key) => [key, CREDIT_PACKAGES[key]] as const);
 
   return (
     <div>

@@ -4,7 +4,6 @@ import { Toaster } from "sonner";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/components/theme/use-mounted";
 
-/** Sonner toasts in the active theme; colours come from the palette tokens. */
 export function ThemedToaster() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();

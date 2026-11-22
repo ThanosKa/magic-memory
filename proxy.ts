@@ -1,14 +1,10 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { type NextFetchEvent, type NextRequest, NextResponse } from "next/server"
 import logger from "@/lib/logger"
 
 const PROTECTED_ROUTES = ["/restore", "/restore/(.*)", "/profile", "/profile/(.*)"]
 const PROTECTED_PATH_PATTERN = /^\/(restore|profile)(\/|$)/
 
-/**
- * Without Clerk the proxy cannot check a session, so protected pages fail
- * closed: they redirect home and log an error instead of opening silently.
- */
-function failClosed(req: NextRequest, reason: string) {
+function failClosed({ req, reason }: { req: NextRequest; reason: string }) {
   if (!PROTECTED_PATH_PATTERN.test(req.nextUrl.pathname)) {
     return NextResponse.next()
   }
@@ -17,9 +13,9 @@ function failClosed(req: NextRequest, reason: string) {
   return NextResponse.redirect(new URL("/", req.url))
 }
 
-export async function proxy(req: NextRequest) {
+export async function proxy(req: NextRequest, event: NextFetchEvent) {
   if (!process.env.CLERK_SECRET_KEY || !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
-    return failClosed(req, "Clerk keys are not configured")
+    return failClosed({ req, reason: "Clerk keys are not configured" })
   }
 
   try {
@@ -30,9 +26,9 @@ export async function proxy(req: NextRequest) {
       if (isProtected(request)) {
         await auth.protect()
       }
-    })(req, {} as never)
+    })(req, event)
   } catch (error) {
-    return failClosed(req, error instanceof Error ? error.message : String(error))
+    return failClosed({ req, reason: error instanceof Error ? error.message : String(error) })
   }
 }
 

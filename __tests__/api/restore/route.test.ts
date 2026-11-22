@@ -86,7 +86,7 @@ describe("POST /api/restore", () => {
     })
 
     it("returns 400 for missing file", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         const request = createMockRequest(null)
         const response = await POST(request)
@@ -98,7 +98,7 @@ describe("POST /api/restore", () => {
     })
 
     it("returns 400 for invalid file type", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         const invalidFile = createMockFile("test.gif", "image/gif")
         const request = createMockRequest(invalidFile)
@@ -111,7 +111,7 @@ describe("POST /api/restore", () => {
     })
 
     it("returns 400 for oversized file", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         const largeFile = createMockFile("large.jpg", "image/jpeg", 15 * 1024 * 1024)
         const request = createMockRequest(largeFile)
@@ -124,7 +124,7 @@ describe("POST /api/restore", () => {
     })
 
     it("returns 403 when no credits available", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         ledger.balance.mockResolvedValue({ ok: true, paidCredits: 0 })
 
@@ -139,7 +139,7 @@ describe("POST /api/restore", () => {
     })
 
     it("returns 403 even when SQL function reports free daily credit available", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         ledger.balance.mockResolvedValue({ ok: true, paidCredits: 0 })
 
@@ -155,7 +155,7 @@ describe("POST /api/restore", () => {
     })
 
     it("uses paid credit when no free available", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         ledger.balance.mockResolvedValue({ ok: true, paidCredits: 50 })
 
@@ -184,7 +184,7 @@ describe("POST /api/restore", () => {
     })
 
     it("returns restored image URL on success", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         ledger.balance.mockResolvedValue({ ok: true, paidCredits: 5 })
 
@@ -213,7 +213,7 @@ describe("POST /api/restore", () => {
     })
 
     it("returns 500 and never charges when Replicate fails", async () => {
-        vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+        vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
 
         ledger.balance.mockResolvedValue({ ok: true, paidCredits: 5 })
 
@@ -244,7 +244,7 @@ describe("POST /api/restore", () => {
         }
 
         beforeEach(() => {
-            vi.mocked(auth).mockResolvedValue({ userId: "clerk_user_123" } as Awaited<ReturnType<typeof auth>>)
+            vi.mocked(auth).mockResolvedValue({ userId: "user_123" } as Awaited<ReturnType<typeof auth>>)
             ledger.balance.mockReset()
             ledger.chargeRestoration.mockReset()
             ledger.reverseRestoration.mockReset()
@@ -270,7 +270,7 @@ describe("POST /api/restore", () => {
             expect(mockPredictionsCreate).not.toHaveBeenCalled()
             expect(ledger.chargeRestoration).not.toHaveBeenCalled()
             expect(logger.warn).toHaveBeenCalledWith(
-                { userId: "clerk_user_123", creditCheck: failure },
+                { userId: "user_123", creditCheck: failure },
                 "No paid credits available",
             )
         })
@@ -283,12 +283,11 @@ describe("POST /api/restore", () => {
 
             expect(response.status).toBe(503)
             expect(data).toEqual({ success: false, error: "We couldn't check your credits. Please try again." })
-            // The uploader sends any error containing "No credits" to the out-of-credits screen.
             expect(data.error).not.toContain("No credits")
             expect(mockPredictionsCreate).not.toHaveBeenCalled()
             expect(ledger.chargeRestoration).not.toHaveBeenCalled()
             expect(logger.error).toHaveBeenCalledWith(
-                { userId: "clerk_user_123", error: "connection refused" },
+                { userId: "user_123", error: "connection refused" },
                 "Failed to check credits",
             )
         })
@@ -324,9 +323,9 @@ describe("POST /api/restore", () => {
                     remainingPaidCredits: 2,
                 },
             })
-            expect(ledger.balance).toHaveBeenCalledWith("clerk_user_123")
+            expect(ledger.balance).toHaveBeenCalledWith("user_123")
             expect(ledger.chargeRestoration).toHaveBeenCalledTimes(1)
-            expect(ledger.chargeRestoration).toHaveBeenCalledWith("clerk_user_123", {
+            expect(ledger.chargeRestoration).toHaveBeenCalledWith("user_123", {
                 originalUrl: "ephemeral:grandma.jpg",
                 restoredUrl: "https://replicate.delivery/out.png",
             })
@@ -348,7 +347,7 @@ describe("POST /api/restore", () => {
             expect(response.status).toBe(500)
             expect(data).toEqual({ success: false, error: "Failed to record restoration" })
             expect(logger.error).toHaveBeenCalledWith(
-                { userId: "clerk_user_123", error: logged },
+                { userId: "user_123", error: logged },
                 "Failed to deduct credit",
             )
             expect(ledger.reverseRestoration).not.toHaveBeenCalled()

@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-/** Raised dark surface with a hairline border and the large radius used on the home page. */
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div

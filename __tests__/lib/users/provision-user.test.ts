@@ -31,7 +31,6 @@ function fakeClient(params: { upsert: unknown; update?: unknown; read?: unknown 
     select: vi.fn(() => readChain),
   };
   const supabase = { from: vi.fn(() => table) };
-  // Test double: only the used query-builder surface is implemented.
   return { supabase: supabase as unknown as SupabaseClient, table, updateChain, readChain };
 }
 
@@ -44,7 +43,7 @@ describe("provisionUser", () => {
 
   it("returns created user", async () => {
     const { supabase } = fakeClient({ upsert: { data: row, error: null } });
-    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase, sendWelcomeEmail });
+    const r = await provisionUser({ profile: { clerkUserId: "new", email: "a@b.c", name: null }, supabase, sendWelcomeEmail });
     expect(r).toEqual({ ok: true, user: row, outcome: "created" });
   });
 
@@ -56,7 +55,7 @@ describe("provisionUser", () => {
       },
       update: { data: row, error: null },
     });
-    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: "N", emailVerified: true }, { supabase, sendWelcomeEmail });
+    const r = await provisionUser({ profile: { clerkUserId: "new", email: "a@b.c", name: "N", emailVerified: true }, supabase, sendWelcomeEmail });
     expect(table.update).toHaveBeenCalledWith({ clerk_user_id: "new", name: "N" });
     expect(updateChain.eq).toHaveBeenCalledWith("email", "a@b.c");
     expect(r).toEqual({ ok: true, user: row, outcome: "relinked" });
@@ -70,10 +69,7 @@ describe("provisionUser", () => {
       },
       update: { data: row, error: null },
     });
-    await provisionUser(
-      { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png", emailVerified: true },
-      { supabase, sendWelcomeEmail }
-    );
+    await provisionUser({ profile: { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png", emailVerified: true }, supabase, sendWelcomeEmail });
     expect(table.update).toHaveBeenCalledWith({ clerk_user_id: "new", profile_image: "https://x.y/i.png" });
   });
 
@@ -89,7 +85,7 @@ describe("provisionUser", () => {
           error: { code: "23505", message: 'duplicate key value violates unique constraint "users_email_key"' },
         },
       });
-      const r = await provisionUser({ clerkUserId: "new", name: "N", ...extra }, { supabase, sendWelcomeEmail });
+      const r = await provisionUser({ profile: { clerkUserId: "new", name: "N", ...extra }, supabase, sendWelcomeEmail });
       expect(r.ok).toBe(false);
       expect(table.update).not.toHaveBeenCalled();
     });
@@ -101,7 +97,7 @@ describe("provisionUser", () => {
       upsert: { data: null, error: null },
       read: { data: existing, error: null },
     });
-    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase, sendWelcomeEmail });
+    const r = await provisionUser({ profile: { clerkUserId: "new", email: "a@b.c", name: null }, supabase, sendWelcomeEmail });
     expect(r).toEqual({ ok: true, user: existing, outcome: "already_existed" });
     expect(table.upsert).toHaveBeenCalledWith(
       { clerk_user_id: "new", email: "a@b.c", name: null, paid_credits: 1 },
@@ -113,18 +109,15 @@ describe("provisionUser", () => {
 
   it("leaves profile_image out of the insert unless an image URL is given", async () => {
     const { supabase, table } = fakeClient({ upsert: { data: row, error: null } });
-    await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase, sendWelcomeEmail });
+    await provisionUser({ profile: { clerkUserId: "new", email: "a@b.c", name: null }, supabase, sendWelcomeEmail });
     expect(table.upsert.mock.calls[0][0]).not.toHaveProperty("profile_image");
-    await provisionUser(
-      { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png" },
-      { supabase, sendWelcomeEmail }
-    );
+    await provisionUser({ profile: { clerkUserId: "new", email: "a@b.c", name: null, imageUrl: "https://x.y/i.png" }, supabase, sendWelcomeEmail });
     expect(table.upsert.mock.calls[1][0]).toHaveProperty("profile_image", "https://x.y/i.png");
   });
 
   it("fails on other errors", async () => {
     const { supabase } = fakeClient({ upsert: { data: null, error: { code: "XX", message: "boom" } } });
-    const r = await provisionUser({ clerkUserId: "new", email: "a@b.c", name: null }, { supabase, sendWelcomeEmail });
+    const r = await provisionUser({ profile: { clerkUserId: "new", email: "a@b.c", name: null }, supabase, sendWelcomeEmail });
     expect(r).toEqual({ ok: false, message: "boom" });
   });
 
@@ -133,14 +126,14 @@ describe("provisionUser", () => {
 
     it("sends one email with the User's email and name on created", async () => {
       const { supabase } = fakeClient({ upsert: { data: row, error: null } });
-      await provisionUser(profile, { supabase, sendWelcomeEmail });
+      await provisionUser({ profile, supabase, sendWelcomeEmail });
       expect(sendWelcomeEmail).toHaveBeenCalledTimes(1);
-      expect(sendWelcomeEmail).toHaveBeenCalledWith("a@b.c", "N");
+      expect(sendWelcomeEmail).toHaveBeenCalledWith({ to: "a@b.c", name: "N" });
     });
 
     it("sends none when the row already existed", async () => {
       const { supabase } = fakeClient({ upsert: { data: null, error: null }, read: { data: row, error: null } });
-      await provisionUser(profile, { supabase, sendWelcomeEmail });
+      await provisionUser({ profile, supabase, sendWelcomeEmail });
       expect(sendWelcomeEmail).not.toHaveBeenCalled();
     });
 
@@ -152,20 +145,19 @@ describe("provisionUser", () => {
         },
         update: { data: row, error: null },
       });
-      const r = await provisionUser({ ...profile, emailVerified: true }, { supabase, sendWelcomeEmail });
+      const r = await provisionUser({ profile: { ...profile, emailVerified: true }, supabase, sendWelcomeEmail });
       expect(r).toMatchObject({ ok: true, outcome: "relinked" });
       expect(sendWelcomeEmail).not.toHaveBeenCalled();
     });
 
     it("sends none on a database error", async () => {
       const { supabase } = fakeClient({ upsert: { data: null, error: { code: "XX", message: "boom" } } });
-      const r = await provisionUser(profile, { supabase, sendWelcomeEmail });
+      const r = await provisionUser({ profile, supabase, sendWelcomeEmail });
       expect(r.ok).toBe(false);
       expect(sendWelcomeEmail).not.toHaveBeenCalled();
     });
 
     it("sends exactly one in total for two concurrent calls", async () => {
-      // Insert-or-nothing: the first insert wins, the second hits the conflict.
       const upsertResults = [{ data: row, error: null }, { data: null, error: null }];
       const upsertChain = () => {
         const result = upsertResults.shift();
@@ -177,8 +169,8 @@ describe("provisionUser", () => {
       const supabase = { from: () => table } as unknown as SupabaseClient;
 
       await Promise.all([
-        provisionUser(profile, { supabase, sendWelcomeEmail }),
-        provisionUser(profile, { supabase, sendWelcomeEmail }),
+        provisionUser({ profile, supabase, sendWelcomeEmail }),
+        provisionUser({ profile, supabase, sendWelcomeEmail }),
       ]);
       expect(sendWelcomeEmail).toHaveBeenCalledTimes(1);
     });
@@ -190,7 +182,7 @@ describe("provisionUser", () => {
         finished = true;
       });
       const { supabase } = fakeClient({ upsert: { data: row, error: null } });
-      await provisionUser(profile, { supabase, sendWelcomeEmail });
+      await provisionUser({ profile, supabase, sendWelcomeEmail });
       expect(finished).toBe(true);
     });
 
@@ -199,7 +191,7 @@ describe("provisionUser", () => {
         throw new Error("resend down");
       });
       const { supabase } = fakeClient({ upsert: { data: row, error: null } });
-      const r = await provisionUser(profile, { supabase, sendWelcomeEmail });
+      const r = await provisionUser({ profile, supabase, sendWelcomeEmail });
       expect(r).toEqual({ ok: true, user: row, outcome: "created" });
     });
   });

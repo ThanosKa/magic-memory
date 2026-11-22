@@ -99,7 +99,7 @@ describe("POST /api/stripe/webhook", () => {
           object: {
             id: "cs_test_123",
             metadata: {
-              userId: "user-uuid",
+              userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
               packageType: "starter",
               credits: "20",
               priceId: "price_starter",
@@ -127,7 +127,6 @@ describe("POST /api/stripe/webhook", () => {
     beforeEach(() => {
       vi.mocked(sendPurchaseEmail).mockClear();
       setStarterPriceId("price_starter");
-      // pino's level methods are not spies after automock, so spy on warn here.
       vi.spyOn(logger, "warn").mockImplementation(() => {});
     });
 
@@ -144,7 +143,7 @@ describe("POST /api/stripe/webhook", () => {
       expect(response.status).toBe(200);
       expect(data.data?.received).toBe(true);
       expect(rpc).toHaveBeenCalledWith("grant_purchase_credits", {
-        p_user_id: "user-uuid",
+        p_user_id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
         p_stripe_payment_id: "pi_new_123",
         p_credits: 20,
         p_amount_paid: 999,
@@ -158,7 +157,7 @@ describe("POST /api/stripe/webhook", () => {
 
       const response = await deliver({
         metadata: {
-          userId: "user-uuid",
+          userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
           packageType: "starter",
           credits: "25",
           priceId: "price_starter",
@@ -173,7 +172,7 @@ describe("POST /api/stripe/webhook", () => {
       expect(logger.warn).toHaveBeenCalledTimes(1);
       expect(logger.warn).toHaveBeenCalledWith(
         {
-          userId: "user-uuid",
+          userId: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
           packageType: "starter",
           stripePaymentId: "pi_new_123",
           metadataCredits: 25,
@@ -216,7 +215,6 @@ describe("POST /api/stripe/webhook", () => {
       let logError: ReturnType<typeof vi.spyOn>;
 
       beforeEach(() => {
-        // The automocked pino logger has no spies, so watch error() here.
         logError = vi.spyOn(logger, "error").mockImplementation(() => undefined);
         rpc = useGrantResult({ data: true, error: null });
       });

@@ -8,7 +8,6 @@ import { BlogPostLayout } from "@/components/blog/blog-post-layout";
 
 const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 
-// Content components
 import { HowToRestoreOldPhotosContent } from "@/lib/blog/posts/how-to-restore-old-photos";
 import { BestAIPhotoRestorationContent } from "@/lib/blog/posts/best-ai-photo-restoration";
 import { GFPGANExplainedContent } from "@/lib/blog/posts/gfpgan-explained";

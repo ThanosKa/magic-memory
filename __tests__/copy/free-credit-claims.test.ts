@@ -2,11 +2,6 @@ import { describe, it, expect } from "vitest"
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import path from "node:path"
 
-/**
- * The daily free credit was removed on purpose. Anything a visitor can read
- * must not promise it back: a user who trusts the claim hits a 403.
- */
-
 const ROOT = path.resolve(__dirname, "../..")
 const SCANNED_DIRS = ["app", "components", "lib", "public"]
 const SCANNED_EXTENSIONS = [".ts", ".tsx", ".md", ".txt"]

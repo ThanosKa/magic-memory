@@ -3,11 +3,6 @@ import { renderToStaticMarkup } from "react-dom/server"
 
 import { ThemeColorScript } from "@/components/theme/theme-color-script"
 
-/**
- * The browser chrome colour (<meta name="theme-color">) must match the page
- * before first paint, including for visitors who chose the light theme.
- */
-
 function runScript(): void {
   const markup = renderToStaticMarkup(<ThemeColorScript />)
   const source = markup.replace(/^<script[^>]*>/, "").replace(/<\/script>$/, "")
@@ -18,7 +13,6 @@ function themeColor(): string | null {
   return document.querySelector('meta[name="theme-color"]')?.getAttribute("content") ?? null
 }
 
-/** Stand-in for app/globals.css: --ink per theme, keyed on <html data-theme>. */
 function applyTheme(theme: "dark" | "light"): void {
   const root = document.documentElement
   root.setAttribute("data-theme", theme)

@@ -16,7 +16,7 @@ describe("validation utilities", () => {
                 json: () => Promise.reject(new Error("Invalid JSON")),
             } as unknown as Request
 
-            const result = await parseRequestBody(mockRequest, testSchema)
+            const result = await parseRequestBody({ request: mockRequest, schema: testSchema })
 
             expect(result.success).toBe(false)
             if (!result.success) {
@@ -30,7 +30,7 @@ describe("validation utilities", () => {
                 json: () => Promise.resolve({ name: 123, age: -5 }),
             } as unknown as Request
 
-            const result = await parseRequestBody(mockRequest, testSchema)
+            const result = await parseRequestBody({ request: mockRequest, schema: testSchema })
 
             expect(result.success).toBe(false)
             if (!result.success) {
@@ -45,7 +45,7 @@ describe("validation utilities", () => {
                 json: () => Promise.resolve({ name: "John", age: 25 }),
             } as unknown as Request
 
-            const result = await parseRequestBody(mockRequest, testSchema)
+            const result = await parseRequestBody({ request: mockRequest, schema: testSchema })
 
             expect(result.success).toBe(true)
             if (result.success) {
@@ -59,7 +59,7 @@ describe("validation utilities", () => {
                 json: () => Promise.resolve({ name: 123 }),
             } as unknown as Request
 
-            const result = await parseRequestBody(mockRequest, testSchema)
+            const result = await parseRequestBody({ request: mockRequest, schema: testSchema })
 
             expect(result.success).toBe(false)
             if (!result.success) {

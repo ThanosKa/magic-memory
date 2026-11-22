@@ -48,7 +48,7 @@ export const purchaseSchema = z.object({
   user_id: z.string().uuid(),
   stripe_payment_id: z.string(),
   credits_purchased: z.number().int().positive(),
-  amount_paid: z.number().int().nonnegative(), // in cents; 0 on a 100% discount
+  amount_paid: z.number().int().nonnegative(),
   package_type: z.enum(["starter", "growth", "premium"]),
   created_at: z.string().datetime(),
 });

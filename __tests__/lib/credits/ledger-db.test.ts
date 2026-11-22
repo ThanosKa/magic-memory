@@ -31,20 +31,20 @@ describe("supabaseLedgerDb", () => {
   })
 
   it("finds users.id by clerk_user_id", async () => {
-    const client = fakeAdminClient({ data: { id: "user-uuid" }, error: null })
+    const client = fakeAdminClient({ data: { id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" }, error: null })
 
-    await expect(supabaseLedgerDb().findUserId("clerk_user_123")).resolves.toEqual({
-      id: "user-uuid",
+    await expect(supabaseLedgerDb().findUserId("user_123")).resolves.toEqual({
+      id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
     })
     expect(client.from).toHaveBeenCalledWith("users")
     expect(client.select).toHaveBeenCalledWith("id")
-    expect(client.eq).toHaveBeenCalledWith("clerk_user_id", "clerk_user_123")
+    expect(client.eq).toHaveBeenCalledWith("clerk_user_id", "user_123")
   })
 
   it("answers missing when no row has the Clerk id", async () => {
     fakeAdminClient({ data: null, error: null })
 
-    await expect(supabaseLedgerDb().findUserId("clerk_user_123")).resolves.toEqual({
+    await expect(supabaseLedgerDb().findUserId("user_123")).resolves.toEqual({
       missing: true,
     })
   })
@@ -52,7 +52,7 @@ describe("supabaseLedgerDb", () => {
   it("answers the error message when the lookup fails", async () => {
     fakeAdminClient({ data: null, error: { message: "connection reset" } })
 
-    await expect(supabaseLedgerDb().findUserId("clerk_user_123")).resolves.toEqual({
+    await expect(supabaseLedgerDb().findUserId("user_123")).resolves.toEqual({
       error: "connection reset",
     })
   })
@@ -82,7 +82,7 @@ describe("createCreditLedger() on the Supabase adapter", () => {
   it("grants through the admin client's rpc with today's arguments", async () => {
     const client = fakeAdminClient({ data: null, error: null }, { data: true, error: null })
 
-    const result = await createCreditLedger().grantPurchase(asUserId("user-uuid"), {
+    const result = await createCreditLedger().grantPurchase(asUserId("3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c"), {
       stripePaymentId: "pi_123",
       credits: 20,
       amountPaid: 999,
@@ -91,7 +91,7 @@ describe("createCreditLedger() on the Supabase adapter", () => {
 
     expect(result).toEqual({ ok: true, granted: true })
     expect(client.rpc).toHaveBeenCalledWith("grant_purchase_credits", {
-      p_user_id: "user-uuid",
+      p_user_id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c",
       p_stripe_payment_id: "pi_123",
       p_credits: 20,
       p_amount_paid: 999,
@@ -101,19 +101,19 @@ describe("createCreditLedger() on the Supabase adapter", () => {
 
   it("obtains one admin client per operation, as the old functions do", async () => {
     const client = fakeAdminClient(
-      { data: { id: "user-uuid" }, error: null },
+      { data: { id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" }, error: null },
       { data: [{ paid_credits: 3 }], error: null },
     )
     const ledger = createCreditLedger()
 
-    await expect(ledger.balance(asClerkUserId("clerk_user_123"))).resolves.toEqual({
+    await expect(ledger.balance(asClerkUserId("user_123"))).resolves.toEqual({
       ok: true,
       paidCredits: 3,
     })
     expect(getSupabaseAdminClient).toHaveBeenCalledTimes(1)
-    expect(client.rpc).toHaveBeenCalledWith("check_user_credits", { p_user_id: "user-uuid" })
+    expect(client.rpc).toHaveBeenCalledWith("check_user_credits", { p_user_id: "3f2b8c1e-5a4d-4e7a-9b6c-1d2e3f4a5b6c" })
 
-    await ledger.balance(asClerkUserId("clerk_user_123"))
+    await ledger.balance(asClerkUserId("user_123"))
     expect(getSupabaseAdminClient).toHaveBeenCalledTimes(2)
   })
 })

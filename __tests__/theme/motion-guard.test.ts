@@ -2,18 +2,6 @@ import { describe, it, expect } from "vitest"
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import path from "node:path"
 
-/**
- * Motion guard: people who ask for reduced motion get no entrance animations.
- *
- * - Every CSS animation declared in the theme file is switched off inside a
- *   `prefers-reduced-motion: reduce` block.
- * - Every component that uses Framer Motion opts into the user's setting
- *   (`useReducedMotion()` or `<MotionConfig reducedMotion="user">`).
- *
- * Spinners and skeleton pulses use Tailwind utilities and stay on: they show
- * that work is happening, which reduced motion should not hide.
- */
-
 const ROOT = path.resolve(__dirname, "../..")
 const THEME_FILE = "app/globals.css"
 const SCANNED_DIRS = ["app", "components"]
@@ -21,7 +9,6 @@ const REDUCED_MOTION = /prefers-reduced-motion:\s*reduce/
 
 type CssRule = { selector: string; body: string; reduced: boolean }
 
-/** Flattens nested CSS into style rules, noting which sit in a reduced-motion block. */
 function parseCss(css: string): CssRule[] {
   const source = css.replace(/\/\*[\s\S]*?\*\//g, "")
   const rules: CssRule[] = []

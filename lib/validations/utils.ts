@@ -2,10 +2,13 @@ import { NextResponse } from "next/server";
 import type { z, ZodError } from "zod";
 import logger from "@/lib/logger";
 
-export async function parseRequestBody<T extends z.ZodType>(
-  request: Request,
-  schema: T
-): Promise<
+export async function parseRequestBody<T extends z.ZodType>({
+  request,
+  schema,
+}: {
+  request: Request;
+  schema: T;
+}): Promise<
   { success: true; data: z.infer<T> } | { success: false; error: NextResponse }
 > {
   try {
@@ -43,14 +46,17 @@ export async function parseRequestBody<T extends z.ZodType>(
   }
 }
 
-export function createApiResponse<T>(data: T, status = 200): NextResponse {
+export function createApiResponse<T>({ data, status = 200 }: { data: T; status?: number }): NextResponse {
   return NextResponse.json({ success: true, data }, { status });
 }
 
-export function createErrorResponse(
-  message: string,
-  status = 500
-): NextResponse {
+export function createErrorResponse({
+  message,
+  status = 500,
+}: {
+  message: string;
+  status?: number;
+}): NextResponse {
   return NextResponse.json({ success: false, error: message }, { status });
 }
 

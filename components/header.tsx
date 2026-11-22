@@ -14,14 +14,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CreditsSkeleton } from "@/components/ui/loading-states";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
-
 const headerClass =
   "sticky top-0 z-50 w-full border-b border-paper/10 bg-ink/85 backdrop-blur supports-[backdrop-filter]:bg-ink/70";
 
 const creditsPillClass =
   "focus-ring font-mono items-center gap-2 rounded-full border border-paper/15 px-3.5 py-2 text-[12px] uppercase tracking-[0.12em] text-paper transition-colors hover:border-paper/40 hover:bg-paper/[0.06]";
 
-function navLinkClass(isActive: boolean, variant: "desktop" | "mobile") {
+function navLinkClass({ isActive, variant }: { isActive: boolean; variant: "desktop" | "mobile" }) {
   return variant === "desktop"
     ? cn(
         "focus-ring mm-underline text-sm transition-colors hover:text-paper",
@@ -69,9 +68,9 @@ function HeaderWithClerk() {
     { href: "/blog", label: "Blog" },
   ];
 
-  const renderNavLink = (link: NavLink, variant: "desktop" | "mobile") => {
+  const renderNavLink = ({ link, variant }: { link: NavLink; variant: "desktop" | "mobile" }) => {
     const isActive = pathname === link.href;
-    const classes = navLinkClass(isActive, variant);
+    const classes = navLinkClass({ isActive, variant });
     const handleClick =
       variant === "mobile" ? () => setMobileOpen(false) : undefined;
 
@@ -108,7 +107,7 @@ function HeaderWithClerk() {
           <Brand />
 
           <nav className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => renderNavLink(link, "desktop"))}
+            {navLinks.map((link) => renderNavLink({ link, variant: "desktop" }))}
           </nav>
 
           <div className="flex items-center gap-3 sm:gap-4">
@@ -129,8 +128,6 @@ function HeaderWithClerk() {
                 </Link>
               ))}
 
-            {/* Rendered while Clerk is still loading too, so the header is never
-                empty; Clerk queues a click until it has loaded. */}
             {!isSignedIn && (
               <div className="hidden items-center gap-2 md:flex">
                 <SignInButton mode="modal">
@@ -169,7 +166,7 @@ function HeaderWithClerk() {
                       </Link>
                     ))}
                   <nav className="flex flex-col">
-                    {navLinks.map((link) => renderNavLink(link, "mobile"))}
+                    {navLinks.map((link) => renderNavLink({ link, variant: "mobile" }))}
                   </nav>
                   <ThemeToggle variant="row" />
                   {!isSignedIn && (
@@ -216,7 +213,7 @@ function HeaderWithoutClerk() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={navLinkClass(pathname === link.href, "desktop")}
+                className={navLinkClass({ isActive: pathname === link.href, variant: "desktop" })}
               >
                 {link.label}
               </Link>
@@ -258,7 +255,7 @@ function HeaderWithoutClerk() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={navLinkClass(pathname === link.href, "mobile")}
+                        className={navLinkClass({ isActive: pathname === link.href, variant: "mobile" })}
                       >
                         {link.label}
                       </Link>

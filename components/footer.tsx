@@ -2,8 +2,6 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
 import { PageContainer } from "@/components/layout/page-container";
 
-// The underline sits on an inline span so it follows wrapped text line by line
-// instead of stretching across the whole column.
 function FooterLink({ href, children, ...rest }: React.ComponentProps<"a">) {
   const external = typeof href === "string" && /^(https?:|mailto:)/.test(href);
   const className = "focus-ring group text-sm text-paper/70 transition-colors hover:text-paper";
