@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
+import { getStripeClient } from "@/lib/billing/stripe-client";
 import { asUserId, createCreditLedger } from "@/lib/credits/ledger";
 import {
   CREDITS_MISMATCH_LOG_MESSAGE,
@@ -8,19 +8,6 @@ import {
 } from "@/lib/billing/verify-checkout-session";
 import { sendPurchaseEmail } from "@/lib/email";
 import logger from "@/lib/logger";
-
-function getStripeClient() {
-  const secretKey = process.env.STRIPE_SECRET_KEY;
-
-  if (!secretKey) {
-    throw new Error("STRIPE_SECRET_KEY is not configured");
-  }
-
-  return new Stripe(secretKey, {
-    // @ts-expect-error — pinned to clover until we migrate to dahlia
-    apiVersion: "2025-11-17.clover",
-  });
-}
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -46,7 +33,6 @@ export async function POST(request: NextRequest) {
 
   try {
     const stripe = getStripeClient();
-    // Workers only offer async crypto: the sync constructEvent throws there.
     const event = await stripe.webhooks.constructEventAsync(
       body,
       signature,
@@ -123,7 +109,7 @@ export async function POST(request: NextRequest) {
       const customerEmail = session.customer_details?.email;
       if (customerEmail) {
         const customerName = session.customer_details?.name || null;
-        // Awaited: Workers can cancel work still running after the response.
+        // Awaited because Workers can cancel work still running after the response: https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil
         await sendPurchaseEmail({
           to: customerEmail,
           name: customerName,

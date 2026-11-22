@@ -15,7 +15,6 @@ interface AuditResult {
   warnings: string[];
 }
 
-/** Text of the first `pageMetadata(...)` call, or null when the page has none. */
 function pageMetadataCall(content: string): string | null {
   const start = content.indexOf("pageMetadata(");
   if (start === -1) return null;
@@ -144,7 +143,7 @@ const seoChecks: SEOCheck[] = [
     name: "Uses Next.js Image component",
     description: "Should use next/image for optimized images",
     check: (content) => {
-      if (!content.includes("<img")) return true; // No images
+      if (!content.includes("<img")) return true;
       return (
         content.includes('from "next/image"') ||
         content.includes("from 'next/image'")

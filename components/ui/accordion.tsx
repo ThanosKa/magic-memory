@@ -6,11 +6,6 @@ import { ChevronDownIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-/**
- * Home FAQ style: hairline dividers, large sans question, muted answer.
- * Text takes the section's colour, so it works on ink and cream sections.
- * Give the root `border-t border-border` for a top rule above the first item.
- */
 function Accordion({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
@@ -52,13 +47,6 @@ function AccordionTrigger({
   )
 }
 
-/**
- * Answers stay in the HTML while closed (FAQPage structured data lists them),
- * so the item is force-mounted and collapsed with CSS: grid rows 0fr → 1fr,
- * and `invisible` once closed so hidden answers leave the tab order and the
- * accessibility tree. The transition sits on the inner grid because Radix
- * zeroes transitions on the content node while it measures.
- */
 function AccordionContent({
   className,
   children,

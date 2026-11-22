@@ -2,14 +2,6 @@ import { describe, it, expect } from "vitest"
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import path from "node:path"
 
-/**
- * Theme guard: keeps the "darkroom" theme (dark default + light variant) from drifting.
- *
- * Colours live in one place (THEME_FILE). Components and pages must use token
- * classes (bg-ink, text-paper/60, border-border, ring-ember, ...), never raw hex
- * colours or the retired palette.
- */
-
 const ROOT = path.resolve(__dirname, "../..")
 const THEME_FILE = "app/globals.css"
 const SCANNED_DIRS = ["app", "components"]
@@ -20,7 +12,6 @@ type Rule = { name: string; pattern: RegExp }
 const RULES: Rule[] = [
   {
     name: "raw hex colour (use a theme token)",
-    // `(?<![&\w])` skips HTML entities such as &#8217;
     pattern: /(?<![&\w])#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})\b/g,
   },
   {
@@ -38,10 +29,6 @@ const RULES: Rule[] = [
   },
 ]
 
-/**
- * Permanent, documented exceptions: exact snippets that may contain a raw
- * colour because they are not UI theme colours. Keep this list short.
- */
 const EXCEPTIONS: { file: string; snippet: string; reason: string }[] = [
   {
     file: "app/layout.tsx",
@@ -57,10 +44,8 @@ const EXCEPTIONS: { file: string; snippet: string; reason: string }[] = [
 
 const DARK_SELECTOR = ':root, :root[data-theme="dark"]'
 const LIGHT_SELECTOR = ':root[data-theme="light"]'
-/** The raw palette; components use these as utility classes (bg-ink, text-paper/70, ...). */
 const PALETTE = ["--ink", "--surface", "--surface-2", "--surface-3", "--paper", "--paper-deep", "--ember"]
 
-/** Declarations of the CSS rule whose selector is exactly `selector`. */
 function declarations(css: string, selector: string): Record<string, string> {
   const start = css.indexOf(`\n${selector} {`)
   if (start === -1) return {}

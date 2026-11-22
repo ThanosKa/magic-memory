@@ -3,7 +3,6 @@ import type { ClerkProvider } from "@clerk/nextjs"
 
 type Appearance = NonNullable<ComponentProps<typeof ClerkProvider>["appearance"]>
 
-/** Clerk theme: every colour reads from the darkroom palette in app/globals.css. */
 export const clerkAppearance: Appearance = {
   variables: {
     colorPrimary: "var(--primary)",

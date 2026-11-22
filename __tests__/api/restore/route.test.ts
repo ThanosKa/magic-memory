@@ -266,7 +266,7 @@ describe("POST /api/restore", () => {
             const data = await response.json()
 
             expect(response.status).toBe(403)
-            expect(data).toEqual({ success: false, error: NO_CREDITS })
+            expect(data).toEqual({ success: false, code: "out_of_credits", error: NO_CREDITS })
             expect(mockPredictionsCreate).not.toHaveBeenCalled()
             expect(ledger.chargeRestoration).not.toHaveBeenCalled()
             expect(logger.warn).toHaveBeenCalledWith(
@@ -283,7 +283,6 @@ describe("POST /api/restore", () => {
 
             expect(response.status).toBe(503)
             expect(data).toEqual({ success: false, error: "We couldn't check your credits. Please try again." })
-            // The uploader sends any error containing "No credits" to the out-of-credits screen.
             expect(data.error).not.toContain("No credits")
             expect(mockPredictionsCreate).not.toHaveBeenCalled()
             expect(ledger.chargeRestoration).not.toHaveBeenCalled()

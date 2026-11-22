@@ -13,10 +13,6 @@ const TONE_CLASSES: Record<Tone, { text: string; rule: string }> = {
   "paper": { text: "text-ink/65", rule: "bg-ink/25" },
 };
 
-/**
- * Mono uppercase label: ember `index` (two digits, e.g. "01"), short rule,
- * label. Use `tone="paper"` on cream sections.
- */
 export function SectionLabel({ index, children, tone = "dark", className }: SectionLabelProps) {
   return (
     <p

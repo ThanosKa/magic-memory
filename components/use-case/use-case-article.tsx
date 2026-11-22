@@ -5,7 +5,6 @@ type UseCaseArticleProps = {
   children: ReactNode;
 };
 
-/** Long-form body section of a use-case page; h2, p, li and strong inside are styled here. */
 export function UseCaseArticle({ children }: UseCaseArticleProps) {
   return (
     <section className="border-t border-paper/10">

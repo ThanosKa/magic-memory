@@ -127,7 +127,6 @@ describe("POST /api/stripe/webhook", () => {
     beforeEach(() => {
       vi.mocked(sendPurchaseEmail).mockClear();
       setStarterPriceId("price_starter");
-      // pino's level methods are not spies after automock, so spy on warn here.
       vi.spyOn(logger, "warn").mockImplementation(() => {});
     });
 
@@ -216,7 +215,6 @@ describe("POST /api/stripe/webhook", () => {
       let logError: ReturnType<typeof vi.spyOn>;
 
       beforeEach(() => {
-        // The automocked pino logger has no spies, so watch error() here.
         logError = vi.spyOn(logger, "error").mockImplementation(() => undefined);
         rpc = useGrantResult({ data: true, error: null });
       });

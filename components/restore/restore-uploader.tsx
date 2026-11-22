@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ErrorAlert, type ErrorType } from "@/components/ui/error-alert";
 import { cn } from "@/lib/utils";
+import { OUT_OF_CREDITS_CODE } from "@/lib/restore/error-codes";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 type RestorationStage = "idle" | "restoring" | "complete";
@@ -122,7 +123,6 @@ export function RestoreUploader() {
   } = useSWR("/api/credits", fetcher);
   const totalCredits = creditsData?.data?.totalCredits;
   const freeResetTime = creditsData?.data?.freeResetTime;
-  // Three states: a Balance we know, a request that failed, and one still loading.
   const balanceKnown =
     creditsData?.success === true && typeof totalCredits === "number";
   const balanceFailed =
@@ -259,7 +259,7 @@ export function RestoreUploader() {
       if (!restoreData.success) {
         console.error("Restore failed", restoreData.error);
 
-        if (restoreData.error?.includes("No credits")) {
+        if (restoreData.code === OUT_OF_CREDITS_CODE) {
           setError({ type: "out_of_credits", message: restoreData.error });
         } else if (restoreResponse.status === 401) {
           setError({ type: "auth_error" });

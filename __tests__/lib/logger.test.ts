@@ -1,7 +1,6 @@
-// @vitest-environment node
+// @vitest-environment node https://vitest.dev/guide/environment
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest"
 
-// vitest.setup.ts replaces the logger with a stub for every other test.
 vi.unmock("@/lib/logger")
 
 async function loadWorkerLogger() {
@@ -42,7 +41,6 @@ describe("logger on the Workers runtime", () => {
 
     const line = parseOnlyCall(error)
     expect(line.msg).toBe("Failed to grant purchased credits")
-    // Workers Logs reads a JSON line's own level field, so it must say "error".
     expect(line.level).toBe("error")
     expect(line.userId).toBe("user_1")
     expect(log).not.toHaveBeenCalled()

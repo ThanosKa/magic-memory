@@ -10,16 +10,13 @@ import { cn } from "@/lib/utils";
 type SliderImage = {
   src: string;
   alt: string;
-  /** Mono tag in the photo's top corner. */
   label: string;
 };
 
 type BeforeAfterSliderProps = {
   before: SliderImage;
   after: SliderImage;
-  /** Optional mono note under the photo, e.g. "Sample restoration". */
   note?: string;
-  /** Frame width / height; match the photos so both line up. */
   aspectRatio?: number;
   sizes?: string;
   preload?: boolean;
@@ -30,12 +27,6 @@ type BeforeAfterSliderProps = {
 const START = 50;
 const KEY_STEP = 5;
 
-/**
- * Before/after slider: the restored photo with the original on top, cut at a
- * vertical line the visitor drags (or clicks, or moves with the arrow keys).
- * The split is written straight to a CSS variable, so dragging never
- * re-renders React. `touch-pan-y` keeps vertical page scroll working on phones.
- */
 export function BeforeAfterSlider({
   before,
   after,

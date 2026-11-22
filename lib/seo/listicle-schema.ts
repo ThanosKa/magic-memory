@@ -79,7 +79,6 @@ const listicles: Record<string, ListicleEntry[]> = {
 
 type ListicleFaq = { question: string; answer: string };
 
-// Mirrors the visible "Frequently asked questions" section in each listicle post.
 const listicleFaqs: Record<string, ListicleFaq[]> = {
   "best-ai-photo-restoration": [
     {

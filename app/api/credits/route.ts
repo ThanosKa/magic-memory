@@ -33,8 +33,6 @@ export async function GET() {
     const found = await findUser({ clerkUserId: userId, supabase });
     let user = found.status === "found" ? found.user : null;
 
-    // A failed read says nothing about whether the User exists, so it must
-    // never lead to Provisioning: that is how a paying User's Balance was reset.
     if (found.status === "error") {
       logger.error(
         { userId, error: found.message },

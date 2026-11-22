@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 
-// vitest.setup.ts mocks this module for every test; here we need the real one.
 vi.unmock("@/lib/email");
 
 vi.mock("resend", () => ({

@@ -4,15 +4,6 @@ type BrandMarkProps = {
   className?: string;
 };
 
-/**
- * The Magic Memory mark: a lens split by the before/after seam. The outlined
- * half is the faded original, the solid half the restored print.
- *
- * Paper parts use `currentColor` and the seam uses the ember token, so the mark
- * follows the active theme. public/icon.svg, app/icon.png and app/apple-icon.png
- * draw the same lens on an ink tile, with a wider, full-height seam so it stays
- * visible at small sizes; regenerate them if the lens changes.
- */
 export function BrandMark({ className }: BrandMarkProps) {
   return (
     <svg

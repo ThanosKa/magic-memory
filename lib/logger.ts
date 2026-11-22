@@ -10,15 +10,12 @@ const LEVEL_PATTERN = /"level":"(\w+)"/;
 
 const OPTIONS: LoggerOptions = {
   level: process.env.LOG_LEVEL || (IS_DEV ? "debug" : "info"),
-  // Keep redaction - protects against accidental secret logging, and keeps
-  // customer email addresses out of Workers Logs.
   redact: {
     paths: ["password", "token", "apiKey", "secret", "authorization", "cookie", "email", "to"],
     censor: "[REDACTED]",
   },
 };
 
-// pino-pretty runs in a worker thread, which the Workers runtime does not offer.
 const PRETTY_TRANSPORT: LoggerOptions["transport"] = {
   target: "pino-pretty",
   options: {
@@ -28,11 +25,6 @@ const PRETTY_TRANSPORT: LoggerOptions["transport"] = {
   },
 };
 
-/**
- * Sends pino's JSON lines to the console method that matches their level, so
- * Workers Logs records errors as errors. pino's default destination calls
- * fs.writeSync in a form the Workers runtime rejects, so every log call throws there.
- */
 const CONSOLE_DESTINATION: DestinationStream = {
   write(line) {
     const level = LEVEL_PATTERN.exec(line)?.[1] ?? "info";
@@ -45,8 +37,6 @@ const CONSOLE_DESTINATION: DestinationStream = {
   },
 };
 
-// Workers Logs takes a JSON line's own "level" field as the log level, so it
-// must be the label ("error"), not pino's number (50).
 const WORKER_OPTIONS: LoggerOptions = {
   ...OPTIONS,
   formatters: { level: (label) => ({ level: label }) },

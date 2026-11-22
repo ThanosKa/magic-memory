@@ -6,14 +6,6 @@ import { ArrowRight } from "lucide-react";
 import type { Tone } from "@/components/layout/tone";
 import { cn } from "@/lib/utils";
 
-/**
- * Darkroom button. The default variant is the cream pill used for primary
- * actions everywhere (the home start button uses it too).
- *
- * - `tone="paper"` flips colours for cream sections (ink pill, ink outline).
- * - Add `<ButtonArrow />` as the last child for the arrow that nudges on hover.
- * - `default` and `lg` sizes are 44px+ tall; use them for primary actions.
- */
 const buttonVariants = cva(
   "group/button focus-ring inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-[color,background-color,border-color,transform] duration-150 ease-(--ease-out) active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
@@ -35,7 +27,6 @@ const buttonVariants = cva(
         "icon-sm": "size-10",
         "icon-lg": "size-12",
       },
-      // Keys are quoted so the theme guard does not mistake them for Tailwind's dark variant.
       tone: {
         "dark": "",
         "paper": "",
@@ -78,7 +69,6 @@ function Button({ className, variant, size, tone, asChild = false, ...props }: B
   );
 }
 
-/** Arrow for primary actions; nudges right when its button is hovered. */
 function ButtonArrow({ className }: { className?: string }) {
   return (
     <ArrowRight

@@ -16,7 +16,6 @@ function fakeClient(result: unknown) {
     maybeSingle: vi.fn().mockResolvedValue(result),
   };
   const supabase = { from: vi.fn(() => query) };
-  // Test double: only the used query-builder surface is implemented.
   return { supabase: supabase as unknown as SupabaseClient, query };
 }
 

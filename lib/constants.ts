@@ -2,7 +2,7 @@ export const CREDIT_PACKAGES = {
   starter: {
     name: "Starter",
     credits: 20,
-    price: 999, // in cents (€9.99)
+    price: 999,
     priceDisplay: "€9.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER ?? "",
     description: "Best for occasional use",
@@ -17,7 +17,7 @@ export const CREDIT_PACKAGES = {
   growth: {
     name: "Growth",
     credits: 60,
-    price: 1999, // in cents (€19.99)
+    price: 1999,
     priceDisplay: "€19.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_GROWTH ?? "",
     description: "Best for regular users",
@@ -33,7 +33,7 @@ export const CREDIT_PACKAGES = {
   premium: {
     name: "Premium",
     credits: 120,
-    price: 2999, // in cents (€29.99)
+    price: 2999,
     priceDisplay: "€29.99",
     priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PREMIUM ?? "",
     description: "Best for professionals",
@@ -54,7 +54,6 @@ export function isPackageType(value: string): value is PackageType {
   return value in CREDIT_PACKAGES;
 }
 
-/** A pack's price per restoration, e.g. "€0.33". */
 export function perPhotoPrice(pkg: { price: number; credits: number }): string {
   return `€${(pkg.price / pkg.credits / 100).toFixed(2)}`;
 }
@@ -63,8 +62,8 @@ export const APP_CONFIG = {
   name: "Magic Memory",
   description: "Magic Memory restores your old photos with AI",
   freeRestorationPerDay: 1,
-  maxFileSize: 10 * 1024 * 1024, // 10MB
-  maxImageDimension: 4000, // 4000x4000 max for GFPGAN
+  maxFileSize: 10 * 1024 * 1024,
+  maxImageDimension: 4000,
   supportedFormats: ["image/jpeg", "image/png", "image/webp"],
   processingTimeSeconds: { min: 5, max: 60 },
 } as const;

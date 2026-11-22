@@ -5,12 +5,6 @@ import { HomeFaq } from "@/components/home/home-faq"
 import { UseCaseFAQ } from "@/components/use-case/use-case-faq"
 import { homepageFaqs } from "@/lib/seo/faq-data"
 
-/**
- * FAQ answers are listed in FAQPage structured data, so search engines must
- * find them in the server HTML even while every accordion item is closed.
- */
-
-/** React escapes text in markup, so compare against escaped answers. */
 function escapeHtml(text: string): string {
   return text
     .replace(/&/g, "&amp;")

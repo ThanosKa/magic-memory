@@ -3,8 +3,6 @@ import { describe, expect, it, vi } from "vitest"
 import { JsonLd } from "@/components/seo/json-ld"
 import { blogPosts } from "@/lib/blog/posts"
 
-// Pages read these at import time, and CI sets different values than a laptop,
-// so pin them before any page is imported (vi.hoisted runs first).
 vi.hoisted(() => {
   process.env.NEXT_PUBLIC_APP_URL = "https://magic-memory.dev"
   process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER = "price_snapshot_starter"
@@ -12,14 +10,9 @@ vi.hoisted(() => {
   process.env.NEXT_PUBLIC_STRIPE_PRICE_PREMIUM = "price_snapshot_premium"
 })
 
-// /restore redirects signed-out visitors, so the tests call it as a signed-in user.
 vi.mock("@clerk/nextjs/server", () => ({
   auth: vi.fn(() => Promise.resolve({ userId: "user_snapshot" })),
 }))
-
-// Safety net for the marketing pages' <head>: records each page's exported
-// metadata and the application/ld+json scripts in the tree its page function
-// returns. Pages are called as plain functions, nothing is rendered.
 
 type PageModule = {
   metadata?: unknown
@@ -30,7 +23,6 @@ type PageModule = {
 }
 
 const PAGES: Record<string, () => Promise<PageModule>> = {
-  // 10 use-case pages
   "/fix-blurry-photos": () => import("@/app/fix-blurry-photos/page"),
   "/restore-portrait-photos": () => import("@/app/restore-portrait-photos/page"),
   "/restore-family-photos": () => import("@/app/restore-family-photos/page"),
@@ -42,7 +34,6 @@ const PAGES: Record<string, () => Promise<PageModule>> = {
   "/enhance-old-photos": () => import("@/app/enhance-old-photos/page"),
   "/restore-wedding-photos": () => import("@/app/restore-wedding-photos/page"),
   "/restore-vintage-photos": () => import("@/app/restore-vintage-photos/page"),
-  // 5 glossary
   "/glossary/photo-restoration": () =>
     import("@/app/glossary/photo-restoration/page"),
   "/glossary/face-restoration": () =>
@@ -52,23 +43,18 @@ const PAGES: Record<string, () => Promise<PageModule>> = {
   "/glossary/gfpgan": () => import("@/app/glossary/gfpgan/page"),
   "/glossary/ai-photo-enhancement": () =>
     import("@/app/glossary/ai-photo-enhancement/page"),
-  // 3 vs
   "/vs/remini": () => import("@/app/vs/remini/page"),
   "/vs/myheritage": () => import("@/app/vs/myheritage/page"),
   "/vs/vanceai": () => import("@/app/vs/vanceai/page"),
-  // 4 alternatives, including the index
   "/alternatives": () => import("@/app/alternatives/page"),
   "/alternatives/remini": () => import("@/app/alternatives/remini/page"),
   "/alternatives/myheritage": () => import("@/app/alternatives/myheritage/page"),
   "/alternatives/vanceai": () => import("@/app/alternatives/vanceai/page"),
-  // 3 for
   "/for/real-estate": () => import("@/app/for/real-estate/page"),
   "/for/genealogists": () => import("@/app/for/genealogists/page"),
   "/for/photographers": () => import("@/app/for/photographers/page"),
-  // 2 blog pages (the post page generates its metadata per slug)
   "/blog": () => import("@/app/blog/page"),
   "/blog/[slug]": () => import("@/app/blog/[slug]/page"),
-  // restore and pricing
   "/restore": () => import("@/app/restore/page"),
   "/pricing": () => import("@/app/pricing/page"),
 }
@@ -88,7 +74,6 @@ function collectJsonLd(node: unknown, found: string[] = []): string[] {
     }
   }
   if (!element.props) return found
-  // <JsonLd> is a server component: expand it the way React would
   if (element.type === JsonLd) {
     return collectJsonLd(
       JsonLd(element.props as unknown as Parameters<typeof JsonLd>[0]),
@@ -107,7 +92,6 @@ function collectJsonLd(node: unknown, found: string[] = []): string[] {
 
 function describeJsonLd(raws: string[]) {
   return raws.map((raw) => ({
-    // the exact serialised text is pinned by its hash, the parsed object keeps diffs readable
     sha256: createHash("sha256").update(raw).digest("hex"),
     data: JSON.parse(raw),
   }))

@@ -9,8 +9,6 @@ import { provisionUser } from "@/lib/users"
 vi.mock("@/lib/supabase/server")
 vi.mock("@/lib/logger")
 vi.mock("@/lib/email", () => ({ sendWelcomeEmail: vi.fn() }))
-// Wraps the real provisionUser so one test can run it against a fake client;
-// the rest stub its answer.
 vi.mock("@/lib/users", async (importOriginal) => {
     const actual = await importOriginal<typeof import("@/lib/users")>()
     return { ...actual, provisionUser: vi.fn(actual.provisionUser) }

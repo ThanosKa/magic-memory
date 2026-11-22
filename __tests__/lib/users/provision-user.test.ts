@@ -31,7 +31,6 @@ function fakeClient(params: { upsert: unknown; update?: unknown; read?: unknown 
     select: vi.fn(() => readChain),
   };
   const supabase = { from: vi.fn(() => table) };
-  // Test double: only the used query-builder surface is implemented.
   return { supabase: supabase as unknown as SupabaseClient, table, updateChain, readChain };
 }
 
@@ -159,7 +158,6 @@ describe("provisionUser", () => {
     });
 
     it("sends exactly one in total for two concurrent calls", async () => {
-      // Insert-or-nothing: the first insert wins, the second hits the conflict.
       const upsertResults = [{ data: row, error: null }, { data: null, error: null }];
       const upsertChain = () => {
         const result = upsertResults.shift();

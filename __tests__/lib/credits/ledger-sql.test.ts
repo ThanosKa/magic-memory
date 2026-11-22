@@ -1,24 +1,7 @@
-// @vitest-environment node
+// @vitest-environment node https://vitest.dev/guide/environment
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest"
 import { asClerkUserId, asUserId, createCreditLedger } from "@/lib/credits/ledger"
 import { createPgliteLedger, type PgliteLedger } from "./pglite-ledger-db"
-
-/**
- * The credit ledger against the real SQL functions, run in PGlite (an
- * in-process Postgres) and loaded from the repo's numbered scripts in
- * `scripts/`.
- *
- * Limits, on purpose:
- * - PGlite runs ONE connection. These tests do not prove that two concurrent
- *   Charges at a Balance of 1 let only one through. That rests on the row lock
- *   (`FOR UPDATE`) in `deduct_credit_and_record_restoration` and is untested.
- * - They test the repo's scripts, not what production runs. If someone edited
- *   a function by hand in Supabase, these tests do not see it.
- * - The scripts load whole, including `CREATE POLICY`, against stubs of the
- *   Supabase roles and `auth.uid()` / `auth.role()`. The stubs do not enforce
- *   row-level security as Supabase does, and statements run as the database
- *   owner, so role grants (who may call a function) are loaded but not tested.
- */
 
 vi.mock("@/lib/logger", () => ({
   default: { error: vi.fn(), warn: vi.fn(), info: vi.fn() },

@@ -1,9 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from "vitest"
+import { describe, it, expect, expectTypeOf, vi, beforeEach } from "vitest"
 import logger from "@/lib/logger"
 import {
   asClerkUserId,
   asUserId,
   createCreditLedger,
+  type ClerkUserId,
+  type UserId,
 } from "@/lib/credits/ledger"
 import type { LedgerDb, LedgerFunction, UserLookup } from "@/lib/credits/ledger-db"
 
@@ -13,10 +15,6 @@ vi.mock("@/lib/logger", () => ({
 
 type Answer = { data: unknown; error: string | null } | Error
 
-/**
- * The fake `LedgerDb`: users keyed by Clerk id, one scripted answer per SQL
- * function, and a record of every call. An `Error` answer is thrown.
- */
 function fakeLedgerDb({
   users = {},
   lookup,
@@ -318,11 +316,10 @@ describe("createCreditLedger", () => {
     })
 
     it("refuses the wrong identity at compile time", () => {
-      const ledger = createCreditLedger(() => fakeLedgerDb().db)
-      // @ts-expect-error a Clerk id is not a users.id
-      expect(() => ledger.grantPurchase(CLERK_ID, purchase)).not.toThrow()
-      // @ts-expect-error a plain string is not a Clerk id
-      expect(() => ledger.balance("clerk_user_123")).not.toThrow()
+      type Ledger = ReturnType<typeof createCreditLedger>
+      expectTypeOf<Parameters<Ledger["grantPurchase"]>[0]>().toEqualTypeOf<UserId>()
+      expectTypeOf<Parameters<Ledger["grantPurchase"]>[0]>().not.toEqualTypeOf<ClerkUserId>()
+      expectTypeOf<Parameters<Ledger["balance"]>[0]>().toEqualTypeOf<ClerkUserId>()
     })
 
     it("lets an exception escape, so the webhook still answers 400 as today", async () => {

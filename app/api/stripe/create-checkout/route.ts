@@ -6,20 +6,7 @@ import { parseRequestBody } from "@/lib/validations/utils";
 import { createCheckoutRequestSchema } from "@/lib/validations/api";
 import { CREDIT_PACKAGES } from "@/lib/constants";
 import { checkoutMetadata } from "@/lib/billing/verify-checkout-session";
-import Stripe from "stripe";
-
-function getStripeClient() {
-  const secretKey = process.env.STRIPE_SECRET_KEY;
-
-  if (!secretKey) {
-    throw new Error("STRIPE_SECRET_KEY is not configured");
-  }
-
-  return new Stripe(secretKey, {
-    // @ts-expect-error — pinned to clover until we migrate to dahlia
-    apiVersion: "2025-11-17.clover",
-  });
-}
+import { getStripeClient } from "@/lib/billing/stripe-client";
 
 export async function POST(request: NextRequest) {
   try {

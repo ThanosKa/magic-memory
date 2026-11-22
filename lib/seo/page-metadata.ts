@@ -5,17 +5,10 @@ type PageMetadataInput = {
   path: string
   title: string
   description: string
-  /** Passed explicitly: social titles differ in format between pages. */
   social: { title: string; description: string; imageAlt: string }
-  /** Only pages that have a Twitter card today pass this. */
   twitter?: { title: string; description: string }
 }
 
-/**
- * The `Metadata` a marketing page exports. Emits only the fields pages emit
- * today, because a page's metadata replaces the layout's Open Graph object
- * wholesale.
- */
 export function pageMetadata({
   path,
   title,

@@ -14,7 +14,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CreditsSkeleton } from "@/components/ui/loading-states";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
-
 const headerClass =
   "sticky top-0 z-50 w-full border-b border-paper/10 bg-ink/85 backdrop-blur supports-[backdrop-filter]:bg-ink/70";
 
@@ -129,8 +128,6 @@ function HeaderWithClerk() {
                 </Link>
               ))}
 
-            {/* Rendered while Clerk is still loading too, so the header is never
-                empty; Clerk queues a click until it has loaded. */}
             {!isSignedIn && (
               <div className="hidden items-center gap-2 md:flex">
                 <SignInButton mode="modal">

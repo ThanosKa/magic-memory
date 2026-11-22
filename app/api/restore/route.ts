@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { unstable_noStore as noStore } from "next/cache";
+import { OUT_OF_CREDITS_CODE } from "@/lib/restore/error-codes";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -17,8 +18,7 @@ function getRateLimiter() {
   return new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(10, "1 m"),
-    // Analytics writes run after the response; Workers would cancel them
-    // without ctx.waitUntil, which this route does not have.
+    // Analytics writes run after the response and Workers cancel them without ctx.waitUntil: https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil
     analytics: false,
     prefix: "ratelimit:restore",
   })
@@ -45,7 +45,6 @@ async function validateImageDimensions(buffer: Buffer): Promise<{ valid: boolean
 }
 
 export async function POST(request: NextRequest) {
-  // Prevent Next.js from caching any fetch calls (predictions polling GET requests)
   noStore()
 
   let restorationId: string | null = null
@@ -72,7 +71,6 @@ export async function POST(request: NextRequest) {
           )
         }
       } catch (redisErr) {
-        // Redis unavailable — log and continue rather than blocking restoration
         logger.warn({ userId, error: redisErr instanceof Error ? redisErr.message : String(redisErr) }, "Rate limiter unavailable, skipping")
       }
     }
@@ -135,8 +133,6 @@ export async function POST(request: NextRequest) {
     const clerkUserId = asClerkUserId(userId)
     const creditCheck = await ledger.balance(clerkUserId)
 
-    // A database failure is not "no credits": answer 503 so the uploader says "try again".
-    // The text must not contain "No credits", which the uploader routes to the out-of-credits screen.
     if (!creditCheck.ok && creditCheck.reason === "db_error") {
       logger.error({ userId, error: creditCheck.message }, "Failed to check credits")
       return NextResponse.json(
@@ -148,7 +144,7 @@ export async function POST(request: NextRequest) {
     if (!creditCheck.ok || creditCheck.paidCredits <= 0) {
       logger.warn({ userId, creditCheck }, "No paid credits available")
       return NextResponse.json(
-        { success: false, error: "No credits available. Purchase more credits to continue." },
+        { success: false, code: OUT_OF_CREDITS_CODE, error: "No credits available. Purchase more credits to continue." },
         { status: 403 },
       )
     }

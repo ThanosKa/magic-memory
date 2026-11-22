@@ -1,6 +1,6 @@
 # Coding Standards
 
-The rules every diff in this repo is checked against, one per line. Writing code: every rule that touches the files you change holds before you finish. Reviewing: check the diff against every rule in turn. Lint enforces `any`, type assertions (`as const` aside), non-null `!`, `console`, exhaustive `switch` and positional parameters: resolve each lint error in the code itself.
+The rules every diff in this repo is checked against, one per line. Writing code: every rule that touches the files you change holds before you finish. Reviewing: check the diff against every rule in turn. Lint enforces `any`, type assertions (`as const` aside), non-null `!`, `console`, exhaustive `switch`, positional parameters and comments: resolve each lint error in the code itself.
 
 ## API routes
 
@@ -54,5 +54,5 @@ The rules every diff in this repo is checked against, one per line. Writing code
 
 ## Comments
 
-- Keep JSDoc for exported functions and inline comments for complex logic; let names carry the rest.
+- Write no comments; let names, types and structure carry the meaning. Delete a comment you would add and fix the code instead. Allowed: a license header, `prettier-ignore`, an ESLint directive, a `/** */` doc comment on an export that defines a public API contract, and a comment with a link to the doc or issue that proves a behaviour forced by a dependency, platform or vendor.
 - Keep emojis out of code and comments.

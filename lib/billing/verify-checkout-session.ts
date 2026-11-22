@@ -2,15 +2,6 @@ import { z } from "zod";
 import type Stripe from "stripe";
 import { CREDIT_PACKAGES } from "@/lib/constants";
 
-/**
- * The money rules of a Purchase, kept pure: no I/O, no logging, no clock.
- * `verifyCheckoutSession` answers "grant these credits" or "reject for this
- * reason"; the Stripe webhook route does everything else.
- *
- * The metadata keys below (`userId`, `packageType`, `credits`, `priceId`) are a
- * stable contract with checkout sessions opened before a deploy: a session can
- * be paid after a newer build is live, so never rename or require new keys.
- */
 const stripeMetadataSchema = z.object({
   userId: z.string().min(1),
   packageType: z.string().min(1),
@@ -18,11 +9,6 @@ const stripeMetadataSchema = z.object({
   priceId: z.string().min(1),
 });
 
-/**
- * The metadata checkout creation puts on a Stripe session; the schema above
- * reads it back in the webhook. `credits` is a string because Stripe metadata
- * values are strings.
- */
 export function checkoutMetadata(input: {
   userId: string;
   clerkUserId: string;
@@ -47,11 +33,9 @@ export type RejectionReason =
   | "amount_mismatch"
   | "wrong_currency";
 
-/** Log text for a Purchase whose metadata credits differ from its Credit pack; log filters depend on it. */
 export const CREDITS_MISMATCH_LOG_MESSAGE =
   "Purchased credits differ from Credit pack";
 
-/** The exact log text per rejection reason; log filters depend on it. */
 export const REJECTION_LOG_MESSAGE: Record<RejectionReason, string> = {
   invalid_metadata: "Missing or invalid metadata in checkout session",
   missing_payment_id: "Missing payment intent in checkout session",
@@ -65,20 +49,13 @@ export type PurchaseVerdict =
   | {
       ok: true;
       grant: {
-        /** `users.id`, not the Clerk id. */
         userId: string;
         stripePaymentId: string;
-        /** From `metadata.credits`, not from the Credit pack. */
         credits: number;
-        /** After discount. */
         amountPaid: number;
         packageType: string;
         packageName: string;
       };
-      /**
-       * Present only when `metadata.credits` differs from the Credit pack's
-       * credits. The grant still uses the metadata; the route logs a warning.
-       */
       creditsMismatch?: { metadataCredits: number; packCredits: number };
     }
   | {
@@ -92,12 +69,6 @@ type PackageTable = Record<
   { name: string; credits: number; price: number; priceId: string } | undefined
 >;
 
-/**
- * Checks a completed checkout session against the Credit packs, in order:
- * metadata, payment id, known pack, price id, amount (discounts included),
- * currency `eur`. `packages` exists only for tests and defaults to the real
- * Credit packs.
- */
 export function verifyCheckoutSession({
   session,
   packages = CREDIT_PACKAGES,

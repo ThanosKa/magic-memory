@@ -5,6 +5,46 @@ import tsParser from '@typescript-eslint/parser';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
+const ALLOWED_COMMENTS = [
+  /^\s*prettier-ignore\s*$/,
+  /^\s*eslint-(disable|enable)/,
+  /^\/\s*<reference\s/,
+  /https?:\/\/\S+/,
+  /\b(copyright|license|SPDX-License-Identifier)\b/i,
+];
+
+function isDocOnExport(comment, source) {
+  if (comment.type !== 'Block' || !comment.value.startsWith('*')) return false;
+  return source.getTokenAfter(comment, { includeComments: false })?.value === 'export';
+}
+
+const noCommentsPlugin = {
+  rules: {
+    'no-comments': {
+      meta: {
+        type: 'suggestion',
+        messages: {
+          banned:
+            'Delete this comment and let the code say it. Allowed: a license header, prettier-ignore, /** */ on an export, or a link to the issue, RFC or vendor doc that forces the behaviour.',
+        },
+      },
+      create(context) {
+        const source = context.sourceCode;
+        return {
+          Program() {
+            for (const comment of source.getAllComments()) {
+              if (comment.type === 'Shebang') continue;
+              if (isDocOnExport(comment, source)) continue;
+              if (ALLOWED_COMMENTS.some((pattern) => pattern.test(comment.value))) continue;
+              context.report({ loc: comment.loc, messageId: 'banned' });
+            }
+          },
+        };
+      },
+    },
+  },
+};
+
 export default [
   {
     ignores: [
@@ -34,10 +74,8 @@ export default [
         },
       },
       globals: {
-        // React
         React: 'readonly',
         JSX: 'readonly',
-        // Node.js
         NodeJS: 'readonly',
         console: 'readonly',
         process: 'readonly',
@@ -51,13 +89,11 @@ export default [
         clearTimeout: 'readonly',
         setInterval: 'readonly',
         clearInterval: 'readonly',
-        // Browser
         window: 'readonly',
         document: 'readonly',
         navigator: 'readonly',
         localStorage: 'readonly',
         sessionStorage: 'readonly',
-        // Web APIs
         fetch: 'readonly',
         FormData: 'readonly',
         Headers: 'readonly',
@@ -87,7 +123,6 @@ export default [
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
 
-      // TypeScript specific
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
@@ -96,16 +131,14 @@ export default [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-non-null-assertion': 'error',
 
-      // React specific
-      'react/react-in-jsx-scope': 'off', // Not needed in Next.js
-      'react/prop-types': 'off', // Using TypeScript
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
       'react/jsx-uses-react': 'off',
       'react/jsx-no-target-blank': 'warn',
       'react/no-unescaped-entities': 'warn',
 
-      // General best practices
       'no-console': ['error', { allow: ['warn', 'error'] }],
-      'no-unused-vars': 'off', // Handled by TypeScript
+      'no-unused-vars': 'off',
       'prefer-const': 'warn',
       'no-var': 'error',
     },
@@ -118,7 +151,6 @@ export default [
       },
     },
   },
-  // TypeScript only: type-aware lint and the CODING_STANDARDS.md rules the linter can check.
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -143,7 +175,6 @@ export default [
       ],
     },
   },
-  // Server code logs through lib/logger.ts. Client code and scripts/ keep the rule above.
   {
     files: [
       'app/api/**/*.{ts,tsx}',
@@ -159,7 +190,6 @@ export default [
       'no-console': ['error', {}],
     },
   },
-  // Tests may use any, type assertions, non-null assertions and positional params.
   {
     files: [
       '**/*.test.{ts,tsx}',
@@ -173,5 +203,11 @@ export default [
       '@typescript-eslint/no-non-null-assertion': 'off',
       'no-restricted-syntax': 'off',
     },
+  },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    ignores: ['next-env.d.ts'],
+    plugins: { local: noCommentsPlugin },
+    rules: { 'local/no-comments': 'error' },
   },
 ];

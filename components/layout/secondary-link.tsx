@@ -6,7 +6,6 @@ type SecondaryLinkProps = {
   children: ReactNode;
 };
 
-/** The underlined text link that sits next to a primary pill. */
 export function SecondaryLink({ href, children }: SecondaryLinkProps) {
   return (
     <Link

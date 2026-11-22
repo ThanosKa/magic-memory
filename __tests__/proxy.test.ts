@@ -3,9 +3,6 @@ import { type NextFetchEvent, NextRequest } from "next/server"
 import logger from "@/lib/logger"
 import { proxy } from "@/proxy"
 
-// vitest.setup.ts mocks @clerk/nextjs/server without clerkMiddleware, so with
-// both keys set the proxy's Clerk branch throws, as a broken Clerk import would.
-
 async function runProxy(path: string) {
   const request = new NextRequest(new URL(path, "https://magic-memory.dev"))
   const response = await proxy(request, { waitUntil: vi.fn() } as unknown as NextFetchEvent)

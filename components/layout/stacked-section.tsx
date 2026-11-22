@@ -15,13 +15,6 @@ const TONE_CLASSES: Record<Tone, string> = {
   "paper": "bg-paper text-ink [--ember:var(--ember-on-paper)]",
 };
 
-/**
- * A section that slides over the one before it like a stacked print:
- * rounded top corners, pulled up by 40px. Later sections paint on top
- * (each one is its own stacking context), so no z-index juggling.
- * `tone="paper"` makes a cream contrast section (ink text); `className`
- * goes on the inner page container (grid, padding overrides).
- */
 export function StackedSection({ children, tone = "dark", id, className }: StackedSectionProps) {
   return (
     <section

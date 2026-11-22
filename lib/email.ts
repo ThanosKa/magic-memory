@@ -64,10 +64,6 @@ export async function sendPurchaseEmail({
   }
 }
 
-// ---------- HTML builders ----------
-
-// Email clients cannot read the CSS variables in app/globals.css, so these are
-// the dark "Darkroom" tokens as literals. Keep them in step with that file.
 const SITE_URL = "https://magic-memory.dev";
 const INK = "#0d0b09";
 const PAPER = "#f1eadf";
@@ -78,12 +74,10 @@ const LINE = "#282623";
 const PRINT_LINE = "#d3cbbd";
 const PRINT_MUTED = "#5c544a";
 
-// Many clients (Gmail included) drop web fonts, so the fallbacks must read well too.
 const SANS = "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif";
 const SERIF = "'Instrument Serif',Georgia,'Times New Roman',serif";
 const MONO = "'JetBrains Mono',Menlo,Consolas,monospace";
 
-/** Names come from the sign-up form, so escape them before they reach the HTML. */
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")

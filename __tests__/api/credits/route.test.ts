@@ -52,11 +52,6 @@ function mockSupabaseWithUser(user: { paid_credits: number } | null) {
   };
 }
 
-/**
- * The User read fails, while a Provisioning write would succeed with a fresh
- * 1-credit row. `single` answers like `maybeSingle` so code that still asks
- * for exactly one row reaches the write instead of throwing.
- */
 function mockSupabaseWithReadError(message: string) {
   const readResult = { data: null, error: { message } };
   const writeChain = {

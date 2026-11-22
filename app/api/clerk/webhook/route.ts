@@ -112,7 +112,6 @@ export async function POST(request: NextRequest) {
                 });
 
                 if (!result.ok) {
-                    // Return 500 so Clerk retries
                     logger.error({ error: result.message, userId: id }, "Failed to create user in database");
                     return NextResponse.json(
                         { success: false, error: "Failed to create user" },
@@ -121,7 +120,6 @@ export async function POST(request: NextRequest) {
                 }
 
                 if (result.outcome === "already_existed") {
-                    // Retried webhook, or GET /api/credits created the row first
                     logger.info({ userId: id, email }, "User already exists in database (duplicate webhook)");
                     break;
                 }
@@ -131,7 +129,6 @@ export async function POST(request: NextRequest) {
                     break;
                 }
 
-                // provisionUser has already sent the welcome email.
                 logger.info({ userId: id, email }, "User created in database");
                 break;
             }

@@ -8,17 +8,12 @@ import { Button } from "@/components/ui/button"
 
 const COOKIE_CONSENT_KEY = "cookie-consent"
 
-// Same shape as the home hero's secondary action: plain text that underlines on
-// hover, so Decline never looks like the Accept pill.
 const declineClass =
     "focus-ring group inline-flex min-h-11 cursor-pointer items-center px-2 text-[14px] font-medium text-paper/80 transition-colors hover:text-paper"
 
 export function CookieConsent() {
     const [showBanner, setShowBanner] = useState(false)
     const reduceMotion = useReducedMotion()
-    // A short rise and fade, no spring: a notice should arrive, not bounce.
-    // Full transform strings so Framer Motion runs it on the compositor.
-    // Reduced motion: fade only.
     const hidden = { transform: `translateY(${reduceMotion ? 0 : 16}px)`, opacity: 0 }
 
     useEffect(() => {

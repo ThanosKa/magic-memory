@@ -21,8 +21,4 @@ export const FONT_MONO = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
-/**
- * CSS variables for the three theme fonts, set once on <html> in the root layout.
- * app/globals.css maps them to Tailwind's font-sans, font-serif and font-mono.
- */
 export const FONT_VARIABLES = `${FONT_SANS.variable} ${FONT_SERIF.variable} ${FONT_MONO.variable}`;

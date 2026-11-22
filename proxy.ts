@@ -4,10 +4,6 @@ import logger from "@/lib/logger"
 const PROTECTED_ROUTES = ["/restore", "/restore/(.*)", "/profile", "/profile/(.*)"]
 const PROTECTED_PATH_PATTERN = /^\/(restore|profile)(\/|$)/
 
-/**
- * Without Clerk the proxy cannot check a session, so protected pages fail
- * closed: they redirect home and log an error instead of opening silently.
- */
 function failClosed({ req, reason }: { req: NextRequest; reason: string }) {
   if (!PROTECTED_PATH_PATTERN.test(req.nextUrl.pathname)) {
     return NextResponse.next()
