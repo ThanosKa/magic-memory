@@ -20,7 +20,7 @@ describe("restorePhoto", () => {
 
   it("returns the URL when the first poll succeeds", async () => {
     const { client } = fakeClient([{ status: "succeeded", output: "https://r/1.png" }])
-    await expect(restorePhoto(photo, { client, sleep })).resolves.toBe("https://r/1.png")
+    await expect(restorePhoto({ photo, deps: { client, sleep } })).resolves.toBe("https://r/1.png")
     expect(sleep).not.toHaveBeenCalled()
   })
 
@@ -31,7 +31,7 @@ describe("restorePhoto", () => {
       { status: "processing" },
       { status: "succeeded", output: "https://r/2.png" },
     ])
-    await expect(restorePhoto(photo, { client, sleep })).resolves.toBe("https://r/2.png")
+    await expect(restorePhoto({ photo, deps: { client, sleep } })).resolves.toBe("https://r/2.png")
     expect(get).toHaveBeenCalledTimes(4)
     expect(get).toHaveBeenCalledWith("pred-1")
     expect(sleep).toHaveBeenCalledTimes(3)
@@ -40,15 +40,22 @@ describe("restorePhoto", () => {
 
   it("throws a failed RestorationError with the Replicate message", async () => {
     const { client } = fakeClient([{ status: "failed", error: "model crashed" }])
-    const error = await restorePhoto(photo, { client, sleep }).catch((e) => e)
+    const error = await restorePhoto({ photo, deps: { client, sleep } }).catch((e) => e)
     expect(error).toBeInstanceOf(RestorationError)
     expect(error.reason).toBe("failed")
     expect(error.message).toBe("Restoration failed: model crashed")
   })
 
+  it("throws a failed RestorationError when a succeeded prediction has no URL output", async () => {
+    const { client } = fakeClient([{ status: "succeeded", output: ["https://r/1.png"] }])
+    const error = await restorePhoto({ photo, deps: { client, sleep } }).catch((e) => e)
+    expect(error).toBeInstanceOf(RestorationError)
+    expect(error.reason).toBe("failed")
+  })
+
   it("throws a canceled RestorationError", async () => {
     const { client } = fakeClient([{ status: "canceled" }])
-    const error = await restorePhoto(photo, { client, sleep }).catch((e) => e)
+    const error = await restorePhoto({ photo, deps: { client, sleep } }).catch((e) => e)
     expect(error).toBeInstanceOf(RestorationError)
     expect(error.reason).toBe("canceled")
     expect(error.message).toBe("Restoration failed: canceled")
@@ -57,7 +64,7 @@ describe("restorePhoto", () => {
   it("times out after maxAttempts polls", async () => {
     const { client, get } = fakeClient([])
     get.mockResolvedValue({ status: "processing" })
-    const error = await restorePhoto(photo, { client, sleep, maxAttempts: 5 }).catch((e) => e)
+    const error = await restorePhoto({ photo, deps: { client, sleep, maxAttempts: 5 } }).catch((e) => e)
     expect(error).toBeInstanceOf(RestorationError)
     expect(error.reason).toBe("timed_out")
     expect(error.message).toBe("Restoration timed out after 60 seconds")
@@ -66,7 +73,7 @@ describe("restorePhoto", () => {
 
   it("sends the model version, parameters and a data URL to create", async () => {
     const { client, create } = fakeClient([{ status: "succeeded", output: "u" }])
-    await restorePhoto(photo, { client, sleep })
+    await restorePhoto({ photo, deps: { client, sleep } })
     expect(create).toHaveBeenCalledWith({
       version: VERSION,
       input: {

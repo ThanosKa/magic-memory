@@ -32,17 +32,14 @@ function session(overrides: Record<string, unknown> = {}) {
 
 describe("verifyCheckoutSession", () => {
   it("grants a normal Purchase, taking credits from metadata", () => {
-    const verdict = verifyCheckoutSession(
-      session({
+    const verdict = verifyCheckoutSession({ session: session({
         metadata: {
           userId: "user-uuid",
           packageType: "starter",
           credits: "25",
           priceId: "price_starter",
         },
-      }),
-      PACKAGES,
-    );
+      }), packages: PACKAGES });
 
     expect(verdict).toEqual({
       ok: true,
@@ -59,34 +56,28 @@ describe("verifyCheckoutSession", () => {
   });
 
   it("reports no credits mismatch when metadata matches the Credit pack", () => {
-    const verdict = verifyCheckoutSession(session(), PACKAGES);
+    const verdict = verifyCheckoutSession({ session: session(), packages: PACKAGES });
 
     expect(verdict.ok).toBe(true);
     expect(verdict.ok && verdict.creditsMismatch).toBeUndefined();
   });
 
   it("grants a discounted Purchase and records the amount after discount", () => {
-    const verdict = verifyCheckoutSession(
-      session({
+    const verdict = verifyCheckoutSession({ session: session({
         amount_total: 800,
         total_details: { amount_discount: 200 },
-      }),
-      PACKAGES,
-    );
+      }), packages: PACKAGES });
 
     expect(verdict).toMatchObject({ ok: true, grant: { amountPaid: 800 } });
   });
 
   it("grants a 100% discount using the session id as payment id", () => {
-    const verdict = verifyCheckoutSession(
-      session({
+    const verdict = verifyCheckoutSession({ session: session({
         payment_intent: null,
         payment_status: "no_payment_required",
         amount_total: 0,
         total_details: { amount_discount: 1000 },
-      }),
-      PACKAGES,
-    );
+      }), packages: PACKAGES });
 
     expect(verdict).toMatchObject({
       ok: true,
@@ -95,23 +86,17 @@ describe("verifyCheckoutSession", () => {
   });
 
   it("only counts a discount when a subtotal is present", () => {
-    const verdict = verifyCheckoutSession(
-      session({
+    const verdict = verifyCheckoutSession({ session: session({
         amount_total: 800,
         amount_subtotal: null,
         total_details: { amount_discount: 200 },
-      }),
-      PACKAGES,
-    );
+      }), packages: PACKAGES });
 
     expect(verdict).toMatchObject({ ok: false, reason: "amount_mismatch" });
   });
 
   it("rejects invalid metadata", () => {
-    const verdict = verifyCheckoutSession(
-      session({ metadata: { userId: "u", credits: "abc" } }),
-      PACKAGES,
-    );
+    const verdict = verifyCheckoutSession({ session: session({ metadata: { userId: "u", credits: "abc" } }), packages: PACKAGES });
 
     expect(verdict).toMatchObject({
       ok: false,
@@ -124,10 +109,7 @@ describe("verifyCheckoutSession", () => {
   });
 
   it("rejects a missing payment id", () => {
-    const verdict = verifyCheckoutSession(
-      session({ payment_intent: null, amount_total: 1000 }),
-      PACKAGES,
-    );
+    const verdict = verifyCheckoutSession({ session: session({ payment_intent: null, amount_total: 1000 }), packages: PACKAGES });
 
     expect(verdict).toEqual({
       ok: false,
@@ -137,17 +119,14 @@ describe("verifyCheckoutSession", () => {
   });
 
   it("rejects an unknown package", () => {
-    const verdict = verifyCheckoutSession(
-      session({
+    const verdict = verifyCheckoutSession({ session: session({
         metadata: {
           userId: "u",
           packageType: "gold",
           credits: "1",
           priceId: "p",
         },
-      }),
-      PACKAGES,
-    );
+      }), packages: PACKAGES });
 
     expect(verdict).toEqual({
       ok: false,
@@ -157,28 +136,22 @@ describe("verifyCheckoutSession", () => {
   });
 
   it("rejects a price id mismatch, and a pack with no price id", () => {
-    const wrong = verifyCheckoutSession(
-      session({
+    const wrong = verifyCheckoutSession({ session: session({
         metadata: {
           userId: "u",
           packageType: "starter",
           credits: "1",
           priceId: "price_other",
         },
-      }),
-      PACKAGES,
-    );
-    const unset = verifyCheckoutSession(
-      session({
+      }), packages: PACKAGES });
+    const unset = verifyCheckoutSession({ session: session({
         metadata: {
           userId: "u",
           packageType: "empty",
           credits: "1",
           priceId: "x",
         },
-      }),
-      PACKAGES,
-    );
+      }), packages: PACKAGES });
 
     expect(wrong).toEqual({
       ok: false,
@@ -189,10 +162,7 @@ describe("verifyCheckoutSession", () => {
   });
 
   it("rejects an amount mismatch with the amounts in the log context", () => {
-    const verdict = verifyCheckoutSession(
-      session({ amount_total: 900, amount_subtotal: 900 }),
-      PACKAGES,
-    );
+    const verdict = verifyCheckoutSession({ session: session({ amount_total: 900, amount_subtotal: 900 }), packages: PACKAGES });
 
     expect(verdict).toEqual({
       ok: false,
@@ -208,10 +178,7 @@ describe("verifyCheckoutSession", () => {
   });
 
   it("rejects a currency other than eur", () => {
-    const verdict = verifyCheckoutSession(
-      session({ currency: "usd" }),
-      PACKAGES,
-    );
+    const verdict = verifyCheckoutSession({ session: session({ currency: "usd" }), packages: PACKAGES });
 
     expect(verdict).toEqual({
       ok: false,
@@ -222,7 +189,7 @@ describe("verifyCheckoutSession", () => {
 
   it("accepts the currency in upper case", () => {
     expect(
-      verifyCheckoutSession(session({ currency: "EUR" }), PACKAGES).ok,
+      verifyCheckoutSession({ session: session({ currency: "EUR" }), packages: PACKAGES }).ok,
     ).toBe(true);
   });
 
@@ -266,7 +233,7 @@ describe("checkoutMetadata", () => {
       priceId: "price_starter",
     });
 
-    const verdict = verifyCheckoutSession(session({ metadata }), PACKAGES);
+    const verdict = verifyCheckoutSession({ session: session({ metadata }), packages: PACKAGES });
 
     expect(verdict.ok).toBe(true);
   });

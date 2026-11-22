@@ -43,17 +43,17 @@ describe("welcome email first-restoration copy", () => {
 
 describe("purchase email", () => {
   it("greets generically without a name", () => {
-    expect(buildPurchaseHtml(null, "Starter", 20)).toContain("Hi there,");
+    expect(buildPurchaseHtml({ name: null, packageName: "Starter", credits: 20 })).toContain("Hi there,");
   });
 
   it("escapes a name that contains HTML", () => {
-    const html = buildPurchaseHtml("<script>", "Starter", 20);
+    const html = buildPurchaseHtml({ name: "<script>", packageName: "Starter", credits: 20 });
     expect(html).toContain("&lt;script&gt;");
     expect(html).not.toContain("<script>");
   });
 
   it("names the pack and the restorations", () => {
-    const html = buildPurchaseHtml("Maria", "Starter", 20);
+    const html = buildPurchaseHtml({ name: "Maria", packageName: "Starter", credits: 20 });
     expect(html).toContain("Starter");
     expect(html).toContain("20 restorations");
   });

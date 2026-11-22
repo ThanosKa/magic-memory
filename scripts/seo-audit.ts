@@ -217,7 +217,7 @@ function auditFile(filePath: string): AuditResult | null {
   return result;
 }
 
-function findPages(dir: string, pages: string[] = []): string[] {
+function findPages({ dir, pages = [] }: { dir: string; pages?: string[] }): string[] {
   const files = fs.readdirSync(dir);
 
   for (const file of files) {
@@ -225,7 +225,7 @@ function findPages(dir: string, pages: string[] = []): string[] {
     const stat = fs.statSync(filePath);
 
     if (stat.isDirectory() && !file.startsWith("_") && file !== "api") {
-      findPages(filePath, pages);
+      findPages({ dir: filePath, pages });
     } else if (file === "page.tsx" || file === "page.ts") {
       pages.push(filePath);
     }
@@ -239,7 +239,7 @@ function runAudit() {
   console.warn("=".repeat(50));
 
   const appDir = path.join(process.cwd(), "app");
-  const pages = findPages(appDir);
+  const pages = findPages({ dir: appDir });
 
   let totalPassed = 0;
   let totalFailed = 0;

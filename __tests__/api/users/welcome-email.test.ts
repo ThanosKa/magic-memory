@@ -97,7 +97,7 @@ describe("the welcome email goes out from whichever path created the User", () =
     expect(credits.status).toBe(200);
     expect(rows.size).toBe(1);
     expect(sendWelcomeEmail).toHaveBeenCalledTimes(1);
-    expect(sendWelcomeEmail).toHaveBeenCalledWith("ada@example.com", "Ada Lovelace");
+    expect(sendWelcomeEmail).toHaveBeenCalledWith({ to: "ada@example.com", name: "Ada Lovelace" });
 
     mockWebhookVerify.mockReturnValue(userCreated);
     const webhook = await POST(webhookRequest());
@@ -115,6 +115,6 @@ describe("the welcome email goes out from whichever path created the User", () =
     await GET();
 
     expect(sendWelcomeEmail).toHaveBeenCalledTimes(1);
-    expect(sendWelcomeEmail).toHaveBeenCalledWith("ada@example.com", "Ada Lovelace");
+    expect(sendWelcomeEmail).toHaveBeenCalledWith({ to: "ada@example.com", name: "Ada Lovelace" });
   });
 });

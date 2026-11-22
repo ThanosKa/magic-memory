@@ -33,10 +33,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const parseResult = await parseRequestBody(
+    const parseResult = await parseRequestBody({
       request,
-      createCheckoutRequestSchema
-    );
+      schema: createCheckoutRequestSchema,
+    });
     if (!parseResult.success) {
       logger.warn(
         { userId, error: "Invalid request body" },

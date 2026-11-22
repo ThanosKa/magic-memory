@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type Stripe from "stripe";
-import { CREDIT_PACKAGES, type PackageType } from "@/lib/constants";
+import { CREDIT_PACKAGES } from "@/lib/constants";
 
 /**
  * The money rules of a Purchase, kept pure: no I/O, no logging, no clock.
@@ -72,7 +72,7 @@ export type PurchaseVerdict =
         credits: number;
         /** After discount. */
         amountPaid: number;
-        packageType: PackageType;
+        packageType: string;
         packageName: string;
       };
       /**
@@ -98,10 +98,13 @@ type PackageTable = Record<
  * currency `eur`. `packages` exists only for tests and defaults to the real
  * Credit packs.
  */
-export function verifyCheckoutSession(
-  session: Stripe.Checkout.Session,
-  packages: PackageTable = CREDIT_PACKAGES,
-): PurchaseVerdict {
+export function verifyCheckoutSession({
+  session,
+  packages = CREDIT_PACKAGES,
+}: {
+  session: Stripe.Checkout.Session;
+  packages?: PackageTable;
+}): PurchaseVerdict {
   const parseResult = stripeMetadataSchema.safeParse(session.metadata || {});
 
   if (!parseResult.success) {
@@ -116,7 +119,8 @@ export function verifyCheckoutSession(
   }
 
   const { userId, packageType, credits, priceId } = parseResult.data;
-  const paymentIntent = session.payment_intent as string | null;
+  const paymentIntent =
+    typeof session.payment_intent === "string" ? session.payment_intent : null;
   const amountTotal = session.amount_total ?? 0;
   const amountDiscount =
     session.total_details?.amount_discount && session.amount_subtotal
@@ -195,7 +199,7 @@ export function verifyCheckoutSession(
       stripePaymentId: paymentId,
       credits: metadataCredits,
       amountPaid: amountTotal,
-      packageType: packageType as PackageType,
+      packageType,
       packageName: pkg.name,
     },
     ...(metadataCredits !== pkg.credits && {

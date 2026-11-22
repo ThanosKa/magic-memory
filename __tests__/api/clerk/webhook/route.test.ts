@@ -106,16 +106,17 @@ describe("POST /api/clerk/webhook", () => {
 
         expect(response.status).toBe(200)
         expect(data.data?.received).toBe(true)
-        expect(provisionUser).toHaveBeenCalledWith(
-            {
+        expect(provisionUser).toHaveBeenCalledWith({
+            profile: {
                 clerkUserId: "clerk_user_123",
                 email: "kazakis.th@gmail.com",
                 name: "John Doe",
                 imageUrl: "https://example.com/photo.jpg",
                 emailVerified: false,
             },
-            { supabase: fakeSupabase, sendWelcomeEmail }
-        )
+            supabase: fakeSupabase,
+            sendWelcomeEmail,
+        })
     })
 
     it("updates user on user.updated event", async () => {
@@ -198,10 +199,11 @@ describe("POST /api/clerk/webhook", () => {
 
         await POST(createMockRequest("{}"))
 
-        expect(provisionUser).toHaveBeenCalledWith(
-            { clerkUserId: "clerk_user_123", email: "kazakis.th@gmail.com", name: null, imageUrl: null, emailVerified: false },
-            { supabase: fakeSupabase, sendWelcomeEmail }
-        )
+        expect(provisionUser).toHaveBeenCalledWith({
+            profile: { clerkUserId: "clerk_user_123", email: "kazakis.th@gmail.com", name: null, imageUrl: null, emailVerified: false },
+            supabase: fakeSupabase,
+            sendWelcomeEmail,
+        })
     })
 
     it("returns 500 when database insert fails", async () => {
@@ -279,16 +281,14 @@ describe("POST /api/clerk/webhook", () => {
     it("uses the primary address, not the first, and passes a verified one as verified", async () => {
         await createdWith([addr("e1", "other@x.com", "unverified"), addr("e2", "main@x.com", "verified")], "e2")
         expect(provisionUser).toHaveBeenCalledWith(
-            expect.objectContaining({ email: "main@x.com", emailVerified: true }),
-            expect.anything()
+            expect.objectContaining({ profile: expect.objectContaining({ email: "main@x.com", emailVerified: true }) })
         )
     })
 
     it("passes an unverified primary address as not verified", async () => {
         await createdWith([addr("e1", "main@x.com", "unverified")], "e1")
         expect(provisionUser).toHaveBeenCalledWith(
-            expect.objectContaining({ email: "main@x.com", emailVerified: false }),
-            expect.anything()
+            expect.objectContaining({ profile: expect.objectContaining({ email: "main@x.com", emailVerified: false }) })
         )
     })
 

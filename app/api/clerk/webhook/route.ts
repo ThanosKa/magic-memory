@@ -105,10 +105,11 @@ export async function POST(request: NextRequest) {
                 const emailVerified = primary?.verification?.status === "verified";
                 const name = [first_name, last_name].filter(Boolean).join(" ") || null;
 
-                const result = await provisionUser(
-                    { clerkUserId: id, email, name, imageUrl: image_url, emailVerified },
-                    { supabase, sendWelcomeEmail }
-                );
+                const result = await provisionUser({
+                    profile: { clerkUserId: id, email, name, imageUrl: image_url, emailVerified },
+                    supabase,
+                    sendWelcomeEmail,
+                });
 
                 if (!result.ok) {
                     // Return 500 so Clerk retries
@@ -177,9 +178,6 @@ export async function POST(request: NextRequest) {
                 logger.info({ userId: id }, "User deleted from database (cascade will remove restorations)");
                 break;
             }
-
-            default:
-                logger.warn({ eventType: (event as { type: string }).type }, "Unhandled webhook event type");
         }
 
         return NextResponse.json({ success: true, data: { received: true } });

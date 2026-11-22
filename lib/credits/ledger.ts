@@ -16,14 +16,24 @@ export type ClerkUserId = string & { readonly __brand: "ClerkUserId" }
 /** `users.id` (UUID), as Stripe checkout metadata carries it. */
 export type UserId = string & { readonly __brand: "UserId" }
 
-/** Marks a Clerk id from `auth()`. Types only: the string is unchanged. */
-export function asClerkUserId(id: string): ClerkUserId {
-  return id as ClerkUserId
+export function isClerkUserId(id: string): id is ClerkUserId {
+  return id.length > 0
 }
 
-/** Marks a `users.id`, such as verified checkout metadata. Types only: the string is unchanged. */
+export function isUserId(id: string): id is UserId {
+  return id.length > 0
+}
+
+/** Marks a Clerk id from `auth()`. The string is unchanged; an empty one throws. */
+export function asClerkUserId(id: string): ClerkUserId {
+  if (!isClerkUserId(id)) throw new Error("Clerk user id is empty")
+  return id
+}
+
+/** Marks a `users.id`, such as verified checkout metadata. The string is unchanged; an empty one throws. */
 export function asUserId(id: string): UserId {
-  return id as UserId
+  if (!isUserId(id)) throw new Error("User id is empty")
+  return id
 }
 
 export type LedgerFailure =

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { NextRequest } from "next/server"
+import { type NextFetchEvent, NextRequest } from "next/server"
 import logger from "@/lib/logger"
 import { proxy } from "@/proxy"
 
@@ -7,7 +7,8 @@ import { proxy } from "@/proxy"
 // both keys set the proxy's Clerk branch throws, as a broken Clerk import would.
 
 async function runProxy(path: string) {
-  const response = await proxy(new NextRequest(new URL(path, "https://magic-memory.dev")))
+  const request = new NextRequest(new URL(path, "https://magic-memory.dev"))
+  const response = await proxy(request, { waitUntil: vi.fn() } as unknown as NextFetchEvent)
   if (!response) throw new Error("proxy returned no response")
   return response
 }

@@ -50,6 +50,10 @@ export const CREDIT_PACKAGES = {
 
 export type PackageType = keyof typeof CREDIT_PACKAGES;
 
+export function isPackageType(value: string): value is PackageType {
+  return value in CREDIT_PACKAGES;
+}
+
 /** A pack's price per restoration, e.g. "€0.33". */
 export function perPhotoPrice(pkg: { price: number; credits: number }): string {
   return `€${(pkg.price / pkg.credits / 100).toFixed(2)}`;

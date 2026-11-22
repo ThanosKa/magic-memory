@@ -28,7 +28,7 @@ export type UserRow = {
 };
 
 /** Sends the welcome email. The real one is `sendWelcomeEmail` from `@/lib/email`. */
-export type WelcomeEmailSender = (to: string, name: string | null) => Promise<unknown>;
+export type WelcomeEmailSender = (args: { to: string; name: string | null }) => Promise<unknown>;
 
 export type ProvisionOutcome = "created" | "already_existed" | "relinked";
 
@@ -46,10 +46,13 @@ export type FindUserResult =
  * "missing", so callers cannot mistake a database error for a new User and
  * provision over an existing Balance.
  */
-export async function findUser(
-  clerkUserId: string,
-  { supabase }: { supabase: SupabaseClient }
-): Promise<FindUserResult> {
+export async function findUser({
+  clerkUserId,
+  supabase,
+}: {
+  clerkUserId: string;
+  supabase: SupabaseClient;
+}): Promise<FindUserResult> {
   const { data, error } = await supabase
     .from("users")
     .select("*")
@@ -80,10 +83,15 @@ export async function findUser(
  * - Two concurrent calls for one Clerk id give one "created" and one
  *   "already_existed", because the insert is insert-or-nothing.
  */
-export async function provisionUser(
-  profile: NewUserProfile,
-  { supabase, sendWelcomeEmail }: { supabase: SupabaseClient; sendWelcomeEmail: WelcomeEmailSender }
-): Promise<ProvisionResult> {
+export async function provisionUser({
+  profile,
+  supabase,
+  sendWelcomeEmail,
+}: {
+  profile: NewUserProfile;
+  supabase: SupabaseClient;
+  sendWelcomeEmail: WelcomeEmailSender;
+}): Promise<ProvisionResult> {
   const { clerkUserId, email, name, imageUrl, emailVerified } = profile;
 
   // Insert or do nothing: a conflict on clerk_user_id returns no row and
@@ -105,7 +113,7 @@ export async function provisionUser(
 
   if (!error && created) {
     try {
-      await sendWelcomeEmail(email, name);
+      await sendWelcomeEmail({ to: email, name });
     } catch (err) {
       logger.error(
         { error: err instanceof Error ? err.message : String(err), to: email },

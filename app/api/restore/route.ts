@@ -155,7 +155,7 @@ export async function POST(request: NextRequest) {
 
     logger.info({ userId }, "Starting AI restoration")
 
-    const restoredImageUrl = await restorePhoto({ bytes: buffer, mimeType: file.type })
+    const restoredImageUrl = await restorePhoto({ photo: { bytes: buffer, mimeType: file.type } })
 
     logger.info({ userId }, "AI restoration complete")
 

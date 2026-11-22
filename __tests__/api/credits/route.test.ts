@@ -218,18 +218,16 @@ describe("GET /api/credits", () => {
       clerkWith("verified");
       await load();
       expect(provisionUser).toHaveBeenCalledWith(
-        expect.objectContaining({ email: "a@b.c", emailVerified: true }),
-        expect.anything()
-      );
+            expect.objectContaining({ profile: expect.objectContaining({ email: "a@b.c", emailVerified: true }) })
+        );
     });
 
     it("marks an unverified primary address as not verified", async () => {
       clerkWith("unverified");
       await load();
       expect(provisionUser).toHaveBeenCalledWith(
-        expect.objectContaining({ email: "a@b.c", emailVerified: false }),
-        expect.anything()
-      );
+            expect.objectContaining({ profile: expect.objectContaining({ email: "a@b.c", emailVerified: false }) })
+        );
     });
   });
 });

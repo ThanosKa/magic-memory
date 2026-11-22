@@ -4,11 +4,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://magic-memory.dev";
 const SITE_NAME = "Magic Memory";
 const SITE_TITLE = "Magic Memory - AI-Powered Photo Restoration";
 
-export const organizationJsonLd = (
-  name: string = SITE_NAME,
-  url: string = SITE_URL,
-  logo: string = `${SITE_URL}/icon.svg`
-): Thing => ({
+export const organizationJsonLd = ({
+  name = SITE_NAME,
+  url = SITE_URL,
+  logo = `${SITE_URL}/icon.svg`,
+}: { name?: string; url?: string; logo?: string } = {}): Thing => ({
   "@context": "https://schema.org",
   "@type": "Organization",
   name,

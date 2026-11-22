@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL = "Magic Memory <hello@notifications.app-whisper.com>";
 
-export async function sendWelcomeEmail(to: string, name: string | null) {
+export async function sendWelcomeEmail({ to, name }: { to: string; name: string | null }) {
   try {
     const firstName = name?.split(" ")[0] || null;
     const greeting = firstName
@@ -32,18 +32,23 @@ export async function sendWelcomeEmail(to: string, name: string | null) {
   }
 }
 
-export async function sendPurchaseEmail(
-  to: string,
-  name: string | null,
-  packageName: string,
-  credits: number,
-) {
+export async function sendPurchaseEmail({
+  to,
+  name,
+  packageName,
+  credits,
+}: {
+  to: string;
+  name: string | null;
+  packageName: string;
+  credits: number;
+}) {
   try {
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
       to,
       subject: `Your ${packageName} pack is ready — ${credits} credits added`,
-      html: buildPurchaseHtml(name, packageName, credits),
+      html: buildPurchaseHtml({ name, packageName, credits }),
     });
 
     if (error) {
@@ -144,7 +149,7 @@ function paragraph(html: string) {
   return `<p style="margin:0 0 28px;font-size:15px;line-height:24px;color:${MUTED};">${html}</p>`;
 }
 
-function button(text: string, href: string) {
+function button({ text, href }: { text: string; href: string }) {
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0;">
   <tr>
     <td bgcolor="${PAPER}" style="background-color:${PAPER};border-radius:999px;">
@@ -154,14 +159,14 @@ function button(text: string, href: string) {
 </table>`;
 }
 
-function step(number: string, text: string) {
+function step({ number, text }: { number: string; text: string }) {
   return `<tr>
     <td width="44" valign="top" style="padding:14px 0;border-top:1px solid ${LINE};font-family:${MONO};font-size:12px;line-height:22px;color:${EMBER};">${number}</td>
     <td valign="top" style="padding:14px 0;border-top:1px solid ${LINE};font-size:15px;line-height:22px;color:${PAPER};">${text}</td>
   </tr>`;
 }
 
-function receiptRow(name: string, value: string, isLast: boolean) {
+function receiptRow({ name, value, isLast }: { name: string; value: string; isLast: boolean }) {
   const border = isLast ? "" : `border-bottom:1px solid ${PRINT_LINE};`;
   return `<tr>
     <td style="padding:12px 0;${border}font-size:14px;line-height:20px;color:${PRINT_MUTED};">${name}</td>
@@ -178,20 +183,24 @@ function buildWelcomeHtml(name: string | null): string {
     ${heading(title)}
     ${paragraph("We're excited to have you. Magic Memory uses AI to restore your old, blurry or damaged photos, bringing your memories back to life in seconds.")}
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;border-bottom:1px solid ${LINE};">
-      ${step("01", "Upload your old or blurry photo")}
-      ${step("02", "Our AI restores it in seconds")}
-      ${step("03", "Download your restored memory")}
+      ${step({ number: "01", text: "Upload your old or blurry photo" })}
+      ${step({ number: "02", text: "Our AI restores it in seconds" })}
+      ${step({ number: "03", text: "Download your restored memory" })}
     </table>
     ${paragraph("Your first restoration is on us. Credits never expire.")}
-    ${button("Restore your first photo", `${SITE_URL}/restore`)}
+    ${button({ text: "Restore your first photo", href: `${SITE_URL}/restore` })}
   `);
 }
 
-function buildPurchaseHtml(
-  name: string | null,
-  packageName: string,
-  credits: number,
-): string {
+function buildPurchaseHtml({
+  name,
+  packageName,
+  credits,
+}: {
+  name: string | null;
+  packageName: string;
+  credits: number;
+}): string {
   const firstName = firstNameOf(name);
   const greeting = firstName ? `Hi ${firstName},` : "Hi there,";
 
@@ -203,14 +212,14 @@ function buildPurchaseHtml(
       <tr>
         <td style="padding:10px 22px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-            ${receiptRow("Pack", escapeHtml(packageName), false)}
-            ${receiptRow("Credits added", `${credits} restorations`, true)}
+            ${receiptRow({ name: "Pack", value: escapeHtml(packageName), isLast: false })}
+            ${receiptRow({ name: "Credits added", value: `${credits} restorations`, isLast: true })}
           </table>
         </td>
       </tr>
     </table>
     ${paragraph("Your credits never expire, so use them whenever you're ready.")}
-    ${button("Start restoring photos", `${SITE_URL}/restore`)}
+    ${button({ text: "Start restoring photos", href: `${SITE_URL}/restore` })}
   `);
 }
 

@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
     );
 
     if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session;
-      const verdict = verifyCheckoutSession(session);
+      const session = event.data.object;
+      const verdict = verifyCheckoutSession({ session });
 
       if (!verdict.ok) {
         logger.error(verdict.logContext, REJECTION_LOG_MESSAGE[verdict.reason]);
@@ -83,7 +83,8 @@ export async function POST(request: NextRequest) {
           userId,
           packageType,
           credits: creditsToAdd,
-          paymentIntent: session.payment_intent as string | null,
+          paymentIntent:
+            typeof session.payment_intent === "string" ? session.payment_intent : null,
         },
         "Processing successful payment",
       );
@@ -123,12 +124,12 @@ export async function POST(request: NextRequest) {
       if (customerEmail) {
         const customerName = session.customer_details?.name || null;
         // Awaited: Workers can cancel work still running after the response.
-        await sendPurchaseEmail(
-          customerEmail,
-          customerName,
-          verdict.grant.packageName,
-          creditsToAdd,
-        );
+        await sendPurchaseEmail({
+          to: customerEmail,
+          name: customerName,
+          packageName: verdict.grant.packageName,
+          credits: creditsToAdd,
+        });
       }
     }
 

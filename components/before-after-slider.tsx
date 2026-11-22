@@ -102,7 +102,7 @@ export function BeforeAfterSlider({
         <div
           ref={frameRef}
           className="relative w-full cursor-ew-resize touch-pan-y select-none overflow-hidden bg-scrim"
-          style={{ aspectRatio, ["--split" as string]: `${START}%` }}
+          style={{ aspectRatio, ...{ "--split": `${START}%` } }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={stopDragging}

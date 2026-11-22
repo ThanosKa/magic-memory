@@ -41,10 +41,13 @@ export class RestorationError extends Error {
  * Must be called inside a route handler that already called `noStore()`, so
  * Next.js does not cache the polling requests.
  */
-export async function restorePhoto(
-  photo: { bytes: Buffer; mimeType: string },
-  deps: RestorerDeps = {},
-): Promise<string> {
+export async function restorePhoto({
+  photo,
+  deps = {},
+}: {
+  photo: { bytes: Buffer; mimeType: string }
+  deps?: RestorerDeps
+}): Promise<string> {
   const replicate =
     deps.client ?? new Replicate({ auth: process.env.REPLICATE_API_TOKEN })
   const sleep = deps.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)))
@@ -70,7 +73,11 @@ export async function restorePhoto(
 
     if (status.status === "succeeded") {
       logger.info({ predictionId: prediction.id }, "Replicate prediction succeeded")
-      return status.output as string
+      if (typeof status.output !== "string") {
+        logger.error({ predictionId: prediction.id }, "Replicate prediction returned no URL")
+        throw new RestorationError("Restoration failed: no output URL", "failed")
+      }
+      return status.output
     }
 
     if (status.status === "failed" || status.status === "canceled") {
