@@ -29,7 +29,7 @@ const faqs: FAQItem[] = [
   {
     question: "What is face restoration?",
     answer:
-      "Face restoration is a subset of photo restoration that focuses specifically on recovering facial detail in degraded photographs. AI face restoration uses neural networks trained on millions of high-quality face images to reconstruct sharp features from blurry, low-resolution, or damaged inputs. The most common models are GFPGAN and CodeFormer.",
+      "Face restoration is a subset of photo restoration that focuses specifically on recovering facial detail in degraded photographs. AI face restoration uses neural networks trained on large sets of high-quality face photos (GFPGAN and CodeFormer both use FFHQ, 70,000 images) to reconstruct sharp features from blurry, low-resolution, or damaged inputs. The most common models are GFPGAN and CodeFormer.",
   },
   {
     question: "How is face restoration different from photo enhancement?",

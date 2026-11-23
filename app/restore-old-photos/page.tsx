@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import {
   faqPageJsonLd,
   breadcrumbJsonLd,
@@ -122,12 +123,15 @@ export default function RestoreOldPhotosPage() {
             Old photos deteriorate for four main reasons: UV exposure breaks
             down dye layers, humidity causes paper warping and mold, physical
             handling creates scratches and creases, and early digitization
-            produced low-resolution scans with heavy compression.
+            produced low-resolution scans with heavy compression. Our guide to{" "}
+            <Link href="/glossary/photo-restoration">what photo restoration is</Link>{" "}
+            covers each type of damage, the repair steps and what each method
+            costs.
           </p>
           <p>
             GFPGAN — developed by researchers at Tencent ARC and published at
             CVPR 2021 — addresses these issues in portraits specifically. It was
-            trained on millions of high-resolution face images, giving it the
+            trained on FFHQ, a set of 70,000 high-quality face photos, giving it the
             ability to reconstruct missing facial detail even when the original
             photo is severely degraded.
           </p>

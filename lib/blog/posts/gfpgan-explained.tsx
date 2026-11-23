@@ -25,7 +25,7 @@ export function GFPGANExplainedContent() {
 
       <h3>1. The Facial Prior (the &quot;knowledge bank&quot;)</h3>
       <p>
-        Before GFPGAN was trained for restoration, a separate model called StyleGAN2 was trained on millions of high-resolution face photos. StyleGAN2 learned to generate realistic faces — it developed a rich internal representation of what faces look like: how eyes are shaped, how hair falls, the texture of skin, the geometry of facial structure.
+        Before GFPGAN was trained for restoration, a separate model called StyleGAN2 was trained on FFHQ, a dataset of 70,000 high-quality face photos. StyleGAN2 learned to generate realistic faces — it developed a rich internal representation of what faces look like: how eyes are shaped, how hair falls, the texture of skin, the geometry of facial structure.
       </p>
       <p>
         GFPGAN uses this knowledge (the &quot;generative facial prior&quot;) when restoring your photo. Rather than trying to guess what is in a blurry area of your photo, it consults its learned model of faces to reconstruct plausible, realistic detail.

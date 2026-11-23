@@ -1500,7 +1500,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Standard sharpening (like Unsharp Mask in Photoshop) increases edge contrast without adding new information — it makes an image look sharper but introduces halos and artifacts. AI restoration using GFPGAN actually reconstructs missing facial detail by comparing your photo against millions of high-resolution face examples. The result is genuinely sharper detail rather than just contrast-enhanced edges.",
+                "text": "Standard sharpening (like Unsharp Mask in Photoshop) increases edge contrast without adding new information — it makes an image look sharper but introduces halos and artifacts. AI restoration using GFPGAN actually reconstructs missing facial detail using what it learned from FFHQ, a dataset of 70,000 high-quality face photos. The result is genuinely sharper detail rather than just contrast-enhanced edges.",
               },
               "name": "What is the difference between sharpening and AI restoration?",
             },
@@ -1522,7 +1522,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "6209ece319a6a3d3fe6bfcd4496de7453250e7a1929eff2b2460b4768266635c",
+        "sha256": "1ccfa1754fe21e99f9b09d2f88c0f0cb8904448a7219c04846d27174ad252ea4",
       },
       {
         "data": {
@@ -1977,7 +1977,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Face restoration is a subset of photo restoration that focuses specifically on recovering facial detail in degraded photographs. AI face restoration uses neural networks trained on millions of high-quality face images to reconstruct sharp features from blurry, low-resolution, or damaged inputs. The most common models are GFPGAN and CodeFormer.",
+                "text": "Face restoration is a subset of photo restoration that focuses specifically on recovering facial detail in degraded photographs. AI face restoration uses neural networks trained on large sets of high-quality face photos (GFPGAN and CodeFormer both use FFHQ, 70,000 images) to reconstruct sharp features from blurry, low-resolution, or damaged inputs. The most common models are GFPGAN and CodeFormer.",
               },
               "name": "What is face restoration?",
             },
@@ -2007,7 +2007,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "0bb4f36f2a154abc8a46aa9b99eb23338d3a0ec037f25fc105ef735243ac6ff7",
+        "sha256": "dbfe10fc4ae9ccacbbcca0af2b2342ab7cd69e456446b7f573145be19f010b27",
       },
       {
         "data": {
@@ -2273,7 +2273,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Professional manual photo restoration typically costs $25-$150+ per photo depending on the damage level and turnaround time. AI-powered tools like Magic Memory offer the same face restoration for a fraction of the cost — with one-time credit packs from €9.99 for 20 restorations.",
+                "text": "A manual restoration service charges per photo by damage level: as of November 2026, Fixthephoto lists $30, $45 and $60 per photo (plus $12 for each extra person), and FOREVER lists $89.99 per photo. AI tools cost far less per photo: Magic Memory works out at €0.25 to €0.50 per photo with one-time credit packs, but it restores faces and sharpness only, not tears or missing pieces.",
               },
               "name": "How much does professional photo restoration cost?",
             },
@@ -2281,7 +2281,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For face restoration specifically, AI tools like GFPGAN produce results comparable to professional manual retouching in most cases. AI excels at recovering facial detail, sharpening features, and removing blur. Manual restoration is still better for complex damage like torn photos, missing sections, or non-face elements that require creative reconstruction.",
+                "text": "For blurry, faded or low-resolution faces, AI face restoration models like GFPGAN recover sharp features in under a minute, which is the slowest part of manual work. Manual restoration is still the better choice for torn photos, missing sections, stains across the image, and anything that needs creative reconstruction, because a retoucher can rebuild what the photo no longer shows.",
               },
               "name": "Is AI photo restoration as good as manual restoration?",
             },
@@ -2293,9 +2293,25 @@ exports[`marketing page head snapshot > records metadata and structured data for
               },
               "name": "Can photo restoration fix completely destroyed photos?",
             },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Digitize the print with a high-resolution scan, keep that scan as an untouched master copy, assess the damage, repair it on a copy (dust and scratches, tears, fading and color, then blur and faces), and save the result at full resolution. AI tools automate the face and sharpness step; physical damage still needs a retoucher or Photoshop.",
+              },
+              "name": "What are the steps of photo restoration?",
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Digital photo restoration works on a scan or a photo of the print, so the original stays untouched. Handle old prints by the edges and scan them flat; do not try to clean or flatten a fragile print yourself.",
+              },
+              "name": "Does photo restoration damage the original photo?",
+            },
           ],
         },
-        "sha256": "a9ea6231af9ad11bef2b7a6f81ad88955c8cb1050361ec89ed9c458ef3ba4dc7",
+        "sha256": "60e49dcff2d71e2533d99ebcde860b6e8de1f7f2344651383c67384960f2a720",
       },
       {
         "data": {
@@ -2329,7 +2345,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
       "alternates": {
         "canonical": "https://magic-memory.dev/glossary/photo-restoration",
       },
-      "description": "Photo restoration is the process of repairing and enhancing old, damaged, or degraded photographs. Learn about manual retouching, AI-powered restoration with GFPGAN, and how to choose the right method for your photos.",
+      "description": "Photo restoration repairs old, faded, blurry or damaged photos. The steps, manual vs AI methods, what each costs per photo, and what AI cannot fix yet.",
       "openGraph": {
         "description": "Learn what photo restoration is, how it works, and which methods produce the best results for old and damaged photographs.",
         "images": [
@@ -3331,7 +3347,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "GFPGAN was specifically designed for face restoration — it is not a general image enhancement tool. It was trained on millions of high-resolution portrait photos and learned the precise structure of human faces at a microscopic level. This specialization means it outperforms general tools significantly on portraits, while being less effective on landscapes or objects.",
+                "text": "GFPGAN was specifically designed for face restoration — it is not a general image enhancement tool. It was trained on FFHQ, a dataset of 70,000 high-quality face photos, and learned the precise structure of human faces at a microscopic level. This specialization means it outperforms general tools significantly on portraits, while being less effective on landscapes or objects.",
               },
               "name": "Why is portrait restoration better than general photo restoration?",
             },
@@ -3369,7 +3385,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
             },
           ],
         },
-        "sha256": "6e3582feb9d795b753b13bcde1871269ab5c0ad6d4db60133a2771fd78c3b7e3",
+        "sha256": "812c16aafb67684f92e44db51d31b97bf36805024dd8ab44219d7b8db0763a19",
       },
       {
         "data": {

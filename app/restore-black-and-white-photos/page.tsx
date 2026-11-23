@@ -120,7 +120,7 @@ export default function RestoreBlackAndWhitePhotosPage() {
 
           <h2>What GFPGAN Does to B&W Portraits</h2>
           <p>
-            GFPGAN was trained on millions of high-resolution faces. When it
+            GFPGAN was trained on 70,000 high-quality face photos. When it
             processes a black and white photo, it identifies facial structures —
             eyes, nose, mouth, hairline — and reconstructs the fine detail that
             film grain and low resolution obscured.
