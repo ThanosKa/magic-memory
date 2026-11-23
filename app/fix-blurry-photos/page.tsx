@@ -55,7 +55,7 @@ const faqs: FAQItem[] = [
   {
     question: "What is the difference between sharpening and AI restoration?",
     answer:
-      "Standard sharpening (like Unsharp Mask in Photoshop) increases edge contrast without adding new information — it makes an image look sharper but introduces halos and artifacts. AI restoration using GFPGAN actually reconstructs missing facial detail by comparing your photo against millions of high-resolution face examples. The result is genuinely sharper detail rather than just contrast-enhanced edges.",
+      "Standard sharpening (like Unsharp Mask in Photoshop) increases edge contrast without adding new information — it makes an image look sharper but introduces halos and artifacts. AI restoration using GFPGAN actually reconstructs missing facial detail using what it learned from FFHQ, a dataset of 70,000 high-quality face photos. The result is genuinely sharper detail rather than just contrast-enhanced edges.",
   },
   {
     question: "Why are old scanned photos blurry?",
@@ -102,7 +102,7 @@ export default function FixBlurryPhotosPage() {
             fundamentally different.
           </p>
           <p>
-            The model was trained on millions of high-resolution face images. It
+            The model was trained on FFHQ, a set of 70,000 high-quality face photos. It
             learned what sharp, detailed faces look like at a structural level —
             pores, eyelashes, hair strands, the curve of an ear. When it
             processes your blurry photo, it compares the degraded input to its

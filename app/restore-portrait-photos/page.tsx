@@ -46,7 +46,7 @@ const faqs: FAQItem[] = [
     question:
       "Why is portrait restoration better than general photo restoration?",
     answer:
-      "GFPGAN was specifically designed for face restoration — it is not a general image enhancement tool. It was trained on millions of high-resolution portrait photos and learned the precise structure of human faces at a microscopic level. This specialization means it outperforms general tools significantly on portraits, while being less effective on landscapes or objects.",
+      "GFPGAN was specifically designed for face restoration — it is not a general image enhancement tool. It was trained on FFHQ, a dataset of 70,000 high-quality face photos, and learned the precise structure of human faces at a microscopic level. This specialization means it outperforms general tools significantly on portraits, while being less effective on landscapes or objects.",
   },
   {
     question: "Does it work on profile shots and three-quarter portraits?",
@@ -90,7 +90,7 @@ export default function RestorePortraitPhotosPage() {
       <main className="flex-1">
         <UseCaseHero
           headline="AI Portrait Photo Restoration — Restore Old Portraits With Precision"
-          subheadline="Portraits are GFPGAN's specialty. The AI model was designed from the ground up for face restoration — trained on millions of high-resolution portraits to reconstruct fine detail, sharp edges, and natural expression. Your old portrait photos are its ideal input."
+          subheadline="Portraits are GFPGAN's specialty. The AI model was designed from the ground up for face restoration — trained on 70,000 high-quality face photos to reconstruct fine detail, sharp edges, and natural expression. Your old portrait photos are its ideal input."
           keyword="restore portrait photos"
         />
 
@@ -99,8 +99,8 @@ export default function RestorePortraitPhotosPage() {
           <p>
             GFPGAN stands for Generative Facial Prior GAN. The &quot;facial
             prior&quot; is the key — the model encodes a deep understanding of
-            facial structure derived from training on millions of
-            high-resolution face images. This prior knowledge allows it to
+            facial structure derived from training on 70,000
+            high-quality face photos (the FFHQ dataset). This prior knowledge allows it to
             reconstruct plausible, accurate facial detail even when the input
             photo is severely degraded.
           </p>

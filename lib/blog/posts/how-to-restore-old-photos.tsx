@@ -39,7 +39,7 @@ export function HowToRestoreOldPhotosContent() {
 
       <h3>3. AI Photo Restoration</h3>
       <p>
-        AI tools like Magic Memory use models trained on millions of photos to automatically restore detail. Cost: €0.25–€0.50 per photo on Magic Memory. Time: usually under a minute per photo. Best for: portrait and face-focused photos, batch restoration projects, users without Photoshop skills. Not ideal for: complex physical damage (tears, mold) or non-face areas needing detailed restoration.
+        AI tools like Magic Memory use face restoration models (GFPGAN, trained on 70,000 high-quality face photos) to automatically restore detail. Cost: €0.25–€0.50 per photo on Magic Memory. Time: usually under a minute per photo. Best for: portrait and face-focused photos, users without Photoshop skills. Not ideal for: complex physical damage (tears, mold) or non-face areas needing detailed restoration.
       </p>
 
       <h2>How to Restore Photos with AI: Step by Step</h2>

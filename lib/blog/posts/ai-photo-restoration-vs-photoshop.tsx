@@ -30,7 +30,7 @@ export function AIPhotoRestorationVsPhotoshopContent() {
         AI restoration tools like Magic Memory use trained neural networks to automatically restore photos. The process: upload a photo, the AI processes it, usually in under a minute, you download the result.
       </p>
       <p>
-        Magic Memory uses GFPGAN — a model trained on millions of high-resolution face images to specifically restore portrait photos. According to the research paper (Wang et al., CVPR 2021, Tencent ARC), GFPGAN outperforms earlier methods significantly on face restoration metrics.
+        Magic Memory uses GFPGAN — a model trained on FFHQ, a set of 70,000 high-quality face photos, to specifically restore portrait photos. According to the research paper (Wang et al., CVPR 2021, Tencent ARC), GFPGAN outperforms earlier methods significantly on face restoration metrics.
       </p>
       <p>
         The AI approach requires no Photoshop subscription ($20.99/month), no Photoshop skills (years to develop), and no time (under a minute vs. hours).
