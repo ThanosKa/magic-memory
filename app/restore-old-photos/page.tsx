@@ -27,18 +27,18 @@ const Footer = dynamic(
 
 export const metadata: Metadata = pageMetadata({
   path: "/restore-old-photos",
-  title: "Restore Old Photos Online — AI Photo Restoration",
+  title: "Restore Old Photos Online: AI Old Photo Restoration",
   description:
-    "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
+    "Restore old photos online with AI: upload a scan and GFPGAN sharpens faces and lost detail, usually in under a minute. From \u20ac0.25 a photo, no subscription.",
   social: {
-    title: "Restore Old Photos Online — AI Photo Restoration | Magic Memory",
+    title: "Restore Old Photos Online: AI Old Photo Restoration | Magic Memory",
     description:
-      "Restore your old photos online in seconds. Magic Memory uses AI to sharpen faces, remove blur, and fix damage. One-time credits, no subscription.",
+      "Restore old photos online with AI: upload a scan and GFPGAN sharpens faces and lost detail, usually in under a minute. From \u20ac0.25 a photo, no subscription.",
     imageAlt: "Restore Old Photos",
   },
   twitter: {
     title: "Restore Old Photos Online",
-    description: "Restore your old photos in seconds with AI. No subscription.",
+    description: "Restore old photos online with AI, usually in under a minute. No subscription.",
   },
 });
 
@@ -47,6 +47,11 @@ const faqs: FAQItem[] = [
     question: "How much does it cost to restore an old photo?",
     answer:
       "One restoration costs one credit. Credit packs are one-time payments from \u20ac9.99 for 20 photos to \u20ac29.99 for 120 photos (\u20ac0.25 each), and credits never expire. A failed restoration costs no credit.",
+  },
+  {
+    question: "Can AI fix scratches, tears and missing pieces in old photos?",
+    answer:
+      "Not as a separate repair. Magic Memory runs GFPGAN, a face-restoration model: it rebuilds blurred or grainy faces and upscales the whole photo 2x, but it does not remove scratches, creases or stains from the background, fill in torn-off corners, or colorize. For heavy physical damage, a manual retoucher is the better choice.",
   },
   {
     question: "What makes old photos blurry?",
@@ -87,8 +92,8 @@ const howToJsonLd = {
     },
     {
       "@type": "HowToStep",
-      name: "Download in Full Resolution",
-      text: "Download your restored photo and compare before and after.",
+      name: "Compare and Download",
+      text: "Compare before and after with the slider, then download the restored photo at twice the original width and height.",
     },
   ],
 };
@@ -113,7 +118,7 @@ export default function RestoreOldPhotosPage() {
       <main className="flex-1">
         <UseCaseHero
           headline="Restore Old Photos Online With AI"
-          subheadline="Find an old photo box and see blurry grandparent photos that deserve better? Magic Memory uses GFPGAN AI to restore faces, recover lost detail, and bring your most important memories back to life, usually in under a minute. Pay once per photo, with credits that never expire."
+          subheadline="Upload a scan or phone photo of an old print and Magic Memory's AI (GFPGAN) rebuilds blurred faces, reduces grain and returns a copy at twice the size, usually in under a minute. Each restoration costs one credit, from €0.25 to €0.50 depending on the pack, and a failed restoration costs nothing."
           keyword="restore old photos"
         />
 
@@ -140,6 +145,54 @@ export default function RestoreOldPhotosPage() {
             degraded input against its learned model of how faces should look,
             then reconstructing sharp edges, fine texture, and clear features
             that were lost to time.
+          </p>
+
+          <h2>What AI Old Photo Restoration Fixes, and What It Does Not</h2>
+          <p>
+            Magic Memory runs one model, GFPGAN v1.4, at 2x scale. That makes
+            it strong on people and honest about the rest:
+          </p>
+          <ul className="space-y-3">
+            <li className="flex gap-3">
+              <span className="text-ember font-bold">→</span> Fixes: blurred,
+              soft or grainy faces, in color and black and white photos
+            </li>
+            <li className="flex gap-3">
+              <span className="text-ember font-bold">→</span> Fixes: low
+              resolution, since the whole photo comes back at twice the width
+              and height
+            </li>
+            <li className="flex gap-3">
+              <span className="text-ember font-bold">→</span> Does not fix:
+              scratches, creases, stains or tears outside the faces, or pieces
+              of the print that are missing
+            </li>
+            <li className="flex gap-3">
+              <span className="text-ember font-bold">→</span> Does not do:
+              colorization. A black and white photo stays black and white
+            </li>
+          </ul>
+          <p>
+            If the damage is mostly physical rather than blur, compare{" "}
+            <Link href="/glossary/photo-restoration">
+              what manual photo restoration costs
+            </Link>{" "}
+            before you spend a credit.
+          </p>
+
+          <h2>What It Costs and What Happens to Your Photo</h2>
+          <p>
+            Credits come in one-time packs: 20 for €9.99, 60 for €19.99 or
+            120 for €29.99, which is €0.50, €0.33 or €0.25 a photo. They
+            never expire and there is no subscription. A credit is taken only
+            after a restoration succeeds, so a failed or timed-out run costs
+            nothing. See <Link href="/pricing">all packs on the pricing page</Link>.
+          </p>
+          <p>
+            Your upload is held in memory and sent to Replicate, the service
+            that runs the model. We do not save the original or the restored
+            image on our own servers; the{" "}
+            <Link href="/privacy">privacy policy</Link> has the details.
           </p>
 
           <h2>Who Needs Old Photo Restoration</h2>
