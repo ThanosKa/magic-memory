@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
 import { PageContainer } from "@/components/layout/page-container";
+import { StatusIndicator } from "@/components/status-indicator";
 
 function FooterLink({ href, children, ...rest }: React.ComponentProps<"a">) {
   const external = typeof href === "string" && /^(https?:|mailto:)/.test(href);
@@ -95,16 +96,18 @@ export function Footer() {
               <FooterLink href="https://github.com/ThanosKa/magic-memory" target="_blank" rel="noopener noreferrer">GitHub</FooterLink>
               <FooterLink href="https://twitter.com/KazakisThanos" target="_blank" rel="noopener noreferrer">Twitter / X</FooterLink>
               <FooterLink href="mailto:kazakis.th@gmail.com">Support</FooterLink>
+              <FooterLink href="https://thanoska.betteruptime.com" target="_blank" rel="noopener noreferrer">Status</FooterLink>
               <FooterLink href="/terms">Terms</FooterLink>
               <FooterLink href="/privacy">Privacy</FooterLink>
             </nav>
           </div>
         </div>
 
-        <div className="mt-14 border-t border-paper/10 pt-8">
+        <div className="mt-14 flex flex-col items-center gap-4 border-t border-paper/10 pt-8 md:flex-row md:justify-between">
           <p className="font-mono text-center text-[11px] uppercase tracking-[0.18em] text-paper/60">
             &copy; 2026 Thaka — All rights reserved.
           </p>
+          <StatusIndicator />
         </div>
       </PageContainer>
     </footer>

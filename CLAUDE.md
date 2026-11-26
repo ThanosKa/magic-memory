@@ -16,6 +16,7 @@ AI photo restoration SaaS on the Next.js 16 App Router. A signed-in user uploads
 - `scripts/` holds the numbered SQL migrations, applied by hand, plus the file-based `seo-audit.ts`
 - Redis (Upstash) only rate-limits `/api/restore`, and the route keeps working when Redis is down
 - Tests live in `__tests__/`, mirroring the source tree
+- `worker/index.ts` is the Worker entry: it wraps vinext's fetch handler with `@sentry/cloudflare`, and `instrumentation.ts` / `instrumentation-client.ts` report server and browser errors to Better Stack (README, Error tracking)
 - Env vars are listed in `.env.example` and read from `process.env`; there is no validation module. On the Worker a server-only name reaches `process.env` only when `cloudflare.config.ts` declares it (`bindings.secret()`), so a new name goes there too
 
 ## Commands
