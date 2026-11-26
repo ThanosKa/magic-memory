@@ -257,7 +257,7 @@ Server and browser errors go to Better Stack Errors through the Sentry SDKs: `@s
 - Every other build reports as `development` and sends nothing. To test locally, set `NEXT_PUBLIC_SENTRY_SEND_IN_DEV=true` before `pnpm dev:vinext` or `pnpm build:vinext`.
 - Only errors are sent: no traces, sessions or replays, and no cookies, request bodies, query strings or user info. `beforeSend` also masks emails and tokens in messages and breadcrumbs.
 
-Uptime is public at [thanoska.betteruptime.com](https://thanoska.betteruptime.com), linked from the footer.
+Uptime is public at [thanoska.betteruptime.com](https://thanoska.betteruptime.com), linked from the footer twice: a Status link in the Connect column, and a live indicator next to the copyright that reads the Magic Memory resource from the status page's `index.json` in the browser.
 
 ### Production Checklist
 
