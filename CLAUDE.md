@@ -25,7 +25,7 @@ pnpm only. Run tests once with `pnpm test:run` (`pnpm test` is watch mode). Befo
 
 Production is the Cloudflare Worker `magic-memory`. Every merge to `main` deploys it automatically once CI passes (`.github/workflows/deploy.yml`), so the merge is the developer's yes and every PR must be safe to ship on its own. Never deploy by hand. Migrations stay manual: the developer runs a migration on production before merging code that needs it. The deploy stops when a `scripts/*.sql` file changed, and the developer then uses the manual run (Run workflow in the Actions tab; see README, Deployment).
 
-Logs: `npx wrangler tail magic-memory --format pretty` streams live requests through the owner's `wrangler login`, so start it before the request you want to see.
+Logs: `npx wrangler tail magic-memory --format pretty` streams live requests through the owner's `wrangler login`, so start it before the request you want to see. The last 3 days of production logs are in Better Stack Logs, source "Magic Memory (Cloudflare Worker)", which the Better Stack MCP can query.
 
 ## Before working on
 

@@ -6,7 +6,11 @@ export default defineConfig({
     entrypoint: "./worker/index.ts",
     compatibilityDate: "2026-11-07",
     compatibilityFlags: ["nodejs_compat"],
-    observability: { enabled: true },
+    observability: {
+      enabled: true,
+      // https://developers.cloudflare.com/workers/observability/exporting-opentelemetry-data/ (logs also go to Better Stack, source "Magic Memory (Cloudflare Worker)")
+      logs: { enabled: true, destinations: ["betterstack-magic-memory"] },
+    },
     domains: ["magic-memory.dev"],
     workersDev: false,
     assets: {
