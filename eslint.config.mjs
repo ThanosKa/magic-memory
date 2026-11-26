@@ -166,11 +166,11 @@ export default [
       'no-restricted-syntax': [
         'error',
         {
-          selector: 'FunctionDeclaration[params.length>1]:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy)$/])',
+          selector: 'FunctionDeclaration[params.length>1]:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy|onRequestError)$/])',
           message: 'Take one object argument instead of positional params.',
         },
         {
-          selector: 'VariableDeclarator:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy)$/]) > ArrowFunctionExpression[params.length>1]',
+          selector: 'VariableDeclarator:not([id.name=/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|generateMetadata|generateViewport|middleware|proxy|onRequestError)$/]) > ArrowFunctionExpression[params.length>1]',
           message: 'Take one object argument instead of positional params.',
         },
       ],

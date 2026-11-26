@@ -249,6 +249,16 @@ pnpm start:vinext
 
 `pnpm build` and `pnpm start` still run the plain Next.js build. Production does not use it; it stays only while the Vercel project is the way back.
 
+### Error tracking
+
+Server and browser errors go to Better Stack Errors through the Sentry SDKs: `@sentry/cloudflare` wraps the Worker in `worker/index.ts` and `instrumentation.ts` reports the errors vinext catches (`onRequestError`); `@sentry/browser` starts in `instrumentation-client.ts`. The options live in `lib/error-tracking.ts`, with the DSN, which is a public ingest key.
+
+- `deploy.yml` sets `NEXT_PUBLIC_SENTRY_ENVIRONMENT=production` and `NEXT_PUBLIC_SENTRY_RELEASE` to the commit SHA, so only the live site reports as `production`.
+- Every other build reports as `development` and sends nothing. To test locally, set `NEXT_PUBLIC_SENTRY_SEND_IN_DEV=true` before `pnpm dev:vinext` or `pnpm build:vinext`.
+- Only errors are sent: no traces, sessions or replays, and no cookies, request bodies, query strings or user info. `beforeSend` also masks emails and tokens in messages and breadcrumbs.
+
+Uptime is public at [thanoska.betteruptime.com](https://thanoska.betteruptime.com), linked from the footer.
+
 ### Production Checklist
 
 - Update all environment variables for production.
@@ -256,7 +266,7 @@ pnpm start:vinext
 - Configure Clerk production instance and webhooks.
 - Set Stripe live keys and webhook secrets.
 - Add Upstash Redis production tokens.
-- Configure custom domain and error tracking if desired.
+- Configure custom domain.
 
 ## CI
 

@@ -15,7 +15,7 @@ importers:
     dependencies:
       '@clerk/nextjs':
         specifier: latest
-        version: 7.2.7(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        version: 7.2.7(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@emotion/is-prop-valid':
         specifier: latest
         version: 1.4.0
@@ -106,6 +106,12 @@ importers:
       '@react-email/components':
         specifier: ^1.0.12
         version: 1.0.12(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@sentry/browser':
+        specifier: 11.12.0
+        version: 11.12.0
+      '@sentry/cloudflare':
+        specifier: 11.12.0
+        version: 11.12.0(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
       '@supabase/ssr':
         specifier: latest
         version: 0.10.2(@supabase/supabase-js@2.105.1)
@@ -120,7 +126,7 @@ importers:
         version: 1.37.0
       '@vinext/cloudflare':
         specifier: ^1.3.3
-        version: 1.3.3(@cloudflare/vite-plugin@2.0.0-beta.v.12(@types/node@22.0.0)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))(workerd@1.20261104.1))(cf@1.0.0-beta.28(@types/node@22.0.0))(vinext@1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))
+        version: 1.3.3(@cloudflare/vite-plugin@2.0.0-beta.v.12(@types/node@22.0.0)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))(workerd@1.20261104.1))(cf@1.0.0-beta.28(@types/node@22.0.0))(vinext@1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.5.0)
@@ -156,7 +162,7 @@ importers:
         version: 0.454.0(react@19.3.1)
       next:
         specifier: 16.0.7
-        version: 16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        version: 16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -222,7 +228,7 @@ importers:
         version: 1.1.2(@types/react-dom@19.0.0)(@types/react@19.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       vinext:
         specifier: ^1.4.4
-        version: 1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
+        version: 1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
       web-vitals:
         specifier: ^5.1.0
         version: 5.1.0
@@ -313,7 +319,7 @@ importers:
         version: 8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)
       vitest:
         specifier: ^4.1.12
-        version: 4.1.12(@types/node@22.0.0)(@vitest/coverage-v8@4.1.12)(happy-dom@20.0.11)(msw@2.12.4(@types/node@22.0.0)(typescript@5.9.3))(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
+        version: 4.1.12(@opentelemetry/api@1.10.0)(@types/node@22.0.0)(@vitest/coverage-v8@4.1.12)(happy-dom@20.0.11)(msw@2.12.4(@types/node@22.0.0)(typescript@5.9.3))(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
 
 packages:
 
@@ -1063,6 +1069,10 @@ packages:
 
   '@open-draft/until@2.1.0':
     resolution: {integrity: sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==}
+
+  '@opentelemetry/api@1.10.0':
+    resolution: {integrity: sha512-lMkyes8iHrG+mk6WH7X70MdCLI2RS0FwNBY1PyQ8UemaijE2m5mv5A0Niy3HtbYTFrgkUEQjFMXmSAk2hQDuPQ==}
+    engines: {node: '>=8.0.0'}
 
   '@oxc-project/types@0.156.0':
     resolution: {integrity: sha512-1Duyg48TdJNdyhEB8Xn1L36bT9Pv6GUtlKjHxOys8xkaF/rQq3XJE+bAurSK/AgIz5mGFsb77cn9Pb20+WCScw==}
@@ -2019,6 +2029,59 @@ packages:
 
   '@selderee/plugin-htmlparser2@0.11.0':
     resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
+
+  '@sentry/browser-utils@11.12.0':
+    resolution: {integrity: sha512-OttAHqf557R1gfLQRqb/dpGUK1UQd21qkeeN0KA/ThuymYXTNY+qTpJIOqmzgpk6fOmE922mTT6xmnMEiGYZBQ==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/browser@11.12.0':
+    resolution: {integrity: sha512-oiSs0ZZQGVLVLASxTk/Z+MW4cGOHhC65IKc3B//M54eaZEa4p6JqP2DM++ta4IqDQx8+lSD6+TglAIsHBdSyVQ==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/cloudflare@11.12.0':
+    resolution: {integrity: sha512-m/nls+rx8NTCfxqgIMsw57lit5Rbo8VKbbrGDEZF65qsG12uV7wORDrUV6PnGi/MCjXx1Cc+tfdc90ljAlamwQ==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+    peerDependencies:
+      '@cloudflare/workers-types': ^4.x || ^5.x
+      vite: ^6.1.0 || ^7.0.0 || ^8.0.0
+      wrangler: ^4.x
+    peerDependenciesMeta:
+      '@cloudflare/workers-types':
+        optional: true
+      vite:
+        optional: true
+      wrangler:
+        optional: true
+
+  '@sentry/conventions@0.32.0':
+    resolution: {integrity: sha512-WkSQcDhUUsz1SwxR23LpmyPKba+dgxxiH0DWV4VSM9yaAvhhl87ppW2Ts3g4piIKCVflc31aJeWy+biUbYfsMQ==}
+    engines: {node: '>=14'}
+
+  '@sentry/core@11.12.0':
+    resolution: {integrity: sha512-HKER7EcRpPPgC8mLRe5BzP6njfRYFZ53BFLZxVp1whWbY6lp/b2mvTBk4q6+rKsUFhLhRDsd6jL8y/8ddEWv6A==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/feedback@11.12.0':
+    resolution: {integrity: sha512-vYOIeby3tVoKZ/q70D1NJ48D4APMVcojyvCjlaZkFOQR6DIEsOjF/uC9MkhnCP3cpa4oADdMatsIpkhlPM+qng==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/opentelemetry@11.12.0':
+    resolution: {integrity: sha512-oWJwUdc2OSSvyOPXn/E1nWkC3GV5KNTWfR5prbw/0XxlKJepdlBsW19y+FAE9n3QznZ52aMZmetWEAFMsPJ0KQ==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.9.0
+
+  '@sentry/replay-canvas@11.12.0':
+    resolution: {integrity: sha512-kx9Q3TY8pMp0b12fpcR0tziGoEW7Z8PpFKncmzD9XYWE3YzMt//B+cjkR+vmmZSUVxOuQATYDFp9c1jRTnbrug==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/replay@11.12.0':
+    resolution: {integrity: sha512-SF1064TKmOvIQTKo8WelVB34IZWtYtrflInsydPeB9jMTpy2iE3LqKRizDJr3YivjMUPDgIGn67b+0kaxiwQ4g==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/server-utils@11.12.0':
+    resolution: {integrity: sha512-gAP5FLhXSiMs9vsU7guc54QNY1OzUJmhqyXMjhiP4SYlhQltoKtipcyo8pFWVsmylIzIkA8e2eGR6e0YA6YF3A==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
 
   '@shuding/opentype.js@1.4.0-beta.0':
     resolution: {integrity: sha512-3NgmNyH3l/Hv6EvsWJbsvpcpUba6R8IREQ83nH83cyakCw7uM1arZKNfHwv1Wz6jgqrF/j4x5ELvR6PnK9nTcA==}
@@ -4820,6 +4883,9 @@ packages:
   web-vitals@5.1.0:
     resolution: {integrity: sha512-ArI3kx5jI0atlTtmV0fWU3fjpLmq/nD3Zr1iFFlJLaqa5wLBkUSzINwBPySCX/8jRyjlmy1Volw1kz1g9XE4Jg==}
 
+  web-vitals@6.2.3:
+    resolution: {integrity: sha512-Dmy+vdO1UPMqXiAtZSNayhl4f794Bxfd94W4HIj2HlYtczEQfEOon969memlcpcHrTuOKLa5baFjX7WbgmOq+A==}
+
   webpack-sources@3.7.0:
     resolution: {integrity: sha512-PdUhbCycwEgiS1hB/FBDksWKg/ashAIuJKqwdbPn8/dFVgU5LxQiBvG0js6VRRIzPujMrStYCczywp82P0KWng==}
     engines: {node: '>=10.13.0'}
@@ -5095,12 +5161,12 @@ snapshots:
       - react
       - react-dom
 
-  '@clerk/nextjs@7.2.7(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@clerk/nextjs@7.2.7(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       '@clerk/backend': 3.4.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@clerk/react': 6.4.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@clerk/shared': 4.8.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
-      next: 16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
       server-only: 0.0.1
@@ -5607,6 +5673,8 @@ snapshots:
       outvariant: 1.4.3
 
   '@open-draft/until@2.1.0': {}
+
+  '@opentelemetry/api@1.10.0': {}
 
   '@oxc-project/types@0.156.0': {}
 
@@ -6494,6 +6562,64 @@ snapshots:
       domhandler: 5.0.3
       selderee: 0.11.0
 
+  '@sentry/browser-utils@11.12.0':
+    dependencies:
+      '@sentry/conventions': 0.32.0
+      '@sentry/core': 11.12.0
+      web-vitals: 6.2.3
+
+  '@sentry/browser@11.12.0':
+    dependencies:
+      '@sentry/browser-utils': 11.12.0
+      '@sentry/conventions': 0.32.0
+      '@sentry/core': 11.12.0
+      '@sentry/feedback': 11.12.0
+      '@sentry/replay': 11.12.0
+      '@sentry/replay-canvas': 11.12.0
+
+  '@sentry/cloudflare@11.12.0(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))':
+    dependencies:
+      '@opentelemetry/api': 1.10.0
+      '@sentry/conventions': 0.32.0
+      '@sentry/core': 11.12.0
+      '@sentry/opentelemetry': 11.12.0(@opentelemetry/api@1.10.0)
+      '@sentry/server-utils': 11.12.0
+      magic-string: 0.30.21
+    optionalDependencies:
+      vite: 8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)
+
+  '@sentry/conventions@0.32.0': {}
+
+  '@sentry/core@11.12.0':
+    dependencies:
+      '@sentry/conventions': 0.32.0
+
+  '@sentry/feedback@11.12.0':
+    dependencies:
+      '@sentry/core': 11.12.0
+
+  '@sentry/opentelemetry@11.12.0(@opentelemetry/api@1.10.0)':
+    dependencies:
+      '@opentelemetry/api': 1.10.0
+      '@sentry/conventions': 0.32.0
+      '@sentry/core': 11.12.0
+
+  '@sentry/replay-canvas@11.12.0':
+    dependencies:
+      '@sentry/core': 11.12.0
+      '@sentry/replay': 11.12.0
+
+  '@sentry/replay@11.12.0':
+    dependencies:
+      '@sentry/browser-utils': 11.12.0
+      '@sentry/core': 11.12.0
+
+  '@sentry/server-utils@11.12.0':
+    dependencies:
+      '@opentelemetry/api': 1.10.0
+      '@sentry/conventions': 0.32.0
+      '@sentry/core': 11.12.0
+
   '@shuding/opentype.js@1.4.0-beta.0':
     dependencies:
       fflate: 0.7.3
@@ -6795,13 +6921,13 @@ snapshots:
     dependencies:
       unpic: 4.2.2
 
-  '@unpic/react@1.0.2(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@unpic/react@1.0.2(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       '@unpic/core': 1.0.3
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
     optionalDependencies:
-      next: 16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
 
   '@upstash/core-analytics@0.0.10':
     dependencies:
@@ -6825,10 +6951,10 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@vinext/cloudflare@1.3.3(@cloudflare/vite-plugin@2.0.0-beta.v.12(@types/node@22.0.0)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))(workerd@1.20261104.1))(cf@1.0.0-beta.28(@types/node@22.0.0))(vinext@1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))':
+  '@vinext/cloudflare@1.3.3(@cloudflare/vite-plugin@2.0.0-beta.v.12(@types/node@22.0.0)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))(workerd@1.20261104.1))(cf@1.0.0-beta.28(@types/node@22.0.0))(vinext@1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))':
     dependencies:
       '@cloudflare/workers-response-store': 1.1.5
-      vinext: 1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
+      vinext: 1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
     optionalDependencies:
       '@cloudflare/vite-plugin': 2.0.0-beta.v.12(@types/node@22.0.0)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))(workerd@1.20261104.1)
       cf: 1.0.0-beta.28(@types/node@22.0.0)
@@ -6869,7 +6995,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.3.0
       tinyrainbow: 3.2.0
-      vitest: 4.1.12(@types/node@22.0.0)(@vitest/coverage-v8@4.1.12)(happy-dom@20.0.11)(msw@2.12.4(@types/node@22.0.0)(typescript@5.9.3))(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
+      vitest: 4.1.12(@opentelemetry/api@1.10.0)(@types/node@22.0.0)(@vitest/coverage-v8@4.1.12)(happy-dom@20.0.11)(msw@2.12.4(@types/node@22.0.0)(typescript@5.9.3))(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
 
   '@vitest/expect@4.1.12':
     dependencies:
@@ -8356,7 +8482,7 @@ snapshots:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
 
-  next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
       '@next/env': 16.0.7
       '@swc/helpers': 0.5.15
@@ -8374,6 +8500,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.0.7
       '@next/swc-win32-arm64-msvc': 16.0.7
       '@next/swc-win32-x64-msvc': 16.0.7
+      '@opentelemetry/api': 1.10.0
       sharp: 0.34.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -9345,9 +9472,9 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vinext@1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)):
+  vinext@1.4.4(patch_hash=b594a163fc47fd962e44beed3f72638b136ee596ea1959bab3053f285982eab7)(@types/node@22.0.0)(@vitejs/plugin-react@6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(@vitejs/plugin-rsc@0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)))(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(webpack@5.112.2(postcss@8.5.0)))(react@19.3.1)(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)):
     dependencies:
-      '@unpic/react': 1.0.2(next@16.0.7(@babel/core@7.28.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@unpic/react': 1.0.2(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.10.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@vercel/og': 1.0.3(@types/node@22.0.0)
       '@vinext/types': 1.0.2
       '@vitejs/plugin-react': 6.2.1(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
@@ -9395,7 +9522,7 @@ snapshots:
     optionalDependencies:
       vite: 8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)
 
-  vitest@4.1.12(@types/node@22.0.0)(@vitest/coverage-v8@4.1.12)(happy-dom@20.0.11)(msw@2.12.4(@types/node@22.0.0)(typescript@5.9.3))(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)):
+  vitest@4.1.12(@opentelemetry/api@1.10.0)(@types/node@22.0.0)(@vitest/coverage-v8@4.1.12)(happy-dom@20.0.11)(msw@2.12.4(@types/node@22.0.0)(typescript@5.9.3))(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)):
     dependencies:
       '@vitest/expect': 4.1.12
       '@vitest/mocker': 4.1.12(msw@2.12.4(@types/node@22.0.0)(typescript@5.9.3))(vite@8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2))
@@ -9418,6 +9545,7 @@ snapshots:
       vite: 8.3.0(@types/node@22.0.0)(jiti@2.6.1)(terser@5.51.2)
       why-is-node-running: 2.3.0
     optionalDependencies:
+      '@opentelemetry/api': 1.10.0
       '@types/node': 22.0.0
       '@vitest/coverage-v8': 4.1.12(vitest@4.1.12)
       happy-dom: 20.0.11
@@ -9431,6 +9559,8 @@ snapshots:
   web-vitals@4.2.4: {}
 
   web-vitals@5.1.0: {}
+
+  web-vitals@6.2.3: {}
 
   webpack-sources@3.7.0: {}
 

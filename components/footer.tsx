@@ -95,6 +95,7 @@ export function Footer() {
               <FooterLink href="https://github.com/ThanosKa/magic-memory" target="_blank" rel="noopener noreferrer">GitHub</FooterLink>
               <FooterLink href="https://twitter.com/KazakisThanos" target="_blank" rel="noopener noreferrer">Twitter / X</FooterLink>
               <FooterLink href="mailto:kazakis.th@gmail.com">Support</FooterLink>
+              <FooterLink href="https://thanoska.betteruptime.com" target="_blank" rel="noopener noreferrer">Status</FooterLink>
               <FooterLink href="/terms">Terms</FooterLink>
               <FooterLink href="/privacy">Privacy</FooterLink>
             </nav>

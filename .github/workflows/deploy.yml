@@ -36,6 +36,8 @@ jobs:
       NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SENTRY_ENVIRONMENT: production
+      NEXT_PUBLIC_SENTRY_RELEASE: ${{ github.event.workflow_run.head_sha || github.sha }}
 
     steps:
       - name: Checkout the commit CI passed on
