@@ -2814,7 +2814,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "AI can significantly improve water-damaged photos where the damage has caused blur, fading, or color loss in facial areas. Faces affected by water staining often see dramatic improvement. However, photos where water damage has physically destroyed the emulsion layer — leaving white patches or complete transparency — cannot be fully restored, as there is no original data for the AI to work with.",
+                "text": "Only the faces. Magic Memory runs GFPGAN v1.4, a face restoration model, so a face that water has left blurred or faded can come back sharper. Stains, warping and white patches elsewhere in the picture are not repaired, and where the emulsion is gone there is no original data to recover.",
               },
               "name": "Can AI fix water-damaged photos?",
             },
@@ -2822,7 +2822,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "GFPGAN improves the detail and clarity of the undamaged portions of torn photos. For tears that cross facial areas, the AI fills in detail based on surrounding facial structure, with results varying by severity. For complete tears through the center of a face, results are good but not perfect — the AI reconstructs plausible detail rather than exact original detail.",
+                "text": "No. The model does not join tears or fill missing pieces of a photo. It sharpens faces and the picture at 2x, so a torn print is best scanned flat first; a tear that runs through a face gives a reconstructed guess at that face, not the original detail.",
               },
               "name": "Does AI fix torn photos?",
             },
@@ -2830,7 +2830,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "AI restoration works best on: blur and loss of sharpness, film grain, fading and reduced contrast, mild color cast, and minor surface scratches. It works less effectively on: complete physical destruction of emulsion (holes, missing pieces), severe mold damage covering faces, and damage where the face is entirely obscured.",
+                "text": "Blur, low resolution and faded or soft faces. Damage that is not on a face, such as scratches, tears, holes, mold or fire damage, is not repaired by this model, and a face that is mostly covered cannot be recovered.",
               },
               "name": "What types of photo damage respond best to AI restoration?",
             },
@@ -2838,7 +2838,7 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "GFPGAN suppresses some scratch artifacts, particularly in facial areas, as part of its general restoration process. For photos with heavy scratching across the entire frame, a dust-and-scratch removal step before AI restoration (using scanner software or Photoshop) improves results.",
+                "text": "Not reliably. GFPGAN is built to restore faces and does not remove scratches across the frame. For a heavily scratched scan, use dust-and-scratch removal in your scanner software or Photoshop first, then restore the faces.",
               },
               "name": "Can AI remove scratches from scanned photos?",
             },
@@ -2846,13 +2846,21 @@ exports[`marketing page head snapshot > records metadata and structured data for
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Complete emulsion destruction is the hardest for AI to address — this includes mold that has eaten through the photo, fire damage that has charred portions of the image, and physical holes. When the original image data no longer exists, even advanced AI cannot accurately reconstruct it. GFPGAN makes educated guesses based on surrounding pixels, but results are interpretive rather than accurate.",
+                "text": "Damage that has destroyed the image itself: mold that has eaten through the photo, fire damage and physical holes. When the original image data no longer exists, the model can only guess, and what it adds to a face is plausible detail rather than the real one.",
               },
               "name": "What is the worst type of photo damage for AI restoration?",
             },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "One credit restores one photo, and credits come in one-time packs with no subscription. A restoration that fails does not use a credit.",
+              },
+              "name": "What does it cost, and am I charged if it fails?",
+            },
           ],
         },
-        "sha256": "d7037282a88f3d62623cf104c57173ae93e95a576873d2a9607a677a0393bd98",
+        "sha256": "9fe487d52874edcde0c27c719b2b8710c9c6a67535f4ebdd0bc3c27a04e30ccd",
       },
       {
         "data": {
@@ -2881,8 +2889,8 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "@type": "SoftwareApplication",
           "applicationCategory": "PhotographyApplication",
           "applicationSubCategory": "PhotoRestoration",
-          "description": "Restore water-damaged, torn, scratched, or faded photos with GFPGAN AI. Recovers facial detail even in severely damaged scans. No subscription.",
-          "name": "Magic Memory — Fix Damaged Photos with AI",
+          "description": "Restore the faces in damaged, faded and blurry photos with GFPGAN AI. Does not repair tears, holes or stains elsewhere in the picture. No subscription.",
+          "name": "Magic Memory — Restore Damaged Photos with AI",
           "offers": {
             "@type": "AggregateOffer",
             "description": "Three one-time credit packs from €9.99 to €29.99 (credits never expire)",
@@ -2894,39 +2902,39 @@ exports[`marketing page head snapshot > records metadata and structured data for
           "operatingSystem": "Web",
           "url": "https://magic-memory.dev/restore-damaged-photos",
         },
-        "sha256": "567f82ce22cbeacfc796719f5d1e791d0da82d991d1c1a98af83c88d6fa0732d",
+        "sha256": "134ba3dd842a6e8e68fa8dc2981384e142e39557c1003230e73f0a834ee9c6bd",
       },
     ],
     "metadata": {
       "alternates": {
         "canonical": "https://magic-memory.dev/restore-damaged-photos",
       },
-      "description": "Restore water-damaged, torn, scratched, or faded photos with AI. GFPGAN recovers facial detail even in severely damaged photos. No subscription.",
+      "description": "AI restores the faces in damaged, faded and blurry photos. It does not repair tears, holes or stains elsewhere. See what to expect before you pay.",
       "openGraph": {
-        "description": "AI photo restoration for water-damaged, torn, and faded photos. No subscription.",
+        "description": "AI restores faces in damaged, faded and blurry photos. No subscription.",
         "images": [
           {
-            "alt": "Fix Damaged Photos",
+            "alt": "Restore Damaged Photos",
             "height": 630,
             "url": "https://magic-memory.dev/og-image-restore.png",
             "width": 1200,
           },
         ],
-        "title": "Fix Damaged Photos With AI — Magic Memory",
+        "title": "Restore Damaged Photos With AI — Magic Memory",
         "url": "https://magic-memory.dev/restore-damaged-photos",
       },
       "robots": {
         "follow": true,
         "index": true,
       },
-      "title": "Fix Damaged Photos With AI — Scratches, Tears, and Fading",
+      "title": "Restore Damaged Photos: What AI Can and Cannot Fix",
       "twitter": {
         "card": "summary_large_image",
-        "description": "Restore water-damaged, torn, and scratched photos with AI.",
+        "description": "AI restores faces in damaged, faded and blurry photos.",
         "images": [
           "https://magic-memory.dev/og-image-restore.png",
         ],
-        "title": "Fix Damaged Photos With AI",
+        "title": "Restore Damaged Photos With AI",
       },
     },
   },
