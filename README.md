@@ -256,6 +256,7 @@ Server and browser errors go to Better Stack Errors through the Sentry SDKs: `@s
 - `deploy.yml` sets `NEXT_PUBLIC_SENTRY_ENVIRONMENT=production` and `NEXT_PUBLIC_SENTRY_RELEASE` to the commit SHA, so only the live site reports as `production`.
 - Every other build reports as `development` and sends nothing. To test locally, set `NEXT_PUBLIC_SENTRY_SEND_IN_DEV=true` before `pnpm dev:vinext` or `pnpm build:vinext`.
 - Only errors are sent: no traces, sessions or replays, and no cookies, request bodies, query strings or user info. `beforeSend` also masks emails and tokens in messages and breadcrumbs.
+- The browser drops errors that say nothing about our code (`lib/error-noise.ts`): it does not start for crawlers and automated browsers, ignores scripts from browser extensions, drops a script download cut off because the visitor left the page, and drops a hydration mismatch on a page Chrome translated.
 
 Uptime is public at [thanoska.betteruptime.com](https://thanoska.betteruptime.com), linked from the footer twice: a Status link in the Connect column, and a live indicator next to the copyright that reads the Magic Memory resource from the status page's `index.json` in the browser.
 
